@@ -14,7 +14,7 @@ using System.Net.Http;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 
-namespace 联友生产辅助工具
+namespace HarveyZ
 {
     public class CEncrypt
     {
@@ -84,7 +84,7 @@ namespace 联友生产辅助工具
         /// 数据库连接测试
         /// </summary>
         /// <param name="strConnection">数据库连接字</param>
-        public static void SQLlinkTest(string strConnection) //数据库连接测试
+        public bool SQLlinkTest(string strConnection) //数据库连接测试
         {
             bool CanConnectDB = false;
             using (SqlConnection testConnection = new SqlConnection(strConnection))
@@ -99,11 +99,11 @@ namespace 联友生产辅助工具
                 catch { }
                 if (CanConnectDB)
                 {
-                    MessageBox.Show("数据库连接成功！", "提示");
+                    return true;
                 }
                 else
                 {
-                    MessageBox.Show("数据库连接失败！", "提示");
+                    return false;
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace 联友生产辅助工具
         /// </summary>
         /// <param name="SQLstr">数据库连接字符串</param>
         /// <param name="CMDstr">本数据库中表示DeviceID</param>
-        public static int SQLexcute(string SQLstr, string CMDstr)
+        public int SQLexcute(string SQLstr, string CMDstr)
         {
             using (SqlConnection conn = new SqlConnection(SQLstr))
             {
@@ -147,7 +147,7 @@ namespace 联友生产辅助工具
         /// </summary>
         /// <param name="SQLstr">数据库连接字符串</param>
         /// <param name="CMDstr">本数据库中表示DeviceID</param>
-        public static DataTable SQLselect(string SQLstr, string CMDstr)
+        public DataTable SQLselect(string SQLstr, string CMDstr)
         {
             using (SqlConnection conn = new SqlConnection(SQLstr))
             {
@@ -199,7 +199,7 @@ namespace 联友生产辅助工具
 
     public class WebNet
     {
-        public static Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
+        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
         {
             try
             {

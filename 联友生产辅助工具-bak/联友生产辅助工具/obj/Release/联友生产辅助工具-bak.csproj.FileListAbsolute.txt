@@ -1,0 +1,2 @@
+E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.exe
+E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.pdb

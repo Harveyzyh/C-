@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具
+﻿namespace HarveyZ
 {
     partial class FormLogin
     {
@@ -35,7 +35,7 @@
             this.FormLogin_TextBox_PWD = new System.Windows.Forms.TextBox();
             this.FormLogin_Button_Login = new System.Windows.Forms.Button();
             this.FormLogin_Button_Exit = new System.Windows.Forms.Button();
-            this.FormLogin_Botton_Linktest = new System.Windows.Forms.Button();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -106,24 +106,21 @@
             this.FormLogin_Button_Exit.UseVisualStyleBackColor = true;
             this.FormLogin_Button_Exit.Click += new System.EventHandler(this.FormLogin_Button_Exit_Click);
             // 
-            // FormLogin_Botton_Linktest
+            // labelVersion
             // 
-            this.FormLogin_Botton_Linktest.Location = new System.Drawing.Point(397, 259);
-            this.FormLogin_Botton_Linktest.Margin = new System.Windows.Forms.Padding(4);
-            this.FormLogin_Botton_Linktest.Name = "FormLogin_Botton_Linktest";
-            this.FormLogin_Botton_Linktest.Size = new System.Drawing.Size(100, 29);
-            this.FormLogin_Botton_Linktest.TabIndex = 6;
-            this.FormLogin_Botton_Linktest.Text = "数据库连接测试";
-            this.FormLogin_Botton_Linktest.UseVisualStyleBackColor = true;
-            this.FormLogin_Botton_Linktest.Visible = false;
-            this.FormLogin_Botton_Linktest.Click += new System.EventHandler(this.FormLogin_Botton_Linktest_Click);
+            this.labelVersion.Font = new System.Drawing.Font("宋体", 8F);
+            this.labelVersion.Location = new System.Drawing.Point(337, 276);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelVersion.Size = new System.Drawing.Size(161, 12);
+            this.labelVersion.TabIndex = 6;
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 288);
-            this.Controls.Add(this.FormLogin_Botton_Linktest);
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.FormLogin_Button_Exit);
             this.Controls.Add(this.FormLogin_Button_Login);
             this.Controls.Add(this.FormLogin_TextBox_PWD);
@@ -152,6 +149,6 @@
         private System.Windows.Forms.TextBox FormLogin_TextBox_PWD;
         private System.Windows.Forms.Button FormLogin_Button_Login;
         private System.Windows.Forms.Button FormLogin_Button_Exit;
-        private System.Windows.Forms.Button FormLogin_Botton_Linktest;
+        private System.Windows.Forms.Label labelVersion;
     }
 }
