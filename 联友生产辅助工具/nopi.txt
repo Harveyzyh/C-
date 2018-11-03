@@ -1,0 +1,3 @@
+sheet.SetColumnWidth(列数, 宽度*256+200)   设置列宽
+sheet.AddMergedRegion(new CellRangeAddress(始行, 终行, 始列, 终列))  合并单元格
+row.Height= 行高*20
