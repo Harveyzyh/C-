@@ -80,7 +80,7 @@ namespace HarveyZ
 
         private void FormLogin_Login()
         {
-            if (FormLogin_TextBox_UID.Text == "" || FormLogin_TextBox_PWD.Text == "")
+            if (FormLogin_TextBox_UID.Text == "" )
             {
                 if (MessageBox.Show("请输入账号或密码", "提示", MessageBoxButtons.OK) == DialogResult.OK)
                 {
@@ -193,7 +193,6 @@ namespace HarveyZ
             {
                 string Login_status = "";
                 dict.TryGetValue("Login_Status", out Login_status);
-                MessageBox.Show(Login_status, "");
                 if(Login_status == "Y")
                 {
                     dict.TryGetValue("Login_Uid", out Login_Uid);

@@ -1,5 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using HarveyZ;
 using 联友生产辅助工具.FormModule;
 
@@ -48,7 +55,11 @@ namespace 联友生产辅助工具
 
         private void Form_MainResized_Work()
         {
-
+            //窗框大小
+            int FormWidth, FormHeight;
+            FormWidth = Width - 16;
+            FormHeight = Height - 16;
+            LabelUserInfo.Location = new Point(2, FormHeight - 40);
         }
         #endregion
 
