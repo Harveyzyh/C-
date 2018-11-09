@@ -91,7 +91,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1760, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1444, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -207,7 +207,7 @@
             // 
             // ButtonReportSelectWG
             // 
-            this.ButtonReportSelectWG.Location = new System.Drawing.Point(191, 37);
+            this.ButtonReportSelectWG.Location = new System.Drawing.Point(92, 37);
             this.ButtonReportSelectWG.Name = "ButtonReportSelectWG";
             this.ButtonReportSelectWG.Size = new System.Drawing.Size(85, 29);
             this.ButtonReportSelectWG.TabIndex = 16;
@@ -222,15 +222,15 @@
             "全部",
             "组别-系列",
             "部门-组别-系列"});
-            this.ComboBoxReportSelectType.Location = new System.Drawing.Point(521, 41);
+            this.ComboBoxReportSelectType.Location = new System.Drawing.Point(383, 41);
             this.ComboBoxReportSelectType.Name = "ComboBoxReportSelectType";
-            this.ComboBoxReportSelectType.Size = new System.Drawing.Size(243, 20);
+            this.ComboBoxReportSelectType.Size = new System.Drawing.Size(243, 24);
             this.ComboBoxReportSelectType.TabIndex = 15;
             // 
             // LabelReportSelectType2
             // 
             this.LabelReportSelectType2.AutoSize = true;
-            this.LabelReportSelectType2.Location = new System.Drawing.Point(441, 45);
+            this.LabelReportSelectType2.Location = new System.Drawing.Point(303, 45);
             this.LabelReportSelectType2.Name = "LabelReportSelectType2";
             this.LabelReportSelectType2.Size = new System.Drawing.Size(88, 16);
             this.LabelReportSelectType2.TabIndex = 14;
@@ -238,7 +238,7 @@
             // 
             // ButtonReportSelectLayout
             // 
-            this.ButtonReportSelectLayout.Location = new System.Drawing.Point(1027, 37);
+            this.ButtonReportSelectLayout.Location = new System.Drawing.Point(797, 37);
             this.ButtonReportSelectLayout.Name = "ButtonReportSelectLayout";
             this.ButtonReportSelectLayout.Size = new System.Drawing.Size(89, 29);
             this.ButtonReportSelectLayout.TabIndex = 13;
@@ -251,7 +251,7 @@
             // 
             this.DtpReportSelectEndDate.CustomFormat = "yyyy-MM-dd";
             this.DtpReportSelectEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpReportSelectEndDate.Location = new System.Drawing.Point(807, 4);
+            this.DtpReportSelectEndDate.Location = new System.Drawing.Point(630, 4);
             this.DtpReportSelectEndDate.Name = "DtpReportSelectEndDate";
             this.DtpReportSelectEndDate.ShowCheckBox = true;
             this.DtpReportSelectEndDate.Size = new System.Drawing.Size(147, 26);
@@ -261,7 +261,7 @@
             // 
             this.DtpReportSelectStartDate.CustomFormat = "yyyy-MM-dd";
             this.DtpReportSelectStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpReportSelectStartDate.Location = new System.Drawing.Point(521, 4);
+            this.DtpReportSelectStartDate.Location = new System.Drawing.Point(383, 4);
             this.DtpReportSelectStartDate.Name = "DtpReportSelectStartDate";
             this.DtpReportSelectStartDate.ShowCheckBox = true;
             this.DtpReportSelectStartDate.Size = new System.Drawing.Size(147, 26);
@@ -271,7 +271,7 @@
             // ButtonReportSelectSubmit
             // 
             this.ButtonReportSelectSubmit.Font = new System.Drawing.Font("宋体", 12F);
-            this.ButtonReportSelectSubmit.Location = new System.Drawing.Point(1027, 3);
+            this.ButtonReportSelectSubmit.Location = new System.Drawing.Point(797, 3);
             this.ButtonReportSelectSubmit.Name = "ButtonReportSelectSubmit";
             this.ButtonReportSelectSubmit.Size = new System.Drawing.Size(89, 28);
             this.ButtonReportSelectSubmit.TabIndex = 9;
@@ -283,7 +283,7 @@
             // 
             this.LabelReportSelectEndDate.AutoSize = true;
             this.LabelReportSelectEndDate.Font = new System.Drawing.Font("宋体", 12F);
-            this.LabelReportSelectEndDate.Location = new System.Drawing.Point(726, 9);
+            this.LabelReportSelectEndDate.Location = new System.Drawing.Point(549, 9);
             this.LabelReportSelectEndDate.Name = "LabelReportSelectEndDate";
             this.LabelReportSelectEndDate.Size = new System.Drawing.Size(88, 16);
             this.LabelReportSelectEndDate.TabIndex = 4;
@@ -293,7 +293,7 @@
             // 
             this.LabelReportSelectStartDate.AutoSize = true;
             this.LabelReportSelectStartDate.Font = new System.Drawing.Font("宋体", 12F);
-            this.LabelReportSelectStartDate.Location = new System.Drawing.Point(440, 9);
+            this.LabelReportSelectStartDate.Location = new System.Drawing.Point(302, 9);
             this.LabelReportSelectStartDate.Name = "LabelReportSelectStartDate";
             this.LabelReportSelectStartDate.Size = new System.Drawing.Size(88, 16);
             this.LabelReportSelectStartDate.TabIndex = 3;
@@ -310,7 +310,7 @@
             "生产四部",
             "生产五部",
             "全部"});
-            this.ComboBoxReportDptType.Location = new System.Drawing.Point(266, 5);
+            this.ComboBoxReportDptType.Location = new System.Drawing.Point(167, 5);
             this.ComboBoxReportDptType.Name = "ComboBoxReportDptType";
             this.ComboBoxReportDptType.Size = new System.Drawing.Size(121, 24);
             this.ComboBoxReportDptType.TabIndex = 5;
@@ -320,7 +320,7 @@
             // 
             this.LabelReportSelectDpt.AutoSize = true;
             this.LabelReportSelectDpt.Font = new System.Drawing.Font("宋体", 12F);
-            this.LabelReportSelectDpt.Location = new System.Drawing.Point(188, 8);
+            this.LabelReportSelectDpt.Location = new System.Drawing.Point(89, 8);
             this.LabelReportSelectDpt.Name = "LabelReportSelectDpt";
             this.LabelReportSelectDpt.Size = new System.Drawing.Size(88, 16);
             this.LabelReportSelectDpt.TabIndex = 1;
@@ -330,7 +330,7 @@
             // 
             this.LabelReportSelectType.AutoSize = true;
             this.LabelReportSelectType.Font = new System.Drawing.Font("宋体", 12F);
-            this.LabelReportSelectType.Location = new System.Drawing.Point(108, 8);
+            this.LabelReportSelectType.Location = new System.Drawing.Point(9, 8);
             this.LabelReportSelectType.Name = "LabelReportSelectType";
             this.LabelReportSelectType.Size = new System.Drawing.Size(88, 16);
             this.LabelReportSelectType.TabIndex = 0;
@@ -341,6 +341,7 @@
             this.dataGridViewReportSelect.AllowUserToAddRows = false;
             this.dataGridViewReportSelect.AllowUserToDeleteRows = false;
             this.dataGridViewReportSelect.AllowUserToOrderColumns = true;
+            this.dataGridViewReportSelect.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewReportSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReportSelect.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.dataGridViewReportSelect.Location = new System.Drawing.Point(0, 72);
@@ -391,7 +392,7 @@
             this.DtpReportInputWorkDate.CustomFormat = "yyyy-MM-dd";
             this.DtpReportInputWorkDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DtpReportInputWorkDate.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.DtpReportInputWorkDate.Location = new System.Drawing.Point(471, 7);
+            this.DtpReportInputWorkDate.Location = new System.Drawing.Point(348, 7);
             this.DtpReportInputWorkDate.Margin = new System.Windows.Forms.Padding(4);
             this.DtpReportInputWorkDate.Name = "DtpReportInputWorkDate";
             this.DtpReportInputWorkDate.Size = new System.Drawing.Size(137, 26);
@@ -401,7 +402,7 @@
             // 
             // ButtonReportInputXLSelect
             // 
-            this.ButtonReportInputXLSelect.Location = new System.Drawing.Point(660, 4);
+            this.ButtonReportInputXLSelect.Location = new System.Drawing.Point(503, 4);
             this.ButtonReportInputXLSelect.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonReportInputXLSelect.Name = "ButtonReportInputXLSelect";
             this.ButtonReportInputXLSelect.Size = new System.Drawing.Size(134, 33);
@@ -413,7 +414,7 @@
             // 
             // ButtonReportInputCommit
             // 
-            this.ButtonReportInputCommit.Location = new System.Drawing.Point(860, 4);
+            this.ButtonReportInputCommit.Location = new System.Drawing.Point(655, 4);
             this.ButtonReportInputCommit.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonReportInputCommit.Name = "ButtonReportInputCommit";
             this.ButtonReportInputCommit.Size = new System.Drawing.Size(112, 33);
@@ -427,8 +428,10 @@
             // 
             this.dataGridViewReportInput.AllowUserToAddRows = false;
             this.dataGridViewReportInput.AllowUserToDeleteRows = false;
+            this.dataGridViewReportInput.AllowUserToOrderColumns = true;
             this.dataGridViewReportInput.AllowUserToResizeRows = false;
             this.dataGridViewReportInput.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.dataGridViewReportInput.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewReportInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReportInput.GridColor = System.Drawing.Color.White;
             this.dataGridViewReportInput.Location = new System.Drawing.Point(0, 42);
@@ -444,7 +447,7 @@
             // LabelReportWorkDateInput
             // 
             this.LabelReportWorkDateInput.AutoSize = true;
-            this.LabelReportWorkDateInput.Location = new System.Drawing.Point(391, 10);
+            this.LabelReportWorkDateInput.Location = new System.Drawing.Point(268, 10);
             this.LabelReportWorkDateInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelReportWorkDateInput.Name = "LabelReportWorkDateInput";
             this.LabelReportWorkDateInput.Size = new System.Drawing.Size(88, 16);
@@ -469,7 +472,7 @@
             // 
             // ButtonReportUpdateXLSelect
             // 
-            this.ButtonReportUpdateXLSelect.Location = new System.Drawing.Point(563, 2);
+            this.ButtonReportUpdateXLSelect.Location = new System.Drawing.Point(482, 2);
             this.ButtonReportUpdateXLSelect.Name = "ButtonReportUpdateXLSelect";
             this.ButtonReportUpdateXLSelect.Size = new System.Drawing.Size(119, 32);
             this.ButtonReportUpdateXLSelect.TabIndex = 6;
@@ -482,6 +485,7 @@
             this.dataGridViewReportUpdate.AllowUserToAddRows = false;
             this.dataGridViewReportUpdate.AllowUserToDeleteRows = false;
             this.dataGridViewReportUpdate.AllowUserToResizeRows = false;
+            this.dataGridViewReportUpdate.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewReportUpdate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReportUpdate.GridColor = System.Drawing.Color.White;
             this.dataGridViewReportUpdate.Location = new System.Drawing.Point(0, 37);
@@ -503,7 +507,7 @@
             // ButtonReportUpdateCommit
             // 
             this.ButtonReportUpdateCommit.Font = new System.Drawing.Font("宋体", 12F);
-            this.ButtonReportUpdateCommit.Location = new System.Drawing.Point(931, 2);
+            this.ButtonReportUpdateCommit.Location = new System.Drawing.Point(713, 2);
             this.ButtonReportUpdateCommit.Name = "ButtonReportUpdateCommit";
             this.ButtonReportUpdateCommit.Size = new System.Drawing.Size(86, 33);
             this.ButtonReportUpdateCommit.TabIndex = 3;
@@ -514,7 +518,7 @@
             // ButtonReportUpdateSelect
             // 
             this.ButtonReportUpdateSelect.Font = new System.Drawing.Font("宋体", 12F);
-            this.ButtonReportUpdateSelect.Location = new System.Drawing.Point(757, 2);
+            this.ButtonReportUpdateSelect.Location = new System.Drawing.Point(610, 2);
             this.ButtonReportUpdateSelect.Name = "ButtonReportUpdateSelect";
             this.ButtonReportUpdateSelect.Size = new System.Drawing.Size(93, 33);
             this.ButtonReportUpdateSelect.TabIndex = 2;
@@ -527,7 +531,7 @@
             this.DtpReportUpdateWorkDate.CustomFormat = "yyyy-MM-dd";
             this.DtpReportUpdateWorkDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DtpReportUpdateWorkDate.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.DtpReportUpdateWorkDate.Location = new System.Drawing.Point(398, 5);
+            this.DtpReportUpdateWorkDate.Location = new System.Drawing.Point(344, 5);
             this.DtpReportUpdateWorkDate.Name = "DtpReportUpdateWorkDate";
             this.DtpReportUpdateWorkDate.Size = new System.Drawing.Size(128, 26);
             this.DtpReportUpdateWorkDate.TabIndex = 1;
@@ -537,7 +541,7 @@
             // LabelReportUpdateWorkDate
             // 
             this.LabelReportUpdateWorkDate.AutoSize = true;
-            this.LabelReportUpdateWorkDate.Location = new System.Drawing.Point(306, 9);
+            this.LabelReportUpdateWorkDate.Location = new System.Drawing.Point(252, 9);
             this.LabelReportUpdateWorkDate.Name = "LabelReportUpdateWorkDate";
             this.LabelReportUpdateWorkDate.Size = new System.Drawing.Size(88, 16);
             this.LabelReportUpdateWorkDate.TabIndex = 0;
@@ -547,8 +551,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1760, 776);
-            this.Controls.Add(this.panelReportUpdate);
+            this.ClientSize = new System.Drawing.Size(1444, 776);
+            this.Controls.Add(this.panelReportSelect);
             this.Controls.Add(this.LabelUserInfo);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("宋体", 13F);
@@ -559,6 +563,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "联友生产辅助工具";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
             this.menuStrip1.ResumeLayout(false);

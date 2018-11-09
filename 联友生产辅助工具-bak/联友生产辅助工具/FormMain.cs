@@ -262,7 +262,13 @@ namespace 联友生产辅助工具
             {
                 if (dataGridView.Rows[Index].Cells[2].Value.ToString() == "0" && dataGridView.Rows[Index].Cells[3].Value.ToString() == "0")
                 {
-                    continue;
+                    dataGridView.Rows[Index].Cells[4].Value = "0";
+                    dataGridView.Rows[Index].Cells[5].Value = "0";
+                    dataGridView.Rows[Index].Cells[6].Value = "0";
+                    dataGridView.Rows[Index].Cells[7].Value = "0";
+                    dataGridView.Rows[Index].Cells[8].Value = "0";
+                    dataGridView.Rows[Index].Cells[9].Value = "";
+                    dataGridView.Rows[Index].Cells[10].Value = "";
                 }
                 else
                 {
@@ -379,7 +385,8 @@ namespace 联友生产辅助工具
                    + " WGroup AS 组别, Serial AS 系列, PlanNumber AS 计划数量, "
                    + " WorkNumber AS 生产数量, Workers AS 人数, Hours AS 工时, StopHours AS 停工工时, TotalHours AS 总工时, Capacity AS 产量每人每小时, "
                    + " OrderID AS 生产单号, Remark AS 备注 FROM SC_DAILYRECORD "
-                   + " WHERE 1 = 1 ";
+                   + " WHERE 1 = 1 "
+                   + " AND (PlanNumber <> '0' AND WorkNumber <> '0') ";
                 sqlstr += sql_date + sql_dpt;
                 sqlstr += WGroup_List;
             }

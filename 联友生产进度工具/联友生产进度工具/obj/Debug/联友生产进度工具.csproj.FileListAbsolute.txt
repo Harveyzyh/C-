@@ -1,0 +1,71 @@
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.exe
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.pdb
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csprojResolveAssemblyReference.cache
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.FormMain.resources
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Properties.Resources.resources
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csproj.GenerateResource.Cache
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.exe
+E:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.pdb
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.exe
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.pdb
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csprojResolveAssemblyReference.cache
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Properties.Resources.resources
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csproj.GenerateResource.Cache
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.exe
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.pdb
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.exe
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.pdb
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.exe
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.pdb
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csprojResolveAssemblyReference.cache
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.FormMain.resources
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Properties.Resources.resources
+C:\Users\WPad\Desktop\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csproj.GenerateResource.Cache
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.exe
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.pdb
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.exe
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.pdb
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csprojResolveAssemblyReference.cache
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Properties.Resources.resources
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csproj.GenerateResource.Cache
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Login.resources
+H:\0 CODE\C#\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Main.resources
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.exe
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.pdb
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csprojResolveAssemblyReference.cache
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Login.resources
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Main.resources
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Properties.Resources.resources
+E:\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.csproj.GenerateResource.Cache
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.exe
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\联友生产进度工具.pdb
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\Newtonsoft.Json.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OOXML.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OpenXml4Net.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.Primitives.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.WebRequest.dll
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\Newtonsoft.Json.xml
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.xml
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.xml
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.Primitives.xml
+E:\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.WebRequest.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\Newtonsoft.Json.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OOXML.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OpenXml4Net.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.Primitives.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.WebRequest.dll
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\Newtonsoft.Json.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\NPOI.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.Primitives.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\bin\Debug\System.Net.Http.WebRequest.xml
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Login.resources
+D:\桌面\联友生产进度工具\联友生产进度工具\obj\Debug\联友生产进度工具.Form_Main.resources
