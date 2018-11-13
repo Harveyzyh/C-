@@ -23,3 +23,5 @@ E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\�
 E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.FormMain_WG_Modi.resources
 E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.Properties.Resources.resources
 E:\0 CODE\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具-bak.csproj.GenerateResource.Cache
+E:\GitHub\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.exe
+E:\GitHub\C#\联友生产辅助工具-bak\联友生产辅助工具\obj\Release\联友生产辅助工具.pdb

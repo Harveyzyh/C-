@@ -1,21 +1,4 @@
-﻿public class Global_Var //全局变量配置
-{
-    #region 程序版本信息
-    public static string Software_Version = "";
-    public static string File_Version  = "";
-    #endregion
-    
-    public static string Login_UID = "";
-    public static string Login_Role = "";
-    public static string Login_Name = "";
-    public static string Login_Dpt = "";
-
-
-    //public static string XL_List = "";
-    //public static bool XL_ChangeFlag = false;
-}
-
-public class Global_Const //静态量配置
+﻿public class Global_Const //静态量配置
 {
     #region 数据库连接字
     public const string strConnection_CONFIG =      "Server=192.168.0.198;initial catalog=CONFIG;user id=sa;password=COMfort123456;Connect Timeout=5";

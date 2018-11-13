@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using HarveyZ;
 using 联友生产辅助工具.FormModule;
+using System.Net;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace 联友生产辅助工具
 {
@@ -29,6 +31,10 @@ namespace 联友生产辅助工具
         private void FormMainInit()
         {
             LabelUserInfo.Text = "部门：" + FormLogin.Login_Dpt + "    姓名：" + FormLogin.Login_Uid + "-" + FormLogin.Login_Name;
+            if(FormLogin.Login_Uid != "001114")
+            {
+                测试ToolStripMenuItem.Visible = false;
+            }
         }
         #endregion
 
@@ -69,6 +75,32 @@ namespace 联友生产辅助工具
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        /*
+         以下为测试部分
+             */
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            //ZipUnZip zipunzip = new ZipUnZip();
+            //MessageBox.Show("", "");
+            //WebClient client = new WebClient();
+            //string URLAddress = @"http://192.168.7.251:8099/Client/WG/Download/FtpClient.zip";
+            //string receivePath = @"F:\";
+            //client.DownloadFile(URLAddress, receivePath + System.IO.Path.GetFileName(URLAddress));
+
+            //string kk = @"F:\FtpClient.zip";
+
+            //if (zipunzip.UnZip(kk, @"F:\FtpClient") == true)
+            //{
+            //    MessageBox.Show("解压完成", "");
+            //}
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //Form_Opt frm = new Form_Opt(PDA_JH);
         }
     }
 }

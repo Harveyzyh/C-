@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HarveyZ;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,20 +7,37 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using 联友生产辅助工具;
 
 namespace PDA工具
 {
-    public partial class Form1 : Form
+    public partial class PDA_LL : Form
     {
         string strConnection = Global_Const.strConnection_COMFORT;
         DataTable dttmp = null;
+
+        Mssql mssql = new Mssql();
+
         string xa007 = "";
-        public Form1()
+        public PDA_LL()
         {
             InitializeComponent();
             button2.Enabled = false;
         }
+
+        #region 主窗体按钮
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e) //窗体上的关闭按钮
+        {
+            if (MessageBox.Show("是否退出？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Dispose();
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -62,8 +80,9 @@ namespace PDA工具
 
         private string getTime()
         {
+            
             string sqlstr = "SELECT REPLACE(REPLACE(REPLACE(CONVERT(VARCHAR(30), GETDATE(), 120), '-', ''), ':', ''), ' ', '')";
-            DataTable dttmp2 = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp2 != null)
             {
                 return dttmp2.Rows[0][0].ToString();
@@ -99,7 +118,7 @@ namespace PDA工具
         private bool checkMOCTC(string danbie, string danhao)
         {
             string sqlstr = "SELECT TC001, TC002 FROM MOCTC WHERE TC001 = '" + danbie + "' AND TC002 = '" + danhao + "'";
-            DataTable dttmp2 = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp2 != null)
             {
                 return true;
@@ -113,7 +132,7 @@ namespace PDA工具
         private bool checkLLXA(string danbie, string danhao)
         {
             string sqlstr = "SELECT LLXA001 FROM LL_LYXA WHERE LLXA001='" + danbie + "' AND LLXA002='" + danhao + "'";
-            DataTable dttmp2 = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp2 != null)
             {
                 return true;
@@ -127,7 +146,7 @@ namespace PDA工具
         private bool checkLLXA007(string LLXA007)
         {
             string sqlstr = "SELECT LLXA007 FROM LL_LYXA WHERE LLXA007='" + LLXA007 + "'";
-            DataTable dttmp2 = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp2 != null)
             {
                 return true;
@@ -161,7 +180,7 @@ namespace PDA工具
                 + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
                 + " '" + xa007 + "' AS LLXA007 "
                 + " FROM VMOCTEJ WHERE TE001 = '" + danbie + "' AND TE002 = '" + danhao + "'";
-            dttmp = Mssql.SQLselect(strConnection, sqlstr);
+            dttmp = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp != null)
             {
                 dataGridView1.DataSource = dttmp;
@@ -215,13 +234,14 @@ namespace PDA工具
                     sqlstr = "INSERT INTO LL_LYXA (CREATOR, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( "
                             +  "'" +creator + "', '" + create_date + "', '" + xa001 + "', '" + xa002 + "', '" + xa003 + "', '" + xa007 + "', '" + xa009 + "','" + xa010 + "', '" + xa011 + "', '" + xa012 + "','" 
                             + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')";
-                    Mssql.SQLexcute(strConnection, sqlstr);
+                    mssql.SQLexcute(strConnection, sqlstr);
                 }
                 dataGridView1.DataSource = null;
                 dttmp = null;
                 button2.Enabled = false;
                 textBox1.Text = "";
                 label2.Text = "";
+                label3.Text = "已上传" + index.ToString() + "条记录！";
                 MessageBox.Show("已上传" + index.ToString() + "条记录！", "");
             }
             else

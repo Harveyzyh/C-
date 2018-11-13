@@ -1,0 +1,8 @@
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Release\AutoUpdate.exe
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Release\AutoUpdate.pdb
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Release\AutoUpdate.AutoUpdate.resources
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Release\AutoUpdate.Properties.Resources.resources
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Release\AutoUpdate.csproj.GenerateResource.Cache
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Release\AutoUpdate.exe
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Release\AutoUpdate.pdb

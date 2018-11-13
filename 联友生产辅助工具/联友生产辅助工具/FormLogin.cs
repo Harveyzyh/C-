@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 using 联友生产辅助工具;
 
@@ -7,7 +9,8 @@ namespace HarveyZ
 {
     public partial class FormLogin : Form
     {
-        private bool TestFlag = true;
+        private bool URLTestFlag = true;
+        private bool UpdateTestFlag = true;
 
         #region 定义公开全局变量
         public static string Login_Uid = "";
@@ -23,6 +26,10 @@ namespace HarveyZ
         private bool MessageboxFlag = false;
         private string HttpURL = "";
         private string ConnStr = Global_Const.strConnection_WG_DB;
+        
+        private string ProgFileName = "";
+
+        private string UpdateUrl = "";
         #endregion
 
         CEncrypt cEncrypt = new CEncrypt();
@@ -33,8 +40,72 @@ namespace HarveyZ
         {
             InitializeComponent();
             GetMutilOpen();
+            if (URLTestFlag)
+            {
+                FormLogin_TextBox_UID.Text = "001114";
+                FormLogin_TextBox_PWD.Text = "Venushui";
+            }
+
             FormLogin_Init(); //配置信息获取
+
+            bool UpdFlag = GetNewVersion();
+            if (UpdFlag && UpdateTestFlag)
+            {
+                Update();
+            }
+
+            labelVersion.Text = "Ver: " + Software_Version;
+
         }
+
+        #region 程序更新
+        public bool StartProcess(string filename, string[] args)
+        {
+            try
+            {
+                string s = "";
+                foreach (string arg in args)
+                {
+                    s = s + arg + " ";
+                }
+                s = s.Trim();
+                Process myprocess = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo(filename, s);
+                myprocess.StartInfo = startInfo;
+
+                //通过以下参数可以控制exe的启动方式，具体参照 myprocess.StartInfo.下面的参数，如以无界面方式启动exe等
+                myprocess.StartInfo.UseShellExecute = false;
+                myprocess.Start();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("启动应用程序时出错！原因：" + ex.Message);
+            }
+            return false;
+        }
+
+        private void Update()
+        {
+            string Path = System.IO.Directory.GetCurrentDirectory();
+            try
+            {
+                string[] arg = new string[2];
+                arg[0] = UpdateUrl;
+                arg[1] = ProgFileName;
+                StartProcess(Path + "\\" + "AutoUpdate.exe", arg);
+                System.Environment.Exit(0);
+            }
+            catch(Win32Exception e)
+            {
+                if(MessageBox.Show("找不到更新软件，程序即将退出!", "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    System.Environment.Exit(0);
+                }
+            }
+            
+        }
+        #endregion
 
         #region 窗口设计
 
@@ -117,7 +188,7 @@ namespace HarveyZ
         private string GetHttpURL()
         {
             string sqlstr = "";
-            if (TestFlag)
+            if (URLTestFlag)
             {
                 sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Vaild = 'Y'";
             }
@@ -153,8 +224,47 @@ namespace HarveyZ
             }
         }
 
+        private bool GetNewVersion()
+        {
+            ProgFileName = System.IO.Path.GetFileName(Application.ExecutablePath).Split('.')[0];
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("ProgName", ProgFileName);
+            dict.Add("Version", Software_Version);
+            dict = Webnet.WebPost(HttpURL + "/Client/GetVersion", dict);
+            string Mode = "";
+            dict.TryGetValue("Mode", out Mode);
+            if (Mode == "Yes")
+            {
+                return false;
+            }
+            else if(Mode == "New")
+            {
+                dict.TryGetValue("URL", out UpdateUrl);
+                return true;
+            }
+            else if(Mode == "False")
+            {
+                dict.TryGetValue("URL", out UpdateUrl);
+                if (MessageBox.Show("程序：" + ProgFileName + " 已停用！ 请勿再使用，谢谢！\n\r\n\r" + UpdateUrl, "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    Environment.Exit(0);
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void FormLogin_Init() //软件配置信息获取
         {
+            Software_Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            File_Version = Application.ProductVersion.ToString();
+            Software_Version = Software_Version.Split('.')[0] + '.' + Software_Version.Split('.')[1] + '.'
+                + Software_Version.Split('.')[2];
+            
             if (mssql.SQLlinkTest(ConnStr))
             {
                 HttpURL = GetHttpURL();
@@ -174,10 +284,6 @@ namespace HarveyZ
                     Environment.Exit(0);
                 }
             }
-
-            Software_Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            File_Version = Application.ProductVersion.ToString();
-            labelVersion.Text = "Ver: " + Software_Version;
         }
 
         private bool FormLogin_GetLogin(string Login_uid, string Login_pwd)//登录

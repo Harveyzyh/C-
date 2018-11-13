@@ -1,0 +1,9 @@
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.csprojResolveAssemblyReference.cache
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.AutoUpdate.resources
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.Properties.Resources.resources
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.csproj.GenerateResource.Cache
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Debug\AutoUpdate.exe
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Debug\AutoUpdate.pdb
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.exe
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\obj\Debug\AutoUpdate.pdb
+E:\GitHub\C#\联友生产辅助工具\AutoUpdate\bin\Debug\ICSharpCode.SharpZipLib.dll
