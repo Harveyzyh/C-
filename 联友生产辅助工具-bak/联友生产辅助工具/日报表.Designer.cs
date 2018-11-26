@@ -1,6 +1,6 @@
 ﻿namespace 联友生产辅助工具
 {
-    partial class FormMain
+    partial class 日报表
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(日报表));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.生产日报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部门填写ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

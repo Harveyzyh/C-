@@ -58,6 +58,7 @@
             this.FormLogin_TextBox_UID.Name = "FormLogin_TextBox_UID";
             this.FormLogin_TextBox_UID.Size = new System.Drawing.Size(182, 24);
             this.FormLogin_TextBox_UID.TabIndex = 1;
+            this.FormLogin_TextBox_UID.TextChanged += new System.EventHandler(this.FormLogin_TextBox_Changed);
             this.FormLogin_TextBox_UID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormLogin_TextBox_UID_KeyUp);
             // 
             // label2
@@ -80,6 +81,7 @@
             this.FormLogin_TextBox_PWD.PasswordChar = '*';
             this.FormLogin_TextBox_PWD.Size = new System.Drawing.Size(182, 24);
             this.FormLogin_TextBox_PWD.TabIndex = 3;
+            this.FormLogin_TextBox_PWD.TextChanged += new System.EventHandler(this.FormLogin_TextBox_Changed);
             this.FormLogin_TextBox_PWD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormLogin_TextBox_PWD_KeyUp);
             // 
             // FormLogin_Button_Login

@@ -226,8 +226,14 @@ namespace 联友生产进度工具
                                          + " SC023 AS 生产车间,  "
                                          + " SC024 AS 客户编码,  "
                                          + " SC025 AS 电商编码,  "
+                                         + " (CASE WHEN SC037 = 'N' THEN '未维护' ELSE SC037 END) AS 栈板分类码, "
+                                         + " Type AS 栈板分类, "
+                                         + " (CASE WHEN SC036 = 'NULL' THEN '未维护' ELSE SC036 END) AS 纸箱尺寸码, "
+                                         + " Size AS 纸箱尺寸, "
                                          + " (CASE SC033 WHEN '0' THEN '未完成' WHEN '1' THEN '已完成' END) AS 完成状态  "
                                          + " FROM SCHEDULE "
+                                         + " LEFT JOIN BoxSizeCode ON SC036 = Code "
+                                         + " LEFT JOIN SplitTypeCode ON TypeCode = SC037 "
                                          + " WHERE 1=1 ";
             if (show)
             {

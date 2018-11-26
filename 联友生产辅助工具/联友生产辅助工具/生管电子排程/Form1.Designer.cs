@@ -1,6 +1,6 @@
-﻿namespace 联友生产辅助工具.FormModule
+﻿namespace 联友生产辅助工具.生管电子排程
 {
-    partial class PDA_JH
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "PDA_JH";
+            this.Text = "Form1";
         }
 
         #endregion

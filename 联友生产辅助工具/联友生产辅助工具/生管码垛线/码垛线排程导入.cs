@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.FormModule
+namespace 联友生产辅助工具.生管码垛线
 {
-    public partial class SC_DAILYREPORT : Form
+    public partial class 码垛线排程导入 : Form
     {
-        public SC_DAILYREPORT()
+        public 码垛线排程导入()
         {
             InitializeComponent();
         }

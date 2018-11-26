@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.FormModule
+namespace 联友生产辅助工具.生产日报表
 {
-    public partial class PDA_JH : Form
+    public partial class 日报表部门线别维护 : Form
     {
-        public PDA_JH()
+        public 日报表部门线别维护()
         {
             InitializeComponent();
         }

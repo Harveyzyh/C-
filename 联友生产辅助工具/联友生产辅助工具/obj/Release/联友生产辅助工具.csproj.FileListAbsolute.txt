@@ -17,9 +17,16 @@ E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Release\Syste
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.Primitives.xml
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.WebRequest.xml
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\HarveyZ.FormLogin.resources
-E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.FormMain.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.Properties.Resources.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.csproj.GenerateResource.Cache
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.exe
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.pdb
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.csprojResolveAssemblyReference.cache
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.主界面.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描进货单.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描领料单.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表修改.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表新增.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表查询.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表维护组别系列.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表获取组别系列.resources

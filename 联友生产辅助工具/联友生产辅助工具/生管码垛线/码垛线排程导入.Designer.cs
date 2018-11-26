@@ -1,6 +1,6 @@
-﻿namespace 联友生产辅助工具.FormModule
+﻿namespace 联友生产辅助工具.生管码垛线
 {
-    partial class SC_DAILYREPORT
+    partial class 码垛线排程导入
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "SC_DAILYREPORT";
+            this.Text = "Form1";
         }
 
         #endregion

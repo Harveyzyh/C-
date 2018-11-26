@@ -142,7 +142,7 @@ namespace 联友生产辅助工具
                     Global_Var.Login_Dpt = dttmp.Rows[0][2].ToString();
 
                     dttmp.Dispose();
-                    FormMain form_main = new FormMain();
+                    日报表 form_main = new 日报表();
                     form_main.Show();
                     this.Hide();
                 }

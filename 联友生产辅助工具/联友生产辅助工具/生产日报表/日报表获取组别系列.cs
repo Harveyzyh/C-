@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HarveyZ;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,15 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具
+namespace 联友生产辅助工具.生产日报表
 {
-    public partial class FormMain_WG : Form
+    public partial class 日报表获取组别系列 : Form
     {
-        public string strConnection = FormMain.strConnection;
-        
+        public string strConnection = 日报表新增.strConnection;
+
+        Mssql mssql = new Mssql();
+        string Login_UID = FormLogin.Login_Uid;
+        string Login_Role = FormLogin.Login_Role;
+        string Login_Dpt = FormLogin.Login_Dpt;
+
+
         public static bool XL_ChangeFlag = false;
         public static string XL_List = "";
-        public FormMain_WG(string sqlstr)
+
+        public 日报表获取组别系列(string sqlstr)
         {
             InitializeComponent();
             XL_List = "";
@@ -24,7 +32,7 @@ namespace 联友生产辅助工具
 
         private void Init(string sqlstr)
         {
-            DataTable dttmp = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
             dataGridView1.DataSource = dttmp;
             if(dttmp != null)
             {

@@ -107,37 +107,85 @@
     <Compile Include="FormLogin.designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="主界面.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <Compile Include="主界面.Designer.cs">
+      <DependentUpon>主界面.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModule\PDA_JH.cs">
+    <Compile Include="仓储中心\PDA-扫描进货单.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModule\PDA_JH.Designer.cs">
-      <DependentUpon>PDA_JH.cs</DependentUpon>
+    <Compile Include="仓储中心\PDA-扫描进货单.Designer.cs">
+      <DependentUpon>PDA-扫描进货单.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModule\SC_DAILYREPORT.cs">
+    <Compile Include="仓储中心\PDA_扫描领料单.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModule\SC_DAILYREPORT.Designer.cs">
-      <DependentUpon>SC_DAILYREPORT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormModule\SC_DAILYREPORT_XL.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormModule\SC_DAILYREPORT_XL.Designer.cs">
-      <DependentUpon>SC_DAILYREPORT_XL.cs</DependentUpon>
+    <Compile Include="仓储中心\PDA_扫描领料单.designer.cs">
+      <DependentUpon>PDA_扫描领料单.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="生产日报表\日报表修改.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表修改.designer.cs">
+      <DependentUpon>日报表修改.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生产日报表\日报表新增.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表新增.designer.cs">
+      <DependentUpon>日报表新增.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生产日报表\日报表查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表查询.designer.cs">
+      <DependentUpon>日报表查询.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生产日报表\日报表维护组别系列.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表维护组别系列.designer.cs">
+      <DependentUpon>日报表维护组别系列.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生产日报表\日报表获取组别系列.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表获取组别系列.Designer.cs">
+      <DependentUpon>日报表获取组别系列.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生产日报表\日报表部门线别维护.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表部门线别维护.Designer.cs">
+      <DependentUpon>日报表部门线别维护.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管电子排程\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管电子排程\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管码垛线\码垛线排程导入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管码垛线\码垛线排程导入.Designer.cs">
+      <DependentUpon>码垛线排程导入.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <EmbeddedResource Include="主界面.resx">
+      <DependentUpon>主界面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="仓储中心\PDA-扫描进货单.resx">
+      <DependentUpon>PDA-扫描进货单.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="仓储中心\PDA_扫描领料单.resx">
+      <DependentUpon>PDA_扫描领料单.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -148,6 +196,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="生产日报表\日报表修改.resx">
+      <DependentUpon>日报表修改.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生产日报表\日报表新增.resx">
+      <DependentUpon>日报表新增.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生产日报表\日报表查询.resx">
+      <DependentUpon>日报表查询.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生产日报表\日报表维护组别系列.resx">
+      <DependentUpon>日报表维护组别系列.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生产日报表\日报表获取组别系列.resx">
+      <DependentUpon>日报表获取组别系列.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

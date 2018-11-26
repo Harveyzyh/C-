@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.FormModule
+namespace 联友生产辅助工具.生管电子排程
 {
-    public partial class SC_DAILYREPORT_XL : Form
+    public partial class Form1 : Form
     {
-        public SC_DAILYREPORT_XL()
+        public Form1()
         {
             InitializeComponent();
         }

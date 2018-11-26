@@ -10,13 +10,13 @@ using System.IO;
 
 namespace 联友生产辅助工具
 {
-    public partial class FormMain : Form
+    public partial class 日报表 : Form
     {
         public static string strConnection = Global_Const.strConnection_WG_DB;
         bool DtpFlag = false;
 
         #region Init
-        public FormMain()
+        public 日报表()
         {
             InitializeComponent();
 
@@ -171,7 +171,7 @@ namespace 联友生产辅助工具
             panelReportSelect.Visible = false;
             panelReportInput.Visible = false;
             panelReportUpdate.Visible = false;
-            Form Modi = new FormMain_WG_Modi();
+            Form Modi = new 日报表修改组别系列();
             Modi.ShowDialog();
         }
 
@@ -373,9 +373,9 @@ namespace 联友生产辅助工具
             }
 
             //选择组别
-            if(FormMain_WG.XL_List != "")
+            if(日报表获取系列.XL_List != "")
             {
-                WGroup_List += "AND WGroup IN (" + FormMain_WG.XL_List + ")";
+                WGroup_List += "AND WGroup IN (" + 日报表获取系列.XL_List + ")";
             }
 
             //汇总方式
@@ -626,7 +626,7 @@ namespace 联友生产辅助工具
         {
             string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_XL2GY";
 
-            Form formxl = new FormMain_WG(sqlstr);
+            Form formxl = new 日报表获取系列(sqlstr);
             formxl.ShowDialog();
             //if (FormMain_WG.XL_ChangeFlag)
             //{
@@ -758,11 +758,11 @@ namespace 联友生产辅助工具
 
             string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_XL2GY";
 
-            Form formxl = new FormMain_WG(sqlstr);
+            Form formxl = new 日报表获取系列(sqlstr);
             formxl.ShowDialog();
-            if (FormMain_WG.XL_ChangeFlag)
+            if (日报表获取系列.XL_ChangeFlag)
             {
-                ReportInputShow(FormMain_WG.XL_List);
+                ReportInputShow(日报表获取系列.XL_List);
             }
             formxl.Dispose();
             
@@ -932,11 +932,11 @@ namespace 联友生产辅助工具
         {
             string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_XL2GY";
 
-            Form formxl = new FormMain_WG(sqlstr);
+            Form formxl = new 日报表获取系列(sqlstr);
             formxl.ShowDialog();
-            if (FormMain_WG.XL_ChangeFlag)
+            if (日报表获取系列.XL_ChangeFlag)
             {
-                ReportUpdateShow(FormMain_WG.XL_List);
+                ReportUpdateShow(日报表获取系列.XL_List);
             }
             formxl.Dispose();
             DtpFlag = true;

@@ -6,36 +6,58 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using HarveyZ;
 
-namespace 联友生产辅助工具
+namespace 联友生产辅助工具.生产日报表
 {
-    public partial class FormMain_WG_Modi : Form
+    public partial class 日报表维护组别系列 : Form
     {
-        public static string strConnection = FormMain.strConnection;
+        public static string strConnection = 日报表新增.strConnection;
 
-        public FormMain_WG_Modi()
+        Mssql mssql = new Mssql();
+        string Login_UID = FormLogin.Login_Uid;
+        string Login_Role = FormLogin.Login_Role;
+        string Login_Dpt = FormLogin.Login_Dpt;
+
+        public 日报表维护组别系列()
         {
             InitializeComponent();
             Init();
             comboBox1.Text = "";
         }
 
+        #region 窗口大小变化设置
+        private void Form_MainResized(object sender, EventArgs e)
+        {
+            Form_MainResized_Work();
+        }
+
+        private void Form_MainResized_Work()
+        {
+            //窗框大小
+            int FormWidth, FormHeight;
+            FormWidth = Width;
+            FormHeight = Height;
+            panel_Title.Size = new Size(FormWidth, panel_Title.Height);
+            DataGridView_List.Location = new Point(0, panel_Title.Height + 2);
+            DataGridView_List.Size = new Size(FormWidth, FormHeight - panel_Title.Height - 2);
+        }
+        #endregion
+
+
         private void Init()
         {
-
-            //comboBox1.Text = "";
             getitem();
-
-
+            
             string sqlstr = "";
             sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Vaild AS 有效码 FROM WG_DB..SC_XL2GY ORDER BY K_ID DESC ";
-            DataTable dttmp = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
 
-            dataGridView1.DataSource = null;
+            DataGridView_List.DataSource = null;
 
             if (dttmp != null)
             {
-                dataGridView1.Rows.Clear();
+                DataGridView_List.Rows.Clear();
 
                 int Columns = dttmp.Columns.Count;
                 int Rows = dttmp.Rows.Count;
@@ -44,37 +66,37 @@ namespace 联友生产辅助工具
 
                 for(Row_Index = 0; Row_Index < Rows; Row_Index++)
                 {
-                    Index = dataGridView1.Rows.Add();
-                    dataGridView1.Rows[Index].Cells[0].Value = dttmp.Rows[Row_Index][0].ToString();
-                    dataGridView1.Rows[Index].Cells[1].Value = dttmp.Rows[Row_Index][1].ToString();
+                    Index = DataGridView_List.Rows.Add();
+                    DataGridView_List.Rows[Index].Cells[0].Value = dttmp.Rows[Row_Index][0].ToString();
+                    DataGridView_List.Rows[Index].Cells[1].Value = dttmp.Rows[Row_Index][1].ToString();
                     if(dttmp.Rows[Row_Index][2].ToString() == "Y")
                     {
-                        dataGridView1.Rows[Index].Cells[2].Value = 1;
+                        DataGridView_List.Rows[Index].Cells[2].Value = 1;
                     }
                     else
                     {
-                        dataGridView1.Rows[Index].Cells[2].Value = 0;
+                        DataGridView_List.Rows[Index].Cells[2].Value = 0;
                     }
                 }
 
 
 
 
-                dataGridView1.Columns[0].Width = 150;
-                dataGridView1.Columns[0].ReadOnly = true;
-                dataGridView1.Columns[1].Width = 350;
-                dataGridView1.Columns[1].ReadOnly = true;
-                dataGridView1.Columns[2].Width = 50;
-                dataGridView1.RowsDefaultCellStyle.BackColor = Color.Bisque;
-                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+                DataGridView_List.Columns[0].Width = 150;
+                DataGridView_List.Columns[0].ReadOnly = true;
+                DataGridView_List.Columns[1].Width = 350;
+                DataGridView_List.Columns[1].ReadOnly = true;
+                DataGridView_List.Columns[2].Width = 50;
+                DataGridView_List.RowsDefaultCellStyle.BackColor = Color.Bisque;
+                DataGridView_List.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
 
 
-                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                for (int i = 0; i < this.DataGridView_List.Columns.Count; i++)
                 {
-                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    this.DataGridView_List.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-                HeadRowLineNumber(dataGridView1);
-                dataGridView1.RowHeadersWidth = 40;
+                HeadRowLineNumber(DataGridView_List);
+                DataGridView_List.RowHeadersWidth = 40;
             }
             else
             {
@@ -85,7 +107,7 @@ namespace 联友生产辅助工具
         private void getitem()
         {
             string sqlstr = "SELECT DISTINCT WGroup FROM WG_DB..SC_XL2GY ORDER BY WGroup";
-            DataTable dttmp = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
             if(dttmp != null)
             {
                 comboBox1.Items.Clear();
@@ -114,7 +136,7 @@ namespace 联友生产辅助工具
         
         private bool seach(string sqlstr)
         {
-            DataTable dttmp = Mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
             if (dttmp != null)
             {
                 return true;
@@ -130,13 +152,13 @@ namespace 联友生产辅助工具
             int Index, RowCount;
             string sqlstr1, sqlstr2;
             string WGroup, Serial, Vaild;
-            RowCount = dataGridView1.RowCount;
+            RowCount = DataGridView_List.RowCount;
 
             for(Index = 0; Index < RowCount; Index++)
             {
-                WGroup = dataGridView1.Rows[Index].Cells[0].Value.ToString();
-                Serial = dataGridView1.Rows[Index].Cells[1].Value.ToString();
-                if((bool)dataGridView1.Rows[Index].Cells[2].EditedFormattedValue == true)
+                WGroup = DataGridView_List.Rows[Index].Cells[0].Value.ToString();
+                Serial = DataGridView_List.Rows[Index].Cells[1].Value.ToString();
+                if((bool)DataGridView_List.Rows[Index].Cells[2].EditedFormattedValue == true)
                 {
                     Vaild = "Y";
                 }
@@ -153,7 +175,7 @@ namespace 联友生产辅助工具
                 else
                 {
                     sqlstr2 = "UPDATE WG_DB..SC_XL2GY SET Vaild = '" + Vaild + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
-                    Mssql.SQLexcute(strConnection, sqlstr2);
+                    mssql.SQLexcute(strConnection, sqlstr2);
                 }
             }
         }
@@ -178,7 +200,7 @@ namespace 联友生产辅助工具
                 else
                 {
                     sqlstr2 = "INSERT INTO WG_DB..SC_XL2GY VALUES('" + WGroup + "', '" + Serial + "', 'Y')";
-                    Mssql.SQLexcute(strConnection, sqlstr2);
+                    mssql.SQLexcute(strConnection, sqlstr2);
                     MessageBox.Show("组别：" + WGroup + "，系列：" + Serial + "新增成功！", "提示", MessageBoxButtons.OK);
                     commit();
                     Init();
@@ -203,10 +225,10 @@ namespace 联友生产辅助工具
         {
             string sqlstr = "";
 
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Global_Var.Login_UID + "', " + Global_Const.sqldatestrlong
+            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Login_UID + "', " + Global_Const.sqldatestrlong
                    + ", '" + ProgramName + "', '" + ModuleName + "')";
 
-            Mssql.SQLexcute(strConnection, sqlstr);
+            mssql.SQLexcute(strConnection, sqlstr);
         }
         #endregion
     }

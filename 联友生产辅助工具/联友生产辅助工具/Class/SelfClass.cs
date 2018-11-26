@@ -187,7 +187,7 @@ namespace HarveyZ
 
     public class Form_Opt
     {
-        public static Form Form_Init(Form sender)
+        public Form Form_Init(Form sender)
         {
             Form frm = sender;
             frm.TopLevel = false;
@@ -199,13 +199,26 @@ namespace HarveyZ
     }
 
 
+    #region WebPost
+    public class WebClientEx : WebClient
+    {
+        public int Timeout { get; set; }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var request = base.GetWebRequest(address);
+            request.Timeout = 5000;
+            return request;
+        }
+    }
+
     public class WebNet
     {
         public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
         {
             try
             {
-                var client = new WebClient();
+                var client = new WebClientEx();
 
                 string json = DictJson.Dict2Json(dict);
 
@@ -219,6 +232,7 @@ namespace HarveyZ
             }
         }
     }
+    #endregion
 
 
     public class Excel

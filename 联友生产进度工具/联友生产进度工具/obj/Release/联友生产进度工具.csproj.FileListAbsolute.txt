@@ -59,3 +59,24 @@ E:\0 GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联
 E:\0 GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.pdb
 E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.exe
 E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.pdb
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\联友生产进度工具.exe
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\联友生产进度工具.pdb
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\Newtonsoft.Json.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\NPOI.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\NPOI.OOXML.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\NPOI.OpenXml4Net.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\NPOI.OpenXmlFormats.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.Primitives.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.WebRequest.dll
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\Newtonsoft.Json.xml
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\NPOI.xml
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.xml
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.Primitives.xml
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\bin\Release\System.Net.Http.WebRequest.xml
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.csprojResolveAssemblyReference.cache
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.Form_Login.resources
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.Form_Main.resources
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.Properties.Resources.resources
+E:\GitHub\C#\联友生产进度工具\联友生产进度工具\obj\Release\联友生产进度工具.csproj.GenerateResource.Cache

@@ -1,6 +1,6 @@
-﻿namespace 联友生产辅助工具.FormModule
+﻿namespace 联友生产辅助工具.生产日报表
 {
-    partial class SC_DAILYREPORT_XL
+    partial class 日报表部门线别维护
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "SC_DAILYREPORT_XL";
+            this.Text = "日报表部门线别维护";
         }
 
         #endregion
