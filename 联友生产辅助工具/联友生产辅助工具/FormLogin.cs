@@ -9,8 +9,8 @@ namespace HarveyZ
 {
     public partial class FormLogin : Form
     {
-        private bool URLTestFlag = false;
-        private bool UpdateFlag = true;
+        private bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址
+        private bool UpdateFlag = true; //是否运行文件更新，false：依然会发送程序版本至服务器进行对比，无论对比结果如何，不会进入更新程序
 
         #region 定义公开全局变量
         public static string Login_Uid = "";

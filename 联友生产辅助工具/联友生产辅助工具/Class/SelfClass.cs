@@ -18,6 +18,30 @@ using ICSharpCode.SharpZipLib.Checksums;
 
 namespace HarveyZ
 {
+    public class IPInfo
+    {
+        public string GetIpAddress()
+        {
+            string addr = "";
+            string ip = "192.168."; //用于过滤ip
+            int index = 0;
+            string hostName = Dns.GetHostName();   //获取本机名
+            IPHostEntry localhost = Dns.GetHostByName(hostName);    //方法已过期，可以获取IPv4的地址
+            //IPHostEntry localhost = Dns.GetHostEntry(hostName);   //获取IPv6地址
+
+            foreach(IPAddress localaddr in localhost.AddressList)
+            {
+                index = localaddr.ToString().IndexOf(ip);
+                if (index >= 0)
+                {
+                    addr = localaddr.ToString();
+                }
+            }
+
+            return addr;
+        }
+    }
+
     public class CEncrypt
     {
         public string GetMd5Str(string str)     //取得字符串str被MD5加密算法加密后的字符串

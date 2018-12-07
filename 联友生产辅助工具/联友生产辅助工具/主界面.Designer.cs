@@ -58,6 +58,7 @@
             this.LabelUserInfo = new System.Windows.Forms.Label();
             this.panelParent = new System.Windows.Forms.Panel();
             this.Label_Test = new System.Windows.Forms.Label();
+            this.LabelIPInfo = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,21 +134,21 @@
             // 生产日报表新增ToolStripMenuItem
             // 
             this.生产日报表新增ToolStripMenuItem.Name = "生产日报表新增ToolStripMenuItem";
-            this.生产日报表新增ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.生产日报表新增ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.生产日报表新增ToolStripMenuItem.Text = "新增";
             this.生产日报表新增ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_新增ToolStripMenuItem_Click);
             // 
             // 生产日报表修改ToolStripMenuItem
             // 
             this.生产日报表修改ToolStripMenuItem.Name = "生产日报表修改ToolStripMenuItem";
-            this.生产日报表修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.生产日报表修改ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.生产日报表修改ToolStripMenuItem.Text = "修改";
             this.生产日报表修改ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_修改ToolStripMenuItem_Click);
             // 
             // 生产日报表查询ToolStripMenuItem
             // 
             this.生产日报表查询ToolStripMenuItem.Name = "生产日报表查询ToolStripMenuItem";
-            this.生产日报表查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.生产日报表查询ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.生产日报表查询ToolStripMenuItem.Text = "查询";
             this.生产日报表查询ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_查询ToolStripMenuItem_Click);
             // 
@@ -172,7 +173,7 @@
             // 码垛线排程导入ToolStripMenuItem
             // 
             this.码垛线排程导入ToolStripMenuItem.Name = "码垛线排程导入ToolStripMenuItem";
-            this.码垛线排程导入ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.码垛线排程导入ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.码垛线排程导入ToolStripMenuItem.Text = "排程导入";
             // 
             // 生产日报表生管维护ToolStripMenuItem
@@ -211,13 +212,13 @@
             // 权限管理ToolStripMenuItem
             // 
             this.权限管理ToolStripMenuItem.Name = "权限管理ToolStripMenuItem";
-            this.权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.权限管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.权限管理ToolStripMenuItem.Text = "权限管理";
             // 
             // 用户管理ToolStripMenuItem
             // 
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
             // 
             // 帮助ToolStripMenuItem
@@ -250,21 +251,21 @@
             // 测试_1ToolStripMenuItem
             // 
             this.测试_1ToolStripMenuItem.Name = "测试_1ToolStripMenuItem";
-            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_1ToolStripMenuItem.Text = "1";
             this.测试_1ToolStripMenuItem.Click += new System.EventHandler(this.测试_1ToolStripMenuItem_Click);
             // 
             // 测试_2ToolStripMenuItem
             // 
             this.测试_2ToolStripMenuItem.Name = "测试_2ToolStripMenuItem";
-            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_2ToolStripMenuItem.Text = "2";
             this.测试_2ToolStripMenuItem.Click += new System.EventHandler(this.测试_2ToolStripMenuItem_Click);
             // 
             // 测试_3ToolStripMenuItem
             // 
             this.测试_3ToolStripMenuItem.Name = "测试_3ToolStripMenuItem";
-            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_3ToolStripMenuItem.Text = "3";
             this.测试_3ToolStripMenuItem.Click += new System.EventHandler(this.测试_3ToolStripMenuItem_Click);
             // 
@@ -282,7 +283,7 @@
             this.LabelUserInfo.Location = new System.Drawing.Point(0, 426);
             this.LabelUserInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelUserInfo.Name = "LabelUserInfo";
-            this.LabelUserInfo.Size = new System.Drawing.Size(600, 16);
+            this.LabelUserInfo.Size = new System.Drawing.Size(400, 16);
             this.LabelUserInfo.TabIndex = 152;
             this.LabelUserInfo.Text = "LabelUserInfo";
             // 
@@ -303,11 +304,23 @@
             this.Label_Test.Size = new System.Drawing.Size(0, 18);
             this.Label_Test.TabIndex = 154;
             // 
+            // LabelIPInfo
+            // 
+            this.LabelIPInfo.Font = new System.Drawing.Font("宋体", 9F);
+            this.LabelIPInfo.Location = new System.Drawing.Point(667, 426);
+            this.LabelIPInfo.Name = "LabelIPInfo";
+            this.LabelIPInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LabelIPInfo.Size = new System.Drawing.Size(173, 16);
+            this.LabelIPInfo.TabIndex = 155;
+            this.LabelIPInfo.Text = "LabelIPInfo";
+            this.LabelIPInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 443);
+            this.Controls.Add(this.LabelIPInfo);
             this.Controls.Add(this.Label_Test);
             this.Controls.Add(this.panelParent);
             this.Controls.Add(this.LabelUserInfo);
@@ -361,6 +374,7 @@
         private System.Windows.Forms.ToolStripMenuItem 生产日报表部门线别维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表系列组别维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关闭当前界面ToolStripMenuItem;
+        private System.Windows.Forms.Label LabelIPInfo;
     }
 }
 

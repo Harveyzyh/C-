@@ -28,6 +28,8 @@ namespace 联友生产辅助工具
             InitializeComponent();
             
             LabelUserInfo.Text = "部门：" + FormLogin.Login_Dpt + "    姓名：" + FormLogin.Login_Uid + "-" + FormLogin.Login_Name;
+            IPInfo ipinfo = new IPInfo();
+            LabelIPInfo.Text = "本机IP地址：" + ipinfo.GetIpAddress() + "  ";
 
             关闭当前界面ToolStripMenuItem.Visible = false;
 
@@ -196,6 +198,7 @@ namespace 联友生产辅助工具
             FormWidth = Width - 20;
             FormHeight = Height - 40;
             LabelUserInfo.Location = new Point(2, FormHeight - LabelUserInfo.Height);
+            LabelIPInfo.Location = new Point(FormWidth - LabelIPInfo.Width, FormHeight - LabelIPInfo.Height);
             panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - LabelUserInfo.Height - 7);
         }
         #endregion
@@ -251,7 +254,9 @@ namespace 联友生产辅助工具
 
         private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            IPInfo ipinfo = new IPInfo();
+            string ip = ipinfo.GetIpAddress();
+            MessageBox.Show(ip);
         }
 
         private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)
