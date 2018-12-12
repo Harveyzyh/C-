@@ -230,7 +230,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "生产日报表查询";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.SizeChanged += new System.EventHandler(this.Form_MainResized);
+            this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
             this.panel_Title.ResumeLayout(false);
             this.panel_Title.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();

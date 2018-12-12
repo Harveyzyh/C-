@@ -20,22 +20,24 @@ namespace HarveyZ
 
         public static string Software_Version = "";
         public static string File_Version = "";
+
+        public static string HttpURL = "";
         #endregion
 
         #region 本地局域变量
         private bool MessageboxFlag = false;
-        private string HttpURL = "";
         private string ConnStr = Global_Const.strConnection_WG_DB;
         
         private string ProgFileName = "";
 
         private string UpdateUrl = "";
-        #endregion
 
         CEncrypt cEncrypt = new CEncrypt();
         Mssql mssql = new Mssql();
         WebNet Webnet = new WebNet();
-        
+        #endregion
+
+        #region Init
         public FormLogin()
         {
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace HarveyZ
             if (URLTestFlag)
             {
                 FormLogin_TextBox_UID.Text = "001114";
-                FormLogin_TextBox_PWD.Text = "Venushui";
+                FormLogin_TextBox_PWD.Text = "18098700";
             }
 
             FormLogin_Init(); //配置信息获取
@@ -57,6 +59,7 @@ namespace HarveyZ
             labelVersion.Text = "Ver: " + Software_Version;
 
         }
+        #endregion
 
         #region 程序更新
         public bool StartProcess(string filename, string[] args)
@@ -282,7 +285,7 @@ namespace HarveyZ
                 bool get = HttpURLTest();
                 if (!get)
                 {
-                    if (MessageBox.Show("无法连接后台服务器", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
+                    if (MessageBox.Show("无法连接后台服务器\n 程序即将退出！", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
                     {
                         Environment.Exit(0);
                     }
@@ -290,7 +293,7 @@ namespace HarveyZ
             }
             else
             {
-                if (MessageBox.Show("无法连接配置服务器", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
+                if (MessageBox.Show("无法连接配置服务器\n 程序即将退出！", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }

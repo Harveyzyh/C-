@@ -10,8 +10,8 @@ using System.IO;
 using HarveyZ;
 using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生管电子排程;
-using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生产日报表;
+using 联友生产进度工具.生管码垛线;
 
 namespace 联友生产辅助工具
 {
@@ -50,19 +50,20 @@ namespace 联友生产辅助工具
             {
                 if(FormLogin.Login_Dpt.Substring(0, 2) == "生产")
                 {
-                    list.Add("生产日报表新增");
-                    list.Add("生产日报表修改");
-                    list.Add("生产日报表查询");
+                    list.Add("生产日报表_新增");
+                    list.Add("生产日报表_修改");
+                    list.Add("生产日报表_查询");
                 }
                 if(FormLogin.Login_Role == "生管")
                 {
-                    list.Add("生产日报表查询");
-                    list.Add("生产日报表系列组别维护");
-                    list.Add("码垛线排程导入");
+                    list.Add("生产日报表_查询");
+                    list.Add("生产日报表_部门线别维护");
+                    list.Add("生产日报表_系列组别维护");
+                    list.Add("码垛线_排程导入");
                 }
                 if(FormLogin.Login_Uid == "000960")
                 {
-                    list.Add("扫描领料单");
+                    list.Add("仓储中心_扫描领料单");
                 }
                 SetPermission(list);
             }
@@ -279,15 +280,27 @@ namespace 联友生产辅助工具
         }
         #endregion
 
+        #region 管理
+        private void 管理_权限管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 管理_用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
         #region PDA工具
-        private void 扫描领料单ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 仓储中心_扫描领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PDA_扫描领料单 frm = new PDA_扫描领料单();
             FormOpenInit(frm);
             frm.Show();
         }
 
-        private void 扫描进货单ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 仓储中心_扫描进货单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PDA_扫描进货单 frm = new PDA_扫描进货单();
             FormOpenInit(frm);
@@ -317,14 +330,14 @@ namespace 联友生产辅助工具
             frm.Show();
         }
 
-        private void 日报表系列组别维护ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 生产日报表_系列组别维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             日报表维护组别系列 frm = new 日报表维护组别系列();
             FormOpenInit(frm);
             frm.Show();
         }
 
-        private void 日报表部门线别维护ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 生产日报表_部门线别维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             日报表部门线别维护 frm = new 日报表部门线别维护();
             FormOpenInit(frm);
@@ -334,9 +347,14 @@ namespace 联友生产辅助工具
         #endregion
 
         #region 码垛线
+        private void 码垛线_排程导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            码垛线排程导入 frm = new 码垛线排程导入();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
 
         #endregion
-
     }
 }

@@ -80,3 +80,4 @@ E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友�
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表查询.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表修改.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表获取组别系列.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产进度工具.生管码垛线.码垛线排程导入.resources

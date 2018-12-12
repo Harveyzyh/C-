@@ -1,11 +1,8 @@
 ﻿using HarveyZ;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace 联友生产辅助工具.仓储中心
@@ -16,6 +13,8 @@ namespace 联友生产辅助工具.仓储中心
         DataTable dttmp = null;
 
         Mssql mssql = new Mssql();
+
+        WebNet Webnet = new WebNet();
 
         string xa007 = "";
         public PDA_扫描领料单()
@@ -95,17 +94,17 @@ namespace 联友生产辅助工具.仓储中心
         {
             insertsql();
         }
-
-
-
+        
         private string getTime()
         {
-            
-            string sqlstr = "SELECT REPLACE(REPLACE(REPLACE(CONVERT(VARCHAR(30), GETDATE(), 120), '-', ''), ':', ''), ' ', '')";
-            DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr);
-            if (dttmp2 != null)
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("Mode", "Long");
+            dict = Webnet.WebPost(FormLogin.HttpURL + "/Client/GetTime", dict);
+            string Time = "";
+            if (dict != null)
             {
-                return dttmp2.Rows[0][0].ToString();
+                dict.TryGetValue("Time", out Time);
+                return Time;
             }
             else
             {
@@ -217,12 +216,17 @@ namespace 联友生产辅助工具.仓储中心
 
         private void insertsql()
         {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
             string sqlstr = "";
+            string detail = "";
+            string danhao = "";
             int index;
             if (dttmp != null)
             {
+                danhao = dttmp.Rows[0][0].ToString().Trim() + "-" + dttmp.Rows[0][1].ToString().Trim();
                 string create_date = getTime();
-                string creator = "Tools";
+                string creator = FormLogin.Login_Uid;
                 string xa001 = "";
                 string xa002 = "";
                 string xa003 = "";
@@ -251,17 +255,30 @@ namespace 联友生产辅助工具.仓储中心
                     xa015 = dttmp.Rows[index][11].ToString().Trim();
                     xa017 = dttmp.Rows[index][6].ToString().Trim();
                     xa018 = dttmp.Rows[index][14].ToString().Trim();
+
+                    detail += xa012 + ":" + xa017 + "; ";
+
                     sqlstr = "INSERT INTO LL_LYXA (CREATOR, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( "
                             +  "'" +creator + "', '" + create_date + "', '" + xa001 + "', '" + xa002 + "', '" + xa003 + "', '" + xa007 + "', '" + xa009 + "','" + xa010 + "', '" + xa011 + "', '" + xa012 + "','" 
                             + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')";
                     mssql.SQLexcute(strConnection, sqlstr);
                 }
                 DataGridView_List.DataSource = null;
-                dttmp = null;
                 Button_Upload.Enabled = false;
                 TextBox_Danhao.Text = "";
+                TextBox_Danhao.Select();
                 Lable_Danhao.Text = "";
                 label3.Text = "已上传" + index.ToString() + "条记录！";
+
+                dict.Add("User", FormLogin.Login_Uid);
+                dict.Add("ID", danhao);
+                dict.Add("Select", dttmp.Rows.Count.ToString());
+                dict.Add("Upload", index.ToString());
+                dict.Add("Detail", detail);
+                Webnet.WebPost(FormLogin.HttpURL + "/Client/PDA/LL_LYXA", dict);
+                
+                dttmp = null;
+
                 MessageBox.Show("已上传" + index.ToString() + "条记录！", "");
             }
             else

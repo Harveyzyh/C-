@@ -13,12 +13,14 @@ namespace 联友生产辅助工具.生产日报表
 {
     public partial class 日报表查询: Form
     {
+        #region 局部变量
         Mssql mssql = new Mssql();
         string Login_UID = FormLogin.Login_Uid;
         string Login_Role = FormLogin.Login_Role;
         string Login_Dpt = FormLogin.Login_Dpt;
         public static string strConnection = Global_Const.strConnection_WG_DB;
         bool DtpFlag = false;
+        #endregion
 
         #region Init
         public 日报表查询()
@@ -27,7 +29,7 @@ namespace 联友生产辅助工具.生产日报表
 
             FormMainInit();
 
-            Form_MainResized_Work();
+            FormMain_Resized_Work();
         }
 
         private void FormMainInit()
@@ -82,12 +84,12 @@ namespace 联友生产辅助工具.生产日报表
         #endregion
 
         #region 窗口大小变化设置
-        private void Form_MainResized(object sender, EventArgs e)
+        private void FormMain_Resized(object sender, EventArgs e)
         {
-            Form_MainResized_Work();
+            FormMain_Resized_Work();
         }
 
-        private void Form_MainResized_Work()
+        private void FormMain_Resized_Work()
         {
             //窗框大小
             int FormWidth, FormHeight;
