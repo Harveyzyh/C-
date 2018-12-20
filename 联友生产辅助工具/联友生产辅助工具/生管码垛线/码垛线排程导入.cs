@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using HarveyZ;
 using System.Collections.Generic;
 
-namespace 联友生产进度工具.生管码垛线
+namespace 联友生产辅助工具.生管码垛线
 {
     public partial class 码垛线排程导入 : Form
     {
@@ -18,7 +18,7 @@ namespace 联友生产进度工具.生管码垛线
 
         public Mssql mssql = new Mssql();
 
-        private static string strConnertion = Global_Const.strConnection_ROBOT_TEST;
+        private static string strConnertion = Global_Const.strConnection_ROBOT;
 
         private WebNet Webnet = new WebNet();
 
@@ -86,9 +86,13 @@ namespace 联友生产进度工具.生管码垛线
             int col_total = dttmp.Columns.Count;
             string updatestr = "";
             string insertstr = "";
+            string returnstr = "";
 
             string SC003 = "";
             string SC001 = "";
+
+            int SysTime = int.Parse(GetTime()) + 3;
+            int WorkTime = 0;
 
             if(dttmp.Rows[0][1].ToString() == "上线日期")
             {
@@ -97,10 +101,21 @@ namespace 联友生产进度工具.生管码垛线
 
             for (; row < row_total; row++ )
             {
-                //if (dttmp.Rows[row][0].ToString() == "")
-                //{
-                //    continue;
-                //}
+                //限定日期
+                try
+                {
+                    SC003 = dttmp.Rows[row][0].ToString().Replace("-", "");
+                    WorkTime = int.Parse(SC003);
+                    if(WorkTime > SysTime)
+                    {
+                        continue;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+
 
                 if (dttmp.Rows[row][2].ToString() == "生产单号")
                 {
@@ -112,7 +127,8 @@ namespace 联友生产进度工具.生管码垛线
                     SC001 = SC001.Split('-')[0].Trim() + '-' + SC001.Split('-')[1].Trim() + '-' + SC001.Split('-')[2].Trim();
                     SC001 = SC001.Replace("（新增）", "").Replace("（变更）", "").Replace("（更改）", "").Replace("(新增)", "").Replace("(变更)", "").Replace("(更改)", "");
 
-                    SC003 = dttmp.Rows[row][0].ToString().Replace("-", "");
+                    //SC003 = dttmp.Rows[row][0].ToString().Replace("-", "");
+                    returnstr += SC001 + ":" + SC003 + "; ";
                     if (SC003.Contains("转"))
                     {
                         break;
@@ -165,16 +181,16 @@ namespace 联友生产进度工具.生管码垛线
                 }
                 else continue;
             }
-            string returnstr = "新增" + insert.ToString() + "条，更新" + update.ToString() + "条，失败" + error.ToString() + "\r\n";
-            if (errorstr == "")
-            {
-                returnstr += "\r\n\r\n";
-            }
-            else
-            {
-                returnstr +=  "失败单号为：" + errorstr;
-                returnstr += "\r\n\r\n";
-            }
+            //string returnstr = "新增" + insert.ToString() + "条，更新" + update.ToString() + "条，失败" + error.ToString() + "\r\n";
+            //if (errorstr == "")
+            //{
+            //    returnstr += "\r\n\r\n";
+            //}
+            //else
+            //{
+            //    returnstr +=  "失败单号为：" + errorstr;
+            //    returnstr += "\r\n\r\n";
+            //}
 
             return returnstr;
         }
@@ -324,25 +340,29 @@ namespace 联友生产进度工具.生管码垛线
 
 
                 excel.ExcelOpt(excelObj);
-                try
+                if(excelObj.Status == "Yes")
                 {
-                    NewTaskDelegate task = dt2sqlstr;
-                    IAsyncResult asyncResult = task.BeginInvoke(excelObj.CellDt, null, null);
-                    string result = task.EndInvoke(asyncResult);
-                    getdatatable(true);
-
-                    Dictionary<string, string> dict = new Dictionary<string, string>();
-                    dict.Add("User", FormLogin.Login_Uid);
-                    dict.Add("Mode", "Insert");
-                    Webnet.WebPost(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
-
-                    MessageBox.Show(result, "导入结果", MessageBoxButtons.OK);
-                }
-                catch (Exception es)
-                {
-                    if (MessageBox.Show("请截图联系资讯课！软件即将退出。\r\n" + es.ToString(), "程序出错", MessageBoxButtons.OK) == DialogResult.OK)
+                    try
                     {
-                        Application.Exit();
+                        NewTaskDelegate task = dt2sqlstr;
+                        IAsyncResult asyncResult = task.BeginInvoke(excelObj.CellDt, null, null);
+                        string result = task.EndInvoke(asyncResult);
+                        getdatatable(true);
+
+                        Dictionary<string, string> dict = new Dictionary<string, string>();
+                        dict.Add("User", FormLogin.Login_Uid);
+                        dict.Add("Mode", "Insert");
+                        dict.Add("Detail", result);
+                        Webnet.WebPost(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
+
+                        MessageBox.Show("已提交至后台服务器", "导入结果", MessageBoxButtons.OK);
+                    }
+                    catch (Exception es)
+                    {
+                        if (MessageBox.Show("请截图联系资讯课！软件即将退出。\r\n" + es.ToString(), "程序出错", MessageBoxButtons.OK) == DialogResult.OK)
+                        {
+                            Application.Exit();
+                        }
                     }
                 }
             }

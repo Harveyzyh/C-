@@ -163,17 +163,41 @@
     <Compile Include="生产日报表\日报表部门线别维护.Designer.cs">
       <DependentUpon>日报表部门线别维护.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管电子排程\Form1.cs">
+    <Compile Include="生管排程\生管电子排程.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管电子排程\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="生管排程\生管电子排程.Designer.cs">
+      <DependentUpon>生管电子排程.cs</DependentUpon>
     </Compile>
     <Compile Include="生管码垛线\码垛线排程导入.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="生管码垛线\码垛线排程导入.Designer.cs">
       <DependentUpon>码垛线排程导入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管码垛线\纸箱编码管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管码垛线\纸箱编码管理.Designer.cs">
+      <DependentUpon>纸箱编码管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管码垛线\订单类别编码管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管码垛线\订单类别编码管理.Designer.cs">
+      <DependentUpon>订单类别编码管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="管理\权限管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="管理\权限管理.Designer.cs">
+      <DependentUpon>权限管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="管理\用户管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="管理\用户管理.Designer.cs">
+      <DependentUpon>用户管理.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -211,8 +235,23 @@
     <EmbeddedResource Include="生产日报表\日报表获取组别系列.resx">
       <DependentUpon>日报表获取组别系列.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\生管电子排程.resx">
+      <DependentUpon>生管电子排程.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="生管码垛线\码垛线排程导入.resx">
       <DependentUpon>码垛线排程导入.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管码垛线\纸箱编码管理.resx">
+      <DependentUpon>纸箱编码管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管码垛线\订单类别编码管理.resx">
+      <DependentUpon>订单类别编码管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="管理\权限管理.resx">
+      <DependentUpon>权限管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="管理\用户管理.resx">
+      <DependentUpon>用户管理.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -80,4 +80,51 @@ E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友�
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表查询.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表修改.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表获取组别系列.resources
-E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产进度工具.生管码垛线.码垛线排程导入.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生管电子排程.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.码垛线排程导入.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱编码管理.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.订单类别编码管理.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.管理.权限管理.resources
+E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.管理.用户管理.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\联友生产辅助工具.exe
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\联友生产辅助工具.pdb
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\Newtonsoft.Json.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NLog.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NPOI.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NPOI.OOXML.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.WebRequest.dll
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\Newtonsoft.Json.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NLog.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\NPOI.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\bin\Debug\System.Net.Http.WebRequest.xml
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.csprojResolveAssemblyReference.cache
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.主界面.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.仓储中心.PDA_扫描进货单.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.仓储中心.PDA_扫描领料单.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.Properties.Resources.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表修改.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表新增.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表查询.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表维护组别系列.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表获取组别系列.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生管电子排程.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.码垛线排程导入.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱编码管理.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.订单类别编码管理.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.管理.权限管理.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.管理.用户管理.resources
+C:\Users\harvey\Desktop\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.csproj.GenerateResource.Cache
+C:\Users\harvey\Desktop\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+C:\Users\harvey\Desktop\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
+Y:\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+Y:\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb

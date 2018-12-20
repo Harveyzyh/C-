@@ -1,4 +1,4 @@
-﻿namespace 联友生产进度工具.生管码垛线
+﻿namespace 联友生产辅助工具.生管码垛线
 {
     partial class 码垛线排程导入
     {

@@ -1,6 +1,6 @@
-﻿namespace 联友生产辅助工具.仓储中心
+﻿namespace 联友生产辅助工具.生管码垛线
 {
-    partial class PDA_扫描进货单
+    partial class 纸箱编码管理
     {
         /// <summary>
         /// Required designer variable.
@@ -34,20 +34,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 54);
+            this.label1.Location = new System.Drawing.Point(46, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "功能待添加";
             // 
-            // PDA_扫描进货单
+            // 纸箱编码管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 393);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label1);
-            this.Name = "PDA_扫描进货单";
-            this.Text = "PDA_扫描进货单";
+            this.Name = "纸箱编码管理";
+            this.Text = "纸箱编码管理";
             this.ResumeLayout(false);
             this.PerformLayout();
 

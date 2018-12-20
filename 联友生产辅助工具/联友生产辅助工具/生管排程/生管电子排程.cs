@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.仓储中心
+namespace 联友生产辅助工具.生管排程
 {
-    public partial class PDA_扫描进货单 : Form
+    public partial class 生管电子排程 : Form
     {
-        public PDA_扫描进货单()
+        public 生管电子排程()
         {
             InitializeComponent();
         }

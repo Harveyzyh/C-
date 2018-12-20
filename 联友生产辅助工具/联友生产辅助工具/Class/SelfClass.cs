@@ -274,6 +274,7 @@ namespace HarveyZ
             private DataTable titleDt = null;//表头内容
             private DataTable titleFormat = null;//表头格式
             private DataTable cellDt = null;//数据内容
+            private string status = null;//打开返回状态
 
             public string FilePath
             {
@@ -373,6 +374,18 @@ namespace HarveyZ
                     cellDt = value;
                 }
             }
+
+            public string Status
+            {
+                get
+                {
+                    return status;
+                }
+                set
+                {
+                    status = value;
+                }
+            }
         }
         #endregion
 
@@ -412,8 +425,9 @@ namespace HarveyZ
             string path = Path.Combine(filePath, fileName);
 
 
-            using (FileStream fsRead = File.OpenRead(path))
+            try 
             {
+                FileStream fsRead = File.OpenRead(path);
                 IWorkbook wk = null;
                 //获取后缀名
                 string extension = path.Substring(path.LastIndexOf(".")).ToString().ToLower();
@@ -478,7 +492,13 @@ namespace HarveyZ
                         }
                     }
                 }
+                newExcel.Status = "Yes";
                 newExcel.CellDt = cellDt;
+            }
+            catch(Exception IOException)
+            {
+                newExcel.Status = "Error";
+                MessageBox.Show("Excel文件：" + fileName + "已被打开，请先将该文件关闭再执行导入操作！", "错误", MessageBoxButtons.OK);
             }
         }
 

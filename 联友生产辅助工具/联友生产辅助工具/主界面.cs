@@ -9,14 +9,19 @@ using System.Windows.Forms;
 using System.IO;
 using HarveyZ;
 using 联友生产辅助工具.仓储中心;
-using 联友生产辅助工具.生管电子排程;
 using 联友生产辅助工具.生产日报表;
-using 联友生产进度工具.生管码垛线;
+using 联友生产辅助工具.生管码垛线;
+using 联友生产辅助工具.生管排程;
+using 联友生产辅助工具.管理;
 
 namespace 联友生产辅助工具
 {
     public partial class 主界面 : Form
     {
+        #region 全局变量
+        public static List<string> MenuItem_List = new List<string> { };
+        #endregion
+
         #region 局部静态变量
         private static string strConnection = Global_Const.strConnection_WG_DB;
         private static Form FormOpen = null;
@@ -53,6 +58,11 @@ namespace 联友生产辅助工具
                     list.Add("生产日报表_新增");
                     list.Add("生产日报表_修改");
                     list.Add("生产日报表_查询");
+                }
+                if(FormLogin.Login_Dpt == "工程部")
+                {
+                    list.Add("码垛线_纸箱编码管理");
+                    list.Add("码垛线_订单类别编码管理");
                 }
                 if(FormLogin.Login_Role == "生管")
                 {
@@ -163,6 +173,7 @@ namespace 联友生产辅助工具
             else
             {
                 con.Visible = false;
+                MenuItem_List.Add(con.Name.Replace("ToolStripMenuItem", ""));
             }
         }
         #endregion
@@ -283,12 +294,16 @@ namespace 联友生产辅助工具
         #region 管理
         private void 管理_权限管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            权限管理 frm = new 权限管理();
+            FormOpenInit(frm);
+            frm.Show();
         }
 
         private void 管理_用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            用户管理 frm = new 用户管理();
+            FormOpenInit(frm);
+            frm.Show();
         }
         #endregion
 
@@ -350,6 +365,29 @@ namespace 联友生产辅助工具
         private void 码垛线_排程导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             码垛线排程导入 frm = new 码垛线排程导入();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 码垛线_纸箱编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            纸箱编码管理 frm = new 纸箱编码管理();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 码垛线_订单类别编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            订单类别编码管理 frm = new 订单类别编码管理();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+        #endregion
+
+        #region 生管排程
+        private void 生管_电子排程ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            生管电子排程 frm = new 生管电子排程();
             FormOpenInit(frm);
             frm.Show();
         }
