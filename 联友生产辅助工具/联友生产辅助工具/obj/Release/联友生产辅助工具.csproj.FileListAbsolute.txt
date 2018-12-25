@@ -36,3 +36,42 @@ E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联�
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.订单类别编码管理.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.权限管理.resources
 E:\GitHub\C#\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.用户管理.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.pdb
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\联友生产辅助工具.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\联友生产辅助工具.pdb
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\Newtonsoft.Json.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NLog.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.Primitives.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.WebRequest.dll
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\Newtonsoft.Json.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NLog.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.Primitives.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\bin\Release\System.Net.Http.WebRequest.xml
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\HarveyZ.FormLogin.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.主界面.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描进货单.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描领料单.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表修改.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表新增.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表查询.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表维护组别系列.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表获取组别系列.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生管排程.生管电子排程.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.码垛线排程导入.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.纸箱编码管理.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.订单类别编码管理.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.权限管理.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.用户管理.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描进货单_获取单据信息.resources

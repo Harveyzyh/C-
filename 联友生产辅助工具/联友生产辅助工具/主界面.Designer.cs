@@ -177,7 +177,7 @@
             // 码垛线_排程导入ToolStripMenuItem
             // 
             this.码垛线_排程导入ToolStripMenuItem.Name = "码垛线_排程导入ToolStripMenuItem";
-            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.码垛线_排程导入ToolStripMenuItem.Text = "排程导入";
             this.码垛线_排程导入ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_排程导入ToolStripMenuItem_Click);
             // 
@@ -256,14 +256,14 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
             // 管理_用户管理ToolStripMenuItem
             // 
             this.管理_用户管理ToolStripMenuItem.Name = "管理_用户管理ToolStripMenuItem";
-            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.管理_用户管理ToolStripMenuItem.Text = "用户管理";
             this.管理_用户管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_用户管理ToolStripMenuItem_Click);
             // 
@@ -281,21 +281,21 @@
             // 测试_1ToolStripMenuItem
             // 
             this.测试_1ToolStripMenuItem.Name = "测试_1ToolStripMenuItem";
-            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_1ToolStripMenuItem.Text = "1";
             this.测试_1ToolStripMenuItem.Click += new System.EventHandler(this.测试_1ToolStripMenuItem_Click);
             // 
             // 测试_2ToolStripMenuItem
             // 
             this.测试_2ToolStripMenuItem.Name = "测试_2ToolStripMenuItem";
-            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_2ToolStripMenuItem.Text = "2";
             this.测试_2ToolStripMenuItem.Click += new System.EventHandler(this.测试_2ToolStripMenuItem_Click);
             // 
             // 测试_3ToolStripMenuItem
             // 
             this.测试_3ToolStripMenuItem.Name = "测试_3ToolStripMenuItem";
-            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
             this.测试_3ToolStripMenuItem.Text = "3";
             this.测试_3ToolStripMenuItem.Click += new System.EventHandler(this.测试_3ToolStripMenuItem_Click);
             // 

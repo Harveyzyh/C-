@@ -32,14 +32,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel_Title = new System.Windows.Forms.Panel();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Title.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,29 @@
             this.DataGridView_List.RowTemplate.Height = 23;
             this.DataGridView_List.Size = new System.Drawing.Size(749, 239);
             this.DataGridView_List.TabIndex = 2;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "组别";
+            this.Column1.MinimumWidth = 150;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 150;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "系列";
+            this.Column2.MinimumWidth = 500;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 550;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "有效码";
+            this.Column3.MinimumWidth = 80;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 80;
             // 
             // comboBox1
             // 
@@ -131,29 +154,6 @@
             this.panel_Title.Size = new System.Drawing.Size(753, 85);
             this.panel_Title.TabIndex = 7;
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "组别";
-            this.Column1.MinimumWidth = 150;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "系列";
-            this.Column2.MinimumWidth = 500;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 550;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "有效码";
-            this.Column3.MinimumWidth = 80;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 80;
-            // 
             // 日报表维护组别系列
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -168,7 +168,7 @@
             this.MinimizeBox = false;
             this.Name = "日报表维护组别系列";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "组别系列修改";
+            this.Text = "生产日报表组别系列修改";
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();
             this.panel_Title.ResumeLayout(false);

@@ -31,9 +31,9 @@
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
             this.button_Show = new System.Windows.Forms.Button();
             this.panel_Title = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.button_Output = new System.Windows.Forms.Button();
             this.button_Input = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Title.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +76,15 @@
             this.panel_Title.Size = new System.Drawing.Size(622, 38);
             this.panel_Title.TabIndex = 4;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(418, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // button_Output
             // 
             this.button_Output.Location = new System.Drawing.Point(101, 4);
@@ -95,15 +104,6 @@
             this.button_Input.UseVisualStyleBackColor = true;
             this.button_Input.Click += new System.EventHandler(this.button_Input_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(418, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
-            // 
             // 码垛线排程导入
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -115,7 +115,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "码垛线排程导入";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "联友生产进度工具";
+            this.Text = "码垛线排程导入";
             this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();
             this.panel_Title.ResumeLayout(false);

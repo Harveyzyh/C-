@@ -34,8 +34,8 @@
             this.DtpReportInputWorkDate = new System.Windows.Forms.DateTimePicker();
             this.ButtonReportInputXLSelect = new System.Windows.Forms.Button();
             this.ButtonReportInputCommit = new System.Windows.Forms.Button();
-            this.DataGridView_List = new System.Windows.Forms.DataGridView();
             this.LabelReportWorkDateInput = new System.Windows.Forms.Label();
+            this.DataGridView_List = new System.Windows.Forms.DataGridView();
             this.panel_Tile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.SuspendLayout();
@@ -91,6 +91,16 @@
             this.ButtonReportInputCommit.UseVisualStyleBackColor = true;
             this.ButtonReportInputCommit.Click += new System.EventHandler(this.ButtonReportInputCommit_Click);
             // 
+            // LabelReportWorkDateInput
+            // 
+            this.LabelReportWorkDateInput.AutoSize = true;
+            this.LabelReportWorkDateInput.Location = new System.Drawing.Point(5, 10);
+            this.LabelReportWorkDateInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LabelReportWorkDateInput.Name = "LabelReportWorkDateInput";
+            this.LabelReportWorkDateInput.Size = new System.Drawing.Size(88, 16);
+            this.LabelReportWorkDateInput.TabIndex = 4;
+            this.LabelReportWorkDateInput.Text = "生产日期：";
+            // 
             // DataGridView_List
             // 
             this.DataGridView_List.AllowUserToAddRows = false;
@@ -111,21 +121,11 @@
             this.DataGridView_List.TabIndex = 0;
             this.DataGridView_List.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewReportInput_CellValueChanged);
             // 
-            // LabelReportWorkDateInput
-            // 
-            this.LabelReportWorkDateInput.AutoSize = true;
-            this.LabelReportWorkDateInput.Location = new System.Drawing.Point(5, 10);
-            this.LabelReportWorkDateInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LabelReportWorkDateInput.Name = "LabelReportWorkDateInput";
-            this.LabelReportWorkDateInput.Size = new System.Drawing.Size(88, 16);
-            this.LabelReportWorkDateInput.TabIndex = 4;
-            this.LabelReportWorkDateInput.Text = "生产日期：";
-            // 
             // 日报表新增
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1444, 776);
+            this.ClientSize = new System.Drawing.Size(1348, 737);
             this.Controls.Add(this.panel_Tile);
             this.Controls.Add(this.DataGridView_List);
             this.Font = new System.Drawing.Font("宋体", 13F);
@@ -134,7 +134,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "日报表新增";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "联友生产辅助工具";
+            this.Text = "生产日报表新增";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
             this.panel_Tile.ResumeLayout(false);

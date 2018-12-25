@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using HarveyZ;
 using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
 using 联友生产辅助工具.管理;
+using System.Collections;
+using System.Web.Script.Serialization;
 
 namespace 联友生产辅助工具
 {
@@ -41,6 +40,7 @@ namespace 联友生产辅助工具
             FormPermission();
 
             Form_MainResized_Work();
+            this.Text += "      Ver." + FormLogin.Software_Version;
         }
 
         #endregion
@@ -74,6 +74,10 @@ namespace 联友生产辅助工具
                 if(FormLogin.Login_Uid == "000960")
                 {
                     list.Add("仓储中心_扫描领料单");
+                }
+                if (FormLogin.Login_Uid == "000068")
+                {
+                    list.Add("仓储中心_扫描进货单");
                 }
                 SetPermission(list);
             }
@@ -212,6 +216,12 @@ namespace 联友生产辅助工具
             LabelUserInfo.Location = new Point(2, FormHeight - LabelUserInfo.Height);
             LabelIPInfo.Location = new Point(FormWidth - LabelIPInfo.Width, FormHeight - LabelIPInfo.Height);
             panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - LabelUserInfo.Height - 7);
+            if(FormOpen != null)
+            {
+                Form frm = FormOpen;
+                frm.Visible = false;
+               // frm.Visible = true;
+            }
         }
         #endregion
 
@@ -246,6 +256,7 @@ namespace 联友生产辅助工具
             frm.WindowState = FormWindowState.Maximized;
             frm.Parent = this.panelParent;
             关闭当前界面ToolStripMenuItem.Visible = true;
+            关闭当前界面ToolStripMenuItem.Text = "关闭界面(" + frm.Text + ")";
             return frm;
         }
 
@@ -255,6 +266,7 @@ namespace 联友生产辅助工具
             frm.Dispose();
             FormOpen = null;
             关闭当前界面ToolStripMenuItem.Visible = false;
+            关闭当前界面ToolStripMenuItem.Text = "关闭界面";
         }
         #endregion
 
@@ -273,7 +285,57 @@ namespace 联友生产辅助工具
 
         private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form frm = FormOpen;
+            frm.Visible = true;
+        }
 
+        public DataTable Json2Dt(string json)
+        {
+            DataTable dataTable = new DataTable();  //实例化
+            DataTable result;
+            try
+            {
+                MessageBox.Show("0");
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+                MessageBox.Show("0.5");
+                if (arrayList.Count > 0)
+                {
+                    MessageBox.Show("1");
+                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    {
+                        MessageBox.Show("2");
+                        if (dictionary.Keys.Count<string>() == 0)
+                        {
+                            result = dataTable;
+                            return result;
+                        }
+                        //Columns
+                        if (dataTable.Columns.Count == 0)
+                        {
+                            foreach (string current in dictionary.Keys)
+                            {
+                                dataTable.Columns.Add(current, dictionary[current].GetType());
+                            }
+                        }
+                        //Rows
+                        DataRow dataRow = dataTable.NewRow();
+                        foreach (string current in dictionary.Keys)
+                        {
+                            MessageBox.Show("3");
+                            dataRow[current] = dictionary[current];
+                        }
+                        dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            result = dataTable;
+            return result;
         }
         #endregion
 

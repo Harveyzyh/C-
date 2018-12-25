@@ -9,7 +9,7 @@ namespace HarveyZ
 {
     public partial class FormLogin : Form
     {
-        private bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址
+        private bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
         private bool UpdateFlag = true; //是否运行文件更新，false：依然会发送程序版本至服务器进行对比，无论对比结果如何，不会进入更新程序
 
         #region 定义公开全局变量
@@ -42,10 +42,16 @@ namespace HarveyZ
         {
             InitializeComponent();
             GetMutilOpen();
+
+            #if DEBUG
+            URLTestFlag = true;
+            this.Text += "    -DEBUG";
+            #endif
+
             if (URLTestFlag)
             {
-                FormLogin_TextBox_UID.Text = "001114";
-                FormLogin_TextBox_PWD.Text = "18098700";
+                //FormLogin_TextBox_UID.Text = "001114";
+                //FormLogin_TextBox_PWD.Text = "18098700";
             }
 
             FormLogin_Init(); //配置信息获取
@@ -195,17 +201,47 @@ namespace HarveyZ
         #region 逻辑设计
         private string GetHttpURL()
         {
-            string sqlstr = "";
-            if (URLTestFlag)
+            try
             {
-                sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Vaild = 'Y'";
+                string sqlstr = "";
+                if (URLTestFlag)
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Valid = 'Y'";
+                }
+                else
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
+                }
+                var get = mssql.SQLselect(ConnStr, sqlstr).Rows[0][0].ToString();
+                return get;
             }
-            else
+            catch
             {
-                sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
+                try
+                {
+                    string sqlstr = "";
+                    if (URLTestFlag)
+                    {
+                        sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Vaild = 'Y'";
+                    }
+                    else
+                    {
+                        sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
+                    }
+                    var get = mssql.SQLselect(ConnStr, sqlstr).Rows[0][0].ToString();
+                    return get;
+                }
+                catch
+                {
+                    if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                    return null;
+                }
+                
             }
-            var get = mssql.SQLselect(ConnStr, sqlstr).Rows[0][0].ToString();
-            return get;
+            
         }
 
         private bool HttpURLTest()

@@ -89,6 +89,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -112,6 +114,12 @@
     </Compile>
     <Compile Include="主界面.Designer.cs">
       <DependentUpon>主界面.cs</DependentUpon>
+    </Compile>
+    <Compile Include="仓储中心\PDA-扫描进货单-获取单据信息.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="仓储中心\PDA-扫描进货单-获取单据信息.Designer.cs">
+      <DependentUpon>PDA-扫描进货单-获取单据信息.cs</DependentUpon>
     </Compile>
     <Compile Include="仓储中心\PDA-扫描进货单.cs">
       <SubType>Form</SubType>
@@ -204,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="主界面.resx">
       <DependentUpon>主界面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="仓储中心\PDA-扫描进货单-获取单据信息.resx">
+      <DependentUpon>PDA-扫描进货单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\PDA-扫描进货单.resx">
       <DependentUpon>PDA-扫描进货单.cs</DependentUpon>

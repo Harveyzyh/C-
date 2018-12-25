@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1444, 776);
+            this.ClientSize = new System.Drawing.Size(1348, 737);
             this.Controls.Add(this.panel_Title);
             this.Controls.Add(this.DataGridView_List);
             this.Font = new System.Drawing.Font("宋体", 13F);
@@ -122,7 +122,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "日报表修改";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "联友生产辅助工具";
+            this.Text = "生产日报表修改";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
             this.panel_Title.ResumeLayout(false);

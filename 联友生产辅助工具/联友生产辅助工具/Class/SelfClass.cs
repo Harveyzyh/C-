@@ -196,7 +196,7 @@ namespace HarveyZ
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    //MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return null;
                 }
                 finally
@@ -245,7 +245,6 @@ namespace HarveyZ
                 var client = new WebClientEx();
 
                 string json = DictJson.Dict2Json(dict);
-
                 string response = client.UploadString(url, json);
                 dict = DictJson.Json2Dict(response);
                 return dict;

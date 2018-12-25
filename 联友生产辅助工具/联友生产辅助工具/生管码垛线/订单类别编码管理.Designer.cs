@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label1);
             this.Name = "订单类别编码管理";
-            this.Text = "订单类别编码管理";
+            this.Text = "码垛线订单类别编码管理";
             this.ResumeLayout(false);
             this.PerformLayout();
 
