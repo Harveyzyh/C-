@@ -60,6 +60,7 @@
             this.panel_Last = new System.Windows.Forms.Panel();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Last.SuspendLayout();
@@ -67,6 +68,7 @@
             // 
             // panel_Title
             // 
+            this.panel_Title.Controls.Add(this.label1);
             this.panel_Title.Controls.Add(this.数量T);
             this.panel_Title.Controls.Add(this.条码T);
             this.panel_Title.Controls.Add(this.条码L);
@@ -93,7 +95,7 @@
             // 
             // 数量T
             // 
-            this.数量T.Location = new System.Drawing.Point(434, 73);
+            this.数量T.Location = new System.Drawing.Point(404, 73);
             this.数量T.Name = "数量T";
             this.数量T.Size = new System.Drawing.Size(178, 24);
             this.数量T.TabIndex = 16;
@@ -110,7 +112,7 @@
             // 条码L
             // 
             this.条码L.AutoSize = true;
-            this.条码L.Location = new System.Drawing.Point(42, 80);
+            this.条码L.Location = new System.Drawing.Point(42, 78);
             this.条码L.Name = "条码L";
             this.条码L.Size = new System.Drawing.Size(76, 15);
             this.条码L.TabIndex = 15;
@@ -127,7 +129,7 @@
             // 
             // 入库仓库查
             // 
-            this.入库仓库查.Location = new System.Drawing.Point(317, 10);
+            this.入库仓库查.Location = new System.Drawing.Point(291, 9);
             this.入库仓库查.Margin = new System.Windows.Forms.Padding(4);
             this.入库仓库查.Name = "入库仓库查";
             this.入库仓库查.Size = new System.Drawing.Size(35, 29);
@@ -138,7 +140,7 @@
             // 
             // 供应商查
             // 
-            this.供应商查.Location = new System.Drawing.Point(614, 9);
+            this.供应商查.Location = new System.Drawing.Point(589, 9);
             this.供应商查.Margin = new System.Windows.Forms.Padding(4);
             this.供应商查.Name = "供应商查";
             this.供应商查.Size = new System.Drawing.Size(35, 29);
@@ -149,7 +151,7 @@
             // 
             // 入库单别查
             // 
-            this.入库单别查.Location = new System.Drawing.Point(4, 9);
+            this.入库单别查.Location = new System.Drawing.Point(6, 9);
             this.入库单别查.Margin = new System.Windows.Forms.Padding(4);
             this.入库单别查.Name = "入库单别查";
             this.入库单别查.Size = new System.Drawing.Size(35, 29);
@@ -161,7 +163,7 @@
             // 入库仓库
             // 
             this.入库仓库.AutoSize = true;
-            this.入库仓库.Location = new System.Drawing.Point(431, 16);
+            this.入库仓库.Location = new System.Drawing.Point(401, 16);
             this.入库仓库.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库仓库.Name = "入库仓库";
             this.入库仓库.Size = new System.Drawing.Size(0, 15);
@@ -179,7 +181,7 @@
             // 供应商
             // 
             this.供应商.AutoSize = true;
-            this.供应商.Location = new System.Drawing.Point(733, 16);
+            this.供应商.Location = new System.Drawing.Point(708, 16);
             this.供应商.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.供应商.Name = "供应商";
             this.供应商.Size = new System.Drawing.Size(0, 15);
@@ -196,7 +198,7 @@
             // 
             // 送货单号T
             // 
-            this.送货单号T.Location = new System.Drawing.Point(434, 39);
+            this.送货单号T.Location = new System.Drawing.Point(404, 39);
             this.送货单号T.Margin = new System.Windows.Forms.Padding(4);
             this.送货单号T.Name = "送货单号T";
             this.送货单号T.Size = new System.Drawing.Size(178, 24);
@@ -226,7 +228,7 @@
             // 送货单号L
             // 
             this.送货单号L.AutoSize = true;
-            this.送货单号L.Location = new System.Drawing.Point(354, 45);
+            this.送货单号L.Location = new System.Drawing.Point(324, 44);
             this.送货单号L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.送货单号L.Name = "送货单号L";
             this.送货单号L.Size = new System.Drawing.Size(82, 15);
@@ -236,7 +238,7 @@
             // 供应商L
             // 
             this.供应商L.AutoSize = true;
-            this.供应商L.Location = new System.Drawing.Point(651, 16);
+            this.供应商L.Location = new System.Drawing.Point(626, 16);
             this.供应商L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.供应商L.Name = "供应商L";
             this.供应商L.Size = new System.Drawing.Size(83, 15);
@@ -246,7 +248,7 @@
             // 入库仓库L
             // 
             this.入库仓库L.AutoSize = true;
-            this.入库仓库L.Location = new System.Drawing.Point(354, 16);
+            this.入库仓库L.Location = new System.Drawing.Point(324, 16);
             this.入库仓库L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库仓库L.Name = "入库仓库L";
             this.入库仓库L.Size = new System.Drawing.Size(82, 15);
@@ -256,11 +258,11 @@
             // 数量L
             // 
             this.数量L.AutoSize = true;
-            this.数量L.Location = new System.Drawing.Point(354, 80);
+            this.数量L.Location = new System.Drawing.Point(329, 78);
             this.数量L.Name = "数量L";
-            this.数量L.Size = new System.Drawing.Size(84, 15);
+            this.数量L.Size = new System.Drawing.Size(76, 15);
             this.数量L.TabIndex = 17;
-            this.数量L.Text = "数    量：";
+            this.数量L.Text = "数   量：";
             // 
             // DataGridView_List
             // 
@@ -283,6 +285,7 @@
             this.DataGridView_List.Location = new System.Drawing.Point(1, 120);
             this.DataGridView_List.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridView_List.Name = "DataGridView_List";
+            this.DataGridView_List.ReadOnly = true;
             this.DataGridView_List.RowHeadersVisible = false;
             this.DataGridView_List.RowTemplate.Height = 23;
             this.DataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -301,46 +304,54 @@
             // 
             this.C3.HeaderText = "品名";
             this.C3.Name = "C3";
+            this.C3.ReadOnly = true;
             this.C3.Width = 200;
             // 
             // C4
             // 
             this.C4.HeaderText = "规格";
             this.C4.Name = "C4";
+            this.C4.ReadOnly = true;
             this.C4.Width = 200;
             // 
             // C5
             // 
             this.C5.HeaderText = "数量";
             this.C5.Name = "C5";
+            this.C5.ReadOnly = true;
             this.C5.Width = 70;
             // 
             // C6
             // 
             this.C6.HeaderText = "仓库";
             this.C6.Name = "C6";
+            this.C6.ReadOnly = true;
             this.C6.Width = 70;
             // 
             // C7
             // 
             this.C7.HeaderText = "批号";
             this.C7.Name = "C7";
+            this.C7.ReadOnly = true;
             this.C7.Width = 70;
             // 
             // C8
             // 
             this.C8.HeaderText = "供应商";
             this.C8.Name = "C8";
+            this.C8.ReadOnly = true;
             // 
             // C9
             // 
             this.C9.HeaderText = "送货单";
             this.C9.Name = "C9";
+            this.C9.ReadOnly = true;
             // 
             // C10
             // 
             this.C10.HeaderText = "条码";
             this.C10.Name = "C10";
+            this.C10.ReadOnly = true;
             this.C10.Width = 200;
             // 
             // panel_Last
@@ -374,6 +385,14 @@
             this.buttonDelete.Text = "删除";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(646, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.TabIndex = 18;
             // 
             // PDA_扫描进货单
             // 
@@ -432,5 +451,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn C8;
         private System.Windows.Forms.DataGridViewTextBoxColumn C9;
         private System.Windows.Forms.DataGridViewTextBoxColumn C10;
+        private System.Windows.Forms.Label label1;
     }
 }

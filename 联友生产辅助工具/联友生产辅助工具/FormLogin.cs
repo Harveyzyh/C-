@@ -9,7 +9,7 @@ namespace HarveyZ
 {
     public partial class FormLogin : Form
     {
-        private bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
+        public static bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
         private bool UpdateFlag = true; //是否运行文件更新，false：依然会发送程序版本至服务器进行对比，无论对比结果如何，不会进入更新程序
 
         #region 定义公开全局变量
@@ -25,7 +25,7 @@ namespace HarveyZ
         #endregion
 
         #region 本地局域变量
-        private bool MessageboxFlag = false;
+        private bool MsgFlag = false;
         private string ConnStr = Global_Const.strConnection_WG_DB;
         
         private string ProgFileName = "";
@@ -133,14 +133,14 @@ namespace HarveyZ
 
         private void FormLogin_TextBox_Changed(object sender, EventArgs e)//避免登录错误显示，鼠标点击，重新输入信息后，按下回车无反应
         {
-            MessageboxFlag = false;
+            MsgFlag = false;
         }
 
         private void FormLogin_TextBox_UID_KeyUp(object sender, KeyEventArgs e)//输入框跳转
         {
-            if ((MessageboxFlag == true) && (e.KeyCode == Keys.Enter))
+            if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
             {
-                MessageboxFlag = false;
+                MsgFlag = false;
                 return;
             }
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
@@ -152,9 +152,9 @@ namespace HarveyZ
 
         private void FormLogin_TextBox_PWD_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((MessageboxFlag == true) && (e.KeyCode == Keys.Enter))
+            if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
             {
-                MessageboxFlag = false;
+                MsgFlag = false;
                 return;
             }
             if (e.KeyCode == Keys.Enter)
@@ -169,7 +169,7 @@ namespace HarveyZ
             {
                 if (MessageBox.Show("请输入账号或密码", "提示", MessageBoxButtons.OK) == DialogResult.OK)
                 {
-                    MessageboxFlag = true;
+                    MsgFlag = true;
                     FormLogin_TextBox_PWD.Text = "";
                     FormLogin_TextBox_UID.Focus();
                     FormLogin_TextBox_UID.SelectAll();
@@ -188,7 +188,7 @@ namespace HarveyZ
                 {
                     if (MessageBox.Show("输入的用户名或密码错误！", "登录失败", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        MessageboxFlag = true;
+                        MsgFlag = true;
                         FormLogin_TextBox_PWD.Text = "";
                         FormLogin_TextBox_UID.Focus();
                         FormLogin_TextBox_UID.SelectAll();

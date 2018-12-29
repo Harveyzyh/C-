@@ -17,6 +17,8 @@ namespace 联友生产辅助工具.仓储中心
         WebNet Webnet = new WebNet();
 
         string xa007 = "";
+        private bool MsgFlag = false;
+
         public PDA_扫描领料单()
         {
             InitializeComponent();
@@ -84,6 +86,11 @@ namespace 联友生产辅助工具.仓储中心
 
         private void button1_Click_Enter(object sender, KeyEventArgs e)
         {
+            if((MsgFlag == true) && (e.KeyCode == Keys.Enter))
+            {
+                MsgFlag = false;
+                return;
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 button1_Work();
@@ -92,6 +99,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void button2_Click(object sender, EventArgs e)
         {
+            MsgFlag = true;
             insertsql();
         }
         

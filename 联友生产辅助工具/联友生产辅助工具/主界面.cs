@@ -50,6 +50,8 @@ namespace 联友生产辅助工具
         {
             SetTestPermission();
 
+            ItemUnvisable();
+
             List<string> list = new List<string> { };
             if (FormLogin.Login_Role != "Super")
             {
@@ -63,6 +65,7 @@ namespace 联友生产辅助工具
                 {
                     list.Add("码垛线_纸箱编码管理");
                     list.Add("码垛线_订单类别编码管理");
+                    list.Add("码垛线_排程导入");
                 }
                 if(FormLogin.Login_Role == "生管")
                 {
@@ -81,6 +84,10 @@ namespace 联友生产辅助工具
                 }
                 SetPermission(list);
             }
+            else
+            {
+                SetPermission(MenuItem_List);
+            }
         }
         
         private void SetTestPermission()
@@ -93,7 +100,6 @@ namespace 联友生产辅助工具
 
         private void SetPermission(List<string> list)
         {
-            ItemUnvisable();
             ItemVisable(list);
         }
 
@@ -156,11 +162,18 @@ namespace 联友生产辅助工具
                 {
                     continue;
                 }
-                if (con.Name == "帮助ToolStripMenuItem")
+                else if (con.Name == "帮助ToolStripMenuItem")
                 {
                     continue;
                 }
-                ItemUnvisableWork(con);
+                else if(con.Name == "测试ToolStripMenuItem")
+                {
+                    continue;
+                }
+                else
+                {
+                    ItemUnvisableWork(con);
+                }
             }
         }
 
@@ -187,7 +200,7 @@ namespace 联友生产辅助工具
         {
             if (MessageBox.Show("是否退出？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                Form frm = (Form)FormOpen;
+                Form frm = FormOpen;
                 if(frm != null)
                 {
                     frm.Dispose();

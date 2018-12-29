@@ -13,7 +13,8 @@ namespace 联友生产辅助工具.仓储中心
     public partial class PDA_扫描进货单 : Form
     {
         #region 公用变量设定
-        public static string strConnection = Global_Const.strConnection_COMFORT_TEST;
+
+        public static string strConnection = Global_Const.strConnection_COMFORT;
         #endregion
 
         #region 局部变量设定
@@ -36,6 +37,9 @@ namespace 联友生产辅助工具.仓储中心
         private string BarCode = null;
         private string LoginUid = FormLogin.Login_Uid;
         private string LoginUserGroup = null;
+
+        private bool MsgFlag = false;
+        private bool NumKeyFlag = false;
         #endregion
 
         #region 窗口初始化
@@ -47,11 +51,18 @@ namespace 联友生产辅助工具.仓储中心
 
         private void Init()
         {
+            if (FormLogin.URLTestFlag)
+            {
+                strConnection = Global_Const.strConnection_COMFORT_TEST;
+                label1.Text = "DEBUG模式";
+            }
             入库单别.Text = "3401-采购入库单";
             入库仓库.Text = "P013-仓储原材料仓";
 
             panel_Title.Enabled = true;
             panel_Last.Enabled = false;
+
+            供应商查.Select();
         }
         #endregion
 
@@ -137,6 +148,20 @@ namespace 联友生产辅助工具.仓储中心
             }
         }
 
+        private bool GetMaterielExist(string MaterielID)
+        {
+            string sqlstr = "SELECT MB001 FROM INVMB WHERE MB001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(strConnection, string.Format(sqlstr, MaterielID));
+            if(dt != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void AddData()
         {
             if (MaterielID != null)
@@ -144,44 +169,72 @@ namespace 联友生产辅助工具.仓储中心
                 DataTable dt = GetMaterielInfo(MaterielID, SupplierID);
                 if(dt != null)
                 {
+                    float shuliang = -2;
                     try
                     {
-                        float.Parse(数量T.Text);
-                        float k = float.Parse(dt.Rows[0][4].ToString());
-                        if (float.Parse(dt.Rows[0][4].ToString()) > 0)
+                        shuliang = float.Parse(数量T.Text);
+                        try
                         {
-                            int index = this.DataGridView_List.Rows.Add();
-                            this.DataGridView_List.Rows[index].Cells[0].Value = MaterielID;
-                            this.DataGridView_List.Rows[index].Cells[1].Value = dt.Rows[0][1];
-                            this.DataGridView_List.Rows[index].Cells[2].Value = dt.Rows[0][2];
-                            this.DataGridView_List.Rows[index].Cells[3].Value = 数量T.Text;
-                            this.DataGridView_List.Rows[index].Cells[4].Value = PositionID;
-                            this.DataGridView_List.Rows[index].Cells[5].Value = SupplierID;
-                            this.DataGridView_List.Rows[index].Cells[6].Value = SupplierID;
-                            this.DataGridView_List.Rows[index].Cells[7].Value = 送货单号T.Text;
-                            this.DataGridView_List.Rows[index].Cells[8].Value = MaterielID + SupplierID;
+                            float k = float.Parse(dt.Rows[0][4].ToString());
+                            if (k >= shuliang)
+                            {
+                                int index = this.DataGridView_List.Rows.Add();
+                                this.DataGridView_List.Rows[index].Cells[0].Value = MaterielID;
+                                this.DataGridView_List.Rows[index].Cells[1].Value = dt.Rows[0][1];
+                                this.DataGridView_List.Rows[index].Cells[2].Value = dt.Rows[0][2];
+                                this.DataGridView_List.Rows[index].Cells[3].Value = 数量T.Text;
+                                this.DataGridView_List.Rows[index].Cells[4].Value = PositionID;
+                                this.DataGridView_List.Rows[index].Cells[5].Value = SupplierID;
+                                this.DataGridView_List.Rows[index].Cells[6].Value = SupplierID;
+                                this.DataGridView_List.Rows[index].Cells[7].Value = 送货单号T.Text;
+                                this.DataGridView_List.Rows[index].Cells[8].Value = MaterielID + SupplierID;
+                                条码T.SelectAll();
+                                条码T.Select();
+                            }
+                            else
+                            {
+                                MessageBox.Show("此条码可入库数量为" + k.ToString() + "少于输入的数量。\n\r请重新输入", "错误");
+                                数量T.Text = "";
+                                数量T.SelectAll();
+                                数量T.Select();
+                            }
                         }
-                        else
+                        catch
                         {
-                            MessageBox.Show("此条码没有未入库量", "错误");
-                            条码T.Text = "";
+                            MessageBox.Show("查询未进货量返回错误", "错误");
+                            条码T.SelectAll();
+                            条码T.Select();
                         }
                     }
                     catch
                     {
                         MessageBox.Show("数量输入错误", "错误");
-                        数量T.Text = "";
+                        数量T.Select();
+                        数量T.SelectAll();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("品号：" + MaterielID + ",供应商编号：" + SupplierID + "存在错误", "错误");
+                    if (GetMaterielExist(MaterielID))
+                    {
+                        MessageBox.Show("品号：" + MaterielID + " 可入库数量为零，请重新输入条码", "错误");
+                        条码T.SelectAll();
+                        条码T.Select();
+                    }
+                    else
+                    {
+                        MessageBox.Show("品号：" + MaterielID + " 存在错误，请重新输入条码", "错误");
+                        条码T.SelectAll();
+                        条码T.Select();
+                    }
                 }
                 MaterielID = null;
             }
             else
             {
                 MessageBox.Show("没有获取到品号信息", "错误");
+                条码T.Select();
+                条码T.SelectAll();
             }
             SetEnable();
         }
@@ -189,10 +242,10 @@ namespace 联友生产辅助工具.仓储中心
         private void Insert()
         {
             string sql = "INSERT INTO JH_LYXA "
-                        + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, JHXA001, JHXA002, JHXA003, "
+                        + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, JHXA001, JHXA002, JHXA003, "
                         + "JHXA004, JHXA005, JHXA007, JHXA008, JHXA009, "
                         + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID) "
-                        + "VALUES('COMFORT', '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', "
+                        + "VALUES('COMFORT', '{0}', '{1}', '{2}', 1, '{3}', '{4}', '{5}', "
                         + "'{6}', '{7}', '{8}', '{9}', '{10}', 'N', 'N', "
                         + "'{11}', '********************', '{12}', '{13}')";
             string FlowId = GetFlowID();
@@ -286,7 +339,6 @@ namespace 联友生产辅助工具.仓储中心
         #endregion
 
         #region UI按钮
-
         private void 送货单别查_Click(object sender, EventArgs e)
         {
             Mode = "TypeID";
@@ -322,6 +374,9 @@ namespace 联友生产辅助工具.仓储中心
                     GetOther = null;
                 }
                 frm.Dispose();
+                MsgFlag = true;
+                送货单号T.Select();
+                送货单号T.SelectAll();
             }
         }
 
@@ -346,6 +401,11 @@ namespace 联友生产辅助工具.仓储中心
 
         private void 送货单号_KeyUp(object sender, KeyEventArgs e)
         {
+            if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
+            {
+                MsgFlag = false;
+                return;
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 条码T.Select();
@@ -396,15 +456,13 @@ namespace 联友生产辅助工具.仓储中心
                 try
                 {
                     float.Parse(数量T.Text);
+                    AddData();
                 }
                 catch
                 {
                     MessageBox.Show("数量输入错误！", "错误");
                     数量T.SelectAll();
                 }
-                AddData();
-                条码T.SelectAll();
-                条码T.Select();
             }
         }
 

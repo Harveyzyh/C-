@@ -94,6 +94,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(645, 411);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv_KeyDown);
             // 
             // PDA_扫描进货单_获取单据信息
             // 

@@ -42,7 +42,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 13F);
-            this.label1.Location = new System.Drawing.Point(84, 65);
+            this.label1.Location = new System.Drawing.Point(115, 86);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 18);
@@ -53,7 +53,7 @@
             // 
             this.FormLogin_TextBox_UID.AcceptsTab = true;
             this.FormLogin_TextBox_UID.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.FormLogin_TextBox_UID.Location = new System.Drawing.Point(187, 64);
+            this.FormLogin_TextBox_UID.Location = new System.Drawing.Point(197, 83);
             this.FormLogin_TextBox_UID.Margin = new System.Windows.Forms.Padding(4);
             this.FormLogin_TextBox_UID.Name = "FormLogin_TextBox_UID";
             this.FormLogin_TextBox_UID.Size = new System.Drawing.Size(182, 24);
@@ -65,7 +65,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 13F);
-            this.label2.Location = new System.Drawing.Point(87, 145);
+            this.label2.Location = new System.Drawing.Point(115, 146);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 18);
@@ -75,7 +75,7 @@
             // FormLogin_TextBox_PWD
             // 
             this.FormLogin_TextBox_PWD.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.FormLogin_TextBox_PWD.Location = new System.Drawing.Point(187, 142);
+            this.FormLogin_TextBox_PWD.Location = new System.Drawing.Point(197, 143);
             this.FormLogin_TextBox_PWD.Margin = new System.Windows.Forms.Padding(4);
             this.FormLogin_TextBox_PWD.Name = "FormLogin_TextBox_PWD";
             this.FormLogin_TextBox_PWD.PasswordChar = '*';
@@ -121,14 +121,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(499, 288);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.FormLogin_Button_Exit);
             this.Controls.Add(this.FormLogin_Button_Login);
             this.Controls.Add(this.FormLogin_TextBox_PWD);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.FormLogin_TextBox_UID);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("宋体", 11F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.Off;

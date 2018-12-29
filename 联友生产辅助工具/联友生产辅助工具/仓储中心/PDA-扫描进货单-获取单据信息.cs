@@ -49,6 +49,7 @@ namespace 联友生产辅助工具.仓储中心
         private void button1_Click(object sender, EventArgs e)
         {
             Seach_Work();
+            dataGridView1.Select();
         }
 
         private void button1_KeyUp(object sender, KeyEventArgs e)
@@ -56,6 +57,7 @@ namespace 联友生产辅助工具.仓储中心
             if (e.KeyCode == Keys.Enter)
             {
                 Seach_Work();
+                dataGridView1.Select();
             }
         }
 
@@ -130,6 +132,17 @@ namespace 联友生产辅助工具.仓储中心
             PDA_扫描进货单.GetMain = dt.Rows[Index][0].ToString();
             PDA_扫描进货单.GetOther = dt.Rows[Index][1].ToString();
             this.Close();
+        }
+
+        private void dgv_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Index = dataGridView1.CurrentRow.Index;
+                PDA_扫描进货单.GetMain = dt.Rows[Index][0].ToString();
+                PDA_扫描进货单.GetOther = dt.Rows[Index][1].ToString();
+                this.Close();
+            }
         }
     }
 }

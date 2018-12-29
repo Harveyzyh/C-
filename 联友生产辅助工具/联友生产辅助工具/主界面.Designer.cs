@@ -33,7 +33,7 @@
             this.仓储中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_扫描领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_扫描进货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.仓储中心_仓库ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.仓储中心_仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部_生产日报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产日报表_新增ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,7 +89,7 @@
             this.仓储中心ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.仓储中心_扫描领料单ToolStripMenuItem,
             this.仓储中心_扫描进货单ToolStripMenuItem,
-            this.仓储中心_仓库ToolStripMenuItem1});
+            this.仓储中心_仓库ToolStripMenuItem});
             this.仓储中心ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
             this.仓储中心ToolStripMenuItem.Name = "仓储中心ToolStripMenuItem";
             this.仓储中心ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
@@ -109,11 +109,11 @@
             this.仓储中心_扫描进货单ToolStripMenuItem.Text = "扫描进货单";
             this.仓储中心_扫描进货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单ToolStripMenuItem_Click);
             // 
-            // 仓储中心_仓库ToolStripMenuItem1
+            // 仓储中心_仓库ToolStripMenuItem
             // 
-            this.仓储中心_仓库ToolStripMenuItem1.Name = "仓储中心_仓库ToolStripMenuItem1";
-            this.仓储中心_仓库ToolStripMenuItem1.Size = new System.Drawing.Size(153, 24);
-            this.仓储中心_仓库ToolStripMenuItem1.Text = "仓库";
+            this.仓储中心_仓库ToolStripMenuItem.Name = "仓储中心_仓库ToolStripMenuItem";
+            this.仓储中心_仓库ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.仓储中心_仓库ToolStripMenuItem.Text = "仓库";
             // 
             // 生产部ToolStripMenuItem
             // 
@@ -349,6 +349,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(843, 443);
             this.Controls.Add(this.LabelIPInfo);
             this.Controls.Add(this.Label_Test);
@@ -380,7 +381,7 @@
         private System.Windows.Forms.ToolStripMenuItem 仓储中心ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产部ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 仓储中心_扫描进货单ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 仓储中心_仓库ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 仓储中心_仓库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产部_生产日报表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_新增ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_查询ToolStripMenuItem;
