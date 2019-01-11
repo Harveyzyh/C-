@@ -91,6 +91,10 @@ namespace 联友生产辅助工具.仓储中心
                 MsgFlag = false;
                 return;
             }
+            else
+            {
+                MsgFlag = false;
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 button1_Work();
@@ -294,6 +298,11 @@ namespace 联友生产辅助工具.仓储中心
                 Button_Upload.Enabled = false;
                 MessageBox.Show("", "错误");
             }
+        }
+
+        private void TextBoxChange(object sender, EventArgs e)
+        {
+            MsgFlag = false;
         }
     }
 }

@@ -51,11 +51,11 @@ namespace 联友生产辅助工具.仓储中心
 
         private void Init()
         {
-            if (FormLogin.URLTestFlag)
-            {
-                strConnection = Global_Const.strConnection_COMFORT_TEST;
-                label1.Text = "DEBUG模式";
-            }
+            //if (FormLogin.URLTestFlag)
+            //{
+            //    strConnection = Global_Const.strConnection_COMFORT_TEST;
+            //    label1.Text = "DEBUG模式";
+            //}
             入库单别.Text = "3401-采购入库单";
             入库仓库.Text = "P013-仓储原材料仓";
 
@@ -134,7 +134,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private DataTable GetMaterielInfo(string MaterielID, string SupplierID)
         {
-            string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCWNum FROM VPURTDPCB "
+            string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCBSum FROM VPURTDPCB "
                             + "INNER JOIN INVMB ON MB001 = TD004 "
                             + "WHERE TD004 = '{0}' AND TC004 = '{1}' ";
             DataTable dt = mssql.SQLselect(strConnection, string.Format(sqlstr, MaterielID, SupplierID));
@@ -162,6 +162,28 @@ namespace 联友生产辅助工具.仓储中心
             }
         }
 
+        private void GetIndex()//重排dgv的序号并且设置部分列居中显示
+        {
+            if(DataGridView_List.Rows.Count > 0)
+            {
+                int Count = DataGridView_List.Rows.Count;
+                int Index = 0;
+                for(Index = 0; Index < Count; Index++)
+                {
+                    DataGridView_List.Rows[Index].Cells[0].Value = (Index + 1).ToString().PadLeft(3, '0');
+                    DataGridView_List.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataGridView_List.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataGridView_List.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataGridView_List.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataGridView_List.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
         private void AddData()
         {
             if (MaterielID != null)
@@ -179,20 +201,21 @@ namespace 联友生产辅助工具.仓储中心
                             if (k >= shuliang)
                             {
                                 int index = this.DataGridView_List.Rows.Add();
-                                this.DataGridView_List.Rows[index].Cells[0].Value = MaterielID;
-                                this.DataGridView_List.Rows[index].Cells[1].Value = dt.Rows[0][1];
-                                this.DataGridView_List.Rows[index].Cells[2].Value = dt.Rows[0][2];
-                                this.DataGridView_List.Rows[index].Cells[3].Value = 数量T.Text;
-                                this.DataGridView_List.Rows[index].Cells[4].Value = PositionID;
-                                this.DataGridView_List.Rows[index].Cells[5].Value = SupplierID;
+                                this.DataGridView_List.Rows[index].Cells[1].Value = MaterielID;
+                                this.DataGridView_List.Rows[index].Cells[2].Value = dt.Rows[0][1];
+                                this.DataGridView_List.Rows[index].Cells[3].Value = dt.Rows[0][2];
+                                this.DataGridView_List.Rows[index].Cells[4].Value = 数量T.Text;
+                                this.DataGridView_List.Rows[index].Cells[5].Value = PositionID;
                                 this.DataGridView_List.Rows[index].Cells[6].Value = SupplierID;
-                                this.DataGridView_List.Rows[index].Cells[7].Value = 送货单号T.Text;
-                                this.DataGridView_List.Rows[index].Cells[8].Value = MaterielID + SupplierID;
+                                this.DataGridView_List.Rows[index].Cells[7].Value = SupplierID;
+                                this.DataGridView_List.Rows[index].Cells[8].Value = 送货单号T.Text;
+                                this.DataGridView_List.Rows[index].Cells[9].Value = MaterielID + SupplierID;
                                 条码T.SelectAll();
                                 条码T.Select();
                             }
                             else
                             {
+                                MsgFlag = true;
                                 MessageBox.Show("此条码可入库数量为" + k.ToString() + "少于输入的数量。\n\r请重新输入", "错误");
                                 数量T.Text = "";
                                 数量T.SelectAll();
@@ -201,6 +224,7 @@ namespace 联友生产辅助工具.仓储中心
                         }
                         catch
                         {
+                            MsgFlag = true;
                             MessageBox.Show("查询未进货量返回错误", "错误");
                             条码T.SelectAll();
                             条码T.Select();
@@ -208,6 +232,7 @@ namespace 联友生产辅助工具.仓储中心
                     }
                     catch
                     {
+                        MsgFlag = true;
                         MessageBox.Show("数量输入错误", "错误");
                         数量T.Select();
                         数量T.SelectAll();
@@ -217,12 +242,14 @@ namespace 联友生产辅助工具.仓储中心
                 {
                     if (GetMaterielExist(MaterielID))
                     {
+                        MsgFlag = true;
                         MessageBox.Show("品号：" + MaterielID + " 可入库数量为零，请重新输入条码", "错误");
                         条码T.SelectAll();
                         条码T.Select();
                     }
                     else
                     {
+                        MsgFlag = true;
                         MessageBox.Show("品号：" + MaterielID + " 存在错误，请重新输入条码", "错误");
                         条码T.SelectAll();
                         条码T.Select();
@@ -232,9 +259,29 @@ namespace 联友生产辅助工具.仓储中心
             }
             else
             {
-                MessageBox.Show("没有获取到品号信息", "错误");
-                条码T.Select();
-                条码T.SelectAll();
+                if (条码T.Text != "")
+                {
+                    if (!CheckSupplierID(条码T.Text.Substring(条码T.Text.Length - 5, 5)))
+                    {
+                        MsgFlag = true;
+                        MessageBox.Show("条码中的供应商编码与选择的不对应！请检测条码。", "错误");
+                        条码T.Select();
+                        条码T.SelectAll();
+                    }
+                    else
+                    {
+                        MaterielID = 条码T.Text.Substring(0, 条码T.Text.Length - 5);
+                        数量T.Select();
+                        AddData();
+                    }
+                }
+                else
+                {
+                    MsgFlag = true;
+                    MessageBox.Show("没有获取到品号信息", "错误");
+                    条码T.Select();
+                    条码T.SelectAll();
+                }
             }
             SetEnable();
         }
@@ -256,14 +303,14 @@ namespace 联友生产辅助工具.仓储中心
             for (int Index = 0; Index < Count; Index++)
             {
                 string JHXA001 = TypeID;
-                string JHXA002 = DataGridView_List.Rows[0].Cells[6].Value.ToString();
-                string JHXA003 = DataGridView_List.Rows[0].Cells[4].Value.ToString();
+                string JHXA002 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
+                string JHXA003 = DataGridView_List.Rows[0].Cells[5].Value.ToString();
                 string JHXA004 = GetDate();
-                string JHXA007 = DataGridView_List.Rows[0].Cells[0].Value.ToString();
-                string JHXA008 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
-                string JHXA009 = DataGridView_List.Rows[0].Cells[3].Value.ToString();
-                string JHXA013 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
-                string JHXA015 = DataGridView_List.Rows[0].Cells[6].Value.ToString();
+                string JHXA007 = DataGridView_List.Rows[0].Cells[1].Value.ToString();
+                string JHXA008 = DataGridView_List.Rows[0].Cells[9].Value.ToString();
+                string JHXA009 = DataGridView_List.Rows[0].Cells[4].Value.ToString();
+                string JHXA013 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
+                string JHXA015 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
                 string ID = (Index+1).ToString();
                 string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
                     JHXA004, FlowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
@@ -278,10 +325,15 @@ namespace 联友生产辅助工具.仓储中心
             {
                 tell += "\n\r进货单号为：" + GetBack;
             }
+            else
+            {
+                tell += "\n\r处理失败，请把记下流水处理号并联系咨询部。";
+            }
             if (MessageBox.Show(tell, "提示", MessageBoxButtons.OK) == DialogResult.OK)
             {
-                条码T.SelectAll();
-                条码T.Select();
+                MsgFlag = true;
+                送货单号T.SelectAll();
+                送货单号T.Select();
                 panel_Last.Enabled = false;
             }
         }
@@ -401,6 +453,16 @@ namespace 联友生产辅助工具.仓储中心
 
         private void 送货单号_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter && MsgFlag == true)
+            {
+                MsgFlag = false;
+                return;
+            }
+            else
+            {
+                MsgFlag = false;
+            }
+
             if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
             {
                 MsgFlag = false;
@@ -414,11 +476,22 @@ namespace 联友生产辅助工具.仓储中心
 
         private void 条码_KeyUp(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.Enter && MsgFlag == true)
+            {
+                MsgFlag = false;
+                return;
+            }
+            else
+            {
+                MsgFlag = false;
+            }
+
             if (e.KeyCode == Keys.Enter)
             {
                 条码T.Text = 条码T.Text.ToUpper();
                 if (入库单别.Text == "" || 供应商.Text == "" || 入库仓库.Text == "" || 送货单号T.Text == "")
                 {
+                    MsgFlag = true;
                     MessageBox.Show("请先查询或填写 进货单别，供应商，入库仓库，送货单号 的信息！", "错误");
                     条码T.Select();
                     条码T.SelectAll();
@@ -427,6 +500,7 @@ namespace 联友生产辅助工具.仓储中心
                 {
                     if(!CheckSupplierID(条码T.Text.Substring(条码T.Text.Length-5, 5)))
                     {
+                        MsgFlag = true;
                         MessageBox.Show("条码中的供应商编码与选择的不对应！请检测条码。", "错误");
                         条码T.Select();
                         条码T.SelectAll();
@@ -451,15 +525,22 @@ namespace 联友生产辅助工具.仓储中心
 
         private void 数量_KeyUp(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.Enter && MsgFlag == true)
+            {
+                MsgFlag = false;
+                return;
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 try
                 {
                     float.Parse(数量T.Text);
                     AddData();
+                    GetIndex();
                 }
                 catch
                 {
+                    MsgFlag = true;
                     MessageBox.Show("数量输入错误！", "错误");
                     数量T.SelectAll();
                 }
@@ -475,12 +556,14 @@ namespace 联友生产辅助工具.仓储中心
             条码T.SelectAll();
             条码T.Select();
             SetEnable();
+            GetIndex();
         }
 
         private void buttonUpload_Click(object sender, EventArgs e)
         {
             Insert();
             SetEnable();
+            GetIndex();
         }
         #endregion
     }

@@ -47,6 +47,7 @@
             this.TextBox_Danhao.Name = "TextBox_Danhao";
             this.TextBox_Danhao.Size = new System.Drawing.Size(200, 21);
             this.TextBox_Danhao.TabIndex = 0;
+            this.TextBox_Danhao.TextChanged += new System.EventHandler(this.TextBoxChange);
             this.TextBox_Danhao.KeyUp += new System.Windows.Forms.KeyEventHandler(this.button1_Click_Enter);
             // 
             // DataGridView_List

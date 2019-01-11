@@ -231,6 +231,18 @@ namespace HarveyZ
         protected override WebRequest GetWebRequest(Uri address)
         {
             var request = base.GetWebRequest(address);
+            request.Timeout = 30000;
+            return request;
+        }
+    }
+
+    public class WebClientEx_Test : WebClient
+    {
+        public int Timeout { get; set; }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var request = base.GetWebRequest(address);
             request.Timeout = 5000;
             return request;
         }
@@ -243,6 +255,26 @@ namespace HarveyZ
             try
             {
                 var client = new WebClientEx();
+
+                string json = DictJson.Dict2Json(dict);
+                string response = client.UploadString(url, json);
+                dict = DictJson.Json2Dict(response);
+                return dict;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
+
+    public class WebNet_Test
+    {
+        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
+        {
+            try
+            {
+                var client = new WebClientEx_Test();
 
                 string json = DictJson.Dict2Json(dict);
                 string response = client.UploadString(url, json);

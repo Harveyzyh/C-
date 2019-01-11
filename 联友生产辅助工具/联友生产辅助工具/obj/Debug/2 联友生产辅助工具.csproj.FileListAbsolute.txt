@@ -37,3 +37,4 @@
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\2 联友生产辅助工具.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Debug\联友生产辅助工具.测试.测试_码垛线排程导入.resources

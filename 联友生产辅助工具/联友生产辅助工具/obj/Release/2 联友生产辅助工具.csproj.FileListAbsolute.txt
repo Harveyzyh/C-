@@ -37,3 +37,4 @@
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.权限管理.resources
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.管理.用户管理.resources
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\2 联友生产辅助工具.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\联友生产辅助工具\obj\Release\联友生产辅助工具.测试.测试_码垛线排程导入.resources

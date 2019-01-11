@@ -143,6 +143,10 @@ namespace HarveyZ
                 MsgFlag = false;
                 return;
             }
+            else
+            {
+                MsgFlag = false;
+            }
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
             {
                     FormLogin_TextBox_PWD.SelectAll();
@@ -156,6 +160,10 @@ namespace HarveyZ
             {
                 MsgFlag = false;
                 return;
+            }
+            else
+            {
+                MsgFlag = false;
             }
             if (e.KeyCode == Keys.Enter)
             {
@@ -246,9 +254,10 @@ namespace HarveyZ
 
         private bool HttpURLTest()
         {
+            WebNet_Test WebnetTest = new WebNet_Test();
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("", "");
-            dict = Webnet.WebPost(HttpURL + "/Client/LinkTest", dict);
+            dict = WebnetTest.WebPost(HttpURL + "/Client/LinkTest", dict);
             string get = "";
             if (dict != null)
             {

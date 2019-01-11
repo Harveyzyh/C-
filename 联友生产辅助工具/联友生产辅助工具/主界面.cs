@@ -10,6 +10,7 @@ using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
 using 联友生产辅助工具.管理;
+using 联友生产辅助工具.测试;
 using System.Collections;
 using System.Web.Script.Serialization;
 
@@ -74,11 +75,11 @@ namespace 联友生产辅助工具
                     list.Add("生产日报表_系列组别维护");
                     list.Add("码垛线_排程导入");
                 }
-                if(FormLogin.Login_Uid == "000960")
+                if(FormLogin.Login_Uid == "000960" || FormLogin.Login_Uid == "001165")
                 {
                     list.Add("仓储中心_扫描领料单");
                 }
-                if (FormLogin.Login_Uid == "000068")
+                if (FormLogin.Login_Uid == "000068" || FormLogin.Login_Uid == "001161")
                 {
                     list.Add("仓储中心_扫描进货单");
                 }
@@ -286,7 +287,9 @@ namespace 联友生产辅助工具
         #region 测试部分
         private void 测试_1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("测试", "", MessageBoxButtons.OK);
+            Form frm = new 测试_码垛线排程导入();
+            FormOpenInit(frm);
+            frm.Show();
         }
 
         private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)

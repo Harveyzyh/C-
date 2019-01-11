@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel_Title = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.数量T = new System.Windows.Forms.TextBox();
             this.条码T = new System.Windows.Forms.TextBox();
             this.条码L = new System.Windows.Forms.Label();
@@ -48,6 +49,10 @@
             this.入库仓库L = new System.Windows.Forms.Label();
             this.数量L = new System.Windows.Forms.Label();
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
+            this.panel_Last = new System.Windows.Forms.Panel();
+            this.buttonUpload = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.C1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,10 +62,6 @@
             this.C8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel_Last = new System.Windows.Forms.Panel();
-            this.buttonUpload = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Last.SuspendLayout();
@@ -92,6 +93,14 @@
             this.panel_Title.Name = "panel_Title";
             this.panel_Title.Size = new System.Drawing.Size(819, 119);
             this.panel_Title.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(646, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.TabIndex = 18;
             // 
             // 数量T
             // 
@@ -268,11 +277,11 @@
             // 
             this.DataGridView_List.AllowUserToAddRows = false;
             this.DataGridView_List.AllowUserToDeleteRows = false;
-            this.DataGridView_List.AllowUserToOrderColumns = true;
             this.DataGridView_List.AllowUserToResizeRows = false;
             this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.C1,
             this.C2,
             this.C3,
             this.C4,
@@ -282,7 +291,7 @@
             this.C8,
             this.C9,
             this.C10});
-            this.DataGridView_List.Location = new System.Drawing.Point(1, 120);
+            this.DataGridView_List.Location = new System.Drawing.Point(6, 122);
             this.DataGridView_List.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridView_List.Name = "DataGridView_List";
             this.DataGridView_List.ReadOnly = true;
@@ -292,6 +301,45 @@
             this.DataGridView_List.Size = new System.Drawing.Size(818, 422);
             this.DataGridView_List.TabIndex = 1;
             this.DataGridView_List.TabStop = false;
+            // 
+            // panel_Last
+            // 
+            this.panel_Last.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Last.Controls.Add(this.buttonUpload);
+            this.panel_Last.Controls.Add(this.buttonDelete);
+            this.panel_Last.Location = new System.Drawing.Point(0, 551);
+            this.panel_Last.Name = "panel_Last";
+            this.panel_Last.Size = new System.Drawing.Size(819, 44);
+            this.panel_Last.TabIndex = 2;
+            // 
+            // buttonUpload
+            // 
+            this.buttonUpload.Location = new System.Drawing.Point(108, 9);
+            this.buttonUpload.Name = "buttonUpload";
+            this.buttonUpload.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpload.TabIndex = 1;
+            this.buttonUpload.TabStop = false;
+            this.buttonUpload.Text = "上传";
+            this.buttonUpload.UseVisualStyleBackColor = true;
+            this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(12, 9);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 0;
+            this.buttonDelete.TabStop = false;
+            this.buttonDelete.Text = "删除";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // C1
+            // 
+            this.C1.HeaderText = "序号";
+            this.C1.Name = "C1";
+            this.C1.ReadOnly = true;
+            this.C1.Width = 60;
             // 
             // C2
             // 
@@ -354,46 +402,6 @@
             this.C10.ReadOnly = true;
             this.C10.Width = 200;
             // 
-            // panel_Last
-            // 
-            this.panel_Last.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_Last.Controls.Add(this.buttonUpload);
-            this.panel_Last.Controls.Add(this.buttonDelete);
-            this.panel_Last.Location = new System.Drawing.Point(0, 551);
-            this.panel_Last.Name = "panel_Last";
-            this.panel_Last.Size = new System.Drawing.Size(819, 44);
-            this.panel_Last.TabIndex = 2;
-            // 
-            // buttonUpload
-            // 
-            this.buttonUpload.Location = new System.Drawing.Point(108, 9);
-            this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpload.TabIndex = 1;
-            this.buttonUpload.TabStop = false;
-            this.buttonUpload.Text = "上传";
-            this.buttonUpload.UseVisualStyleBackColor = true;
-            this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(12, 9);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 0;
-            this.buttonDelete.TabStop = false;
-            this.buttonDelete.Text = "删除";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(646, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
-            this.label1.TabIndex = 18;
-            // 
             // PDA_扫描进货单
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -442,6 +450,8 @@
         private System.Windows.Forms.Panel panel_Last;
         private System.Windows.Forms.Button buttonUpload;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn C1;
         private System.Windows.Forms.DataGridViewTextBoxColumn C2;
         private System.Windows.Forms.DataGridViewTextBoxColumn C3;
         private System.Windows.Forms.DataGridViewTextBoxColumn C4;
@@ -451,6 +461,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn C8;
         private System.Windows.Forms.DataGridViewTextBoxColumn C9;
         private System.Windows.Forms.DataGridViewTextBoxColumn C10;
-        private System.Windows.Forms.Label label1;
     }
 }
