@@ -91,7 +91,7 @@ namespace 联友生产辅助工具.生管码垛线
             string SC003 = "";
             string SC001 = "";
 
-            int SysTime = int.Parse(GetTime()) + 3;
+            int SysTime = int.Parse(GetTime());
             int WorkTime = 0;
 
             if(dttmp.Rows[0][1].ToString() == "上线日期")
@@ -106,7 +106,7 @@ namespace 联友生产辅助工具.生管码垛线
                 {
                     SC003 = dttmp.Rows[row][0].ToString().Replace("-", "");
                     WorkTime = int.Parse(SC003);
-                    if(WorkTime > SysTime)
+                    if(WorkTime < SysTime)
                     {
                         continue;
                     }
