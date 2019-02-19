@@ -48,12 +48,6 @@ namespace HarveyZ
             this.Text += "    -DEBUG";
             #endif
 
-            if (URLTestFlag)
-            {
-                //FormLogin_TextBox_UID.Text = "001114";
-                //FormLogin_TextBox_PWD.Text = "18098700";
-            }
-
             FormLogin_Init(); //配置信息获取
 
             bool UpdFlag = GetNewVersion();

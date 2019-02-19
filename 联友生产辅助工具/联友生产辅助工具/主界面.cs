@@ -83,6 +83,11 @@ namespace 联友生产辅助工具
                 {
                     list.Add("仓储中心_扫描进货单");
                 }
+                if (FormLogin.Login_Uid == "000807")
+                {
+                    list.Add("生产日报表_查询");
+                }
+                
                 SetPermission(list);
             }
             else
