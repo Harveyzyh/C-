@@ -15,6 +15,7 @@ namespace 联友生产辅助工具.生产日报表
     {
         #region 局部变量
         Mssql mssql = new Mssql();
+        DataGridViewFunction Get = new DataGridViewFunction();
         string Login_UID = FormLogin.Login_Uid;
         string Login_Role = FormLogin.Login_Role;
         string Login_Dpt = FormLogin.Login_Dpt;
@@ -89,7 +90,7 @@ namespace 联友生产辅助工具.生产日报表
             FormMain_Resized_Work();
         }
 
-        private void FormMain_Resized_Work()
+        public void FormMain_Resized_Work()
         {
             //窗框大小
             int FormWidth, FormHeight;
@@ -99,6 +100,7 @@ namespace 联友生产辅助工具.生产日报表
             DataGridView_List.Location = new Point(0, panel_Title.Height + 2);
             DataGridView_List.Size = new Size(FormWidth, FormHeight - panel_Title.Height - 2);
         }
+        
         #endregion
 
         #region 格式化
@@ -339,10 +341,13 @@ namespace 联友生产辅助工具.生产日报表
                 DataGridView_List.DataSource = null;
                 if(dttmp != null)
                 {
-                    DataGridView_List.DataSource = dttmp;
+                    //DataGridView_List.DataSource = dttmp;
 
-                    DataGridView_List.ReadOnly = true;
+                    Get.GridViewDataLoad(dttmp, DataGridView_List);
+                    Get.GridViewHeaderFilter(DataGridView_List);
 
+                    //DataGridView_List.ReadOnly = true;
+                    
                     if (ComboBoxReportSelectType.Text == "全部")
                     {
 
@@ -391,6 +396,7 @@ namespace 联友生产辅助工具.生产日报表
                     日报表新增.HeadRowLineNumber(DataGridView_List);
                     DataGridView_List.RowHeadersWidth = 60;
                     ButtonReportSelectLayout.Enabled = true;
+
                 }
                 else
                 {

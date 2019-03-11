@@ -62,6 +62,9 @@
             this.panelParent = new System.Windows.Forms.Panel();
             this.Label_Test = new System.Windows.Forms.Label();
             this.LabelIPInfo = new System.Windows.Forms.Label();
+            this.玖友ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.玖友_查询物料需求量ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.玖友_查询生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +77,7 @@
             this.生产部ToolStripMenuItem,
             this.生管ToolStripMenuItem,
             this.工程部ToolStripMenuItem,
+            this.玖友ToolStripMenuItem,
             this.管理ToolStripMenuItem,
             this.测试ToolStripMenuItem,
             this.关闭当前界面ToolStripMenuItem});
@@ -345,6 +349,30 @@
             this.LabelIPInfo.Text = "LabelIPInfo";
             this.LabelIPInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // 玖友ToolStripMenuItem
+            // 
+            this.玖友ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.玖友_查询物料需求量ToolStripMenuItem,
+            this.玖友_查询生产排程ToolStripMenuItem});
+            this.玖友ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.玖友ToolStripMenuItem.Name = "玖友ToolStripMenuItem";
+            this.玖友ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.玖友ToolStripMenuItem.Text = "玖友";
+            // 
+            // 玖友_查询物料需求量ToolStripMenuItem
+            // 
+            this.玖友_查询物料需求量ToolStripMenuItem.Name = "玖友_查询物料需求量ToolStripMenuItem";
+            this.玖友_查询物料需求量ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.玖友_查询物料需求量ToolStripMenuItem.Text = "查询物料需求量";
+            this.玖友_查询物料需求量ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询物料需求量ToolStripMenuItem_Click);
+            // 
+            // 玖友_查询生产排程ToolStripMenuItem
+            // 
+            this.玖友_查询生产排程ToolStripMenuItem.Name = "玖友_查询生产排程ToolStripMenuItem";
+            this.玖友_查询生产排程ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.玖友_查询生产排程ToolStripMenuItem.Text = "查询生产排程";
+            this.玖友_查询生产排程ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询生产排程ToolStripMenuItem_Click);
+            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -409,6 +437,9 @@
         private System.Windows.Forms.ToolStripMenuItem 码垛线_纸箱编码管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_订单类别编码管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_电子排程ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 玖友ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 玖友_查询物料需求量ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 玖友_查询生产排程ToolStripMenuItem;
     }
 }
 

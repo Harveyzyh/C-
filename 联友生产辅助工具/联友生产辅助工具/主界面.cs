@@ -9,6 +9,7 @@ using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
+using 联友生产辅助工具.玖友;
 using 联友生产辅助工具.管理;
 using 联友生产辅助工具.测试;
 using System.Collections;
@@ -84,6 +85,10 @@ namespace 联友生产辅助工具
                     list.Add("仓储中心_扫描进货单");
                 }
                 if (FormLogin.Login_Uid == "000807")
+                {
+                    list.Add("生产日报表_查询");
+                }
+                if (FormLogin.Login_Uid == "000946")
                 {
                     list.Add("生产日报表_查询");
                 }
@@ -235,11 +240,12 @@ namespace 联友生产辅助工具
             LabelUserInfo.Location = new Point(2, FormHeight - LabelUserInfo.Height);
             LabelIPInfo.Location = new Point(FormWidth - LabelIPInfo.Width, FormHeight - LabelIPInfo.Height);
             panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - LabelUserInfo.Height - 7);
+            //父窗体发生大小变化时，重新设置子窗体的大小
             if(FormOpen != null)
             {
                 Form frm = FormOpen;
-                frm.Visible = false;
-               // frm.Visible = true;
+                frm.WindowState = FormWindowState.Minimized;
+                frm.WindowState = FormWindowState.Maximized;
             }
         }
         #endregion
@@ -299,14 +305,13 @@ namespace 联友生产辅助工具
 
         private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IPInfo ipinfo = new IPInfo();
-            string ip = ipinfo.GetIpAddress();
-            MessageBox.Show(ip);
+            
         }
 
         private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = FormOpen;
+            Form frm = new 测试_3();
+            FormOpenInit(frm);
             frm.Visible = true;
         }
 
@@ -476,6 +481,22 @@ namespace 联友生产辅助工具
         }
         #endregion
 
+        #region 玖友
+        private void 玖友_查询物料需求量ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            玖友查询物料需求量 frm = new 玖友查询物料需求量();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 玖友_查询生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            生管电子排程 frm = new 生管电子排程();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
+
+        #endregion 
     }
 }

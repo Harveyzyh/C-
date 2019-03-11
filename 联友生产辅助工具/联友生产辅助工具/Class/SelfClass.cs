@@ -23,7 +23,7 @@ namespace HarveyZ
         public string GetIpAddress()
         {
             string addr = "";
-            string ip = "192.168."; //用于过滤ip
+            string ip = "192.16"; //用于过滤ip
             int index = 0;
             string hostName = Dns.GetHostName();   //获取本机名
             IPHostEntry localhost = Dns.GetHostByName(hostName);    //方法已过期，可以获取IPv4的地址
