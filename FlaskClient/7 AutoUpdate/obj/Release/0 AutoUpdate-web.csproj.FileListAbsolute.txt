@@ -1,0 +1,2 @@
+Y:\Documents\GitHub\C-\FlaskClient\7 AutoUpdate\obj\Release\AutoUpdate.exe
+Y:\Documents\GitHub\C-\FlaskClient\7 AutoUpdate\obj\Release\AutoUpdate.pdb

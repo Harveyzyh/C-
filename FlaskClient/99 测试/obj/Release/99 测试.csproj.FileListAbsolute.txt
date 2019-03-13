@@ -1,0 +1,14 @@
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\bin\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\bin\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
