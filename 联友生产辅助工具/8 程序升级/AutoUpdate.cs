@@ -121,7 +121,7 @@ namespace AutoUpdate
                 label_Log.Text += "\n\r更新已完成，更新程序即将退出...";
                 Directory.Delete(LocalPath + @"\temp\", true);
                 Thread.Sleep(1500);
-                StartProcess(LocalPath + "\\" + ProgFileName + ".exe", null);
+                StartProcess(LocalPath + @"\" + ProgFileName + ".exe", null);
                 Environment.Exit(0);
             }
         }
@@ -168,7 +168,7 @@ namespace FtpSyn
     {
         //基本设置
         static private string ftpip = "40.73.246.171";    //ftp IP地址
-        static private string path = @"ftp://" + ftpip + "/";    //目标路径
+        static private string path = @"ftp://" + ftpip + "/lssoft-c/";    //目标路径
         static private string username = "erpupdate";   //ftp用户名
         static private string password = "erpfiledownload";   //ftp密码
 

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("程序更新")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("广东联友办公家具有限公司")]
 [assembly: AssemblyProduct("AutoUpdate")]
 [assembly: AssemblyCopyright("Harvey © 2019")]
 [assembly: AssemblyTrademark("")]
