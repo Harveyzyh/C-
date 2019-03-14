@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ly.ico</ApplicationIcon>
+    <ApplicationIcon>logo-ly.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>联友生产辅助工具.Program</StartupObject>
@@ -101,14 +101,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Common.Helper.Crypto.cs" />
     <Compile Include="Class\DataGridViewAutoFilter.cs" />
     <Compile Include="Class\Global.cs" />
     <Compile Include="Class\SelfClass.cs" />
-    <Compile Include="FormLogin.cs">
+    <Compile Include="登录界面.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogin.designer.cs">
-      <DependentUpon>FormLogin.cs</DependentUpon>
+    <Compile Include="登录界面.designer.cs">
+      <DependentUpon>登录界面.cs</DependentUpon>
     </Compile>
     <Compile Include="主界面.cs">
       <SubType>Form</SubType>
@@ -232,8 +233,8 @@
     <Compile Include="管理\用户管理.Designer.cs">
       <DependentUpon>用户管理.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormLogin.resx">
-      <DependentUpon>FormLogin.cs</DependentUpon>
+    <EmbeddedResource Include="登录界面.resx">
+      <DependentUpon>登录界面.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="主界面.resx">
       <DependentUpon>主界面.cs</DependentUpon>
@@ -327,7 +328,7 @@
     <Content Include="Lib\System.Net.Http.WebRequest.dll" />
     <Content Include="Lib\System.Net.Http.WebRequest.xml" />
     <Content Include="Lib\System.Net.Http.xml" />
-    <Content Include="ly.ico" />
+    <Content Include="logo-ly.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

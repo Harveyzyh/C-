@@ -12,3 +12,27 @@ Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolve
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\Newtonsoft.Json.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NLog.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.Primitives.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\Newtonsoft.Json.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NLog.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.Primitives.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.xml

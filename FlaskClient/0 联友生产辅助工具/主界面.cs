@@ -14,18 +14,15 @@ using 联友生产辅助工具.管理;
 using 联友生产辅助工具.测试;
 using System.Collections;
 using System.Web.Script.Serialization;
+using Common.Helper.Crypto;
 
 namespace 联友生产辅助工具
 {
     public partial class 主界面 : Form
     {
-        #region 全局变量
-        public static List<string> MenuItem_List = new List<string> { };
-        #endregion
-
-        #region 局部静态变量
-        private static string strConnection = Global_Const.strConnection_WG_DB;
+        #region 静态变量
         private static Form FormOpen = null;
+        public static List<string> MenuItem_List = new List<string> { };//菜单栏列表
         #endregion
 
         #region 窗体初始化
@@ -42,7 +39,7 @@ namespace 联友生产辅助工具
             FormPermission();
 
             Form_MainResized_Work();
-            this.Text += "      Ver." + FormLogin.Software_Version;
+            this.Text += "      Ver." + FormLogin.ProgVersion;
         }
 
         #endregion

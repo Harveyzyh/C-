@@ -80,7 +80,7 @@
             this.DtpReportUpdateWorkDate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.DtpReportUpdateWorkDate.Location = new System.Drawing.Point(91, 6);
             this.DtpReportUpdateWorkDate.Name = "DtpReportUpdateWorkDate";
-            this.DtpReportUpdateWorkDate.Size = new System.Drawing.Size(128, 26);
+            this.DtpReportUpdateWorkDate.Size = new System.Drawing.Size(128, 44);
             this.DtpReportUpdateWorkDate.TabIndex = 1;
             this.DtpReportUpdateWorkDate.TabStop = false;
             this.DtpReportUpdateWorkDate.ValueChanged += new System.EventHandler(this.DtpReportUpdateWorkDate_ValueChanged);
@@ -90,7 +90,7 @@
             this.LabelReportUpdateWorkDate.AutoSize = true;
             this.LabelReportUpdateWorkDate.Location = new System.Drawing.Point(6, 10);
             this.LabelReportUpdateWorkDate.Name = "LabelReportUpdateWorkDate";
-            this.LabelReportUpdateWorkDate.Size = new System.Drawing.Size(88, 16);
+            this.LabelReportUpdateWorkDate.Size = new System.Drawing.Size(175, 33);
             this.LabelReportUpdateWorkDate.TabIndex = 0;
             this.LabelReportUpdateWorkDate.Text = "生产日期：";
             // 
@@ -98,6 +98,7 @@
             // 
             this.DataGridView_List.AllowUserToAddRows = false;
             this.DataGridView_List.AllowUserToDeleteRows = false;
+            this.DataGridView_List.AllowUserToOrderColumns = true;
             this.DataGridView_List.AllowUserToResizeRows = false;
             this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -111,7 +112,7 @@
             // 
             // 日报表修改
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 34F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 737);
             this.Controls.Add(this.panel_Title);

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Common.Helper.Crypto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using 联友生产辅助工具;
+
 
 namespace HarveyZ
 {
@@ -13,28 +15,38 @@ namespace HarveyZ
         private bool UpdateFlag = true; //是否运行文件更新，false：依然会发送程序版本至服务器进行对比，无论对比结果如何，不会进入更新程序
 
         #region 定义公开全局变量
+        //公用信息
+        public static WebNet webNet = new WebNet();//http post
+        public static AesCrypto aes16 = new AesCrypto();//字符串加密
+        public static CEncrypt cEncrypt = new CEncrypt();//MD5加密
+        public static Mssql mssql = new Mssql();//MSSQL操作类
+        public static DictJson dictJson = new DictJson();//字典json互转类
+
+        //用户信息
         public static string Login_Uid = "";
         public static string Login_Name = "";
         public static string Login_Dpt = "";
         public static string Login_Role = "";
 
-        public static string Software_Version = "";
-        public static string File_Version = "";
+        //软件信息
+        public static string ProgVersion = "";
+        public static string ProgName = "";
 
+        //服务器URL
         public static string HttpURL = "";
+
+        //数据库连接字符串
+        public static string Conn_WG_DB = Global_Const.strConnection_WG_DB;
+        public static string Conn_ERP99 = Global_Const.strConnection_COMFORT;
+        public static string Conn_ERP_TEST = Global_Const.strConnection_COMFORT_TEST;
+        public static string Conn_ROBOT = Global_Const.strConnection_ROBOT;
+        
         #endregion
 
         #region 本地局域变量
         private bool MsgFlag = false;
-        private string ConnStr = Global_Const.strConnection_WG_DB;
-        
-        private string ProgFileName = "";
 
         private string UpdateUrl = "";
-
-        CEncrypt cEncrypt = new CEncrypt();
-        Mssql mssql = new Mssql();
-        WebNet Webnet = new WebNet();
         #endregion
 
         #region Init
@@ -43,6 +55,11 @@ namespace HarveyZ
             InitializeComponent();
             GetMutilOpen();
 
+            //从文件详细信息中获取程序名称
+            ProgName = Application.ProductName.ToString();
+            ProgVersion = Application.ProductVersion.ToString();
+
+            //判断是否在debug模式
             #if DEBUG
             URLTestFlag = true;
             this.Text += "    -DEBUG";
@@ -53,60 +70,11 @@ namespace HarveyZ
             bool UpdFlag = GetNewVersion();
             if (UpdFlag && UpdateFlag)
             {
-                Update();
+                ProgUpdate();
             }
 
-            labelVersion.Text = "Ver: " + Software_Version;
+            labelVersion.Text = "Ver: " + ProgVersion;
 
-        }
-        #endregion
-
-        #region 程序更新
-        public bool StartProcess(string filename, string[] args)
-        {
-            try
-            {
-                string s = "";
-                foreach (string arg in args)
-                {
-                    s = s + arg + " ";
-                }
-                s = s.Trim();
-                Process myprocess = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo(filename, s);
-                myprocess.StartInfo = startInfo;
-
-                //通过以下参数可以控制exe的启动方式，具体参照 myprocess.StartInfo.下面的参数，如以无界面方式启动exe等
-                myprocess.StartInfo.UseShellExecute = false;
-                myprocess.Start();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("启动应用程序时出错！原因：" + ex.Message);
-            }
-            return false;
-        }
-
-        private void Update()
-        {
-            string Path = System.IO.Directory.GetCurrentDirectory();
-            try
-            {
-                string[] arg = new string[2];
-                arg[0] = HttpURL + UpdateUrl;
-                arg[1] = ProgFileName;
-                StartProcess(Path + "\\" + "AutoUpdate.exe", arg);
-                System.Environment.Exit(0);
-            }
-            catch(Win32Exception e)
-            {
-                if(MessageBox.Show("找不到更新软件，程序即将退出!", "错误", MessageBoxButtons.OK) == DialogResult.OK)
-                {
-                    System.Environment.Exit(0);
-                }
-            }
-            
         }
         #endregion
 
@@ -214,7 +182,7 @@ namespace HarveyZ
                 {
                     sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
                 }
-                var get = mssql.SQLselect(ConnStr, sqlstr).Rows[0][0].ToString();
+                var get = mssql.SQLselect(Conn_WG_DB, sqlstr).Rows[0][0].ToString();
                 return get;
             }
             catch
@@ -230,7 +198,7 @@ namespace HarveyZ
                     {
                         sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
                     }
-                    var get = mssql.SQLselect(ConnStr, sqlstr).Rows[0][0].ToString();
+                    var get = mssql.SQLselect(Conn_WG_DB, sqlstr).Rows[0][0].ToString();
                     return get;
                 }
                 catch
@@ -248,10 +216,10 @@ namespace HarveyZ
 
         private bool HttpURLTest()
         {
-            WebNet_Test WebnetTest = new WebNet_Test();
+            
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("", "");
-            dict = WebnetTest.WebPost(HttpURL + "/Client/LinkTest", dict);
+            dict.Add("Test", "Client");
+            dict = HttpPost(HttpURL + "/Client/LinkTest", dict, 5000);
             string get = "";
             if (dict != null)
             {
@@ -273,14 +241,12 @@ namespace HarveyZ
 
         private bool GetNewVersion()
         {
-            ProgFileName = System.IO.Path.GetFileName(Application.ExecutablePath).Split('.')[0];
-
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("ProgName", ProgFileName);
-            dict.Add("Version", Software_Version);
+            dict.Add("ProgName", ProgName);
+            dict.Add("Version", ProgVersion);
             try
             {
-                dict = Webnet.WebPost(HttpURL + "/Client/GetVersion", dict);
+                dict = webNet.WebPost(HttpURL + "/Client/GetVersion", dict);
                 string Mode = "";
                 dict.TryGetValue("Mode", out Mode);
                 if (Mode == "Yes")
@@ -295,7 +261,7 @@ namespace HarveyZ
                 else if (Mode == "False")
                 {
                     dict.TryGetValue("URL", out UpdateUrl);
-                    if (MessageBox.Show("程序：" + ProgFileName + " 已停用！ 请勿再使用，谢谢！\n\r\n\r" + UpdateUrl, "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                    if (MessageBox.Show("程序：" + ProgName + " 已停用！ 请勿再使用，谢谢！\n\r\n\r" + UpdateUrl, "错误", MessageBoxButtons.OK) == DialogResult.OK)
                     {
                         Environment.Exit(0);
                     }
@@ -311,14 +277,11 @@ namespace HarveyZ
                 MessageBox.Show("无法连接程序版本管理器", "错误", MessageBoxButtons.OK);
                 return false;
             }
-            
         }
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            Software_Version = Application.ProductVersion.ToString();
-            
-            if (mssql.SQLlinkTest(ConnStr))
+            if (mssql.SQLlinkTest(Conn_WG_DB))
             {
                 HttpURL = GetHttpURL();
                 bool get = HttpURLTest();
@@ -346,7 +309,7 @@ namespace HarveyZ
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("Login_Uid", Login_uid);
             dict.Add("Login_Pwd", Login_pwd);
-            dict = Webnet.WebPost(HttpURL + "/Client/UserLogin", dict);
+            dict = webNet.WebPost(HttpURL + "/Client/UserLogin", dict);
             
             if(dict != null)
             {
@@ -373,6 +336,69 @@ namespace HarveyZ
             {
                 return false;
             }
+        }
+        #endregion
+
+        #region HTTP Post发送
+        public Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout)
+        {
+            Dictionary<string, string> dictBack = new Dictionary<string, string> { };
+
+            string jsonin = dictJson.Dict2Json(dict);
+            string jsonin_enc = aes16.Encrypt(jsonin);
+            string jsonout = webNet.WebPost(webURL, jsonin_enc, timeout);
+            jsonout = aes16.Decrypt(jsonout);
+            dictBack = dictJson.Json2Dict(jsonout);
+            return dictBack;
+        }
+        #endregion
+
+        #region 程序更新
+        public bool StartProcess(string filename, string[] args)
+        {
+            try
+            {
+                string s = "";
+                foreach (string arg in args)
+                {
+                    s = s + arg + " ";
+                }
+                s = s.Trim();
+                Process myprocess = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo(filename, s);
+                myprocess.StartInfo = startInfo;
+
+                //通过以下参数可以控制exe的启动方式，具体参照 myprocess.StartInfo.下面的参数，如以无界面方式启动exe等
+                myprocess.StartInfo.UseShellExecute = false;
+                myprocess.Start();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("启动应用程序时出错！原因：" + ex.Message);
+            }
+            return false;
+        }
+
+        private void ProgUpdate()
+        {
+            string Path = System.IO.Directory.GetCurrentDirectory();
+            try
+            {
+                string[] arg = new string[2];
+                arg[0] = HttpURL + UpdateUrl;
+                arg[1] = ProgName;
+                StartProcess(Path + "\\" + "AutoUpdate.exe", arg);
+                System.Environment.Exit(0);
+            }
+            catch (Win32Exception e)
+            {
+                if (MessageBox.Show("找不到更新软件，程序即将退出!", "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    System.Environment.Exit(0);
+                }
+            }
+
         }
         #endregion
         

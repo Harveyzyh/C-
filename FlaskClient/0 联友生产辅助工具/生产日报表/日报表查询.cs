@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using HarveyZ;
+using DataGridViewAutoFilter;
 
 namespace 联友生产辅助工具.生产日报表
 {

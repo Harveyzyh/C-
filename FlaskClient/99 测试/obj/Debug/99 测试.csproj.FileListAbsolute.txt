@@ -1,0 +1,24 @@
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache

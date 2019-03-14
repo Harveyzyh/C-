@@ -23,7 +23,7 @@ namespace HarveyZ
         public string GetIpAddress()
         {
             string addr = "";
-            string ip = "192.16"; //用于过滤ip
+            string ip = "192."; //用于过滤ip
             int index = 0;
             string hostName = Dns.GetHostName();   //获取本机名
             IPHostEntry localhost = Dns.GetHostByName(hostName);    //方法已过期，可以获取IPv4的地址
@@ -226,39 +226,38 @@ namespace HarveyZ
     #region WebPost
     public class WebClientEx : WebClient
     {
-        public int Timeout { get; set; }
-
-        protected override WebRequest GetWebRequest(Uri address)
+        private int timeout = 60000;
+        public int Timeout
         {
-            var request = base.GetWebRequest(address);
-            request.Timeout = 30000;
-            return request;
+            get
+            {
+                return timeout;
+            }
+            set
+            {
+                timeout = value;
+            }
         }
-    }
-
-    public class WebClientEx_Test : WebClient
-    {
-        public int Timeout { get; set; }
 
         protected override WebRequest GetWebRequest(Uri address)
         {
             var request = base.GetWebRequest(address);
-            request.Timeout = 5000;
+            request.Timeout = timeout;
             return request;
         }
     }
 
     public class WebNet
     {
-        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
+        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict, int timeout = 60000)
         {
             try
             {
                 var client = new WebClientEx();
-
-                string json = DictJson.Dict2Json(dict);
+                client.Timeout = timeout;
+                string json = FormLogin.dictJson.Dict2Json(dict);
                 string response = client.UploadString(url, json);
-                dict = DictJson.Json2Dict(response);
+                dict = FormLogin.dictJson.Json2Dict(response);
                 return dict;
             }
             catch
@@ -266,20 +265,15 @@ namespace HarveyZ
                 return null;
             }
         }
-    }
 
-    public class WebNet_Test
-    {
-        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict)
+        public string WebPost(string url, string strin, int timeout = 60000)
         {
             try
             {
-                var client = new WebClientEx_Test();
-
-                string json = DictJson.Dict2Json(dict);
-                string response = client.UploadString(url, json);
-                dict = DictJson.Json2Dict(response);
-                return dict;
+                var client = new WebClientEx();
+                client.Timeout = timeout;
+                string strout = client.UploadString(url, strin);
+                return strout;
             }
             catch
             {
@@ -692,7 +686,7 @@ namespace HarveyZ
         /// <typeparam name="TValue">字典value</typeparam>
         /// <param name="dict">要序列化的字典数据</param>
         /// <returns>json字符串</returns>
-        public static string Dict2JsonNull<TKey, TValue>(Dictionary<TKey, TValue> dict)
+        public string Dict2JsonNull<TKey, TValue>(Dictionary<TKey, TValue> dict)
         {
             if (dict.Count == 0)
                 return "";
@@ -701,7 +695,7 @@ namespace HarveyZ
             return jsonStr;
         }
 
-        public static string Dict2Json(Dictionary<string, string> dict)
+        public string Dict2Json(Dictionary<string, string> dict)
         {
             if (dict.Count == 0)
                 return "";
@@ -717,7 +711,7 @@ namespace HarveyZ
         /// <typeparam name="TValue">字典value</typeparam>
         /// <param name="jsonStr">json字符串</param>
         /// <returns>字典数据</returns>
-        public static Dictionary<TKey, TValue> Json2DictNull<TKey, TValue>(string jsonStr)
+        public Dictionary<TKey, TValue> Json2DictNull<TKey, TValue>(string jsonStr)
         {
             if (string.IsNullOrEmpty(jsonStr))
                 return new Dictionary<TKey, TValue>();
@@ -728,7 +722,7 @@ namespace HarveyZ
 
         }
 
-        public static Dictionary<string, string> Json2Dict(string jsonStr)
+        public Dictionary<string, string> Json2Dict(string jsonStr)
         {
             if (string.IsNullOrEmpty(jsonStr))
                 return new Dictionary<string, string>();

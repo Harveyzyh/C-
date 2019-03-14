@@ -92,7 +92,7 @@ namespace 联友生产辅助工具.生产日报表
 
                 sqlstr += " AND B.WorkDate = '" + WorkDate + "' ";
 
-                sqlstr += " ORDER BY C.S DESC, A.S DESC ";
+                sqlstr += " ORDER BY B.Serial, B.WGroup, C.S DESC, A.S DESC ";
                 DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
                 DataGridView_List.DataSource = dttmp;
                 if (dttmp != null)
@@ -120,12 +120,12 @@ namespace 联友生产辅助工具.生产日报表
                     DataGridView_List.RowsDefaultCellStyle.BackColor = Color.Bisque;
                     DataGridView_List.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
 
-                    for (int i = 0; i < this.DataGridView_List.Columns.Count; i++)
-                    {
-                        this.DataGridView_List.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    }
-                    日报表新增.HeadRowLineNumber(DataGridView_List);
-                    DataGridView_List.RowHeadersWidth = 60;
+                    //for (int i = 0; i < this.DataGridView_List.Columns.Count; i++)
+                    //{
+                    //    this.DataGridView_List.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    //}
+                    //日报表新增.HeadRowLineNumber(DataGridView_List);
+                    DataGridView_List.RowHeadersWidth = 30;
                     DtpFlag = true;
                     ButtonReportUpdateCommit.Enabled = true;
                 }

@@ -50,7 +50,7 @@ namespace 联友生产辅助工具.生产日报表
             getitem();
             
             string sqlstr = "";
-            sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Vaild AS 有效码 FROM WG_DB..SC_XL2GY ORDER BY K_ID DESC ";
+            sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Vaild AS 有效码 FROM WG_DB..SC_XL2GY ORDER BY Serial, K_ID DESC ";
             DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
 
             DataGridView_List.DataSource = null;
