@@ -33,7 +33,7 @@ namespace HarveyZ
         public static string ProgName = "";
 
         //服务器URL
-        public static string HttpURL = "";
+        public static string HttpURL = "HTTP://192.168.31.29:80";
 
         //数据库连接字符串
         public static string Conn_WG_DB = Global_Const.strConnection_WG_DB;
@@ -281,9 +281,9 @@ namespace HarveyZ
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            if (mssql.SQLlinkTest(Conn_WG_DB))
+            if (true)//mssql.SQLlinkTest(Conn_WG_DB))
             {
-                HttpURL = GetHttpURL();
+                //HttpURL = GetHttpURL();
                 bool get = HttpURLTest();
                 if (!get)
                 {
