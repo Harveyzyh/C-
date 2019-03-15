@@ -22,7 +22,6 @@ namespace 联友生产辅助工具
     {
         #region 静态变量
         private static Form FormOpen = null;
-        public static List<string> MenuItem_List = new List<string> { };//菜单栏列表
         #endregion
 
         #region 窗体初始化
@@ -50,52 +49,7 @@ namespace 联友生产辅助工具
             SetTestPermission();
 
             ItemUnvisable();
-
-            List<string> list = new List<string> { };
-            if (FormLogin.Login_Role != "Super")
-            {
-                if(FormLogin.Login_Dpt.Substring(0, 2) == "生产")
-                {
-                    list.Add("生产日报表_新增");
-                    list.Add("生产日报表_修改");
-                    list.Add("生产日报表_查询");
-                }
-                if(FormLogin.Login_Dpt == "工程部")
-                {
-                    list.Add("码垛线_纸箱编码管理");
-                    list.Add("码垛线_订单类别编码管理");
-                    list.Add("码垛线_排程导入");
-                }
-                if(FormLogin.Login_Role == "生管")
-                {
-                    list.Add("生产日报表_查询");
-                    list.Add("生产日报表_部门线别维护");
-                    list.Add("生产日报表_系列组别维护");
-                    list.Add("码垛线_排程导入");
-                }
-                if(FormLogin.Login_Uid == "000960" || FormLogin.Login_Uid == "001165")
-                {
-                    list.Add("仓储中心_扫描领料单");
-                }
-                if (FormLogin.Login_Uid == "000068" || FormLogin.Login_Uid == "001161")
-                {
-                    list.Add("仓储中心_扫描进货单");
-                }
-                if (FormLogin.Login_Uid == "000807")
-                {
-                    list.Add("生产日报表_查询");
-                }
-                if (FormLogin.Login_Uid == "000946")
-                {
-                    list.Add("生产日报表_查询");
-                }
-                
-                SetPermission(list);
-            }
-            else
-            {
-                SetPermission(MenuItem_List);
-            }
+            SetPermission(FormLogin.PermItemList);
         }
         
         private void SetTestPermission()
@@ -198,9 +152,10 @@ namespace 联友生产辅助工具
             else
             {
                 con.Visible = false;
-                MenuItem_List.Add(con.Name.Replace("ToolStripMenuItem", ""));
+                FormLogin.MenuItemList.Add(con.Name.Replace("ToolStripMenuItem", ""));
             }
         }
+
         #endregion
 
         #region 主窗体按钮

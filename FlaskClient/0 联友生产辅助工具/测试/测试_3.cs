@@ -14,7 +14,7 @@ namespace 联友生产辅助工具.测试
     {
         WebNet webNet = new WebNet();
         Dictionary<string, string> dict = new Dictionary<string, string> { };
-        List<string> MenuItem_List = 主界面.MenuItem_List;
+        List<string> MenuItem_List = FormLogin.MenuItemList;
 
         public 测试_3()
         {

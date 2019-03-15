@@ -28,6 +28,10 @@ namespace HarveyZ
         public static string Login_Dpt = "";
         public static string Login_Role = "";
 
+        //权限信息
+        public static List<string> MenuItemList = new List<string> { };//所有菜单栏列表
+        public static List<string> PermItemList = new List<string> { };//用户权限列表
+
         //软件信息
         public static string ProgVersion = "";
         public static string ProgName = "";
@@ -246,7 +250,7 @@ namespace HarveyZ
             dict.Add("Version", ProgVersion);
             try
             {
-                dict = webNet.WebPost(HttpURL + "/Client/GetVersion", dict);
+                dict = HttpPost(HttpURL + "/Client/GetVersion", dict);
                 string Mode = "";
                 dict.TryGetValue("Mode", out Mode);
                 if (Mode == "Yes")
@@ -281,9 +285,9 @@ namespace HarveyZ
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            if (true)//mssql.SQLlinkTest(Conn_WG_DB))
+            if (mssql.SQLlinkTest(Conn_WG_DB))
             {
-                //HttpURL = GetHttpURL();
+                HttpURL = GetHttpURL();
                 bool get = HttpURLTest();
                 if (!get)
                 {
@@ -302,28 +306,37 @@ namespace HarveyZ
             }
         }
 
-        private bool FormLogin_GetLogin(string Login_uid, string Login_pwd)//登录
+        private bool FormLogin_GetLogin(string LoginUid, string LoginPwd)//登录
         {
-            Login_pwd = cEncrypt.GetMd5Str(Login_pwd); //转换成MD5值
+            LoginPwd = cEncrypt.GetMd5Str(LoginPwd); //转换成MD5值
 
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("Login_Uid", Login_uid);
-            dict.Add("Login_Pwd", Login_pwd);
-            dict = webNet.WebPost(HttpURL + "/Client/UserLogin", dict);
+            dict.Add("LoginUid", LoginUid);
+            dict.Add("LoginPwd", LoginPwd);
+            dict = HttpPost(HttpURL + "/Client/UserLogin", dict);
             
             if(dict != null)
             {
-                string Login_status = "";
-                dict.TryGetValue("Login_Status", out Login_status);
-                if(Login_status == "Y")
+                string Loginstatus = "";
+                dict.TryGetValue("LoginStatus", out Loginstatus);
+                if(Loginstatus == "Y")
                 {
-                    dict.TryGetValue("Login_Uid", out Login_Uid);
-                    dict.TryGetValue("Login_Name", out Login_Name);
-                    dict.TryGetValue("Login_Role", out Login_Role);
-                    dict.TryGetValue("Login_Dpt", out Login_Dpt);
+                    string PermStr = "";
+                    dict.TryGetValue("LoginUid", out Login_Uid);
+                    dict.TryGetValue("LoginName", out Login_Name);
+                    dict.TryGetValue("LoginRole", out Login_Role);
+                    dict.TryGetValue("LoginDpt", out Login_Dpt);
+                    dict.TryGetValue("LoginPermission", out PermStr);
+                    if(PermStr != null)
+                    {
+                        foreach(string PermStrTmp in PermStr.Trim().Split('|'))
+                        {
+                            PermItemList.Add(PermStrTmp);
+                        }
+                    }
                     return true;
                 }
-                else if(Login_status == "y")
+                else if(Loginstatus == "y")
                 {
                     return false;
                 }
@@ -340,7 +353,7 @@ namespace HarveyZ
         #endregion
 
         #region HTTP Post发送
-        public Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout)
+        public Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout = 60000)
         {
             Dictionary<string, string> dictBack = new Dictionary<string, string> { };
 
