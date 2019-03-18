@@ -14,8 +14,6 @@ namespace 联友生产辅助工具.仓储中心
 
         Mssql mssql = new Mssql();
 
-        WebNet Webnet = new WebNet();
-
         string xa007 = "";
         private bool MsgFlag = false;
 
@@ -111,7 +109,7 @@ namespace 联友生产辅助工具.仓储中心
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("Mode", "Long");
-            dict = Webnet.WebPost(FormLogin.HttpURL + "/Client/GetTime", dict);
+            dict = FormLogin.HttpPost(FormLogin.HttpURL + "/Client/GetTime", dict);
             string Time = "";
             if (dict != null)
             {
@@ -287,7 +285,7 @@ namespace 联友生产辅助工具.仓储中心
                 dict.Add("Select", dttmp.Rows.Count.ToString());
                 dict.Add("Upload", index.ToString());
                 dict.Add("Detail", detail);
-                Webnet.WebPost(FormLogin.HttpURL + "/Client/PDA/LL_LYXA", dict);
+                FormLogin.HttpPost(FormLogin.HttpURL + "/Client/PDA/LL_LYXA", dict);
                 
                 dttmp = null;
 

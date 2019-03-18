@@ -7,3 +7,12 @@
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\8 程序升级\bin\Release\ERP程序升级.pdb
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\8 程序升级\obj\Release\ERP程序升级.exe
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\8 程序升级\obj\Release\ERP程序升级.pdb
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\bin\Release\ERP程序升级.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\ERP程序升级.exe
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\ERP程序升级.pdb
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\bin\Release\ERP程序升级.exe
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\bin\Release\ERP程序升级.pdb
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\8 程序升级-ftp.csprojResolveAssemblyReference.cache
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\AutoUpdate.AutoUpdate.resources
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\AutoUpdate.Properties.Resources.resources
+Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\8 程序升级-ftp.csproj.GenerateResource.Cache

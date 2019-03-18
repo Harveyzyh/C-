@@ -250,9 +250,7 @@ namespace 联友生产辅助工具
         #region 测试部分
         private void 测试_1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new 测试_码垛线排程导入();
-            FormOpenInit(frm);
-            frm.Show();
+
         }
 
         private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)

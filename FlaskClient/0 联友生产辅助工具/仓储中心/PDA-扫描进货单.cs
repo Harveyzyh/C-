@@ -19,7 +19,6 @@ namespace 联友生产辅助工具.仓储中心
 
         #region 局部变量设定
         Mssql mssql = new Mssql();
-        WebNet webNet = new WebNet();
 
         Dictionary<string, string> dict = new Dictionary<string, string> { };
         Dictionary<string, string> dict_get = new Dictionary<string, string> { };
@@ -98,7 +97,7 @@ namespace 联友生产辅助工具.仓储中心
             dict.Add("Mode", "Select");
             dict.Add("Parameter", "FlowID");
             dict.Add("Data", null);
-            dict = webNet.WebPost(URL, dict);
+            dict = FormLogin.HttpPost(URL, dict);
             string FlowId = "";
             dict.TryGetValue("Data", out FlowId);
             return FlowId;
@@ -346,7 +345,7 @@ namespace 联友生产辅助工具.仓储中心
             dict.Add("Parameter", FlowId);
             dict.Add("Data", "");
             dict.Add("RowCount", Count);
-            dict = webNet.WebPost(URL, dict);
+            dict = FormLogin.HttpPost(URL, dict);
             string GetBack = null;
             if (dict != null)
             {

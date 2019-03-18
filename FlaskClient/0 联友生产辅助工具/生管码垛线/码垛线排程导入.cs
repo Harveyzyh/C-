@@ -20,8 +20,6 @@ namespace 联友生产辅助工具.生管码垛线
 
         private static string strConnertion = Global_Const.strConnection_ROBOT;
 
-        private WebNet Webnet = new WebNet();
-
         #endregion
 
         #region 窗体设计
@@ -64,7 +62,7 @@ namespace 联友生产辅助工具.生管码垛线
             dict.Add("Mode", "Sort");
             try
             {
-                dict = Webnet.WebPost(FormLogin.HttpURL + "/Client/GetTime", dict);
+                dict = FormLogin.HttpPost(FormLogin.HttpURL + "/Client/GetTime", dict);
                 dict.TryGetValue("Time", out Time);
                 string Time2 = (int.Parse(Time) + 2).ToString();
             }
@@ -353,7 +351,7 @@ namespace 联友生产辅助工具.生管码垛线
                         dict.Add("User", FormLogin.Login_Uid);
                         dict.Add("Mode", "Insert");
                         dict.Add("Detail", result);
-                        Webnet.WebPost(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
+                        FormLogin.HttpPost(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
 
                         MessageBox.Show("已提交至后台服务器", "导入结果", MessageBoxButtons.OK);
                     }

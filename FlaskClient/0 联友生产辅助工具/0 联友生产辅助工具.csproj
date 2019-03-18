@@ -149,12 +149,6 @@
     <Compile Include="测试\测试_3.Designer.cs">
       <DependentUpon>测试_3.cs</DependentUpon>
     </Compile>
-    <Compile Include="测试\测试_码垛线排程导入.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="测试\测试_码垛线排程导入.designer.cs">
-      <DependentUpon>测试_码垛线排程导入.cs</DependentUpon>
-    </Compile>
     <Compile Include="玖友\玖友查询物料需求量.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,9 +256,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="测试\测试_3.resx">
       <DependentUpon>测试_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="测试\测试_码垛线排程导入.resx">
-      <DependentUpon>测试_码垛线排程导入.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生产日报表\日报表修改.resx">
       <DependentUpon>日报表修改.cs</DependentUpon>

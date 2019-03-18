@@ -250,7 +250,7 @@ namespace HarveyZ
             dict.Add("Version", ProgVersion);
             try
             {
-                dict = HttpPost(HttpURL + "/Client/GetVersion", dict);
+                dict = HttpPost(HttpURL + "/Client/VersionManager", dict);
                 string Mode = "";
                 dict.TryGetValue("Mode", out Mode);
                 if (Mode == "Yes")
@@ -353,7 +353,7 @@ namespace HarveyZ
         #endregion
 
         #region HTTP Post发送
-        public Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout = 60000)
+        public static Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout = 60000)
         {
             Dictionary<string, string> dictBack = new Dictionary<string, string> { };
 
