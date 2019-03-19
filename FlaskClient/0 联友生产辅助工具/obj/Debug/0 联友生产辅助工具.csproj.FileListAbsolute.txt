@@ -27,7 +27,6 @@
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.Properties.Resources.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.测试.测试_2.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.测试.测试_3.resources
-\\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.测试.测试_码垛线排程导入.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表修改.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表新增.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表查询.resources

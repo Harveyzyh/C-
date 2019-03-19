@@ -12,7 +12,6 @@ namespace HarveyZ
     public partial class FormLogin : Form
     {
         public static bool URLTestFlag = false; //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
-        private bool UpdateFlag = true; //是否运行文件更新，false：依然会发送程序版本至服务器进行对比，无论对比结果如何，不会进入更新程序
 
         #region 定义公开全局变量
         //公用信息
@@ -70,9 +69,8 @@ namespace HarveyZ
             #endif
 
             FormLogin_Init(); //配置信息获取
-
-            bool UpdFlag = GetNewVersion();
-            if (UpdFlag && UpdateFlag)
+            
+            if (GetNewVersion())
             {
                 ProgUpdate();
             }
@@ -285,21 +283,11 @@ namespace HarveyZ
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            if (mssql.SQLlinkTest(Conn_WG_DB))
+            HttpURL = GetHttpURL();
+            bool get = HttpURLTest();
+            if (!get)
             {
-                HttpURL = GetHttpURL();
-                bool get = HttpURLTest();
-                if (!get)
-                {
-                    if (MessageBox.Show("无法连接后台服务器\n 程序即将退出！", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("无法连接配置服务器\n 程序即将退出！", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
+                if (MessageBox.Show("无法连接后台服务器\n 程序即将退出！", "配置错误", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
@@ -311,22 +299,24 @@ namespace HarveyZ
             LoginPwd = cEncrypt.GetMd5Str(LoginPwd); //转换成MD5值
 
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("LoginUid", LoginUid);
-            dict.Add("LoginPwd", LoginPwd);
-            dict = HttpPost(HttpURL + "/Client/UserLogin", dict);
+            dict.Add("Module", "UserManager");
+            dict.Add("Mode", "UserLogin");
+            dict.Add("Uid", LoginUid);
+            dict.Add("Pwd", LoginPwd);
+            dict = HttpPost(HttpURL + "/Client/UserManager", dict);
             
             if(dict != null)
             {
-                string Loginstatus = "";
-                dict.TryGetValue("LoginStatus", out Loginstatus);
-                if(Loginstatus == "Y")
+                string LoginStatus = "";
+                dict.TryGetValue("Status", out LoginStatus);
+                if(LoginStatus == "Y")
                 {
                     string PermStr = "";
-                    dict.TryGetValue("LoginUid", out Login_Uid);
-                    dict.TryGetValue("LoginName", out Login_Name);
-                    dict.TryGetValue("LoginRole", out Login_Role);
-                    dict.TryGetValue("LoginDpt", out Login_Dpt);
-                    dict.TryGetValue("LoginPermission", out PermStr);
+                    dict.TryGetValue("Uid", out Login_Uid);
+                    dict.TryGetValue("Name", out Login_Name);
+                    dict.TryGetValue("Role", out Login_Role);
+                    dict.TryGetValue("Dpt", out Login_Dpt);
+                    dict.TryGetValue("Permission", out PermStr);
                     if(PermStr != null)
                     {
                         foreach(string PermStrTmp in PermStr.Trim().Split('|'))
@@ -336,7 +326,7 @@ namespace HarveyZ
                     }
                     return true;
                 }
-                else if(Loginstatus == "y")
+                else if(LoginStatus == "y")
                 {
                     return false;
                 }
