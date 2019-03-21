@@ -308,7 +308,9 @@ namespace HarveyZ
             if(dict != null)
             {
                 string LoginStatus = "";
+                string Message = "";
                 dict.TryGetValue("Status", out LoginStatus);
+                dict.TryGetValue("Message", out Message);
                 if(LoginStatus == "Y")
                 {
                     string PermStr = "";
