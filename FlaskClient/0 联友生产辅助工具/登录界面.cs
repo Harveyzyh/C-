@@ -17,9 +17,7 @@ namespace HarveyZ
         //公用信息
         public static WebNet webNet = new WebNet();//http post
         public static AesCrypto aes16 = new AesCrypto();//字符串加密
-        public static CEncrypt cEncrypt = new CEncrypt();//MD5加密
         public static Mssql mssql = new Mssql();//MSSQL操作类
-        public static DictJson dictJson = new DictJson();//字典json互转类
 
         //用户信息
         public static string Login_Uid = "";
@@ -296,7 +294,7 @@ namespace HarveyZ
 
         private bool FormLogin_GetLogin(string LoginUid, string LoginPwd)//登录
         {
-            LoginPwd = cEncrypt.GetMd5Str(LoginPwd); //转换成MD5值
+            LoginPwd = CEncrypt.GetMd5Str(LoginPwd); //转换成MD5值
 
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("Module", "UserManager");
@@ -349,12 +347,22 @@ namespace HarveyZ
         {
             Dictionary<string, string> dictBack = new Dictionary<string, string> { };
 
-            string jsonin = dictJson.Dict2Json(dict);
+            string jsonin = Json.Dict2Json(dict);
             string jsonin_enc = aes16.Encrypt(jsonin);
-            string jsonout = webNet.WebPost(webURL, jsonin_enc, timeout);
+            string jsonout = WebNet.WebPost(webURL, jsonin_enc, timeout);
             jsonout = aes16.Decrypt(jsonout);
-            dictBack = dictJson.Json2Dict(jsonout);
+            dictBack = Json.Json2Dict(jsonout);
             return dictBack;
+        }
+        public static string HttpPost_Json(string webURL, Dictionary<string, string> dict, int timeout = 60000)
+        {
+            Dictionary<string, string> dictBack = new Dictionary<string, string> { };
+
+            string jsonin = Json.Dict2Json(dict);
+            string jsonin_enc = aes16.Encrypt(jsonin);
+            string jsonout = WebNet.WebPost(webURL, jsonin_enc, timeout);
+            jsonout = aes16.Decrypt(jsonout);
+            return jsonout;
         }
         #endregion
 

@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using Common.Helper.Crypto;
 using System.Net;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Collections;
 
 namespace 测试
 {
@@ -24,27 +26,22 @@ namespace 测试
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string json = "[{\"id\":\"00e58d51\",\"mac\":\"20:f1:7c:c5:cd:80\"},"
+                        + "{\"id\":\"00e58d52\",\"mac\":\"20:f1:7c:c5:cd:85\"}]";
+
+            DataTableJson table2json = new DataTableJson();
+            DataTable dt = DataTableJson.Json2DT(json);
+            dataGridView1.DataSource = dt;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox2.Text = Application.ProductName.ToString();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DictJson dictJson = new DictJson();
-            dict.Clear();
-            dict.Add("UID", "001114");
-            dict.Add("Mode", "Complete");
-            dict.Add("Parameter", "JH201812281329460001");
-            dict.Add("Data", null);
-            dict.Add("RowCount", "4");
-            string jsonin = dictJson.Dict2Json(dict);
-            string jsonin_enc = AesCrypto.Encrypt(jsonin);
-            string jsonout = webnet.WebPost("http://192.168.1.60:80/Test/Test3", jsonin_enc);
-            jsonout = AesCrypto.Decrypt(jsonout);
-            textBox5.Text = jsonout;
+
         }
     }
 
@@ -110,6 +107,133 @@ namespace 测试
             Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonStr);
             return dict;
 
+        }
+    }
+
+    public class DataTableJson
+    {
+        /// <summary>
+        /// Json 字符串 转换为 DataTable数据集合
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public DataTable Json2DT2(string json)
+        {
+            DataTable dataTable = new DataTable();  //实例化
+            DataTable result;
+            try
+            {
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+                if (arrayList.Count > 0)
+                {
+                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    {
+                        if (dictionary.Keys.Count<string>() == 0)
+                        {
+                            result = dataTable;
+                            return result;
+                        }
+                        //Columns
+                        if (dataTable.Columns.Count == 0)
+                        {
+                            foreach (string current in dictionary.Keys)
+                            {
+                                if (current != "data")
+                                    dataTable.Columns.Add(current, dictionary[current].GetType());
+                                else
+                                {
+                                    ArrayList list = dictionary[current] as ArrayList;
+                                    foreach (Dictionary<string, object> dic in list)
+                                    {
+                                        foreach (string key in dic.Keys)
+                                        {
+                                            dataTable.Columns.Add(key, dic[key].GetType());
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        //Rows
+                        string root = "";
+                        foreach (string current in dictionary.Keys)
+                        {
+                            if (current != "data")
+                                root = current;
+                            else
+                            {
+                                ArrayList list = dictionary[current] as ArrayList;
+                                foreach (Dictionary<string, object> dic in list)
+                                {
+                                    DataRow dataRow = dataTable.NewRow();
+                                    dataRow[root] = dictionary[root];
+                                    foreach (string key in dic.Keys)
+                                    {
+                                        dataRow[key] = dic[key];
+                                    }
+                                    dataTable.Rows.Add(dataRow);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+            result = dataTable;
+            return result;
+        }
+
+
+        /// <summary>
+        /// Json 字符串 转换为 DataTable数据集合
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static DataTable Json2DT(string json)
+        {
+            DataTable dataTable = new DataTable();  //实例化
+            DataTable result;
+            try
+            {
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+                if (arrayList.Count > 0)
+                {
+                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    {
+                        if (dictionary.Keys.Count == 0)
+                        {
+                            result = dataTable;
+                            return result;
+                        }
+                        //Columns
+                        if (dataTable.Columns.Count == 0)
+                        {
+                            foreach (string current in dictionary.Keys)
+                            {
+                                dataTable.Columns.Add(current, dictionary[current].GetType());
+                            }
+                        }
+                        //Rows
+                        DataRow dataRow = dataTable.NewRow();
+                        foreach (string current in dictionary.Keys)
+                        {
+                            dataRow[current] = dictionary[current];
+                        }
+                        dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
+                    }
+                }
+            }
+            catch
+            {
+            }
+            result = dataTable;
+            return result;
         }
     }
 }

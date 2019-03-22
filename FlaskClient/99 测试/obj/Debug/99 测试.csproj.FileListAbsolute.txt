@@ -22,3 +22,4 @@
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.exe
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe.config

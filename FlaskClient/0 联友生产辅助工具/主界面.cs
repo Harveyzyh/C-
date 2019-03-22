@@ -255,7 +255,9 @@ namespace 联友生产辅助工具
 
         private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Form frm = new 测试_2();
+            FormOpenInit(frm);
+            frm.Visible = true;
         }
 
         private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)

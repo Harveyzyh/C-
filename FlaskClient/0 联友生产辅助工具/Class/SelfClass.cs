@@ -10,11 +10,11 @@ using NPOI.XSSF.UserModel;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net;
-using System.Net.Http;
-using System.Collections.Specialized;
 using System.Collections.Generic;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Checksums;
+using System.Web.Script.Serialization;
+using System.Collections;
 
 namespace HarveyZ
 {
@@ -44,10 +44,10 @@ namespace HarveyZ
 
     public class CEncrypt
     {
-        public string GetMd5Str(string str)     //取得字符串str被MD5加密算法加密后的字符串
+        public static string GetMd5Str(string str)     //取得字符串str被MD5加密算法加密后的字符串
         {
             string resultstr = "";
-            System.Security.Cryptography.MD5 myMD5 = System.Security.Cryptography.MD5.Create();
+            MD5 myMD5 = MD5.Create();
             Byte[] mybyte;
             mybyte = myMD5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(str));
             for (int itmp = 0; itmp < mybyte.Length; itmp++)
@@ -249,15 +249,15 @@ namespace HarveyZ
 
     public class WebNet
     {
-        public Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict, int timeout = 60000)
+        public static Dictionary<string, string> WebPost(string url, Dictionary<string, string> dict, int timeout = 60000)
         {
             try
             {
                 var client = new WebClientEx();
                 client.Timeout = timeout;
-                string json = FormLogin.dictJson.Dict2Json(dict);
+                string json = Json.Dict2Json(dict);
                 string response = client.UploadString(url, json);
-                dict = FormLogin.dictJson.Json2Dict(response);
+                dict = Json.Json2Dict(response);
                 return dict;
             }
             catch
@@ -266,7 +266,7 @@ namespace HarveyZ
             }
         }
 
-        public string WebPost(string url, string strin, int timeout = 60000)
+        public static string WebPost(string url, string strin, int timeout = 60000)
         {
             try
             {
@@ -626,7 +626,7 @@ namespace HarveyZ
     }
 
 
-    public class DictJson
+    public class Json
     {
         /// <summary>
         /// 将字典类型序列化为json字符串
@@ -635,7 +635,7 @@ namespace HarveyZ
         /// <typeparam name="TValue">字典value</typeparam>
         /// <param name="dict">要序列化的字典数据</param>
         /// <returns>json字符串</returns>
-        public string Dict2JsonNull<TKey, TValue>(Dictionary<TKey, TValue> dict)
+        public static string Dict2JsonNull<TKey, TValue>(Dictionary<TKey, TValue> dict)
         {
             if (dict.Count == 0)
                 return "";
@@ -644,7 +644,7 @@ namespace HarveyZ
             return jsonStr;
         }
 
-        public string Dict2Json(Dictionary<string, string> dict)
+        public static string Dict2Json(Dictionary<string, string> dict)
         {
             if (dict.Count == 0)
                 return "";
@@ -660,7 +660,7 @@ namespace HarveyZ
         /// <typeparam name="TValue">字典value</typeparam>
         /// <param name="jsonStr">json字符串</param>
         /// <returns>字典数据</returns>
-        public Dictionary<TKey, TValue> Json2DictNull<TKey, TValue>(string jsonStr)
+        public static Dictionary<TKey, TValue> Json2DictNull<TKey, TValue>(string jsonStr)
         {
             if (string.IsNullOrEmpty(jsonStr))
                 return new Dictionary<TKey, TValue>();
@@ -671,7 +671,7 @@ namespace HarveyZ
 
         }
 
-        public Dictionary<string, string> Json2Dict(string jsonStr)
+        public static Dictionary<string, string> Json2Dict(string jsonStr)
         {
             if (string.IsNullOrEmpty(jsonStr))
                 return new Dictionary<string, string>();
@@ -681,7 +681,133 @@ namespace HarveyZ
             return dict;
 
         }
+
+        /// <summary>
+        /// Json 字符串 转换为 DataTable数据集合
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static DataTable Json2DT2(string json)
+        {
+            DataTable dataTable = new DataTable();  //实例化
+            DataTable result;
+            try
+            {
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+                if (arrayList.Count > 0)
+                {
+                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    {
+                        if (dictionary.Keys.Count == 0)
+                        {
+                            result = dataTable;
+                            return result;
+                        }
+                        //Columns
+                        if (dataTable.Columns.Count == 0)
+                        {
+                            foreach (string current in dictionary.Keys)
+                            {
+                                if (current != "data")
+                                    dataTable.Columns.Add(current, dictionary[current].GetType());
+                                else
+                                {
+                                    ArrayList list = dictionary[current] as ArrayList;
+                                    foreach (Dictionary<string, object> dic in list)
+                                    {
+                                        foreach (string key in dic.Keys)
+                                        {
+                                            dataTable.Columns.Add(key, dic[key].GetType());
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        //Rows
+                        string root = "";
+                        foreach (string current in dictionary.Keys)
+                        {
+                            if (current != "data")
+                                root = current;
+                            else
+                            {
+                                ArrayList list = dictionary[current] as ArrayList;
+                                foreach (Dictionary<string, object> dic in list)
+                                {
+                                    DataRow dataRow = dataTable.NewRow();
+                                    dataRow[root] = dictionary[root];
+                                    foreach (string key in dic.Keys)
+                                    {
+                                        dataRow[key] = dic[key];
+                                    }
+                                    dataTable.Rows.Add(dataRow);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+            result = dataTable;
+            return result;
+        }
+
+
+        /// <summary>
+        /// Json 字符串 转换为 DataTable数据集合
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static DataTable Json2DT(string json)
+        {
+            DataTable dataTable = new DataTable();  //实例化
+            DataTable result = null;
+            try
+            {
+                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+                if (arrayList.Count > 0)
+                {
+                    foreach (Dictionary<string, object> dictionary in arrayList)
+                    {
+                        if (dictionary.Keys.Count == 0)
+                        {
+                            result = dataTable;
+                            return result;
+                        }
+                        //Columns
+                        if (dataTable.Columns.Count == 0)
+                        {
+                            foreach (string current in dictionary.Keys)
+                            {
+                                dataTable.Columns.Add(current, dictionary[current].GetType());
+                            }
+                        }
+                        //Rows
+                        DataRow dataRow = dataTable.NewRow();
+                        foreach (string current in dictionary.Keys)
+                        {
+                            dataRow[current] = dictionary[current];
+                        }
+                        dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            result = dataTable;
+            return result;
+        }
     }
+
 
     public class ZipUnZip
     {
@@ -994,4 +1120,5 @@ namespace HarveyZ
 
         #endregion
     }
+
 }

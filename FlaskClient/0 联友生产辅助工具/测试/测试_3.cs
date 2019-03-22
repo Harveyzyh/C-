@@ -41,7 +41,7 @@ namespace 联友生产辅助工具.测试
         {
 
             dict.Add("name", "me");
-            webNet.WebPost("http://192.168.1.60/Test/Test", dict);
+            WebNet.WebPost("http://192.168.1.60/Test/Test", dict);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace 联友生产辅助工具.测试
                 }
             }
             dict.Add("BasePower", Item_string);
-            dict = webNet.WebPost("http://192.168.1.60/Test/BasePower", dict);
+            dict = WebNet.WebPost("http://192.168.1.60/Test/BasePower", dict);
         }
     }
 }

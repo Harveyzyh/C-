@@ -50,6 +50,9 @@
             this.码垛线配置管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_纸箱编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_订单类别编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.玖友ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.玖友_查询物料需求量ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.玖友_查询生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,9 +65,6 @@
             this.panelParent = new System.Windows.Forms.Panel();
             this.Label_Test = new System.Windows.Forms.Label();
             this.LabelIPInfo = new System.Windows.Forms.Label();
-            this.玖友ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.玖友_查询物料需求量ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.玖友_查询生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +84,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(843, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1185, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -94,38 +94,38 @@
             this.仓储中心_扫描领料单ToolStripMenuItem,
             this.仓储中心_扫描进货单ToolStripMenuItem,
             this.仓储中心_仓库ToolStripMenuItem});
-            this.仓储中心ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.仓储中心ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.仓储中心ToolStripMenuItem.Name = "仓储中心ToolStripMenuItem";
-            this.仓储中心ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.仓储中心ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
             this.仓储中心ToolStripMenuItem.Text = "仓储中心";
             // 
             // 仓储中心_扫描领料单ToolStripMenuItem
             // 
             this.仓储中心_扫描领料单ToolStripMenuItem.Name = "仓储中心_扫描领料单ToolStripMenuItem";
-            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.仓储中心_扫描领料单ToolStripMenuItem.Text = "扫描领料单";
             this.仓储中心_扫描领料单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描领料单ToolStripMenuItem_Click);
             // 
             // 仓储中心_扫描进货单ToolStripMenuItem
             // 
             this.仓储中心_扫描进货单ToolStripMenuItem.Name = "仓储中心_扫描进货单ToolStripMenuItem";
-            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.仓储中心_扫描进货单ToolStripMenuItem.Text = "扫描进货单";
             this.仓储中心_扫描进货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单ToolStripMenuItem_Click);
             // 
             // 仓储中心_仓库ToolStripMenuItem
             // 
             this.仓储中心_仓库ToolStripMenuItem.Name = "仓储中心_仓库ToolStripMenuItem";
-            this.仓储中心_仓库ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.仓储中心_仓库ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.仓储中心_仓库ToolStripMenuItem.Text = "仓库";
             // 
             // 生产部ToolStripMenuItem
             // 
             this.生产部ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.生产部_生产日报表ToolStripMenuItem});
-            this.生产部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.生产部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.生产部ToolStripMenuItem.Name = "生产部ToolStripMenuItem";
-            this.生产部ToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.生产部ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.生产部ToolStripMenuItem.Text = "生产部";
             // 
             // 生产部_生产日报表ToolStripMenuItem
@@ -135,27 +135,27 @@
             this.生产日报表_修改ToolStripMenuItem,
             this.生产日报表_查询ToolStripMenuItem});
             this.生产部_生产日报表ToolStripMenuItem.Name = "生产部_生产日报表ToolStripMenuItem";
-            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.生产部_生产日报表ToolStripMenuItem.Text = "生产日报表";
             // 
             // 生产日报表_新增ToolStripMenuItem
             // 
             this.生产日报表_新增ToolStripMenuItem.Name = "生产日报表_新增ToolStripMenuItem";
-            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_新增ToolStripMenuItem.Text = "新增";
             this.生产日报表_新增ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_新增ToolStripMenuItem_Click);
             // 
             // 生产日报表_修改ToolStripMenuItem
             // 
             this.生产日报表_修改ToolStripMenuItem.Name = "生产日报表_修改ToolStripMenuItem";
-            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_修改ToolStripMenuItem.Text = "修改";
             this.生产日报表_修改ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_修改ToolStripMenuItem_Click);
             // 
             // 生产日报表_查询ToolStripMenuItem
             // 
             this.生产日报表_查询ToolStripMenuItem.Name = "生产日报表_查询ToolStripMenuItem";
-            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_查询ToolStripMenuItem.Text = "查询";
             this.生产日报表_查询ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_查询ToolStripMenuItem_Click);
             // 
@@ -165,9 +165,9 @@
             this.码垛线ToolStripMenuItem,
             this.生产日报表生管维护ToolStripMenuItem,
             this.生管_电子排程ToolStripMenuItem});
-            this.生管ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.生管ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.生管ToolStripMenuItem.Name = "生管ToolStripMenuItem";
-            this.生管ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.生管ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
             this.生管ToolStripMenuItem.Text = "生管";
             // 
             // 码垛线ToolStripMenuItem
@@ -175,13 +175,13 @@
             this.码垛线ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.码垛线_排程导入ToolStripMenuItem});
             this.码垛线ToolStripMenuItem.Name = "码垛线ToolStripMenuItem";
-            this.码垛线ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.码垛线ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.码垛线ToolStripMenuItem.Text = "码垛线";
             // 
             // 码垛线_排程导入ToolStripMenuItem
             // 
             this.码垛线_排程导入ToolStripMenuItem.Name = "码垛线_排程导入ToolStripMenuItem";
-            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.码垛线_排程导入ToolStripMenuItem.Text = "排程导入";
             this.码垛线_排程导入ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_排程导入ToolStripMenuItem_Click);
             // 
@@ -191,27 +191,27 @@
             this.生产日报表_部门线别维护ToolStripMenuItem,
             this.生产日报表_系列组别维护ToolStripMenuItem});
             this.生产日报表生管维护ToolStripMenuItem.Name = "生产日报表生管维护ToolStripMenuItem";
-            this.生产日报表生管维护ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.生产日报表生管维护ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.生产日报表生管维护ToolStripMenuItem.Text = "生产日报表";
             // 
             // 生产日报表_部门线别维护ToolStripMenuItem
             // 
             this.生产日报表_部门线别维护ToolStripMenuItem.Name = "生产日报表_部门线别维护ToolStripMenuItem";
-            this.生产日报表_部门线别维护ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.生产日报表_部门线别维护ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.生产日报表_部门线别维护ToolStripMenuItem.Text = "部门线别维护";
             this.生产日报表_部门线别维护ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_部门线别维护ToolStripMenuItem_Click);
             // 
             // 生产日报表_系列组别维护ToolStripMenuItem
             // 
             this.生产日报表_系列组别维护ToolStripMenuItem.Name = "生产日报表_系列组别维护ToolStripMenuItem";
-            this.生产日报表_系列组别维护ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.生产日报表_系列组别维护ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.生产日报表_系列组别维护ToolStripMenuItem.Text = "系列组别维护";
             this.生产日报表_系列组别维护ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_系列组别维护ToolStripMenuItem_Click);
             // 
             // 生管_电子排程ToolStripMenuItem
             // 
             this.生管_电子排程ToolStripMenuItem.Name = "生管_电子排程ToolStripMenuItem";
-            this.生管_电子排程ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.生管_电子排程ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.生管_电子排程ToolStripMenuItem.Text = "电子排程";
             this.生管_电子排程ToolStripMenuItem.Click += new System.EventHandler(this.生管_电子排程ToolStripMenuItem_Click);
             // 
@@ -219,9 +219,9 @@
             // 
             this.工程部ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.码垛线配置管理ToolStripMenuItem});
-            this.工程部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.工程部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.工程部ToolStripMenuItem.Name = "工程部ToolStripMenuItem";
-            this.工程部ToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.工程部ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.工程部ToolStripMenuItem.Text = "工程部";
             // 
             // 码垛线配置管理ToolStripMenuItem
@@ -230,44 +230,68 @@
             this.码垛线_纸箱编码管理ToolStripMenuItem,
             this.码垛线_订单类别编码管理ToolStripMenuItem});
             this.码垛线配置管理ToolStripMenuItem.Name = "码垛线配置管理ToolStripMenuItem";
-            this.码垛线配置管理ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.码垛线配置管理ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.码垛线配置管理ToolStripMenuItem.Text = "码垛线配置管理";
             // 
             // 码垛线_纸箱编码管理ToolStripMenuItem
             // 
             this.码垛线_纸箱编码管理ToolStripMenuItem.Name = "码垛线_纸箱编码管理ToolStripMenuItem";
-            this.码垛线_纸箱编码管理ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.码垛线_纸箱编码管理ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.码垛线_纸箱编码管理ToolStripMenuItem.Text = "纸箱编码管理";
             this.码垛线_纸箱编码管理ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_纸箱编码管理ToolStripMenuItem_Click);
             // 
             // 码垛线_订单类别编码管理ToolStripMenuItem
             // 
             this.码垛线_订单类别编码管理ToolStripMenuItem.Name = "码垛线_订单类别编码管理ToolStripMenuItem";
-            this.码垛线_订单类别编码管理ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.码垛线_订单类别编码管理ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.码垛线_订单类别编码管理ToolStripMenuItem.Text = "订单类别编码管理";
             this.码垛线_订单类别编码管理ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_订单类别编码管理ToolStripMenuItem_Click);
+            // 
+            // 玖友ToolStripMenuItem
+            // 
+            this.玖友ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.玖友_查询物料需求量ToolStripMenuItem,
+            this.玖友_查询生产排程ToolStripMenuItem});
+            this.玖友ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.玖友ToolStripMenuItem.Name = "玖友ToolStripMenuItem";
+            this.玖友ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
+            this.玖友ToolStripMenuItem.Text = "玖友";
+            // 
+            // 玖友_查询物料需求量ToolStripMenuItem
+            // 
+            this.玖友_查询物料需求量ToolStripMenuItem.Name = "玖友_查询物料需求量ToolStripMenuItem";
+            this.玖友_查询物料需求量ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.玖友_查询物料需求量ToolStripMenuItem.Text = "查询物料需求量";
+            this.玖友_查询物料需求量ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询物料需求量ToolStripMenuItem_Click);
+            // 
+            // 玖友_查询生产排程ToolStripMenuItem
+            // 
+            this.玖友_查询生产排程ToolStripMenuItem.Name = "玖友_查询生产排程ToolStripMenuItem";
+            this.玖友_查询生产排程ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.玖友_查询生产排程ToolStripMenuItem.Text = "查询生产排程";
+            this.玖友_查询生产排程ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询生产排程ToolStripMenuItem_Click);
             // 
             // 管理ToolStripMenuItem
             // 
             this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.管理_权限管理ToolStripMenuItem,
             this.管理_用户管理ToolStripMenuItem});
-            this.管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
-            this.管理ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.管理ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
             this.管理ToolStripMenuItem.Text = "管理";
             // 
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
             // 管理_用户管理ToolStripMenuItem
             // 
             this.管理_用户管理ToolStripMenuItem.Name = "管理_用户管理ToolStripMenuItem";
-            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.管理_用户管理ToolStripMenuItem.Text = "用户管理";
             this.管理_用户管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_用户管理ToolStripMenuItem_Click);
             // 
@@ -277,37 +301,37 @@
             this.测试_1ToolStripMenuItem,
             this.测试_2ToolStripMenuItem,
             this.测试_3ToolStripMenuItem});
-            this.测试ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.测试ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem";
-            this.测试ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.测试ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
             this.测试ToolStripMenuItem.Text = "测试";
             // 
             // 测试_1ToolStripMenuItem
             // 
             this.测试_1ToolStripMenuItem.Name = "测试_1ToolStripMenuItem";
-            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
             this.测试_1ToolStripMenuItem.Text = "1";
             this.测试_1ToolStripMenuItem.Click += new System.EventHandler(this.测试_1ToolStripMenuItem_Click);
             // 
             // 测试_2ToolStripMenuItem
             // 
             this.测试_2ToolStripMenuItem.Name = "测试_2ToolStripMenuItem";
-            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
             this.测试_2ToolStripMenuItem.Text = "2";
             this.测试_2ToolStripMenuItem.Click += new System.EventHandler(this.测试_2ToolStripMenuItem_Click);
             // 
             // 测试_3ToolStripMenuItem
             // 
             this.测试_3ToolStripMenuItem.Name = "测试_3ToolStripMenuItem";
-            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
             this.测试_3ToolStripMenuItem.Text = "3";
             this.测试_3ToolStripMenuItem.Click += new System.EventHandler(this.测试_3ToolStripMenuItem_Click);
             // 
             // 关闭当前界面ToolStripMenuItem
             // 
-            this.关闭当前界面ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
+            this.关闭当前界面ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.关闭当前界面ToolStripMenuItem.Name = "关闭当前界面ToolStripMenuItem";
-            this.关闭当前界面ToolStripMenuItem.Size = new System.Drawing.Size(111, 24);
+            this.关闭当前界面ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.关闭当前界面ToolStripMenuItem.Text = "关闭当前界面";
             this.关闭当前界面ToolStripMenuItem.Click += new System.EventHandler(this.关闭当前界面ToolStripMenuItem_Click);
             // 
@@ -349,36 +373,12 @@
             this.LabelIPInfo.Text = "LabelIPInfo";
             this.LabelIPInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // 玖友ToolStripMenuItem
-            // 
-            this.玖友ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.玖友_查询物料需求量ToolStripMenuItem,
-            this.玖友_查询生产排程ToolStripMenuItem});
-            this.玖友ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F);
-            this.玖友ToolStripMenuItem.Name = "玖友ToolStripMenuItem";
-            this.玖友ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.玖友ToolStripMenuItem.Text = "玖友";
-            // 
-            // 玖友_查询物料需求量ToolStripMenuItem
-            // 
-            this.玖友_查询物料需求量ToolStripMenuItem.Name = "玖友_查询物料需求量ToolStripMenuItem";
-            this.玖友_查询物料需求量ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.玖友_查询物料需求量ToolStripMenuItem.Text = "查询物料需求量";
-            this.玖友_查询物料需求量ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询物料需求量ToolStripMenuItem_Click);
-            // 
-            // 玖友_查询生产排程ToolStripMenuItem
-            // 
-            this.玖友_查询生产排程ToolStripMenuItem.Name = "玖友_查询生产排程ToolStripMenuItem";
-            this.玖友_查询生产排程ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.玖友_查询生产排程ToolStripMenuItem.Text = "查询生产排程";
-            this.玖友_查询生产排程ToolStripMenuItem.Click += new System.EventHandler(this.玖友_查询生产排程ToolStripMenuItem_Click);
-            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(843, 443);
+            this.ClientSize = new System.Drawing.Size(1185, 622);
             this.Controls.Add(this.LabelIPInfo);
             this.Controls.Add(this.Label_Test);
             this.Controls.Add(this.panelParent);
@@ -387,6 +387,7 @@
             this.Font = new System.Drawing.Font("宋体", 13F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.Location = new System.Drawing.Point(200, 200);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "主界面";
