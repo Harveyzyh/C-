@@ -4,6 +4,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections;
+using System.Web.Script.Serialization;
 using HarveyZ;
 using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
@@ -12,9 +14,6 @@ using 联友生产辅助工具.生管排程;
 using 联友生产辅助工具.玖友;
 using 联友生产辅助工具.管理;
 using 联友生产辅助工具.测试;
-using System.Collections;
-using System.Web.Script.Serialization;
-using Common.Helper.Crypto;
 
 namespace 联友生产辅助工具
 {
@@ -22,6 +21,12 @@ namespace 联友生产辅助工具
     {
         #region 静态变量
         private static Form FormOpen = null;
+        private static List<string> menuIgnoreList = new List<string> {
+            "关闭当前界面",
+            "帮助",
+            "测试",
+            "此用户没有任何权限"
+        };
         #endregion
 
         #region 窗体初始化
@@ -30,8 +35,7 @@ namespace 联友生产辅助工具
             InitializeComponent();
             
             LabelUserInfo.Text = "部门：" + FormLogin.Login_Dpt + "    姓名：" + FormLogin.Login_Uid + "-" + FormLogin.Login_Name;
-            IPInfo ipinfo = new IPInfo();
-            LabelIPInfo.Text = "本机IP地址：" + ipinfo.GetIpAddress() + "  ";
+            LabelIPInfo.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
 
             关闭当前界面ToolStripMenuItem.Visible = false;
 
@@ -46,10 +50,9 @@ namespace 联友生产辅助工具
         #region 窗体权限设置
         private void FormPermission()
         {
-            SetTestPermission();
-
             ItemUnvisable();
             SetPermission(FormLogin.PermItemList);
+            SetTestPermission();
         }
         
         private void SetTestPermission()
@@ -62,6 +65,10 @@ namespace 联友生产辅助工具
 
         private void SetPermission(List<string> list)
         {
+            if (list.Count == 0)
+            {
+                此用户没有任何权限ToolStripMenuItem.Visible = true;
+            }
             ItemVisable(list);
         }
 
@@ -120,15 +127,7 @@ namespace 联友生产辅助工具
         {
             foreach (ToolStripMenuItem con in MainMenuStrip.Items)
             {
-                if (con.Name == "关闭当前界面ToolStripMenuItem")
-                {
-                    continue;
-                }
-                else if (con.Name == "帮助ToolStripMenuItem")
-                {
-                    continue;
-                }
-                else if(con.Name == "测试ToolStripMenuItem")
+                if (menuIgnoreList.Contains(con.Name.Replace("ToolStripMenuItem", "")))
                 {
                     continue;
                 }

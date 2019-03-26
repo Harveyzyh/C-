@@ -20,7 +20,7 @@ namespace HarveyZ
 {
     public class IPInfo
     {
-        public string GetIpAddress()
+        public static string GetIpAddress()
         {
             string addr = "";
             string ip = "192."; //用于过滤ip
@@ -786,7 +786,7 @@ namespace HarveyZ
                         {
                             foreach (string current in dictionary.Keys)
                             {
-                                dataTable.Columns.Add(current, dictionary[current].GetType());
+                                dataTable.Columns.Add(current/*, dictionary[current].GetType()*/);
                             }
                         }
                         //Rows

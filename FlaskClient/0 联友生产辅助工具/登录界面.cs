@@ -219,7 +219,7 @@ namespace HarveyZ
             
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("Test", "Client");
-            dict = HttpPost(HttpURL + "/Client/LinkTest", dict, 5000);
+            dict = HttpPost_Dict(HttpURL + "/Client/LinkTest", dict, 5000);
             string get = "";
             if (dict != null)
             {
@@ -246,7 +246,7 @@ namespace HarveyZ
             dict.Add("Version", ProgVersion);
             try
             {
-                dict = HttpPost(HttpURL + "/Client/VersionManager", dict);
+                dict = HttpPost_Dict(HttpURL + "/Client/VersionManager", dict);
                 string Mode = "";
                 dict.TryGetValue("Mode", out Mode);
                 if (Mode == "Yes")
@@ -301,7 +301,7 @@ namespace HarveyZ
             dict.Add("Mode", "UserLogin");
             dict.Add("Uid", LoginUid);
             dict.Add("Pwd", LoginPwd);
-            dict = HttpPost(HttpURL + "/Client/UserManager", dict);
+            dict = HttpPost_Dict(HttpURL + "/Client/UserManager", dict);
             
             if(dict != null)
             {
@@ -343,7 +343,7 @@ namespace HarveyZ
         #endregion
 
         #region HTTP Post发送
-        public static Dictionary<string, string> HttpPost(string webURL, Dictionary<string, string>dict, int timeout = 60000)
+        public static Dictionary<string, string> HttpPost_Dict(string webURL, Dictionary<string, string>dict, int timeout = 60000)
         {
             Dictionary<string, string> dictBack = new Dictionary<string, string> { };
 

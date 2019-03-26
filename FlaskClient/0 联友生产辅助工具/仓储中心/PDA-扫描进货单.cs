@@ -97,7 +97,7 @@ namespace 联友生产辅助工具.仓储中心
             dict.Add("Mode", "Select");
             dict.Add("Parameter", "FlowID");
             dict.Add("Data", null);
-            dict = FormLogin.HttpPost(URL, dict);
+            dict = FormLogin.HttpPost_Dict(URL, dict);
             string FlowId = "";
             dict.TryGetValue("Data", out FlowId);
             return FlowId;
@@ -345,7 +345,7 @@ namespace 联友生产辅助工具.仓储中心
             dict.Add("Parameter", FlowId);
             dict.Add("Data", "");
             dict.Add("RowCount", Count);
-            dict = FormLogin.HttpPost(URL, dict);
+            dict = FormLogin.HttpPost_Dict(URL, dict);
             string GetBack = null;
             if (dict != null)
             {

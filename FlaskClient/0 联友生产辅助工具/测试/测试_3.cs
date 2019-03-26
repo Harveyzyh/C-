@@ -39,27 +39,15 @@ namespace 联友生产辅助工具.测试
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            dict.Add("name", "me");
-            WebNet.WebPost("http://192.168.1.60/Test/Test", dict);
+            foreach( string kk in MenuItem_List)
+            {
+                MessageBox.Show(kk);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string Item_string = "";
-            foreach (string kk in MenuItem_List)
-            {
-                if(Item_string == "")
-                {
-                    Item_string += kk;
-                }
-                else
-                {
-                    Item_string += ";" + kk;
-                }
-            }
-            dict.Add("BasePower", Item_string);
-            dict = WebNet.WebPost("http://192.168.1.60/Test/BasePower", dict);
+
         }
     }
 }

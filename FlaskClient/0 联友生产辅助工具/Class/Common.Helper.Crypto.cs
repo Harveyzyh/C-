@@ -101,7 +101,8 @@ namespace Common.Helper.Crypto
             };
             ICryptoTransform cTransform = rm.CreateDecryptor();
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
-            return Encoding.UTF8.GetString(resultArray);
+            string resultString = Encoding.UTF8.GetString(resultArray).Replace("\0", "");
+            return resultString;
         }
         #endregion
 

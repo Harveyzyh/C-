@@ -65,6 +65,8 @@
             this.panelParent = new System.Windows.Forms.Panel();
             this.Label_Test = new System.Windows.Forms.Label();
             this.LabelIPInfo = new System.Windows.Forms.Label();
+            this.此用户没有任何权限ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +82,8 @@
             this.玖友ToolStripMenuItem,
             this.管理ToolStripMenuItem,
             this.测试ToolStripMenuItem,
-            this.关闭当前界面ToolStripMenuItem});
+            this.关闭当前界面ToolStripMenuItem,
+            this.此用户没有任何权限ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
@@ -102,21 +105,21 @@
             // 仓储中心_扫描领料单ToolStripMenuItem
             // 
             this.仓储中心_扫描领料单ToolStripMenuItem.Name = "仓储中心_扫描领料单ToolStripMenuItem";
-            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.仓储中心_扫描领料单ToolStripMenuItem.Text = "扫描领料单";
             this.仓储中心_扫描领料单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描领料单ToolStripMenuItem_Click);
             // 
             // 仓储中心_扫描进货单ToolStripMenuItem
             // 
             this.仓储中心_扫描进货单ToolStripMenuItem.Name = "仓储中心_扫描进货单ToolStripMenuItem";
-            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.仓储中心_扫描进货单ToolStripMenuItem.Text = "扫描进货单";
             this.仓储中心_扫描进货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单ToolStripMenuItem_Click);
             // 
             // 仓储中心_仓库ToolStripMenuItem
             // 
             this.仓储中心_仓库ToolStripMenuItem.Name = "仓储中心_仓库ToolStripMenuItem";
-            this.仓储中心_仓库ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.仓储中心_仓库ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.仓储中心_仓库ToolStripMenuItem.Text = "仓库";
             // 
             // 生产部ToolStripMenuItem
@@ -135,27 +138,27 @@
             this.生产日报表_修改ToolStripMenuItem,
             this.生产日报表_查询ToolStripMenuItem});
             this.生产部_生产日报表ToolStripMenuItem.Name = "生产部_生产日报表ToolStripMenuItem";
-            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生产部_生产日报表ToolStripMenuItem.Text = "生产日报表";
             // 
             // 生产日报表_新增ToolStripMenuItem
             // 
             this.生产日报表_新增ToolStripMenuItem.Name = "生产日报表_新增ToolStripMenuItem";
-            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生产日报表_新增ToolStripMenuItem.Text = "新增";
             this.生产日报表_新增ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_新增ToolStripMenuItem_Click);
             // 
             // 生产日报表_修改ToolStripMenuItem
             // 
             this.生产日报表_修改ToolStripMenuItem.Name = "生产日报表_修改ToolStripMenuItem";
-            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生产日报表_修改ToolStripMenuItem.Text = "修改";
             this.生产日报表_修改ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_修改ToolStripMenuItem_Click);
             // 
             // 生产日报表_查询ToolStripMenuItem
             // 
             this.生产日报表_查询ToolStripMenuItem.Name = "生产日报表_查询ToolStripMenuItem";
-            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生产日报表_查询ToolStripMenuItem.Text = "查询";
             this.生产日报表_查询ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_查询ToolStripMenuItem_Click);
             // 
@@ -175,13 +178,13 @@
             this.码垛线ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.码垛线_排程导入ToolStripMenuItem});
             this.码垛线ToolStripMenuItem.Name = "码垛线ToolStripMenuItem";
-            this.码垛线ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.码垛线ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.码垛线ToolStripMenuItem.Text = "码垛线";
             // 
             // 码垛线_排程导入ToolStripMenuItem
             // 
             this.码垛线_排程导入ToolStripMenuItem.Name = "码垛线_排程导入ToolStripMenuItem";
-            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.码垛线_排程导入ToolStripMenuItem.Text = "排程导入";
             this.码垛线_排程导入ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_排程导入ToolStripMenuItem_Click);
             // 
@@ -191,7 +194,7 @@
             this.生产日报表_部门线别维护ToolStripMenuItem,
             this.生产日报表_系列组别维护ToolStripMenuItem});
             this.生产日报表生管维护ToolStripMenuItem.Name = "生产日报表生管维护ToolStripMenuItem";
-            this.生产日报表生管维护ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.生产日报表生管维护ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生产日报表生管维护ToolStripMenuItem.Text = "生产日报表";
             // 
             // 生产日报表_部门线别维护ToolStripMenuItem
@@ -211,7 +214,7 @@
             // 生管_电子排程ToolStripMenuItem
             // 
             this.生管_电子排程ToolStripMenuItem.Name = "生管_电子排程ToolStripMenuItem";
-            this.生管_电子排程ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.生管_电子排程ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.生管_电子排程ToolStripMenuItem.Text = "电子排程";
             this.生管_电子排程ToolStripMenuItem.Click += new System.EventHandler(this.生管_电子排程ToolStripMenuItem_Click);
             // 
@@ -275,7 +278,8 @@
             // 
             this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.管理_权限管理ToolStripMenuItem,
-            this.管理_用户管理ToolStripMenuItem});
+            this.管理_用户管理ToolStripMenuItem,
+            this.修改密码ToolStripMenuItem});
             this.管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
             this.管理ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
@@ -284,14 +288,14 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
             // 管理_用户管理ToolStripMenuItem
             // 
             this.管理_用户管理ToolStripMenuItem.Name = "管理_用户管理ToolStripMenuItem";
-            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.管理_用户管理ToolStripMenuItem.Text = "用户管理";
             this.管理_用户管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_用户管理ToolStripMenuItem_Click);
             // 
@@ -309,21 +313,21 @@
             // 测试_1ToolStripMenuItem
             // 
             this.测试_1ToolStripMenuItem.Name = "测试_1ToolStripMenuItem";
-            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
+            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.测试_1ToolStripMenuItem.Text = "1";
             this.测试_1ToolStripMenuItem.Click += new System.EventHandler(this.测试_1ToolStripMenuItem_Click);
             // 
             // 测试_2ToolStripMenuItem
             // 
             this.测试_2ToolStripMenuItem.Name = "测试_2ToolStripMenuItem";
-            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
+            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.测试_2ToolStripMenuItem.Text = "2";
             this.测试_2ToolStripMenuItem.Click += new System.EventHandler(this.测试_2ToolStripMenuItem_Click);
             // 
             // 测试_3ToolStripMenuItem
             // 
             this.测试_3ToolStripMenuItem.Name = "测试_3ToolStripMenuItem";
-            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
+            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.测试_3ToolStripMenuItem.Text = "3";
             this.测试_3ToolStripMenuItem.Click += new System.EventHandler(this.测试_3ToolStripMenuItem_Click);
             // 
@@ -372,6 +376,21 @@
             this.LabelIPInfo.TabIndex = 155;
             this.LabelIPInfo.Text = "LabelIPInfo";
             this.LabelIPInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 此用户没有任何权限ToolStripMenuItem
+            // 
+            this.此用户没有任何权限ToolStripMenuItem.Enabled = false;
+            this.此用户没有任何权限ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.此用户没有任何权限ToolStripMenuItem.Name = "此用户没有任何权限ToolStripMenuItem";
+            this.此用户没有任何权限ToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.此用户没有任何权限ToolStripMenuItem.Text = "此用户没有任何权限";
+            this.此用户没有任何权限ToolStripMenuItem.Visible = false;
+            // 
+            // 修改密码ToolStripMenuItem
+            // 
+            this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
+            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改密码ToolStripMenuItem.Text = "修改密码";
             // 
             // 主界面
             // 
@@ -441,6 +460,8 @@
         private System.Windows.Forms.ToolStripMenuItem 玖友ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 玖友_查询物料需求量ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 玖友_查询生产排程ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 此用户没有任何权限ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改密码ToolStripMenuItem;
     }
 }
 

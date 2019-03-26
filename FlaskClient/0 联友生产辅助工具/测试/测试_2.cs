@@ -26,11 +26,28 @@ namespace 联友生产辅助工具.测试
             string json = FormLogin.HttpPost_Json(Url + @"/Client/Test/0", dict);
             textBox1.Text = json;
             dataGridView1.DataSource = Json.Json2DT(json);
+            int count = 0;
+            count = dataGridView1.ColumnCount;
+            MessageBox.Show(count.ToString());
+            if (count > 0)
+            {
+                for( int index = 0; index < count; index++)
+                {
+                    if(dataGridView1.Columns[index].HeaderText == "有效码")
+                    {
+                        MessageBox.Show(index.ToString());
+                        for(int index2 = 0; index2 < dataGridView1.RowCount; index2++)
+                        {
+                            MessageBox.Show(dataGridView1.Rows[index2].Cells[index].Value.ToString());
+                        }
+                    }
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string json = "[{\"id\":\"00e58d51\",\"mac\":\"20:f1:7c:c5:cd:80\"}, {\"id\":\"00e58d51\",\"mac\":\"20:f1:7c:c5:cd:85\"}]";
+            string json = "[{\"ascdsf\": \"1\", \"mac\": \"20:f1:7c:c5:cd:80\"}, {\"ascdsf\": \"sdfsfsdfsdf4\", \"mac\": \"20:f1:7c:c5:cd:85\"}]";
             textBox1.Text = json;
             dataGridView1.DataSource = Json.Json2DT(json);
         }

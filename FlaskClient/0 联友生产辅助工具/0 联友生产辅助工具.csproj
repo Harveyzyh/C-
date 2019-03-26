@@ -119,13 +119,7 @@
       <HintPath>Lib\System.Net.Http.WebRequest.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Web">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Web.Extensions">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Services">
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
