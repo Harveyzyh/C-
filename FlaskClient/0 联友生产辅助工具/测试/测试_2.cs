@@ -38,7 +38,8 @@ namespace 联友生产辅助工具.测试
                         MessageBox.Show(index.ToString());
                         for(int index2 = 0; index2 < dataGridView1.RowCount; index2++)
                         {
-                            MessageBox.Show(dataGridView1.Rows[index2].Cells[index].Value.ToString());
+                            MessageBox.Show(dataGridView1.Rows[index2].Cells[index].Value.GetType().ToString());
+                            dataGridView1.Columns[index] = new System.Windows.Forms.DataGridViewCheckBoxColumn();
                         }
                     }
                 }

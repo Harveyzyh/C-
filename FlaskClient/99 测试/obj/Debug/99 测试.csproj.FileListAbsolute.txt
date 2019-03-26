@@ -23,3 +23,28 @@
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OOXML.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXml4Net.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXmlFormats.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Form1.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache

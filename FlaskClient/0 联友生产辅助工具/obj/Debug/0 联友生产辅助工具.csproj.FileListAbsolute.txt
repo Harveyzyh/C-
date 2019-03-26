@@ -66,3 +66,4 @@ Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友�
 Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\联友生产辅助工具.管理.用户管理.resources
 Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\obj\Debug\0 联友生产辅助工具.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Debug\联友生产辅助工具.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Debug\联友生产辅助工具.exe.config

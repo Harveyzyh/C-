@@ -26,8 +26,8 @@ namespace 测试
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string json = "[{\"id\":\"00e58d51\",\"mac\":\"20:f1:7c:c5:cd:80\"},"
-                        + "{\"id\":\"00e58d52\",\"mac\":\"20:f1:7c:c5:cd:85\"}]";
+            string json = "[{ \"id\":\"00e58d51\",\"aa\":true,\"mac\":\"20:f1:7c:c5:cd:80\"},"
+                        + "{ \"id\":\"00e58d52\",\"aa\":true,\"mac\":\"20:f1:7c:c5:cd:85\"}]";
 
             DataTableJson table2json = new DataTableJson();
             DataTable dt = DataTableJson.Json2DT(json);
@@ -180,8 +180,9 @@ namespace 测试
                     }
                 }
             }
-            catch
+            catch(Exception es)
             {
+                MessageBox.Show(es.ToString());
             }
             result = dataTable;
             return result;
@@ -229,8 +230,9 @@ namespace 测试
                     }
                 }
             }
-            catch
+            catch (Exception es)
             {
+                MessageBox.Show(es.ToString());
             }
             result = dataTable;
             return result;
