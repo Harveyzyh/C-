@@ -67,6 +67,7 @@
             // 
             // panel_Title
             // 
+            this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_Title.Controls.Add(this.label1);
             this.panel_Title.Controls.Add(this.button_Output);
             this.panel_Title.Controls.Add(this.button_Input);

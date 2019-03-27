@@ -28,33 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.panel_Title = new System.Windows.Forms.Panel();
+            this.BtnReflash = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
+            this.panel_Title.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // dgvMain
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "功能待添加";
+            this.dgvMain.AllowUserToAddRows = false;
+            this.dgvMain.AllowUserToDeleteRows = false;
+            this.dgvMain.AllowUserToOrderColumns = true;
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMain.Location = new System.Drawing.Point(1, 72);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.RowTemplate.Height = 23;
+            this.dgvMain.Size = new System.Drawing.Size(588, 450);
+            this.dgvMain.TabIndex = 0;
+            // 
+            // panel_Title
+            // 
+            this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Title.Controls.Add(this.BtnSave);
+            this.panel_Title.Controls.Add(this.BtnAdd);
+            this.panel_Title.Controls.Add(this.BtnReflash);
+            this.panel_Title.Location = new System.Drawing.Point(1, 1);
+            this.panel_Title.Name = "panel_Title";
+            this.panel_Title.Size = new System.Drawing.Size(483, 69);
+            this.panel_Title.TabIndex = 1;
+            // 
+            // BtnReflash
+            // 
+            this.BtnReflash.Location = new System.Drawing.Point(45, 22);
+            this.BtnReflash.Name = "BtnReflash";
+            this.BtnReflash.Size = new System.Drawing.Size(75, 23);
+            this.BtnReflash.TabIndex = 0;
+            this.BtnReflash.Text = "刷新";
+            this.BtnReflash.UseVisualStyleBackColor = true;
+            this.BtnReflash.Click += new System.EventHandler(this.BtnReflash_Click);
+            // 
+            // BtnAdd
+            // 
+            this.BtnAdd.Location = new System.Drawing.Point(169, 22);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(75, 23);
+            this.BtnAdd.TabIndex = 1;
+            this.BtnAdd.Text = "新增";
+            this.BtnAdd.UseVisualStyleBackColor = true;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.Location = new System.Drawing.Point(296, 22);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(75, 23);
+            this.BtnSave.TabIndex = 2;
+            this.BtnSave.Text = "保存";
+            this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // 纸箱编码管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(924, 663);
+            this.Controls.Add(this.panel_Title);
+            this.Controls.Add(this.dgvMain);
             this.Name = "纸箱编码管理";
             this.Text = "码垛线纸箱编码管理";
+            this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
+            this.panel_Title.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.Panel panel_Title;
+        private System.Windows.Forms.Button BtnSave;
+        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Button BtnReflash;
     }
 }

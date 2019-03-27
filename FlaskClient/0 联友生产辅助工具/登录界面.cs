@@ -356,8 +356,6 @@ namespace HarveyZ
         }
         public static string HttpPost_Json(string webURL, Dictionary<string, string> dict, int timeout = 60000)
         {
-            Dictionary<string, string> dictBack = new Dictionary<string, string> { };
-
             string jsonin = Json.Dict2Json(dict);
             string jsonin_enc = aes16.Encrypt(jsonin);
             string jsonout = WebNet.WebPost(webURL, jsonin_enc, timeout);

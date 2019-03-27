@@ -786,7 +786,7 @@ namespace HarveyZ
                         {
                             foreach (string current in dictionary.Keys)
                             {
-                                dataTable.Columns.Add(current/*, dictionary[current].GetType()*/);
+                                dataTable.Columns.Add(current, dictionary[current].GetType());
                             }
                         }
                         //Rows
