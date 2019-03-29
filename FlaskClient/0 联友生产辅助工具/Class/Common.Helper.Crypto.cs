@@ -57,22 +57,26 @@ namespace Common.Helper.Crypto
         //public static string Encrypt(string palinData, string key, string iv, EncodingStrOrByte.EncodingType encodingType = EncodingStrOrByte.EncodingType.UTF8)
         public string Encrypt(string palinData, EncodingStrOrByte.EncodingType encodingType = EncodingStrOrByte.EncodingType.UTF8)
         {
-            string key = key_def;
-            string iv = key_def;
-
-            if (string.IsNullOrWhiteSpace(palinData)) return null;
-            if (!(CheckKey(key) && CheckIv(iv))) return palinData;
-            byte[] toEncryptArray = EncodingStrOrByte.GetBytes(palinData, encodingType);
-            var rm = new RijndaelManaged
+            if (palinData != null)
             {
-                IV = EncodingStrOrByte.GetBytes(iv, encodingType),
-                Key = EncodingStrOrByte.GetBytes(key, encodingType),
-                Mode = CipherMode.ECB,
-                Padding = PaddingMode.Zeros
-            };
-            ICryptoTransform cTransform = rm.CreateEncryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
-            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+                string key = key_def;
+                string iv = key_def;
+
+                if (string.IsNullOrWhiteSpace(palinData)) return null;
+                if (!(CheckKey(key) && CheckIv(iv))) return palinData;
+                byte[] toEncryptArray = EncodingStrOrByte.GetBytes(palinData, encodingType);
+                var rm = new RijndaelManaged
+                {
+                    IV = EncodingStrOrByte.GetBytes(iv, encodingType),
+                    Key = EncodingStrOrByte.GetBytes(key, encodingType),
+                    Mode = CipherMode.ECB,
+                    Padding = PaddingMode.Zeros
+                };
+                ICryptoTransform cTransform = rm.CreateEncryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+                return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+            }
+            else return null;
         }
 
         /// <summary>
@@ -86,23 +90,27 @@ namespace Common.Helper.Crypto
         //public static string Decrypt(string encryptedData, string key, string iv, EncodingStrOrByte.EncodingType encodingType = EncodingStrOrByte.EncodingType.UTF8)
         public string Decrypt(string encryptedData, EncodingStrOrByte.EncodingType encodingType = EncodingStrOrByte.EncodingType.UTF8)
         {
-            string key = key_def;
-            string iv = key_def;
-
-            if (string.IsNullOrWhiteSpace(encryptedData)) return null;
-            if (!(CheckKey(key) && CheckIv(iv))) return encryptedData;
-            byte[] toEncryptArray = Convert.FromBase64String(encryptedData);
-            var rm = new RijndaelManaged
+            if (encryptedData != null)
             {
-                IV = EncodingStrOrByte.GetBytes(iv, encodingType),
-                Key = EncodingStrOrByte.GetBytes(key, encodingType),
-                Mode = CipherMode.ECB,
-                Padding = PaddingMode.Zeros
-            };
-            ICryptoTransform cTransform = rm.CreateDecryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
-            string resultString = Encoding.UTF8.GetString(resultArray).Replace("\0", "");
-            return resultString;
+                string key = key_def;
+                string iv = key_def;
+
+                if (string.IsNullOrWhiteSpace(encryptedData)) return null;
+                if (!(CheckKey(key) && CheckIv(iv))) return encryptedData;
+                byte[] toEncryptArray = Convert.FromBase64String(encryptedData);
+                var rm = new RijndaelManaged
+                {
+                    IV = EncodingStrOrByte.GetBytes(iv, encodingType),
+                    Key = EncodingStrOrByte.GetBytes(key, encodingType),
+                    Mode = CipherMode.ECB,
+                    Padding = PaddingMode.Zeros
+                };
+                ICryptoTransform cTransform = rm.CreateDecryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+                string resultString = Encoding.UTF8.GetString(resultArray).Replace("\0", "");
+                return resultString;
+            }
+            else return null;
         }
         #endregion
 

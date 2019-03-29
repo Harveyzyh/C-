@@ -441,7 +441,7 @@ namespace 联友生产辅助工具.生产日报表
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("文件保存失败,请确保改文件没被打开！", "错误");
+                    MessageBox.Show("文件保存失败,请确保该文件没被打开！", "错误");
                 }
             }
         }
@@ -452,10 +452,6 @@ namespace 联友生产辅助工具.生产日报表
 
             Form formxl = new 日报表获取组别系列(sqlstr);
             formxl.ShowDialog();
-            //if (FormMain_WG.XL_ChangeFlag)
-            //{
-            //    ReportInputShow(FormMain_WG.XL_List);
-            //}
             formxl.Dispose();
         }
         #endregion

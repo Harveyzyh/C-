@@ -31,7 +31,6 @@
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
             this.button_Show = new System.Windows.Forms.Button();
             this.panel_Title = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.button_Output = new System.Windows.Forms.Button();
             this.button_Input = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
@@ -68,7 +67,6 @@
             // panel_Title
             // 
             this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_Title.Controls.Add(this.label1);
             this.panel_Title.Controls.Add(this.button_Output);
             this.panel_Title.Controls.Add(this.button_Input);
             this.panel_Title.Controls.Add(this.button_Show);
@@ -76,15 +74,6 @@
             this.panel_Title.Name = "panel_Title";
             this.panel_Title.Size = new System.Drawing.Size(622, 38);
             this.panel_Title.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(418, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
             // 
             // button_Output
             // 
@@ -120,7 +109,6 @@
             this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();
             this.panel_Title.ResumeLayout(false);
-            this.panel_Title.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -131,7 +119,6 @@
         private System.Windows.Forms.Panel panel_Title;
         private System.Windows.Forms.Button button_Output;
         private System.Windows.Forms.Button button_Input;
-        private System.Windows.Forms.Label label1;
     }
 }
 

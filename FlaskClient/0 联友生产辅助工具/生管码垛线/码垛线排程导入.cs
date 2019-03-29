@@ -73,6 +73,48 @@ namespace 联友生产辅助工具.生管码垛线
             return Time;
         }
 
+        /// <summary>
+        /// 计算字符串中子串出现的次数
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <param name="substring">子串</param>
+        /// <returns>出现的次数</returns>
+        static int SubstringCount(string str, string substring)
+        {
+            if (str.Contains(substring))
+            {
+                string strReplaced = str.Replace(substring, "");
+                return (str.Length - strReplaced.Length) / substring.Length;
+            }
+
+            return 0;
+        }
+
+        private bool CheckDt(DataTable Dt)
+        {
+            int rowTotal = Dt.Rows.Count;
+            string SC001 = "";
+            string Msg = "";
+            for (int rowIndex = 0; rowIndex < rowTotal; rowIndex++)
+            {
+                if (Dt.Rows[rowIndex][2].ToString() == "生产单号")
+                {
+                    continue;
+                }
+                SC001 = Dt.Rows[rowIndex][2].ToString();
+                if(SubstringCount(SC001, "-") < 2)
+                {
+                    Msg += (rowIndex + 1).ToString() + ",";
+                }
+            }
+            if (Msg == "") return true;
+            else
+            {
+                MessageBox.Show("导入文件中行：" + Msg + "有异常，请检查", "导入失败", MessageBoxButtons.OK);
+                return false;
+            }
+        }
+
         private string dt2sqlstr(DataTable dttmp)//数据表转成sql语句
         {
             int insert = 0;
@@ -335,10 +377,10 @@ namespace 联友生产辅助工具.生管码垛线
                 excelObj.FileName = Path.GetFileName(openFileDialog.FileName);
                 excelObj.IsWrite = false;
                 excelObj.IsTitleRow = true;
-
-
+                
                 excel.ExcelOpt(excelObj);
-                if(excelObj.Status == "Yes")
+                
+                if(excelObj.Status == "Yes" && CheckDt(excelObj.CellDt))
                 {
                     try
                     {

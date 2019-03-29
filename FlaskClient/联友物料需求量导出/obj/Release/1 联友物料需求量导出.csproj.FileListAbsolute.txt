@@ -1,0 +1,14 @@
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\联友物料需求量导出.exe.config
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\联友物料需求量导出.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\联友物料需求量导出.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\bin\Release\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\obj\Release\联友物料需求量导出.联友物料需求量导出.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\obj\Release\联友物料需求量导出.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\obj\Release\1 联友物料需求量导出.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\obj\Release\联友物料需求量导出.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\联友物料需求量导出\obj\Release\联友物料需求量导出.pdb

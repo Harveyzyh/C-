@@ -216,10 +216,9 @@ namespace HarveyZ
 
         private bool HttpURLTest()
         {
-            
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("Test", "Client");
-            dict = HttpPost_Dict(HttpURL + "/Client/LinkTest", dict, 5000);
+            dict = WebNet.WebPost(HttpURL + "/Client/LinkTest", dict, 5000);
             string get = "";
             if (dict != null)
             {
@@ -246,7 +245,7 @@ namespace HarveyZ
             dict.Add("Version", ProgVersion);
             try
             {
-                dict = HttpPost_Dict(HttpURL + "/Client/VersionManager", dict);
+                dict = WebNet.WebPost(HttpURL + "/Client/GetVersion", dict);
                 string Mode = "";
                 dict.TryGetValue("Mode", out Mode);
                 if (Mode == "Yes")
@@ -343,23 +342,21 @@ namespace HarveyZ
         #endregion
 
         #region HTTP Post发送
-        public static Dictionary<string, string> HttpPost_Dict(string webURL, Dictionary<string, string>dict, int timeout = 60000)
+        public static Dictionary<string, string> HttpPost_Dict(string webURL, Dictionary<string, string>dict = null, int timeout = 60)
         {
             Dictionary<string, string> dictBack = new Dictionary<string, string> { };
 
             string jsonin = Json.Dict2Json(dict);
-            string jsonin_enc = aes16.Encrypt(jsonin);
-            string jsonout = WebNet.WebPost(webURL, jsonin_enc, timeout);
+            string jsonout = WebNet.WebPost(webURL, aes16.Encrypt(jsonin), timeout * 1000);
             jsonout = aes16.Decrypt(jsonout);
             dictBack = Json.Json2Dict(jsonout);
             return dictBack;
         }
-        public static string HttpPost_Json(string webURL, Dictionary<string, string> dict, int timeout = 60000)
+        public static string HttpPost_Json(string webURL, Dictionary<string, string> dict = null, int timeout = 60)
         {
             string jsonin = Json.Dict2Json(dict);
-            string jsonin_enc = aes16.Encrypt(jsonin);
-            string jsonout = WebNet.WebPost(webURL, jsonin_enc, timeout);
-            jsonout = aes16.Decrypt(jsonout);
+            string jsonout = WebNet.WebPost(webURL, aes16.Encrypt(jsonin), timeout * 1000);
+            //jsonout = aes16.Decrypt(jsonout);
             return jsonout;
         }
         #endregion

@@ -15,7 +15,8 @@ namespace 联友生产辅助工具.生管码垛线
         #region 本地局域变量
         private static DataTable showDtTmp = new DataTable();
         private static DataTable showDt = new DataTable();
-        private static Dictionary<string, string> dictSend = new Dictionary<string, string> { };
+        private static string connStrRobot = FormLogin.Conn_ROBOT;
+        private static Mssql mssql = new Mssql();
         #endregion
 
 
@@ -25,15 +26,8 @@ namespace 联友生产辅助工具.生管码垛线
             InitializeComponent();
             FormMain_Init();
             FormMain_Resized_Work();
-            Dict_Init();
         }
 
-        private void Dict_Init()
-        {
-            dictSend.Add("Module", null);
-            dictSend.Add("Mode", null);
-            dictSend.Add("Data", null);
-        }
 
         private void FormMain_Init() // 窗体显示初始化
         {
@@ -62,13 +56,19 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void ShowBoxCode()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string> { };
-            dict.Add("", "");
-            string jsonBack = FormLogin.HttpPost_Json(FormLogin.HttpURL + @"/Client/Test/0", dict);
-            showDt = Json.Json2DT(jsonBack);
-            showDtTmp = showDt.Copy();
-            dgvMain.DataSource = showDt;
-            dgvMain.Columns[0].ReadOnly = true;
+            string sqlstr = @"SELECT K_ID 序号, BoxSize 纸箱尺寸, BoxCode 纸箱编码, BoxSet 纸箱码放方式, Valid 有效码 FROM BoxSizeCode ORDER BY K_ID ";
+            showDt = mssql.SQLselect(connStrRobot, sqlstr);
+
+
+            dgvMain.DataSource = null;
+            if (showDt != null)
+            {
+                DtOpt.DtValid2Bool(showDt);
+                showDtTmp = showDt.Copy();
+                dgvMain.DataSource = showDt;
+                dgvMain.Columns[0].ReadOnly = true;
+                DgvOpt.SetRowColor(dgvMain);
+            }
         }
 
         private void BtnReflash_Click(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            dictSend["Module"] = "BoxSize";
+
         }
 
         private void BtnSave_Click(object sender, EventArgs e)

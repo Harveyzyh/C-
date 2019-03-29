@@ -345,7 +345,7 @@ namespace 联友生产辅助工具.仓储中心
             dict.Add("Parameter", FlowId);
             dict.Add("Data", "");
             dict.Add("RowCount", Count);
-            dict = FormLogin.HttpPost_Dict(URL, dict);
+            dict = FormLogin.HttpPost_Dict(URL, dict, 120);
             string GetBack = null;
             if (dict != null)
             {
