@@ -65,3 +65,4 @@ Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Release\System
 Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Release\System.Net.Http.Primitives.xml
 Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Release\System.Net.Http.WebRequest.xml
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Release\联友生产辅助工具.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\0 联友生产辅助工具\bin\Release\联友生产辅助工具.exe.config

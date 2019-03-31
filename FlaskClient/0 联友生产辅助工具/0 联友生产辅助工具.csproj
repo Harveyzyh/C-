@@ -151,6 +151,7 @@
     <Compile Include="Class\Common.Helper.Crypto.cs" />
     <Compile Include="Class\DataGridViewAutoFilter.cs" />
     <Compile Include="Class\Global.cs" />
+    <Compile Include="Class\Permission.cs" />
     <Compile Include="Class\SelfClass.cs" />
     <Compile Include="登录界面.cs">
       <SubType>Form</SubType>

@@ -8,7 +8,7 @@
     
     public const string strConnection_COMFORT = "Server=192.168.0.99;initial catalog=COMFORT;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
 
-    public const string strConnection_COMFORT_TEST = "Server=192.168.1.64;initial catalog=COMFORT;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
+    public const string strConnection_JY = "Server=40.73.246.171;initial catalog=WG_DB;user id=sa;password=DGlsdnkj168;Connect Timeout=5";
     #endregion
 
     #region 数据库年月日获取字

@@ -178,8 +178,6 @@ namespace HarveyZ
             {
                 try
                 {
-                    //conn.Open();
-                    //SqlCommand cmd = new SqlCommand(CMDstr, conn);
                     DataTable dttmp = new DataTable();
                     SqlDataAdapter sdatmp = new SqlDataAdapter(CMDstr, conn);
                     sdatmp.Fill(dttmp);
@@ -195,7 +193,7 @@ namespace HarveyZ
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return null;
                 }
                 finally

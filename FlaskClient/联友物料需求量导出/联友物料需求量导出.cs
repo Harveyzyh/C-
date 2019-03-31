@@ -65,12 +65,17 @@ namespace 联友物料需求量导出
             DgvList.DataSource = null;
             BtnData2Excel.Enabled = false;
 
-            string sqlstr = @"select substring(T.CreateDate, 1, 4) + '-' + substring(T.CreateDate, 5, 2) + '-' + substring(T.CreateDate, 7, 2) 生成日期, "
-                          + @" substring(D.PlanDate, 1, 4) + '-' + substring(D.PlanDate, 5, 2) + '-' + substring(D.PlanDate, 7, 2) 排程日期, "
-                          + @" D.Material 品号, D.MaterialName 品名, D.MaterialSpec 规格, D.NeedNum 需求量, D.Unit 单位 from LY_MaterialList_T as T "
-                          + @" inner join LY_MaterialList_D as D on T.CreateDate = D.CreateDate where T.Status = 'OK' "
-                          + @" and T.CreateDate = '{0}' "
-                          + @" order by T.CreateDate, D.PlanDate, D.Material ";
+            string sqlstr = @"select substring(T.CreateDate, 1, 4) + '-' + substring(T.CreateDate, 5, 2) + '-' + substring(T.CreateDate, 7, 2) 生成日期, 
+                                substring(D.PlanDate, 1, 4) + '-' + substring(D.PlanDate, 5, 2) + '-' + substring(D.PlanDate, 7, 2) 排程日期, 
+                                D.Material 品号, D.MaterialName 品名, D.MaterialSpec 规格, D.NeedNum 需求量, D.Unit 单位, 
+                                material.kcsl 库存数量 
+
+                                from LY_MaterialList_T as T 
+                                inner join LY_MaterialList_D as D on T.CreateDate = D.CreateDate 
+                                left join [lserp-LY].dbo.material as material on material.wlno = D.Material COLLATE Chinese_PRC_CS_AS
+                                where T.Status = 'OK' 
+                                and T.CreateDate = '20190329' 
+                                order by T.CreateDate, D.PlanDate, D.Material ";
 
             CreateDate = DtpDate.Value.ToString("yyyyMMdd");
 
