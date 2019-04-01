@@ -54,42 +54,6 @@ namespace 联友生产辅助工具.生管码垛线
         #endregion
 
         #endregion
-
-        private string GetTime()
-        {
-            string Time = "";
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("Mode", "Sort");
-            try
-            {
-                dict = FormLogin.HttpPost_Dict(FormLogin.HttpURL + "/Client/GetTime", dict);
-                dict.TryGetValue("Time", out Time);
-                string Time2 = (int.Parse(Time) + 2).ToString();
-            }
-            catch
-            {
-                MessageBox.Show("无法获取系统日期", "错误", MessageBoxButtons.OK);
-            }
-            return Time;
-        }
-
-        /// <summary>
-        /// 计算字符串中子串出现的次数
-        /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="substring">子串</param>
-        /// <returns>出现的次数</returns>
-        static int SubstringCount(string str, string substring)
-        {
-            if (str.Contains(substring))
-            {
-                string strReplaced = str.Replace(substring, "");
-                return (str.Length - strReplaced.Length) / substring.Length;
-            }
-
-            return 0;
-        }
-
         private bool CheckDt(DataTable Dt)
         {
             int rowTotal = Dt.Rows.Count;
@@ -102,7 +66,7 @@ namespace 联友生产辅助工具.生管码垛线
                     continue;
                 }
                 SC001 = Dt.Rows[rowIndex][2].ToString();
-                if(SubstringCount(SC001, "-") < 2)
+                if(Normal.GetSubstringCount(SC001, "-") < 2)
                 {
                     Msg += (rowIndex + 1).ToString() + ",";
                 }
@@ -131,7 +95,7 @@ namespace 联友生产辅助工具.生管码垛线
             string SC003 = "";
             string SC001 = "";
 
-            int SysTime = int.Parse(GetTime());
+            int SysTime = int.Parse(Normal.GetDbSysTime("Sort"));
             int WorkTime = 0;
 
             if(dttmp.Rows[0][1].ToString() == "上线日期")

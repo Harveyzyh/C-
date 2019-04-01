@@ -4,11 +4,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0 联友生产辅助工具", "0 联友生产辅助工具\0 联友生产辅助工具.csproj", "{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7 AutoUpdate-web", "7 AutoUpdate\7 AutoUpdate-web.csproj", "{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7 程序升级-web", "7 程序升级-web\7 程序升级-web.csproj", "{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9 码垛线测试临时客户端", "9 码垛线测试临时客户端\9 码垛线测试临时客户端.csproj", "{CCA43171-681C-462B-B5D8-0723BE6AE3DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8 程序升级-ftp", "8 程序升级\8 程序升级-ftp.csproj", "{FDB12813-43C7-4084-B926-B534F42C59D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8 程序升级-ftp", "8 程序升级-ftp\8 程序升级-ftp.csproj", "{FDB12813-43C7-4084-B926-B534F42C59D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "99 测试", "99 测试\99 测试.csproj", "{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}"
 EndProject

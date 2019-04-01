@@ -33,12 +33,10 @@ namespace 联友生产辅助工具.仓储中心
         private string TypeID = "3401";
         private string PositionID = "P013";
         private string MaterielID = null;
-        private string BarCode = null;
         private string LoginUid = FormLogin.Login_Uid;
         private string LoginUserGroup = null;
 
         private bool MsgFlag = false;
-        private bool NumKeyFlag = false;
         #endregion
 
         #region 窗口初始化

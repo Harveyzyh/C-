@@ -24,8 +24,7 @@ namespace HarveyZ
             string addr = "";
             string ip = "192."; //用于过滤ip
             int index = 0;
-            string hostName = Dns.GetHostName();   //获取本机名
-            IPHostEntry localhost = Dns.GetHostByName(hostName);    //方法已过期，可以获取IPv4的地址
+            IPHostEntry localhost = Dns.GetHostEntry(Dns.GetHostName());    //方法已过期，可以获取IPv4的地址
             //IPHostEntry localhost = Dns.GetHostEntry(hostName);   //获取IPv6地址
 
             foreach(IPAddress localaddr in localhost.AddressList)
@@ -195,6 +194,44 @@ namespace HarveyZ
                 {
                     MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return null;
+                }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 数据库-查-是否存在
+        /// </summary>
+        /// <param name="SQLstr">数据库连接字符串</param>
+        /// <param name="CMDstr">查询语句</param>
+        public bool SQLexist(string SQLstr, string CMDstr)
+        {
+            using (SqlConnection conn = new SqlConnection(SQLstr))
+            {
+                try
+                {
+                    DataTable dttmp = new DataTable();
+                    SqlDataAdapter sdatmp = new SqlDataAdapter(CMDstr, conn);
+                    sdatmp.Fill(dttmp);
+                    sdatmp.Dispose();
+                    if (dttmp.Rows.Count <= 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("执行失败(" + ex.Message + ")，请退出后重新进入！", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    return false;
                 }
                 finally
                 {

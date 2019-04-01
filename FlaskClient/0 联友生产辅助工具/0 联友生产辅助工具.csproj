@@ -151,8 +151,15 @@
     <Compile Include="Class\Common.Helper.Crypto.cs" />
     <Compile Include="Class\DataGridViewAutoFilter.cs" />
     <Compile Include="Class\Global.cs" />
+    <Compile Include="Class\Normal.cs" />
     <Compile Include="Class\Permission.cs" />
     <Compile Include="Class\SelfClass.cs" />
+    <Compile Include="生管排程\生管电子排程.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\生管电子排程.Designer.cs">
+      <DependentUpon>生管电子排程.cs</DependentUpon>
+    </Compile>
     <Compile Include="登录界面.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,12 +246,6 @@
     <Compile Include="生产日报表\日报表部门线别维护.Designer.cs">
       <DependentUpon>日报表部门线别维护.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管排程\生管电子排程.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="生管排程\生管电子排程.Designer.cs">
-      <DependentUpon>生管电子排程.cs</DependentUpon>
-    </Compile>
     <Compile Include="生管码垛线\码垛线排程导入.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +276,9 @@
     <Compile Include="管理\用户管理.Designer.cs">
       <DependentUpon>用户管理.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="生管排程\生管电子排程.resx">
+      <DependentUpon>生管电子排程.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
     </EmbeddedResource>
@@ -319,9 +323,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="生产日报表\日报表获取组别系列.resx">
       <DependentUpon>日报表获取组别系列.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="生管排程\生管电子排程.resx">
-      <DependentUpon>生管电子排程.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管码垛线\码垛线排程导入.resx">
       <DependentUpon>码垛线排程导入.cs</DependentUpon>

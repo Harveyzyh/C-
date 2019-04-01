@@ -39,7 +39,6 @@ namespace HarveyZ
         //数据库连接字符串
         public static string Conn_WG_DB = Global_Const.strConnection_WG_DB;
         public static string Conn_ERP99 = Global_Const.strConnection_COMFORT;
-        public static string Conn_ERP_TEST = Global_Const.strConnection_COMFORT_TEST;
         public static string Conn_ROBOT = Global_Const.strConnection_ROBOT;
         
         #endregion
