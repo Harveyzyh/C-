@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(码垛线测试临时客户端));
             this.panel_Title = new System.Windows.Forms.Panel();
+            this.txb_Fine = new System.Windows.Forms.TextBox();
             this.btn_Show_Type = new System.Windows.Forms.Button();
             this.btn_Fine = new System.Windows.Forms.Button();
             this.btn_Find_Type = new System.Windows.Forms.Button();
@@ -38,7 +39,6 @@
             this.btn_Reflash = new System.Windows.Forms.Button();
             this.btn_Test_Reset = new System.Windows.Forms.Button();
             this.dgv_Main = new System.Windows.Forms.DataGridView();
-            this.txb_Fine = new System.Windows.Forms.TextBox();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Main)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,13 @@
             this.panel_Title.Name = "panel_Title";
             this.panel_Title.Size = new System.Drawing.Size(1307, 59);
             this.panel_Title.TabIndex = 0;
+            // 
+            // txb_Fine
+            // 
+            this.txb_Fine.Location = new System.Drawing.Point(289, 20);
+            this.txb_Fine.Name = "txb_Fine";
+            this.txb_Fine.Size = new System.Drawing.Size(240, 21);
+            this.txb_Fine.TabIndex = 8;
             // 
             // btn_Show_Type
             // 
@@ -147,13 +154,6 @@
             this.dgv_Main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Main.Size = new System.Drawing.Size(881, 363);
             this.dgv_Main.TabIndex = 1;
-            // 
-            // txb_Fine
-            // 
-            this.txb_Fine.Location = new System.Drawing.Point(289, 20);
-            this.txb_Fine.Name = "txb_Fine";
-            this.txb_Fine.Size = new System.Drawing.Size(240, 21);
-            this.txb_Fine.TabIndex = 8;
             // 
             // 码垛线测试临时客户端
             // 

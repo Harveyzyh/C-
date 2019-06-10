@@ -6,3 +6,11 @@
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\9 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.exe
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.pdb
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.exe
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.pdb
+X:\88 AppClient\9 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.exe
+X:\88 AppClient\9 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.pdb
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csprojResolveAssemblyReference.cache
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.码垛线测试临时客户端.resources
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.Properties.Resources.resources
+X:\88 AppClient\9 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csproj.GenerateResource.Cache

@@ -1,0 +1,93 @@
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe.config
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OOXML.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXml4Net.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.OpenXmlFormats.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NLog.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\NPOI.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Form1.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+E:\88 AppClient\99 测试\bin\Debug\测试.exe.config
+E:\88 AppClient\99 测试\obj\Debug\测试.exe
+E:\88 AppClient\99 测试\obj\Debug\测试.pdb
+E:\88 AppClient\99 测试\bin\Debug\测试.exe
+E:\88 AppClient\99 测试\bin\Debug\测试.pdb
+E:\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+E:\88 AppClient\99 测试\bin\Debug\NLog.xml
+E:\88 AppClient\99 测试\bin\Debug\NPOI.xml
+E:\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+E:\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+E:\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+E:\88 AppClient\99 测试\obj\Debug\测试.JY_KYSL.resources
+E:\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+E:\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+X:\88 AppClient\99 测试\bin\Debug\测试.exe.config
+X:\88 AppClient\99 测试\obj\Debug\测试.exe
+X:\88 AppClient\99 测试\obj\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\测试.exe
+X:\88 AppClient\99 测试\bin\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.dll
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+X:\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+X:\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+X:\88 AppClient\99 测试\bin\Debug\NLog.xml
+X:\88 AppClient\99 测试\bin\Debug\NPOI.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+X:\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+X:\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+X:\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+X:\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+X:\88 AppClient\99 测试\obj\Debug\RdlCompile.cache
+X:\88 AppClient\99 测试\obj\Debug\RdlCompile.compiled
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\测试.exe.config
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.exe
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\FastReport.dll
+X:\88 AppClient\99 测试\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+X:\88 AppClient\99 测试\bin\Debug\FastReport.Bars.dll
+X:\88 AppClient\99 测试\bin\Debug\FastReport.Editor.dll
+X:\88 AppClient\99 测试\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll

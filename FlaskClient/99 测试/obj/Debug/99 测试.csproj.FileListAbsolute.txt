@@ -48,3 +48,68 @@ Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csprojResolveAs
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Form1.resources
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\测试.Properties.Resources.resources
 Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+E:\88 AppClient\99 测试\bin\Debug\测试.exe.config
+E:\88 AppClient\99 测试\obj\Debug\测试.exe
+E:\88 AppClient\99 测试\obj\Debug\测试.pdb
+E:\88 AppClient\99 测试\bin\Debug\测试.exe
+E:\88 AppClient\99 测试\bin\Debug\测试.pdb
+E:\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+E:\88 AppClient\99 测试\bin\Debug\NLog.xml
+E:\88 AppClient\99 测试\bin\Debug\NPOI.xml
+E:\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+E:\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+E:\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+E:\88 AppClient\99 测试\obj\Debug\测试.JY_KYSL.resources
+E:\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+E:\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+X:\88 AppClient\99 测试\bin\Debug\测试.exe.config
+X:\88 AppClient\99 测试\obj\Debug\测试.exe
+X:\88 AppClient\99 测试\obj\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\测试.exe
+X:\88 AppClient\99 测试\bin\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.dll
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+X:\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+X:\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+X:\88 AppClient\99 测试\bin\Debug\NLog.xml
+X:\88 AppClient\99 测试\bin\Debug\NPOI.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+X:\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+X:\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+X:\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+X:\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+X:\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\测试.exe.config
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.exe
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.pdb
+X:\88 AppClient\99 测试\bin\Debug\FastReport.dll
+X:\88 AppClient\99 测试\bin\Debug\FastReport.Bars.dll
+X:\88 AppClient\99 测试\bin\Debug\FastReport.Editor.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\RdlCompile.cache
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Debug\RdlCompile.compiled
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\测试.exe
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\测试.pdb
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\FastReport.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\System.Net.Http.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\FastReport.Bars.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\FastReport.Editor.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\NLog.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\NPOI.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\System.Net.Http.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+X:\88 AppClient\99 测试\bin\Debug\FastReport.xml
+C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\bin\Debug\测试.exe.config
+C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\obj\Debug\测试.exe
+C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\obj\Debug\测试.pdb

@@ -1,0 +1,84 @@
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\bin\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\bin\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\99 测试\obj\Release\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.exe
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.pdb
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
+Y:\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.pdb
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\Newtonsoft.Json.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NLog.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OOXML.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.Primitives.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\Newtonsoft.Json.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NLog.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.Primitives.xml
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.xml
+E:\88 AppClient\99 测试\bin\Release\测试.exe.config
+E:\88 AppClient\99 测试\obj\Release\测试.exe
+E:\88 AppClient\99 测试\obj\Release\测试.pdb
+E:\88 AppClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+E:\88 AppClient\99 测试\obj\Release\测试.Form1.resources
+E:\88 AppClient\99 测试\obj\Release\测试.JY_KYSL.resources
+E:\88 AppClient\99 测试\obj\Release\测试.Properties.Resources.resources
+E:\88 AppClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+E:\88 AppClient\99 测试\bin\Release\测试.exe
+E:\88 AppClient\99 测试\bin\Release\测试.pdb
+E:\88 AppClient\99 测试\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\88 AppClient\99 测试\bin\Release\Newtonsoft.Json.xml
+E:\88 AppClient\99 测试\bin\Release\NLog.xml
+E:\88 AppClient\99 测试\bin\Release\NPOI.xml
+E:\88 AppClient\99 测试\bin\Release\System.Net.Http.Primitives.xml
+G:\88 AppClient\99 测试\bin\Release\测试.exe.config
+G:\88 AppClient\99 测试\obj\Release\测试.exe
+G:\88 AppClient\99 测试\obj\Release\测试.pdb
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\bin\Release\测试.exe.config
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Release\测试.exe
+C:\Users\IT-Latop\Desktop\88 AppClient\99 测试\obj\Release\测试.pdb
+X:\88 AppClient\99 测试\bin\Release\测试.exe.config
+X:\88 AppClient\99 测试\obj\Release\测试.exe
+X:\88 AppClient\99 测试\obj\Release\测试.pdb
+X:\88 AppClient\99 测试\bin\Release\测试.exe
+X:\88 AppClient\99 测试\bin\Release\测试.pdb
+X:\88 AppClient\99 测试\bin\Release\FastReport.dll
+X:\88 AppClient\99 测试\bin\Release\Microsoft.ReportViewer.WinForms.dll
+X:\88 AppClient\99 测试\bin\Release\System.Net.Http.dll
+X:\88 AppClient\99 测试\bin\Release\System.Net.Http.WebRequest.dll
+X:\88 AppClient\99 测试\bin\Release\FastReport.Bars.dll
+X:\88 AppClient\99 测试\bin\Release\FastReport.Editor.dll
+X:\88 AppClient\99 测试\bin\Release\ICSharpCode.SharpZipLib.dll
+X:\88 AppClient\99 测试\bin\Release\Newtonsoft.Json.xml
+X:\88 AppClient\99 测试\bin\Release\NLog.xml
+X:\88 AppClient\99 测试\bin\Release\NPOI.xml
+X:\88 AppClient\99 测试\bin\Release\System.Net.Http.xml
+X:\88 AppClient\99 测试\bin\Release\System.Net.Http.Primitives.xml
+X:\88 AppClient\99 测试\bin\Release\System.Net.Http.WebRequest.xml
+X:\88 AppClient\99 测试\bin\Release\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+X:\88 AppClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+X:\88 AppClient\99 测试\obj\Release\测试.Form1.resources
+X:\88 AppClient\99 测试\obj\Release\测试.Properties.Resources.resources
+X:\88 AppClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
+X:\88 AppClient\99 测试\obj\Release\RdlCompile.cache
+X:\88 AppClient\99 测试\obj\Release\RdlCompile.compiled

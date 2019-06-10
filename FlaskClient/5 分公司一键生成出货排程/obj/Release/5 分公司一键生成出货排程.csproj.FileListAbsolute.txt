@@ -1,0 +1,8 @@
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\bin\Release\5 分公司一键生成出货排程.exe
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\bin\Release\5 分公司一键生成出货排程.pdb
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 分公司一键生成出货排程.csprojResolveAssemblyReference.cache
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\分公司一键生成出货排程.Properties.Resources.resources
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\分公司一键生成出货排程.分公司一键生成出货排程.resources
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 分公司一键生成出货排程.csproj.GenerateResource.Cache
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 分公司一键生成出货排程.exe
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 分公司一键生成出货排程.pdb

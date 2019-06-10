@@ -1,0 +1,31 @@
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\bin\Release\5 联友中山分公司生产辅助工具.exe
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\bin\Release\5 联友中山分公司生产辅助工具.pdb
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.Properties.Resources.resources
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.主界面.resources
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.联友中山分公司生产辅助工具.resources
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 联友中山分公司生产辅助工具.exe
+C:\Users\IT-Latop\Desktop\Work\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 联友中山分公司生产辅助工具.pdb
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.dll
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OOXML.dll
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OpenXml4Net.dll
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OpenXmlFormats.dll
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\ICSharpCode.SharpZipLib.dll
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.xml
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生产入库领料明细.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.Properties.Resources.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.主界面.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生成出货排程.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.FormChildDemo.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生产日入库明细.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.联友物料需求量导出.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.玖友库存.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.物控登录.resources
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.新增排程数据.resources
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分公司生产辅助工具.exe
+X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分公司生产辅助工具.pdb
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.exe
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.pdb
