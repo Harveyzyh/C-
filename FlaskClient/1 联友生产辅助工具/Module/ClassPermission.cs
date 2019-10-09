@@ -25,7 +25,7 @@ namespace HarveyZ
 
                 foreach (string MenuListTmp in getList)
                 {
-                    if (mssql.SQLselect(Conn_WG_DB, sqlstrFind) == null)
+                    if (mssql.SQLexist(Conn_WG_DB, string.Format(sqlstrFind, MenuListTmp)))
                     {
                         mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrSet, MenuListTmp));
                     }

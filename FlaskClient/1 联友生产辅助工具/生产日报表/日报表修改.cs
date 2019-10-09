@@ -134,8 +134,6 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportUpdateCommit_Click(object sender, EventArgs e)
         {
-            RecordUseLog("联友生产辅助工具", "生产日报表-修改");
-
             string sqlstr = "";
             int Index = 0;
             int row = DataGridView_List.RowCount;

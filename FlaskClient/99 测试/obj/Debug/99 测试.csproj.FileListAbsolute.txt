@@ -113,3 +113,21 @@ X:\88 AppClient\99 测试\bin\Debug\FastReport.xml
 C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\bin\Debug\测试.exe.config
 C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\obj\Debug\测试.exe
 C:\Users\IT-Latop\Desktop\2019-04-25\88 AppClient\99 测试\obj\Debug\测试.pdb
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\测试.exe.config
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\测试.exe
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\测试.pdb
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\测试.exe
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\测试.pdb
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\System.Net.Http.dll
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.dll
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\ICSharpCode.SharpZipLib.dll
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\Newtonsoft.Json.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\NLog.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\NPOI.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\System.Net.Http.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\System.Net.Http.Primitives.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\bin\Debug\System.Net.Http.WebRequest.xml
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\99 测试.csprojResolveAssemblyReference.cache
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\测试.Form1.resources
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\测试.Properties.Resources.resources
+\\Mac\iCloud\90 开发\88 AppClient\99 测试\obj\Debug\99 测试.csproj.GenerateResource.Cache

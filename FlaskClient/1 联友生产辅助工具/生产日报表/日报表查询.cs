@@ -166,8 +166,6 @@ namespace 联友生产辅助工具.生产日报表
         #region PanelReportSelect
         private void ButtonSelectSubmit_Click(object sender, EventArgs e)
         {
-            RecordUseLog("联友生产辅助工具", "生产日报表-查询");
-
             bool NullFlag = false;
 
             string sqlstr = "", sql_date = "", sql_dpt = "", WGroup_List = "";

@@ -16,7 +16,7 @@ namespace 联友生产辅助工具.生管码垛线
         #region 本地局域变量
         private static DataTable showDtTmp = new DataTable();
         private static DataTable showDt = new DataTable();
-        private static string connStrRobot = FormLogin.connRobot;
+        public static string connStrRobot = FormLogin.connRobot;
         private static Mssql mssql = new Mssql();
         #endregion
 
@@ -56,17 +56,19 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void ShowBoxCode()
         {
-            string sqlstr = @"SELECT K_ID 序号, BoxSize 纸箱尺寸, BoxCode 纸箱编码, BoxSet 纸箱码放方式, Valid 有效码 FROM BoxSizeCode ORDER BY K_ID ";
+            string sqlstr = @"SELECT BoxSize 纸箱尺寸, BoxCode 纸箱编码, BoxSet 纸箱码放方式, Valid 有效码 FROM BoxSizeCode ORDER BY BoxCode, BoxSize ";
             showDt = mssql.SQLselect(connStrRobot, sqlstr);
-
-
+            
             DgvMain.DataSource = null;
             if (showDt != null)
             {
                 showDtTmp = showDt.Copy();
                 DgvMain.DataSource = showDt;
-                DgvOpt.SetColReadonly(DgvMain, "序号");
+                DgvOpt.SetColReadonly(DgvMain, "纸箱尺寸");
                 DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetColNoSortMode(DgvMain);
+                DgvMain.Columns[0].Width = 250;
+                DgvMain.Columns[1].Width = 100;
             }
         }
 
@@ -77,21 +79,25 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-
+            纸箱编码添加 frm = new 纸箱编码添加();
+            frm.ShowDialog();
+            ShowBoxCode();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            string sqlstr = @"UPDATE BoxSizeCode SET BoxSize = '{1}', BoxCode = '{2}', BoxSet = '{3}', Valid = '{4}' WHERE K_ID = '{0}' ";
+            string sqlstr = @"UPDATE BoxSizeCode SET BoxCode = '{1}', BoxSet = '{2}', Valid = '{3}' WHERE BoxSize = '{0}' ";
             for(int rowIndex = 0; rowIndex < showDtTmp.Rows.Count; rowIndex++)
             {
                 for (int colIndex = 0; colIndex < showDtTmp.Columns.Count; colIndex++)
                 {
-                    if(showDtTmp.Rows[rowIndex][colIndex].ToString() != DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString())
+                    string kk = DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString();
+                    if (showDtTmp.Rows[rowIndex][colIndex].ToString() != DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString())
                     {
-                        mssql.SQLexcute(connStrRobot, string.Format(sqlstr, showDtTmp.Rows[rowIndex][0].ToString(), showDtTmp.Rows[rowIndex][1].ToString(),
-                            showDtTmp.Rows[rowIndex][2].ToString(), showDtTmp.Rows[rowIndex][3].ToString(),
-                            DgvMain.Rows[rowIndex].Cells[4].Value.ToString()).Replace("'True'", "1").Replace("'False'", "0"));
+                        mssql.SQLexcute(connStrRobot, string.Format(sqlstr, DgvMain.Rows[rowIndex].Cells[0].Value.ToString(),
+                            DgvMain.Rows[rowIndex].Cells[1].Value.ToString(),
+                            DgvMain.Rows[rowIndex].Cells[2].Value.ToString(),
+                            DgvMain.Rows[rowIndex].Cells[3].Value.ToString()).Replace("'True'", "1").Replace("'False'", "0"));
                         break;
                     }
                 }

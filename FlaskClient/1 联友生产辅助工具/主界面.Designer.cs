@@ -49,6 +49,7 @@
             this.生管_订单信息查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.工程部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线配置管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.码垛线_纸箱名称管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_纸箱编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_订单类别编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.中山分公司ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,8 +57,6 @@
             this.中山分公司_查询生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.管理_用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试_1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试_2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,11 +242,19 @@
             // 码垛线配置管理ToolStripMenuItem
             // 
             this.码垛线配置管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.码垛线_纸箱名称管理ToolStripMenuItem,
             this.码垛线_纸箱编码管理ToolStripMenuItem,
             this.码垛线_订单类别编码管理ToolStripMenuItem});
             this.码垛线配置管理ToolStripMenuItem.Name = "码垛线配置管理ToolStripMenuItem";
             this.码垛线配置管理ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.码垛线配置管理ToolStripMenuItem.Text = "码垛线配置管理";
+            // 
+            // 码垛线_纸箱名称管理ToolStripMenuItem
+            // 
+            this.码垛线_纸箱名称管理ToolStripMenuItem.Name = "码垛线_纸箱名称管理ToolStripMenuItem";
+            this.码垛线_纸箱名称管理ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.码垛线_纸箱名称管理ToolStripMenuItem.Text = "纸箱名称管理";
+            this.码垛线_纸箱名称管理ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_纸箱名称管理ToolStripMenuItem_Click);
             // 
             // 码垛线_纸箱编码管理ToolStripMenuItem
             // 
@@ -290,9 +297,7 @@
             // 管理ToolStripMenuItem
             // 
             this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.管理_权限管理ToolStripMenuItem,
-            this.管理_用户管理ToolStripMenuItem,
-            this.修改密码ToolStripMenuItem});
+            this.管理_权限管理ToolStripMenuItem});
             this.管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
             this.管理ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
@@ -301,22 +306,9 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
-            // 
-            // 管理_用户管理ToolStripMenuItem
-            // 
-            this.管理_用户管理ToolStripMenuItem.Name = "管理_用户管理ToolStripMenuItem";
-            this.管理_用户管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.管理_用户管理ToolStripMenuItem.Text = "用户管理";
-            this.管理_用户管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_用户管理ToolStripMenuItem_Click);
-            // 
-            // 修改密码ToolStripMenuItem
-            // 
-            this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
-            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.修改密码ToolStripMenuItem.Text = "修改密码";
             // 
             // 测试ToolStripMenuItem
             // 
@@ -485,7 +477,6 @@
         private System.Windows.Forms.ToolStripMenuItem 生产日报表生管维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 管理_权限管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 管理_用户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_排程导入ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_部门线别维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_系列组别维护ToolStripMenuItem;
@@ -499,13 +490,13 @@
         private System.Windows.Forms.ToolStripMenuItem 中山分公司_查询物料需求量ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 中山分公司_查询生产排程ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 此用户没有任何权限ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 修改密码ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_订单信息查询ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelUser;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelLocalConn;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelYunConn;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelIP;
+        private System.Windows.Forms.ToolStripMenuItem 码垛线_纸箱名称管理ToolStripMenuItem;
     }
 }
 

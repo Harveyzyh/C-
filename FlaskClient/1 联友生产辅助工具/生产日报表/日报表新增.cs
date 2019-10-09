@@ -270,8 +270,6 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportInputCommit_Click(object sender, EventArgs e)//保存
         {
-            RecordUseLog("联友生产辅助工具", "生产日报表-新增");
-
             int row = DataGridView_List.RowCount;
             int Index = 0;
             string sqlstr = "";

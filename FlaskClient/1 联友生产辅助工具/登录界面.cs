@@ -64,8 +64,8 @@ namespace HarveyZ
             GetMutilOpen();
             GetRobotDbConn();
 
-             //从文件详细信息中获取程序名称
-             ProgName = Application.ProductName.ToString();
+            //从文件详细信息中获取程序名称
+            ProgName = Application.ProductName.ToString();
             ProgVersion = Application.ProductVersion.ToString();
 
             //判断是否在debug模式

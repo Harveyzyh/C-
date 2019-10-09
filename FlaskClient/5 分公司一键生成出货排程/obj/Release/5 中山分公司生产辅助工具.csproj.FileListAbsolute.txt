@@ -29,3 +29,29 @@ X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分�
 X:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分公司生产辅助工具.pdb
 X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.exe
 X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.pdb
+X:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.出货排程欠数查询.resources
+\\Mac\iCloud\90 开发\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.exe
+\\Mac\iCloud\90 开发\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.pdb
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.exe
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.pdb
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分公司生产辅助工具.exe
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\联友中山分公司生产辅助工具.pdb
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.dll
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OOXML.dll
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OpenXml4Net.dll
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.OpenXmlFormats.dll
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\ICSharpCode.SharpZipLib.dll
+Y:\88 AppClient\5 分公司一键生成出货排程\bin\Release\NPOI.xml
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.出货排程欠数查询.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.新增排程数据.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.玖友库存.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生产入库领料明细.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.Properties.Resources.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.主界面.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生成出货排程.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.FormChildDemo.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.生产日入库明细.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.物控登录.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\联友中山分公司生产辅助工具.联友物料需求量导出.resources
+Y:\88 AppClient\5 分公司一键生成出货排程\obj\Release\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache

@@ -41,7 +41,6 @@
             // 
             this.DgvMain.AllowUserToAddRows = false;
             this.DgvMain.AllowUserToDeleteRows = false;
-            this.DgvMain.AllowUserToOrderColumns = true;
             this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMain.Location = new System.Drawing.Point(1, 72);
             this.DgvMain.Name = "DgvMain";

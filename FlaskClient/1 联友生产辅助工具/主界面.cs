@@ -450,6 +450,13 @@ namespace 联友生产辅助工具
             FormOpenInit(frm);
             frm.Show();
         }
+
+        private void 码垛线_纸箱名称管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            纸箱名称管理 frm = new 纸箱名称管理();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
 
         #region 生产排程

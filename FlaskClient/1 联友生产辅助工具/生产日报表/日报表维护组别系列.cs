@@ -208,7 +208,6 @@ namespace 联友生产辅助工具.生产日报表
             }
             textBox1.Focus();
             textBox1.SelectAll();
-            RecordUseLog("联友生产辅助工具", "生产日报表-维护组别系列");
         }
 
         private void button2_Click(object sender, EventArgs e)

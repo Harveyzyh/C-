@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanelTitle = new System.Windows.Forms.Panel();
             this.BtnGenerate2 = new System.Windows.Forms.Button();
             this.BtnGenerate = new System.Windows.Forms.Button();
@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.checkBox1);
             this.PanelTitle.Controls.Add(this.BtnGenerate2);
             this.PanelTitle.Controls.Add(this.BtnGenerate);
             this.PanelTitle.Controls.Add(this.BtnAdd);
@@ -89,9 +91,9 @@
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(549, 43);
+            this.BtnAdd.Location = new System.Drawing.Point(530, 43);
             this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new System.Drawing.Size(75, 23);
+            this.BtnAdd.Size = new System.Drawing.Size(113, 23);
             this.BtnAdd.TabIndex = 8;
             this.BtnAdd.Text = "新增排程";
             this.BtnAdd.UseVisualStyleBackColor = true;
@@ -99,20 +101,19 @@
             // 
             // BtnLayout
             // 
-            this.BtnLayout.Location = new System.Drawing.Point(662, 6);
+            this.BtnLayout.Location = new System.Drawing.Point(795, 8);
             this.BtnLayout.Name = "BtnLayout";
-            this.BtnLayout.Size = new System.Drawing.Size(75, 23);
+            this.BtnLayout.Size = new System.Drawing.Size(112, 23);
             this.BtnLayout.TabIndex = 7;
             this.BtnLayout.Text = "导出";
             this.BtnLayout.UseVisualStyleBackColor = true;
-            this.BtnLayout.Visible = false;
             this.BtnLayout.Click += new System.EventHandler(this.BtnLayout_Click);
             // 
             // BtnShow
             // 
-            this.BtnShow.Location = new System.Drawing.Point(549, 6);
+            this.BtnShow.Location = new System.Drawing.Point(662, 8);
             this.BtnShow.Name = "BtnShow";
-            this.BtnShow.Size = new System.Drawing.Size(75, 23);
+            this.BtnShow.Size = new System.Drawing.Size(113, 23);
             this.BtnShow.TabIndex = 6;
             this.BtnShow.Text = "查询";
             this.BtnShow.UseVisualStyleBackColor = true;
@@ -178,8 +179,8 @@
             this.DgvMain.AllowUserToAddRows = false;
             this.DgvMain.AllowUserToDeleteRows = false;
             this.DgvMain.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.DgvMain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgvMain.BackgroundColor = System.Drawing.Color.White;
             this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -188,12 +189,23 @@
             this.DgvMain.Name = "DgvMain";
             this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMain.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMain.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(320, 188);
             this.DgvMain.TabIndex = 1;
             this.DgvMain.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDoubleClick);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(530, 11);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(116, 19);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "显示订单明细";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // 生成出货排程
             // 
@@ -230,6 +242,7 @@
         private System.Windows.Forms.Button BtnGenerate2;
         private System.Windows.Forms.Button BtnGenerate;
         private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

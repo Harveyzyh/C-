@@ -196,6 +196,14 @@ namespace HarveyZ
                 Dgv.Columns[listIndex].ReadOnly = true;
             }
         }
+        
+        public static void SetColNoSortMode(DataGridView Dgv)
+        {
+            for (int i = 0; i < Dgv.Columns.Count; i++)
+            {
+                Dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
     }
 
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
+using System.IO;
 
 namespace 联友中山分公司生产辅助工具
 {
@@ -88,18 +89,45 @@ namespace 联友中山分公司生产辅助工具
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            ShowDt();
+            ShowJudge();
         }
 
         private void BtnLayout_Click(object sender, EventArgs e)
         {
+            Excel.Excel_Base excelObj = new Excel.Excel_Base();
 
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            saveFileDialog.Filter = "Excel 2007|*.xlsx";
+            saveFileDialog.FileName = "出货排程导出_" + DateTime.Now.ToString("yyyy-MM-dd");
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DataTable dttmp = (DataTable)DgvMain.DataSource;
+
+                    excelObj.FilePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                    excelObj.FileName = Path.GetFileName(saveFileDialog.FileName);
+                    excelObj.IsWrite = true;
+                    excelObj.CellDt = dttmp;
+
+                    Excel excel = new Excel();
+                    excel.ExcelOpt(excelObj);
+                    MessageBox.Show("Excel导出成功！", "提示");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("文件保存失败,请确保该文件没被打开！", "错误");
+                }
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             新增排程数据.modeAdd = true;
             frm.ShowDialog();
+            checkBox1.Checked = false;
             ShowDt();
         }
 
@@ -227,7 +255,38 @@ namespace 联友中山分公司生产辅助工具
             frm.ShowDialog();
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowJudge();
+        }
+
+        private void ShowJudge()
+        {
+            if (checkBox1.Checked) ShowDt();
+            else ShowDt2();
+        }
+
         private void ShowDt()
+        {
+            string sqlstr = @"select distinct convert(varchar(20), zzzz_chpc.chrq, 112) 出货日期, zzzz_chpc.scdh 生产单号, zzzz_chpc.sl 数量, flag 已处理, msg 异常记录
+                                from zzzz_chpc
+                                left join tf_pos on zzzz_chpc.scdh = tf_pos.csdh
+                                where 1=1
+                                and (zzzz_chpc.scdh like '%{0}%' or tf_pos.bz like '%{0}%' )";
+            if (DtpStartDate.Checked) { sqlstr += string.Format(" and convert(varchar(20), zzzz_chpc.chrq, 112) >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd")); }
+            if (DtpEndDate.Checked) { sqlstr += string.Format(" and convert(varchar(20), zzzz_chpc.chrq, 112) <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd")); }
+            sqlstr += " order by convert(varchar(20), zzzz_chpc.chrq, 112), zzzz_chpc.scdh, zzzz_chpc.sl, flag, msg ";
+
+            DataTable dt = mssql.SQLselect(connYLs, string.Format(sqlstr, textBox1.Text));
+            DgvMain.DataSource = null;
+            if (dt != null)
+            {
+                DgvMain.DataSource = dt;
+                DgvOpt.SetRowColor(DgvMain);
+            }
+        }
+
+        private void ShowDt2()
         {
             string sqlstr = @"select distinct convert(varchar(20), zzzz_chpc.chrq, 112) 出货日期, zzzz_chpc.scdh 生产单号, zzzz_chpc.sl 数量, flag 已处理, msg 异常记录
                                 from zzzz_chpc

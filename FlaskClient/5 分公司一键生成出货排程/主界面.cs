@@ -37,18 +37,6 @@ namespace 联友中山分公司生产辅助工具
             //SqlTestDelegate sqlTestYDelegate = new SqlTestDelegate(SqlTestY);
             //sqlTestYDelegate.BeginInvoke(connY_Ls, null, null);
         }
-
-        private void SqlTestY(string connStr)
-        {
-            if (mssql.SQLlinkTest(connStr))
-            {
-                statusLabelYConn.Text = "已连接云服务器";
-            }
-            else
-            {
-               statusLabelYConn.Text = "未连接云服务器";
-            }
-        }
         #endregion
 
         #region 程序不能多开设定
@@ -100,7 +88,7 @@ namespace 联友中山分公司生产辅助工具
             int FormWidth, FormHeight;
             FormWidth = Width - 18;
             FormHeight = Height - 40;
-            panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - statusBar.Height - 1);
+            panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - 2);
             //父窗体发生大小变化时，重新设置子窗体的大小
             if (FormOpen != null)
             {
@@ -190,9 +178,9 @@ namespace 联友中山分公司生产辅助工具
             }
         }
 
-        private void 物料需求量导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 出货排程欠数查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            联友物料需求量导出 frm = new 联友物料需求量导出();
+            出货排程欠数查询 frm = new 出货排程欠数查询();
             FormOpenInit(frm);
             frm.Show();
         }

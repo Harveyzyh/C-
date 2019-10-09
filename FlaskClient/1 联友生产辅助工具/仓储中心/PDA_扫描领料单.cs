@@ -59,6 +59,14 @@ namespace 联友生产辅助工具.仓储中心
         }
         #endregion
 
+        #region 判断是否有后台在运行
+        private bool checkJobExists() {
+            string sqlstr = @" SELECT * FROM  DSCSYS.dbo.JOBQUEUE WHERE JOBNAME = 'BMSAB01' AND STATUS IN ('P', 'N') ";
+            if (mssql.SQLselect(strConnection, sqlstr) == null) return false;
+            else return true;
+        }
+        #endregion
+
         private void button1_Click(object sender, EventArgs e)
         {
             button1_Work();
@@ -192,24 +200,38 @@ namespace 联友生产辅助工具.仓储中心
 
         private void showList(string danbie, string danhao)
         {
-        	xa007 = getLLXA007();
-            string sqlstr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
-                + " TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017,TE008 AS LLXA013,MC002,TE009 AS LLXA011,"
-                + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
-                + " '" + xa007 + "' AS LLXA007 "
-                + " FROM VMOCTEJ WHERE TE001 = '" + danbie + "' AND TE002 = '" + danhao + "'";
-            dttmp = mssql.SQLselect(strConnection, sqlstr);
-            if (dttmp != null)
+            if (!checkJobExists())
             {
-                DataGridView_List.DataSource = dttmp;
-                Button_Upload.Enabled = true;
-                label1.Text = "领料单共" + dttmp.Rows.Count.ToString() + "条！";
-                Button_Upload.Select();
+                xa007 = getLLXA007();
+                string sqlstr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
+                    + " TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017,TE008 AS LLXA013,MC002,TE009 AS LLXA011,"
+                    + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
+                    + " '" + xa007 + "' AS LLXA007 "
+                    + " FROM VMOCTEJ WHERE TE001 = '" + danbie + "' AND TE002 = '" + danhao + "'";
+                dttmp = mssql.SQLselect(strConnection, sqlstr);
+                if (dttmp != null)
+                {
+
+                    string sqlstr2 = @"SELECT * FROM MOCTC WHERE TC004 IN ('Y003', 'Y0031', 'Y0032') AND TC001 = '" + danbie + "' AND TC002 = '" + danhao + "' ";
+                    if (mssql.SQLselect(strConnection, sqlstr2) != null)
+                    {
+                        MessageBox.Show("此为坐垫组领料单！", "错误", MessageBoxButtons.OK);
+                    }
+
+                    DataGridView_List.DataSource = dttmp;
+                    Button_Upload.Enabled = true;
+                    label1.Text = "领料单共" + dttmp.Rows.Count.ToString() + "条！";
+                    Button_Upload.Select();
+                }
+                else
+                {
+                    Button_Upload.Enabled = false;
+                    MessageBox.Show("领料单：" + danbie + "-" + danhao + " 已审核！", "错误");
+                }
             }
             else
             {
-                Button_Upload.Enabled = false;
-                MessageBox.Show("领料单：" + danbie + "-" + danhao + " 已审核！", "错误");
+                MessageBox.Show("后台存在未结束的‘批量生成领料单’程序，为避免领料单数据丢失，在后台程序结束前，不允许运行扫描领料单！", "错误");
             }
         }
 
@@ -257,11 +279,13 @@ namespace 联友生产辅助工具.仓储中心
 
                     detail += xa012 + ":" + xa017 + "; ";
 
-                    sqlstr = "INSERT INTO LL_LYXA (COMPANY, CREATOR, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( 'COMFORT', "
+                    sqlstr += "INSERT INTO LL_LYXA (COMPANY, CREATOR, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( 'COMFORT', "
                             +  "'" +creator + "', '" + create_date + "', '" + xa001 + "', '" + xa002 + "', '" + xa003 + "', '" + xa007 + "', '" + xa009 + "','" + xa010 + "', '" + xa011 + "', '" + xa012 + "','" 
-                            + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')";
-                    mssql.SQLexcute(strConnection, sqlstr);
+                            + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')   ";
+                    
                 }
+                mssql.SQLexcute(strConnection, sqlstr);
+
                 DataGridView_List.DataSource = null;
                 Button_Upload.Enabled = false;
                 TextBox_Danhao.Text = "";
