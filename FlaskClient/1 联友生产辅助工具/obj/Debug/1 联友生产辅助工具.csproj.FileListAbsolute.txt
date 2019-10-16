@@ -60,3 +60,6 @@ X:\88 AppClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.�
 \\Mac\iCloud\90 开发\88 AppClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱名称管理.resources
 \\Mac\iCloud\90 开发\88 AppClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.订单类别编码添加.resources
 \\Mac\iCloud\90 开发\88 AppClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱编码添加.resources
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\bin\Debug\联友生产辅助工具.exe.config
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+\\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
