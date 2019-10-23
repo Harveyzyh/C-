@@ -238,6 +238,8 @@ namespace 联友生产辅助工具.仓储中心
                     数量T.SelectAll();
                 }
             }
+            selectLastRow(this.DataGridView_List);
+            DgvOpt.SetRowColor(this.DataGridView_List);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -257,6 +259,15 @@ namespace 联友生产辅助工具.仓储中心
             Insert();
             SetEnable();
             GetIndex();
+        }
+
+        private void selectLastRow(DataGridView dgv = null)
+        {
+            int kk = dgv.RowCount;
+            if (dgv.RowCount > 0 && dgv != null)
+            {
+                dgv.CurrentCell = dgv.Rows[dgv.RowCount - 1].Cells[0];
+            }
         }
         #endregion
 
