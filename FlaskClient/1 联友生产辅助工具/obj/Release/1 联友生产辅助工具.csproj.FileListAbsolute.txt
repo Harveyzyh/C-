@@ -191,3 +191,6 @@ Y:\其他\7 联友\99 开发的软件\AppClient\1 联友生产辅助工具\obj\R
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.纸箱编码管理.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Release\联友生产辅助工具.管理.用户管理.resources
 \\Mac\Home\Documents\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Release\1 联友生产辅助工具.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\1 联友生产辅助工具\bin\Release\联友生产辅助工具.exe.config
+Y:\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Release\联友生产辅助工具.exe
+Y:\GitHub\C-\FlaskClient\1 联友生产辅助工具\obj\Release\联友生产辅助工具.pdb
