@@ -39,6 +39,7 @@
             this.生产日报表_新增ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产日报表_修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产日报表_查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.生产日报表_工作组线别维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生管ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_排程导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +130,8 @@
             // 生产部ToolStripMenuItem
             // 
             this.生产部ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.生产部_生产日报表ToolStripMenuItem});
+            this.生产部_生产日报表ToolStripMenuItem,
+            this.生产日报表_工作组线别维护ToolStripMenuItem});
             this.生产部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.生产部ToolStripMenuItem.Name = "生产部ToolStripMenuItem";
             this.生产部ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
@@ -142,7 +144,7 @@
             this.生产日报表_修改ToolStripMenuItem,
             this.生产日报表_查询ToolStripMenuItem});
             this.生产部_生产日报表ToolStripMenuItem.Name = "生产部_生产日报表ToolStripMenuItem";
-            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.生产部_生产日报表ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.生产部_生产日报表ToolStripMenuItem.Text = "生产日报表";
             // 
             // 生产日报表_新增ToolStripMenuItem
@@ -165,6 +167,13 @@
             this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_查询ToolStripMenuItem.Text = "查询";
             this.生产日报表_查询ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_查询ToolStripMenuItem_Click);
+            // 
+            // 生产日报表_工作组线别维护ToolStripMenuItem
+            // 
+            this.生产日报表_工作组线别维护ToolStripMenuItem.Name = "生产日报表_工作组线别维护ToolStripMenuItem";
+            this.生产日报表_工作组线别维护ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.生产日报表_工作组线别维护ToolStripMenuItem.Text = "工作组线别维护";
+            this.生产日报表_工作组线别维护ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_工作组线别维护ToolStripMenuItem_Click);
             // 
             // 生管ToolStripMenuItem
             // 
@@ -306,7 +315,7 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
@@ -497,6 +506,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabelYunConn;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelIP;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_纸箱名称管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 生产日报表_工作组线别维护ToolStripMenuItem;
     }
 }
 

@@ -18,15 +18,9 @@ namespace 联友生产辅助工具.仓储中心
         string strConnection = PDA_扫描进货单.strConnection;
         DataTable dt = new DataTable();
         int Index = 0;
-
-        //private WebNet webNet = new WebNet();
-        //private Dictionary<string, string> dict = new Dictionary<string, string> { };
-        //private Dictionary<string, string> dict_get = new Dictionary<string, string> { };
+        
         private string Title = PDA_扫描进货单.Title;
         private string Mode = PDA_扫描进货单.Mode;
-        //private string URL = PDA_扫描进货单.URL;
-
-        //private string ReturnData = null;
 
         public PDA_扫描进货单_获取单据信息()
         {

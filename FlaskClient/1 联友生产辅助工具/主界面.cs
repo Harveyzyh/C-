@@ -427,6 +427,13 @@ namespace 联友生产辅助工具
             frm.Show();
         }
 
+        private void 生产日报表_工作组线别维护ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            日报表部门工作组线别维护 frm = new 日报表部门工作组线别维护();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
         #endregion
 
         #region 码垛线

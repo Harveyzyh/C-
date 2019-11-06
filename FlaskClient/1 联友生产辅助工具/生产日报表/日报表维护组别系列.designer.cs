@@ -31,16 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(日报表维护组别系列));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.DataGridView_List = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DgvMain = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel_Title = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.panel_Title.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,47 +61,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // DataGridView_List
+            // DgvMain
             // 
-            this.DataGridView_List.AllowUserToAddRows = false;
-            this.DataGridView_List.AllowUserToDeleteRows = false;
-            this.DataGridView_List.AllowUserToResizeColumns = false;
-            this.DataGridView_List.AllowUserToResizeRows = false;
-            this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
-            this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            this.DataGridView_List.Location = new System.Drawing.Point(1, 89);
-            this.DataGridView_List.Name = "DataGridView_List";
-            this.DataGridView_List.RowHeadersVisible = false;
-            this.DataGridView_List.RowTemplate.Height = 23;
-            this.DataGridView_List.Size = new System.Drawing.Size(749, 239);
-            this.DataGridView_List.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "组别";
-            this.Column1.MinimumWidth = 150;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "系列";
-            this.Column2.MinimumWidth = 500;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 550;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "有效码";
-            this.Column3.MinimumWidth = 80;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 80;
+            this.DgvMain.AllowUserToAddRows = false;
+            this.DgvMain.AllowUserToDeleteRows = false;
+            this.DgvMain.AllowUserToResizeColumns = false;
+            this.DgvMain.AllowUserToResizeRows = false;
+            this.DgvMain.BackgroundColor = System.Drawing.Color.White;
+            this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMain.Location = new System.Drawing.Point(1, 89);
+            this.DgvMain.Name = "DgvMain";
+            this.DgvMain.RowHeadersVisible = false;
+            this.DgvMain.RowTemplate.Height = 23;
+            this.DgvMain.Size = new System.Drawing.Size(749, 239);
+            this.DgvMain.TabIndex = 2;
             // 
             // comboBox1
             // 
@@ -160,7 +130,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 609);
             this.Controls.Add(this.panel_Title);
-            this.Controls.Add(this.DataGridView_List);
+            this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -170,7 +140,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "生产日报表组别系列修改";
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).EndInit();
             this.panel_Title.ResumeLayout(false);
             this.panel_Title.PerformLayout();
             this.ResumeLayout(false);
@@ -181,14 +151,11 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView DataGridView_List;
+        private System.Windows.Forms.DataGridView DgvMain;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel_Title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
     }
 }

@@ -169,6 +169,12 @@
     <Compile Include="中山分公司\联友物料需求量导出.Designer.cs">
       <DependentUpon>联友物料需求量导出.cs</DependentUpon>
     </Compile>
+    <Compile Include="生产日报表\日报表部门工作组线别维护.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生产日报表\日报表部门工作组线别维护.Designer.cs">
+      <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
+    </Compile>
     <Compile Include="生管排程\生产排程导入中.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     </Compile>
     <EmbeddedResource Include="中山分公司\联友物料需求量导出.resx">
       <DependentUpon>联友物料需求量导出.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生产日报表\日报表部门工作组线别维护.resx">
+      <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程导入中.resx">
       <DependentUpon>生产排程导入中.cs</DependentUpon>

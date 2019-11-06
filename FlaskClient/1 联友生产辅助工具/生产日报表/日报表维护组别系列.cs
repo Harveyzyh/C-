@@ -39,8 +39,8 @@ namespace 联友生产辅助工具.生产日报表
             FormWidth = Width;
             FormHeight = Height;
             panel_Title.Size = new Size(FormWidth, panel_Title.Height);
-            DataGridView_List.Location = new Point(0, panel_Title.Height + 2);
-            DataGridView_List.Size = new Size(FormWidth, FormHeight - panel_Title.Height - 2);
+            DgvMain.Location = new Point(0, panel_Title.Height + 2);
+            DgvMain.Size = new Size(FormWidth, FormHeight - panel_Title.Height - 2);
         }
         #endregion
 
@@ -50,53 +50,51 @@ namespace 联友生产辅助工具.生产日报表
             getitem();
             
             string sqlstr = "";
-            sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Vaild AS 有效码 FROM WG_DB..SC_XL2GY ORDER BY Serial, K_ID DESC ";
+            sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Valid AS 有效码 FROM WG_DB..SC_XL2GY ORDER BY Serial, K_ID DESC ";
             DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
 
-            DataGridView_List.DataSource = null;
+            DgvMain.DataSource = null;
 
             if (dttmp != null)
             {
-                DataGridView_List.Rows.Clear();
+                DgvMain.Rows.Clear();
 
                 int Columns = dttmp.Columns.Count;
                 int Rows = dttmp.Rows.Count;
                 int Row_Index = 0;
                 int Index;
 
-                for(Row_Index = 0; Row_Index < Rows; Row_Index++)
+                //for(Row_Index = 0; Row_Index < Rows; Row_Index++)
+                //{
+                //    Index = DataGridView_List.Rows.Add();
+                //    DataGridView_List.Rows[Index].Cells[0].Value = dttmp.Rows[Row_Index][0].ToString();
+                //    DataGridView_List.Rows[Index].Cells[1].Value = dttmp.Rows[Row_Index][1].ToString();
+                //    if(dttmp.Rows[Row_Index][2].ToString() == "Y")
+                //    {
+                //        DataGridView_List.Rows[Index].Cells[2].Value = 1;
+                //    }
+                //    else
+                //    {
+                //        DataGridView_List.Rows[Index].Cells[2].Value = 0;
+                //    }
+                //}
+
+                DgvMain.DataSource = dttmp;
+                DgvOpt.SetRowColor(DgvMain);
+
+                DgvMain.Columns[0].Width = 150;
+                DgvMain.Columns[0].ReadOnly = true;
+                DgvMain.Columns[1].Width = 350;
+                DgvMain.Columns[1].ReadOnly = true;
+                DgvMain.Columns[2].Width = 50;
+
+
+                for (int i = 0; i < this.DgvMain.Columns.Count; i++)
                 {
-                    Index = DataGridView_List.Rows.Add();
-                    DataGridView_List.Rows[Index].Cells[0].Value = dttmp.Rows[Row_Index][0].ToString();
-                    DataGridView_List.Rows[Index].Cells[1].Value = dttmp.Rows[Row_Index][1].ToString();
-                    if(dttmp.Rows[Row_Index][2].ToString() == "Y")
-                    {
-                        DataGridView_List.Rows[Index].Cells[2].Value = 1;
-                    }
-                    else
-                    {
-                        DataGridView_List.Rows[Index].Cells[2].Value = 0;
-                    }
+                    this.DgvMain.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-
-
-
-
-                DataGridView_List.Columns[0].Width = 150;
-                DataGridView_List.Columns[0].ReadOnly = true;
-                DataGridView_List.Columns[1].Width = 350;
-                DataGridView_List.Columns[1].ReadOnly = true;
-                DataGridView_List.Columns[2].Width = 50;
-                DataGridView_List.RowsDefaultCellStyle.BackColor = Color.Bisque;
-                DataGridView_List.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-
-
-                for (int i = 0; i < this.DataGridView_List.Columns.Count; i++)
-                {
-                    this.DataGridView_List.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-                HeadRowLineNumber(DataGridView_List);
-                DataGridView_List.RowHeadersWidth = 40;
+                HeadRowLineNumber(DgvMain);
+                DgvMain.RowHeadersWidth = 40;
             }
             else
             {
@@ -152,29 +150,29 @@ namespace 联友生产辅助工具.生产日报表
             int Index, RowCount;
             string sqlstr1, sqlstr2;
             string WGroup, Serial, Vaild;
-            RowCount = DataGridView_List.RowCount;
+            RowCount = DgvMain.RowCount;
 
             for(Index = 0; Index < RowCount; Index++)
             {
-                WGroup = DataGridView_List.Rows[Index].Cells[0].Value.ToString();
-                Serial = DataGridView_List.Rows[Index].Cells[1].Value.ToString();
-                if((bool)DataGridView_List.Rows[Index].Cells[2].EditedFormattedValue == true)
+                WGroup = DgvMain.Rows[Index].Cells[0].Value.ToString();
+                Serial = DgvMain.Rows[Index].Cells[1].Value.ToString();
+                if((bool)DgvMain.Rows[Index].Cells[2].EditedFormattedValue == true)
                 {
-                    Vaild = "Y";
+                    Vaild = "1";
                 }
                 else
                 {
-                    Vaild = "N";
+                    Vaild = "0";
                 }
 
-                sqlstr1 = "SELECT Serial FROM WG_DB..SC_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Vaild = '" +  Vaild + "' ";
+                sqlstr1 = "SELECT Serial FROM WG_DB..SC_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Valid = '" +  Vaild + "' ";
                 if (seach(sqlstr1))
                 {
                     continue;
                 }
                 else
                 {
-                    sqlstr2 = "UPDATE WG_DB..SC_XL2GY SET Vaild = '" + Vaild + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
+                    sqlstr2 = "UPDATE WG_DB..SC_XL2GY SET Valid = '" + Vaild + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
                     mssql.SQLexcute(strConnection, sqlstr2);
                 }
             }

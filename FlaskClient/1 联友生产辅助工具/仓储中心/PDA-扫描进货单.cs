@@ -325,7 +325,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private DataTable GetMaterielInfo(string MaterielID, string SupplierID)
         {
-            string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCBSum FROM VPURTDPCB "
+            string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCBSum FROM VPURTD_ZYH "
                             + "INNER JOIN INVMB ON MB001 = TD004 "
                             + "WHERE TD004 = '{0}' AND TC004 = '{1}' ";
             DataTable dt = mssql.SQLselect(strConnection, string.Format(sqlstr, MaterielID, SupplierID));
@@ -851,6 +851,7 @@ namespace 联友生产辅助工具.仓储中心
         #endregion
     }
 
+    #region 数据对象基类
     class HeadObject
     {
         private string flowId = null;
@@ -965,4 +966,5 @@ namespace 联友生产辅助工具.仓储中心
         public string THC02 { get { return thc02; } set { thc02 = value; } }
 
     }
+    #endregion
 }

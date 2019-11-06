@@ -218,17 +218,18 @@ namespace 联友生产辅助工具.生产日报表
         {
             if (XL_List != "")
             {
-                string sqlstr = " SELECT B.WGroup AS 工作组, B.Serial AS 系列, (CASE WHEN Line IS NULL THEN '-' ELSE Line END) AS 生产线别, "
+                string sqlstr = " SELECT A.WGroup AS 工作组, A.Serial AS 系列, A.Line AS 生产线别,  "
                               + " '0' AS 计划数量, '0' AS 生产数量, '0' AS 人数, '0' AS 工时, '0' AS 停工工时, '0' AS 总工时, "
                               + " '0' AS 产量每人每小时, '' AS 生产单号, '' AS 备注 "
-                              + " FROM WG_DB..SC_XL2GY AS B "
-                              + " LEFT JOIN(SELECT WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup, Serial) AS A ON A.WGroup = B.WGroup AND A.Serial = B.Serial "
-                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
-                              + " LEFT JOIN SC_Dpt2Line ON Dpt = '" + Login_Dpt + "'"
-                              + " WHERE B.WGroup IN("
-                              + XL_List + ")"
-                              + " AND B.Vaild = 'Y' "
-                              + " ORDER BY B.Serial, B.WGroup, C.S DESC, A.S DESC ";
+                              + " FROM WG_DB..SC_LineList AS A"
+                              + " LEFT JOIN(SELECT WorkDpt, WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WorkDpt, WGroup, Serial) "
+                              + " AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND A.Dpt = B.WorkDpt Collate Chinese_PRC_CS_AS "
+                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup Collate Chinese_PRC_CS_AS "
+                              + " WHERE 1 = 1 "
+                              + " AND A.Dpt = '" + Login_Dpt + "' "
+                              + " AND A.Valid = 1 "
+                              + " AND A.WGroup IN(" + XL_List + ") "
+                              + " ORDER BY A.Serial, A.WGroup, A.Line, C.S DESC, B.S DESC "; 
                 DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
                 DataGridView_List.DataSource = dttmp;
                 if (dttmp != null)
