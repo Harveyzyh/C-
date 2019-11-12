@@ -149,7 +149,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             int Index, RowCount;
             string sqlstr1, sqlstr2;
-            string WGroup, Serial, Vaild;
+            string WGroup, Serial, Valid;
             RowCount = DgvMain.RowCount;
 
             for(Index = 0; Index < RowCount; Index++)
@@ -158,21 +158,21 @@ namespace 联友生产辅助工具.生产日报表
                 Serial = DgvMain.Rows[Index].Cells[1].Value.ToString();
                 if((bool)DgvMain.Rows[Index].Cells[2].EditedFormattedValue == true)
                 {
-                    Vaild = "1";
+                    Valid = "1";
                 }
                 else
                 {
-                    Vaild = "0";
+                    Valid = "0";
                 }
 
-                sqlstr1 = "SELECT Serial FROM WG_DB..SC_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Valid = '" +  Vaild + "' ";
+                sqlstr1 = "SELECT Serial FROM WG_DB..SC_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Valid = '" +  Valid + "' ";
                 if (seach(sqlstr1))
                 {
                     continue;
                 }
                 else
                 {
-                    sqlstr2 = "UPDATE WG_DB..SC_XL2GY SET Valid = '" + Vaild + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
+                    sqlstr2 = "UPDATE WG_DB..SC_XL2GY SET Valid = '" + Valid + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
                     mssql.SQLexcute(strConnection, sqlstr2);
                 }
             }
@@ -197,7 +197,7 @@ namespace 联友生产辅助工具.生产日报表
                 }
                 else
                 {
-                    sqlstr2 = "INSERT INTO WG_DB..SC_XL2GY VALUES('" + WGroup + "', '" + Serial + "', 'Y')";
+                    sqlstr2 = "INSERT INTO WG_DB..SC_XL2GY (WGroup, Serial) VALUES('" + WGroup + "', '" + Serial + "')";
                     mssql.SQLexcute(strConnection, sqlstr2);
                     MessageBox.Show("组别：" + WGroup + "，系列：" + Serial + "新增成功！", "提示", MessageBoxButtons.OK);
                     commit();
