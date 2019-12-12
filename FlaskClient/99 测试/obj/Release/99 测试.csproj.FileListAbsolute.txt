@@ -97,3 +97,21 @@ C:\Users\IT-Latop\Desktop\Work\88 AppClient\99 测试\obj\Release\测试.Form1.r
 C:\Users\IT-Latop\Desktop\Work\88 AppClient\99 测试\obj\Release\测试.Properties.Resources.resources
 C:\Users\IT-Latop\Desktop\Work\88 AppClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache
 X:\88 AppClient\99 测试\bin\Release\FastReport.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.exe.config
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.exe
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.pdb
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.exe
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\测试.pdb
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.dll
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.dll
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\ICSharpCode.SharpZipLib.dll
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\Newtonsoft.Json.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\NLog.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\NPOI.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.Primitives.xml
+Y:\GitHub\C-\FlaskClient\99 测试\bin\Release\System.Net.Http.WebRequest.xml
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Form1.resources
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\测试.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\99 测试\obj\Release\99 测试.csproj.GenerateResource.Cache

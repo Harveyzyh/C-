@@ -11,7 +11,6 @@ namespace 测试
         string connYWGDB = Global_Const.strConnection_Y_WGDB;
         string connCOMFORT = Global_Const.strConnection_Y_COMFORT;
         string connRobot = Global_Const.strConnection_ROBOT;
-        string connTest = "Server=192.168.20.188;initial catalog=lserp-JY;user id=sa;password=lsdnkj;Connect Timeout=5";
         Mssql mssql = new Mssql();
 
         private static bool ConnectFlag = false;
@@ -40,7 +39,7 @@ namespace 测试
         
         protected void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Num2Char("710"));
+            mssql.SQLexcute(connRobot, "EXEC dbo.SplitCodeUpdate");
         }
 
         private string SqlTest(string connStr)

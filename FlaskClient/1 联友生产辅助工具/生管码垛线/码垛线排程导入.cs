@@ -327,7 +327,7 @@ namespace 联友生产辅助工具.生管码垛线
         }
         #endregion
 
-        #region 获取ERP订单信息
+        #region 获取ERP订单信息,直接从WG_DB里面取数据
         private void SyncFromPlan()
         {
             label1.Visible = true;
@@ -503,8 +503,14 @@ namespace 联友生产辅助工具.生管码垛线
         #region 获取订单类别编码
         private void SetTypeCode()
         {
-            SetOrderInType();
-            SetOrderOutType();
+            //SetOrderInType(); //更新内销-停用
+            //SetOrderOutType(); //更新外销-停用
+            SetTypeCodeByProc(); //使用存储过程来更新信息
+        }
+
+        private void SetTypeCodeByProc()
+        {
+            mssql.SQLexcute(connRobot, "EXEC dbo.SplitCodeUpdate ");
         }
 
         private void SetOrderInType()

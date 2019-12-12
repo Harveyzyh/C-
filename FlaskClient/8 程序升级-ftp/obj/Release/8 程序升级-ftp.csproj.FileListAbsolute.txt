@@ -16,3 +16,12 @@ Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\8 程序升级-ftp
 Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\AutoUpdate.AutoUpdate.resources
 Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\AutoUpdate.Properties.Resources.resources
 Y:\Documents\GitHub\C-\FlaskClient\8 程序升级\obj\Release\8 程序升级-ftp.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\bin\Release\ERP程序升级.exe.config
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\ERP程序升级.exe
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\ERP程序升级.pdb
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\bin\Release\ERP程序升级.exe
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\bin\Release\ERP程序升级.pdb
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\8 程序升级-ftp.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\AutoUpdate.AutoUpdate.resources
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\AutoUpdate.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\8 程序升级-ftp\obj\Release\8 程序升级-ftp.csproj.GenerateResource.Cache

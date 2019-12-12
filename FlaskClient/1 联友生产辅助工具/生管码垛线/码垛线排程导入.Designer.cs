@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.btnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnSyncFromPlan = new System.Windows.Forms.Button();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnInput = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -52,9 +52,9 @@
             this.DgvMain.Name = "DgvMain";
             this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMain.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMain.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(622, 135);
             this.DgvMain.TabIndex = 2;
@@ -82,6 +82,17 @@
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(740, 38);
             this.PanelTitle.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(423, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(157, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "正在同步数据，请稍等";
+            this.label1.Visible = false;
             // 
             // btnSyncFromPlan
             // 
@@ -113,22 +124,11 @@
             this.btnInput.Visible = false;
             this.btnInput.Click += new System.EventHandler(this.button_Input_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(423, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 15);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "正在同步数据，请稍等";
-            this.label1.Visible = false;
-            // 
             // 码垛线排程导入
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 181);
+            this.ClientSize = new System.Drawing.Size(1090, 311);
             this.Controls.Add(this.PanelTitle);
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);

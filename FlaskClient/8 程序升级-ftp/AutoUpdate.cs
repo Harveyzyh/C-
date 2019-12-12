@@ -167,7 +167,7 @@ namespace FtpSyn
     public class FtpHelper
     {
         //基本设置
-        static private string ftpip = "40.73.246.171";    //ftp IP地址
+        static private string ftpip = "10.255.255.99";    //ftp IP地址
         static private string path = @"ftp://" + ftpip + "/lssoft-c/";    //目标路径
         static private string username = "erpupdate";   //ftp用户名
         static private string password = "erpfiledownload";   //ftp密码

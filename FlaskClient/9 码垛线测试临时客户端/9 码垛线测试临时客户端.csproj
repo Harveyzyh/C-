@@ -47,6 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Module\ClassBasic.cs" />
+    <Compile Include="Module\ClassBom.cs" />
+    <Compile Include="Module\ClassNormal.cs" />
+    <Compile Include="Module\ClassPermission.cs" />
+    <Compile Include="Module\ClassSql.cs" />
+    <Compile Include="Module\ClassUserManager.cs" />
+    <Compile Include="Module\Common.Helper.Crypto.cs" />
+    <Compile Include="Module\DataGridViewAutoFilter.cs" />
+    <Compile Include="Module\Global.cs" />
     <Compile Include="码垛线测试临时客户端.cs">
       <SubType>Form</SubType>
     </Compile>
