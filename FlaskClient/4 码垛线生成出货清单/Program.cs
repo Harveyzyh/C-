@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 码垛线生成出货清单
+namespace 码垛线生成并打印出货清单
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace 码垛线生成出货清单
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new 码垛线生成出货清单());
+            Application.Run(new 码垛线生成并打印出货清单());
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 码垛线生成出货清单.Properties {
+namespace 码垛线生成并打印出货清单.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
