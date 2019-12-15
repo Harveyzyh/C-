@@ -29,12 +29,25 @@ namespace 码垛线生成并打印出货清单
         private static int outReflashTime = 5;
         private static string printerName = "打印机名";
         private static string printerReloadPaperFlag = "Y";
+        private static string autoPrintFlag = "N";
+        private static string autoOutFlag = "N";
 
         private static System.Timers.Timer timerOut = null;
         private static System.Timers.Timer timerPrint = null;
 
 
         private delegate void TextBoxAppendText(string text);
+        private delegate void DelegateCOPTGCreateWork();
+        private delegate void DelegateCOPTGPrintWork();
+        #endregion
+
+        #region PrintPreview变量
+        private static string tg001 = "";
+        private static string tg002 = "";
+        private static string md_no = "";
+        private static string printId = "";
+        private static string printFileName = "";
+
         #endregion
 
         #region 初始化
@@ -53,9 +66,12 @@ namespace 码垛线生成并打印出货清单
 
             ReadIniFile();
             CheckReportPath();
+            tabControl1.SelectedTab = tabControl1.TabPages[0];
+            btnPrintPreview.Enabled = false;
 
             WorkStart();
-            tabControl1.SelectedTab = tabControl1.TabPages[0];
+
+            GetListData();
         }
 
         private void ReadIniFile()
@@ -123,6 +139,26 @@ namespace 码垛线生成并打印出货清单
             {
                 printerName = printerNameTmp;
             }
+
+            string autoPrintFlagTmp = IniHelper.GetValue("Setting", "AutoPrintFlag", "null", iniFilePath);
+            if (autoPrintFlagTmp == "null")
+            {
+                IniHelper.SetValue("Setting", "AutoPrintFlag", autoPrintFlag, iniFilePath);
+            }
+            else
+            {
+                autoPrintFlag = autoPrintFlagTmp;
+            }
+
+            string autoOutFlagTmp = IniHelper.GetValue("Setting", "AutoOutFlag", "null", iniFilePath);
+            if (autoOutFlagTmp == "null")
+            {
+                IniHelper.SetValue("Setting", "AutoOutFlag", autoOutFlag, iniFilePath);
+            }
+            else
+            {
+                autoOutFlag = autoOutFlagTmp;
+            }
         }
 
         private void CheckReportPath()
@@ -173,7 +209,27 @@ namespace 码垛线生成并打印出货清单
 
         private void dgvList_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            //打印列表双击
+            //若OutFlag = 1，则显示到tabpage[2]
+            //若TG001 与TG002 不为空，则btnPrintPreview enable
             int rowIndex = dgvList.CurrentRow.Index;
+            string outFlag = dgvList.Rows[rowIndex].Cells[4].Value.ToString();
+            string errFlag = dgvList.Rows[rowIndex].Cells[13].Value.ToString();
+            printFileName = dgvList.Rows[rowIndex].Cells[11].Value.ToString();
+            printId = dgvList.Rows[rowIndex].Cells[0].Value.ToString();
+            tg001 = dgvList.Rows[rowIndex].Cells[9].Value.ToString();
+            tg002 = dgvList.Rows[rowIndex].Cells[10].Value.ToString();
+            md_no = dgvList.Rows[rowIndex].Cells[2].Value.ToString();
+
+
+            if (outFlag == "True" && errFlag == "False")
+            {
+                btnPrintPreview.Enabled = true;
+            }
+
+            GetDetailData();
+
+            tabControl1.SelectedTab = tabControl1.TabPages[1];
         }
 
         #endregion
@@ -185,7 +241,7 @@ namespace 码垛线生成并打印出货清单
             {
                 dgvDetail.DataSource = dt;
                 DgvOpt.SetRowColor(dgvDetail);
-                dgvDetail_SelectLastRow();
+                //dgvDetail_SelectLastRow();
                 dgvDetail.ReadOnly = true;
             }
         }
@@ -197,50 +253,154 @@ namespace 码垛线生成并打印出货清单
 
         private void btnPrintPreview_Click(object sender, EventArgs e)
         {
-
+            FastReportPreview previewForm = new FastReportPreview(tg001, tg002, md_no, printerName, @"ReportFile/" + printFileName + @".frx");
+            if(previewForm.ShowDialog() == DialogResult.Cancel)
+            {
+                previewForm.Dispose();
+            }
         }
-
         #endregion
 
-        #region 逻辑
+        #region 主逻辑
         private void WorkStart()
         {
-            SetOutTimer();
-            SetPrintTimer();
+            if (autoOutFlag == "Y")
+            {
+                SetOutTimer();
+            }
+            if (autoPrintFlag == "Y")
+            {
+                SetPrintTimer();
+            }
         }
 
+        #region 订单生成并显示打印列表信息
         private void SetOutTimer()
         {
             timerOut = new System.Timers.Timer(outReflashTime * 1000);//实例化Timer类，设置间隔时间为10000毫秒；
-            timerOut.Elapsed += new System.Timers.ElapsedEventHandler(COPTGCreateWork);//到达时间的时候执行事件；
+            timerOut.Elapsed += new System.Timers.ElapsedEventHandler(COPTGCreateTimerWork);//到达时间的时候执行事件；
             timerOut.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             timerOut.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
         }
 
+        private void COPTGCreateTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
+        {
+            //TextBoxAppendText textBoxAppendText = new TextBoxAppendText(TextBoxAppend);
+            //this.textBox1.BeginInvoke(textBoxAppendText, "Create   " + DateTime.Now.ToString("yyyy-mm-dd hh:MM:ss"));
+            DelegateCOPTGCreateWork delegateCreateWork = new DelegateCOPTGCreateWork(COPTGCreateWork);
+            dgvList.BeginInvoke(delegateCreateWork);
+        }
+
+        private void COPTGCreateWork() //销货单生成的主方法，定时器溢出后调用
+        {
+            COPTGCreateProcWork();
+            GetListData();
+        }
+
+        private void GetListData() //打印列表显示信息的获取
+        {
+            string sqlstr = @"SELECT * FROM VPrintList 
+                                ORDER BY 打印序号";
+            DataTable dt = mssql.SQLselect(connRobot, sqlstr);
+            dgvList_Show(dt);
+        }
+
+        private void COPTGCreateProcWork() //执行存储过程在99生成销货单
+        {
+            string sqlstr = @" EXEC ROBOT_TEST.dbo.COPTG_CREATE_WORK_ZYH ";
+            mssql.SQLexcute(connRobot, sqlstr);
+        }
+
+        private void GetDetailData()
+        {
+            label3.Text = tg001;
+            label4.Text = tg002;
+            label7.Text = md_no;
+            label8.Text = printId;
+            string sqlstr = @"SELECT COPTH.TH003 AS 序号, RTRIM(COPTH.TH004) AS 品号, RTRIM(COPTH.TH005) AS 品名, RTRIM(COPTH.TH006) AS 规格,
+                                RTRIM(COPTH.TH014) + '-' + RTRIM(COPTH.TH015) + '-' + RTRIM(COPTH.TH016) AS 生产单号, 
+                                CONVERT(VARCHAR(10), CONVERT(FLOAT, COPTH.TH008)) AS 数量, RTRIM(COPTH.TH009) AS 单位, 
+                                RTRIM(COPTH.UDF03) AS 描述备注, RTRIM(COPTH.UDF04) AS 保友品名, RTRIM(COPTH.UDF05) AS 配置方案, RTRIM(COPTH.UDF10) AS 产品电商代码, 
+                                ' ' + RTRIM(CMSMC.MC002) + CHAR(10)+ CHAR(10) + RTRIM(COPTH.TH004) AS 备注, RTRIM(COPTH.UDF01) AS PO号
+
+                                FROM [192.168.0.99].COMFORT.dbo.COPTH
+                                LEFT JOIN [192.168.0.99].COMFORT.dbo.COPTG ON TG001 = TH001 AND TG002 = TH002
+                                LEFT JOIN [192.168.0.99].COMFORT.dbo.COPMA ON COPMA.MA001 = COPTG.TG004 
+                                LEFT JOIN [192.168.0.99].COMFORT.dbo.CMSMC ON COPTH.TH007 = CMSMC.MC001
+                                LEFT JOIN [192.168.0.99].COMFORT.dbo.CMSMV ON COPTG.CREATOR = CMSMV.MV001 
+                                WHERE RTRIM(TH001) = '{0}' AND RTRIM(TH002) = '{1}'
+                                ORDER BY COPTH.TH003";
+            DataTable dt = mssql.SQLselect(connRobot, string.Format(sqlstr, tg001, tg002));
+            dgvDetail_Show(dt);
+        }
+        #endregion
+
+        #region 订单打印
         private void SetPrintTimer()
         {
             timerPrint = new System.Timers.Timer(printReflashTime * 1000);//实例化Timer类，设置间隔时间为10000毫秒；
-            timerPrint.Elapsed += new System.Timers.ElapsedEventHandler(COPTGPrintWork);//到达时间的时候执行事件；
+            timerPrint.Elapsed += new System.Timers.ElapsedEventHandler(COPTGPrintTimerWork);//到达时间的时候执行事件；
             timerPrint.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             timerPrint.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
         }
 
-        private void COPTGCreateWork(object source, System.Timers.ElapsedEventArgs e)
+        private void COPTGPrintTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
         {
-            TextBoxAppendText textBoxAppendText = new TextBoxAppendText(TextBoxAppend);
-            this.textBox1.BeginInvoke(textBoxAppendText, "Create   " + DateTime.Now.ToString("yyyy-mm-dd hh:MM:ss"));
+            //DelegateCOPTGPrintWork delegatePrintWork = new DelegateCOPTGPrintWork(COPTGPrintWork);
+            COPTGPrintWork();
         }
 
-        private void COPTGPrintWork(object source, System.Timers.ElapsedEventArgs e)
+        private void COPTGPrintWork() //销货单打印的主方法，定时器溢出后调用
         {
-            TextBoxAppendText textBoxAppendText = new TextBoxAppendText(TextBoxAppend);
-            this.textBox1.BeginInvoke(textBoxAppendText, "Print   " + DateTime.Now.ToString("yyyy-mm-dd hh:MM:ss"));
-        }
+            FastReport.Report report = new FastReport.Report();
 
-        private void TextBoxAppend(string text)
+            string sqlstr = @"SELECT TOP 1 TG001, TG002, MD_No, PrintType, PrintId FROM ROBOT_TEST.dbo.PrintData
+                                INNER JOIN ROBOT_TEST.dbo.SplitTypeCode ON TG001 = OutType
+                                WHERE STATUSS = 0 AND OutFlag = 1 AND PrintFlag = 0 AND PrintingFlag = 0
+                                ORDER BY Create_Date ";
+
+            DataTable dt = mssql.SQLselect(connRobot, sqlstr);
+
+            if (dt != null)
+            {
+                string tg001c = dt.Rows[0][0].ToString();
+                string tg002c = dt.Rows[0][1].ToString();
+                string md_noc = dt.Rows[0][2].ToString();
+                string printFileNamec = dt.Rows[0][3].ToString();
+                string printIdc = dt.Rows[0][4].ToString();
+
+                mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintingFlag = 1 WHERE PrintId = {0}", 
+                                                            printIdc));
+
+
+                report.Load(@"ReportFile/" + printFileNamec + @".frx");
+                report.SetParameterValue("@TG001", tg001c);
+                report.SetParameterValue("@TG002", tg002c);
+                report.SetParameterValue("@PD_NO", md_noc);
+                report.PrintSettings.Printer = printerName;
+                report.PrintSettings.ShowDialog = false;
+                //report.Show();
+                report.Print();
+
+                mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintFlag = 1, PrintDate = getdate(), PrintingFlag = 0 WHERE PrintId = {0}", 
+                                                            printIdc));
+            }
+        }
+        #endregion
+        
+        #region 测试项
+
+        private void TextBoxAppend(string text) //插入字符串到textbox1
         {
             textBox1.AppendText(text + "\n");
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            COPTGPrintWork();
+        }
+        #endregion
+
         #endregion
     }
 }

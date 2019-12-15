@@ -15,3 +15,4 @@ Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.Deployme
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.dll
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.Drawing.dll
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.Xml.dll
+Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\obj\Debug\码垛线生成并打印出货清单.FastReportPreview.resources

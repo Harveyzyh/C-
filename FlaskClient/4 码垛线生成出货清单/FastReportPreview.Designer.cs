@@ -35,7 +35,12 @@
             // previewControl1
             // 
             this.previewControl1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.previewControl1.Buttons = ((FastReport.PreviewButtons)((((FastReport.PreviewButtons.Print | FastReport.PreviewButtons.Save) 
+            | FastReport.PreviewButtons.Watermark) 
+            | FastReport.PreviewButtons.Close)));
+            this.previewControl1.Clouds = FastReport.PreviewClouds.None;
             this.previewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewControl1.Exports = FastReport.PreviewExports.None;
             this.previewControl1.Font = new System.Drawing.Font("宋体", 9F);
             this.previewControl1.Location = new System.Drawing.Point(0, 0);
             this.previewControl1.Name = "previewControl1";

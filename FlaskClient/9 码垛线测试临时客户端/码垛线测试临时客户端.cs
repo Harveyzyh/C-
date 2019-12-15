@@ -31,10 +31,6 @@ namespace 码垛线测试临时客户端
         public 码垛线测试临时客户端()
         {
             InitializeComponent();
-            if (!Enable())
-            {
-                Environment.Exit(0);
-            }
             Form_MainResized_Work();
             Init();
         }
@@ -55,29 +51,7 @@ namespace 码垛线测试临时客户端
             dgv_Main.Size = new Size(FormWidth, FormHeight-panel_Title.Height-7);
         }
         #endregion
-
-        private bool Enable()
-        {
-            string sqlstr = " SELECT CONTENTS FROM CONFIG..CONFIGURE WHERE CONFIG_NAME = 'ROBOT_TEST' ";
-            Main_dt = mssql.SQLselect(strConnection_ROBOT, sqlstr);
-            if(Main_dt != null)
-            {
-                if (Main_dt.Rows[0][0].ToString() == "Y")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
+        
         private void Init()
         {
             Dgv_Show();
@@ -145,7 +119,7 @@ namespace 码垛线测试临时客户端
                             + "SC037 订单编码, InTypeName + (CASE WHEN Spec IS NULL THEN '' ELSE '-' + Spec END) 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
                             + "FROM SCHEDULE AS SC "
-                            + "LEFT JOIN SplitTypeCode ON TypeCode = SC037 "
+                            + "LEFT JOIN SplitTypeCode ON InType = SUBSTRING(SC001, 1, 4) "
                             + "LEFT JOIN ( "
                             + "SELECT SC001, MD_No, COUNT(Pd_Sta) PDCOUNT FROM PdData "
                             + "WHERE Pd_Sta = 'OK' GROUP BY SC001, MD_No "
