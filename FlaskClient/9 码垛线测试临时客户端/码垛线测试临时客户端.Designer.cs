@@ -54,9 +54,10 @@
             this.panel_Title.Controls.Add(this.btn_Test_Add);
             this.panel_Title.Controls.Add(this.btn_Reflash);
             this.panel_Title.Controls.Add(this.btn_Test_Reset);
-            this.panel_Title.Location = new System.Drawing.Point(2, 2);
+            this.panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Title.Location = new System.Drawing.Point(0, 0);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(1307, 59);
+            this.panel_Title.Size = new System.Drawing.Size(1321, 59);
             this.panel_Title.TabIndex = 0;
             // 
             // txb_Fine
@@ -146,13 +147,14 @@
             this.dgv_Main.AllowUserToResizeRows = false;
             this.dgv_Main.BackgroundColor = System.Drawing.Color.White;
             this.dgv_Main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Main.Location = new System.Drawing.Point(2, 63);
+            this.dgv_Main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Main.Location = new System.Drawing.Point(0, 59);
             this.dgv_Main.MultiSelect = false;
             this.dgv_Main.Name = "dgv_Main";
             this.dgv_Main.RowHeadersVisible = false;
             this.dgv_Main.RowTemplate.Height = 23;
             this.dgv_Main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Main.Size = new System.Drawing.Size(881, 363);
+            this.dgv_Main.Size = new System.Drawing.Size(1321, 772);
             this.dgv_Main.TabIndex = 1;
             // 
             // 码垛线测试临时客户端

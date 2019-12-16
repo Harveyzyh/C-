@@ -266,10 +266,12 @@ namespace 码垛线生成并打印出货清单
         {
             if (autoOutFlag == "Y")
             {
+                this.Text += "    -生成销货单已开启";
                 SetOutTimer();
             }
             if (autoPrintFlag == "Y")
             {
+                this.Text += "    -自动打印已开启";
                 SetPrintTimer();
             }
         }
