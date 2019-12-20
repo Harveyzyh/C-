@@ -116,10 +116,9 @@ namespace 码垛线测试临时客户端
             }
             string sqlstr = "SELECT SC.SC001 订单号, SUBSTRING(SC003,1, 4) + '-' + SUBSTRING(SC003, 5, 2) + '-' + SUBSTRING(SC003, 7, 2) 生产日期, "
                             + "SC010 品名, SC013 数量, SC036 纸箱编码, "
-                            + "SC037 订单编码, InTypeName + (CASE WHEN Spec IS NULL THEN '' ELSE '-' + Spec END) 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
+                            + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
                             + "FROM SCHEDULE AS SC "
-                            + "LEFT JOIN SplitTypeCode ON InType = SUBSTRING(SC001, 1, 4) "
                             + "LEFT JOIN ( "
                             + "SELECT SC001, MD_No, COUNT(Pd_Sta) PDCOUNT FROM PdData "
                             + "WHERE Pd_Sta = 'OK' GROUP BY SC001, MD_No "
