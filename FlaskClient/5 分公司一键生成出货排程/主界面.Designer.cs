@@ -31,10 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(主界面));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.生产入库领料明细ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生产日入库数ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.出货排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.出货排程欠数查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查询玖友库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭当前界面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelParent = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
@@ -45,10 +41,6 @@
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.生产入库领料明细ToolStripMenuItem,
-            this.生产日入库数ToolStripMenuItem,
-            this.出货排程ToolStripMenuItem,
-            this.出货排程欠数查询ToolStripMenuItem,
-            this.查询玖友库存ToolStripMenuItem,
             this.关闭当前界面ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -63,34 +55,6 @@
             this.生产入库领料明细ToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.生产入库领料明细ToolStripMenuItem.Text = "生产入库领料明细";
             this.生产入库领料明细ToolStripMenuItem.Click += new System.EventHandler(this.生产入库领料明细ToolStripMenuItem_Click);
-            // 
-            // 生产日入库数ToolStripMenuItem
-            // 
-            this.生产日入库数ToolStripMenuItem.Name = "生产日入库数ToolStripMenuItem";
-            this.生产日入库数ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.生产日入库数ToolStripMenuItem.Text = "生产日入库数";
-            this.生产日入库数ToolStripMenuItem.Click += new System.EventHandler(this.生产日入库数ToolStripMenuItem_Click);
-            // 
-            // 出货排程ToolStripMenuItem
-            // 
-            this.出货排程ToolStripMenuItem.Name = "出货排程ToolStripMenuItem";
-            this.出货排程ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
-            this.出货排程ToolStripMenuItem.Text = "出货排程";
-            this.出货排程ToolStripMenuItem.Click += new System.EventHandler(this.出货排程ToolStripMenuItem_Click);
-            // 
-            // 出货排程欠数查询ToolStripMenuItem
-            // 
-            this.出货排程欠数查询ToolStripMenuItem.Name = "出货排程欠数查询ToolStripMenuItem";
-            this.出货排程欠数查询ToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.出货排程欠数查询ToolStripMenuItem.Text = "出货排程欠数查询";
-            this.出货排程欠数查询ToolStripMenuItem.Click += new System.EventHandler(this.出货排程欠数查询ToolStripMenuItem_Click);
-            // 
-            // 查询玖友库存ToolStripMenuItem
-            // 
-            this.查询玖友库存ToolStripMenuItem.Name = "查询玖友库存ToolStripMenuItem";
-            this.查询玖友库存ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.查询玖友库存ToolStripMenuItem.Text = "查询玖友库存";
-            this.查询玖友库存ToolStripMenuItem.Click += new System.EventHandler(this.查询玖友库存ToolStripMenuItem_Click);
             // 
             // 关闭当前界面ToolStripMenuItem
             // 
@@ -140,9 +104,5 @@
         private System.Windows.Forms.Panel panelParent;
         private System.Windows.Forms.ToolStripMenuItem 关闭当前界面ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产入库领料明细ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 生产日入库数ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 出货排程ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 出货排程欠数查询ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 查询玖友库存ToolStripMenuItem;
     }
 }

@@ -56,7 +56,8 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void ShowTypeSplitCode()
         {
-            string sqlstr = @"SELECT K_ID 序号, PO_Class 订单类别, PO_Type 描述备注, TypeCode 类别代码, Valid 有效码 FROM SplitTypeCode ORDER BY K_ID ";
+            //string sqlstr = @"SELECT K_ID 序号, PO_Class 订单类别, PO_Type 描述备注, TypeCode 类别代码, Valid 有效码 FROM SplitTypeCode ORDER BY K_ID ";
+            string sqlstr = @"Select InType 订单单别, InTypeName 订单单别名称, OutType 销货单别, OutTypeName 销货单别名称, SplitType 区分方式, Spec 描述备注, TypeCode 订单类别码, Remark 备注, PrintType 打印模板文件名 from SplitTypeCode";
             showDt = mssql.SQLselect(connStrRobot, sqlstr);
 
 
@@ -65,10 +66,11 @@ namespace 联友生产辅助工具.生管码垛线
             {
                 showDtTmp = showDt.Copy();
                 DgvMain.DataSource = showDt;
-                DgvOpt.SetColReadonly(DgvMain, "序号");
-                DgvOpt.SetColReadonly(DgvMain, "订单类别");
-                DgvOpt.SetColReadonly(DgvMain, "类别代码");
-                DgvOpt.SetColReadonly(DgvMain, "描述备注");
+                //DgvOpt.SetColReadonly(DgvMain, "序号");
+                //DgvOpt.SetColReadonly(DgvMain, "订单类别");
+                //DgvOpt.SetColReadonly(DgvMain, "类别代码");
+                //DgvOpt.SetColReadonly(DgvMain, "描述备注");
+                DgvMain.ReadOnly = true;
                 DgvOpt.SetRowColor(DgvMain);
             }
 

@@ -61,6 +61,7 @@
             // 
             // BtnSave
             // 
+            this.BtnSave.Enabled = false;
             this.BtnSave.Location = new System.Drawing.Point(296, 22);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
@@ -71,6 +72,7 @@
             // 
             // BtnAdd
             // 
+            this.BtnAdd.Enabled = false;
             this.BtnAdd.Location = new System.Drawing.Point(169, 22);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
