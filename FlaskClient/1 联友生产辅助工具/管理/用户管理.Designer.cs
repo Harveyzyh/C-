@@ -117,10 +117,13 @@
             // 
             // DgvUser
             // 
+            this.DgvUser.AllowUserToAddRows = false;
+            this.DgvUser.AllowUserToDeleteRows = false;
             this.DgvUser.BackgroundColor = System.Drawing.Color.White;
             this.DgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvUser.Location = new System.Drawing.Point(398, 122);
             this.DgvUser.Name = "DgvUser";
+            this.DgvUser.ReadOnly = true;
             this.DgvUser.RowTemplate.Height = 23;
             this.DgvUser.Size = new System.Drawing.Size(240, 150);
             this.DgvUser.TabIndex = 2;
