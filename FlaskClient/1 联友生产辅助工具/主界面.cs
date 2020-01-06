@@ -199,15 +199,15 @@ namespace 联友生产辅助工具
                 frm.WindowState = FormWindowState.Maximized;
             }
 
-            statusLabelYunConn.Width = 150;
-            statusLabelYunConn.TextAlign = ContentAlignment.MiddleCenter;
+            //statusLabelYunConn.Width = 150;
+            //statusLabelYunConn.TextAlign = ContentAlignment.MiddleCenter;
             statusLabelLocalConn.Width = 150;
             statusLabelLocalConn.TextAlign = ContentAlignment.MiddleCenter;
             statusLabelIP.Width = 180;
             statusLabelIP.TextAlign = ContentAlignment.MiddleRight;
 
             statusLabelUser.TextAlign = ContentAlignment.MiddleLeft;
-            statusLabelUser.Width = FormWidth - statusLabelYunConn.Width - statusLabelLocalConn.Width - statusLabelIP.Width - 12;
+            statusLabelUser.Width = FormWidth - statusLabelLocalConn.Width - statusLabelIP.Width - 12;
         }
         #endregion
 
@@ -261,14 +261,6 @@ namespace 联友生产辅助工具
         {
             statusLabelUser.Text = "部门：" + FormLogin.Login_Dpt + "    姓名：" + FormLogin.Login_Uid + "-" + FormLogin.Login_Name;
             statusLabelIP.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
-            if (FormLogin.connFlagY)
-            {
-                statusLabelYunConn.Text = "云服务器：已连接";
-            }
-            else
-            {
-                statusLabelYunConn.Text = "云服务器：未连接";
-            }
             if (FormLogin.connFlag99)
             {
                 statusLabelLocalConn.Text = "联友服务器：已连接";

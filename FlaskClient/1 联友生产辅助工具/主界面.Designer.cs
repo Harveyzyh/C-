@@ -69,7 +69,6 @@
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusLabelUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelYunConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -391,7 +390,6 @@
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelUser,
             this.statusLabelLocalConn,
-            this.statusLabelYunConn,
             this.statusLabelIP});
             this.statusBar.Location = new System.Drawing.Point(0, 596);
             this.statusBar.Name = "statusBar";
@@ -414,14 +412,6 @@
             this.statusLabelLocalConn.Name = "statusLabelLocalConn";
             this.statusLabelLocalConn.Size = new System.Drawing.Size(133, 21);
             this.statusLabelLocalConn.Text = "statusLabelLocalConn";
-            // 
-            // statusLabelYunConn
-            // 
-            this.statusLabelYunConn.AutoSize = false;
-            this.statusLabelYunConn.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.statusLabelYunConn.Name = "statusLabelYunConn";
-            this.statusLabelYunConn.Size = new System.Drawing.Size(124, 21);
-            this.statusLabelYunConn.Text = "statusLabelYunConn";
             // 
             // statusLabelIP
             // 
@@ -503,7 +493,6 @@
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelUser;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelLocalConn;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelYunConn;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelIP;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_纸箱名称管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_工作组线别维护ToolStripMenuItem;

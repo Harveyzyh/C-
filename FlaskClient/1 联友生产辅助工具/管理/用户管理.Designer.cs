@@ -36,6 +36,7 @@
             this.TextBoxU_ID = new System.Windows.Forms.TextBox();
             this.LableU_ID = new System.Windows.Forms.Label();
             this.DgvUser = new System.Windows.Forms.DataGridView();
+            this.BtnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvUser)).BeginInit();
@@ -45,10 +46,13 @@
             // 
             this.DgvMain.AllowUserToAddRows = false;
             this.DgvMain.AllowUserToDeleteRows = false;
+            this.DgvMain.AllowUserToResizeRows = false;
             this.DgvMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvMain.BackgroundColor = System.Drawing.Color.White;
             this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMain.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.DgvMain.Location = new System.Drawing.Point(4, 97);
+            this.DgvMain.MultiSelect = false;
             this.DgvMain.Name = "DgvMain";
             this.DgvMain.RowHeadersVisible = false;
             this.DgvMain.RowTemplate.Height = 23;
@@ -58,6 +62,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.BtnReset);
             this.PanelTitle.Controls.Add(this.BtnSetBasePerm);
             this.PanelTitle.Controls.Add(this.BtnSave);
             this.PanelTitle.Controls.Add(this.BtnFind);
@@ -72,7 +77,7 @@
             // 
             this.BtnSetBasePerm.Location = new System.Drawing.Point(502, 21);
             this.BtnSetBasePerm.Name = "BtnSetBasePerm";
-            this.BtnSetBasePerm.Size = new System.Drawing.Size(75, 23);
+            this.BtnSetBasePerm.Size = new System.Drawing.Size(91, 23);
             this.BtnSetBasePerm.TabIndex = 4;
             this.BtnSetBasePerm.Text = "更新基础权限";
             this.BtnSetBasePerm.UseVisualStyleBackColor = true;
@@ -80,6 +85,7 @@
             // 
             // BtnSave
             // 
+            this.BtnSave.Enabled = false;
             this.BtnSave.Location = new System.Drawing.Point(379, 22);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
@@ -119,14 +125,31 @@
             // 
             this.DgvUser.AllowUserToAddRows = false;
             this.DgvUser.AllowUserToDeleteRows = false;
+            this.DgvUser.AllowUserToResizeRows = false;
             this.DgvUser.BackgroundColor = System.Drawing.Color.White;
             this.DgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvUser.Location = new System.Drawing.Point(398, 122);
+            this.DgvUser.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.DgvUser.Location = new System.Drawing.Point(368, 98);
+            this.DgvUser.MultiSelect = false;
             this.DgvUser.Name = "DgvUser";
             this.DgvUser.ReadOnly = true;
+            this.DgvUser.RowHeadersVisible = false;
             this.DgvUser.RowTemplate.Height = 23;
-            this.DgvUser.Size = new System.Drawing.Size(240, 150);
+            this.DgvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvUser.Size = new System.Drawing.Size(360, 397);
             this.DgvUser.TabIndex = 2;
+            this.DgvUser.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DgvUser_MouseDoubleClick);
+            // 
+            // BtnReset
+            // 
+            this.BtnReset.Enabled = false;
+            this.BtnReset.Location = new System.Drawing.Point(265, 52);
+            this.BtnReset.Name = "BtnReset";
+            this.BtnReset.Size = new System.Drawing.Size(94, 23);
+            this.BtnReset.TabIndex = 5;
+            this.BtnReset.Text = "允许重置密码";
+            this.BtnReset.UseVisualStyleBackColor = true;
+            this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // 用户管理
             // 
@@ -157,5 +180,6 @@
         private System.Windows.Forms.TextBox TextBoxU_ID;
         private System.Windows.Forms.Label LableU_ID;
         private System.Windows.Forms.DataGridView DgvUser;
+        private System.Windows.Forms.Button BtnReset;
     }
 }

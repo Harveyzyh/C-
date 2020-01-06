@@ -12,6 +12,8 @@ namespace 联友生产辅助工具.管理
 {
     public partial class 用户管理 : Form
     {
+        static string connWG = Global_Const.strConnection_WGDB;
+        static Mssql mssql = new Mssql();
         public 用户管理()
         {
             InitializeComponent();
@@ -44,9 +46,8 @@ namespace 联友生产辅助工具.管理
 
         private void ShowUser()
         {
-            string connWG = Global_Const.strConnection_WGDB;
-            Mssql mssql = new Mssql();
-            string sqlstr = @"SELECT U_ID, U_NAME, DPT, FLAG, TYPE FROM WG_USER ORDER BY K_ID ";
+            
+            string sqlstr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 FROM WG_USER ORDER BY K_ID ";
             DgvUser.DataSource = mssql.SQLselect(connWG, sqlstr);
             DgvOpt.SetRowColor(DgvUser);
         }
@@ -54,12 +55,15 @@ namespace 联友生产辅助工具.管理
         private void ShowUserPerm(string U_ID)
         {
             DgvMain.DataSource = null;
+            BtnSave.Enabled = false;
+            BtnReset.Enabled = false;
             DataTable showDt = UserPermission.ShowUserPerm(U_ID);
             if (showDt != null)
             {
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetRowColor(DgvMain);
                 BtnSave.Enabled = true;
+                BtnReset.Enabled = true;
             }
             else
             {
@@ -100,6 +104,26 @@ namespace 联友生产辅助工具.管理
         {
             DgvMain.DataSource = null;
             BtnSave.Enabled = false;
+            BtnReset.Enabled = false;
+        }
+
+        private void DgvUser_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string userId = "";
+            if(DgvUser.RowCount > 0)
+            {
+                userId = DgvUser.Rows[DgvUser.CurrentRow.Index].Cells[0].Value.ToString();
+                TextBoxU_ID.Text = userId;
+                ShowUserPerm(userId);
+            }
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            string sqlstr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' ";
+            mssql.SQLexcute(connWG, string.Format(sqlstr, TextBoxU_ID.Text));
+            ShowUser();
+            MessageBox.Show("已设置", "提示", MessageBoxButtons.OK);
         }
     }
 }

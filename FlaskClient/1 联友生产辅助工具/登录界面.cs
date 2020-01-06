@@ -83,8 +83,8 @@ namespace HarveyZ
 
             labelVersion.Text = "Ver: " + ProgVersion;
 
-            SqlTestDelegate sqlTestYDelegate = new SqlTestDelegate(SqlTestY);
-            sqlTestYDelegate.BeginInvoke(connY_Ls, null, null);
+            //SqlTestDelegate sqlTestYDelegate = new SqlTestDelegate(SqlTestY);
+            //sqlTestYDelegate.BeginInvoke(connY_Ls, null, null);
             SqlTestDelegate sqlTest99Delegate = new SqlTestDelegate(SqlTest99);
             sqlTest99Delegate.BeginInvoke(connComfort, null, null);
             SqlTestDelegate sqlTest198Delegate = new SqlTestDelegate(SqlTest198);
