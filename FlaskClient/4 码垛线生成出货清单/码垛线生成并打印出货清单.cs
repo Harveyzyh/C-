@@ -392,11 +392,6 @@ namespace 码垛线生成并打印出货清单
         
         #region 测试项
 
-        private void TextBoxAppend(string text) //插入字符串到textbox1
-        {
-            textBox1.AppendText(text + "\n");
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             COPTGPrintWork();
