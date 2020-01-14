@@ -28,16 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -48,6 +38,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_Title = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.数量T = new System.Windows.Forms.TextBox();
@@ -62,13 +62,23 @@
             this.供应商 = new System.Windows.Forms.Label();
             this.入库单别 = new System.Windows.Forms.Label();
             this.送货单号T = new System.Windows.Forms.TextBox();
-            this.入库单别L = new System.Windows.Forms.Label();
+            this.入库单别L = new System.Windows.Forms.LinkLabel();
             this.送货日期L = new System.Windows.Forms.Label();
             this.送货单号L = new System.Windows.Forms.Label();
-            this.供应商L = new System.Windows.Forms.Label();
-            this.入库仓库L = new System.Windows.Forms.Label();
+            this.供应商L = new System.Windows.Forms.LinkLabel();
+            this.入库仓库L = new System.Windows.Forms.LinkLabel();
             this.数量L = new System.Windows.Forms.Label();
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
+            this.C1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Last = new System.Windows.Forms.Panel();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -82,16 +92,6 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Last.SuspendLayout();
@@ -252,7 +252,9 @@
             this.入库单别L.Name = "入库单别L";
             this.入库单别L.Size = new System.Drawing.Size(82, 15);
             this.入库单别L.TabIndex = 0;
+            this.入库单别L.TabStop = true;
             this.入库单别L.Text = "入库单别：";
+            this.入库单别L.MouseClick += new System.Windows.Forms.MouseEventHandler(this.入库单别L_MouseClick);
             // 
             // 送货日期L
             // 
@@ -282,7 +284,9 @@
             this.供应商L.Name = "供应商L";
             this.供应商L.Size = new System.Drawing.Size(83, 15);
             this.供应商L.TabIndex = 1;
+            this.供应商L.TabStop = true;
             this.供应商L.Text = "供 应 商：";
+            this.供应商L.MouseClick += new System.Windows.Forms.MouseEventHandler(this.供应商L_MouseClick);
             // 
             // 入库仓库L
             // 
@@ -292,7 +296,9 @@
             this.入库仓库L.Name = "入库仓库L";
             this.入库仓库L.Size = new System.Drawing.Size(82, 15);
             this.入库仓库L.TabIndex = 3;
+            this.入库仓库L.TabStop = true;
             this.入库仓库L.Text = "入库仓库：";
+            this.入库仓库L.MouseClick += new System.Windows.Forms.MouseEventHandler(this.入库仓库L_MouseClick);
             // 
             // 数量L
             // 
@@ -332,6 +338,95 @@
             this.DataGridView_List.Size = new System.Drawing.Size(1263, 469);
             this.DataGridView_List.TabIndex = 1;
             this.DataGridView_List.TabStop = false;
+            // 
+            // C1
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.C1.HeaderText = "序号";
+            this.C1.Name = "C1";
+            this.C1.ReadOnly = true;
+            this.C1.ToolTipText = "自动生成序号";
+            this.C1.Width = 60;
+            // 
+            // C2
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.C2.HeaderText = "品号";
+            this.C2.Name = "C2";
+            this.C2.ReadOnly = true;
+            this.C2.Width = 150;
+            // 
+            // C3
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C3.DefaultCellStyle = dataGridViewCellStyle3;
+            this.C3.HeaderText = "品名";
+            this.C3.Name = "C3";
+            this.C3.ReadOnly = true;
+            this.C3.Width = 200;
+            // 
+            // C4
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C4.DefaultCellStyle = dataGridViewCellStyle4;
+            this.C4.HeaderText = "规格";
+            this.C4.Name = "C4";
+            this.C4.ReadOnly = true;
+            this.C4.Width = 200;
+            // 
+            // C5
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C5.DefaultCellStyle = dataGridViewCellStyle5;
+            this.C5.HeaderText = "数量";
+            this.C5.Name = "C5";
+            this.C5.ReadOnly = true;
+            this.C5.Width = 70;
+            // 
+            // C6
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C6.DefaultCellStyle = dataGridViewCellStyle6;
+            this.C6.HeaderText = "仓库";
+            this.C6.Name = "C6";
+            this.C6.ReadOnly = true;
+            this.C6.Width = 70;
+            // 
+            // C7
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C7.DefaultCellStyle = dataGridViewCellStyle7;
+            this.C7.HeaderText = "批号";
+            this.C7.Name = "C7";
+            this.C7.ReadOnly = true;
+            this.C7.Width = 70;
+            // 
+            // C8
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C8.DefaultCellStyle = dataGridViewCellStyle8;
+            this.C8.HeaderText = "供应商";
+            this.C8.Name = "C8";
+            this.C8.ReadOnly = true;
+            // 
+            // C9
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C9.DefaultCellStyle = dataGridViewCellStyle9;
+            this.C9.HeaderText = "送货单";
+            this.C9.Name = "C9";
+            this.C9.ReadOnly = true;
+            // 
+            // C10
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C10.DefaultCellStyle = dataGridViewCellStyle10;
+            this.C10.HeaderText = "条码";
+            this.C10.Name = "C10";
+            this.C10.ReadOnly = true;
+            this.C10.Width = 200;
             // 
             // panel_Last
             // 
@@ -444,95 +539,6 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Width = 200;
             // 
-            // C1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.C1.HeaderText = "序号";
-            this.C1.Name = "C1";
-            this.C1.ReadOnly = true;
-            this.C1.ToolTipText = "自动生成序号";
-            this.C1.Width = 60;
-            // 
-            // C2
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.C2.HeaderText = "品号";
-            this.C2.Name = "C2";
-            this.C2.ReadOnly = true;
-            this.C2.Width = 150;
-            // 
-            // C3
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C3.DefaultCellStyle = dataGridViewCellStyle3;
-            this.C3.HeaderText = "品名";
-            this.C3.Name = "C3";
-            this.C3.ReadOnly = true;
-            this.C3.Width = 200;
-            // 
-            // C4
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C4.DefaultCellStyle = dataGridViewCellStyle4;
-            this.C4.HeaderText = "规格";
-            this.C4.Name = "C4";
-            this.C4.ReadOnly = true;
-            this.C4.Width = 200;
-            // 
-            // C5
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C5.DefaultCellStyle = dataGridViewCellStyle5;
-            this.C5.HeaderText = "数量";
-            this.C5.Name = "C5";
-            this.C5.ReadOnly = true;
-            this.C5.Width = 70;
-            // 
-            // C6
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C6.DefaultCellStyle = dataGridViewCellStyle6;
-            this.C6.HeaderText = "仓库";
-            this.C6.Name = "C6";
-            this.C6.ReadOnly = true;
-            this.C6.Width = 70;
-            // 
-            // C7
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C7.DefaultCellStyle = dataGridViewCellStyle7;
-            this.C7.HeaderText = "批号";
-            this.C7.Name = "C7";
-            this.C7.ReadOnly = true;
-            this.C7.Width = 70;
-            // 
-            // C8
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C8.DefaultCellStyle = dataGridViewCellStyle8;
-            this.C8.HeaderText = "供应商";
-            this.C8.Name = "C8";
-            this.C8.ReadOnly = true;
-            // 
-            // C9
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C9.DefaultCellStyle = dataGridViewCellStyle9;
-            this.C9.HeaderText = "送货单";
-            this.C9.Name = "C9";
-            this.C9.ReadOnly = true;
-            // 
-            // C10
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C10.DefaultCellStyle = dataGridViewCellStyle10;
-            this.C10.HeaderText = "条码";
-            this.C10.Name = "C10";
-            this.C10.ReadOnly = true;
-            this.C10.Width = 200;
-            // 
             // PDA_扫描进货单
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -559,10 +565,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel_Title;
-        private System.Windows.Forms.Label 入库仓库L;
         private System.Windows.Forms.Label 送货日期L;
-        private System.Windows.Forms.Label 供应商L;
-        private System.Windows.Forms.Label 入库单别L;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button 入库仓库查;
         private System.Windows.Forms.Button 供应商查;
@@ -602,5 +605,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.LinkLabel 供应商L;
+        private System.Windows.Forms.LinkLabel 入库仓库L;
+        private System.Windows.Forms.LinkLabel 入库单别L;
     }
 }

@@ -143,6 +143,66 @@ namespace 联友生产辅助工具.仓储中心
                 frm.Dispose();
             }
         }
+        
+        private void 入库仓库L_MouseClick(object sender, MouseEventArgs e)
+        {
+            Mode = "PositionID";
+            Title = "仓库编号";
+            //Title = "仓库编号|仓库名称";
+            PDA_扫描进货单_获取单据信息 frm = new PDA_扫描进货单_获取单据信息();
+            if (frm.ShowDialog() == DialogResult.Cancel)
+            {
+                if (GetMain != null)
+                {
+                    入库仓库.Text = GetMain + "-" + GetOther;
+                    PositionID = GetMain;
+                    GetMain = null;
+                    GetOther = null;
+                }
+                frm.Dispose();
+            }
+        }
+
+        private void 供应商L_MouseClick(object sender, MouseEventArgs e)
+        {
+            Mode = "SupplierID";
+            Title = "供应商编号";
+            //Title = "供应商编号|简称";
+            PDA_扫描进货单_获取单据信息 frm = new PDA_扫描进货单_获取单据信息();
+            if (frm.ShowDialog() == DialogResult.Cancel)
+            {
+                if (GetMain != null)
+                {
+                    供应商.Text = GetMain + "-" + GetOther;
+                    SupplierID = GetMain;
+                    GetMain = null;
+                    GetOther = null;
+                }
+                frm.Dispose();
+                MsgFlag = true;
+                送货单号T.Select();
+                送货单号T.SelectAll();
+            }
+        }
+
+        private void 入库单别L_MouseClick(object sender, MouseEventArgs e)
+        {
+            Mode = "TypeID";
+            Title = "单别";
+            //Title = "单别|单据简称";
+            PDA_扫描进货单_获取单据信息 frm = new PDA_扫描进货单_获取单据信息();
+            if (frm.ShowDialog() == DialogResult.Cancel)
+            {
+                if (GetMain != null)
+                {
+                    入库单别.Text = GetMain + "-" + GetOther;
+                    TypeID = GetMain;
+                    GetMain = null;
+                    GetOther = null;
+                }
+                frm.Dispose();
+            }
+        }
 
         private void 送货单号_KeyUp(object sender, KeyEventArgs e)
         {
@@ -731,20 +791,15 @@ namespace 联友生产辅助工具.仓储中心
             string sqlstr = @"SELECT DISTINCT TOP 200 TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) 
                                 FROM COMFORT.dbo.PURTH PURTH WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 
                                 AND TH030 = 'N' ) AS WJL, 
-                                TD001, RTRIM(TD002), TD003, (CASE WHEN TD010 IS NULL THEN 0 ELSE TD010 END), TD014, RTRIM(TD020), 
-                                RTRIM(TD022), RTRIM(TDC03) AS TD010, TD012 
+                                TD001, RTRIM(TD002) AS TD002, TD003, (CASE WHEN TD010 IS NULL THEN 0 ELSE TD010 END) AS TD010, TD014, RTRIM(TD020) AS TD020, 
+                                RTRIM(TD022) AS TD022, RTRIM(TDC03) AS TDC03, TC024 
                                 FROM COMFORT.dbo.PURTD AS PURTD 
                                 LEFT JOIN COMFORT.dbo.PURTC AS PURTC ON TC001 = TD001 AND TC002 = TD002 
-                                LEFT JOIN (SELECT XB005,XB006,XB007,MIN(XB003) XB003,XA001 FROM COMFORT.dbo.MPSXB MPSXB 
-                                INNER JOIN COMFORT.dbo.MPSXA MPSXA ON XB001 = XA001 
-                                WHERE XA006 = 'Y' AND XA007 = 'Y' 
-                                GROUP BY XB005,XB006,XB007,XA001) AS MPSXB ON CHARINDEX( '/' + RTRIM( XB006 ) + '/', '/' + 
-                                RTRIM( TD014 ) + '/' ) > 0 
                                 WHERE TC004 = '{0}' AND TD004 = '{1}' 
                                 AND (TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) FROM COMFORT.dbo.PURTH PURTH 
                                 WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 AND TH030 = 'N' )) > 0 
                                 AND TD016 = 'N' AND TC014 = 'Y' AND TC001 <> '3305' AND TC001 <> '3306' 
-                                ORDER BY TD012, TD001, RTRIM(TD002), TD003 ";
+                                ORDER BY TC024, TD001 DESC, RTRIM(TD002), TD003 ";
             detailObj.SlDt = mssql.SQLselect(strConnection, string.Format(sqlstr, headObj.TG005, detailObj.TH004));
         }
 
