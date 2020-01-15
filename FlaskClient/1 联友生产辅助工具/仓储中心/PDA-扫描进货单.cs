@@ -792,14 +792,14 @@ namespace 联友生产辅助工具.仓储中心
                                 FROM COMFORT.dbo.PURTH PURTH WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 
                                 AND TH030 = 'N' ) AS WJL, 
                                 TD001, RTRIM(TD002) AS TD002, TD003, (CASE WHEN TD010 IS NULL THEN 0 ELSE TD010 END) AS TD010, TD014, RTRIM(TD020) AS TD020, 
-                                RTRIM(TD022) AS TD022, RTRIM(TDC03) AS TDC03, TC024 
+                                RTRIM(TD022) AS TD022, RTRIM(TDC03) AS TDC03, TD012 
                                 FROM COMFORT.dbo.PURTD AS PURTD 
                                 LEFT JOIN COMFORT.dbo.PURTC AS PURTC ON TC001 = TD001 AND TC002 = TD002 
                                 WHERE TC004 = '{0}' AND TD004 = '{1}' 
                                 AND (TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) FROM COMFORT.dbo.PURTH PURTH 
                                 WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 AND TH030 = 'N' )) > 0 
                                 AND TD016 = 'N' AND TC014 = 'Y' AND TC001 <> '3305' AND TC001 <> '3306' 
-                                ORDER BY TC024, TD001 DESC, RTRIM(TD002), TD003 ";
+                                ORDER BY TD012, TD001 DESC, RTRIM(TD002), TD003 ";
             detailObj.SlDt = mssql.SQLselect(strConnection, string.Format(sqlstr, headObj.TG005, detailObj.TH004));
         }
 

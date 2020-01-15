@@ -16,10 +16,20 @@ namespace 码垛线生成并打印出货清单
 {
     public partial class 码垛线生成并打印出货清单 : Form
     {
+        #region 公共静态变量
+        //软件信息
+        public static string ProgVersion = "";
+        public static string ProgName = "";
+        //服务器URL
+        public static string HttpURL = "";
+        private string UpdateUrl = "";
+        #endregion
+
         #region 局域静态变量
         private Mssql mssql = new Mssql();
         private static string connRobot = Global_Const.strConnection_ROBOT_TEST;
         private static string connComfort = Global_Const.strConnection_COMFORT;
+        public static string connWg = Global_Const.strConnection_WGDB;
 
         private static string localPath = "";
         private static string iniFilePath = "";
@@ -60,20 +70,95 @@ namespace 码垛线生成并打印出货清单
 
         private void Init()
         {
+            //判断是否在debug模式
+            #if DEBUG
+            this.Text += " -DEBUG";
+            #endif
+
+            //从文件详细信息中获取程序名称
+            ProgName = Application.ProductName.ToString();
+            ProgVersion = Application.ProductVersion.ToString();
+
+            this.Text += " -Ver." + ProgVersion;
+
+            //检查软件是否存在更新版本
+            HttpURL = GetHttpURL();
+            if (GetNewVersion())
+            {
+                UpdateMe.ProgUpdate(ProgName, UpdateUrl);
+            }
+
+
+            //获取初始化文件及打印模板目录
             localPath = System.IO.Directory.GetCurrentDirectory();
             iniFilePath = localPath + @"\" + iniFileName;
             printFilePath = localPath + @"\ReportFile\";
 
+            //初始化检测
             ReadIniFile();
             CheckReportPath();
             tabControl1.SelectedTab = tabControl1.TabPages[0];
             btnPrintPreview.Enabled = false;
 
+            //开始工作
             WorkStart();
-
-            GetListData();
         }
 
+        #region 软件更新检测
+        private string GetHttpURL()
+        {
+            try
+            {
+                string sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
+                
+                var get = mssql.SQLselect(connWg, sqlstr).Rows[0][0].ToString();
+                return get;
+            }
+            catch
+            {
+                try
+                {
+                    string sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
+                    
+                    var get = mssql.SQLselect(connWg, sqlstr).Rows[0][0].ToString();
+                    return get;
+                }
+                catch
+                {
+                    if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                    return null;
+                }
+
+            }
+
+        }
+
+        private bool GetNewVersion()
+        {
+            string Msg, Url;
+            if (VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg, out Url))
+            {
+                UpdateUrl = HttpURL + Url + ProgName + ".exe";
+                return true;
+            }
+            else
+            {
+                if (Msg != null)
+                {
+                    if (MessageBox.Show(Msg, "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                return false;
+            }
+        }
+        #endregion
+
+        #region 信息初始化检测
         private void ReadIniFile()
         {
             var pat = Path.GetDirectoryName(iniFilePath);
@@ -170,6 +255,7 @@ namespace 码垛线生成并打印出货清单
             }
         }
 
+        #endregion
         #endregion
 
         #region 程序不能多开设定
@@ -274,6 +360,8 @@ namespace 码垛线生成并打印出货清单
                 this.Text += "    -自动打印已开启";
                 SetPrintTimer();
             }
+            //获取生成、打印记录信息
+            GetListData();
         }
 
         #region 订单生成并显示打印列表信息
