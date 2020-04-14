@@ -1,24 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 联友生产辅助工具", "1 联友生产辅助工具\1 联友生产辅助工具.csproj", "{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 联友生产辅助工具", "01 联友生产辅助工具\1 联友生产辅助工具.csproj", "{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7 程序升级-web", "7 程序升级-web\7 程序升级-web.csproj", "{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2 联友物料需求量导出", "02 联友物料需求量导出\2 联友物料需求量导出.csproj", "{BEC7FE2F-F6EE-4819-A288-01D6AD791D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9 码垛线测试临时客户端", "9 码垛线测试临时客户端\9 码垛线测试临时客户端.csproj", "{CCA43171-681C-462B-B5D8-0723BE6AE3DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 玖友库存上传工具", "03 玖友库存上传工具\3 玖友库存上传工具.csproj", "{B6664CF4-D2B7-4010-9B86-96B760BBAEBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8 程序升级-ftp", "8 程序升级-ftp\8 程序升级-ftp.csproj", "{FDB12813-43C7-4084-B926-B534F42C59D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4 码垛线生成并打印出货清单", "04 码垛线生成出货清单\4 码垛线生成并打印出货清单.csproj", "{1E30FDF5-C5F1-46F3-A66C-279EEA7EE702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5 中山分公司生产辅助工具", "05 分公司一键生成出货排程\5 中山分公司生产辅助工具.csproj", "{36BC320A-C2DA-4B07-A56E-1B4B97C43819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7 程序升级-web", "07 程序升级-web\7 程序升级-web.csproj", "{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8 程序升级-ftp", "08 程序升级-ftp\8 程序升级-ftp.csproj", "{FDB12813-43C7-4084-B926-B534F42C59D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9 码垛线测试临时客户端", "09 码垛线测试临时客户端\9 码垛线测试临时客户端.csproj", "{CCA43171-681C-462B-B5D8-0723BE6AE3DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "99 测试", "99 测试\99 测试.csproj", "{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2 联友物料需求量导出", "2 联友物料需求量导出\2 联友物料需求量导出.csproj", "{BEC7FE2F-F6EE-4819-A288-01D6AD791D66}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 玖友库存上传工具", "3 玖友库存上传工具\3 玖友库存上传工具.csproj", "{B6664CF4-D2B7-4010-9B86-96B760BBAEBC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4 码垛线生成并打印出货清单", "4 码垛线生成出货清单\4 码垛线生成并打印出货清单.csproj", "{1E30FDF5-C5F1-46F3-A66C-279EEA7EE702}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5 中山分公司生产辅助工具", "5 分公司一键生成出货排程\5 中山分公司生产辅助工具.csproj", "{36BC320A-C2DA-4B07-A56E-1B4B97C43819}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,22 +30,6 @@ Global
 		{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3E4BA8-2590-4FAD-A844-5ADFCB47A13E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDB12813-43C7-4084-B926-B534F42C59D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDB12813-43C7-4084-B926-B534F42C59D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDB12813-43C7-4084-B926-B534F42C59D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDB12813-43C7-4084-B926-B534F42C59D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEC7FE2F-F6EE-4819-A288-01D6AD791D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEC7FE2F-F6EE-4819-A288-01D6AD791D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC7FE2F-F6EE-4819-A288-01D6AD791D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,6 +46,22 @@ Global
 		{36BC320A-C2DA-4B07-A56E-1B4B97C43819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36BC320A-C2DA-4B07-A56E-1B4B97C43819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36BC320A-C2DA-4B07-A56E-1B4B97C43819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B35AA20-85A6-44CA-A5D9-0330EA03B4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB12813-43C7-4084-B926-B534F42C59D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB12813-43C7-4084-B926-B534F42C59D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB12813-43C7-4084-B926-B534F42C59D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB12813-43C7-4084-B926-B534F42C59D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCA43171-681C-462B-B5D8-0723BE6AE3DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A2B7E7-5087-4128-A0D4-7B9B1201C72F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
