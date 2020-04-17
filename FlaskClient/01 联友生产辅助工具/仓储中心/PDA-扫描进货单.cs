@@ -23,7 +23,7 @@ namespace 联友生产辅助工具.仓储中心
         Dictionary<string, string> dict = new Dictionary<string, string> { };
         Dictionary<string, string> dict_get = new Dictionary<string, string> { };
         public static string Mode = null;
-        public static string URL = FormLogin.HttpURL + "/Client/PDA/JH_LYXA";
+        public static string URL = FormLogin.infObj.httpHost + "/Client/PDA/JH_LYXA";
         public static string Title = null;
         public static string GetMain = null;
         public static string GetOther = null;
@@ -75,11 +75,14 @@ namespace 联友生产辅助工具.仓储中心
             int FormWidth, FormHeight;
             FormWidth = Width;
             FormHeight = Height;
-            panel_Title.Size = new Size(FormWidth, panel_Title.Height);
-            DataGridView_List.Location = new Point(0, panel_Title.Height + 3);
-            DataGridView_List.Size = new Size(FormWidth, FormHeight - panel_Title.Height - panel_Last.Height);
-            panel_Last.Location = new Point(0, panel_Title.Height + DataGridView_List.Height);
-            panel_Last.Size = new Size(FormWidth, panel_Last.Height);
+            panel_Title.Location = new Point(1, 1);
+            panel_Title.Size = new Size(FormWidth - 2, panel_Title.Height);
+
+            panel_Last.Location = new Point(panel_Title.Location.X, panel_Title.Height + DataGridView_List.Height);
+            panel_Last.Size = new Size(panel_Title.Width, panel_Last.Height);
+
+            DataGridView_List.Location = new Point(panel_Title.Location.X, panel_Title.Location.Y + panel_Title.Height + 1);
+            DataGridView_List.Size = new Size(panel_Title.Width, FormHeight - (panel_Title.Height + 1) - (panel_Last.Height + 1));
         }
         #endregion
 

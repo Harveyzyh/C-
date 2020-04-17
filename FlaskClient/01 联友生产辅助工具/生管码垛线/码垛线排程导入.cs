@@ -18,8 +18,8 @@ namespace 联友生产辅助工具.生管码垛线
 
         private Mssql mssql = new Mssql();
 
-        private static string connRobot = FormLogin.connRobot;
-        private static string connComfort = FormLogin.connComfort;
+        private static string connRobot = Global_Const.strConnection_ROBOT_TEST;
+        private static string connComfort = Global_Const.strConnection_COMFORT;
 
         #endregion
 
@@ -106,7 +106,7 @@ namespace 联友生产辅助工具.生管码垛线
                         dict.Add("User", FormLogin.Login_Uid);
                         dict.Add("Mode", "Insert");
                         dict.Add("Detail", result);
-                        HttpPost.HttpPost_Dict(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
+                        HttpPost.HttpPost_Dict(FormLogin.infObj.httpHost + "/Client/MaDuo/GetInfo", dict);
 
                         MessageBox.Show("已提交至后台服务器", "导入结果", MessageBoxButtons.OK);
                     }
@@ -339,7 +339,7 @@ namespace 联友生产辅助工具.生管码垛线
                                 SC009, SC010, SC011, SC012, SC013, SC014, SC015, SC016, SC017, SC018, SC019, SC020, 
                                 SC021, SC022, SC023, SC024, SC025, SC026 
                                 FROM WG_DB..SC_PLAN
-                                WHERE SC023 = '生产五部'
+                                WHERE SC023 IN ('生产五部', '生产二部') 
                                 AND SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112)
                                 UPDATE SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112) AND SC039 != 'Y' ";
             mssql.SQLexcute(connRobot, sqlstr);

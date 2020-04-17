@@ -16,7 +16,7 @@ namespace 联友生产辅助工具.生管码垛线
         #region 本地局域变量
         private static DataTable showDtTmp = new DataTable();
         private static DataTable showDt = new DataTable();
-        public static string connStrRobot = FormLogin.connRobot;
+        public static string connStrRobot = Global_Const.strConnection_ROBOT_TEST;
         private static Mssql mssql = new Mssql();
         #endregion
 

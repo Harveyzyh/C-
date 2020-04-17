@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.label1 = new System.Windows.Forms.Label();
-            this.TextBoxUID = new System.Windows.Forms.TextBox();
+            this.textBoxUid = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.FormLogin_TextBox_PWD = new System.Windows.Forms.TextBox();
+            this.textBoxPwd = new System.Windows.Forms.TextBox();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
@@ -49,17 +49,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "账号：";
             // 
-            // TextBoxUID
+            // textBoxUid
             // 
-            this.TextBoxUID.AcceptsTab = true;
-            this.TextBoxUID.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.TextBoxUID.Location = new System.Drawing.Point(197, 83);
-            this.TextBoxUID.Margin = new System.Windows.Forms.Padding(4);
-            this.TextBoxUID.Name = "TextBoxUID";
-            this.TextBoxUID.Size = new System.Drawing.Size(182, 24);
-            this.TextBoxUID.TabIndex = 1;
-            this.TextBoxUID.TextChanged += new System.EventHandler(this.TextBoxChanged);
-            this.TextBoxUID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxUID_KeyUp);
+            this.textBoxUid.AcceptsTab = true;
+            this.textBoxUid.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.textBoxUid.Location = new System.Drawing.Point(197, 83);
+            this.textBoxUid.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxUid.Name = "textBoxUid";
+            this.textBoxUid.Size = new System.Drawing.Size(182, 24);
+            this.textBoxUid.TabIndex = 1;
+            this.textBoxUid.TextChanged += new System.EventHandler(this.textBoxChanged);
+            this.textBoxUid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxUid_KeyUp);
+            this.textBoxUid.Leave += new System.EventHandler(this.textBoxUid_Leave);
             // 
             // label2
             // 
@@ -72,17 +73,18 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "密码：";
             // 
-            // FormLogin_TextBox_PWD
+            // textBoxPwd
             // 
-            this.FormLogin_TextBox_PWD.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.FormLogin_TextBox_PWD.Location = new System.Drawing.Point(197, 143);
-            this.FormLogin_TextBox_PWD.Margin = new System.Windows.Forms.Padding(4);
-            this.FormLogin_TextBox_PWD.Name = "FormLogin_TextBox_PWD";
-            this.FormLogin_TextBox_PWD.PasswordChar = '*';
-            this.FormLogin_TextBox_PWD.Size = new System.Drawing.Size(182, 24);
-            this.FormLogin_TextBox_PWD.TabIndex = 3;
-            this.FormLogin_TextBox_PWD.TextChanged += new System.EventHandler(this.TextBoxChanged);
-            this.FormLogin_TextBox_PWD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxPWD_KeyUp);
+            this.textBoxPwd.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.textBoxPwd.Location = new System.Drawing.Point(197, 143);
+            this.textBoxPwd.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPwd.Name = "textBoxPwd";
+            this.textBoxPwd.PasswordChar = '*';
+            this.textBoxPwd.Size = new System.Drawing.Size(182, 24);
+            this.textBoxPwd.TabIndex = 3;
+            this.textBoxPwd.TextChanged += new System.EventHandler(this.textBoxChanged);
+            this.textBoxPwd.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPwd_KeyUp);
+            this.textBoxPwd.Leave += new System.EventHandler(this.textBoxPwd_Leave);
             // 
             // BtnLogin
             // 
@@ -126,8 +128,8 @@
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.BtnExit);
             this.Controls.Add(this.BtnLogin);
-            this.Controls.Add(this.FormLogin_TextBox_PWD);
-            this.Controls.Add(this.TextBoxUID);
+            this.Controls.Add(this.textBoxPwd);
+            this.Controls.Add(this.textBoxUid);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("宋体", 11F);
@@ -147,9 +149,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TextBoxUID;
+        private System.Windows.Forms.TextBox textBoxUid;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox FormLogin_TextBox_PWD;
+        private System.Windows.Forms.TextBox textBoxPwd;
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Button BtnExit;
         private System.Windows.Forms.Label labelVersion;

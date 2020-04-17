@@ -118,10 +118,11 @@
             this.panel_Title.Controls.Add(this.供应商L);
             this.panel_Title.Controls.Add(this.入库仓库L);
             this.panel_Title.Controls.Add(this.数量L);
+            this.panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Title.Location = new System.Drawing.Point(0, 0);
             this.panel_Title.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(1317, 59);
+            this.panel_Title.Size = new System.Drawing.Size(1462, 59);
             this.panel_Title.TabIndex = 0;
             // 
             // label1
@@ -314,7 +315,7 @@
             this.DataGridView_List.AllowUserToAddRows = false;
             this.DataGridView_List.AllowUserToDeleteRows = false;
             this.DataGridView_List.AllowUserToResizeRows = false;
-            this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
+            this.DataGridView_List.BackgroundColor = System.Drawing.Color.Silver;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.C1,
@@ -327,7 +328,7 @@
             this.C8,
             this.C9,
             this.C10});
-            this.DataGridView_List.Location = new System.Drawing.Point(6, 75);
+            this.DataGridView_List.Location = new System.Drawing.Point(1, 62);
             this.DataGridView_List.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridView_List.Name = "DataGridView_List";
             this.DataGridView_List.ReadOnly = true;
@@ -433,9 +434,10 @@
             this.panel_Last.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_Last.Controls.Add(this.buttonUpload);
             this.panel_Last.Controls.Add(this.buttonDelete);
+            this.panel_Last.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_Last.Location = new System.Drawing.Point(0, 551);
             this.panel_Last.Name = "panel_Last";
-            this.panel_Last.Size = new System.Drawing.Size(819, 44);
+            this.panel_Last.Size = new System.Drawing.Size(1462, 44);
             this.panel_Last.TabIndex = 2;
             // 
             // buttonUpload

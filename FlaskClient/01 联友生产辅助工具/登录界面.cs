@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Data;
 using System.Windows.Forms;
 using 联友生产辅助工具;
 
@@ -10,13 +10,15 @@ namespace HarveyZ
 {
     public partial class FormLogin : Form
     {
+        public static InfoObject infObj = new InfoObject();
+        private Main main = new Main(infObj);
+        
         #region 定义公开全局变量
         //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
         public static bool URLTestFlag = false; 
 
         //公用信息
         public static WebNet webNet = new WebNet();//http post
-        public static Mssql mssql = new Mssql();//MSSQL操作类
 
         //用户信息
         public static string Login_Uid = "";
@@ -28,18 +30,8 @@ namespace HarveyZ
         public static List<string> menuItemList = new List<string> { };//所有菜单栏列表
         public static List<string> userPermList = new List<string> { };//用户权限列表
 
-        //软件信息
-        public static string ProgVersion = "";
-        public static string ProgName = "";
-
-        //服务器URL
-        public static string HttpURL = "";
-
         //数据库连接字符串
-        public static string connWg = Global_Const.strConnection_WGDB;
-        public static string connComfort = Global_Const.strConnection_COMFORT;
-        public static string connY_Ls = Global_Const.strConnection_Y_LS;
-        public static string connRobot = null;
+        //public static string connWg = Global_Const.strConnection_WGDB;
 
         //数据库连接标志位
         public static bool connFlag99 = false;
@@ -62,15 +54,10 @@ namespace HarveyZ
         {
             InitializeComponent();
             GetMutilOpen();
-            GetRobotDbConn();
-
-            //从文件详细信息中获取程序名称
-            ProgName = Application.ProductName.ToString();
-            ProgVersion = Application.ProductVersion.ToString();
 
             //判断是否在debug模式
             #if DEBUG
-            URLTestFlag = true;
+            infObj.testFlag = true;
             this.Text += "    -DEBUG";
             #endif
 
@@ -78,17 +65,13 @@ namespace HarveyZ
             
             if (GetNewVersion())
             {
-                UpdateMe.ProgUpdate(ProgName, UpdateUrl);
+                UpdateMe.ProgUpdate(infObj.progName, UpdateUrl);
             }
 
-            labelVersion.Text = "Ver: " + ProgVersion;
-
-            //SqlTestDelegate sqlTestYDelegate = new SqlTestDelegate(SqlTestY);
-            //sqlTestYDelegate.BeginInvoke(connY_Ls, null, null);
+            labelVersion.Text = "Ver: " + infObj.progVer;
+            
             SqlTestDelegate sqlTest99Delegate = new SqlTestDelegate(SqlTest99);
-            sqlTest99Delegate.BeginInvoke(connComfort, null, null);
-            SqlTestDelegate sqlTest198Delegate = new SqlTestDelegate(SqlTest198);
-            sqlTest198Delegate.BeginInvoke(connWg, null, null);
+            sqlTest99Delegate.BeginInvoke(infObj.connComfort, null, null);
         }
 
         #endregion
@@ -108,12 +91,12 @@ namespace HarveyZ
             }
         }
 
-        private void TextBoxChanged(object sender, EventArgs e)//避免登录错误显示，鼠标点击，重新输入信息后，按下回车无反应
+        private void textBoxChanged(object sender, EventArgs e)//避免登录错误显示，鼠标点击，重新输入信息后，按下回车无反应
         {
             MsgFlag = false;
         }
 
-        private void TextBoxUID_KeyUp(object sender, KeyEventArgs e)//输入框跳转
+        private void textBoxUid_KeyUp(object sender, KeyEventArgs e)//输入框跳转
         {
             if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
             {
@@ -126,12 +109,12 @@ namespace HarveyZ
             }
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
             {
-                    FormLogin_TextBox_PWD.SelectAll();
-                    FormLogin_TextBox_PWD.Focus();
+                    textBoxPwd.SelectAll();
+                    textBoxPwd.Focus();
             }
         }
 
-        private void TextBoxPWD_KeyUp(object sender, KeyEventArgs e)
+        private void textBoxPwd_KeyUp(object sender, KeyEventArgs e)
         {
             if ((MsgFlag == true) && (e.KeyCode == Keys.Enter))
             {
@@ -150,20 +133,20 @@ namespace HarveyZ
 
         private void FormLogin_Login()
         {
-            if (TextBoxUID.Text == "" )
+            if (textBoxUid.Text == "" )
             {
                 if (MessageBox.Show("请输入账号或密码", "提示", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     MsgFlag = true;
-                    FormLogin_TextBox_PWD.Text = "";
-                    TextBoxUID.Focus();
-                    TextBoxUID.SelectAll();
+                    textBoxPwd.Text = "";
+                    textBoxUid.Focus();
+                    textBoxUid.SelectAll();
                 }
             }
             else
             {
                 string Msg = "";
-                bool result = FormLogin_GetLogin(TextBoxUID.Text, FormLogin_TextBox_PWD.Text, out Msg);
+                bool result = FormLogin_GetLogin(textBoxUid.Text, textBoxPwd.Text, out Msg);
                 if (result)
                 {
                     主界面 Form_main = new 主界面();
@@ -175,9 +158,9 @@ namespace HarveyZ
                     if (MessageBox.Show(Msg, "登录失败", MessageBoxButtons.OK) == DialogResult.OK)
                     {
                         MsgFlag = true;
-                        FormLogin_TextBox_PWD.Text = "";
-                        TextBoxUID.Focus();
-                        TextBoxUID.SelectAll();
+                        textBoxPwd.Text = "";
+                        textBoxUid.Focus();
+                        textBoxUid.SelectAll();
                     }
                 }
             }
@@ -185,25 +168,9 @@ namespace HarveyZ
         #endregion
 
         #region 逻辑设计
-        private void SqlTestY(string connStr)
-        {
-            connFlagY = mssql.SQLlinkTest(connStr);
-        }
         private void SqlTest99(string connStr)
         {
-            connFlag99 = mssql.SQLlinkTest(connStr);
-        }
-        private void SqlTest198(string connStr)
-        {
-            connFlag198 = mssql.SQLlinkTest(connStr);
-        }
-
-        private void GetRobotDbConn()
-        {
-            string sqlstr = @"SELECT ServerURL FROM WG_CONFIG WHERE ConfigName = 'MdSysDb' AND Valid = 'Y' ";
-            string dbName = mssql.SQLselect(connWg, sqlstr).Rows[0][0].ToString();
-            if (dbName == "ROBOT_TEST") connRobot = Global_Const.strConnection_ROBOT_TEST;
-            if (dbName == "ROBOT") connRobot = Global_Const.strConnection_ROBOT;
+            connFlag99 = infObj.sql.SQLlinkTest(connStr);
         }
 
         private string GetHttpURL()
@@ -219,7 +186,7 @@ namespace HarveyZ
                 {
                     sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
                 }
-                var get = mssql.SQLselect(connWg, sqlstr).Rows[0][0].ToString();
+                var get = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
                 return get;
             }
             catch
@@ -235,7 +202,7 @@ namespace HarveyZ
                     {
                         sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
                     }
-                    var get = mssql.SQLselect(connWg, sqlstr).Rows[0][0].ToString();
+                    var get = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
                     return get;
                 }
                 catch
@@ -254,9 +221,9 @@ namespace HarveyZ
         private bool GetNewVersion()
         {
             string Msg, Url;
-            if(VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg, out Url))
+            if(VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg, out Url))
             {
-                UpdateUrl = HttpURL + Url + ProgName + ".exe";
+                UpdateUrl = infObj.httpHost + Url + infObj.progName + ".exe";
                 return true;
             }
             else
@@ -274,8 +241,14 @@ namespace HarveyZ
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            HttpURL = GetHttpURL();
-            //HttpURL = "http://192.168.0.197:8099";
+            bool flag = main.GetHttpURL();
+            if(!flag)
+            {
+                if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    Environment.Exit(0);
+                }
+            }
         }
         
         private bool FormLogin_GetLogin(string LoginUid, string LoginPwd, out string Msg)//登录
@@ -320,5 +293,80 @@ namespace HarveyZ
             }
         }
         #endregion
+
+        private void textBoxUid_Leave(object sender, EventArgs e)
+        {
+            infObj.userId = textBoxUid.Text;
+        }
+
+        private void textBoxPwd_Leave(object sender, EventArgs e)
+        {
+            infObj.userPwd = textBoxPwd.Text;
+        }
+    }
+
+    public class Main
+    {
+        private InfoObject infObj = null;
+
+        public Main(InfoObject _infObj)
+        {
+            infObj = _infObj;
+            infObj.sql = new Mssql();
+            infObj.connWg = Global_Const.strConnection_WGDB;
+            infObj.connComfort = Global_Const.strConnection_COMFORT;
+
+            GetProgInfo();
+        }
+
+        public void GetProgInfo()
+        {
+            infObj.progName = Application.ProductName.ToString();
+            infObj.progVer = Application.ProductVersion.ToString();
+        }
+
+        public bool GetHttpURL()
+        {
+            try
+            {
+                string sqlstr = "";
+                if (infObj.testFlag)
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Valid = 'Y'";
+                }
+                else
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
+                }
+                infObj.httpHost = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+    }
+
+    public class InfoObject : InfoObjectBase
+    {
+        private string _userPwd = null;
+        private string _httpHost = null;
+        private bool _testFlag = false;
+        private string _progName = null;
+        private string _progVer = null;
+        private string _connWg = null;
+        private string _connComfort = null;
+
+        public string userPwd { get { return _userPwd; } set { _userPwd = value; } }
+        public string httpHost { get { return _httpHost; } set { _httpHost = value; } }
+        public bool testFlag { get { return _testFlag; } set { _testFlag = value; } }
+
+        public string connWg { get { return _connWg; } set { _connWg = value; } }
+        public string connComfort { get { return _connComfort; } set { _connComfort = value; } }
+
+        public string progName { get { return _progName; } set { _progName = value; } }
+        public string progVer { get { return _progVer; } set { _progVer = value; } }
     }
 }

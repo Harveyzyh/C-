@@ -11,7 +11,6 @@ using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
-using 联友生产辅助工具.中山分公司;
 using 联友生产辅助工具.管理;
 using 联友生产辅助工具.测试;
 
@@ -19,6 +18,7 @@ namespace 联友生产辅助工具
 {
     public partial class 主界面 : Form
     {
+        public static InfoObject infObj = new InfoObject();
         #region 静态变量
         private static Form FormOpen = null;
         private static List<string> menuIgnoreList = new List<string> {
@@ -34,12 +34,21 @@ namespace 联友生产辅助工具
         {
             InitializeComponent();
 
+            infObj.userId = FormLogin.infObj.userId;
+            infObj.userName = FormLogin.infObj.userName;
+            infObj.userDpt = FormLogin.infObj.userDpt;
+
             关闭当前界面ToolStripMenuItem.Visible = false;
 
             FormPermission();
 
             Form_MainResized_Work();
-            this.Text += "      Ver." + FormLogin.ProgVersion;
+
+            this.Text = FormLogin.infObj.progName + "      Ver." + FormLogin.infObj.progVer;
+            if (FormLogin.infObj.testFlag)
+            {
+                this.Text += "     -DEBUG";
+            }
             
             StatusBarSetItem();
         }
@@ -249,6 +258,7 @@ namespace 联友生产辅助工具
         private void FormCloseWork()
         {
             Form frm = FormOpen;
+            frm.Close();
             frm.Dispose();
             FormOpen = null;
             关闭当前界面ToolStripMenuItem.Visible = false;
@@ -481,22 +491,11 @@ namespace 联友生产辅助工具
         }
         #endregion
 
-        #region 中山分公司
-        private void 中山分公司_查询物料需求量ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            联友物料需求量导出 frm = new 联友物料需求量导出();
-            FormOpenInit(frm);
-            frm.Show();
-        }
-
-        private void 中山分公司_查询生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            生产电子排程 frm = new 生产电子排程();
-            FormOpenInit(frm);
-            frm.Show();
-        }
         #endregion
+    }
 
-        #endregion
+    public class InfoObject : InfoObjectBase
+    {
+
     }
 }

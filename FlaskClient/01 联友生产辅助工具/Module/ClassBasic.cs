@@ -204,6 +204,15 @@ namespace HarveyZ
                 Dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
+
+        public static void SelectLastRow(DataGridView dgv = null)
+        {
+            int kk = dgv.RowCount;
+            if (dgv.RowCount > 0 && dgv != null)
+            {
+                dgv.CurrentCell = dgv.Rows[dgv.RowCount - 1].Cells[0];
+            }
+        }
     }
 
 

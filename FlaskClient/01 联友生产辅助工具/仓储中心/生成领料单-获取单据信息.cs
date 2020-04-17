@@ -7,128 +7,104 @@ namespace 联友生产辅助工具.仓储中心
 {
     public partial class 生成领料单_获取单据信息 : Form
     {
-        Mssql mssql = new Mssql();
-        string strConnection = 生成领料单.strConnection;
-        DataTable dt = new DataTable();
-        int Index = 0;
-        
-        private string Title = 生成领料单.Title;
-        private string Mode = 生成领料单.Mode;
+        private static InfoObject infObj = null;
+        private static LldGenerate generate = null;
 
-        public 生成领料单_获取单据信息()
+        DataTable dt = null;
+
+        public 生成领料单_获取单据信息(InfoObject _infObj, LldGenerate _generate)
         {
             InitializeComponent();
+
+            infObj = _infObj;
+            generate = _generate;
+
             Init();
         }
 
         private void Init()
         {
-            if(Title != null)
-            {
-                var TitleList = Title.Split('|');
-                comboBox1.Items.AddRange(TitleList);
-                comboBox1.SelectedIndex = 0;
-                textBox1.Select();
-            }
+            button2.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Seach_Work();
-            dataGridView1.Select();
+            GetDt();
         }
 
-        private void button1_KeyUp(object sender, KeyEventArgs e)
+        private void GetDt()
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Seach_Work();
-                dataGridView1.Select();
-            }
-        }
-
-        private void Seach_Work()
-        {
-            if (Mode == "TypeID")
-            {
-                GetTypeID();
-            }
-            else if (Mode == "SupplierID")
-            {
-                GetSupplierID();
-            }
-            else if (Mode == "PositionID")
-            {
-                GetPositionID();
-            }
-        }
-
-        private void GetTypeID()
-        {
-            dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MQ001) 单别, RTRIM(MQ002) 单据名称, RTRIM(MQ019) 核对采购 "
-                            + "FROM CMSMQ "
-                            + "WHERE 1=1 "
-                            + "AND MQ003 = '34' AND MQ004 = '2'"
-                            + "AND MQ001 LIKE '%{0}%' "
-                            + "ORDER BY MQ001 ");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = infObj.sql.SQLselect(infObj.connStr, string.Format(infObj.getGdSqlStr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].Width = 200;
-                dataGridView1.Columns[1].Width = 300;
+                dataGridView1.ReadOnly = false;
+                for(int idx=1; idx<dataGridView1.Columns.Count; idx++)
+                {
+                    dataGridView1.Columns[idx].ReadOnly = true;
+                }
+                DgvOpt.SetRowColor(dataGridView1);
+                button2.Enabled = true;
             }
-        }
-
-        private void GetSupplierID()
-        {
-            dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MA001) 供应商编号, RTRIM(MA002) 简称 FROM COMFORT..PURMA "
-                            + "WHERE MA001 LIKE '%{0}%' "
-                            + "ORDER BY MA001 ");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
-            if (dt != null)
+            else
             {
-                dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].Width = 200;
-                dataGridView1.Columns[1].Width = 300;
+                MessageBox.Show("无数据", "错误", MessageBoxButtons.OK);
+                button2.Enabled = false;
             }
         }
 
-        private void GetPositionID()
+        private void button2_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MC001) 仓库编号, RTRIM(MC002) 仓库名称, RTRIM(MC003) 工厂编号 "
-                            + "FROM COMFORT..CMSMC "
-                            + "WHERE MC001 LIKE '%{0}%' "
-                            + "ORDER BY LEN(MC001) DESC, MC001");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
-            if (dt != null)
+            DataTable dt2 = dt.Copy();
+            dt2.Columns.RemoveAt(0);
+
+            for(int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)
             {
-                dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].Width = 200;
-                dataGridView1.Columns[1].Width = 300;
-            }
-        }
+                if(dt.Rows[rowIdx][0].ToString() == "True")
+                {
+                    bool flag = true;
+                    DataRow dtRow = dt2.Rows[rowIdx];
 
-        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            Index = dataGridView1.Rows[e.RowIndex].Index;
-            PDA_扫描进货单.GetMain = dt.Rows[Index][0].ToString();
-            PDA_扫描进货单.GetOther = dt.Rows[Index][1].ToString();
+                    // 检车新勾选的是否存在原有的dt里，若存在则 pass
+                    for(int rowIdx2=0; rowIdx2 < infObj.gdDt.Rows.Count; rowIdx2++)
+                    {
+                        if (dtRow[0].ToString() == infObj.gdDt.Rows[rowIdx2][0].ToString() && dtRow[1].ToString() == infObj.gdDt.Rows[rowIdx2][1].ToString())
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag) infObj.gdDt.ImportRow(dtRow);
+                }
+            }
             this.Close();
         }
 
-        private void dgv_KeyDown(object sender, KeyEventArgs e)
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter)
             {
-                Index = dataGridView1.CurrentRow.Index;
-                PDA_扫描进货单.GetMain = dt.Rows[Index][0].ToString();
-                PDA_扫描进货单.GetOther = dt.Rows[Index][1].ToString();
-                this.Close();
+                GetDt();
             }
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
+            {
+                for (int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)
+                {
+                    dt.Rows[rowIdx][0] = !(bool)dt.Rows[rowIdx][0];
+                }
+                DgvOpt.SelectLastRow(dataGridView1);
+            }
+
+            e.Handled = true;
+        }
+
+        private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            dt.Rows[dataGridView1.CurrentRow.Index][0] = !(bool)dt.Rows[dataGridView1.CurrentRow.Index][0];
         }
     }
 }

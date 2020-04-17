@@ -12,7 +12,7 @@ namespace 联友生产辅助工具.测试
 {
     public partial class 测试_2 : Form
     {
-        string Url = FormLogin.HttpURL;
+        string Url = FormLogin.infObj.httpHost;
 
         public 测试_2()
         {
