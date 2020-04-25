@@ -178,6 +178,24 @@ namespace 联友生产辅助工具.生产日报表
             }
         }
 
+        private void commit_LineList()
+        {
+            string sqlstr_insert = " INSERT INTO SC_LineList (Dpt, WGroup, Serial, Line) "
+                          + " SELECT A.Dpt, B.WGroup, B.Serial, A.Line "
+                          + " FROM SC_Dpt2Line AS A "
+                          + " INNER JOIN SC_XL2GY AS B ON B.Valid = 1 "
+                          + " AND A.Valid = 1 "
+                          + " AND NOT EXISTS(SELECT 1 FROM SC_LineList AS C WHERE C.[Dpt] = A.[Dpt] "
+                          + " AND C.[WGroup] = B.[WGroup] Collate Chinese_PRC_CS_AS AND C.[Serial] = B.[Serial] Collate Chinese_PRC_CS_AS AND C.[Line] = A.[Line])";
+            mssql.SQLexcute(strConnection, sqlstr_insert);
+
+            string sqlstr_update = "UPDATE SC_LineList SET Valid=0 "
+                                 + " FROM SC_LineList AS A "
+                                 + " INNER JOIN SC_XL2GY AS B ON B.WGroup Collate Chinese_PRC_CS_AS = A.WGroup AND B.Serial Collate Chinese_PRC_CS_AS = A.Serial "
+                                 + " WHERE B.Valid = 0 ";
+            mssql.SQLexcute(strConnection, sqlstr_update);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string WGroup = comboBox1.Text.Trim();
@@ -201,6 +219,7 @@ namespace 联友生产辅助工具.生产日报表
                     mssql.SQLexcute(strConnection, sqlstr2);
                     MessageBox.Show("组别：" + WGroup + "，系列：" + Serial + "新增成功！", "提示", MessageBoxButtons.OK);
                     commit();
+                    commit_LineList();
                     Init();
                 }
             }

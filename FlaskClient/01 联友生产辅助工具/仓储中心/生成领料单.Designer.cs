@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel_Title = new System.Windows.Forms.Panel();
+            this.labelGdScCount = new System.Windows.Forms.Label();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.checkedListBoxGroup = new System.Windows.Forms.CheckedListBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBoxCpName = new System.Windows.Forms.TextBox();
             this.textBoxOrderNum = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -57,6 +61,10 @@
             // panel_Title
             // 
             this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Title.Controls.Add(this.labelGdScCount);
+            this.panel_Title.Controls.Add(this.btnTest);
+            this.panel_Title.Controls.Add(this.checkedListBoxGroup);
+            this.panel_Title.Controls.Add(this.label8);
             this.panel_Title.Controls.Add(this.textBoxCpName);
             this.panel_Title.Controls.Add(this.textBoxOrderNum);
             this.panel_Title.Controls.Add(this.label7);
@@ -80,27 +88,67 @@
             this.panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Title.Location = new System.Drawing.Point(0, 0);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(1116, 100);
+            this.panel_Title.Size = new System.Drawing.Size(1173, 100);
             this.panel_Title.TabIndex = 4;
+            // 
+            // labelGdScCount
+            // 
+            this.labelGdScCount.AutoSize = true;
+            this.labelGdScCount.Location = new System.Drawing.Point(343, 72);
+            this.labelGdScCount.Name = "labelGdScCount";
+            this.labelGdScCount.Size = new System.Drawing.Size(41, 12);
+            this.labelGdScCount.TabIndex = 31;
+            this.labelGdScCount.Text = "label9";
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(998, 67);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 30;
+            this.btnTest.Text = "测试";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // checkedListBoxGroup
+            // 
+            this.checkedListBoxGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.checkedListBoxGroup.FormattingEnabled = true;
+            this.checkedListBoxGroup.Location = new System.Drawing.Point(825, 5);
+            this.checkedListBoxGroup.Name = "checkedListBoxGroup";
+            this.checkedListBoxGroup.Size = new System.Drawing.Size(105, 82);
+            this.checkedListBoxGroup.TabIndex = 29;
+            this.checkedListBoxGroup.TabStop = false;
+            this.checkedListBoxGroup.SelectedValueChanged += new System.EventHandler(this.checkedListBoxGroup_SelectedValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(775, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "工作组：";
             // 
             // textBoxCpName
             // 
-            this.textBoxCpName.Location = new System.Drawing.Point(616, 39);
+            this.textBoxCpName.Location = new System.Drawing.Point(561, 39);
             this.textBoxCpName.Name = "textBoxCpName";
-            this.textBoxCpName.Size = new System.Drawing.Size(261, 21);
+            this.textBoxCpName.Size = new System.Drawing.Size(196, 21);
             this.textBoxCpName.TabIndex = 7;
             // 
             // textBoxOrderNum
             // 
-            this.textBoxOrderNum.Location = new System.Drawing.Point(466, 39);
+            this.textBoxOrderNum.Location = new System.Drawing.Point(452, 39);
             this.textBoxOrderNum.Name = "textBoxOrderNum";
-            this.textBoxOrderNum.Size = new System.Drawing.Size(75, 21);
+            this.textBoxOrderNum.Size = new System.Drawing.Size(42, 21);
             this.textBoxOrderNum.TabIndex = 6;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(557, 43);
+            this.label7.Location = new System.Drawing.Point(502, 43);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 27;
@@ -109,7 +157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(407, 43);
+            this.label6.Location = new System.Drawing.Point(393, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 26;
@@ -117,7 +165,7 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(203, 68);
+            this.btnCheck.Location = new System.Drawing.Point(558, 68);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(93, 23);
             this.btnCheck.TabIndex = 9;
@@ -127,7 +175,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(96, 68);
+            this.btnAdd.Location = new System.Drawing.Point(142, 68);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(93, 23);
             this.btnAdd.TabIndex = 8;
@@ -138,7 +186,7 @@
             // labelGdCount
             // 
             this.labelGdCount.AutoSize = true;
-            this.labelGdCount.Location = new System.Drawing.Point(329, 72);
+            this.labelGdCount.Location = new System.Drawing.Point(271, 72);
             this.labelGdCount.Name = "labelGdCount";
             this.labelGdCount.Size = new System.Drawing.Size(41, 12);
             this.labelGdCount.TabIndex = 23;
@@ -147,7 +195,7 @@
             // labelRowCount
             // 
             this.labelRowCount.AutoSize = true;
-            this.labelRowCount.Location = new System.Drawing.Point(467, 73);
+            this.labelRowCount.Location = new System.Drawing.Point(435, 73);
             this.labelRowCount.Name = "labelRowCount";
             this.labelRowCount.Size = new System.Drawing.Size(41, 12);
             this.labelRowCount.TabIndex = 22;
@@ -212,7 +260,7 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(678, 68);
+            this.btnClean.Location = new System.Drawing.Point(26, 68);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(93, 23);
             this.btnClean.TabIndex = 12;
@@ -223,7 +271,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(785, 68);
+            this.btnSave.Location = new System.Drawing.Point(668, 68);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(93, 23);
             this.btnSave.TabIndex = 13;
@@ -234,15 +282,15 @@
             // 
             // textBoxOrder
             // 
-            this.textBoxOrder.Location = new System.Drawing.Point(466, 11);
+            this.textBoxOrder.Location = new System.Drawing.Point(452, 11);
             this.textBoxOrder.Name = "textBoxOrder";
-            this.textBoxOrder.Size = new System.Drawing.Size(411, 21);
+            this.textBoxOrder.Size = new System.Drawing.Size(305, 21);
             this.textBoxOrder.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 15);
+            this.label2.Location = new System.Drawing.Point(393, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 8;
@@ -281,7 +329,7 @@
             this.DataGridView_List.RowHeadersVisible = false;
             this.DataGridView_List.RowTemplate.Height = 23;
             this.DataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridView_List.Size = new System.Drawing.Size(1116, 530);
+            this.DataGridView_List.Size = new System.Drawing.Size(1173, 530);
             this.DataGridView_List.TabIndex = 10;
             this.DataGridView_List.TabStop = false;
             this.DataGridView_List.DoubleClick += new System.EventHandler(this.DataGridView_List_DoubleClick);
@@ -290,7 +338,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 630);
+            this.ClientSize = new System.Drawing.Size(1173, 630);
             this.Controls.Add(this.DataGridView_List);
             this.Controls.Add(this.panel_Title);
             this.Name = "生成领料单";
@@ -327,5 +375,9 @@
         private System.Windows.Forms.TextBox textBoxOrderNum;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckedListBox checkedListBoxGroup;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Label labelGdScCount;
     }
 }

@@ -43,6 +43,12 @@ namespace 联友生产辅助工具.仓储中心
             {
                 comboBoxTradeMode.Items.Add(tmp);
             }
+
+            // 组别
+            foreach (string tmp in generate.GetGroupList())
+            {
+                checkedListBoxGroup.Items.Add(tmp);
+            }
             
             comboBoxCenter.SelectedIndex = 0;
             comboBoxDb.SelectedIndex = 0;
@@ -84,6 +90,7 @@ namespace 联友生产辅助工具.仓储中心
                 comboBoxDpt.Enabled = false;
                 comboBoxCenter.Enabled = false;
                 comboBoxTradeMode.Enabled = false;
+                btnCheck.Enabled = true;
                 btnClean.Enabled = true;
                 btnSave.Enabled = false;
                 if (infObj.wlRowCount > 0)
@@ -104,11 +111,13 @@ namespace 联友生产辅助工具.仓储中心
                 comboBoxDpt.Enabled = true;
                 comboBoxCenter.Enabled = true;
                 comboBoxTradeMode.Enabled = true;
+                btnCheck.Enabled = false;
                 btnClean.Enabled = false;
                 btnSave.Enabled = false;
             }
 
             labelGdCount.Text = "工单数：" + infObj.gdDt.Rows.Count.ToString();
+            labelGdScCount.Text = "生产数量：" + infObj.gdScCount.ToString();
             labelRowCount.Text = "物料总行数：" + infObj.wlRowCount.ToString();
         }
 
@@ -120,12 +129,26 @@ namespace 联友生产辅助工具.仓储中心
                 frm.Dispose();
             }
             infObj.wlRowCount = 0;
+            generate.GetGdScSl(infObj.gdDt);
             DgvOpt.SelectLastRow(DataGridView_List);
             uiShow();
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            infObj.GroupList = "";
+            for (int rowIdx = 0; rowIdx < checkedListBoxGroup.CheckedItems.Count; rowIdx++)
+            {
+                if (rowIdx + 1 == checkedListBoxGroup.CheckedItems.Count)
+                {
+                    infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "' ";
+                }
+                else
+                {
+                    infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "', ";
+                }
+            }
+
             infObj.wlRowCount = int.Parse(generate.GdRowCount(infObj.gdDt));
             uiShow();
         }
@@ -134,6 +157,7 @@ namespace 联友生产辅助工具.仓储中心
         {
             infObj.gdDt.Clear();
             infObj.wlRowCount = 0;
+            infObj.gdScCount = 0;
             uiShow();
         }
 
@@ -146,6 +170,20 @@ namespace 联友生产辅助工具.仓储中心
                 infObj.cpName = textBoxCpName.Text;
                 infObj.orderNum = textBoxOrderNum.Text;
                 //infObj.wlRowCount = int.Parse(generate.GdRowCount(infObj.gdDt));
+
+                infObj.GroupList = "";
+                for (int rowIdx = 0; rowIdx < checkedListBoxGroup.CheckedItems.Count; rowIdx++)
+                {
+                    if (rowIdx + 1 == checkedListBoxGroup.CheckedItems.Count)
+                    {
+                        infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "' ";
+                    }
+                    else
+                    {
+                        infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "', ";
+                    }
+                }
+
                 if (infObj.wlRowCount > 9900)
                 {
                     MessageBox.Show("物料行数过多，请删减一部分工单", "错误");
@@ -162,6 +200,22 @@ namespace 联友生产辅助工具.仓储中心
                     {
                         MessageBox.Show(string.Format("领料单 {0}-{1}", infObj.db, infObj.dh), "领料单生成失败", MessageBoxButtons.OK);
                     }
+                }
+            }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            infObj.GroupList = "";
+            for (int rowIdx = 0; rowIdx < checkedListBoxGroup.CheckedItems.Count; rowIdx++)
+            {
+                if(rowIdx + 1 == checkedListBoxGroup.CheckedItems.Count)
+                {
+                    infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "' ";
+                }
+                else
+                {
+                    infObj.GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "', ";
                 }
             }
         }
@@ -193,6 +247,12 @@ namespace 联友生产辅助工具.仓储中心
         private void DataGridView_List_DoubleClick(object sender, EventArgs e)
         {
             infObj.gdDt.Rows.RemoveAt(DataGridView_List.CurrentRow.Index);
+            infObj.wlRowCount = 0;
+            uiShow();
+        }
+
+        private void checkedListBoxGroup_SelectedValueChanged(object sender, EventArgs e)
+        {
             infObj.wlRowCount = 0;
             uiShow();
         }
@@ -243,6 +303,25 @@ namespace 联友生产辅助工具.仓储中心
             tradeModeDict.Add("1.内销", "1");
             tradeModeDict.Add("2.一般贸易", "2");
             tradeModeDict.Add("3.合同", "3");
+        }
+
+        public List<string> GetGroupList()
+        {
+            string sqlstr = "SELECT DISTINCT CAST(MW003 AS VARCHAR(100)) MW003 FROM CMSMW WHERE MW003 IS NOT NULL AND CAST(MW003 AS VARCHAR(100)) != '' ";
+            DataTable dt = infObj.sql.SQLselect(infObj.connStr, sqlstr);
+            if (dt != null)
+            {
+                List<string> groupList = new List<string>();
+                for(int rowIdx =0; rowIdx < dt.Rows.Count; rowIdx++)
+                {
+                    groupList.Add(dt.Rows[rowIdx][0].ToString());
+                }
+                return groupList;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public string GetDbStr(string db)
@@ -307,9 +386,32 @@ namespace 联友生产辅助工具.仓储中心
             }
         }
 
+        public void GetGdScSl(DataTable dt)
+        {
+            infObj.gdScCount = 0;
+            int colIdx = 0;
+            for(; colIdx < dt.Columns.Count; colIdx ++)
+            {
+                if(dt.Columns[colIdx].ColumnName == "预计产量")
+                {
+                    break;
+                }
+            }
+            for(int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)
+            {
+                infObj.gdScCount += int.Parse(dt.Rows[rowIdx][colIdx].ToString());
+            }
+        }
+
         public string GdRowCount(DataTable dt)
         {
-            string sqlstr = "SELECT COUNT(*) FROM MOCTB(NOLOCK) WHERE RTRIM(TB001) + '-'+ RTRIM(TB002) IN ({0}) ";
+            string sqlstr = "SELECT COUNT(1) FROM MOCTB(NOLOCK) "
+                          + "INNER JOIN CMSMW ON MW001 = TB006 "
+                          + "WHERE RTRIM(TB001) + '-'+ RTRIM(TB002) IN ({0}) ";
+            if(infObj.GroupList != "")
+            {
+                sqlstr += string.Format(" AND CAST(MW003 AS VARCHAR(100)) IN ({0}) ", infObj.GroupList);
+            }
             string gdStr = "";
             if (dt.Rows.Count != 0)
             {
@@ -343,11 +445,11 @@ namespace 联友生产辅助工具.仓储中心
         {
             string sqlstr = "INSERT INTO MOCTC(COMPANY, CREATOR, CREATE_DATE, FLAG, TC001, TC002, TC003, TC004, TC005, TC006, TC007, TC008, TC009, TC010, "
                           + "TC011, TC012, TC013, TC014, TC015, TC016, TC017, TC018, TC019, TC020, TC021, TC022, TC023, TC024, TC025, TC026, TC027, TC028, "
-                          + "TC029, TC030, TC031, UDF01, UDF04, UDF02, UDF03) "
+                          + "TC029, TC030, TC031, UDF01, UDF04, UDF02, UDF03, UDF09) "
                           + "VALUES('COMFORT', '{0}', dbo.f_getTime(1), 1, '{1}', '{2}', LEFT(dbo.f_getTime(1), 8), '01', '{3}', '', '', '54', 'N', 0, 'N', '1', "
-                          + "'Y', LEFT(dbo.f_getTime(1), 8), '', 'N', 0, '0', '', '', '{4}', '', '', NULL, 0, 0, 0, '', 0, 0, '', '{5}', '{6}', '{7}', '{8}')";
+                          + "'Y', LEFT(dbo.f_getTime(1), 8), '', 'N', 0, '0', '', '', '{4}', '', '', NULL, 0, 0, 0, '', 0, 0, '', '{5}', '{6}', '{7}', '{8}', '{9}')";
             GetDh();
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, FormLogin.infObj.userId, infObj.db, infObj.dh, infObj.center, infObj.dpt, infObj.order, infObj.tradeMode, infObj.orderNum, infObj.cpName)); 
+            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, FormLogin.infObj.userId, infObj.db, infObj.dh, infObj.center, infObj.dpt, infObj.order, infObj.tradeMode, infObj.orderNum, infObj.cpName, infObj.GroupList.Replace("\'", ""))); 
         }
         
         private void MoctdIns()
@@ -385,17 +487,24 @@ namespace 联友生产辅助工具.仓储中心
                           + "RIGHT('0000' + CAST(ROW_NUMBER() over(ORDER BY TB001, TB002, TB003) AS VARCHAR(4)), 4) TE003, "
                           + "TB003, TB004 - TB005 - ISNULL(TE005, 0) TE005, MB004, '' TE007, 'P013' TE008, TB006 TE009, MB032 TE010, TB001, TB002, "
                           + "'' TE013, '' TE014, '' TE015, '1' TE016, MB002 TE017, MB003 TE018, 'N' TE019, '' TE020, 0 TE021, '' TE022, "
-                          + "ME022 TE023, 0 TE024, '##########' TE025, MB004 TE026, TB004-TB005 - ISNULL(TE005, 0) TE027, '' TE028, '' TE029, '' TE030, 0 TE031, "
-                          + "0 TE032, 0 TE033, '2' TEC01, ISNULL(INVMB.UDF02, '') UDF02, ISNULL(MW003, '') UDF03, ISNULL(INVMB.UDF12, '') UDF12 "
+                          + "ISNULL(MA002,'') TE023, 0 TE024, '##########' TE025, MB004 TE026, TB004-TB005 - ISNULL(TE005, 0) TE027, '' TE028, '' TE029, '' TE030, 0 TE031, "
+                          + "0 TE032, 0 TE033, '2' TEC01, ISNULL(INVMB.UDF02, '') UDF02, ISNULL(MW003, '') UDF03, ISNULL(MOCTA.UDF12, '') UDF04 "
                           + "FROM MOCTC INNER JOIN MOCTD ON TC001 = TD001 AND TC002 = TD002 INNER JOIN MOCTB ON TD003 = TB001 AND TD004 = TB002 "
-                          + "INNER JOIN INVMB ON MB001 = TB003 LEFT JOIN CMSMW ON MW001 = TB006 LEFT JOIN INVME ON ME001 = TB003 AND ME002 = MB032 "
+                          + "INNER JOIN INVMB ON MB001 = TB003 INNER JOIN CMSMW ON MW001 = TB006 LEFT JOIN INVME ON ME001 = TB003 AND ME002 = MB032 "
+                          + "INNER JOIN MOCTA ON TD003 = TA001 AND TD004 = TA002 LEFT JOIN PURMA ON MA001 = MB032 "
                           + "LEFT JOIN ("
                           + "SELECT TE2.TE004, TE2.TE009, TE2.TE011, TE2.TE012, SUM(TE2.TE005) AS TE005 FROM MOCTC AS TC2 "
                           + "INNER JOIN MOCTE AS TE2 ON TC2.TC001 = TE2.TE001 AND TC2.TC002 = TE2.TE002 "
-                          + "WHERE   TC2.TC008 = '54' AND TC2.TC009 = 'N' "
+                          + "WHERE TC2.TC008 = '54' AND TC2.TC009 = 'N' "
                           + "GROUP BY TE004, TE009, TE011, TE012 ) AS MOCTE ON TE011 = TD003 AND TE012 = TD004 AND TE004 = TB003 AND TE009 = TB006 " 
-                          + "WHERE TB004-TB005 - ISNULL(TE005, 0) > 0 AND TC001 = '{0}' AND TC002 = '{1}' ORDER BY TB001, TB002, TB003 ";
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh));
+                          + "WHERE TB004-TB005 - ISNULL(TE005, 0) > 0 AND TB011 NOT IN ('4') AND TC001 = '{0}' AND TC002 = '{1}' {2} ORDER BY TB001, TB002, TB003 ";
+            string sqlstr2 = "";
+            if (infObj.GroupList != "")
+            {
+                sqlstr2 = string.Format("AND CAST(MW003 AS VARCHAR(100)) IN ({0}) ", infObj.GroupList);
+                
+            }
+            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh, sqlstr2));
         }
 
         private void MocteUdt()
@@ -424,16 +533,19 @@ namespace 联友生产辅助工具.仓储中心
         private string _orderNum = null;
         private string _cpName = null;
         private int _wlRowCount = 0;
+        private int _gdScCount = 0;
 
         private int _rowCount = 0;
         private bool _generateSucc = false;
 
         private DataTable _gdDt = null;
 
+        private string _groupList = "";
+
         public string getGdSqlStr { get { return "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
                     + " WHERE 部门编号='{1}' AND 贸易方式='{2}' "
                     + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' " 
-                    + " OR 品名 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
+                    + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
                     + " ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)"; } }
 
         public string db { get { return _db; } set { _db = value; } }
@@ -446,7 +558,9 @@ namespace 联友生产辅助工具.仓储中心
         public string cpName { get { return _cpName; } set { _cpName = value; } }
         public int gdStr { get { return _wlRowCount; } set { _wlRowCount = value; } }
         public int wlRowCount { get { return _rowCount; } set { _rowCount = value; } }
+        public int gdScCount { get { return _gdScCount; }set { _gdScCount = value; } }
         public bool gengerateSucc { get { return _generateSucc; } set { _generateSucc = value; } }
         public DataTable gdDt { get { return _gdDt; } set { _gdDt = value; } }
+        public string GroupList { get { return _groupList; } set { _groupList = value; } }
     }
 }

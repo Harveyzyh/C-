@@ -86,13 +86,15 @@ namespace 联友生产辅助工具.生产日报表
             string sqlstr_select = "";
             if (Login_Dpt.Substring(0, 2) == "生产")
             {
-                sqlstr_select = " SELECT Dpt 生产部门, WGroup 工作组, Serial 系列, Line 线别, Valid 有效码 FROM SC_LineList "
-                                 + " WHERE 1 = 1 "
-                                 + " AND Dpt = '" + Login_Dpt + "' ";
+                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM SC_LineList AS A "
+                              + " INNER JOIN SC_XL2GY AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND B.Valid = 1 "
+                              + " WHERE 1 = 1 "
+                              + " AND Dpt = '" + Login_Dpt + "' ";
             }
             else
             {
-                sqlstr_select = " SELECT Dpt 生产部门, WGroup 工作组, Serial 系列, Line 线别, Valid 有效码 FROM SC_LineList ";
+                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM SC_LineList AS A "
+                              + " INNER JOIN SC_XL2GY AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND B.Valid = 1 ";
             }
             
             DataTable dt = mssql.SQLselect(strConnection, sqlstr_select);

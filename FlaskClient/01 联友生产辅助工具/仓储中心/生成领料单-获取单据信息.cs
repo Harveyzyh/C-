@@ -34,7 +34,30 @@ namespace 联友生产辅助工具.仓储中心
 
         private void GetDt()
         {
-            dt = infObj.sql.SQLselect(infObj.connStr, string.Format(infObj.getGdSqlStr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode));
+            string sqlstr = "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
+                    + " WHERE 部门编号='{1}' AND 贸易方式='{2}' "
+                    + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' "
+                    + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
+                    + " {3} ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)";
+
+            string sqlstr2 = " AND  RTRIM(工单单号) IN ({0}) ";
+            string sqlstr3 = "";
+
+            foreach(string tmp in textBox2.Text.Split(','))
+            {
+                sqlstr3 += "'" + tmp.Replace("\r\n", "").Trim() + "',";
+            }
+            if (textBox2.Text == "")
+            {
+                sqlstr2 = "";
+            }
+            else
+            {
+                sqlstr2 = string.Format(sqlstr2, sqlstr3.TrimEnd(','));
+            }
+
+
+            dt = infObj.sql.SQLselect(infObj.connStr, string.Format(sqlstr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode, sqlstr2));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -105,6 +128,12 @@ namespace 联友生产辅助工具.仓储中心
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             dt.Rows[dataGridView1.CurrentRow.Index][0] = !(bool)dt.Rows[dataGridView1.CurrentRow.Index][0];
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            TextBox obj = (TextBox)sender;
+            obj.Text = obj.Text.Replace("\r\n", "").Replace(" ", "").Replace("，", ",").Replace(";", ",").Replace("；", ",");
         }
     }
 }
