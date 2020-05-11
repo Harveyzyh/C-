@@ -333,3 +333,4 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\1 联友生产辅助工具.csproj.GenerateResource.Cache
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Release\联友生产辅助工具.exe
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Release\联友生产辅助工具.pdb
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.扫描进货单_采购平台.resources

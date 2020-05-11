@@ -279,11 +279,12 @@ namespace 联友生产辅助工具.生管码垛线
                                          + " SC024 AS 客户编码,  "
                                          + " SC025 AS 电商编码,  "
                                          + " (CASE WHEN SC037 = 'N' THEN '未维护' ELSE SC037 END) AS 栈板分类码, "
-                                         + " (CASE WHEN SC036 = 'NULL' THEN '未维护' ELSE SC036 END) AS 纸箱尺寸码 "
+                                         + " (CASE WHEN SC036 = 'NULL' THEN '未维护' ELSE SC036 END) AS 纸箱尺寸码,"
+                                         + " SC040 AS 纸箱尺寸 "
                                          + " FROM SCHEDULE "
                                          + " LEFT JOIN BoxSizeCode ON SC036 = BoxCode "
                                          + " LEFT JOIN SplitTypeCode ON TypeCode = SC037 "
-                                         + " WHERE 1=1 ";
+                                         + " WHERE 1=1 AND SC039 = 'N'";
             if (show)
             {
                 show_sqlstr += " AND SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112)";
@@ -330,31 +331,26 @@ namespace 联友生产辅助工具.生管码垛线
         #region 获取ERP订单信息,直接从WG_DB里面取数据
         private void SyncFromPlan()
         {
-            label1.Visible = true;
-            string sqlstr = @"DELETE FROM SCHEDULE WHERE SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112) AND SC039 != 'Y' 
-                                INSERT INTO SCHEDULE(CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, 
-                                SC005, SC006, SC007, SC008, SC009, SC010, SC011, SC012, SC013, SC014, 
-                                SC015, SC016, SC017, SC018, SC019, SC020, SC021, SC022, SC023, SC024, SC025, SC026)
-                                SELECT CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, SC005, SC006, SC007, SC008, 
-                                SC009, SC010, SC011, SC012, SC013, SC014, SC015, SC016, SC017, SC018, SC019, SC020, 
-                                SC021, SC022, SC023, SC024, SC025, SC026 
-                                FROM WG_DB..SC_PLAN
-                                WHERE SC023 IN ('生产五部', '生产二部') 
-                                AND SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112)
-                                UPDATE SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112) AND SC039 != 'Y' ";
-            mssql.SQLexcute(connRobot, sqlstr);
+            //string sqlstr = @"DELETE FROM SCHEDULE WHERE SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112) AND SC039 != 'Y' 
+
+            //                INSERT INTO SCHEDULE(CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, 
+            //                SC005, SC006, SC007, SC008, SC009, SC010, SC011, SC012, SC013, SC014, 
+            //                SC015, SC016, SC017, SC018, SC019, SC020, SC021, SC022, SC023, SC024, SC025, SC026)
+            //                SELECT CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, SC005, SC006, SC007, SC008, 
+            //                SC009, SC010, SC011, SC012, SC013, SC014, SC015, SC016, SC017, SC018, SC019, SC020, 
+            //                SC021, SC022, SC023, SC024, SC025, SC026 
+            //                FROM WG_DB..SC_PLAN
+            //                WHERE SC023 IN ('生产五部', '生产二部') 
+            //                AND SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112)
+
+            //                UPDATE SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), DATEADD(DAY, -1, GETDATE()), 112) AND SC039 != 'Y' ";
+
+            mssql.SQLexcute(connRobot, "EXEC dbo.MdPlanInsert ");
 
             SetTypeCode();
 
             SetBoxCode();
-
-            //Dictionary<string, string> dict = new Dictionary<string, string>();
-            //dict.Add("User", FormLogin.Login_Uid);
-            //dict.Add("Mode", "Insert");
-            //dict.Add("Detail", "");
-            //HttpPost.HttpPost_Dict(FormLogin.HttpURL + "/Client/MaDuo/GetInfo", dict);
-
-            label1.Visible = false;
+            
             DgvShow(true);
             MessageBox.Show("同步工作已完成", "完成");
         }
@@ -363,148 +359,18 @@ namespace 联友生产辅助工具.生管码垛线
         #region 获取纸箱编码
         private void SetBoxCode()
         {
-            string sqlstrGet = @"SELECT SC001 FROM SCHEDULE WHERE 1=1 AND SC038 = 'y' ORDER BY KEY_ID";
-            string sqlstrSet = @"UPDATE SCHEDULE SET SC038 = 'Y', SC036 = (CASE WHEN BC IS NULL THEN 'NULL' ELSE BC END)
-                                    FROM SCHEDULE 
-                                    LEFT JOIN (
-                                    SELECT SC001 AS SC1, BoxCode AS BC FROM SCHEDULE 
-                                    LEFT JOIN BoxSizeCode ON BoxSize = '{1}'
-                                    ) AS A ON SC1 = SC001 WHERE SC001 = '{0}'  ";
-            DataTable dt = mssql.SQLselect(connRobot, sqlstrGet);
-            if (dt != null)
-            {
-                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    string BoxSize = GetMaxBoxSizeCode(dt.Rows[rowIndex][0].ToString());
-                    mssql.SQLexcute(connRobot, string.Format(sqlstrSet, dt.Rows[rowIndex][0].ToString(), BoxSize));
-                }
-            }
+            SetBoxCodeByProc(); //使用存储过程来更新信息
         }
 
-        private string GetMaxBoxSizeCode(string SC001)
+        private void SetBoxCodeByProc()
         {
-            string returnStr = "";
-
-            string sqlstrGet = GetBoxNameStr();
-            string sqlstr = @"SELECT DISTINCT TB013 FROM MOCTB INNER JOIN MOCTA ON TA001 = TB001 AND TA002= TB002 WHERE 1=1 {0} 
-                                AND RTRIM(TA076) + '-' + RTRIM(TA077) + '-' + RTRIM(TA078) = '{1}'";
-
-            string k = string.Format(sqlstr, sqlstrGet, SC001);
-            DataTable dt = mssql.SQLselect(connComfort, string.Format(sqlstr, sqlstrGet, SC001));
-
-            returnStr = GetBoxMaxSize(dt);
-
-            return returnStr;
-        }
-
-        private string GetBoxNameStr()
-        {
-            string sqlstr = @"SELECT DISTINCT BoxName, Spec FROM BoxNameCode WHERE Valid = 1 ";
-
-            string returnStr = null;
-            DataTable dt = mssql.SQLselect(connRobot, sqlstr);
-            if(dt != null)
-            {
-                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    if(returnStr == null)
-                    {
-                        returnStr = string.Format(" (TB012 LIKE '%{0}%' AND TB006 LIKE '%{1}%' )", dt.Rows[rowIndex][0].ToString(), dt.Rows[rowIndex][1].ToString());
-                    }
-                    else
-                    {
-                        returnStr += string.Format(" OR (TB012 LIKE '%{0}%' AND TB006 LIKE '%{1}%' ) ", dt.Rows[rowIndex][0].ToString(), dt.Rows[rowIndex][1].ToString());
-                    }
-                }
-                return string.Format( "AND ({0})", returnStr);
-            }
-            else
-            {
-                return " AND (TB012 LIKE '%纸箱%' AND TB006 = '0801') ";
-            }
-        }
-
-        private string GetBoxMaxSize(DataTable dt)
-        {
-            DataTable dtTmp = new DataTable();
-            string returnStr = null;
-            dtTmp.Columns.Add("L", typeof(Int32));
-            dtTmp.Columns.Add("W", typeof(Int32));
-            dtTmp.Columns.Add("H", typeof(Int32));
-            dtTmp.Columns.Add("V", typeof(Int32));
-
-            if (dt != null)
-            {
-                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    //取出规格中尺寸部分
-                    string guigeStr = dt.Rows[rowIndex][0].ToString();
-                    var guigeStrTmp = guigeStr.Split('/');
-                    for (int i = 0; i < guigeStrTmp.Length; i++)
-                    {
-                        if(Normal.GetSubstringCount(guigeStrTmp[i], "*") == 2)
-                        {
-                            try
-                            {
-                                //取出尺寸Str中各个数字并求出体积
-                                string sizeStr = guigeStrTmp[i];
-                                var sizeTmp = sizeStr.Split('*');
-
-                                string LStr = sizeTmp[0].Split('(')[0].Split('（')[0];
-                                int L = int.Parse(LStr);
-                                string WStr = sizeTmp[1].Split('(')[0].Split('（')[0];
-                                int W = int.Parse(WStr);
-                                string HStr = sizeTmp[2].Split('(')[0].Split('（')[0];
-                                int H = int.Parse(HStr);
-                                int V = L * W * H;
-
-                                DataRow dtTmpRow = dtTmp.NewRow();
-                                dtTmpRow["L"] = L;
-                                dtTmpRow["W"] = W;
-                                dtTmpRow["H"] = H;
-                                dtTmpRow["V"] = V;
-                                dtTmp.Rows.Add(dtTmpRow);
-                            }
-                            catch
-                            {
-                                continue;
-                            }
-                        }
-                    }
-                }
-
-                //已生成临时数据，体积已求出
-                if (dtTmp != null)
-                {
-                    int V = 0;
-                    for (int rowIndex = 0; rowIndex < dtTmp.Rows.Count; rowIndex++)
-                    {
-                        //MessageBox.Show(dtTmp.Rows[rowIndex][0].ToString() + "*" + dtTmp.Rows[rowIndex][1].ToString() + "*" + dtTmp.Rows[rowIndex][2].ToString());
-                        if (int.Parse(dtTmp.Rows[rowIndex][3].ToString()) > V)
-                        {
-                            V = int.Parse(dtTmp.Rows[rowIndex][3].ToString());
-                            returnStr = dtTmp.Rows[rowIndex][0].ToString() + "*" + dtTmp.Rows[rowIndex][1].ToString() + "*" + dtTmp.Rows[rowIndex][2].ToString();
-                        }
-                    }
-                    return returnStr;
-                }
-                else
-                {
-                    return "";
-                }
-            }
-            else
-            {
-                return "";
-            }
+            mssql.SQLexcute(connRobot, "EXEC dbo.BoxCodeUpdate ");
         }
         #endregion
 
         #region 获取订单类别编码
         private void SetTypeCode()
         {
-            //SetOrderInType(); //更新内销-停用
-            //SetOrderOutType(); //更新外销-停用
             SetTypeCodeByProc(); //使用存储过程来更新信息
         }
 
@@ -512,123 +378,6 @@ namespace 联友生产辅助工具.生管码垛线
         {
             mssql.SQLexcute(connRobot, "EXEC dbo.SplitCodeUpdate ");
         }
-
-        private void SetOrderInType()
-        {
-            string sqlstr = @"UPDATE SCHEDULE SET SC038 = 'y', SC037 = SC37
-                            FROM(
-                            SELECT SC001 AS SC1, (CASE  WHEN SC017 LIKE '%无码%' THEN 'C'  WHEN SC017 LIKE '%京东条码%' THEN 'D'  WHEN SC017 LIKE '%POP条码%' THEN 'E'  ELSE 'A' END ) AS SC37 FROM SCHEDULE 
-                            WHERE SC002 = '内销' AND SC038 = 'n' 
-                            ) AS A WHERE SC001 = SC1";
-            mssql.SQLexcute(connRobot, string.Format(sqlstr, GetOrderInTypeSqlStr()));
-        }
-
-        private string GetOrderInTypeSqlStr()
-        {
-            string returnStrTmp = "";
-            string returnStr = "(CASE {0} ELSE 'A' END )";
-            DataTable returnStrDt = mssql.SQLselect(connRobot, @"SELECT PO_Type, TypeCode FROM SplitTypeCode WHERE Valid = 1 AND PO_Class = '内销' AND PO_Type != '内销' ORDER BY K_ID");
-            if(returnStrDt != null)
-            {
-                string returnStrTemp2 = " WHEN SC017 LIKE '%{0}%' THEN '{1}' ";
-                for(int rowIndex = 0; rowIndex < returnStrDt.Rows.Count; rowIndex++)
-                {
-                    returnStrTmp += string.Format(returnStrTemp2, returnStrDt.Rows[rowIndex][0].ToString(), returnStrDt.Rows[rowIndex][1].ToString());
-                }
-                returnStr = string.Format(returnStr, returnStrTmp);
-                return returnStr;
-            }
-            else
-            {
-                return " 'A'";
-            }
-        }
-
-        private void SetOrderOutType()
-        {
-            string sqlstr = @"UPDATE SCHEDULE SET SC038 = 'y', SC037 = TypeCode
-                                FROM (
-                                SELECT SC001 AS SC1, TypeCode FROM SCHEDULE 
-                                INNER JOIN SplitTypeCode ON PO_Type = SUBSTRING(SC001, 1, 4) 
-                                WHERE SC002 = '外销' AND SC038 = 'n' AND PO_Class = '外销' 
-                                ) AS A WHERE SC1 = SC001";
-            mssql.SQLexcute(connRobot, sqlstr);
-
-            string sqlstr2 = @" SELECT DISTINCT SUBSTRING(SC001, 1, 4) FROM SCHEDULE WHERE SC002 = '外销' AND SC038 = 'n'";
-            DataTable dt = mssql.SQLselect(connRobot, sqlstr2);
-            if (dt != null)
-            {
-                GetOrderOutTypeCheck(dt);
-            }
-        }
-
-        private void GetOrderOutTypeCheck(DataTable dt)
-        {
-            if( dt != null)
-            {
-                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    string num = mssql.SQLselect(connRobot, " Select MAX(K_ID) +1 FROM SplitTypeCode").Rows[0][0].ToString();
-                    AddOrderType("外销", dt.Rows[rowIndex][0].ToString(), Num2Char(num));
-                }
-                SetOrderOutType();
-            }
-        }
-
-        private void AddOrderType(string PO_Class, string PO_Type, string TypeCode)
-        {
-            string sqlstr = @"INSERT INTO SplitTypeCode(PO_Class, PO_Type, TypeCode, Valid) 
-                              VALUES ('{0}', '{1}', '{2}', 1) ";
-            mssql.SQLexcute(connRobot, string.Format(sqlstr, PO_Class, PO_Type, TypeCode));
-        }
-
-        #region Num2Char
-        private static string ChangeNum2Char(int num)
-        {
-            string returnStr = "";
-            byte[] array = new byte[1];
-            array[0] = (byte)(Convert.ToInt32(num + 64));//ASCII码强制转换二进制
-            returnStr = Convert.ToString(System.Text.Encoding.ASCII.GetString(array));
-
-            if (returnStr == "@")
-            {
-                returnStr = "Z";
-            }
-            return returnStr;
-        }
-
-        public static string Num2Char(string num2 = null)
-        {
-            string returnStr = "";
-
-            if (num2 == null)
-            {
-                return null;
-            }
-            else
-            {
-                int num = int.Parse(num2);
-                int shang = num / 26;
-                int yu = num % 26;
-
-                if (shang == 1 && yu == 0)
-                {
-                    returnStr += ChangeNum2Char(26);
-                }
-                else if (shang != 0)
-                {
-                    returnStr += Num2Char(shang.ToString());
-                    returnStr += ChangeNum2Char(yu);
-                }
-                else
-                {
-                    returnStr += ChangeNum2Char(yu);
-                }
-                return returnStr;
-            }
-        }
-        #endregion
-
         #endregion
     }
 }

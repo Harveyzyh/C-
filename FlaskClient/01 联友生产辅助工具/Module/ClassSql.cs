@@ -51,6 +51,7 @@ namespace HarveyZ
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SqlStr, conn);
+                    cmd.CommandTimeout = 120;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     conn.Dispose();

@@ -68,6 +68,7 @@
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +98,7 @@
             this.仓储中心ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.仓储中心_扫描领料单ToolStripMenuItem,
             this.仓储中心_扫描进货单ToolStripMenuItem,
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem,
             this.仓储中心_生成领料单ToolStripMenuItem});
             this.仓储中心ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.仓储中心ToolStripMenuItem.Name = "仓储中心ToolStripMenuItem";
@@ -106,21 +108,21 @@
             // 仓储中心_扫描领料单ToolStripMenuItem
             // 
             this.仓储中心_扫描领料单ToolStripMenuItem.Name = "仓储中心_扫描领料单ToolStripMenuItem";
-            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.仓储中心_扫描领料单ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.仓储中心_扫描领料单ToolStripMenuItem.Text = "扫描领料单";
             this.仓储中心_扫描领料单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描领料单ToolStripMenuItem_Click);
             // 
             // 仓储中心_扫描进货单ToolStripMenuItem
             // 
             this.仓储中心_扫描进货单ToolStripMenuItem.Name = "仓储中心_扫描进货单ToolStripMenuItem";
-            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.仓储中心_扫描进货单ToolStripMenuItem.Text = "扫描进货单";
             this.仓储中心_扫描进货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单ToolStripMenuItem_Click);
             // 
             // 仓储中心_生成领料单ToolStripMenuItem
             // 
             this.仓储中心_生成领料单ToolStripMenuItem.Name = "仓储中心_生成领料单ToolStripMenuItem";
-            this.仓储中心_生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.仓储中心_生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.仓储中心_生成领料单ToolStripMenuItem.Text = "生成领料单";
             this.仓储中心_生成领料单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_生成领料单ToolStripMenuItem_Click);
             // 
@@ -288,7 +290,7 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
@@ -401,6 +403,13 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
+            // 仓储中心_扫描进货单采购平台ToolStripMenuItem
+            // 
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Name = "仓储中心_扫描进货单采购平台ToolStripMenuItem";
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Text = "扫描进货单-采购平台";
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单采购平台ToolStripMenuItem_Click);
+            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -473,6 +482,7 @@
         private System.Windows.Forms.ToolStripMenuItem 码垛线_纸箱名称管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_工作组线别维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生成领料单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 仓储中心_扫描进货单采购平台ToolStripMenuItem;
     }
 }
 

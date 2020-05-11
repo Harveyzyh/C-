@@ -392,6 +392,13 @@ namespace 联友生产辅助工具
             frm.Show();
         }
 
+        private void 仓储中心_扫描进货单采购平台ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            扫描进货单_采购平台 frm = new 扫描进货单_采购平台();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
         private void 仓储中心_生成领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             生成领料单 frm = new 生成领料单();
