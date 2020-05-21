@@ -432,6 +432,7 @@ namespace 联友生产辅助工具.仓储中心
             MoctdUdt();
             MocteIns();
             MoctcUdt();
+            MocteUdt();
             infObj.gengerateSucc = true;
         }
 
@@ -507,9 +508,21 @@ namespace 联友生产辅助工具.仓储中心
             infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh, sqlstr2));
         }
 
-        private void MocteUdt()
+        private void MocteUdt() //其他额外情况的更新
         {
-            
+            //订单的指定气压棒供应商更新
+            string sqlstr1 = @"UPDATE MOCTE SET TE010 = COPTD.UDF09
+                                FROM MOCTE
+                                INNER JOIN MOCTA ON TE011 = TA001 AND TE012 = TA002
+                                INNER JOIN COPTD ON TD001 = TA026 AND TD002 = TA027 AND TD003 = TA028
+                                INNER JOIN PURMA ON MA001 = COPTD.UDF09
+                                WHERE 1 = 1
+                                AND TE004 IN('3020501004', '3020501014', '3020502014', '3020502023'
+                                    , '3020501005', '3020501012', '3020501016', '3020502015', '3020502024', '3020502026')
+                                AND TE001 = '{0}' AND TE002 = '{1}'";
+            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr1, infObj.db, infObj.dh));
+
+            //内销非电商，底盘供应商更新
         }
 
         private void MoctcUdt()
