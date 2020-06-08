@@ -17,9 +17,6 @@ namespace HarveyZ
         //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
         public static bool URLTestFlag = false; 
 
-        //公用信息
-        public static WebNet webNet = new WebNet();//http post
-
         //用户信息
         public static string Login_Uid = "";
         public static string Login_Name = "";
@@ -36,7 +33,6 @@ namespace HarveyZ
         //数据库连接标志位
         public static bool connFlag99 = false;
         public static bool connFlag198 = false;
-        public static bool connFlagY = false;
         
         
         #endregion
@@ -173,57 +169,12 @@ namespace HarveyZ
             connFlag99 = infObj.sql.SQLlinkTest(connStr);
         }
 
-        private string GetHttpURL()
-        {
-            try
-            {
-                string sqlstr = "";
-                if (URLTestFlag)
-                {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Valid = 'Y'";
-                }
-                else
-                {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
-                }
-                var get = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
-                return get;
-            }
-            catch
-            {
-                try
-                {
-                    string sqlstr = "";
-                    if (URLTestFlag)
-                    {
-                        sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Vaild = 'Y'";
-                    }
-                    else
-                    {
-                        sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Vaild = 'Y'";
-                    }
-                    var get = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
-                    return get;
-                }
-                catch
-                {
-                    if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
-                    {
-                        Environment.Exit(0);
-                    }
-                    return null;
-                }
-                
-            }
-            
-        }
-
         private bool GetNewVersion()
         {
-            string Msg, Url;
-            if(VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg, out Url))
+            string Msg;
+            if(VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
             {
-                UpdateUrl = infObj.httpHost + Url + infObj.progName + ".exe";
+                UpdateUrl = infObj.httpHost + @"/download/" + infObj.progName + ".exe";
                 return true;
             }
             else

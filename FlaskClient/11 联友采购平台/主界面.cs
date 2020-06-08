@@ -5,8 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using HarveyZ;
-using 联友采购平台.供应商;
-using 联友采购平台.管理;
+using HarveyZ.管理;
 
 namespace 联友采购平台
 {

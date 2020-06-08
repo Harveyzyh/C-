@@ -122,11 +122,10 @@ namespace HarveyZ
             mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstr, ProgName, Version));
         }
 
-        public static bool GetNewVersion(string ProgName, string NowVersion, out string Msg, out string Url)
+        public static bool GetNewVersion(string ProgName, string NowVersion, out string Msg)
         {
             bool result = false;
             Msg = null;
-            Url = null;
             if (Normal.GetSubstringCount(NowVersion, ".") == 3)
             {
                 string sqlstr = @"SELECT Version, Valid FROM WG_APP_INF WHERE ProgName = '{0}'";
@@ -143,7 +142,6 @@ namespace HarveyZ
                             if (int.Parse(NewVersionList[index]) > int.Parse(NowVersionList[index]))
                             {
                                 result = true;
-                                Url = @"/Client/WG/Download/";
                                 break;
                             }
                             if (int.Parse(NewVersionList[index]) < int.Parse(NowVersionList[index]))

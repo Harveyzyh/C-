@@ -1,8 +1,0 @@
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\3 玖友库存上传工具.csprojResolveAssemblyReference.cache
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\_3_玖友库存上传工具.Properties.Resources.resources
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\玖友库存数量上传工具.玖友库存数量上传工具.resources
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\3 玖友库存上传工具.csproj.GenerateResource.Cache
-X:\88 AppClient\3 玖友库存上传工具\bin\Release\3 玖友库存上传工具.exe
-X:\88 AppClient\3 玖友库存上传工具\bin\Release\3 玖友库存上传工具.pdb
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\3 玖友库存上传工具.exe
-X:\88 AppClient\3 玖友库存上传工具\obj\Release\3 玖友库存上传工具.pdb

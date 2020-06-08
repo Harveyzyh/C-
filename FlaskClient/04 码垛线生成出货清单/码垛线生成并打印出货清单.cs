@@ -138,10 +138,10 @@ namespace 码垛线生成并打印出货清单
 
         private bool GetNewVersion()
         {
-            string Msg, Url;
-            if (VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg, out Url))
+            string Msg;
+            if (VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg))
             {
-                UpdateUrl = HttpURL + Url + ProgName + ".exe";
+                UpdateUrl = HttpURL + @"/download/" + ProgName + ".exe";
                 return true;
             }
             else
