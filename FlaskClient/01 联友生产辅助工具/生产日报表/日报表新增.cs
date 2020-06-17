@@ -14,10 +14,7 @@ namespace 联友生产辅助工具.生产日报表
     public partial class 日报表新增 : Form
     {
         Mssql mssql = new Mssql();
-        string Login_UID = FormLogin.Login_Uid;
-        string Login_Role = FormLogin.Login_Role;
-        string Login_Dpt = FormLogin.Login_Dpt;
-        public static string strConnection = Global_Const.strConnection_WGDB;
+        public static string strConnection = FormLogin.infObj.connMD;
         bool DtpFlag = false;
 
         #region Init
@@ -111,7 +108,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             string sqlstr = "";
 
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Login_UID + "', " + Normal.GetSysTimeStr("Long")
+            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long")
                    + ", '" + ProgramName + "', '" + ModuleName  + "')";
 
             mssql.SQLexcute(strConnection, sqlstr);
@@ -223,10 +220,10 @@ namespace 联友生产辅助工具.生产日报表
                               + " '0' AS 产量每人每小时, '' AS 生产单号, '' AS 备注 "
                               + " FROM WG_DB..SC_LineList AS A"
                               + " LEFT JOIN(SELECT WorkDpt, WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WorkDpt, WGroup, Serial) "
-                              + " AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND A.Dpt = B.WorkDpt Collate Chinese_PRC_CS_AS "
-                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup Collate Chinese_PRC_CS_AS "
+                              + " AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND A.Dpt = B.WorkDpt "
+                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
                               + " WHERE 1 = 1 "
-                              + " AND A.Dpt = '" + Login_Dpt + "' "
+                              + " AND A.Dpt = '" + FormLogin.infObj.userDpt + "' "
                               + " AND A.Valid = 1 "
                               + " AND A.WGroup IN(" + XL_List + ") "
                               + " ORDER BY A.Serial, A.WGroup, A.Line, C.S DESC, B.S DESC "; 
@@ -275,9 +272,9 @@ namespace 联友生产辅助工具.生产日报表
             int Index = 0;
             string sqlstr = "";
 
-            string Creator = Login_UID;
+            string Creator = FormLogin.infObj.userId;
             string Create_Date = mssql.SQLselect(strConnection, "SELECT CONVERT(VARCHAR(20), GETDATE(), 112)").Rows[0][0].ToString();
-            string WorkDpt = Login_Dpt;
+            string WorkDpt = FormLogin.infObj.userDpt;
             string WorkDate = DtpReportInputWorkDate.Value.ToString("yyyy-MM-dd");
             WorkDate = WorkDate.Split('-')[0] + WorkDate.Split('-')[1] + WorkDate.Split('-')[2];
             string Serial, Group, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark, Line;

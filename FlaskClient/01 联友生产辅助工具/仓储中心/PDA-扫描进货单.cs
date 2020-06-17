@@ -12,11 +12,6 @@ namespace 联友生产辅助工具.仓储中心
 {
     public partial class PDA_扫描进货单 : Form
     {
-        #region 公用变量设定
-
-        public static string strConnection = Global_Const.strConnection_COMFORT;
-        #endregion
-
         #region 局部变量设定
         Mssql mssql = new Mssql();
         ERP_Create_Purtg createPurtg = new ERP_Create_Purtg();
@@ -31,8 +26,8 @@ namespace 联友生产辅助工具.仓储中心
         private string TypeID = "3401";
         private string PositionID = "P013";
         private string MaterielID = null;
-        private string LoginUid = FormLogin.Login_Uid;
-        private string LoginUserGroup = null;
+        private string LoginUid = FormLogin.infObj.userId;
+        private string LoginUserGroup = FormLogin.infObj.userGroup;
 
         private bool MsgFlag = false;
         #endregion
@@ -52,7 +47,7 @@ namespace 联友生产辅助工具.仓储中心
             panel_Title.Enabled = true;
             panel_Last.Enabled = false;
 
-            供应商查.Select();
+            //供应商查.Select();
         }
         #endregion
 
@@ -335,7 +330,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private string GetFlowID(string flowId = null)
         {
-            string time = mssql.SQLselect(strConnection, "SELECT dbo.f_getTime(1) ").Rows[0][0].ToString();
+            string time = mssql.SQLselect(FormLogin.infObj.connYF, "SELECT dbo.f_getTime(1) ").Rows[0][0].ToString();
 
             if (flowId == null)
             {
@@ -343,7 +338,7 @@ namespace 联友生产辅助工具.仓储中心
             }
             else
             {
-                if (mssql.SQLselect(strConnection, string.Format("SELECT RTRIM(JHXA005) FROM COMFORT..JH_LYXA WHERE JHXA005 = '{0}' ", flowId)) == null)
+                if (mssql.SQLselect(FormLogin.infObj.connYF, string.Format("SELECT RTRIM(JHXA005) FROM COMFORT..JH_LYXA WHERE JHXA005 = '{0}' ", flowId)) == null)
                 {
                     return GetFlowID(flowId);
                 }
@@ -354,7 +349,7 @@ namespace 联友生产辅助工具.仓储中心
         private string GetTime()
         {
             string sqlstr = "SELECT dbo.f_getTime(1) ";
-            DataTable dt = mssql.SQLselect(strConnection, sqlstr);
+            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
             if(dt != null)
             {
                 return dt.Rows[0][0].ToString();
@@ -365,26 +360,12 @@ namespace 联友生产辅助工具.仓储中心
             }
         }
 
-        private void GetUserGroup()
-        {
-            string sql = "SELECT MF004 FROM ADMMF WHERE MF001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(strConnection, string.Format(sql, LoginUid));
-            if(dt != null)
-            {
-                LoginUserGroup = dt.Rows[0][0].ToString();
-            }
-            else
-            {
-                LoginUserGroup = "";
-            }
-        }
-
         private DataTable GetMaterielInfo(string MaterielID, string SupplierID)
         {
             string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCBSum FROM VPURTD_ZYH "
                             + "INNER JOIN INVMB ON MB001 = TD004 "
                             + "WHERE TD004 = '{0}' AND TC004 = '{1}' ";
-            DataTable dt = mssql.SQLselect(strConnection, string.Format(sqlstr, MaterielID, SupplierID));
+            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, MaterielID, SupplierID));
             if(dt != null)
             {
                 return dt;
@@ -398,7 +379,7 @@ namespace 联友生产辅助工具.仓储中心
         private bool GetMaterielExist(string MaterielID)
         {
             string sqlstr = "SELECT MB001 FROM INVMB WHERE MB001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(strConnection, string.Format(sqlstr, MaterielID));
+            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, MaterielID));
             if(dt != null)
             {
                 return true;
@@ -544,7 +525,6 @@ namespace 联友生产辅助工具.仓储中心
                         + "'{11}', '********************', '{12}', '{13}')";
             string flowId = GetFlowID();
             string Time = GetTime();
-            GetUserGroup();
             int Count = DataGridView_List.RowCount;
 
             for (int Index = 0; Index < Count; Index++)
@@ -562,7 +542,7 @@ namespace 联友生产辅助工具.仓储中心
                 string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
                     JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
 
-                mssql.SQLexcute(strConnection, sqlstr);
+                mssql.SQLexcute(FormLogin.infObj.connYF, sqlstr);
 
                 DataGridView_List.Rows.Remove(DataGridView_List.Rows[0]);
             }
@@ -590,18 +570,18 @@ namespace 联友生产辅助工具.仓储中心
             if (DataGridView_List.RowCount > 0)
             {
                 panel_Last.Enabled = true;
-                入库单别查.Enabled = false;
-                入库仓库查.Enabled = false;
-                供应商查.Enabled = false;
+                入库单别L.Enabled = false;
+                入库仓库L.Enabled = false;
+                供应商L.Enabled = false;
                 dateTimePicker1.Enabled = false;
                 送货单号T.Enabled = false;
             }
             if (DataGridView_List.RowCount <= 0)
             {
                 panel_Last.Enabled = false;
-                入库单别查.Enabled = true;
-                入库仓库查.Enabled = true;
-                供应商查.Enabled = true;
+                入库单别L.Enabled = true;
+                入库仓库L.Enabled = true;
+                供应商L.Enabled = true;
                 dateTimePicker1.Enabled = true;
                 送货单号T.Enabled = true;
             }

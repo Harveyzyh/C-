@@ -66,7 +66,7 @@ namespace HarveyZ
                     }
                     else
                     {
-                        MessageBox.Show("SQL Commit 出错了！\r\n" + ConnStr + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
+                        MessageBox.Show("SQL Commit 出错了！\r\n" + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
                         return 1;
                     }
                 }

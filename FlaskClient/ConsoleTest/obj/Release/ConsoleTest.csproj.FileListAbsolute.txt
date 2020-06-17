@@ -1,8 +1,0 @@
-Y:\GitHub\C-\FlaskClient\ConsoleTest\bin\Release\ConsoleTest.exe.config
-Y:\GitHub\C-\FlaskClient\ConsoleTest\obj\Release\ConsoleTest.csprojResolveAssemblyReference.cache
-Y:\GitHub\C-\FlaskClient\ConsoleTest\bin\Release\ConsoleTest.exe
-Y:\GitHub\C-\FlaskClient\ConsoleTest\bin\Release\ConsoleTest.pdb
-Y:\GitHub\C-\FlaskClient\ConsoleTest\obj\Release\ConsoleTest.exe
-Y:\GitHub\C-\FlaskClient\ConsoleTest\obj\Release\ConsoleTest.pdb
-Y:\GitHub\C-\FlaskClient\ConsoleTest\bin\Release\Newtonsoft.Json.dll
-Y:\GitHub\C-\FlaskClient\ConsoleTest\bin\Release\Newtonsoft.Json.xml

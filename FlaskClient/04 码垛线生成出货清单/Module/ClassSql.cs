@@ -8,7 +8,7 @@ namespace HarveyZ
     public class Mssql
     {
         /// <summary>
-        /// 数据库连接测试
+        /// 数据库连接测试，超时时间为3秒
         /// </summary>
         /// <param name="strConnection">数据库连接字</param>
         public bool SQLlinkTest(string strConnection) //数据库连接测试
@@ -20,7 +20,7 @@ namespace HarveyZ
                 {
                     testConnection.Open();
                     SqlCommand testCmd = testConnection.CreateCommand();
-                    testCmd.CommandTimeout = 5;
+                    testCmd.CommandTimeout = 3;
                     CanConnectDB = true;
                     testConnection.Close();
                     testConnection.Dispose();
@@ -51,6 +51,7 @@ namespace HarveyZ
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SqlStr, conn);
+                    cmd.CommandTimeout = 120;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     conn.Dispose();
@@ -65,7 +66,7 @@ namespace HarveyZ
                     }
                     else
                     {
-                        MessageBox.Show("SQL Commit 出错了！\r\n" + ConnStr + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
+                        MessageBox.Show("SQL Commit 出错了！\r\n" + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
                         return 1;
                     }
                 }

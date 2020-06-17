@@ -15,7 +15,7 @@ namespace 联友生产辅助工具.生管排程
         private static string Mode = null;
         public static string Dpt = null;
         Mssql mssql = new Mssql();
-        string connWGDB = Global_Const.strConnection_WGDB;
+        string connWGDB = FormLogin.infObj.connMD;
 
         public 生管排程导入导出部门选择(string WorkMode)
         {

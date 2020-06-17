@@ -16,8 +16,8 @@ namespace 联友生产辅助工具.生管排程
         
         private Mssql mssql = new Mssql();
 
-        private static string Conn_WG_DB = Global_Const.strConnection_WGDB;
-        private static string Conn_ERP = Global_Const.strConnection_COMFORT;
+        private static string Conn_WG_DB = FormLogin.infObj.connMD;
+        private static string Conn_ERP = FormLogin.infObj.connYF;
         #endregion
 
         #region 窗体设计
@@ -171,7 +171,7 @@ namespace 联友生产辅助工具.生管排程
             mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
             for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
             {
-                mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrInsert, FormLogin.Login_Uid, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
+                mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrInsert, FormLogin.infObj.userId, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
                     dt.Rows[rowIndex][2], dt.Rows[rowIndex][3], dt.Rows[rowIndex][4]));
             }
         }

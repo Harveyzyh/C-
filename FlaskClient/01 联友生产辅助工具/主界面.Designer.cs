@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具
+﻿namespace HarveyZ
 {
     partial class 主界面
     {
@@ -33,6 +33,7 @@
             this.仓储中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_扫描领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_扫描进货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部_生产日报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,8 +57,6 @@
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.测试_1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.测试_2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试_3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭当前界面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.此用户没有任何权限ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +67,9 @@
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.仓储中心_扫描进货单采购平台ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.码垛线_客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.生管_生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ERPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.生管ToolStripMenuItem,
             this.工程部ToolStripMenuItem,
             this.管理ToolStripMenuItem,
+            this.ERPToolStripMenuItem,
             this.测试ToolStripMenuItem,
             this.关闭当前界面ToolStripMenuItem,
             this.此用户没有任何权限ToolStripMenuItem});
@@ -118,6 +120,13 @@
             this.仓储中心_扫描进货单ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.仓储中心_扫描进货单ToolStripMenuItem.Text = "扫描进货单";
             this.仓储中心_扫描进货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单ToolStripMenuItem_Click);
+            // 
+            // 仓储中心_扫描进货单采购平台ToolStripMenuItem
+            // 
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Name = "仓储中心_扫描进货单采购平台ToolStripMenuItem";
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Text = "扫描进货单-采购平台";
+            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单采购平台ToolStripMenuItem_Click);
             // 
             // 仓储中心_生成领料单ToolStripMenuItem
             // 
@@ -180,7 +189,8 @@
             this.码垛线ToolStripMenuItem,
             this.生产日报表生管维护ToolStripMenuItem,
             this.生管_电子排程ToolStripMenuItem,
-            this.生管_订单信息查询ToolStripMenuItem});
+            this.生管_订单信息查询ToolStripMenuItem,
+            this.生管_生产排程ToolStripMenuItem});
             this.生管ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.生管ToolStripMenuItem.Name = "生管ToolStripMenuItem";
             this.生管ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
@@ -197,7 +207,7 @@
             // 码垛线_排程导入ToolStripMenuItem
             // 
             this.码垛线_排程导入ToolStripMenuItem.Name = "码垛线_排程导入ToolStripMenuItem";
-            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.码垛线_排程导入ToolStripMenuItem.Text = "排程导入";
             this.码垛线_排程导入ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_排程导入ToolStripMenuItem_Click);
             // 
@@ -241,7 +251,8 @@
             // 工程部ToolStripMenuItem
             // 
             this.工程部ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.码垛线配置管理ToolStripMenuItem});
+            this.码垛线配置管理ToolStripMenuItem,
+            this.码垛线_客户端ToolStripMenuItem});
             this.工程部ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.工程部ToolStripMenuItem.Name = "工程部ToolStripMenuItem";
             this.工程部ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
@@ -290,39 +301,23 @@
             // 管理_权限管理ToolStripMenuItem
             // 
             this.管理_权限管理ToolStripMenuItem.Name = "管理_权限管理ToolStripMenuItem";
-            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.管理_权限管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.管理_权限管理ToolStripMenuItem.Text = "权限管理";
             this.管理_权限管理ToolStripMenuItem.Click += new System.EventHandler(this.管理_权限管理ToolStripMenuItem_Click);
             // 
             // 测试ToolStripMenuItem
             // 
             this.测试ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.测试_1ToolStripMenuItem,
-            this.测试_2ToolStripMenuItem,
             this.测试_3ToolStripMenuItem});
             this.测试ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem";
             this.测试ToolStripMenuItem.Size = new System.Drawing.Size(50, 22);
             this.测试ToolStripMenuItem.Text = "测试";
             // 
-            // 测试_1ToolStripMenuItem
-            // 
-            this.测试_1ToolStripMenuItem.Name = "测试_1ToolStripMenuItem";
-            this.测试_1ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
-            this.测试_1ToolStripMenuItem.Text = "1";
-            this.测试_1ToolStripMenuItem.Click += new System.EventHandler(this.测试_1ToolStripMenuItem_Click);
-            // 
-            // 测试_2ToolStripMenuItem
-            // 
-            this.测试_2ToolStripMenuItem.Name = "测试_2ToolStripMenuItem";
-            this.测试_2ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
-            this.测试_2ToolStripMenuItem.Text = "2";
-            this.测试_2ToolStripMenuItem.Click += new System.EventHandler(this.测试_2ToolStripMenuItem_Click);
-            // 
             // 测试_3ToolStripMenuItem
             // 
             this.测试_3ToolStripMenuItem.Name = "测试_3ToolStripMenuItem";
-            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
+            this.测试_3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.测试_3ToolStripMenuItem.Text = "3";
             this.测试_3ToolStripMenuItem.Click += new System.EventHandler(this.测试_3ToolStripMenuItem_Click);
             // 
@@ -403,12 +398,26 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // 仓储中心_扫描进货单采购平台ToolStripMenuItem
+            // 码垛线_客户端ToolStripMenuItem
             // 
-            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Name = "仓储中心_扫描进货单采购平台ToolStripMenuItem";
-            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Text = "扫描进货单-采购平台";
-            this.仓储中心_扫描进货单采购平台ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_扫描进货单采购平台ToolStripMenuItem_Click);
+            this.码垛线_客户端ToolStripMenuItem.Name = "码垛线_客户端ToolStripMenuItem";
+            this.码垛线_客户端ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.码垛线_客户端ToolStripMenuItem.Text = "码垛线客户端";
+            this.码垛线_客户端ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_客户端ToolStripMenuItem_Click);
+            // 
+            // 生管_生产排程ToolStripMenuItem
+            // 
+            this.生管_生产排程ToolStripMenuItem.Name = "生管_生产排程ToolStripMenuItem";
+            this.生管_生产排程ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.生管_生产排程ToolStripMenuItem.Text = "生产排程";
+            this.生管_生产排程ToolStripMenuItem.Click += new System.EventHandler(this.生管_生产排程ToolStripMenuItem_Click);
+            // 
+            // ERPToolStripMenuItem
+            // 
+            this.ERPToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.ERPToolStripMenuItem.Name = "ERPToolStripMenuItem";
+            this.ERPToolStripMenuItem.Size = new System.Drawing.Size(51, 22);
+            this.ERPToolStripMenuItem.Text = "ERP";
             // 
             // 主界面
             // 
@@ -453,8 +462,6 @@
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_查询ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_修改ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 测试ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 测试_1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 测试_2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 测试_3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 仓储中心_扫描领料单ToolStripMenuItem;
         private System.Windows.Forms.Panel panelParent;
@@ -483,6 +490,8 @@
         private System.Windows.Forms.ToolStripMenuItem 生产日报表_工作组线别维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生成领料单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 仓储中心_扫描进货单采购平台ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 码垛线_客户端ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 生管_生产排程ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ERPToolStripMenuItem;
     }
 }
-

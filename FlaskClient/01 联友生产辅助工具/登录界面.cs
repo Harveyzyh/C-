@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.IO;
 using System.Windows.Forms;
-using 联友生产辅助工具;
 
 
 namespace HarveyZ
@@ -13,34 +11,8 @@ namespace HarveyZ
         public static InfoObject infObj = new InfoObject();
         private Main main = new Main(infObj);
         
-        #region 定义公开全局变量
-        //是否为测试模式：true: 查找测试服务器的地址进行连接，false：查找正式的服务器地址  --在Init中判断DEBUG模式来设定true
-        public static bool URLTestFlag = false; 
-
-        //用户信息
-        public static string Login_Uid = "";
-        public static string Login_Name = "";
-        public static string Login_Dpt = "";
-        public static string Login_Role = "";
-
-        //权限信息
-        public static List<string> menuItemList = new List<string> { };//所有菜单栏列表
-        public static List<string> userPermList = new List<string> { };//用户权限列表
-
-        //数据库连接字符串
-        //public static string connWg = Global_Const.strConnection_WGDB;
-
-        //数据库连接标志位
-        public static bool connFlag99 = false;
-        public static bool connFlag198 = false;
-        
-        
-        #endregion
-
         #region 本地局域变量
         private bool MsgFlag = false;
-
-        private string UpdateUrl = "";
 
         private delegate void SqlTestDelegate(string connStr);
         #endregion
@@ -59,15 +31,18 @@ namespace HarveyZ
 
             FormLogin_Init(); //配置信息获取
             
-            if (GetNewVersion())
+            if (main.GetNewVersion())
             {
-                UpdateMe.ProgUpdate(infObj.progName, UpdateUrl);
+                UpdateMe.ProgUpdate(infObj.progName, infObj.updateHost + @"/download/" + infObj.progName + ".exe");
             }
 
             labelVersion.Text = "Ver: " + infObj.progVer;
-            
-            SqlTestDelegate sqlTest99Delegate = new SqlTestDelegate(SqlTest99);
-            sqlTest99Delegate.BeginInvoke(infObj.connComfort, null, null);
+
+            SqlTestDelegate sqlTestDelegate = new SqlTestDelegate(SqlTest);
+            sqlTestDelegate.BeginInvoke(infObj.connWG, null, null);
+
+            textBoxUid.Text = infObj.userId;
+            textBoxUid.SelectAll();
         }
 
         #endregion
@@ -142,7 +117,7 @@ namespace HarveyZ
             else
             {
                 string Msg = "";
-                bool result = FormLogin_GetLogin(textBoxUid.Text, textBoxPwd.Text, out Msg);
+                bool result = main.FormLogin_GetLogin(textBoxUid.Text, textBoxPwd.Text, out Msg);
                 if (result)
                 {
                     主界面 Form_main = new 主界面();
@@ -164,64 +139,19 @@ namespace HarveyZ
         #endregion
 
         #region 逻辑设计
-        private void SqlTest99(string connStr)
+        private void SqlTest(string connStr)
         {
-            connFlag99 = infObj.sql.SQLlinkTest(connStr);
-        }
-
-        private bool GetNewVersion()
-        {
-            string Msg;
-            if(VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
-            {
-                UpdateUrl = infObj.httpHost + @"/download/" + infObj.progName + ".exe";
-                return true;
-            }
-            else
-            {
-                if(Msg != null)
-                {
-                    if(MessageBox.Show(Msg, "错误", MessageBoxButtons.OK) == DialogResult.OK)
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-                return false;
-            }
+            infObj.connFlag = infObj.sql.SQLlinkTest(connStr);
         }
 
         private void FormLogin_Init() //软件配置信息获取
         {
-            bool flag = main.GetHttpURL();
-            if(!flag)
+            if(!main.GetUpdateHost())
             {
-                if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                if (MessageBox.Show("获取后台服务器配置失败，请联系咨询部！", "错误", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
-            }
-        }
-        
-        private bool FormLogin_GetLogin(string LoginUid, string LoginPwd, out string Msg)//登录
-        {
-            UserLogin userLogin = new UserLogin();
-            UserLogin.UserObjectReturn userObj = new UserLogin.UserObjectReturn();
-            userObj.Uid = LoginUid;
-            userObj.Pwd = CEncrypt.GetMd5Str(LoginPwd);
-            userLogin.Login(userObj);
-            if (userObj.Status)
-            {
-                Login_Uid = userObj.Uid;
-                Login_Name = userObj.Name;
-                Login_Dpt = userObj.Dpt;
-                userPermList = userObj.Permission;
-                Msg = userObj.Msg;
-                return true;
-            }
-            else
-            {
-                Msg = userObj.Msg;
-                return false;
             }
         }
 
@@ -244,16 +174,6 @@ namespace HarveyZ
             }
         }
         #endregion
-
-        private void textBoxUid_Leave(object sender, EventArgs e)
-        {
-            infObj.userId = textBoxUid.Text;
-        }
-
-        private void textBoxPwd_Leave(object sender, EventArgs e)
-        {
-            infObj.userPwd = textBoxPwd.Text;
-        }
     }
 
     public class Main
@@ -264,32 +184,71 @@ namespace HarveyZ
         {
             infObj = _infObj;
             infObj.sql = new Mssql();
-            infObj.connWg = Global_Const.strConnection_WGDB;
-            infObj.connComfort = Global_Const.strConnection_COMFORT;
 
             GetProgInfo();
+            GetRemoteFlag();
+            SetConnInfo();
+
+            InitMainIniPath();
+            InitUserId();
         }
 
-        public void GetProgInfo()
+        private void InitMainIniPath()
         {
+            infObj.mainIniFilePath = infObj.localPath + @"/Main.ini";
+        }
+
+        private void InitUserId()
+        {
+            IniHelper.CheckFile(infObj.mainIniFilePath);
+            infObj.userId = IniHelper.GetValue("Login", "Uid", "", infObj.mainIniFilePath);
+        }
+        
+        private void GetProgInfo()
+        {
+            infObj.localPath = Directory.GetCurrentDirectory();
             infObj.progName = Application.ProductName.ToString();
             infObj.progVer = Application.ProductVersion.ToString();
         }
 
-        public bool GetHttpURL()
+        private void GetRemoteFlag()
+        {
+            if (File.Exists(infObj.localPath + @"/Setting.ini") == true)
+            {
+                infObj.remoteFlag = true;
+            }
+        }
+
+        private void SetConnInfo()
+        {
+            if (infObj.remoteFlag)
+            {
+                infObj.connWG = Global_Const.strConnection_WG_R;
+                infObj.connYF = Global_Const.strConnection_YF_R;
+                infObj.connMD = Global_Const.strConnection_MD_R;
+            }
+            else
+            {
+                infObj.connWG = Global_Const.strConnection_WG;
+                infObj.connYF = Global_Const.strConnection_YF;
+                infObj.connMD = Global_Const.strConnection_MD;
+            }
+        }
+
+        public bool GetUpdateHost()
         {
             try
             {
                 string sqlstr = "";
-                if (infObj.testFlag)
+                if (infObj.remoteFlag)
                 {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='TEST' AND Valid = 'Y'";
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Remote' AND Valid = 'Y'";
                 }
                 else
                 {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Local' AND Valid = 'Y'";
                 }
-                infObj.httpHost = infObj.sql.SQLselect(infObj.connWg, sqlstr).Rows[0][0].ToString();
+                infObj.updateHost = infObj.sql.SQLselect(infObj.connWG, sqlstr).Rows[0][0].ToString();
                 return true;
             }
             catch
@@ -298,26 +257,86 @@ namespace HarveyZ
             }
 
         }
+
+        public bool GetNewVersion()
+        {
+            string Msg;
+            if (VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
+            {
+                return true;
+            }
+            else
+            {
+                if (Msg != null)
+                {
+                    if (MessageBox.Show(Msg, "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                return false;
+            }
+        }
+
+        private void SetIniFileUid()
+        {
+            IniHelper.SetValue("Login", "Uid", infObj.userId, infObj.mainIniFilePath);
+        }
+        
+        public bool FormLogin_GetLogin(string LoginUid, string LoginPwd, out string Msg)//登录
+        {
+            UserLogin userLogin = new UserLogin();
+            UserLogin.UserObjectReturn userObj = new UserLogin.UserObjectReturn();
+            userObj.Uid = LoginUid;
+            userObj.Pwd = CEncrypt.GetMd5Str(LoginPwd);
+            userLogin.Login(userObj);
+            if (userObj.Status)
+            {
+                infObj.userPermList = userObj.Permission;
+
+                Msg = userObj.Msg;
+
+                infObj.userId = userObj.Uid;
+                infObj.userName = userObj.Name;
+                infObj.userDpt = userObj.Dpt;
+                infObj.userGroup = userObj.Group;
+
+                SetIniFileUid();
+
+                return true;
+            }
+            else
+            {
+                Msg = userObj.Msg;
+                return false;
+            }
+        }
     }
 
     public class InfoObject : InfoObjectBase
     {
+        private bool _remoteFlag = false;
+        private string _localPath = null;
         private string _userPwd = null;
-        private string _httpHost = null;
         private bool _testFlag = false;
-        private string _progName = null;
-        private string _progVer = null;
-        private string _connWg = null;
-        private string _connComfort = null;
+        private bool _connFlag = false;
+
+        private string _mainIniFilePath = null;
+        private List<string> _userPermList = new List<string> { };
+        private List<string> _menuItemList = new List<string> { };
+
+        public bool remoteFlag { get { return _remoteFlag; } set { _remoteFlag = value; } }
+        public string localPath { get { return _localPath; } set { _localPath = value; } }
 
         public string userPwd { get { return _userPwd; } set { _userPwd = value; } }
-        public string httpHost { get { return _httpHost; } set { _httpHost = value; } }
+
         public bool testFlag { get { return _testFlag; } set { _testFlag = value; } }
 
-        public string connWg { get { return _connWg; } set { _connWg = value; } }
-        public string connComfort { get { return _connComfort; } set { _connComfort = value; } }
+        public bool connFlag { get { return _connFlag; } set { _connFlag = value; } }
 
-        public string progName { get { return _progName; } set { _progName = value; } }
-        public string progVer { get { return _progVer; } set { _progVer = value; } }
+        public string mainIniFilePath { get { return _mainIniFilePath; } set { _mainIniFilePath = value; } }
+        public List<string> userPermList { get { return _userPermList; } set { _userPermList = value; } }
+        public List<string> menuItemList { get { return _menuItemList; } set { _menuItemList = value; } }
+
     }
 }

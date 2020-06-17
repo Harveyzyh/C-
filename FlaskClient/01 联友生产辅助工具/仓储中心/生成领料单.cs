@@ -270,11 +270,10 @@ namespace 联友生产辅助工具.仓储中心
         public LldGenerate()
         {
             infObj.sql = new Mssql();
-            infObj.connStr = Global_Const.strConnection_COMFORT;
 
-            infObj.userId = 主界面.infObj.userId;
-            infObj.userName = 主界面.infObj.userName;
-            infObj.userDpt = 主界面.infObj.userDpt;
+            infObj.userId = FormLogin.infObj.userId;
+            infObj.userName = FormLogin.infObj.userName;
+            infObj.userDpt = FormLogin.infObj.userDpt;
 
             InitDict();
             InitGdDt();
@@ -282,7 +281,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void InitGdDt()
         {
-            infObj.gdDt = infObj.sql.SQLselect(infObj.connStr, "SELECT TOP 1 *  FROM V_GetWscGd ");
+            infObj.gdDt = infObj.sql.SQLselect(FormLogin.infObj.connYF, "SELECT TOP 1 *  FROM V_GetWscGd ");
             infObj.gdDt.Rows.RemoveAt(0);
         }
 
@@ -308,7 +307,7 @@ namespace 联友生产辅助工具.仓储中心
         public List<string> GetGroupList()
         {
             string sqlstr = "SELECT DISTINCT CAST(MW003 AS VARCHAR(100)) MW003 FROM CMSMW WHERE MW003 IS NOT NULL AND CAST(MW003 AS VARCHAR(100)) != '' ";
-            DataTable dt = infObj.sql.SQLselect(infObj.connStr, sqlstr);
+            DataTable dt = infObj.sql.SQLselect(FormLogin.infObj.connYF, sqlstr);
             if (dt != null)
             {
                 List<string> groupList = new List<string>();
@@ -357,7 +356,7 @@ namespace 联友生产辅助工具.仓储中心
             if (infObj.db != null)
             {
                 string sqlstr = "EXEC P_GETDH @MQ001='{0}' ";
-                DataTable dt = infObj.sql.SQLselect(infObj.connStr, string.Format(sqlstr, infObj.db));
+                DataTable dt = infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db));
                 if (dt != null)
                 {
                     infObj.dh = dt.Rows[0][0].ToString();
@@ -369,7 +368,7 @@ namespace 联友生产辅助工具.仓储中心
         private int GetSl(string gd) // 根据工单号，获取工单的预计产量
         {
             string sqlstr = "SELECT ISNULL(CAST(TA015 AS FLOAT), 0) FROM MOCTA WHERE RTRIM(TA001)+'-'+RTRIM(TA002) = '{0}' ";
-            DataTable dt = infObj.sql.SQLselect(infObj.connStr, string.Format(sqlstr, gd));
+            DataTable dt = infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, gd));
             if(dt != null)
             {
                 return int.Parse(dt.Rows[0][0].ToString());
@@ -414,7 +413,7 @@ namespace 联友生产辅助工具.仓储中心
                     gdStr += "'" + dt.Rows[rowIdx][0].ToString() + "-" + dt.Rows[rowIdx][1].ToString() + "'";
                     if (rowIdx + 1 != dt.Rows.Count) gdStr += ", ";
                 }
-                return infObj.sql.SQLselect(infObj.connStr, string.Format(sqlstr, gdStr.ToString())).Rows[0][0].ToString();
+                return infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, gdStr.ToString())).Rows[0][0].ToString();
             }
             else return 0.ToString();
         }
@@ -444,7 +443,7 @@ namespace 联友生产辅助工具.仓储中心
                           + "VALUES('COMFORT', '{0}', dbo.f_getTime(1), 1, '{1}', '{2}', LEFT(dbo.f_getTime(1), 8), '01', '{3}', '', '', '54', 'N', 0, 'N', '1', "
                           + "'Y', LEFT(dbo.f_getTime(1), 8), '', 'N', 0, '0', '', '', '{4}', '', '', NULL, 0, 0, 0, '', 0, 0, '', '{5}', '{6}', '{7}', '{8}', '{9}')";
             GetDh();
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, FormLogin.infObj.userId, infObj.db, infObj.dh, infObj.center, infObj.dpt, infObj.order, infObj.tradeMode, infObj.orderNum, infObj.cpName, infObj.GroupList.Replace("\'", ""))); 
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, FormLogin.infObj.userId, infObj.db, infObj.dh, infObj.center, infObj.dpt, infObj.order, infObj.tradeMode, infObj.orderNum, infObj.cpName, infObj.GroupList.Replace("\'", ""))); 
         }
         
         private void MoctdIns()
@@ -462,14 +461,14 @@ namespace 联友生产辅助工具.仓储中心
 
                 int sl = GetSl(gdb + "-" + gdh);
 
-                infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh, gdb, gdh, sl, "P013", FormLogin.infObj.userId));
+                infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db, infObj.dh, gdb, gdh, sl, "P013", FormLogin.infObj.userId));
             }
         }
 
         private void MoctdUdt()
         {
             string sqlstr = "UPDATE MOCTD SET MOCTD.USR_GROUP = MF004 FROM MOCTD INNER JOIN ADMMF ON MF001=MOCTD.CREATOR WHERE TD001='{0}' AND TD002='{1}' ";
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh));
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db, infObj.dh));
         }
         
         private void MocteIns()
@@ -499,13 +498,13 @@ namespace 联友生产辅助工具.仓储中心
                 sqlstr2 = string.Format("AND CAST(MW003 AS VARCHAR(100)) IN ({0}) ", infObj.GroupList);
                 
             }
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh, sqlstr2));
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db, infObj.dh, sqlstr2));
         }
 
         private void MocteUdt() //其他额外情况的更新
         {
             string sqlstr1 = @" P_MOCTC_CREATE_AFTER_WG @TC001='{0}', @TC002='{1}' ";
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr1, infObj.db, infObj.dh));
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr1, infObj.db, infObj.dh));
         }
 
         private void MoctcUdt()
@@ -514,7 +513,7 @@ namespace 联友生产辅助工具.仓储中心
                           + "FROM MOCTC "
                           + "LEFT JOIN (SELECT TE001, TE002, USR_GROUP, SUM(TE005) STE005 FROM MOCTE GROUP BY TE001, TE002, USR_GROUP) AS MOCTE ON TE001=TC001 AND TE002=TC002 "
                           + "WHERE TC001='{0}' AND TC002='{1}'";
-            infObj.sql.SQLexcute(infObj.connStr, string.Format(sqlstr, infObj.db, infObj.dh));
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db, infObj.dh));
         }
     }
 

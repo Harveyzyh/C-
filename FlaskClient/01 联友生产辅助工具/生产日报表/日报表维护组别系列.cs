@@ -15,9 +15,6 @@ namespace 联友生产辅助工具.生产日报表
         public static string strConnection = 日报表新增.strConnection;
 
         Mssql mssql = new Mssql();
-        string Login_UID = FormLogin.Login_Uid;
-        string Login_Role = FormLogin.Login_Role;
-        string Login_Dpt = FormLogin.Login_Dpt;
 
         public 日报表维护组别系列()
         {
@@ -63,21 +60,6 @@ namespace 联友生产辅助工具.生产日报表
                 int Rows = dttmp.Rows.Count;
                 int Row_Index = 0;
                 int Index;
-
-                //for(Row_Index = 0; Row_Index < Rows; Row_Index++)
-                //{
-                //    Index = DataGridView_List.Rows.Add();
-                //    DataGridView_List.Rows[Index].Cells[0].Value = dttmp.Rows[Row_Index][0].ToString();
-                //    DataGridView_List.Rows[Index].Cells[1].Value = dttmp.Rows[Row_Index][1].ToString();
-                //    if(dttmp.Rows[Row_Index][2].ToString() == "Y")
-                //    {
-                //        DataGridView_List.Rows[Index].Cells[2].Value = 1;
-                //    }
-                //    else
-                //    {
-                //        DataGridView_List.Rows[Index].Cells[2].Value = 0;
-                //    }
-                //}
 
                 DgvMain.DataSource = dttmp;
                 DgvOpt.SetRowColor(DgvMain);
@@ -185,13 +167,13 @@ namespace 联友生产辅助工具.生产日报表
                           + " FROM SC_Dpt2Line AS A "
                           + " INNER JOIN SC_XL2GY AS B ON B.Valid = 1 "
                           + " AND A.Valid = 1 "
-                          + " AND NOT EXISTS(SELECT 1 FROM SC_LineList AS C WHERE C.[Dpt] = A.[Dpt] "
-                          + " AND C.[WGroup] = B.[WGroup] Collate Chinese_PRC_CS_AS AND C.[Serial] = B.[Serial] Collate Chinese_PRC_CS_AS AND C.[Line] = A.[Line])";
+                          + " AND NOT EXISTS(SELECT 1 FROM SC_LineList AS C WHERE C.Dpt = A.Dpt "
+                          + " AND C.WGroup = B.WGroup AND C.Serial = B.Serial AND C.Line = A.Line)";
             mssql.SQLexcute(strConnection, sqlstr_insert);
 
             string sqlstr_update = "UPDATE SC_LineList SET Valid=0 "
                                  + " FROM SC_LineList AS A "
-                                 + " INNER JOIN SC_XL2GY AS B ON B.WGroup Collate Chinese_PRC_CS_AS = A.WGroup AND B.Serial Collate Chinese_PRC_CS_AS = A.Serial "
+                                 + " INNER JOIN SC_XL2GY AS B ON B.WGroup = A.WGroup AND B.Serial"
                                  + " WHERE B.Valid = 0 ";
             mssql.SQLexcute(strConnection, sqlstr_update);
         }
@@ -241,7 +223,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             string sqlstr = "";
 
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Login_UID + "', " + Normal.GetSysTimeStr("Long")
+            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long")
                    + ", '" + ProgramName + "', '" + ModuleName + "')";
 
             mssql.SQLexcute(strConnection, sqlstr);

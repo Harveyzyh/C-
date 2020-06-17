@@ -35,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSyncFromPlan = new System.Windows.Forms.Button();
             this.btnOutput = new System.Windows.Forms.Button();
-            this.btnInput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +75,6 @@
             this.PanelTitle.Controls.Add(this.label1);
             this.PanelTitle.Controls.Add(this.btnSyncFromPlan);
             this.PanelTitle.Controls.Add(this.btnOutput);
-            this.PanelTitle.Controls.Add(this.btnInput);
             this.PanelTitle.Controls.Add(this.btnShow);
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Name = "PanelTitle";
@@ -113,17 +111,6 @@
             this.btnOutput.Text = "导出";
             this.btnOutput.UseVisualStyleBackColor = true;
             // 
-            // btnInput
-            // 
-            this.btnInput.Location = new System.Drawing.Point(645, 4);
-            this.btnInput.Name = "btnInput";
-            this.btnInput.Size = new System.Drawing.Size(90, 30);
-            this.btnInput.TabIndex = 4;
-            this.btnInput.Text = "导入";
-            this.btnInput.UseVisualStyleBackColor = true;
-            this.btnInput.Visible = false;
-            this.btnInput.Click += new System.EventHandler(this.button_Input_Click);
-            // 
             // 码垛线排程导入
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -149,7 +136,6 @@
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Panel PanelTitle;
         private System.Windows.Forms.Button btnOutput;
-        private System.Windows.Forms.Button btnInput;
         private System.Windows.Forms.Button btnSyncFromPlan;
         private System.Windows.Forms.Label label1;
     }

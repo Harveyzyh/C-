@@ -17,10 +17,7 @@ namespace 联友生产辅助工具.生产日报表
         #region 局部变量
         Mssql mssql = new Mssql();
         DataGridViewFunction Get = new DataGridViewFunction();
-        string Login_UID = FormLogin.Login_Uid;
-        string Login_Role = FormLogin.Login_Role;
-        string Login_Dpt = FormLogin.Login_Dpt;
-        public static string strConnection = Global_Const.strConnection_WGDB;
+        public static string strConnection = FormLogin.infObj.connMD;
         private static bool DtpFlag = false;
         #endregion
 
@@ -39,19 +36,18 @@ namespace 联友生产辅助工具.生产日报表
             ButtonReportSelectLayout.Enabled = false;
 
             //部门判断、权限设置
-            if (Login_Dpt.Substring(0, 2) == "生产")
+            if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
             {
-                ComboBoxReportDptType.Text = Login_Dpt;
+                ComboBoxReportDptType.Text = FormLogin.infObj.userDpt;
                 ComboBoxReportSelectType.Text = "全部";
             }
             else
             {
-                string sqlstr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + Login_UID +"'";
+                string sqlstr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + FormLogin.infObj.userId + "'";
                 DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
                 if (dttmp != null)
                 {
                     string role = dttmp.Rows[0][0].ToString();
-                    Login_Role = role;
                     if (role == "Super")
                     {
                         ComboBoxReportDptType.Text = "全部";
@@ -156,7 +152,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             string sqlstr = "";
 
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Login_UID + "', " + Normal.GetSysTimeStr("Long")
+            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long")
                    + ", '" + ProgramName + "', '" + ModuleName  + "')";
 
             mssql.SQLexcute(strConnection, sqlstr);

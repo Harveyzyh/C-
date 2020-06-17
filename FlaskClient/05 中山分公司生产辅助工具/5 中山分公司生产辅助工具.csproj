@@ -148,11 +148,11 @@
     <Compile Include="销售管理\录入销货单-获取单据信息.Designer.cs">
       <DependentUpon>录入销货单-获取单据信息.cs</DependentUpon>
     </Compile>
-    <Compile Include="管理\用户管理.cs">
+    <Compile Include="管理\权限管理.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="管理\用户管理.Designer.cs">
-      <DependentUpon>用户管理.cs</DependentUpon>
+    <Compile Include="管理\权限管理.Designer.cs">
+      <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
     <Compile Include="销售管理\导入客户订单.cs">
       <SubType>Form</SubType>
@@ -194,8 +194,8 @@
     <EmbeddedResource Include="销售管理\录入销货单-获取单据信息.resx">
       <DependentUpon>录入销货单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="管理\用户管理.resx">
-      <DependentUpon>用户管理.cs</DependentUpon>
+    <EmbeddedResource Include="管理\权限管理.resx">
+      <DependentUpon>权限管理.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="销售管理\导入客户订单.resx">
       <DependentUpon>导入客户订单.cs</DependentUpon>

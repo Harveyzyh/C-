@@ -4,17 +4,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections;
-using System.Web.Script.Serialization;
-using HarveyZ;
 using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
-using 联友生产辅助工具.管理;
 using 联友生产辅助工具.测试;
+using 联友生产辅助工具.生产排程模块;
 
-namespace 联友生产辅助工具
+namespace HarveyZ
 {
     public partial class 主界面 : Form
     {
@@ -25,6 +22,7 @@ namespace 联友生产辅助工具
             "关闭当前界面",
             "帮助",
             "测试",
+            "ERP",
             "此用户没有任何权限"
         };
         #endregion
@@ -49,7 +47,12 @@ namespace 联友生产辅助工具
             {
                 this.Text += "     -DEBUG";
             }
-            
+
+            if (FormLogin.infObj.remoteFlag)
+            {
+                this.Text += "     -Remote";
+            }
+
             StatusBarSetItem();
         }
 
@@ -59,15 +62,16 @@ namespace 联友生产辅助工具
         private void FormPermission()
         {
             ItemUnvisable();
-            SetPermission(FormLogin.userPermList);
+            SetPermission(FormLogin.infObj.userPermList);
             SetTestPermission();
         }
-        
+
         private void SetTestPermission()
         {
-            if (FormLogin.Login_Uid != "001114")
+            if (FormLogin.infObj.userId != "001114")
             {
                 测试ToolStripMenuItem.Visible = false;
+                ERPToolStripMenuItem.Visible = false;
             }
         }
 
@@ -111,7 +115,7 @@ namespace 联友生产辅助工具
             {
                 foreach (ToolStripMenuItem con2 in con.DropDownItems)
                 {
-                    
+
                     if (ItemVisableWork(con2, item, list))
                     {
                         list.Add(con);
@@ -133,7 +137,7 @@ namespace 联友生产辅助工具
                 }
             }
         }
-        
+
         private void ItemUnvisable()
         {
             foreach (ToolStripMenuItem con in MainMenuStrip.Items)
@@ -151,9 +155,9 @@ namespace 联友生产辅助工具
 
         private void ItemUnvisableWork(ToolStripMenuItem con)
         {
-            if(con.DropDownItems.Count > 0)
+            if (con.DropDownItems.Count > 0)
             {
-                foreach(ToolStripMenuItem con2 in con.DropDownItems)
+                foreach (ToolStripMenuItem con2 in con.DropDownItems)
                 {
                     ItemUnvisableWork(con2);
                 }
@@ -162,7 +166,7 @@ namespace 联友生产辅助工具
             else
             {
                 con.Visible = false;
-                FormLogin.menuItemList.Add(con.Name.Replace("ToolStripMenuItem", ""));
+                FormLogin.infObj.menuItemList.Add(con.Name.Replace("ToolStripMenuItem", ""));
             }
         }
 
@@ -174,7 +178,7 @@ namespace 联友生产辅助工具
             if (MessageBox.Show("是否退出？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 Form frm = FormOpen;
-                if(frm != null)
+                if (frm != null)
                 {
                     frm.Dispose();
                 }
@@ -201,15 +205,13 @@ namespace 联友生产辅助工具
             FormHeight = Height - 40;
             panelParent.Size = new Size(FormWidth, FormHeight - menuStrip1.Height - statusBar.Height - 1);
             //父窗体发生大小变化时，重新设置子窗体的大小
-            if(FormOpen != null)
+            if (FormOpen != null)
             {
                 Form frm = FormOpen;
                 frm.WindowState = FormWindowState.Minimized;
                 frm.WindowState = FormWindowState.Maximized;
             }
-
-            //statusLabelYunConn.Width = 150;
-            //statusLabelYunConn.TextAlign = ContentAlignment.MiddleCenter;
+            
             statusLabelLocalConn.Width = 150;
             statusLabelLocalConn.TextAlign = ContentAlignment.MiddleCenter;
             statusLabelIP.Width = 180;
@@ -227,7 +229,7 @@ namespace 联友生产辅助工具
             try
             {
                 frm = (Form)sender;
-                if(FormOpen != null)
+                if (FormOpen != null)
                 {
                     Form frmOpen = FormOpen;
                     frmOpen.Dispose();
@@ -240,7 +242,7 @@ namespace 联友生产辅助工具
                 return null;
             }
         }
-        
+
         private Form FormOpenWork(Form sender)
         {
             Form frm = sender;
@@ -269,9 +271,9 @@ namespace 联友生产辅助工具
         #region 状态栏
         private void StatusBarSetItem()
         {
-            statusLabelUser.Text = "部门：" + FormLogin.Login_Dpt + "    姓名：" + FormLogin.Login_Uid + "-" + FormLogin.Login_Name;
+            statusLabelUser.Text = "部门：" + FormLogin.infObj.userDpt + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
             statusLabelIP.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
-            if (FormLogin.connFlag99)
+            if (FormLogin.infObj.connFlag)
             {
                 statusLabelLocalConn.Text = "联友服务器：已连接";
             }
@@ -283,72 +285,11 @@ namespace 联友生产辅助工具
         #endregion
 
         #region 测试部分
-        private void 测试_1ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 测试_2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form frm = new 测试_2();
-            FormOpenInit(frm);
-            frm.Visible = true;
-        }
-
         private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form frm = new 测试_3();
             FormOpenInit(frm);
             frm.Visible = true;
-        }
-
-        public DataTable Json2Dt(string json)
-        {
-            DataTable dataTable = new DataTable();  //实例化
-            DataTable result;
-            try
-            {
-                MessageBox.Show("0");
-                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-                javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
-                ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
-                MessageBox.Show("0.5");
-                if (arrayList.Count > 0)
-                {
-                    MessageBox.Show("1");
-                    foreach (Dictionary<string, object> dictionary in arrayList)
-                    {
-                        MessageBox.Show("2");
-                        if (dictionary.Keys.Count<string>() == 0)
-                        {
-                            result = dataTable;
-                            return result;
-                        }
-                        //Columns
-                        if (dataTable.Columns.Count == 0)
-                        {
-                            foreach (string current in dictionary.Keys)
-                            {
-                                dataTable.Columns.Add(current, dictionary[current].GetType());
-                            }
-                        }
-                        //Rows
-                        DataRow dataRow = dataTable.NewRow();
-                        foreach (string current in dictionary.Keys)
-                        {
-                            MessageBox.Show("3");
-                            dataRow[current] = dictionary[current];
-                        }
-                        dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            result = dataTable;
-            return result;
         }
         #endregion
 
@@ -364,14 +305,14 @@ namespace 联友生产辅助工具
         #region 管理
         private void 管理_权限管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            用户管理 frm = new 用户管理();
+            权限管理 frm = new 权限管理();
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 管理_用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            用户管理 frm = new 用户管理();
+            权限管理 frm = new 权限管理();
             FormOpenInit(frm);
             frm.Show();
         }
@@ -480,6 +421,13 @@ namespace 联友生产辅助工具
             FormOpenInit(frm);
             frm.Show();
         }
+
+        private void 码垛线_客户端ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            码垛线客户端 frm = new 码垛线客户端();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
 
         #region 生产排程
@@ -496,13 +444,15 @@ namespace 联友生产辅助工具
             FormOpenInit(frm);
             frm.Show();
         }
+
+        private void 生管_生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            生产排程 frm = new 生产排程();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
 
         #endregion
-    }
-
-    public class InfoObject : InfoObjectBase
-    {
-
     }
 }

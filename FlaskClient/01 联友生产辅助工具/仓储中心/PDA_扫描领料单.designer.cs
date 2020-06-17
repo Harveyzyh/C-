@@ -140,7 +140,6 @@
             this.Name = "PDA_扫描领料单";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "扫描领料单";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.SizeChanged += new System.EventHandler(this.Form_MainResized);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).EndInit();
             this.panel_Title.ResumeLayout(false);

@@ -14,7 +14,7 @@ namespace 联友生产辅助工具.生管排程
     public partial class 订单信息查询 : Form
     {
         Mssql mssql = new Mssql();
-        string connCOMFORT = Global_Const.strConnection_COMFORT;
+        string connCOMFORT = FormLogin.infObj.connYF;
         public 订单信息查询()
         {
             InitializeComponent();

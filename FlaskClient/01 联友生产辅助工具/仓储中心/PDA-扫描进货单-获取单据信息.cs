@@ -8,7 +8,6 @@ namespace 联友生产辅助工具.仓储中心
     public partial class PDA_扫描进货单_获取单据信息 : Form
     {
         Mssql mssql = new Mssql();
-        string strConnection = PDA_扫描进货单.strConnection;
         DataTable dt = new DataTable();
         int Index = 0;
         
@@ -23,6 +22,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void Init()
         {
+            DgvOpt.SetRowColor(dataGridView1);
             if(Title != null)
             {
                 var TitleList = Title.Split('|');
@@ -72,7 +72,7 @@ namespace 联友生产辅助工具.仓储中心
                             + "AND MQ003 = '34' AND MQ004 = '2'"
                             + "AND MQ001 LIKE '%{0}%' "
                             + "ORDER BY MQ001 ");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -87,7 +87,7 @@ namespace 联友生产辅助工具.仓储中心
             string sqlstr = ("SELECT RTRIM(MA001) 供应商编号, RTRIM(MA002) 简称 FROM COMFORT..PURMA "
                             + "WHERE MA001 LIKE '%{0}%' "
                             + "ORDER BY MA001 ");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -103,7 +103,7 @@ namespace 联友生产辅助工具.仓储中心
                             + "FROM COMFORT..CMSMC "
                             + "WHERE MC001 LIKE '%{0}%' "
                             + "ORDER BY LEN(MC001) DESC, MC001");
-            dt = mssql.SQLselect(strConnection, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;

@@ -57,7 +57,7 @@ namespace 联友生产辅助工具.仓储中心
             }
 
 
-            dt = infObj.sql.SQLselect(infObj.connStr, string.Format(sqlstr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode, sqlstr2));
+            dt = infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode, sqlstr2));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;

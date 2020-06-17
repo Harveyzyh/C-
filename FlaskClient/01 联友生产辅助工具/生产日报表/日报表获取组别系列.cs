@@ -15,9 +15,6 @@ namespace 联友生产辅助工具.生产日报表
         public string strConnection = 日报表新增.strConnection;
 
         Mssql mssql = new Mssql();
-        string Login_UID = FormLogin.Login_Uid;
-        string Login_Role = FormLogin.Login_Role;
-        string Login_Dpt = FormLogin.Login_Dpt;
 
 
         public static bool XL_ChangeFlag = false;

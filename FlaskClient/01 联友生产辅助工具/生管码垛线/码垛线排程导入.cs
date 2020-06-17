@@ -18,8 +18,8 @@ namespace 联友生产辅助工具.生管码垛线
 
         private Mssql mssql = new Mssql();
 
-        private static string connRobot = Global_Const.strConnection_ROBOT_TEST;
-        private static string connComfort = Global_Const.strConnection_COMFORT;
+        private static string connRobot = FormLogin.infObj.connMD;
+        private static string connComfort = FormLogin.infObj.connYF;
 
         #endregion
 
@@ -70,54 +70,6 @@ namespace 联友生产辅助工具.生管码垛线
             {
                 DgvShow(false);
                 B.Text = "显示当前日期";
-            }
-        }
-
-        private void button_Input_Click(object sender, EventArgs e)
-        {
-            Excel excel = new Excel();
-            Excel.Excel_Base excelObj = new Excel.Excel_Base();
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog.Filter = "Excel文件|*.xlsx;*.xls";
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.FilterIndex = 1;
-
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                excelObj.FilePath = Path.GetDirectoryName(openFileDialog.FileName);
-                excelObj.FileName = Path.GetFileName(openFileDialog.FileName);
-                excelObj.IsWrite = false;
-                excelObj.IsTitleRow = true;
-                
-                excel.ExcelOpt(excelObj);
-                
-                if(excelObj.Status == "Yes" && CheckDt(excelObj.CellDt))
-                {
-                    try
-                    {
-                        NewTaskDelegate task = Dt2SqlStr;
-                        IAsyncResult asyncResult = task.BeginInvoke(excelObj.CellDt, null, null);
-                        string result = task.EndInvoke(asyncResult);
-                        DgvShow(true);
-
-                        Dictionary<string, string> dict = new Dictionary<string, string>();
-                        dict.Add("User", FormLogin.Login_Uid);
-                        dict.Add("Mode", "Insert");
-                        dict.Add("Detail", result);
-                        HttpPost.HttpPost_Dict(FormLogin.infObj.httpHost + "/Client/MaDuo/GetInfo", dict);
-
-                        MessageBox.Show("已提交至后台服务器", "导入结果", MessageBoxButtons.OK);
-                    }
-                    catch (Exception es)
-                    {
-                        if (MessageBox.Show("请截图联系资讯课！软件即将退出。\r\n" + es.ToString(), "程序出错", MessageBoxButtons.OK) == DialogResult.OK)
-                        {
-                            Application.Exit();
-                        }
-                    }
-                }
             }
         }
 
@@ -216,7 +168,7 @@ namespace 联友生产辅助工具.生管码垛线
                     if (dttmp2 != null)
                     {
                         updatestr = "UPDATE SCHEDULE SET "
-                                    + " MODIFIER = '" + FormLogin.Login_Uid + "', MODI_DATE = (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
+                                    + " MODIFIER = '" + FormLogin.infObj.userId + "', MODI_DATE = (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
                                     + " SC003 = '" + SC003 + "', "
                                     + " SC038 = 'N' "
                                     + " WHERE SC001 = '" + SC001 + "' ";
@@ -238,7 +190,7 @@ namespace 联友生产辅助工具.生管码垛线
                     else
                     {
                         insertstr = "INSERT INTO SCHEDULE (CREATOR, CREATE_DATE, SC001, SC003) VALUES ( "
-                                  + "'" + FormLogin.Login_Uid + "', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
+                                  + "'" + FormLogin.infObj.userId + "', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
                                   + "'" + SC001 + "', '" + SC003 + "')";
                         
                         if (0 == mssql.SQLexcute(connRobot, insertstr))

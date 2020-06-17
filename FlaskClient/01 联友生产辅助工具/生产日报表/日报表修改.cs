@@ -14,9 +14,6 @@ namespace 联友生产辅助工具.生产日报表
     public partial class 日报表修改 : Form
     {
         Mssql mssql = new Mssql();
-        string Login_UID = FormLogin.Login_Uid;
-        string Login_Role = FormLogin.Login_Role;
-        string Login_Dpt = FormLogin.Login_Dpt;
         public static string strConnection = 日报表新增.strConnection;
         bool DtpFlag = false;
 
@@ -63,7 +60,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             string sqlstr = "";
 
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + Login_UID + "', " + Normal.GetSysTimeStr("Long") 
+            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long") 
                    + ", '" + ProgramName + "', '" + ModuleName  + "')";
 
             mssql.SQLexcute(strConnection, sqlstr);
@@ -85,9 +82,9 @@ namespace 联友生产辅助工具.生产日报表
                               + " WHERE B.WGroup IN("
                               + XL_List + ")";
 
-                if (Login_Role != "Super")
+                if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
                 {
-                    sqlstr += " AND B.WorkDpt =  '" + Login_Dpt + "' ";
+                    sqlstr += " AND B.WorkDpt =  '" + FormLogin.infObj.userDpt + "' ";
                 }
 
                 sqlstr += " AND B.WorkDate = '" + WorkDate + "' ";
@@ -117,14 +114,7 @@ namespace 联友生产辅助工具.生产日报表
                     DataGridView_List.Columns[11].Width = 500;//备注
 
 
-                    DataGridView_List.RowsDefaultCellStyle.BackColor = Color.Bisque;
-                    DataGridView_List.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-
-                    //for (int i = 0; i < this.DataGridView_List.Columns.Count; i++)
-                    //{
-                    //    this.DataGridView_List.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    //}
-                    //日报表新增.HeadRowLineNumber(DataGridView_List);
+                    DgvOpt.SetRowColor(DataGridView_List);
                     DataGridView_List.RowHeadersWidth = 30;
                     DtpFlag = true;
                     ButtonReportUpdateCommit.Enabled = true;
@@ -139,8 +129,8 @@ namespace 联友生产辅助工具.生产日报表
             int row = DataGridView_List.RowCount;
             string WorkDate = DtpReportUpdateWorkDate.Value.ToString("yyyy-MM-dd");
             WorkDate = WorkDate.Split('-')[0] + WorkDate.Split('-')[1] + WorkDate.Split('-')[2];
-            string WorkDpt = Login_Dpt;
-            string ModiFier = Login_UID;
+            string WorkDpt = FormLogin.infObj.userDpt;
+            string ModiFier = FormLogin.infObj.userId;
             string Modi_Date = mssql.SQLselect(strConnection, "SELECT CONVERT(VARCHAR(20), GETDATE(), 112)").Rows[0][0].ToString();
             string Serial, WGroup, Line, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark;
             for (Index = 0; Index < row; Index++)
@@ -174,7 +164,7 @@ namespace 联友生产辅助工具.生产日报表
                        + "AND OrderID = '" + OrderID + "' "
                        + "AND Remark = '" + Remark + "' "
                        + "";
-                if(Login_Role != "Super")
+                if(FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
                 {
 
                     sqlstr += "AND WorkDpt = '" + WorkDpt + "' ";
@@ -205,7 +195,7 @@ namespace 联友生产辅助工具.生产日报表
                            + "AND Serial = '" + Serial + "' "
                            + "AND WGroup = '" + WGroup + "' "
                            + "AND Line = '" + Line + "' ";
-                    if (Login_Role != "Super")
+                    if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
                     {
                         sqlstr += "AND WorkDpt = '" + WorkDpt + "' ";
                     }

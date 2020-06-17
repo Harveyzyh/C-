@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HarveyZ
@@ -11,7 +8,7 @@ namespace HarveyZ
     public class Mssql
     {
         /// <summary>
-        /// 数据库连接测试
+        /// 数据库连接测试，超时时间为3秒
         /// </summary>
         /// <param name="strConnection">数据库连接字</param>
         public bool SQLlinkTest(string strConnection) //数据库连接测试
@@ -23,7 +20,7 @@ namespace HarveyZ
                 {
                     testConnection.Open();
                     SqlCommand testCmd = testConnection.CreateCommand();
-                    testCmd.CommandTimeout = 20;
+                    testCmd.CommandTimeout = 3;
                     CanConnectDB = true;
                     testConnection.Close();
                     testConnection.Dispose();
@@ -45,15 +42,16 @@ namespace HarveyZ
         /// 数据库-增，改，删
         /// </summary>
         /// <param name="SQLstr">数据库连接字符串</param>
-        /// <param name="CMDstr">本数据库中表示DeviceID</param>
-        public int SQLexcute(string SQLstr, string CMDstr)
+        /// <param name="SqlStr">本数据库中表示DeviceID</param>
+        public int SQLexcute(string ConnStr, string SqlStr, int workCount = 0)
         {
-            using (SqlConnection conn = new SqlConnection(SQLstr))
+            using (SqlConnection conn = new SqlConnection(ConnStr))
             {
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(CMDstr, conn);
+                    SqlCommand cmd = new SqlCommand(SqlStr, conn);
+                    cmd.CommandTimeout = 120;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     conn.Dispose();
@@ -61,8 +59,16 @@ namespace HarveyZ
                 }
                 catch (Exception es)
                 {
-                    MessageBox.Show("SQL Commit 出错了！\r\n" + SQLstr + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
-                    return 1;
+                    workCount++;
+                    if (workCount < 5)
+                    {
+                        return SQLexcute(ConnStr, SqlStr, workCount);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Commit 出错了！\r\n" + "\r\n\r\n\r\n" + es.ToString(), "提示", MessageBoxButtons.OK);
+                        return 1;
+                    }
                 }
                 finally
                 {

@@ -54,9 +54,6 @@
             this.条码T = new System.Windows.Forms.TextBox();
             this.条码L = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.入库仓库查 = new System.Windows.Forms.Button();
-            this.供应商查 = new System.Windows.Forms.Button();
-            this.入库单别查 = new System.Windows.Forms.Button();
             this.入库仓库 = new System.Windows.Forms.Label();
             this.送货日期 = new System.Windows.Forms.Label();
             this.供应商 = new System.Windows.Forms.Label();
@@ -104,9 +101,6 @@
             this.panel_Title.Controls.Add(this.条码T);
             this.panel_Title.Controls.Add(this.条码L);
             this.panel_Title.Controls.Add(this.dateTimePicker1);
-            this.panel_Title.Controls.Add(this.入库仓库查);
-            this.panel_Title.Controls.Add(this.供应商查);
-            this.panel_Title.Controls.Add(this.入库单别查);
             this.panel_Title.Controls.Add(this.入库仓库);
             this.panel_Title.Controls.Add(this.送货日期);
             this.panel_Title.Controls.Add(this.供应商);
@@ -154,9 +148,9 @@
             this.条码L.AutoSize = true;
             this.条码L.Location = new System.Drawing.Point(292, 35);
             this.条码L.Name = "条码L";
-            this.条码L.Size = new System.Drawing.Size(76, 15);
+            this.条码L.Size = new System.Drawing.Size(84, 15);
             this.条码L.TabIndex = 15;
-            this.条码L.Text = "条   码：";
+            this.条码L.Text = "条    码：";
             // 
             // dateTimePicker1
             // 
@@ -167,43 +161,10 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(161, 24);
             this.dateTimePicker1.TabIndex = 13;
             // 
-            // 入库仓库查
-            // 
-            this.入库仓库查.Location = new System.Drawing.Point(267, 2);
-            this.入库仓库查.Margin = new System.Windows.Forms.Padding(4);
-            this.入库仓库查.Name = "入库仓库查";
-            this.入库仓库查.Size = new System.Drawing.Size(35, 29);
-            this.入库仓库查.TabIndex = 11;
-            this.入库仓库查.Text = "查";
-            this.入库仓库查.UseVisualStyleBackColor = true;
-            this.入库仓库查.Click += new System.EventHandler(this.入库仓库查_Click);
-            // 
-            // 供应商查
-            // 
-            this.供应商查.Location = new System.Drawing.Point(527, 2);
-            this.供应商查.Margin = new System.Windows.Forms.Padding(4);
-            this.供应商查.Name = "供应商查";
-            this.供应商查.Size = new System.Drawing.Size(35, 29);
-            this.供应商查.TabIndex = 12;
-            this.供应商查.Text = "查";
-            this.供应商查.UseVisualStyleBackColor = true;
-            this.供应商查.Click += new System.EventHandler(this.供应商查_Click);
-            // 
-            // 入库单别查
-            // 
-            this.入库单别查.Location = new System.Drawing.Point(6, 2);
-            this.入库单别查.Margin = new System.Windows.Forms.Padding(4);
-            this.入库单别查.Name = "入库单别查";
-            this.入库单别查.Size = new System.Drawing.Size(35, 29);
-            this.入库单别查.TabIndex = 10;
-            this.入库单别查.Text = "查";
-            this.入库单别查.UseVisualStyleBackColor = true;
-            this.入库单别查.Click += new System.EventHandler(this.送货单别查_Click);
-            // 
             // 入库仓库
             // 
             this.入库仓库.AutoSize = true;
-            this.入库仓库.Location = new System.Drawing.Point(377, 9);
+            this.入库仓库.Location = new System.Drawing.Point(368, 9);
             this.入库仓库.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库仓库.Name = "入库仓库";
             this.入库仓库.Size = new System.Drawing.Size(0, 15);
@@ -221,7 +182,7 @@
             // 供应商
             // 
             this.供应商.AutoSize = true;
-            this.供应商.Location = new System.Drawing.Point(646, 9);
+            this.供应商.Location = new System.Drawing.Point(642, 9);
             this.供应商.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.供应商.Name = "供应商";
             this.供应商.Size = new System.Drawing.Size(0, 15);
@@ -230,7 +191,7 @@
             // 入库单别
             // 
             this.入库单别.AutoSize = true;
-            this.入库单别.Location = new System.Drawing.Point(119, 8);
+            this.入库单别.Location = new System.Drawing.Point(90, 8);
             this.入库单别.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库单别.Name = "入库单别";
             this.入库单别.Size = new System.Drawing.Size(0, 15);
@@ -248,7 +209,7 @@
             // 入库单别L
             // 
             this.入库单别L.AutoSize = true;
-            this.入库单别L.Location = new System.Drawing.Point(39, 9);
+            this.入库单别L.Location = new System.Drawing.Point(10, 9);
             this.入库单别L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库单别L.Name = "入库单别L";
             this.入库单别L.Size = new System.Drawing.Size(82, 15);
@@ -280,19 +241,19 @@
             // 供应商L
             // 
             this.供应商L.AutoSize = true;
-            this.供应商L.Location = new System.Drawing.Point(564, 9);
+            this.供应商L.Location = new System.Drawing.Point(560, 9);
             this.供应商L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.供应商L.Name = "供应商L";
-            this.供应商L.Size = new System.Drawing.Size(83, 15);
+            this.供应商L.Size = new System.Drawing.Size(67, 15);
             this.供应商L.TabIndex = 1;
             this.供应商L.TabStop = true;
-            this.供应商L.Text = "供 应 商：";
+            this.供应商L.Text = "供应商：";
             this.供应商L.MouseClick += new System.Windows.Forms.MouseEventHandler(this.供应商L_MouseClick);
             // 
             // 入库仓库L
             // 
             this.入库仓库L.AutoSize = true;
-            this.入库仓库L.Location = new System.Drawing.Point(300, 9);
+            this.入库仓库L.Location = new System.Drawing.Point(291, 9);
             this.入库仓库L.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.入库仓库L.Name = "入库仓库L";
             this.入库仓库L.Size = new System.Drawing.Size(82, 15);
@@ -306,9 +267,9 @@
             this.数量L.AutoSize = true;
             this.数量L.Location = new System.Drawing.Point(562, 35);
             this.数量L.Name = "数量L";
-            this.数量L.Size = new System.Drawing.Size(76, 15);
+            this.数量L.Size = new System.Drawing.Size(68, 15);
             this.数量L.TabIndex = 17;
-            this.数量L.Text = "数   量：";
+            this.数量L.Text = "数  量：";
             // 
             // DataGridView_List
             // 
@@ -569,9 +530,6 @@
         private System.Windows.Forms.Panel panel_Title;
         private System.Windows.Forms.Label 送货日期L;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button 入库仓库查;
-        private System.Windows.Forms.Button 供应商查;
-        private System.Windows.Forms.Button 入库单别查;
         private System.Windows.Forms.Label 入库仓库;
         private System.Windows.Forms.Label 送货日期;
         private System.Windows.Forms.Label 供应商;

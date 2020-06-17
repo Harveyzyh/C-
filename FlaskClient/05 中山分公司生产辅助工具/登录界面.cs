@@ -233,12 +233,12 @@ namespace HarveyZ
         {
             if (infObj.remoteFlag)
             {
-                infObj.connWG = Global_Const.strConnection_WG_DB_R;
+                infObj.connWG = Global_Const.strConnection_WG_R;
                 infObj.connYF = Global_Const.strConnection_YF_R;
             }
             else
             {
-                infObj.connWG = Global_Const.strConnection_WG_DB;
+                infObj.connWG = Global_Const.strConnection_WG;
                 infObj.connYF = Global_Const.strConnection_YF;
             }
         }
@@ -247,7 +247,15 @@ namespace HarveyZ
         {
             try
             {
-                string sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='WEB' AND Valid = 'Y'";
+                string sqlstr = "";
+                if (infObj.remoteFlag)
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Remote' AND Valid = 'Y'";
+                }
+                else
+                {
+                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Local' AND Valid = 'Y'";
+                }
                 infObj.updateHost = infObj.sql.SQLselect(infObj.connWG, sqlstr).Rows[0][0].ToString();
                 return true;
             }
