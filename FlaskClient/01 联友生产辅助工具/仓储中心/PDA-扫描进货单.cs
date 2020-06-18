@@ -290,7 +290,7 @@ namespace 联友生产辅助工具.仓储中心
                 }
             }
             selectLastRow(this.DataGridView_List);
-            DgvOpt.SetRowColor(this.DataGridView_List);
+            DgvOpt.SetRowBackColor(this.DataGridView_List);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

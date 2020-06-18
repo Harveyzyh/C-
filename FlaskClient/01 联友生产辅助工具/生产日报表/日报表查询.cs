@@ -147,18 +147,6 @@ namespace 联友生产辅助工具.生产日报表
         }
         #endregion
 
-        #region 回传使用记录
-        private void RecordUseLog(string ProgramName, string ModuleName)
-        {
-            string sqlstr = "";
-
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long")
-                   + ", '" + ProgramName + "', '" + ModuleName  + "')";
-
-            mssql.SQLexcute(strConnection, sqlstr);
-        }
-        #endregion
-
         #region PanelReportSelect
         private void ButtonSelectSubmit_Click(object sender, EventArgs e)
         {

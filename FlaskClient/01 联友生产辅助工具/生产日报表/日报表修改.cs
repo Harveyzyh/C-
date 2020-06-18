@@ -55,18 +55,6 @@ namespace 联友生产辅助工具.生产日报表
         }
         #endregion
 
-        #region 回传使用记录
-        private void RecordUseLog(string ProgramName, string ModuleName)
-        {
-            string sqlstr = "";
-
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long") 
-                   + ", '" + ProgramName + "', '" + ModuleName  + "')";
-
-            mssql.SQLexcute(strConnection, sqlstr);
-        }
-        #endregion
-
         #region PanelReportUpdate
         private void ReportUpdateShow(string XL_List)
         {
@@ -114,7 +102,7 @@ namespace 联友生产辅助工具.生产日报表
                     DataGridView_List.Columns[11].Width = 500;//备注
 
 
-                    DgvOpt.SetRowColor(DataGridView_List);
+                    DgvOpt.SetRowBackColor(DataGridView_List);
                     DataGridView_List.RowHeadersWidth = 30;
                     DtpFlag = true;
                     ButtonReportUpdateCommit.Enabled = true;

@@ -66,7 +66,7 @@ namespace 联友生产辅助工具.仓储中心
                 {
                     dataGridView1.Columns[idx].ReadOnly = true;
                 }
-                DgvOpt.SetRowColor(dataGridView1);
+                DgvOpt.SetRowBackColor(dataGridView1);
                 button2.Enabled = true;
             }
             else

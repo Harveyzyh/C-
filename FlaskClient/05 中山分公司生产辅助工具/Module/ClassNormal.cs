@@ -10,52 +10,6 @@ namespace HarveyZ
 {
     class Normal
     {
-        private static Mssql mssql = FormLogin.infObj.sql;
-        private static string Conn_WG_DB = FormLogin.infObj.connWG;
-
-        /// <summary>
-        /// 获取服务器时间
-        /// </summary>
-        /// <param name="Mode">获取模式：Sort 短时间；Long 详细到时分秒</param>
-        /// <returns>出现的次数</returns>
-        public static string GetDbSysTime(string Mode = "Sort")
-        {
-            string sqlstrSort = @" SELECT CONVERT(VARCHAR(20), GETDATE(), 112) ";
-            string sqlstrLong = @"SELECT (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', ''))";
-            string returnStr = null;
-            if(Mode == "Sort")
-            {
-                DataTable dt = mssql.SQLselect(Conn_WG_DB, sqlstrSort);
-                if (dt != null)
-                {
-                    returnStr =  dt.Rows[0][0].ToString();
-                }
-            }
-            else if(Mode == "Long")
-            {
-                DataTable dt = mssql.SQLselect(Conn_WG_DB, sqlstrLong);
-                if (dt != null)
-                {
-                    returnStr =  dt.Rows[0][0].ToString();
-                }
-            }
-            return returnStr;
-        }
-
-        public static string GetSysTimeStr(string Mode = "Sort")
-        {
-            string returnStr = null;
-            if (Mode == "Sort")
-            {
-                returnStr = @" CONVERT(VARCHAR(20), GETDATE(), 112)";
-            }
-            else if (Mode == "Long")
-            {
-                returnStr = @" (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', ''))";
-            }
-            return returnStr;
-        }
-        
         /// <summary>
         /// 计算字符串中子串出现的次数
         /// </summary>
@@ -113,23 +67,28 @@ namespace HarveyZ
 
     class VersionManeger
     {
-        private static Mssql mssql = FormLogin.infObj.sql;
-        private static string Conn_WG_DB = FormLogin.infObj.connWG;
+        private static Mssql mssql = new Mssql();
+        private static string conn = null;
 
-        public static void SetProgVersion(string ProgName, string Version)
+        public VersionManeger(string _conn = "")
         {
-            string sqlstr = @"UPDATE WG_APP_INF SET Version = '{1}', Valid = 1 WHERE ProgName = '{0}' ";
-            mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstr, ProgName, Version));
+            conn = _conn;
         }
 
-        public static bool GetNewVersion(string ProgName, string NowVersion, out string Msg)
+        public void SetProgVersion(string ProgName, string Version)
+        {
+            string sqlstr = @"UPDATE WG_APP_INF SET Version = '{1}', Valid = 1 WHERE ProgName = '{0}' ";
+            mssql.SQLexcute(conn, string.Format(sqlstr, ProgName, Version));
+        }
+
+        public bool GetNewVersion(string ProgName, string NowVersion, out string Msg)
         {
             bool result = false;
             Msg = null;
             if (Normal.GetSubstringCount(NowVersion, ".") == 3)
             {
                 string sqlstr = @"SELECT Version, Valid FROM WG_APP_INF WHERE ProgName = '{0}'";
-                DataTable dt = mssql.SQLselect(Conn_WG_DB, string.Format(sqlstr, ProgName));
+                DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, ProgName));
                 if (dt != null)
                 {
                     bool valid = dt.Rows[0][1].Equals(true) ? true : false;

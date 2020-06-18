@@ -62,7 +62,7 @@ namespace 联友生产辅助工具.生产日报表
                 int Index;
 
                 DgvMain.DataSource = dttmp;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
 
                 DgvMain.Columns[0].Width = 150;
                 DgvMain.Columns[0].ReadOnly = true;
@@ -217,17 +217,5 @@ namespace 联友生产辅助工具.生产日报表
             textBox1.Text = "";
             MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK);
         }
-
-        #region 回传使用记录
-        private void RecordUseLog(string ProgramName, string ModuleName)
-        {
-            string sqlstr = "";
-
-            sqlstr = " INSERT INTO WG_DB..WG_USELOG (UserID, Date, ProgramName, ModuleName) VALUES('" + FormLogin.infObj.userId + "', " + Normal.GetSysTimeStr("Long")
-                   + ", '" + ProgramName + "', '" + ModuleName + "')";
-
-            mssql.SQLexcute(strConnection, sqlstr);
-        }
-        #endregion
     }
 }

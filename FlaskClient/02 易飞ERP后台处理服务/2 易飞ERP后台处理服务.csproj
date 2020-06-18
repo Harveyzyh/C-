@@ -32,6 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel12">
+      <HintPath>..\0 Lib\Microsoft.Office.Interop.Excel12.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\0 Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -44,7 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Module\ClassBasic.cs" />
-    <Compile Include="Module\ClassDataChange.cs" />
+    <Compile Include="Module\ClassDataConvert.cs" />
+    <Compile Include="Module\ClassNormal.cs" />
     <Compile Include="Module\ClassObject.cs" />
     <Compile Include="Module\ClassSql.cs" />
     <Compile Include="Module\Global.cs" />

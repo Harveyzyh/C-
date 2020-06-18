@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections;
-using 联友中山分公司生产辅助工具.仓储中心;
 using 联友中山分公司生产辅助工具.销售管理;
 
 namespace HarveyZ

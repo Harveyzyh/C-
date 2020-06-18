@@ -1,0 +1,15 @@
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\联友采购平台.exe.config
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\联友采购平台.exe
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\联友采购平台.pdb
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\zh-CN\联友采购平台.resources.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\3 联友采购平台.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.FormLogin.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.主界面.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\联友采购平台.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.用户管理.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.权限管理.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.FormLogin.zh-CN.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\3 联友采购平台.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\zh-CN\联友采购平台.resources.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\联友采购平台.exe
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\联友采购平台.pdb

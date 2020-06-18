@@ -26,8 +26,6 @@ namespace 码垛线生成并打印出货清单
             this.printerName = printerName;
             this.printFilePath = printFilePath;
 
-            //MessageBox.Show("tg001" + tg001 + "  tg002" + tg002 + "   md_no" + md_no);
-
             PreviewShow();
         }
 

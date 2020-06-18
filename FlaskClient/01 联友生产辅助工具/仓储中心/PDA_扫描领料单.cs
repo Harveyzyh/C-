@@ -13,6 +13,8 @@ namespace 联友生产辅助工具.仓储中心
 
         Mssql mssql = new Mssql();
 
+        string conn = FormLogin.infObj.connYF;
+
         string xa007 = "";
         private bool MsgFlag = false;
 
@@ -45,7 +47,7 @@ namespace 联友生产辅助工具.仓储中心
         #region 判断是否有后台在运行
         private bool checkJobExists() {
             string sqlstr = @" SELECT * FROM  DSCSYS.dbo.JOBQUEUE WHERE JOBNAME = 'BMSAB01' AND STATUS IN ('P', 'N') ";
-            if (mssql.SQLselect(FormLogin.infObj.connYF, sqlstr) == null) return false;
+            if (mssql.SQLselect(conn, sqlstr) == null) return false;
             else return true;
         }
         #endregion
@@ -99,7 +101,8 @@ namespace 联友生产辅助工具.仓储中心
         
         private string getTime()
         {
-            return Normal.GetDbSysTime("Long");
+            string sqlstr = @"SELECT dbo.f_getTime(1) ";
+            return mssql.SQLselect(conn, sqlstr).Rows[0][0].ToString();
         }
 
         private void check(string danbie, string danhao)

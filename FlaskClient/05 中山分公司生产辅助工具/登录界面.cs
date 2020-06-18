@@ -189,6 +189,7 @@ namespace HarveyZ
     public class Main
     {
         private InfoObject infObj = null;
+        private VersionManeger versionManeger = null;
 
         public Main(InfoObject _infObj)
         {
@@ -201,6 +202,8 @@ namespace HarveyZ
 
             InitMainIniPath();
             InitUserId();
+
+            versionManeger = new VersionManeger(infObj.connWG);
         }
 
         private void InitMainIniPath()
@@ -269,7 +272,7 @@ namespace HarveyZ
         public bool GetNewVersion()
         {
             string Msg;
-            if (VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
+            if (versionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
             {
                 return true;
             }

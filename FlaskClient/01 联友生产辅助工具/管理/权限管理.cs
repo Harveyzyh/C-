@@ -47,7 +47,7 @@ namespace HarveyZ
             
             string sqlstr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 FROM WG_USER ORDER BY K_ID ";
             DgvUser.DataSource = mssql.SQLselect(FormLogin.infObj.connWG, sqlstr);
-            DgvOpt.SetRowColor(DgvUser);
+            DgvOpt.SetRowBackColor(DgvUser);
         }
 
         private void ShowUserPerm(string U_ID)
@@ -59,7 +59,7 @@ namespace HarveyZ
             if (showDt != null)
             {
                 DgvMain.DataSource = showDt;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
                 BtnSave.Enabled = true;
                 BtnReset.Enabled = true;
             }

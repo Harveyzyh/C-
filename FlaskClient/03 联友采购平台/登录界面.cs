@@ -10,7 +10,7 @@ namespace HarveyZ
     {
         public static InfoObject infObj = new InfoObject();
         private Main main = new Main(infObj);
-        
+
         #region 本地局域变量
         private bool MsgFlag = false;
 
@@ -180,6 +180,8 @@ namespace HarveyZ
     {
         private InfoObject infObj = null;
 
+        private VersionManeger versionManager = null;
+
         public Main(InfoObject _infObj)
         {
             infObj = _infObj;
@@ -191,7 +193,9 @@ namespace HarveyZ
 
             InitMainIniPath();
             InitUserId();
-        }
+            
+            versionManager = new VersionManeger(FormLogin.infObj.connWG);
+    }
 
         private void InitMainIniPath()
         {
@@ -259,7 +263,7 @@ namespace HarveyZ
         public bool GetNewVersion()
         {
             string Msg;
-            if (VersionManeger.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
+            if (versionManager.GetNewVersion(infObj.progName, infObj.progVer, out Msg))
             {
                 return true;
             }

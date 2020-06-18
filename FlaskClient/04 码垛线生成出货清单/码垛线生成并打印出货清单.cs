@@ -282,7 +282,7 @@ namespace 码垛线生成并打印出货清单
             if(dt != null)
             {
                 dgvList.DataSource = dt;
-                DgvOpt.SetRowColor(dgvList);
+                DgvOpt.SetRowBackColor(dgvList);
                 dgvList_SelectLastRow();
                 dgvList.ReadOnly = true;
             }
@@ -326,9 +326,21 @@ namespace 码垛线生成并打印出货清单
             if (dt != null)
             {
                 dgvDetail.DataSource = dt;
-                DgvOpt.SetRowColor(dgvDetail);
+                DgvOpt.SetRowBackColor(dgvDetail);
                 //dgvDetail_SelectLastRow();
                 dgvDetail.ReadOnly = true;
+                Dictionary<string, int> dgvDetailColWidthDict = new Dictionary<string, int>();
+                dgvDetailColWidthDict.Add("序号", 40);
+                dgvDetailColWidthDict.Add("数量", 40);
+                dgvDetailColWidthDict.Add("单位", 40);
+                dgvDetailColWidthDict.Add("描述备注", 300);
+                DgvOpt.SetColWidth(dgvDetail, dgvDetailColWidthDict);
+                DgvOpt.SetColHeadMiddleCenter(dgvDetail);
+                List<string> dgvDetailColMiddleList = new List<string>();
+                dgvDetailColMiddleList.Add("序号");
+                dgvDetailColMiddleList.Add("单位");
+                dgvDetailColMiddleList.Add("数量");
+                DgvOpt.SetColMiddleCenter(dgvDetail, dgvDetailColMiddleList);
             }
         }
 

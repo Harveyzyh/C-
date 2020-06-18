@@ -100,7 +100,7 @@ namespace 联友生产辅助工具.生管排程
                 if (showDt != null)
                 {
                     DgvMain.DataSource = showDt;
-                    DgvOpt.SetRowColor(DgvMain);
+                    DgvOpt.SetRowBackColor(DgvMain);
                     DgvMain.Columns[2].Width = 180;
                     DgvMain.ReadOnly = true;
                     DgvMain.Columns[0].ReadOnly = false;

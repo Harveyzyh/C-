@@ -71,7 +71,7 @@ namespace 联友生产辅助工具.生管码垛线
                 //DgvOpt.SetColReadonly(DgvMain, "类别代码");
                 //DgvOpt.SetColReadonly(DgvMain, "描述备注");
                 DgvMain.ReadOnly = true;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
             }
 
             DgvOpt.SetColNoSortMode(DgvMain);

@@ -154,7 +154,7 @@ namespace 联友生产辅助工具.生管码垛线
             if(Main_dt != null)
             {
                 dgv_Main.DataSource = Main_dt;
-                DgvOpt.SetRowColor(dgv_Main);
+                DgvOpt.SetRowBackColor(dgv_Main);
 
                 if (TestFlag)
                 {

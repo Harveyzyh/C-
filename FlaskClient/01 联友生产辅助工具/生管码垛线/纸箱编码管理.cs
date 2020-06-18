@@ -65,7 +65,7 @@ namespace 联友生产辅助工具.生管码垛线
                 showDtTmp = showDt.Copy();
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetColReadonly(DgvMain, "纸箱尺寸");
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
                 DgvOpt.SetColNoSortMode(DgvMain);
                 DgvMain.Columns[0].Width = 250;
                 DgvMain.Columns[1].Width = 100;

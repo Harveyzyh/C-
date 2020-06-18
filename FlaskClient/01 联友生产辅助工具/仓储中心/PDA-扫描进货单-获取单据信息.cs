@@ -22,7 +22,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void Init()
         {
-            DgvOpt.SetRowColor(dataGridView1);
+            DgvOpt.SetRowBackColor(dataGridView1);
             if(Title != null)
             {
                 var TitleList = Title.Split('|');

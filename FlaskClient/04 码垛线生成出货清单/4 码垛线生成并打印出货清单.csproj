@@ -38,17 +38,21 @@
     <StartupObject>码垛线生成并打印出货清单.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FastReport, Version=2018.4.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FastReport, Version=2019.3.5.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\FastReport\FastReport.dll</HintPath>
+      <HintPath>..\100 FastReport\Framework 4.0\FastReport.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport.Bars, Version=2018.4.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FastReport.Bars, Version=2019.3.5.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\FastReport\FastReport.Bars.dll</HintPath>
+      <HintPath>..\100 FastReport\Framework 4.0\FastReport.Bars.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport.Editor, Version=2018.4.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FastReport.Editor, Version=2019.3.5.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\FastReport\FastReport.Editor.dll</HintPath>
+      <HintPath>..\100 FastReport\Framework 4.0\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.VSDesign, Version=1.0.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\100 FastReport\Framework 4.0\FastReport.VSDesign.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>

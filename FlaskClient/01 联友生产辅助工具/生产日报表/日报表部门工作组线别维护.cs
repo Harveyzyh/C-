@@ -99,7 +99,7 @@ namespace 联友生产辅助工具.生产日报表
             if (dt != null)
             {
                 DgvMain.DataSource = dt;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
                 DgvMain.ReadOnly = false;
                 DgvMain.Columns[0].ReadOnly = true;
                 DgvMain.Columns[1].ReadOnly = true;

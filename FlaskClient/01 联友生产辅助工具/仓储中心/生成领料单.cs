@@ -56,7 +56,7 @@ namespace 联友生产辅助工具.仓储中心
             comboBoxTradeMode.SelectedIndex = 0;
 
             DataGridView_List.DataSource = infObj.gdDt;
-            DgvOpt.SetRowColor(DataGridView_List);
+            DgvOpt.SetRowBackColor(DataGridView_List);
 
             uiShow();
         }

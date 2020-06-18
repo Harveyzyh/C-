@@ -152,12 +152,13 @@
   <ItemGroup>
     <Compile Include="Module\ClassObject.cs" />
     <Compile Include="Module\ClassUserManager.cs" />
-    <Compile Include="Module\ClassDataChange.cs" />
+    <Compile Include="Module\ClassDataConvert.cs" />
     <Compile Include="Module\ClassNetWork.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Module\ClassOffice.cs" />
     <Compile Include="Module\ClassSql.cs" />
+    <Compile Include="Module\ClassZip.cs" />
     <Compile Include="Module\Common.Helper.Crypto.cs" />
     <Compile Include="Module\DataGridViewAutoFilter.cs" />
     <Compile Include="Module\ERP.cs" />

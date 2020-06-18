@@ -16,3 +16,22 @@ Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.dll
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.Drawing.dll
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\bin\Debug\System.Xml.dll
 Y:\GitHub\C-\FlaskClient\4 码垛线生成出货清单\obj\Debug\码垛线生成并打印出货清单.FastReportPreview.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\码垛线打印出货清单.exe
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\码垛线打印出货清单.pdb
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\码垛线打印出货清单.exe
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\码垛线打印出货清单.pdb
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\FastReport.Bars.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\FastReport.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\FastReport.Editor.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\FastReport.VSDesign.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\System.Data.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\System.Deployment.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\System.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\System.Drawing.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\System.Xml.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\bin\Debug\FastReport.Web.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\4 码垛线生成并打印出货清单.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\码垛线生成并打印出货清单.FastReportPreview.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\码垛线生成并打印出货清单.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\码垛线生成并打印出货清单.码垛线生成并打印出货清单.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线生成出货清单\obj\Debug\4 码垛线生成并打印出货清单.csproj.GenerateResource.Cache

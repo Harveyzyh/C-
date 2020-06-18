@@ -18,8 +18,8 @@ namespace 联友生产辅助工具.生管码垛线
 
         private Mssql mssql = new Mssql();
 
-        private static string connRobot = FormLogin.infObj.connMD;
-        private static string connComfort = FormLogin.infObj.connYF;
+        private static string connMD = FormLogin.infObj.connMD;
+        private static string connERP = FormLogin.infObj.connYF;
 
         #endregion
 
@@ -105,6 +105,13 @@ namespace 联友生产辅助工具.生管码垛线
             }
         }
 
+        
+        private string GetTime()
+        {
+            string sqlstr = @"SELECT dbo.f_getTime(1) ";
+            return mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString();
+        }
+
         private string Dt2SqlStr(DataTable dttmp)//数据表转成sql语句
         {
             int insert = 0;
@@ -121,7 +128,7 @@ namespace 联友生产辅助工具.生管码垛线
             string SC003 = "";
             string SC001 = "";
 
-            int SysTime = int.Parse(Normal.GetDbSysTime("Sort"));
+            int SysTime = int.Parse(GetTime());
             int WorkTime = 0;
 
             if(dttmp.Rows[0][1].ToString() == "上线日期")
@@ -163,7 +170,7 @@ namespace 联友生产辅助工具.生管码垛线
                         break;
                     }
                     
-                    DataTable dttmp2 = mssql.SQLselect(connRobot, "SELECT SC001 FROM SCHEDULE WHERE SC001 = '" + SC001 + "'");
+                    DataTable dttmp2 = mssql.SQLselect(connMD, "SELECT SC001 FROM SCHEDULE WHERE SC001 = '" + SC001 + "'");
 
                     if (dttmp2 != null)
                     {
@@ -173,7 +180,7 @@ namespace 联友生产辅助工具.生管码垛线
                                     + " SC038 = 'N' "
                                     + " WHERE SC001 = '" + SC001 + "' ";
 
-                        if (0 == mssql.SQLexcute(connRobot, updatestr))
+                        if (0 == mssql.SQLexcute(connMD, updatestr))
                         {
                             update++;
                         }
@@ -193,7 +200,7 @@ namespace 联友生产辅助工具.生管码垛线
                                   + "'" + FormLogin.infObj.userId + "', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
                                   + "'" + SC001 + "', '" + SC003 + "')";
                         
-                        if (0 == mssql.SQLexcute(connRobot, insertstr))
+                        if (0 == mssql.SQLexcute(connMD, insertstr))
                         {
                             insert++;
                         }
@@ -247,7 +254,7 @@ namespace 联友生产辅助工具.生管码垛线
             {
                 showDt.Clear();
             }
-            showDt = mssql.SQLselect(connRobot, show_sqlstr);
+            showDt = mssql.SQLselect(connMD, show_sqlstr);
 
             if (showDt != null)
             {
@@ -261,7 +268,7 @@ namespace 联友生产辅助工具.生管码垛线
                     showDt.Rows[row_count][0] = Normal.ConvertDate(showDt.Rows[row_count][0].ToString());
                 }
                 DgvMain.DataSource = showDt;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
             }
             else
             {
@@ -297,7 +304,7 @@ namespace 联友生产辅助工具.生管码垛线
 
             //                UPDATE SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), DATEADD(DAY, -1, GETDATE()), 112) AND SC039 != 'Y' ";
 
-            mssql.SQLexcute(connRobot, "EXEC dbo.MdPlanInsert ");
+            mssql.SQLexcute(connERP, "EXEC dbo.MdPlanInsert ");
 
             SetTypeCode();
 
@@ -316,7 +323,7 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void SetBoxCodeByProc()
         {
-            mssql.SQLexcute(connRobot, "EXEC dbo.BoxCodeUpdate ");
+            mssql.SQLexcute(connMD, "EXEC dbo.BoxCodeUpdate ");
         }
         #endregion
 
@@ -328,7 +335,7 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void SetTypeCodeByProc()
         {
-            mssql.SQLexcute(connRobot, "EXEC dbo.SplitCodeUpdate ");
+            mssql.SQLexcute(connMD, "EXEC dbo.SplitCodeUpdate ");
         }
         #endregion
     }

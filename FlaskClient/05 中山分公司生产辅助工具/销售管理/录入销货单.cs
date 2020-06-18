@@ -257,7 +257,7 @@ namespace 联友中山分公司生产辅助工具.销售管理
                 }
             }
             selectLastRow(this.DataGridView_List);
-            DgvOpt.SetRowColor(this.DataGridView_List);
+            DgvOpt.SetRowBackColor(this.DataGridView_List);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

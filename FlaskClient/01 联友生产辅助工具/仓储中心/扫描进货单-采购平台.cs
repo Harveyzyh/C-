@@ -38,7 +38,7 @@ namespace 联友生产辅助工具.仓储中心
         {
             InitializeComponent();
             Init();
-            DgvOpt.SetRowColor(DataGridView_List);
+            DgvOpt.SetRowBackColor(DataGridView_List);
         }
 
         private void Init()

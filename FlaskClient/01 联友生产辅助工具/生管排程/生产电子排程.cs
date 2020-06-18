@@ -16,8 +16,8 @@ namespace 联友生产辅助工具.生管排程
         
         private Mssql mssql = new Mssql();
 
-        private static string Conn_WG_DB = FormLogin.infObj.connMD;
-        private static string Conn_ERP = FormLogin.infObj.connYF;
+        private static string connMD = FormLogin.infObj.connMD;
+        private static string connERP = FormLogin.infObj.connYF;
         #endregion
 
         #region 窗体设计
@@ -92,6 +92,12 @@ namespace 联友生产辅助工具.生管排程
             }
         }
 
+        private string GetTime()
+        {
+            string sqlstr = @"SELECT dbo.f_getTime(1) ";
+            return mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString();
+        }
+
         private string GetInsertDt(DataTable dt)//数据表转成sql语句
         {
             DataTable dtInsert = new DataTable();
@@ -108,7 +114,7 @@ namespace 联友生产辅助工具.生管排程
 
             string SC003 = "", SC001 = "";
 
-            int SysTime = int.Parse(Normal.GetDbSysTime("Sort"));
+            int SysTime = int.Parse(GetTime());
             int WorkTime = 0;
             
             for (; rowIndex < row_total; rowIndex++ )
@@ -168,10 +174,10 @@ namespace 联友生产辅助工具.生管排程
             string sqlstrInsert = @"INSERT INTO SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
                                     VALUES ('{0}', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), 
                                     '{1}', '{2}', '{3}', '{4}', '{5}') ";
-            mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
+            mssql.SQLexcute(connMD, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
             for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
             {
-                mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrInsert, FormLogin.infObj.userId, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
+                mssql.SQLexcute(connMD, string.Format(sqlstrInsert, FormLogin.infObj.userId, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
                     dt.Rows[rowIndex][2], dt.Rows[rowIndex][3], dt.Rows[rowIndex][4]));
             }
         }
@@ -222,15 +228,15 @@ namespace 联友生产辅助工具.生管排程
                                     SC016 = '{12}', SC017 = '{13}', SC018 = '{14}', SC019 = '{15}', SC020 = '{16}', SC021 = '{17}', 
                                     SC022 = '{18}', SC024 = '{19}', SC025 = '{20}', SC026 = '{21}', SC027 = '{22}', SC028 = '{23}' 
                                     WHERE SC001 = '{0}' ";
-            DataTable dtWg = mssql.SQLselect(Conn_WG_DB, sqlstrFindWg);
+            DataTable dtWg = mssql.SQLselect(connMD, sqlstrFindWg);
             if(dtWg != null)
             {
                 for(int rowIndex = 0; rowIndex < dtWg.Rows.Count; rowIndex++)
                 {
-                    DataTable dtErp = mssql.SQLselect(Conn_ERP, string.Format(sqlstrFindErp, dtWg.Rows[rowIndex][0].ToString()));
+                    DataTable dtErp = mssql.SQLselect(connERP, string.Format(sqlstrFindErp, dtWg.Rows[rowIndex][0].ToString()));
                     if(dtErp != null)
                     {
-                        mssql.SQLexcute(Conn_WG_DB, string.Format(sqlstrUpt, dtWg.Rows[rowIndex][0].ToString(), 
+                        mssql.SQLexcute(connMD, string.Format(sqlstrUpt, dtWg.Rows[rowIndex][0].ToString(), 
                             dtErp.Rows[0][0].ToString().Replace("'", "''"), dtErp.Rows[0][1].ToString().Replace("'", "''"), 
                             dtErp.Rows[0][2].ToString().Replace("'", "''"), dtErp.Rows[0][3].ToString().Replace("'", "''"), 
                             dtErp.Rows[0][4].ToString().Replace("'", "''"), dtErp.Rows[0][5].ToString().Replace("'", "''"), 
@@ -264,13 +270,13 @@ namespace 联友生产辅助工具.生管排程
             if (DtpEndDate.Checked) sqlstrShow += @" AND SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
             if (dptList.Contains(CmBoxDptType.Text)) sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
             sqlstrShow += " ORDER BY SUBSTRING(CREATE_DATE, 1, 8), SC003, SC001 ";
-            DataTable showDt = mssql.SQLselect(Conn_WG_DB, sqlstrShow);
+            DataTable showDt = mssql.SQLselect(connMD, sqlstrShow);
 
             if (showDt != null)
             {
                 DtOpt.DtDateFormat(showDt, "日期");
                 DgvMain.DataSource = showDt;
-                DgvOpt.SetRowColor(DgvMain);
+                DgvOpt.SetRowBackColor(DgvMain);
                 DgvMain.Columns[3].Width = 180;
                 BtnOutput.Enabled = true;
             }
