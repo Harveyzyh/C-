@@ -296,10 +296,10 @@ namespace HarveyZ
         
         public bool FormLogin_GetLogin(string LoginUid, string LoginPwd, out string Msg)//登录
         {
-            UserLogin userLogin = new UserLogin();
-            UserLogin.UserObjectReturn userObj = new UserLogin.UserObjectReturn();
+            ERP_UserLogin userLogin = new ERP_UserLogin(FormLogin.infObj.connWG, FormLogin.infObj.connYF);
+            ERP_UserLogin.UserObjectReturn userObj = new ERP_UserLogin.UserObjectReturn();
             userObj.Uid = LoginUid;
-            userObj.Pwd = CEncrypt.GetMd5Str(LoginPwd);
+            userObj.Pwd = LoginPwd;
             userLogin.Login(userObj);
             if (userObj.Status)
             {

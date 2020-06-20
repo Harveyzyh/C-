@@ -155,6 +155,111 @@ namespace HarveyZ
     }
 
 
+    public class FileOpt
+    {
+        public static bool OpenFile(string filter, out string filePath, out string fileName)
+        {
+            filePath = "";
+            fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                fileName = Path.GetFileName(openFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool OpenFile(string filter, out string fullPath)
+        {
+            fullPath = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fullPath = openFileDialog.FileName;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool OpenFile(string filter, string initDir, out string filePath, out string fileName)
+        {
+            filePath = "";
+            fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = initDir;
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                fileName = Path.GetFileName(openFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool SaveFile(string filter, out string filePath, out string fileName)
+        {
+            filePath = "";
+            fileName = "";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.FilterIndex = 1;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                fileName = Path.GetFileName(saveFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string ReadFileGetContent(string filePath)
+        {
+            string rtnStr = "";
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader reader = new StreamReader(fs);
+                rtnStr = reader.ReadToEnd();
+            }
+            catch (Exception)
+            {
+                rtnStr = "";
+            }
+            return rtnStr;
+        }
+    }
+
+
     public class DgvOpt
     {
         #region 行背景颜色

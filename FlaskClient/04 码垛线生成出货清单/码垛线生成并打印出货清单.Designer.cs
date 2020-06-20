@@ -265,6 +265,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "码垛线生成并打印出货清单";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "码垛线出货清单打印程序";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

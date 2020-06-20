@@ -91,10 +91,6 @@ Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Release\NPOI.x
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.Properties.Resources.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\HarveyZ.主界面.resources
-Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.仓储中心.PDA_扫描进货单_获取单据信息.resources
-Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.仓储中心.PDA_扫描进货单.resources
-Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.仓储中心.生成领料单_获取单据信息.resources
-Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.仓储中心.生成领料单.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\HarveyZ.FormLogin.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销货单.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销货单_获取单据信息.resources

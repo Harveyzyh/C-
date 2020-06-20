@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using FastReport.Editor;
-using FastReport.DevComponents;
+using FastReport;
 using System.IO;
 
 namespace 码垛线生成并打印出货清单
@@ -72,14 +72,14 @@ namespace 码垛线生成并打印出货清单
         {
             //判断是否在debug模式
             #if DEBUG
-            this.Text += " -DEBUG";
+            this.Text += "   -DEBUG";
             #endif
 
             //从文件详细信息中获取程序名称
             ProgName = Application.ProductName.ToString();
             ProgVersion = Application.ProductVersion.ToString();
 
-            this.Text += " -Ver." + ProgVersion;
+            this.Text += "   -Ver." + ProgVersion;
 
             //检查软件是否存在更新版本
             HttpURL = GetHttpURL();
@@ -90,7 +90,7 @@ namespace 码垛线生成并打印出货清单
 
 
             //获取初始化文件及打印模板目录
-            localPath = System.IO.Directory.GetCurrentDirectory();
+            localPath = Directory.GetCurrentDirectory();
             iniFilePath = localPath + @"\" + iniFileName;
             printFilePath = localPath + @"\ReportFile\";
 
@@ -290,7 +290,7 @@ namespace 码垛线生成并打印出货清单
 
         private void dgvList_SelectLastRow()
         {
-            dgvList.CurrentCell = dgvList.Rows[dgvList.RowCount - 1].Cells[0];
+            DgvOpt.SelectLastRow(dgvList);
         }
 
         private void dgvList_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -327,7 +327,6 @@ namespace 码垛线生成并打印出货清单
             {
                 dgvDetail.DataSource = dt;
                 DgvOpt.SetRowBackColor(dgvDetail);
-                //dgvDetail_SelectLastRow();
                 dgvDetail.ReadOnly = true;
                 Dictionary<string, int> dgvDetailColWidthDict = new Dictionary<string, int>();
                 dgvDetailColWidthDict.Add("序号", 40);
@@ -344,14 +343,9 @@ namespace 码垛线生成并打印出货清单
             }
         }
 
-        private void dgvDetail_SelectLastRow()
-        {
-            dgvDetail.CurrentCell = dgvDetail.Rows[dgvDetail.RowCount - 1].Cells[0];
-        }
-
         private void btnPrintPreview_Click(object sender, EventArgs e)
         {
-            FastReportPreview previewForm = new FastReportPreview(tg001, tg002, md_no, printerName, @"ReportFile/" + printFileName + @".frx");
+            FastReportPreview previewForm = new FastReportPreview(tg001, tg002, md_no, getfrx(printFileName));
             if(previewForm.ShowDialog() == DialogResult.Cancel)
             {
                 previewForm.Dispose();
@@ -387,8 +381,6 @@ namespace 码垛线生成并打印出货清单
 
         private void COPTGCreateTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
         {
-            //TextBoxAppendText textBoxAppendText = new TextBoxAppendText(TextBoxAppend);
-            //this.textBox1.BeginInvoke(textBoxAppendText, "Create   " + DateTime.Now.ToString("yyyy-mm-dd hh:MM:ss"));
             DelegateCOPTGCreateWork delegateCreateWork = new DelegateCOPTGCreateWork(COPTGCreateWork);
             dgvList.BeginInvoke(delegateCreateWork);
         }
@@ -448,14 +440,12 @@ namespace 码垛线生成并打印出货清单
 
         private void COPTGPrintTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
         {
-            //DelegateCOPTGPrintWork delegatePrintWork = new DelegateCOPTGPrintWork(COPTGPrintWork);
             COPTGPrintWork();
         }
 
         private void COPTGPrintWork() //销货单打印的主方法，定时器溢出后调用
         {
-            FastReport.Report report = new FastReport.Report();
-
+            Report report = new Report();
             string sqlstr = @"SELECT TOP 1 TG001, TG002, MD_No, PrintType, PrintId FROM ROBOT_TEST.dbo.PrintData
                                 INNER JOIN ROBOT_TEST.dbo.SplitTypeCode ON TG001 = OutType
                                 WHERE STATUSS = 0 AND OutFlag = 1 AND PrintFlag = 0 AND PrintingFlag = 0
@@ -468,20 +458,19 @@ namespace 码垛线生成并打印出货清单
                 string tg001c = dt.Rows[0][0].ToString();
                 string tg002c = dt.Rows[0][1].ToString();
                 string md_noc = dt.Rows[0][2].ToString();
-                string printFileNamec = dt.Rows[0][3].ToString();
+                string printFileName = dt.Rows[0][3].ToString();
                 string printIdc = dt.Rows[0][4].ToString();
 
                 mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintingFlag = 1 WHERE PrintId = {0}", 
                                                             printIdc));
 
-
-                report.Load(@"ReportFile/" + printFileNamec + @".frx");
+                
+                report.LoadFromString(getfrx(printFileName));
                 report.SetParameterValue("@TG001", tg001c);
                 report.SetParameterValue("@TG002", tg002c);
                 report.SetParameterValue("@PD_NO", md_noc);
                 report.PrintSettings.Printer = printerName;
                 report.PrintSettings.ShowDialog = false;
-                //report.Show();
                 report.Print();
 
                 mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintFlag = 1, PrintDate = getdate(), PrintingFlag = 0 WHERE PrintId = {0}", 
@@ -499,5 +488,12 @@ namespace 码垛线生成并打印出货清单
         #endregion
 
         #endregion
+
+        private string getfrx(string fileName)
+        {
+            string sqlstr = @"SELECT CONTENT FROM WG_DB.dbo.WG_PRINT WHERE PRINT_TYPE = '码垛线销货单' AND PRINT_NAME = '{0}' ";
+            string frx = mssql.SQLselect(connComfort, string.Format(sqlstr, fileName)).Rows[0][0].ToString();
+            return frx;
+        }
     }
 }

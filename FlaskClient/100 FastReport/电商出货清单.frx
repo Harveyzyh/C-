@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" TextQuality="Regular" SmoothGraphics="true" ReportInfo.Name="Simple List" ReportInfo.Author="Fast Reports Inc" ReportInfo.Description="Demonstrates simple list report. To create it:&#13;&#10;- go to &quot;Data&quot; menu and select &quot;Choose Report Data...&quot; item to select datasource;&#13;&#10;- go to &quot;Report|Configure Bands...&quot; menu to create the band structure;&#13;&#10;- return to the report page, doubleclick the data band to show its editor;&#13;&#10;- choose the datasource;&#13;&#10;- drag data from the Data Dictionary window to the band." ReportInfo.Created="01/17/2008 03:05:57" ReportInfo.Modified="12/16/2019 09:49:52" ReportInfo.CreatorVersion="2018.4.2.0">
+<Report ScriptLanguage="CSharp" TextQuality="Regular" SmoothGraphics="true" ReportInfo.Name="Simple List" ReportInfo.Author="Fast Reports Inc" ReportInfo.Description="Demonstrates simple list report. To create it:&#13;&#10;- go to &quot;Data&quot; menu and select &quot;Choose Report Data...&quot; item to select datasource;&#13;&#10;- go to &quot;Report|Configure Bands...&quot; menu to create the band structure;&#13;&#10;- return to the report page, doubleclick the data band to show its editor;&#13;&#10;- choose the datasource;&#13;&#10;- drag data from the Data Dictionary window to the band." ReportInfo.Created="01/17/2008 03:05:57" ReportInfo.Modified="12/16/2019 10:27:50" ReportInfo.CreatorVersion="2018.4.2.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8RP3eGjs5lkRsmd41956WmixtxKbAEQ/xW/yFLRlm0PqoqlQIIEWmMYFSNzVwl7LEA5u1AZFtyS24+BghB5rSjDfU8RvNgtrOaj+A9lgj4IR7dXBZxRAreiZeimwygC6NYQ0MdtoxgDptVY3DTbwuqO9TBUKITps/02dpacyGzThS9tSgmhtQpKk2Jlm3OnP/g==">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8RP3eGjs5lkRsmd41956WmixtxKbAEQ/xW/yFLRlm0PqoqlQIIEWmMYFSNzVwl7LEA5u1AZFtyS24+BghB5rSjDfU8RvNgtrOaj+A9lgj4IR7dXBZxRAreiZeimwygC6NYQ0MdtoxgDptVY3DTbwuqO9TBUKITps/02dpacyGzThEhXTKGQrmVb3CEpYGnQZOQ==">
       <TableDataSource Name="Table" Alias="COPTH" DataType="System.Int32" Enabled="true" SelectCommand="SELECT COPTH.TH003 AS 序号, RTRIM(COPTH.TH004) AS 品号, RTRIM(COPTH.TH005) AS 品名, RTRIM(COPTH.TH006) AS 规格,&#13;&#10;RTRIM(COPTH.TH014) + '-' + RTRIM(COPTH.TH015) + '-' + RTRIM(COPTH.TH016) AS 生产单号, &#13;&#10;CONVERT(VARCHAR(10), CONVERT(FLOAT, COPTH.TH008)) AS 数量, RTRIM(COPTH.TH009) AS 单位, &#13;&#10;RTRIM(COPTH.UDF03) AS 描述备注, RTRIM(COPTH.UDF04) AS 保友品名, RTRIM(COPTH.UDF05) AS 配置方案, RTRIM(COPTH.UDF10) AS 产品电商代码, &#13;&#10;' ' + RTRIM(CMSMC.MC002) + CHAR(10)+ CHAR(10) + RTRIM(COPTH.TH004) AS 备注_身, RTRIM(COPTH.UDF01) AS PO号_身,&#13;&#10;&#13;&#10;RTRIM(COPTG.TG001)+' '+RTRIM(COPTG.TG002) AS 出货单号, RTRIM(COPTG.UDF04) AS 拖车公司, RTRIM(COPTG.UDF03) AS 车牌, RTRIM(COPMA.MA002) AS 客户简称, &#13;&#10;RTRIM(SUBSTRING(COPTG.TG042,1,4)+'-'+SUBSTRING(COPTG.TG042,5,2)+'-'+SUBSTRING(COPTG.TG042,7,2)) AS 单据日期, RTRIM(COPTG.UDF05) AS 港口, RTRIM(COPTG.UDF06) AS PO号_头,&#13;&#10;RTRIM(COPTG.UDF02) AS 柜型, RTRIM(COPTG.UDF01) AS 柜号, RTRIM(COPTG.UDF08) AS 原产地, RTRIM(CMSMV.MV002) AS 船务, RTRIM(COPTG.TG020) AS 备注_头, &#13;&#10;@PD_NO AS 栈板号 &#13;&#10;FROM COPTH&#13;&#10;LEFT JOIN COPTG ON TG001 = TH001 AND TG002 = TH002&#13;&#10;LEFT JOIN COPMA ON COPMA.MA001 = COPTG.TG004 &#13;&#10;LEFT JOIN CMSMC ON COPTH.TH007 = CMSMC.MC001&#13;&#10;LEFT JOIN CMSMV ON COPTG.CREATOR = CMSMV.MV001 &#13;&#10;WHERE RTRIM(TH001) =@TG001 AND RTRIM(TH002) = @TG002&#13;&#10;ORDER BY COPTH.TH003">
         <Column Name="序号" DataType="System.String"/>
         <Column Name="品号" DataType="System.String"/>
@@ -29,9 +29,9 @@
         <Column Name="船务" DataType="System.String"/>
         <Column Name="备注_头" DataType="System.String"/>
         <Column Name="栈板号" DataType="System.String"/>
-        <CommandParameter Name="TG001" DataType="22" DefaultValue="2303"/>
-        <CommandParameter Name="TG002" DataType="22" DefaultValue="19120058"/>
-        <CommandParameter Name="PD_NO" DataType="22" DefaultValue="1"/>
+        <CommandParameter Name="TG001" DataType="22" Expression="@TG001" DefaultValue="2303"/>
+        <CommandParameter Name="TG002" DataType="22" Expression="@TG002" DefaultValue="19120058"/>
+        <CommandParameter Name="PD_NO" DataType="22" Expression="@PD_NO" DefaultValue="1"/>
       </TableDataSource>
     </MsSqlDataConnection>
   </Dictionary>
@@ -73,8 +73,8 @@
       <TextObject Name="Text111" Left="274.05" Top="141.75" Width="113.4" Height="47.25" Border.Lines="All" Border.Width="1.5" Text="保友品名" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 10pt"/>
       <TextObject Name="Text112" Left="160.65" Top="141.75" Width="113.4" Height="47.25" Border.Lines="All" Border.Width="1.5" Text="联友品名" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 10pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="191.5" Width="801.36" Border.Lines="All" Border.Color="Maroon" CanGrow="true">
-      <DataBand Name="Data2" Top="194" Width="801.36" Height="47.25" DataSource="Table">
+    <DataBand Name="Data1" Top="191.22" Width="801.36" Border.Lines="All" Border.Color="Maroon" CanGrow="true">
+      <DataBand Name="Data2" Top="193.44" Width="801.36" Height="47.25" DataSource="Table">
         <TextObject Name="Text36" Left="548.1" Width="160.65" Height="47.25" Border.Lines="All" Border.Width="1.5" Text="[COPTH.配置方案]"/>
         <TextObject Name="Text31" Left="28.35" Width="47.25" Height="47.25" Border.Lines="All" Border.Width="1.5" HorzAlign="Center"/>
         <TextObject Name="Text32" Left="75.6" Width="85.05" Height="47.25" Border.Lines="All" Border.Width="1.5"/>
@@ -90,7 +90,7 @@
         <TextObject Name="Text114" Left="274.05" Width="113.4" Height="47.25" Border.Lines="All" Border.Width="1.5" Text="[COPTH.保友品名]" VertAlign="Center"/>
         <TextObject Name="Text118" Left="85.05" Top="28.35" Width="75.6" Height="18.9" Text="[COPTH.产品电商代码]"/>
       </DataBand>
-      <DataFooterBand Name="DataFooter1" Top="243.75" Width="801.36" Height="37.8">
+      <DataFooterBand Name="DataFooter1" Top="242.92" Width="801.36" Height="37.8">
         <TextObject Name="Text103" Left="548.1" Width="160.65" Height="37.8" Border.Lines="All" Border.Width="1.5"/>
         <TextObject Name="Text104" Left="28.35" Width="47.25" Height="37.8" Border.Lines="All" Border.Width="1.5" HorzAlign="Center"/>
         <TextObject Name="Text105" Left="387.45" Width="47.25" Height="37.8" Border.Lines="All" Border.Width="1.5" HorzAlign="Center"/>
@@ -102,7 +102,7 @@
         <TextObject Name="Text116" Left="274.05" Width="113.4" Height="37.8" Border.Lines="All" Border.Width="1.5" HorzAlign="Center" VertAlign="Center"/>
       </DataFooterBand>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="284.05" Width="801.36" Height="18.9" Fill.Color="White" CanGrow="true">
+    <PageFooterBand Name="PageFooter1" Top="282.94" Width="801.36" Height="18.9" Fill.Color="White" CanGrow="true">
       <TextObject Name="Text92" Left="28.35" Width="56.7" Height="18.9" Text="业务：" Font="宋体, 10pt"/>
       <TextObject Name="Text93" Left="113.4" Width="56.7" Height="18.9" Text="包装：" Font="宋体, 10pt"/>
       <TextObject Name="Text94" Left="189" Width="56.7" Height="18.9" Text="品管：" Font="宋体, 10pt"/>

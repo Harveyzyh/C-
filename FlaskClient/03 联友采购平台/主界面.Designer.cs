@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(主界面));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.供应商ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.供应商_录入送货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭当前界面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,8 +43,8 @@
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.供应商ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.供应商_录入送货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.管理_修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.管理_添加用户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -63,9 +65,27 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // 供应商ToolStripMenuItem
+            // 
+            this.供应商ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.供应商_录入送货单ToolStripMenuItem});
+            this.供应商ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.供应商ToolStripMenuItem.Name = "供应商ToolStripMenuItem";
+            this.供应商ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
+            this.供应商ToolStripMenuItem.Text = "供应商";
+            // 
+            // 供应商_录入送货单ToolStripMenuItem
+            // 
+            this.供应商_录入送货单ToolStripMenuItem.Name = "供应商_录入送货单ToolStripMenuItem";
+            this.供应商_录入送货单ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.供应商_录入送货单ToolStripMenuItem.Text = "录入送货单";
+            this.供应商_录入送货单ToolStripMenuItem.Click += new System.EventHandler(this.供应商_录入送货单ToolStripMenuItem_Click);
+            // 
             // 管理ToolStripMenuItem
             // 
             this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.管理_添加用户ToolStripMenuItem,
+            this.管理_修改密码ToolStripMenuItem,
             this.管理_权限管理ToolStripMenuItem});
             this.管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
@@ -156,21 +176,19 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // 供应商ToolStripMenuItem
+            // 管理_修改密码ToolStripMenuItem
             // 
-            this.供应商ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.供应商_录入送货单ToolStripMenuItem});
-            this.供应商ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.供应商ToolStripMenuItem.Name = "供应商ToolStripMenuItem";
-            this.供应商ToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
-            this.供应商ToolStripMenuItem.Text = "供应商";
+            this.管理_修改密码ToolStripMenuItem.Name = "管理_修改密码ToolStripMenuItem";
+            this.管理_修改密码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.管理_修改密码ToolStripMenuItem.Text = "修改密码";
+            this.管理_修改密码ToolStripMenuItem.Click += new System.EventHandler(this.管理_修改密码ToolStripMenuItem_Click);
             // 
-            // 供应商_录入送货单ToolStripMenuItem
+            // 管理_添加用户ToolStripMenuItem
             // 
-            this.供应商_录入送货单ToolStripMenuItem.Name = "供应商_录入送货单ToolStripMenuItem";
-            this.供应商_录入送货单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.供应商_录入送货单ToolStripMenuItem.Text = "录入送货单";
-            this.供应商_录入送货单ToolStripMenuItem.Click += new System.EventHandler(this.供应商_录入送货单ToolStripMenuItem_Click);
+            this.管理_添加用户ToolStripMenuItem.Name = "管理_添加用户ToolStripMenuItem";
+            this.管理_添加用户ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.管理_添加用户ToolStripMenuItem.Text = "添加用户";
+            this.管理_添加用户ToolStripMenuItem.Click += new System.EventHandler(this.管理_添加用户ToolStripMenuItem_Click);
             // 
             // 主界面
             // 
@@ -219,5 +237,7 @@
         private System.Windows.Forms.ToolStripMenuItem 生成领料单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 供应商ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 供应商_录入送货单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 管理_修改密码ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 管理_添加用户ToolStripMenuItem;
     }
 }

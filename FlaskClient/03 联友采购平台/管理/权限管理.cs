@@ -11,7 +11,6 @@ namespace HarveyZ
 {
     public partial class 权限管理 : Form
     {
-        static string conn = FormLogin.infObj.connCG;
         static Mssql mssql = new Mssql();
         public 权限管理()
         {
@@ -45,9 +44,7 @@ namespace HarveyZ
 
         private void ShowUser()
         {
-            
-            string sqlstr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 FROM WG_USER ORDER BY K_ID ";
-            DgvUser.DataSource = mssql.SQLselect(conn, sqlstr);
+            DgvUser.DataSource = FormLogin.infObj.userLogin.GetUserInfo();
             DgvOpt.SetRowBackColor(DgvUser);
         }
 
@@ -56,7 +53,7 @@ namespace HarveyZ
             DgvMain.DataSource = null;
             BtnSave.Enabled = false;
             BtnReset.Enabled = false;
-            DataTable showDt = UserPermission.ShowUserPerm(U_ID);
+            DataTable showDt = FormLogin.infObj.userPermission.ShowUserPerm(U_ID);
             if (showDt != null)
             {
                 DgvMain.DataSource = showDt;
@@ -88,14 +85,14 @@ namespace HarveyZ
                         userPermList.Add(saveDt.Rows[rowIndex][1].ToString());
                     }
                 }
-                UserPermission.SetPermUser(TextBoxU_ID.Text, userPermList);
+                FormLogin.infObj.userPermission.SetPermUser(TextBoxU_ID.Text, userPermList);
                 MessageBox.Show("保存成功");
             }
         }
 
         private void BtnSetBasePerm_Click(object sender, EventArgs e)
         {
-            UserPermission.SetPermBase(FormLogin.infObj.menuItemList);
+            FormLogin.infObj.userPermission.SetPermBase(FormLogin.infObj.menuItemList);
             MessageBox.Show("基础权限信息保存成功");
         }
 
@@ -119,10 +116,15 @@ namespace HarveyZ
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            string sqlstr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, TextBoxU_ID.Text));
+            if (FormLogin.infObj.userLogin.SetPasswdReset(TextBoxU_ID.Text))
+            {
+                MessageBox.Show("已设置！", "提示", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("设置失败，稍后重试！", "提示", MessageBoxButtons.OK);
+            }
             ShowUser();
-            MessageBox.Show("已设置", "提示", MessageBoxButtons.OK);
         }
     }
 }

@@ -179,7 +179,7 @@ namespace HarveyZ
     public class Main
     {
         private InfoObject infObj = null;
-        private VersionManeger versionManager = null;
+        VersionManeger versionManager = null;
 
         public Main(InfoObject _infObj)
         {
@@ -193,7 +193,10 @@ namespace HarveyZ
             InitMainIniPath();
             InitUserId();
 
+            infObj.systemType = "ERP";
+
             versionManager = new VersionManeger(infObj.connWG);
+            infObj.userPermission = new UserPermission(infObj.connWG, infObj.systemType);
         }
 
         private void InitMainIniPath()
@@ -288,11 +291,11 @@ namespace HarveyZ
         
         public bool FormLogin_GetLogin(string LoginUid, string LoginPwd, out string Msg)//登录
         {
-            UserLogin userLogin = new UserLogin();
-            UserLogin.UserObjectReturn userObj = new UserLogin.UserObjectReturn();
+            infObj.userLogin = new ERP_UserLogin(FormLogin.infObj.connWG, FormLogin.infObj.connYF);
+            ERP_UserLogin.UserObjectReturn userObj = new ERP_UserLogin.UserObjectReturn();
             userObj.Uid = LoginUid;
-            userObj.Pwd = CEncrypt.GetMd5Str(LoginPwd);
-            userLogin.Login(userObj);
+            userObj.Pwd = LoginPwd;
+            infObj.userLogin.Login(userObj);
             if (userObj.Status)
             {
                 infObj.userPermList = userObj.Permission;
@@ -324,9 +327,14 @@ namespace HarveyZ
         private bool _testFlag = false;
         private bool _connFlag = false;
 
+        private string _systemType = null;
+
         private string _mainIniFilePath = null;
         private List<string> _userPermList = new List<string> { };
         private List<string> _menuItemList = new List<string> { };
+
+        private ERP_UserLogin _userLogin = null;
+        private UserPermission _userPermission = null;
 
         public bool remoteFlag { get { return _remoteFlag; } set { _remoteFlag = value; } }
         public string localPath { get { return _localPath; } set { _localPath = value; } }
@@ -337,9 +345,14 @@ namespace HarveyZ
 
         public bool connFlag { get { return _connFlag; } set { _connFlag = value; } }
 
+        public string systemType { get { return _systemType; } set { _systemType = value; } }
+
         public string mainIniFilePath { get { return _mainIniFilePath; } set { _mainIniFilePath = value; } }
         public List<string> userPermList { get { return _userPermList; } set { _userPermList = value; } }
         public List<string> menuItemList { get { return _menuItemList; } set { _menuItemList = value; } }
+
+        public ERP_UserLogin userLogin { get { return _userLogin; } set { _userLogin = value; } }
+        public UserPermission userPermission { get { return _userPermission; } set { _userPermission = value; } }
 
     }
 }

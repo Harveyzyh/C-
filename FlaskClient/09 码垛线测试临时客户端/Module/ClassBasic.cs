@@ -17,7 +17,7 @@ namespace HarveyZ
         public static string GetIpAddress()
         {
             string addr = "";
-            string ip = "192."; //用于过滤ip
+            string ip = "."; //用于过滤ip
             int index = 0;
             IPHostEntry localhost = Dns.GetHostEntry(Dns.GetHostName());    //方法已过期，可以获取IPv4的地址
             //IPHostEntry localhost = Dns.GetHostEntry(hostName);   //获取IPv6地址
@@ -151,59 +151,599 @@ namespace HarveyZ
 
     public class FormOpt
     {
-        public Form FormInit(Form sender)
+
+    }
+
+
+    public class FileOpt
+    {
+        public static bool OpenFile(string filter, out string filePath, out string fileName)
         {
-            Form frm = sender;
-            frm.TopLevel = false;
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-            frm.WindowState = FormWindowState.Maximized;
-            return frm;
+            filePath = "";
+            fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                fileName = Path.GetFileName(openFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool OpenFile(string filter, out string fullPath)
+        {
+            fullPath = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fullPath = openFileDialog.FileName;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool OpenFile(string filter, string initDir, out string filePath, out string fileName)
+        {
+            filePath = "";
+            fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = initDir;
+            openFileDialog.Filter = filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                fileName = Path.GetFileName(openFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool SaveFile(string filter, out string filePath, out string fileName)
+        {
+            filePath = "";
+            fileName = "";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.FilterIndex = 1;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                fileName = Path.GetFileName(saveFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string ReadFileGetContent(string filePath)
+        {
+            string rtnStr = "";
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader reader = new StreamReader(fs);
+                rtnStr = reader.ReadToEnd();
+            }
+            catch (Exception)
+            {
+                rtnStr = "";
+            }
+            return rtnStr;
         }
     }
 
 
     public class DgvOpt
     {
-        public static void SetRowColor(DataGridView Dgv)
+        #region 行背景颜色
+        /// <summary>
+        /// 设置Dgv中单双行背景颜色不一致
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        public static void SetRowBackColor(DataGridView dgv)
         {
             //行颜色
-            Dgv.RowsDefaultCellStyle.BackColor = Color.Bisque;
-            Dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            dgv.RowsDefaultCellStyle.BackColor = Color.Bisque;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
         }
+        #endregion
 
-        public static void SetColReadonly(DataGridView Dgv, List<int> formatList)
+        #region 列只读
+        /// <summary>
+        /// 设置Dgv的列宽度，以单个列序号传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="col">单个列序号</param>
+        public static void SetColReadonly(DataGridView dgv, int col)
         {
-            foreach (int listIndex in formatList)
+            if (dgv != null)
             {
-                Dgv.Columns[listIndex].ReadOnly = true;
+                dgv.Columns[col].ReadOnly = true;
             }
         }
 
-        public static void SetColReadonly(DataGridView Dgv, string ColName)
+        /// <summary>
+        /// 设置Dgv列只读，以列序号List传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="colList">列序号List</param>
+        public static void SetColReadonly(DataGridView dgv, List<int> colList)
         {
-            List<int> formatList = new List<int>();
-            for (int colIndex = 0; colIndex < Dgv.Columns.Count; colIndex++)
+            //获取所有列序号
+            List<int> dgvList = new List<int>();
+            for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
             {
-                if (Dgv.Columns[colIndex].Name.Contains(ColName))
+                dgvList.Add(colIndex);
+            }
+
+            if (dgv != null)
+            {
+                foreach (int col in colList)
                 {
-                    formatList.Add(colIndex);
+                    SetColReadonly(dgv, col);
+                }
+
+                //其余列设置为可写
+                SetColWritable(dgv, ListOpt.ListDif(dgvList, colList));
+            }
+        }
+
+        /// <summary>
+        /// 设置所有列均为只读
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        public static void SetColReadonly(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                List<int> dgvList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    dgvList.Add(colIndex);
+                }
+
+                SetColReadonly(dgv, dgvList);
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv列只读，以单个列名称传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="colName">单个列名</param>
+        public static void SetColReadonly(DataGridView dgv, string colName)
+        {
+            if (dgv != null)
+            {
+                List<int> colList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(colName))
+                    {
+                        colList.Add(colIndex);
+                    }
+                }
+
+                SetColReadonly(dgv, colList);
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv的列只读，以列名称List传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="nameList">列名List</param>
+        public static void SetColReadonly(DataGridView dgv, List<string> nameList)
+        {
+            if (dgv != null)
+            {
+                foreach (string colName in nameList)
+                {
+                    SetColReadonly(dgv, colName);
                 }
             }
+        }
+        #endregion
 
-            foreach (int listIndex in formatList)
-            {
-                Dgv.Columns[listIndex].ReadOnly = true;
-            }
-        }
-        
-        public static void SetColNoSortMode(DataGridView Dgv)
+        #region 列可写
+        public static void SetColWritable(DataGridView dgv, int col)
         {
-            for (int i = 0; i < Dgv.Columns.Count; i++)
+            if(dgv != null)
             {
-                Dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns[col].ReadOnly = false;
             }
         }
+
+        public static void SetColWritable(DataGridView dgv, List<int> colList)
+        {
+            //获取所有列序号
+            List<int> dgvList = new List<int>();
+            for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+            {
+                dgvList.Add(colIndex);
+            }
+            if (dgv != null)
+            {
+                foreach (int col in colList)
+                {
+                    SetColWritable(dgv, col);
+                }
+
+                //其余列设置为只读
+                SetColReadonly(dgv, ListOpt.ListDif(dgvList, colList));
+            }
+        }
+
+        public static void SetColWritable(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                List<int> dgvList = new List<int>();
+                for(int colIndex =0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    dgvList.Add(colIndex);
+                }
+                SetColWritable(dgv, dgvList);
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv列可写，以单个列名称传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="colName">单个列名</param>
+        public static void SetColWritable(DataGridView dgv, string colName)
+        {
+            if (dgv != null)
+            {
+                List<int> colList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(colName))
+                    {
+                        colList.Add(colIndex);
+                    }
+                }
+
+                SetColWritable(dgv, colList);
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv的列可写，以列名称List传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="nameList">列名List</param>
+        public static void SetColWritable(DataGridView dgv, List<string> nameList)
+        {
+            if (dgv != null)
+            {
+                foreach (string colName in nameList)
+                {
+                    SetColWritable(dgv, colName);
+                }
+            }
+        }
+        #endregion
+
+        #region 列宽度
+        /// <summary>
+        /// 设置Dgv的列宽度，以单个列序号传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="col">列序号</param>
+        /// <param name="width">宽度</param>
+        public static void SetColWidth(DataGridView dgv, int col, int width)
+        {
+            if (dgv != null && width > 0)
+            {
+                dgv.Columns[col].Width = width;
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv的列宽度，以单个列名称传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="colName">列名称</param>
+        /// <param name="width">宽度</param>
+        public static void SetColWidth(DataGridView dgv, string colName, int width)
+        {
+            if (dgv != null && width > 0)
+            {
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(colName))
+                    {
+                        SetColWidth(dgv, colIndex, width);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv的列宽度，以列序号字典传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="dict">字典(列序号，宽度)</param>
+        public static void SetColWidth(DataGridView dgv, Dictionary<int, int> dict)
+        {
+            if (dgv != null && dict != null)
+            {
+                foreach (KeyValuePair<int, int> kv in dict)
+                {
+                    SetColWidth(dgv, kv.Key, kv.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv的列宽度，以列名称字典传入
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="dict">字典(列名称，宽度)</param>
+        public static void SetColWidth(DataGridView dgv, Dictionary<string, int> dict)
+        {
+            if(dgv != null && dict != null)
+            {
+                foreach(KeyValuePair<string, int> kv in dict)
+                {
+                    SetColWidth(dgv, kv.Key, kv.Value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region 列居中显示
+        public static void SetColHeadMiddleCenter(DataGridView dgv)
+        {
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            SetColNoSortMode(dgv);
+        }
+
+        public static void SetColMiddleCenter(DataGridView dgv, int col)
+        {
+            dgv.Columns[col].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        public static void SetColMiddleCenter(DataGridView dgv, List<int> colList)
+        {
+            if (dgv != null)
+            {
+                foreach (int col in colList)
+                {
+                    SetColMiddleCenter(dgv, col);
+                }
+            }
+        }
+
+        public static void SetColMiddleCenter(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                List<int> dgvList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    dgvList.Add(colIndex);
+                }
+                SetColMiddleCenter(dgv, dgvList);
+            }
+        }
+
+        public static void SetColMiddleCenter(DataGridView dgv, string name)
+        {
+            if(dgv != null)
+            {
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(name))
+                    {
+                        SetColMiddleCenter(dgv, colIndex);
+                    }
+                }
+            }
+        }
+
+        public static void SetColMiddleCenter(DataGridView dgv, List<string> nameList)
+        {
+            if(dgv != null)
+            {
+                foreach (string name in nameList)
+                {
+                    SetColMiddleCenter(dgv, name);
+                }
+            }
+        }
+        #endregion
+
+        #region 列靠右显示
+        public static void SetColMiddleRight(DataGridView dgv, int col)
+        {
+            dgv.Columns[col].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        public static void SetColMiddleRight(DataGridView dgv, List<int> colList)
+        {
+            if (dgv != null)
+            {
+                foreach (int col in colList)
+                {
+                    SetColMiddleRight(dgv, col);
+                }
+            }
+        }
+
+        public static void SetColMiddleRight(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                List<int> dgvList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    dgvList.Add(colIndex);
+                }
+                SetColMiddleRight(dgv, dgvList);
+            }
+        }
+
+        public static void SetColMiddleRight(DataGridView dgv, string name)
+        {
+            if (dgv != null)
+            {
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(name))
+                    {
+                        SetColMiddleRight(dgv, colIndex);
+                    }
+                }
+            }
+        }
+
+        public static void SetColMiddleRight(DataGridView dgv, List<string> nameList)
+        {
+            if (dgv != null)
+            {
+                foreach (string name in nameList)
+                {
+                    SetColMiddleRight(dgv, name);
+                }
+            }
+        }
+        #endregion
+
+        #region 列靠左显示
+        public static void SetColMiddleLeft(DataGridView dgv, int col)
+        {
+            dgv.Columns[col].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        }
+
+        public static void SetColMiddleLeft(DataGridView dgv, List<int> colList)
+        {
+            if (dgv != null)
+            {
+                foreach (int col in colList)
+                {
+                    SetColMiddleLeft(dgv, col);
+                }
+            }
+        }
+
+        public static void SetColMiddleLeft(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                List<int> dgvList = new List<int>();
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    dgvList.Add(colIndex);
+                }
+                SetColMiddleLeft(dgv, dgvList);
+            }
+        }
+
+        public static void SetColMiddleLeft(DataGridView dgv, string name)
+        {
+            if (dgv != null)
+            {
+                for (int colIndex = 0; colIndex < dgv.Columns.Count; colIndex++)
+                {
+                    if (dgv.Columns[colIndex].Name.Contains(name))
+                    {
+                        SetColMiddleLeft(dgv, colIndex);
+                    }
+                }
+            }
+        }
+
+        public static void SetColMiddleLeft(DataGridView dgv, List<string> nameList)
+        {
+            if (dgv != null)
+            {
+                foreach (string name in nameList)
+                {
+                    SetColMiddleLeft(dgv, name);
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 设置所有列不需要排序
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        public static void SetColNoSortMode(DataGridView dgv)
+        {
+            if (dgv != null)
+            {
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置Dgv选中最后一行
+        /// </summary>
+        /// <param name="dgv">传入需要处理的Dgv</param>
+        public static void SelectLastRow(DataGridView dgv = null)
+        {
+            int kk = dgv.RowCount;
+            if (dgv.RowCount > 0 && dgv != null)
+            {
+                dgv.CurrentCell = dgv.Rows[dgv.RowCount - 1].Cells[0];
+            }
+        }
+
+        #region 行颜色
+        public static void SetRowFontColor(DataGridView dgv, int row, Color color)
+        {
+            if (dgv != null)
+            {
+                dgv.Rows[row].DefaultCellStyle.ForeColor = color;
+            }
+        }
+
+        public static void SetRowFontColor(DataGridView dgv, List<int> rowList, Color color)
+        {
+            if (dgv != null)
+            {
+                foreach(int row in rowList)
+                {
+                    SetRowFontColor(dgv, row, color);
+                }
+            }
+        }
+        #endregion
     }
 
 
@@ -250,6 +790,48 @@ namespace HarveyZ
         {
             DataTable resultDt = new DataTable();
             return resultDt;
+        }
+    }
+
+    public class ListOpt
+    {
+
+        /// <summary>
+        /// 对比两个List的差异
+        /// </summary>
+        /// <param name="list1">被对比List，多项</param>
+        /// <param name="list2">对比Lis， 少项t</param>
+        /// <returns></returns>
+        public static List<int> ListDif(List<int> list1, List<int> list2)
+        {
+            List<int> list3 = new List<int>();
+            foreach (int item1 in list1)
+            {
+                if (!list2.Contains(item1))
+                {
+                    list3.Add(item1);
+                }
+            }
+            return list3;
+        }
+
+        /// <summary>
+        /// 对比两个List的差异
+        /// </summary>
+        /// <param name="list1">被对比List，多项</param>
+        /// <param name="list2">对比Lis， 少项t</param>
+        /// <returns></returns>
+        public static List<string> ListDif(List<string> list1, List<string> list2)
+        {
+            List<string> list3 = new List<string>();
+            foreach (string item1 in list1)
+            {
+                if (!list2.Contains(item1))
+                {
+                    list3.Add(item1);
+                }
+            }
+            return list3;
         }
     }
 }

@@ -160,7 +160,7 @@ namespace 码垛线测试临时客户端
             if(Main_dt != null)
             {
                 dgv_Main.DataSource = Main_dt;
-                DgvOpt.SetRowColor(dgv_Main);
+                DgvOpt.SetRowBackColor(dgv_Main);
 
                 if (TestFlag)
                 {

@@ -334,3 +334,4 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.主界面.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.码垛线客户端.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.权限管理.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.FastReport模板发布.resources

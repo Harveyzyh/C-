@@ -56,7 +56,7 @@ namespace HarveyZ
             DgvMain.DataSource = null;
             BtnSave.Enabled = false;
             BtnReset.Enabled = false;
-            DataTable showDt = UserPermission.ShowUserPerm(U_ID);
+            DataTable showDt = FormLogin.infObj.userPermission.ShowUserPerm(U_ID);
             if (showDt != null)
             {
                 DgvMain.DataSource = showDt;
@@ -88,14 +88,14 @@ namespace HarveyZ
                         userPermList.Add(saveDt.Rows[rowIndex][1].ToString());
                     }
                 }
-                UserPermission.SetPermUser(TextBoxU_ID.Text, userPermList);
+                FormLogin.infObj.userPermission.SetPermUser(TextBoxU_ID.Text, userPermList);
                 MessageBox.Show("保存成功");
             }
         }
 
         private void BtnSetBasePerm_Click(object sender, EventArgs e)
         {
-            UserPermission.SetPermBase(FormLogin.infObj.menuItemList);
+            FormLogin.infObj.userPermission.SetPermBase(FormLogin.infObj.menuItemList);
             MessageBox.Show("基础权限信息保存成功");
         }
 

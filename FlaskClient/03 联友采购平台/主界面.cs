@@ -51,6 +51,10 @@ namespace HarveyZ
         private void FormPermission()
         {
             ItemUnvisable();
+            
+            FormLogin.infObj.userPermList.Add("供应商_录入送货单");
+            FormLogin.infObj.userPermList.Add("管理_修改密码");
+
             SetPermission(FormLogin.infObj.userPermList);
             SetTestPermission();
         }
@@ -256,7 +260,7 @@ namespace HarveyZ
         #region 状态栏
         private void StatusBarSetItem()
         {
-            statusLabelUser.Text = "部门：" + FormLogin.infObj.userDpt + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
+            statusLabelUser.Text = "公司：" + FormLogin.infObj.userDpt + '-' + GetCompanyName(FormLogin.infObj.userDpt) + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
             statusLabelIP.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
             if (FormLogin.infObj.connFlag)
             {
@@ -265,6 +269,21 @@ namespace HarveyZ
             else
             {
                 statusLabelLocalConn.Text = "联友服务器：未连接";
+            }
+        }
+
+        //额外补充信息，补充供应商名称
+        private string GetCompanyName(string companyId)
+        {
+            string sqlstr = @"SELECT RTRIM(MA002) FROM dbo.PURMA WHERE MA001 = '{0}'";
+            DataTable dt = FormLogin.infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, companyId));
+            if (dt != null)
+            {
+                return dt.Rows[0][0].ToString();
+            }
+            else
+            {
+                return "";
             }
         }
         #endregion
@@ -289,6 +308,20 @@ namespace HarveyZ
         private void 管理_用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             用户管理 frm = new 用户管理();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 管理_修改密码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            修改密码 frm = new 修改密码();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 管理_添加用户ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            添加用户 frm = new 添加用户();
             FormOpenInit(frm);
             frm.Show();
         }

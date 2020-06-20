@@ -316,6 +316,13 @@ namespace HarveyZ
             FormOpenInit(frm);
             frm.Show();
         }
+
+        private void 管理_FastReport模板发布ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FastReport模板发布 frm = new FastReport模板发布();
+            FormOpenInit(frm);
+            frm.Show();
+        }
         #endregion
 
         #region 仓储中心
