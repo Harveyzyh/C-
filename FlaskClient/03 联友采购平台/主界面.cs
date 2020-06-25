@@ -12,6 +12,7 @@ namespace HarveyZ
     public partial class 主界面 : Form
     {
         public static InfoObject infObj = new InfoObject();
+        public static string companyName = "";
         #region 静态变量
         private static Form FormOpen = null;
         private static List<string> menuIgnoreList = new List<string> {
@@ -41,6 +42,8 @@ namespace HarveyZ
             {
                 this.Text += "     -DEBUG";
             }
+
+            companyName = GetCompanyName(FormLogin.infObj.userDpt);
 
             StatusBarSetItem();
         }
@@ -260,7 +263,7 @@ namespace HarveyZ
         #region 状态栏
         private void StatusBarSetItem()
         {
-            statusLabelUser.Text = "公司：" + FormLogin.infObj.userDpt + '-' + GetCompanyName(FormLogin.infObj.userDpt) + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
+            statusLabelUser.Text = "公司：" + FormLogin.infObj.userDpt + '-' + companyName + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
             statusLabelIP.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
             if (FormLogin.infObj.connFlag)
             {
@@ -275,15 +278,22 @@ namespace HarveyZ
         //额外补充信息，补充供应商名称
         private string GetCompanyName(string companyId)
         {
-            string sqlstr = @"SELECT RTRIM(MA002) FROM dbo.PURMA WHERE MA001 = '{0}'";
-            DataTable dt = FormLogin.infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, companyId));
-            if (dt != null)
+            if (companyId == "LY")
             {
-                return dt.Rows[0][0].ToString();
+                return "联友办公家具有限公司";
             }
             else
             {
-                return "";
+                string sqlstr = @"SELECT RTRIM(MA003) FROM dbo.PURMA WHERE MA001 = '{0}'";
+                DataTable dt = FormLogin.infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, companyId));
+                if (dt != null)
+                {
+                    return dt.Rows[0][0].ToString();
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
         #endregion
@@ -330,7 +340,7 @@ namespace HarveyZ
         #region 供应商
         private void 供应商_录入送货单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入送货单 frm = new 录入送货单();
+            录入供应商送货单 frm = new 录入供应商送货单();
             FormOpenInit(frm);
             frm.Show();
         }

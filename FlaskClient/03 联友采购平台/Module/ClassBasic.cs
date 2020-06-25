@@ -311,7 +311,7 @@ namespace HarveyZ
                 }
 
                 //其余列设置为可写
-                SetColWritable(dgv, ListOpt.ListDif(dgvList, colList));
+                //SetColWritable(dgv, ListOpt.ListDif(dgvList, colList));
             }
         }
 

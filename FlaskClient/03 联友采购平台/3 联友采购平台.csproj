@@ -50,7 +50,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>logo-ly.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>联友采购平台.Program</StartupObject>
@@ -137,11 +137,17 @@
     <Compile Include="Module\ClassPermission.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\IniHelper.cs" />
-    <Compile Include="供应商\录入送货单.cs">
+    <Compile Include="供应商\录入供应商送货单.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="供应商\录入送货单.Designer.cs">
-      <DependentUpon>录入送货单.cs</DependentUpon>
+    <Compile Include="供应商\录入供应商送货单.Designer.cs">
+      <DependentUpon>录入供应商送货单.cs</DependentUpon>
+    </Compile>
+    <Compile Include="供应商\打印供应商送货单.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="供应商\打印供应商送货单.Designer.cs">
+      <DependentUpon>打印供应商送货单.cs</DependentUpon>
     </Compile>
     <Compile Include="登录界面.cs">
       <SubType>Form</SubType>
@@ -181,8 +187,11 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="供应商\录入送货单.resx">
-      <DependentUpon>录入送货单.cs</DependentUpon>
+    <EmbeddedResource Include="供应商\录入供应商送货单.resx">
+      <DependentUpon>录入供应商送货单.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="供应商\打印供应商送货单.resx">
+      <DependentUpon>打印供应商送货单.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
@@ -245,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="logo-ly.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

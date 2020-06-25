@@ -18,3 +18,5 @@ Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Release\FastReport.dll
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Release\FastReport.Editor.dll
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Release\HarveyZ.修改密码.resources
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Release\HarveyZ.添加用户.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Release\联友采购平台.供应商.录入供应商送货单.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Release\联友采购平台.供应商.打印供应商送货单.resources

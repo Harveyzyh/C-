@@ -92,10 +92,19 @@ namespace 联友生产辅助工具.生管排程
             }
         }
 
-        private string GetTime()
+        private int GetNowDate()
         {
-            string sqlstr = @"SELECT dbo.f_getTime(1) ";
-            return mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString();
+            string sqlstr = @"SELECT isnull(LEFT(dbo.f_getTime(1), 8), 0) ";
+            return int.Parse(mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString());
+        }
+
+        private int GetLastDate()
+        {
+            //限定日期
+            //获取最后天期限需要增加的天数
+            int dateAdd = 15;
+            string sqlstr = @"SELECT isnull(CONVERT(VARCHAR(8), DATEADD(DAY, {0}, GETDATE()), 112), 0) ";
+            return int.Parse(mssql.SQLselect(connERP, string.Format(sqlstr, dateAdd)).Rows[0][0].ToString());
         }
 
         private string GetInsertDt(DataTable dt)//数据表转成sql语句
@@ -114,7 +123,8 @@ namespace 联友生产辅助工具.生管排程
 
             string SC003 = "", SC001 = "";
 
-            int SysTime = int.Parse(GetTime());
+            int SysDate = GetNowDate();
+            int LastDate = GetLastDate();
             int WorkTime = 0;
             
             for (; rowIndex < row_total; rowIndex++ )
@@ -122,9 +132,9 @@ namespace 联友生产辅助工具.生管排程
                 //限定日期
                 try
                 {
-                    SC003 = dt.Rows[rowIndex][0].ToString().Replace("-", "");
+                    SC003 = dt.Rows[rowIndex][0].ToString().Replace("-", "").Replace("/", "");
                     WorkTime = int.Parse(SC003);
-                    if(WorkTime < SysTime || WorkTime > (int.Parse(DateTime.Now.AddDays(15).ToString("yyyyMMdd"))))
+                    if(WorkTime < SysDate || WorkTime > LastDate)
                     {
                         continue;
                     }
@@ -157,7 +167,7 @@ namespace 联友生产辅助工具.生管排程
 
             if (dtInsert != null && dtInsert.Rows.Count != 0)
             {
-                SqlInsertWork(WorkDate: (SysTime).ToString(), dt: dtInsert);
+                SqlInsertWork(WorkDate: (SysDate).ToString(), dt: dtInsert);
                 UptInfo();
             }
             else
@@ -170,8 +180,8 @@ namespace 联友生产辅助工具.生管排程
 
         private void SqlInsertWork(string WorkDate, DataTable dt)
         {
-            string sqlstrDel = @"DELETE FROM SC_PLAN WHERE SC003 >= '{0}' AND SC023 = '{1}'";
-            string sqlstrInsert = @"INSERT INTO SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
+            string sqlstrDel = @"DELETE FROM WG_DB..SC_PLAN WHERE SC003 >= '{0}' AND SC023 = '{1}'";
+            string sqlstrInsert = @"INSERT INTO WG_DB..SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
                                     VALUES ('{0}', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), 
                                     '{1}', '{2}', '{3}', '{4}', '{5}') ";
             mssql.SQLexcute(connMD, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
@@ -222,8 +232,8 @@ namespace 联友生产辅助工具.生管排程
                                         LEFT JOIN CMSME AS CMSME ON CMSME.ME001 = INVMB.MB445 
                                         WHERE RTRIM(COPTD.TD001) + '-' + RTRIM(COPTD.TD002) + '-' + RTRIM(COPTD.TD003) = '{0}' ";
 
-            string sqlstrFindWg = @" SELECT SC001 FROM SC_PLAN WHERE (SC028 IS NULL OR SC028 ='') ";
-            string sqlstrUpt = @" UPDATE SC_PLAN SET SC002 = '{1}', SC004 = '{2}', SC005 = '{3}', SC006 = '{4}', SC007 = '{5}', SC008 = '{6}', 
+            string sqlstrFindWg = @" SELECT SC001 FROM WG_DB..SC_PLAN WHERE (SC028 IS NULL OR SC028 ='') ";
+            string sqlstrUpt = @" UPDATE WG_DB..SC_PLAN SET SC002 = '{1}', SC004 = '{2}', SC005 = '{3}', SC006 = '{4}', SC007 = '{5}', SC008 = '{6}', 
                                     SC009 = '{7}', SC010 = '{8}', SC011 = '{9}', SC012 = '{10}', SC015 = '{11}', 
                                     SC016 = '{12}', SC017 = '{13}', SC018 = '{14}', SC019 = '{15}', SC020 = '{16}', SC021 = '{17}', 
                                     SC022 = '{18}', SC024 = '{19}', SC025 = '{20}', SC026 = '{21}', SC027 = '{22}', SC028 = '{23}' 
@@ -263,7 +273,7 @@ namespace 联友生产辅助工具.生管排程
                                     SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
                                     SC006 变更原因, SC007 出货日期, SC008 验货日期, SC009 PO#, SC018 柜型柜数, SC019 目的地, 
                                     SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期, SC028 品号 
-                                    FROM SC_PLAN WHERE 1 = 1 ";
+                                    FROM WG_DB..SC_PLAN WHERE 1 = 1 ";
             if (TxBoxOrder.Text != "") sqlstrShow += @" AND SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
             if (TxBoxName.Text != "") sqlstrShow += @" AND SC010 LIKE '%" + TxBoxName.Text + "%' ";
             if (DtpStartDate.Checked) sqlstrShow += @" AND SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";

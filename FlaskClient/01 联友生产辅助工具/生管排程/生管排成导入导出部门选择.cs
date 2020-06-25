@@ -28,7 +28,7 @@ namespace 联友生产辅助工具.生管排程
         {
             if(Mode == "导入")
             {
-                string sqlstr = "SELECT Dpt FROM SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'In' ORDER BY [Index]";
+                string sqlstr = "SELECT Dpt FROM WG_DB..SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'In' ORDER BY [Index]";
                 DataTable dt = mssql.SQLselect(connWGDB, sqlstr);
                 if(dt != null)
                 {
@@ -40,7 +40,7 @@ namespace 联友生产辅助工具.生管排程
             }
             else if (Mode == "导出")
             {
-                string sqlstr = "SELECT Dpt FROM SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'Out' ORDER BY [Index]";
+                string sqlstr = "SELECT Dpt FROM WG_DB..SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'Out' ORDER BY [Index]";
                 DataTable dt = mssql.SQLselect(connWGDB, sqlstr);
                 if (dt != null)
                 {

@@ -25,7 +25,6 @@ namespace 码垛线生成并打印出货清单
             this.tg002 = tg002;
             this.md_no = md_no;
             this.frx = frx;
-            MessageBox.Show(tg002);
 
             PreviewShow();
         }

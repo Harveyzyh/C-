@@ -34,8 +34,8 @@ namespace HarveyZ
                     MessageBox.Show("已保存", "提示", MessageBoxButtons.OK);
                     TextBoxCompanyId.Text = "";
                     TextBoxName.Text = "";
-                    TextBoxPwd.Text = "";
                     TextBoxUid.Text = "";
+                    LabelCompanyName.Text = "";
                 }
                 else
                 {
@@ -54,7 +54,7 @@ namespace HarveyZ
 
         private string GetCompanyName(string companyId)
         {
-            string sqlstr = @"SELECT RTRIM(MA002) FROM dbo.PURMA WHERE MA001 = '{0}'";
+            string sqlstr = @"SELECT RTRIM(MA003) FROM dbo.PURMA WHERE MA001 = '{0}'";
             DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, companyId));
             if (dt != null)
             {

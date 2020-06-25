@@ -404,11 +404,11 @@ namespace 联友生产辅助工具.仓储中心
         //添加数据到dgv中显示
         private void AddData()
         {
-            string sqlstr = @"select d.xh 序号, d.wlno 品号, RTRIM(MB002) 品名, RTRIM(MB003) 规格, sl 数量, t.sup_id   
-                                from [192.168.0.198].CgPlatform.dbo.sh_title as t 
-                                inner join [192.168.0.198].CgPlatform.dbo.sh_detail as d on t.sup_id = d.sup_id and t.sh_date = d.sh_date
-                                left join COMFORT.dbo.INVMB on wlno COLLATE Chinese_PRC_BIN = MB001
-                                where t.sup_id + '-'+ t.sh_date + t.idx = '{0}' 
+            string sqlstr = @"select d.xh 序号, d.wlno 品号, RTRIM(MB002) 品名, RTRIM(MB003) 规格, sl 数量, h.SupId 供应商编号  
+                                from WG_DB.dbo.CG_SupplyHead as h 
+                                inner join WG_DB.dbo.CG_SupplyDetail as d on h.SupId = d.SupId and h.SendDate = d.SendDate and h.SendVersion = d.SendVersion
+                                left join COMFORT.dbo.INVMB on wlno = MB001
+                                where h.SupId + '-'+ h.SendDate + '-'+ h.SendVersion = '{0}' 
                                 order by d.xh";
 
             DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, 条码T.Text));
@@ -550,7 +550,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void UptCgPlatformFlag()
         {
-            string sqlstr = "update [192.168.0.198].CgPlatform.dbo.sh_title set scaned_flag = 1 where sup_id + '-'+ sh_date + idx = '{0}' ";
+            string sqlstr = "update WG_DB.dbo.CG_SupplyHead set ScanFlag = 1 where SupId + '-'+ SendDate + '-'+ SendVersion = '{0}' ";
             mssql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, 条码T.Text));
         }
 

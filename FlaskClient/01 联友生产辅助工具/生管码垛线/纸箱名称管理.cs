@@ -69,7 +69,7 @@ namespace 联友生产辅助工具.生管码垛线
                 DgvOpt.SetRowBackColor(DgvMain);
             }
 
-            DgvOpt.SetColNoSortMode(DgvMain);
+            DgvOpt.SetColHeadMiddleCenter(DgvMain);
         }
 
         private void BtnReflash_Click(object sender, EventArgs e)

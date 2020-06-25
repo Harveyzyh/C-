@@ -184,7 +184,7 @@ namespace 联友生产辅助工具.生产日报表
                 sqlstr = " SELECT WorkDpt AS 生产部门, SUBSTRING(WorkDate,1,4) + '-' + SUBSTRING(WorkDate,5,2) + '-' + SUBSTRING(WorkDate,7,2) AS 生产日期, "
                    + " WGroup AS 组别, Serial AS 系列, Line AS 线别, PlanNumber AS 计划数量, "
                    + " WorkNumber AS 生产数量, Workers AS 人数, Hours AS 工时, StopHours AS 停工工时, TotalHours AS 总工时, Capacity AS 产量每人每小时, "
-                   + " OrderID AS 生产单号, Remark AS 备注 FROM SC_DAILYRECORD "
+                   + " OrderID AS 生产单号, Remark AS 备注 FROM WG_DB..SC_DAILYRECORD "
                    + " WHERE 1 = 1 "
                    + " AND (PlanNumber <> '0' AND WorkNumber <> '0') ";
                 sqlstr += sql_date + sql_dpt;
