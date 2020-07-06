@@ -59,11 +59,11 @@
             this.DataGridView_List.AllowUserToResizeRows = false;
             this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView_List.ColumnHeadersVisible = false;
             this.DataGridView_List.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.DataGridView_List.Location = new System.Drawing.Point(1, 58);
             this.DataGridView_List.Name = "DataGridView_List";
             this.DataGridView_List.ReadOnly = true;
+            this.DataGridView_List.RowHeadersVisible = false;
             this.DataGridView_List.RowTemplate.Height = 23;
             this.DataGridView_List.Size = new System.Drawing.Size(862, 347);
             this.DataGridView_List.TabIndex = 1;

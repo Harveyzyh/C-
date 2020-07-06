@@ -31,6 +31,7 @@ namespace 联友生产辅助工具.仓储中心
         private string LoginUserGroup = FormLogin.infObj.userGroup;
 
         private bool MsgFlag = false;
+        private bool check = false;
         #endregion
 
         #region 窗口初始化
@@ -85,6 +86,14 @@ namespace 联友生产辅助工具.仓储中心
                 入库仓库查.Enabled = false;
                 dateTimePicker1.Enabled = false;
                 送货单号T.Enabled = false;
+                if (check)
+                {
+                    buttonUpload.Enabled = true;
+                }
+                else
+                {
+                    buttonUpload.Enabled = false;
+                }
             }
             if (DataGridView_List.RowCount <= 0)
             {
@@ -296,13 +305,24 @@ namespace 联友生产辅助工具.仓储中心
             GetIndex();
         }
 
-        private void selectLastRow(DataGridView dgv = null)
+        private void buttonCheck_Click(object sender, EventArgs e)
         {
-            int kk = dgv.RowCount;
-            if (dgv.RowCount > 0 && dgv != null)
+            check = Check();
+            if (!check)
             {
-                dgv.CurrentCell = dgv.Rows[dgv.RowCount - 1].Cells[0];
+                MessageBox.Show("存在异常，请检查", "错误", MessageBoxButtons.OK);
             }
+            else
+            {
+                MessageBox.Show("无异常", "提示", MessageBoxButtons.OK);
+            }
+            ShowUI();
+        }
+
+        private void DataGridView_List_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            check = false;
+            ShowUI();
         }
         #endregion
 
@@ -442,66 +462,59 @@ namespace 联友生产辅助工具.仓储中心
         //把数据上传至后台临时表，并生成进货单
         private void Insert()
         {
-            if (Check())
+            string sql = "INSERT INTO JH_LYXA "
+                        + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, JHXA001, JHXA002, JHXA003, "
+                        + "JHXA004, JHXA005, JHXA007, JHXA008, JHXA009, "
+                        + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID) "
+                        + "VALUES('COMFORT', '{0}', '{1}', '{2}', 1, '{3}', '{4}', '{5}', "
+                        + "'{6}', '{7}', '{8}', '{9}', '{10}', 'N', 'N', "
+                        + "'{11}', '********************', '{12}', '{13}')";
+            string flowId = GetFlowID();
+            string Time = GetTime();
+            int Count = DataGridView_List.RowCount;
+
+            for (int Index = 0; Index < Count; Index++)
             {
-                string sql = "INSERT INTO JH_LYXA "
-                            + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, JHXA001, JHXA002, JHXA003, "
-                            + "JHXA004, JHXA005, JHXA007, JHXA008, JHXA009, "
-                            + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID) "
-                            + "VALUES('COMFORT', '{0}', '{1}', '{2}', 1, '{3}', '{4}', '{5}', "
-                            + "'{6}', '{7}', '{8}', '{9}', '{10}', 'N', 'N', "
-                            + "'{11}', '********************', '{12}', '{13}')";
-                string flowId = GetFlowID();
-                string Time = GetTime();
-                int Count = DataGridView_List.RowCount;
+                string JHXA001 = TypeID;
+                string JHXA002 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
+                string JHXA003 = DataGridView_List.Rows[0].Cells[5].Value.ToString();
+                string JHXA004 = GetDate();
+                string JHXA007 = DataGridView_List.Rows[0].Cells[1].Value.ToString();
+                string JHXA008 = "";
+                string JHXA009 = DataGridView_List.Rows[0].Cells[4].Value.ToString();
+                string JHXA013 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
+                string JHXA015 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
+                string ID = (Index + 1).ToString();
+                string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003,
+                    JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
 
-                for (int Index = 0; Index < Count; Index++)
-                {
-                    string JHXA001 = TypeID;
-                    string JHXA002 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
-                    string JHXA003 = DataGridView_List.Rows[0].Cells[5].Value.ToString();
-                    string JHXA004 = GetDate();
-                    string JHXA007 = DataGridView_List.Rows[0].Cells[1].Value.ToString();
-                    string JHXA008 = "";
-                    string JHXA009 = DataGridView_List.Rows[0].Cells[4].Value.ToString();
-                    string JHXA013 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
-                    string JHXA015 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
-                    string ID = (Index + 1).ToString();
-                    string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003,
-                        JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
+                mssql.SQLexcute(FormLogin.infObj.connYF, sqlstr);
 
-                    mssql.SQLexcute(FormLogin.infObj.connYF, sqlstr);
+                DataGridView_List.Rows.Remove(DataGridView_List.Rows[0]);
+            }
+            string tell = "\n\r处理流水号为：" + flowId;
 
-                    DataGridView_List.Rows.Remove(DataGridView_List.Rows[0]);
-                }
-                string tell = "\n\r处理流水号为：" + flowId;
+            //执行生成进货单程序
+            //string getBackStr = "";
+            string getBackStr = createPurtg.HandelDef(flowId);
 
-                //执行生成进货单程序
-                //string getBackStr = "";
-                string getBackStr = createPurtg.HandelDef(flowId);
+            //修改采购平台单头的标志位
+            UptCgPlatformFlag();
 
-                //修改采购平台单头的标志位
-                UptCgPlatformFlag();
-
-                if (getBackStr != null)
-                {
-                    tell += "\n\r进货单号为：" + getBackStr;
-                }
-                else
-                {
-                    tell += "\n\r处理失败，请把记下流水处理号并联系咨询部。";
-                }
-                if (MessageBox.Show(tell, "提示", MessageBoxButtons.OK) == DialogResult.OK)
-                {
-                    MsgFlag = true;
-                    送货单号T.SelectAll();
-                    送货单号T.Select();
-                    panel_Last.Enabled = false;
-                }
+            if (getBackStr != null)
+            {
+                tell += "\n\r进货单号为：" + getBackStr;
             }
             else
             {
-                MessageBox.Show("存在异常，请处理", "错误");
+                tell += "\n\r处理失败，请把记下流水处理号并联系咨询部。";
+            }
+            if (MessageBox.Show(tell, "提示", MessageBoxButtons.OK) == DialogResult.OK)
+            {
+                MsgFlag = true;
+                送货单号T.SelectAll();
+                送货单号T.Select();
+                panel_Last.Enabled = false;
             }
         }
 
@@ -535,16 +548,22 @@ namespace 联友生产辅助工具.仓储中心
                     if(dsl < sl)
                     {
                         DataGridView_List.Rows[index].Cells[9].Value = "可验收量为" + dsl.ToString() + "，少于需入库数量";
+                        DataGridView_List.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                         flag = false;
+                    }
+                    else
+                    {
+                        DataGridView_List.Rows[index].Cells[9].Value = "";
+                        DataGridView_List.Rows[index].DefaultCellStyle.ForeColor = Color.Black;
                     }
                 }
                 else
                 {
                     DataGridView_List.Rows[index].Cells[9].Value = "可验收量为0";
+                    DataGridView_List.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                     flag = false;
                 }
             }
-
             return flag;
         }
 

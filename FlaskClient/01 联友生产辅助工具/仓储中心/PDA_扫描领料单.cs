@@ -22,6 +22,7 @@ namespace 联友生产辅助工具.仓储中心
         {
             InitializeComponent();
             Button_Upload.Enabled = false;
+            DgvOpt.SetRowBackColor(DataGridView_List);
         }
 
         #region 窗口大小变化设置

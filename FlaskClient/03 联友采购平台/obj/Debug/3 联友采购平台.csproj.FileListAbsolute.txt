@@ -20,3 +20,9 @@ Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.修改密码.re
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\HarveyZ.添加用户.resources
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\联友采购平台.供应商.录入供应商送货单.resources
 Y:\GitHub\C-\FlaskClient\03 联友采购平台\obj\Debug\联友采购平台.供应商.打印供应商送货单.resources
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\NPOI.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\NPOI.OOXML.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\NPOI.OpenXml4Net.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\NPOI.OpenXmlFormats.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\ICSharpCode.SharpZipLib.dll
+Y:\GitHub\C-\FlaskClient\03 联友采购平台\bin\Debug\NPOI.xml

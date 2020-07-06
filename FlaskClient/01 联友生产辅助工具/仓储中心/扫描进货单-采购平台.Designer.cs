@@ -28,27 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridView_List = new System.Windows.Forms.DataGridView();
+            this.C1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.C10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Last = new System.Windows.Forms.Panel();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -77,16 +87,7 @@
             this.条码T = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel_Title = new System.Windows.Forms.Panel();
-            this.C1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonCheck = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Last.SuspendLayout();
             this.panel_Title.SuspendLayout();
@@ -120,10 +121,100 @@
             this.DataGridView_List.Size = new System.Drawing.Size(1263, 469);
             this.DataGridView_List.TabIndex = 1;
             this.DataGridView_List.TabStop = false;
+            this.DataGridView_List.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_List_CellValueChanged);
+            // 
+            // C1
+            // 
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C1.DefaultCellStyle = dataGridViewCellStyle21;
+            this.C1.HeaderText = "序号";
+            this.C1.Name = "C1";
+            this.C1.ReadOnly = true;
+            this.C1.ToolTipText = "自动生成序号";
+            this.C1.Width = 60;
+            // 
+            // C2
+            // 
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C2.DefaultCellStyle = dataGridViewCellStyle22;
+            this.C2.HeaderText = "品号";
+            this.C2.Name = "C2";
+            this.C2.ReadOnly = true;
+            this.C2.Width = 150;
+            // 
+            // C3
+            // 
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C3.DefaultCellStyle = dataGridViewCellStyle23;
+            this.C3.HeaderText = "品名";
+            this.C3.Name = "C3";
+            this.C3.ReadOnly = true;
+            this.C3.Width = 200;
+            // 
+            // C4
+            // 
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C4.DefaultCellStyle = dataGridViewCellStyle24;
+            this.C4.HeaderText = "规格";
+            this.C4.Name = "C4";
+            this.C4.ReadOnly = true;
+            this.C4.Width = 200;
+            // 
+            // C5
+            // 
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C5.DefaultCellStyle = dataGridViewCellStyle25;
+            this.C5.HeaderText = "数量";
+            this.C5.Name = "C5";
+            this.C5.Width = 70;
+            // 
+            // C6
+            // 
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C6.DefaultCellStyle = dataGridViewCellStyle26;
+            this.C6.HeaderText = "仓库";
+            this.C6.Name = "C6";
+            this.C6.ReadOnly = true;
+            this.C6.Width = 70;
+            // 
+            // C7
+            // 
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C7.DefaultCellStyle = dataGridViewCellStyle27;
+            this.C7.HeaderText = "批号";
+            this.C7.Name = "C7";
+            this.C7.ReadOnly = true;
+            this.C7.Width = 70;
+            // 
+            // C8
+            // 
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.C8.DefaultCellStyle = dataGridViewCellStyle28;
+            this.C8.HeaderText = "供应商";
+            this.C8.Name = "C8";
+            this.C8.ReadOnly = true;
+            // 
+            // C9
+            // 
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C9.DefaultCellStyle = dataGridViewCellStyle29;
+            this.C9.HeaderText = "送货单";
+            this.C9.Name = "C9";
+            this.C9.ReadOnly = true;
+            // 
+            // C10
+            // 
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.C10.DefaultCellStyle = dataGridViewCellStyle30;
+            this.C10.HeaderText = "异常";
+            this.C10.Name = "C10";
+            this.C10.ReadOnly = true;
+            this.C10.Width = 200;
             // 
             // panel_Last
             // 
             this.panel_Last.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Last.Controls.Add(this.buttonCheck);
             this.panel_Last.Controls.Add(this.buttonUpload);
             this.panel_Last.Controls.Add(this.buttonDelete);
             this.panel_Last.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -134,7 +225,7 @@
             // 
             // buttonUpload
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(108, 9);
+            this.buttonUpload.Location = new System.Drawing.Point(210, 9);
             this.buttonUpload.Name = "buttonUpload";
             this.buttonUpload.Size = new System.Drawing.Size(75, 23);
             this.buttonUpload.TabIndex = 1;
@@ -156,8 +247,8 @@
             // 
             // dataGridViewTextBoxColumn1
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn1.HeaderText = "序号";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ToolTipText = "自动生成序号";
@@ -165,70 +256,70 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewTextBoxColumn2.HeaderText = "品号";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Width = 150;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle33;
             this.dataGridViewTextBoxColumn3.HeaderText = "品名";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Width = 200;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewTextBoxColumn4.HeaderText = "规格";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 200;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewTextBoxColumn5.HeaderText = "数量";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 70;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridViewTextBoxColumn6.HeaderText = "仓库";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.Width = 70;
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle37;
             this.dataGridViewTextBoxColumn7.HeaderText = "批号";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.Width = 70;
             // 
             // dataGridViewTextBoxColumn8
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle38;
             this.dataGridViewTextBoxColumn8.HeaderText = "供应商";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
             // dataGridViewTextBoxColumn9
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle39;
             this.dataGridViewTextBoxColumn9.HeaderText = "送货单";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
             // dataGridViewTextBoxColumn10
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle40;
             this.dataGridViewTextBoxColumn10.HeaderText = "条码";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Width = 200;
@@ -392,93 +483,15 @@
             this.panel_Title.Size = new System.Drawing.Size(1462, 59);
             this.panel_Title.TabIndex = 0;
             // 
-            // C1
+            // buttonCheck
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.C1.HeaderText = "序号";
-            this.C1.Name = "C1";
-            this.C1.ReadOnly = true;
-            this.C1.ToolTipText = "自动生成序号";
-            this.C1.Width = 60;
-            // 
-            // C2
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.C2.HeaderText = "品号";
-            this.C2.Name = "C2";
-            this.C2.ReadOnly = true;
-            this.C2.Width = 150;
-            // 
-            // C3
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C3.DefaultCellStyle = dataGridViewCellStyle3;
-            this.C3.HeaderText = "品名";
-            this.C3.Name = "C3";
-            this.C3.ReadOnly = true;
-            this.C3.Width = 200;
-            // 
-            // C4
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C4.DefaultCellStyle = dataGridViewCellStyle4;
-            this.C4.HeaderText = "规格";
-            this.C4.Name = "C4";
-            this.C4.ReadOnly = true;
-            this.C4.Width = 200;
-            // 
-            // C5
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C5.DefaultCellStyle = dataGridViewCellStyle5;
-            this.C5.HeaderText = "数量";
-            this.C5.Name = "C5";
-            this.C5.Width = 70;
-            // 
-            // C6
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C6.DefaultCellStyle = dataGridViewCellStyle6;
-            this.C6.HeaderText = "仓库";
-            this.C6.Name = "C6";
-            this.C6.ReadOnly = true;
-            this.C6.Width = 70;
-            // 
-            // C7
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C7.DefaultCellStyle = dataGridViewCellStyle7;
-            this.C7.HeaderText = "批号";
-            this.C7.Name = "C7";
-            this.C7.ReadOnly = true;
-            this.C7.Width = 70;
-            // 
-            // C8
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.C8.DefaultCellStyle = dataGridViewCellStyle8;
-            this.C8.HeaderText = "供应商";
-            this.C8.Name = "C8";
-            this.C8.ReadOnly = true;
-            // 
-            // C9
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C9.DefaultCellStyle = dataGridViewCellStyle9;
-            this.C9.HeaderText = "送货单";
-            this.C9.Name = "C9";
-            this.C9.ReadOnly = true;
-            // 
-            // C10
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.C10.DefaultCellStyle = dataGridViewCellStyle10;
-            this.C10.HeaderText = "异常";
-            this.C10.Name = "C10";
-            this.C10.ReadOnly = true;
-            this.C10.Width = 200;
+            this.buttonCheck.Location = new System.Drawing.Point(110, 9);
+            this.buttonCheck.Name = "buttonCheck";
+            this.buttonCheck.Size = new System.Drawing.Size(75, 23);
+            this.buttonCheck.TabIndex = 2;
+            this.buttonCheck.Text = "检查异常";
+            this.buttonCheck.UseVisualStyleBackColor = true;
+            this.buttonCheck.Click += new System.EventHandler(this.buttonCheck_Click);
             // 
             // 扫描进货单_采购平台
             // 
@@ -543,5 +556,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn C8;
         private System.Windows.Forms.DataGridViewTextBoxColumn C9;
         private System.Windows.Forms.DataGridViewTextBoxColumn C10;
+        private System.Windows.Forms.Button buttonCheck;
     }
 }

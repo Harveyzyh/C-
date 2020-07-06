@@ -15,7 +15,7 @@ namespace 联友生产辅助工具.生管排程
         private static string Mode = null;
         public static string Dpt = null;
         Mssql mssql = new Mssql();
-        string connWGDB = FormLogin.infObj.connMD;
+        string connWG = FormLogin.infObj.connWG;
 
         public 生管排程导入导出部门选择(string WorkMode)
         {
@@ -29,7 +29,7 @@ namespace 联友生产辅助工具.生管排程
             if(Mode == "导入")
             {
                 string sqlstr = "SELECT Dpt FROM WG_DB..SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'In' ORDER BY [Index]";
-                DataTable dt = mssql.SQLselect(connWGDB, sqlstr);
+                DataTable dt = mssql.SQLselect(connWG, sqlstr);
                 if(dt != null)
                 {
                     for(int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)
@@ -41,7 +41,7 @@ namespace 联友生产辅助工具.生管排程
             else if (Mode == "导出")
             {
                 string sqlstr = "SELECT Dpt FROM WG_DB..SC_PLAN_DPT_TYPE WHERE Valid = 1 AND Type = 'Out' ORDER BY [Index]";
-                DataTable dt = mssql.SQLselect(connWGDB, sqlstr);
+                DataTable dt = mssql.SQLselect(connWG, sqlstr);
                 if (dt != null)
                 {
                     for (int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)

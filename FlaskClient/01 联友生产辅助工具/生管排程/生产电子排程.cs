@@ -16,7 +16,7 @@ namespace 联友生产辅助工具.生管排程
         
         private Mssql mssql = new Mssql();
 
-        private static string connMD = FormLogin.infObj.connMD;
+        private static string connWG = FormLogin.infObj.connWG;
         private static string connERP = FormLogin.infObj.connYF;
         #endregion
 
@@ -102,7 +102,7 @@ namespace 联友生产辅助工具.生管排程
         {
             //限定日期
             //获取最后天期限需要增加的天数
-            int dateAdd = 15;
+            int dateAdd = 365;
             string sqlstr = @"SELECT isnull(CONVERT(VARCHAR(8), DATEADD(DAY, {0}, GETDATE()), 112), 0) ";
             return int.Parse(mssql.SQLselect(connERP, string.Format(sqlstr, dateAdd)).Rows[0][0].ToString());
         }
@@ -151,8 +151,11 @@ namespace 联友生产辅助工具.生管排程
                 else if (dt.Rows[rowIndex][2].ToString() != "")
                 {
                     SC001 = dt.Rows[rowIndex][2].ToString();
+
+                    SC001 = SC001.Replace("（新增）", "").Replace("（变更）", "").Replace("（更改）", "").Replace("(新增)", "").
+                        Replace("(变更)", "").Replace("(更改)", "").Replace("(变更）", "").Replace("(新增）", "").Replace("(更改）", "");
+
                     SC001 = SC001.Split('-')[0].Trim() + '-' + SC001.Split('-')[1].Trim() + '-' + SC001.Split('-')[2].Trim();
-                    SC001 = SC001.Replace("（新增）", "").Replace("（变更）", "").Replace("（更改）", "").Replace("(新增)", "").Replace("(变更)", "").Replace("(更改)", "");
 
                     dtRowTmp = dtInsert.NewRow();
                     dtRowTmp[0] = SC001;
@@ -184,84 +187,62 @@ namespace 联友生产辅助工具.生管排程
             string sqlstrInsert = @"INSERT INTO WG_DB..SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
                                     VALUES ('{0}', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), 
                                     '{1}', '{2}', '{3}', '{4}', '{5}') ";
-            mssql.SQLexcute(connMD, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
+            mssql.SQLexcute(connWG, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
             for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
             {
-                mssql.SQLexcute(connMD, string.Format(sqlstrInsert, FormLogin.infObj.userId, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
+                mssql.SQLexcute(connWG, string.Format(sqlstrInsert, FormLogin.infObj.userId, dt.Rows[rowIndex][0], dt.Rows[rowIndex][1], 
                     dt.Rows[rowIndex][2], dt.Rows[rowIndex][3], dt.Rows[rowIndex][4]));
             }
         }
         
         private void UptInfo()
         {
-            string sqlstrFindErp = @" SELECT 
-                                        (CASE WHEN TC004='0118' THEN '内销' ELSE '外销' END) AS 订单类型,
-                                        RTRIM(COPMA.MA002) AS 客户名称,
-                                        RTRIM(COPTC.TC015) AS 注意事项,
-                                        RTRIM((CASE WHEN COPTF.TF003 IS NULL THEN '' WHEN COPTF.TF003 IS NOT NULL AND COPTF.TF017 = 'Y' 
-	                                        THEN '指定结束'+':'+'变更版本号'+COPTF.TF003+'_'+COPTF.UDF11 ELSE '变更版本号'+COPTF.TF003+'_'+COPTF.UDF11 END)) AS 订单变更原因,
-                                        RTRIM((CASE WHEN COPTD.TD013 = '' THEN '' WHEN COPTD.TD013 IS NULL THEN '' ELSE COPTD.TD013 END)) AS 出货日,
-                                        RTRIM((CASE WHEN COPTD.UDF03 = '' THEN '' WHEN COPTD.UDF03 IS NULL THEN '' ELSE COPTD.UDF03 END)) AS 验货日,
-                                        RTRIM(COPTD.UDF01) AS PO#,
-                                        RTRIM(COPTD.TD005) AS 品名,
-                                        RTRIM(COPTD.UDF08) AS 保友品名,
-                                        RTRIM(COPTD.TD006) AS 规格,
-                                        RTRIM(COPTD.TD053) AS 配置方案,
-                                        RTRIM(COPTQ.TQ003) AS 配置方案描述,
-                                        RTRIM((COPTQ.UDF07+COPTD.TD020)) AS 描述备注, 
-                                        RTRIM(COPTD.TD204) AS 柜型柜数, 
-                                        RTRIM(COPTC.TC035) AS 目的地,
-                                        RTRIM(CMSMV.MV002) AS 业务员, 
-                                        RTRIM(COPTC.TC012) AS 客户单号, 
-                                        RTRIM(COPTD.TD014) AS 客户品号,
-                                        RTRIM(COPTD.UDF05) AS 客户编码,
-                                        RTRIM(COPTD.UDF10) AS 电商代码,
-                                        RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) AS 急单,
-                                        SUBSTRING(COPTD.CREATE_DATE,1,14) AS 录单日期, 
-                                        RTRIM(COPTD.TD004) AS 品号 
-
-                                        FROM COPTD AS COPTD 
-                                        Left JOIN COPTC AS COPTC On COPTD.TD001=COPTC.TC001 and COPTD.TD002=COPTC.TC002 
-                                        Left JOIN COPTQ AS COPTQ On COPTD.TD053=COPTQ.TQ002 and COPTD.TD004=COPTQ.TQ001 
-                                        Left JOIN COPMA AS COPMA On COPTC.TC004=COPMA.MA001 
-                                        Left JOIN CMSMV AS CMSMV On COPTC.TC006=CMSMV.MV001 
-                                        LEFT JOIN INVMB AS INVMB ON COPTD.TD004=INVMB.MB001 
-                                        Left JOIN COPTF AS COPTF On COPTD.TD001=COPTF.TF001 and COPTD.TD002=COPTF.TF002 and COPTD.TD003=COPTF.TF104 
-	                                        AND COPTF.TF003 = (SELECT MAX(TF003) FROM COPTF 
-		                                        WHERE COPTD.TD001=COPTF.TF001 and COPTD.TD002=COPTF.TF002 and COPTD.TD003=COPTF.TF104) 
-                                        LEFT JOIN CMSME AS CMSME ON CMSME.ME001 = INVMB.MB445 
-                                        WHERE RTRIM(COPTD.TD001) + '-' + RTRIM(COPTD.TD002) + '-' + RTRIM(COPTD.TD003) = '{0}' ";
-
-            string sqlstrFindWg = @" SELECT SC001 FROM WG_DB..SC_PLAN WHERE (SC028 IS NULL OR SC028 ='') ";
-            string sqlstrUpt = @" UPDATE WG_DB..SC_PLAN SET SC002 = '{1}', SC004 = '{2}', SC005 = '{3}', SC006 = '{4}', SC007 = '{5}', SC008 = '{6}', 
-                                    SC009 = '{7}', SC010 = '{8}', SC011 = '{9}', SC012 = '{10}', SC015 = '{11}', 
-                                    SC016 = '{12}', SC017 = '{13}', SC018 = '{14}', SC019 = '{15}', SC020 = '{16}', SC021 = '{17}', 
-                                    SC022 = '{18}', SC024 = '{19}', SC025 = '{20}', SC026 = '{21}', SC027 = '{22}', SC028 = '{23}' 
-                                    WHERE SC001 = '{0}' ";
-            DataTable dtWg = mssql.SQLselect(connMD, sqlstrFindWg);
-            if(dtWg != null)
-            {
-                for(int rowIndex = 0; rowIndex < dtWg.Rows.Count; rowIndex++)
-                {
-                    DataTable dtErp = mssql.SQLselect(connERP, string.Format(sqlstrFindErp, dtWg.Rows[rowIndex][0].ToString()));
-                    if(dtErp != null)
-                    {
-                        mssql.SQLexcute(connMD, string.Format(sqlstrUpt, dtWg.Rows[rowIndex][0].ToString(), 
-                            dtErp.Rows[0][0].ToString().Replace("'", "''"), dtErp.Rows[0][1].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][2].ToString().Replace("'", "''"), dtErp.Rows[0][3].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][4].ToString().Replace("'", "''"), dtErp.Rows[0][5].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][6].ToString().Replace("'", "''"), dtErp.Rows[0][7].ToString().Replace("'", "''"),
-                            dtErp.Rows[0][8].ToString().Replace("'", "''"), dtErp.Rows[0][9].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][10].ToString().Replace("'", "''"), dtErp.Rows[0][11].ToString().Replace("'", "''"),
-                            dtErp.Rows[0][12].ToString().Replace("'", "''"), dtErp.Rows[0][13].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][14].ToString().Replace("'", "''"), dtErp.Rows[0][15].ToString().Replace("'", "''"),
-                            dtErp.Rows[0][16].ToString().Replace("'", "''"), dtErp.Rows[0][17].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][18].ToString().Replace("'", "''"), dtErp.Rows[0][19].ToString().Replace("'", "''"),
-                            dtErp.Rows[0][20].ToString().Replace("'", "''"), dtErp.Rows[0][21].ToString().Replace("'", "''"), 
-                            dtErp.Rows[0][22].ToString().Replace("'", "''")));
-                    }
-                }
-            }
+            string sqlstr = @"UPDATE WG_DB.dbo.SC_PLAN SET 
+                                SC002 = X00, SC004 = X01, SC005 = X02, SC006 = X03, SC007 = X04, SC008 = X05, 
+                                SC009 = X06, SC010 = X07, SC011 = X08, SC012 = X09, SC015 = X10, 
+                                SC016 = X11, SC017 = X12, SC018 = X13, SC019 = X14, SC020 = X15, SC021 = X16, 
+                                SC022 = X17, SC024 = X18, SC025 = X19, SC026 = X20, SC027 = X21, SC028 = X22 
+                                FROM WG_DB.dbo.SC_PLAN
+                                INNER JOIN (
+	                                SELECT 
+	                                RTRIM(COPTD.TD001) + '-' + RTRIM(COPTD.TD002) + '-' + RTRIM(COPTD.TD003) AS DD,
+	                                (CASE WHEN TC004='0118' THEN '内销' ELSE '外销' END) AS X00,
+	                                RTRIM(COPMA.MA002) AS X01,
+	                                RTRIM(COPTC.TC015) AS X02,
+	                                RTRIM((CASE WHEN COPTF.TF003 IS NULL THEN '' WHEN COPTF.TF003 IS NOT NULL AND COPTF.TF017 = 'Y' 
+		                                THEN '指定结束'+':'+'变更版本号'+COPTF.TF003+'_'+COPTF.UDF11 ELSE '变更版本号'+COPTF.TF003+'_'+COPTF.UDF11 END)) AS X03,
+	                                RTRIM((CASE WHEN COPTD.TD013 = '' THEN '' WHEN COPTD.TD013 IS NULL THEN '' ELSE COPTD.TD013 END)) AS X04,
+	                                RTRIM((CASE WHEN COPTD.UDF03 = '' THEN '' WHEN COPTD.UDF03 IS NULL THEN '' ELSE COPTD.UDF03 END)) AS X05,
+	                                RTRIM(COPTD.UDF01) AS X06,
+	                                RTRIM(COPTD.TD005) AS X07,
+	                                RTRIM(COPTD.UDF08) AS X08,
+	                                RTRIM(COPTD.TD006) AS X09,
+	                                RTRIM(COPTD.TD053) AS X10,
+	                                RTRIM(COPTQ.TQ003) AS X11,
+	                                RTRIM((COPTQ.UDF07+COPTD.TD020)) AS X12, 
+	                                RTRIM(COPTD.TD204) AS X13, 
+	                                RTRIM(COPTC.TC035) AS X14,
+	                                RTRIM(CMSMV.MV002) AS X15, 
+	                                RTRIM(COPTC.TC012) AS X16, 
+	                                RTRIM(COPTD.TD014) AS X17,
+	                                RTRIM(COPTD.UDF05) AS X18,
+	                                RTRIM(COPTD.UDF10) AS X19,
+	                                RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) AS X20,
+	                                SUBSTRING(COPTD.CREATE_DATE,1,14) AS X21, 
+	                                RTRIM(COPTD.TD004) AS X22 
+	                                FROM COMFORT.dbo.COPTD AS COPTD 
+	                                Left JOIN COMFORT.dbo.COPTC AS COPTC On COPTD.TD001=COPTC.TC001 and COPTD.TD002=COPTC.TC002 
+	                                Left JOIN COMFORT.dbo.COPTQ AS COPTQ On COPTD.TD053=COPTQ.TQ002 and COPTD.TD004=COPTQ.TQ001 
+	                                Left JOIN COMFORT.dbo.COPMA AS COPMA On COPTC.TC004=COPMA.MA001 
+	                                Left JOIN COMFORT.dbo.CMSMV AS CMSMV On COPTC.TC006=CMSMV.MV001 
+	                                LEFT JOIN COMFORT.dbo.INVMB AS INVMB ON COPTD.TD004=INVMB.MB001 
+	                                Left JOIN COMFORT.dbo.COPTF AS COPTF On COPTD.TD001=COPTF.TF001 and COPTD.TD002=COPTF.TF002 and COPTD.TD003=COPTF.TF104 
+		                                AND COPTF.TF003 = (SELECT MAX(TF003) FROM COMFORT.dbo.COPTF  
+			                                WHERE COPTD.TD001=COPTF.TF001 and COPTD.TD002=COPTF.TF002 and COPTD.TD003=COPTF.TF104) 
+	                                LEFT JOIN COMFORT.dbo.CMSME AS CMSME ON CMSME.ME001 = INVMB.MB445 
+                                ) AS A ON SC001 = DD
+                                WHERE (SC028 IS NULL OR SC028 ='') ";
+            mssql.SQLexcute(connWG, sqlstr);
         }
 
         private void DgvShow() //数据库资料显示到界面
@@ -280,7 +261,7 @@ namespace 联友生产辅助工具.生管排程
             if (DtpEndDate.Checked) sqlstrShow += @" AND SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
             if (dptList.Contains(CmBoxDptType.Text)) sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
             sqlstrShow += " ORDER BY SUBSTRING(CREATE_DATE, 1, 8), SC003, SC001 ";
-            DataTable showDt = mssql.SQLselect(connMD, sqlstrShow);
+            DataTable showDt = mssql.SQLselect(connWG, sqlstrShow);
 
             if (showDt != null)
             {
@@ -341,17 +322,17 @@ namespace 联友生产辅助工具.生管排程
                     {
                         frm.Show();
 
-                        excelObj.FilePath = Path.GetDirectoryName(openFileDialog.FileName);
-                        excelObj.FileName = Path.GetFileName(openFileDialog.FileName);
-                        excelObj.IsWrite = false;
-                        excelObj.IsTitleRow = true;
+                        excelObj.filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                        excelObj.fileName = Path.GetFileName(openFileDialog.FileName);
+                        excelObj.isWrite = false;
+                        excelObj.isTitleRow = true;
 
                         excel.ExcelOpt(excelObj);
 
-                        if (CheckDt(excelObj.CellDt))
+                        if (CheckDt(excelObj.cellDt))
                         {
-                            SetInputDtDpt(Dpt, excelObj.CellDt);
-                            GetInsertDt(excelObj.CellDt);
+                            SetInputDtDpt(Dpt, excelObj.cellDt);
+                            GetInsertDt(excelObj.cellDt);
                             
                             MessageBox.Show("导入成功", "提示");
                             DgvShow();
@@ -382,11 +363,11 @@ namespace 联友生产辅助工具.生管排程
             {
                 try
                 {
-                    excelObj.FilePath = Path.GetDirectoryName(saveFileDialog.FileName);
-                    excelObj.FileName = Path.GetFileName(saveFileDialog.FileName);
-                    excelObj.IsWrite = true;
+                    excelObj.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                    excelObj.fileName = Path.GetFileName(saveFileDialog.FileName);
+                    excelObj.isWrite = true;
 
-                    excelObj.CellDt = (DataTable)DgvMain.DataSource;
+                    excelObj.cellDt = (DataTable)DgvMain.DataSource;
 
                     Excel excel = new Excel();
                     excel.ExcelOpt(excelObj);

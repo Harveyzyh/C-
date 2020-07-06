@@ -19,6 +19,7 @@ namespace 联友中山分公司生产辅助工具.销售管理
         {
             InitializeComponent();
             Init();
+            DgvOpt.SetRowBackColor(dataGridView1);
         }
 
         private void Init()

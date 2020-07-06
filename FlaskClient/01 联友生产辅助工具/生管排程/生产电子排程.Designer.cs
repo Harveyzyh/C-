@@ -31,6 +31,10 @@
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.TxBoxName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxBoxOrder = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.DtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.BtnOutput = new System.Windows.Forms.Button();
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
@@ -39,10 +43,6 @@
             this.CmBoxDptType = new System.Windows.Forms.ComboBox();
             this.LabelReportSelectDpt = new System.Windows.Forms.Label();
             this.LabelReportSelectStartDate = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TxBoxOrder = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TxBoxName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +95,39 @@
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(830, 75);
             this.PanelTitle.TabIndex = 4;
+            // 
+            // TxBoxName
+            // 
+            this.TxBoxName.Location = new System.Drawing.Point(680, 38);
+            this.TxBoxName.Name = "TxBoxName";
+            this.TxBoxName.Size = new System.Drawing.Size(138, 24);
+            this.TxBoxName.TabIndex = 23;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(622, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 15);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "品名：";
+            // 
+            // TxBoxOrder
+            // 
+            this.TxBoxOrder.Location = new System.Drawing.Point(452, 38);
+            this.TxBoxOrder.Name = "TxBoxOrder";
+            this.TxBoxOrder.Size = new System.Drawing.Size(147, 24);
+            this.TxBoxOrder.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 11F);
+            this.label1.Location = new System.Drawing.Point(373, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "订单号：";
             // 
             // DtpEndDate
             // 
@@ -149,6 +182,7 @@
             // 
             // CmBoxDptType
             // 
+            this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmBoxDptType.Font = new System.Drawing.Font("宋体", 12F);
             this.CmBoxDptType.FormattingEnabled = true;
             this.CmBoxDptType.Items.AddRange(new object[] {
@@ -184,40 +218,7 @@
             this.LabelReportSelectStartDate.TabIndex = 15;
             this.LabelReportSelectStartDate.Text = "起始日期：";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 11F);
-            this.label1.Location = new System.Drawing.Point(373, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "订单号：";
-            // 
-            // TxBoxOrder
-            // 
-            this.TxBoxOrder.Location = new System.Drawing.Point(452, 38);
-            this.TxBoxOrder.Name = "TxBoxOrder";
-            this.TxBoxOrder.Size = new System.Drawing.Size(147, 24);
-            this.TxBoxOrder.TabIndex = 21;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(622, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 15);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "品名：";
-            // 
-            // TxBoxName
-            // 
-            this.TxBoxName.Location = new System.Drawing.Point(680, 38);
-            this.TxBoxName.Name = "TxBoxName";
-            this.TxBoxName.Size = new System.Drawing.Size(138, 24);
-            this.TxBoxName.TabIndex = 23;
-            // 
-            // 生管电子排程
+            // 生产电子排程
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -226,7 +227,7 @@
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "生管电子排程";
+            this.Name = "生产电子排程";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "生管排程导入";
             this.SizeChanged += new System.EventHandler(this.FormMain_Resized);

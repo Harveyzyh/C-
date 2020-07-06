@@ -168,6 +168,18 @@
     <Compile Include="Module\ClassPermission.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\IniHelper.cs" />
+    <Compile Include="仓储中心\扫描进货单-Excel导入.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="仓储中心\扫描进货单-Excel导入.Designer.cs">
+      <DependentUpon>扫描进货单-Excel导入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="仓储中心\扫描进货单-联友分公司.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="仓储中心\扫描进货单-联友分公司.Designer.cs">
+      <DependentUpon>扫描进货单-联友分公司.cs</DependentUpon>
+    </Compile>
     <Compile Include="仓储中心\扫描进货单-采购平台.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,12 +302,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="测试\测试_3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="测试\测试_3.Designer.cs">
-      <DependentUpon>测试_3.cs</DependentUpon>
-    </Compile>
     <Compile Include="生产日报表\日报表修改.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,12 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="仓储中心\扫描进货单-Excel导入.resx">
+      <DependentUpon>扫描进货单-Excel导入.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="仓储中心\扫描进货单-联友分公司.resx">
+      <DependentUpon>扫描进货单-联友分公司.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\扫描进货单-采购平台.resx">
       <DependentUpon>扫描进货单-采购平台.cs</DependentUpon>
     </EmbeddedResource>
@@ -422,9 +434,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="测试\测试_3.resx">
-      <DependentUpon>测试_3.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="生产日报表\日报表修改.resx">
       <DependentUpon>日报表修改.cs</DependentUpon>
     </EmbeddedResource>

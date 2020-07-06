@@ -299,6 +299,13 @@ namespace HarveyZ
             frm.Show();
         }
 
+        private void 销售管理_录入销退单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            录入销退单 frm = new 录入销退单();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
         #endregion
 
         #endregion

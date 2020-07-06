@@ -99,3 +99,5 @@ Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Release\Microsoft.CSharp.dll
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Release\System.Data.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销退单.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销退单_获取单据信息.resources

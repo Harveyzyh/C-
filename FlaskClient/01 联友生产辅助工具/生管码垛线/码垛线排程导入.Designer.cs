@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSyncFromPlan = new System.Windows.Forms.Button();
             this.btnOutput = new System.Windows.Forms.Button();
+            this.btnSyncBoxCode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +64,7 @@
             this.btnShow.Location = new System.Drawing.Point(104, 4);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4);
             this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(177, 30);
+            this.btnShow.Size = new System.Drawing.Size(131, 30);
             this.btnShow.TabIndex = 3;
             this.btnShow.Text = "显示全部";
             this.btnShow.UseVisualStyleBackColor = true;
@@ -72,6 +73,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.btnSyncBoxCode);
             this.PanelTitle.Controls.Add(this.label1);
             this.PanelTitle.Controls.Add(this.btnSyncFromPlan);
             this.PanelTitle.Controls.Add(this.btnOutput);
@@ -85,7 +87,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(423, 12);
+            this.label1.Location = new System.Drawing.Point(578, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 15);
             this.label1.TabIndex = 7;
@@ -94,7 +96,7 @@
             // 
             // btnSyncFromPlan
             // 
-            this.btnSyncFromPlan.Location = new System.Drawing.Point(288, 4);
+            this.btnSyncFromPlan.Location = new System.Drawing.Point(245, 4);
             this.btnSyncFromPlan.Name = "btnSyncFromPlan";
             this.btnSyncFromPlan.Size = new System.Drawing.Size(129, 30);
             this.btnSyncFromPlan.TabIndex = 6;
@@ -110,6 +112,17 @@
             this.btnOutput.TabIndex = 5;
             this.btnOutput.Text = "导出";
             this.btnOutput.UseVisualStyleBackColor = true;
+            this.btnOutput.Visible = false;
+            // 
+            // btnSyncBoxCode
+            // 
+            this.btnSyncBoxCode.Location = new System.Drawing.Point(390, 4);
+            this.btnSyncBoxCode.Name = "btnSyncBoxCode";
+            this.btnSyncBoxCode.Size = new System.Drawing.Size(125, 30);
+            this.btnSyncBoxCode.TabIndex = 8;
+            this.btnSyncBoxCode.Text = "只更新纸箱信息";
+            this.btnSyncBoxCode.UseVisualStyleBackColor = true;
+            this.btnSyncBoxCode.Click += new System.EventHandler(this.btnSyncBoxCode_Click);
             // 
             // 码垛线排程导入
             // 
@@ -138,6 +151,7 @@
         private System.Windows.Forms.Button btnOutput;
         private System.Windows.Forms.Button btnSyncFromPlan;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnSyncBoxCode;
     }
 }
 

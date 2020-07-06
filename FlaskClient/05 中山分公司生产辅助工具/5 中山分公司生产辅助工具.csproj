@@ -112,6 +112,18 @@
     <Compile Include="登录界面.designer.cs">
       <DependentUpon>登录界面.cs</DependentUpon>
     </Compile>
+    <Compile Include="销售管理\录入销退单.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="销售管理\录入销退单.Designer.cs">
+      <DependentUpon>录入销退单.cs</DependentUpon>
+    </Compile>
+    <Compile Include="销售管理\录入销退单-获取单据信息.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="销售管理\录入销退单-获取单据信息.Designer.cs">
+      <DependentUpon>录入销退单-获取单据信息.cs</DependentUpon>
+    </Compile>
     <Compile Include="销售管理\录入销货单.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="销售管理\录入销退单.resx">
+      <DependentUpon>录入销退单.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="销售管理\录入销退单-获取单据信息.resx">
+      <DependentUpon>录入销退单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="销售管理\录入销货单.resx">
       <DependentUpon>录入销货单.cs</DependentUpon>

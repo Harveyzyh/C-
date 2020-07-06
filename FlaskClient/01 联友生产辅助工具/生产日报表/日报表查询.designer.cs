@@ -80,6 +80,7 @@
             // 
             // ComboBoxReportSelectType
             // 
+            this.ComboBoxReportSelectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxReportSelectType.FormattingEnabled = true;
             this.ComboBoxReportSelectType.Items.AddRange(new object[] {
             "全部",
@@ -164,6 +165,7 @@
             // 
             // ComboBoxReportDptType
             // 
+            this.ComboBoxReportDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxReportDptType.Font = new System.Drawing.Font("宋体", 12F);
             this.ComboBoxReportDptType.FormattingEnabled = true;
             this.ComboBoxReportDptType.Items.AddRange(new object[] {

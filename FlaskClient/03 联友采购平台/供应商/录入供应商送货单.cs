@@ -72,12 +72,12 @@ namespace 联友采购平台.供应商
         {
             if (ComboBoxVersionList.SelectedItem.ToString() != "")
             {
-                BtnGet.Enabled = true;
+                BtnInput.Enabled = true;
                 BtnSave.Enabled = true;
             }
             else
             {
-                BtnGet.Enabled = false;
+                BtnInput.Enabled = false;
                 BtnSave.Enabled = false;
             }
 
@@ -134,9 +134,9 @@ namespace 联友采购平台.供应商
             }
         }
 
-        private void BtnGet_Click(object sender, EventArgs e)
+        private void BtnInput_Click(object sender, EventArgs e)
         {
-            ShowDtDetail(FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString());
+            BtnInputWork();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -152,11 +152,13 @@ namespace 联友采购平台.供应商
 
         private void DtpDate_ValueChanged(object sender, EventArgs e)
         {
+            dtDetailBak = null;
             Init();
         }
 
         private void ComboBoxVersionList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dtDetailBak = null;
             ComboBoxVersionList_SelectedIndexChanged_Work();
         }
         
@@ -167,7 +169,21 @@ namespace 联友采购平台.供应商
 
         private void DgvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            DgvMain_CellValueChanged_Work();
+            int rowIndex = 0;
+            rowIndex = DgvMain.CurrentRow.Index;
+            string v = DgvMain.Rows[rowIndex].Cells["送货量"].Value.ToString();
+            try
+            {
+                float f = float.Parse(v);
+                DgvMain_CellValueChanged_Work();
+            }
+            catch
+            {
+                DgvMain.Rows[rowIndex].Cells["送货量"].Value = "";
+                MessageBox.Show("请输入数字", "错误", MessageBoxButtons.OK);
+                DgvMain.Rows[rowIndex].Cells["送货量"].Selected = true;
+                return;
+            }
         }
         #endregion
 
@@ -186,6 +202,7 @@ namespace 联友采购平台.供应商
                     if (dt != null)
                     {
                         TextBoxBarCode.Text = dt.Rows[0]["条码编号"].ToString();
+                        TextBoxRemark.Text = dt.Rows[0]["备注"].ToString();
                         if (dt.Rows[0]["已扫描"].ToString() == "True")
                         {
                             LabelScaned.Visible = true;
@@ -270,9 +287,7 @@ namespace 联友采购平台.供应商
             DataSet ds = new DataSet();
             DataTable dtHead = GetDtHead(FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString());
             DataTable dtDetailSrc = GetDtDetail(FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString());
-
-            dtDetailSrc.Columns.Remove("当天可送量");
-
+           
             DataTable dtDetail = dtDetailSrc.Clone();
 
             //不要数量为0的
@@ -309,12 +324,12 @@ namespace 联友采购平台.供应商
             //删除当前的信息，然后重建信息
             string sqlDelH = @"DELETE FROM CG_SupplyHead where SupId = '{0}' and SendDate = '{1}' and SendVersion = '{2}' ";
             string sqlDelD = @"DELETE FROM CG_SupplyDetail where SupId = '{0}' and SendDate = '{1}' and SendVersion = '{2}' ";
-            string sqlInsH = @"INSERT INTO CG_SupplyHead(CreateDate, SupId, SendDate, SendVersion) values(getdate(), '{0}', '{1}', '{2}' )";
+            string sqlInsH = @"INSERT INTO CG_SupplyHead(CreateDate, SupId, SendDate, SendVersion, Remark) values(getdate(), '{0}', '{1}', '{2}', '{3}' )";
             string sqlInsD = @"INSERT INTO CG_SupplyDetail(SupId, SendDate, SendVersion, xh, wlno, sl) values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')";
 
             mssql.SQLselect(conn, string.Format(sqlDelH, FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString()));
             mssql.SQLselect(conn, string.Format(sqlDelD, FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString()));
-            mssql.SQLselect(conn, string.Format(sqlInsH, FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString()));
+            mssql.SQLselect(conn, string.Format(sqlInsH, FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"), ComboBoxVersionList.SelectedItem.ToString(), TextBoxRemark.Text));
 
             //不要数量为0的
             DataTable dtDetail = null;
@@ -340,6 +355,50 @@ namespace 联友采购平台.供应商
             MessageBox.Show("已保存", "提醒", MessageBoxButtons.OK);
         }
 
+        private void BtnInputWork()
+        {
+            string sqlstr = @"SELECT RTRIM(MB002) 品名, RTRIM(MB003) 规格, RTRIM(MB004) 单位 FROM COMFORT.dbo.INVMB WHERE MB001 = '{0}' ";
+            DataTable dtShow = new DataTable();
+            dtShow.Columns.Add(new DataColumn("序号".ToString(), typeof(string)));
+            dtShow.Columns.Add(new DataColumn("品号".ToString(), typeof(string)));
+            dtShow.Columns.Add(new DataColumn("品名".ToString(), typeof(string)));
+            dtShow.Columns.Add(new DataColumn("规格".ToString(), typeof(string)));
+            dtShow.Columns.Add(new DataColumn("单位".ToString(), typeof(string)));
+            dtShow.Columns.Add(new DataColumn("送货量".ToString(), typeof(float)));
+
+            DataTable dtExcel = ReadExcel();
+            DataTable dt = DtConvert(dtExcel);
+            if(dt != null)
+            {
+                DataRow dr = null;
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    dr = dtShow.NewRow();
+                    dr["序号"] = (rowIndex + 1).ToString().PadLeft(4, '0'); 
+                    dr["品号"] = dt.Rows[rowIndex]["品号"].ToString();
+                    dr["送货量"] = float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+
+                    DataTable dtInfo = mssql.SQLselect(conn, string.Format(sqlstr, dt.Rows[rowIndex]["品号"].ToString()));
+                    if (dtInfo != null)
+                    {
+                        dr["品名"] = dtInfo.Rows[0]["品名"].ToString();
+                        dr["规格"] = dtInfo.Rows[0]["规格"].ToString();
+                        dr["单位"] = dtInfo.Rows[0]["单位"].ToString();
+                    }
+                    else
+                    {
+                        dr["品名"] = "";
+                        dr["规格"] = "";
+                        dr["单位"] = "";
+                    }
+
+                    dtShow.Rows.Add(dr);
+                }
+                DgvMain.DataSource = dtShow;
+            }
+            UI();
+        }
+
         private List<string> GetVersionList()
         {
             List<string> rtnList = new List<string>();
@@ -358,7 +417,7 @@ namespace 联友采购平台.供应商
         private DataTable GetDtHead(string supId, string sendDate, string sendVer)
         {
             string sqlstr = @"SELECT SupId 供应商编号, RTRIM(MA003) 供应商名称, substring(SendDate, 1, 4)+'-'+substring(SendDate, 5, 2)+'-'+substring(SendDate, 7, 2) 送货日期, 
-                                ScanFlag 已扫描, SupId+'-'+SendDate+'-'+SendVersion 条码编号, '' 打印时间 from CG_SupplyHead 
+                                ScanFlag 已扫描, SupId+'-'+SendDate+'-'+SendVersion 条码编号, '' 打印时间, Remark 备注 from CG_SupplyHead 
                                 left join COMFORT.dbo.PURMA ON MA001 = SupId  
                                 where SupId = '{0}' and SendDate = '{1}' and SendVersion = '{2}' ";
             return mssql.SQLselect(conn, string.Format(sqlstr, supId, sendDate, sendVer));
@@ -366,7 +425,16 @@ namespace 联友采购平台.供应商
 
         private DataTable GetDtDetail(string supId, string sendDate, string sendVer)
         {
-            string sqlstr = @"exec COMFORT.dbo.P_CG_SupplySl @SupId = '{0}', @SendDate = '{1}', @SendVersion = '{2}' ";
+            string sqlstr = @"SELECT xh 序号, wlno 品号, RTRIM(MB002) 品名, RTRIM(MB003) 规格, RTRIM(MB004) 单位, CG_Supply.sl 送货量 
+                                from(  
+	                                select h.SupId, h.SendDate, h.SendVersion, xh, wlno, sl from WG_DB.dbo.CG_SupplyHead as h
+	                                inner join WG_DB.dbo.CG_SupplyDetail as d on h.SupId = d.SupId and h.SendDate = d.SendDate and h.SendVersion = d.SendVersion
+                                ) as CG_Supply 
+                                left join COMFORT.dbo.INVMB ON MB001 = wlno
+                                where SupId = '{0}' 
+                                and SendDate = '{1}' 
+                                and SendVersion = '{2}'
+                                order by xh ";
             return mssql.SQLselect(conn, string.Format(sqlstr, supId, sendDate, sendVer));
         }
 
@@ -379,6 +447,80 @@ namespace 联友采购平台.供应商
         {
             string sqlstr = @"select isnull(right('000' + cast(max(cast(SendVersion as int)) + 1 as varchar(3)), 3), '001') from CG_SupplyHead where SupId = '{0}' and SendDate = '{1}'";
             return mssql.SQLselect(conn, string.Format(sqlstr, FormLogin.infObj.userDpt, DtpDate.Value.ToString("yyyyMMdd"))).Rows[0][0].ToString();
+        }
+
+        private DataTable ReadExcel()
+        {
+            Excel excel = new Excel();
+            Excel.Excel_Base excelObj = new Excel.Excel_Base();
+            excelObj.isTitleRow = true;
+            excelObj.isWrite = false;
+
+            excel.ExcelOpt(excelObj);
+
+            if (excelObj.status == "Yes")
+            {
+                DataTable dt = excelObj.cellDt;
+                return dt;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private DataTable DtConvert(DataTable dt)
+        {
+            DataTable dtNew = null;
+
+            //是否存在品名，采购数量列flag
+            bool isPhFlag = false;
+            bool isSlFlag = false;
+
+            if (dt != null)
+            {
+                for (int colIndex = 0; colIndex < dt.Columns.Count; colIndex++)
+                {
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace(" ", "");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("采购数量", "送货量");
+
+                    if (dt.Columns[colIndex].ColumnName == "品号") isPhFlag = true;
+                    if (dt.Columns[colIndex].ColumnName == "送货量") isSlFlag = true;
+                }
+
+                if (! (isPhFlag && isSlFlag))
+                {
+                    MessageBox.Show("导入的表格表头不存在“品号”或“送货数量”，请检查。", "错误", MessageBoxButtons.OK);
+                    return null;
+                }
+
+                dt.DefaultView.Sort = "品号 ASC";
+
+                dt = dt.DefaultView.ToTable();
+
+                string pn = "";
+                DataRow dr = null;
+                dtNew = new DataTable();
+                dtNew.Columns.Add(new DataColumn("品号".ToString(), typeof(string)));
+                dtNew.Columns.Add(new DataColumn("送货量".ToString(), typeof(float)));
+
+                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    dr = dtNew.NewRow();
+                    if(pn != dt.Rows[rowIndex]["品号"].ToString())
+                    {
+                        pn = dt.Rows[rowIndex]["品号"].ToString();
+                        dr["品号"] = pn;
+                        dr["送货量"] = float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+                        dtNew.Rows.Add(dr);
+                    }
+                    else
+                    {
+                        dtNew.Rows[dtNew.Rows.Count - 1]["送货量"] = float.Parse(dtNew.Rows[dtNew.Rows.Count - 1]["送货量"].ToString()) + float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+                    }
+                }
+            }
+            return dtNew;
         }
 
         #endregion

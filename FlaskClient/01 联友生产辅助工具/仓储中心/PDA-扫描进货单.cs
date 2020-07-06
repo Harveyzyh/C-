@@ -14,6 +14,7 @@ namespace 联友生产辅助工具.仓储中心
     {
         #region 局部变量设定
         Mssql mssql = new Mssql();
+        string connYF = FormLogin.infObj.connYF;
         ERP_Create_Purtg createPurtg = new ERP_Create_Purtg();
 
         public static string Mode = null;
@@ -330,7 +331,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private string GetFlowID(string flowId = null)
         {
-            string time = mssql.SQLselect(FormLogin.infObj.connYF, "SELECT dbo.f_getTime(1) ").Rows[0][0].ToString();
+            string time = mssql.SQLselect(connYF, "SELECT dbo.f_getTime(1) ").Rows[0][0].ToString();
 
             if (flowId == null)
             {
@@ -338,7 +339,7 @@ namespace 联友生产辅助工具.仓储中心
             }
             else
             {
-                if (mssql.SQLselect(FormLogin.infObj.connYF, string.Format("SELECT RTRIM(JHXA005) FROM COMFORT..JH_LYXA WHERE JHXA005 = '{0}' ", flowId)) == null)
+                if (mssql.SQLselect(connYF, string.Format("SELECT RTRIM(JHXA005) FROM COMFORT..JH_LYXA WHERE JHXA005 = '{0}' ", flowId)) == null)
                 {
                     return GetFlowID(flowId);
                 }
@@ -349,7 +350,7 @@ namespace 联友生产辅助工具.仓储中心
         private string GetTime()
         {
             string sqlstr = "SELECT dbo.f_getTime(1) ";
-            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
+            DataTable dt = mssql.SQLselect(connYF, sqlstr);
             if(dt != null)
             {
                 return dt.Rows[0][0].ToString();
@@ -365,7 +366,7 @@ namespace 联友生产辅助工具.仓储中心
             string sqlstr = "SELECT RTRIM(TD004), RTRIM(MB002), RTRIM(MB003), RTRIM(TC004), PCBSum FROM VPURTD_ZYH "
                             + "INNER JOIN INVMB ON MB001 = TD004 "
                             + "WHERE TD004 = '{0}' AND TC004 = '{1}' ";
-            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, MaterielID, SupplierID));
+            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, MaterielID, SupplierID));
             if(dt != null)
             {
                 return dt;
@@ -379,7 +380,7 @@ namespace 联友生产辅助工具.仓储中心
         private bool GetMaterielExist(string MaterielID)
         {
             string sqlstr = "SELECT MB001 FROM INVMB WHERE MB001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, MaterielID));
+            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, MaterielID));
             if(dt != null)
             {
                 return true;
@@ -399,11 +400,11 @@ namespace 联友生产辅助工具.仓储中心
                 for(Index = 0; Index < Count; Index++)
                 {
                     DataGridView_List.Rows[Index].Cells[0].Value = (Index + 1).ToString().PadLeft(3, '0');
-                    DataGridView_List.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    DataGridView_List.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    DataGridView_List.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    DataGridView_List.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    DataGridView_List.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DgvOpt.SetColMiddleCenter(DataGridView_List, 0);
+                    DgvOpt.SetColMiddleCenter(DataGridView_List, 4);
+                    DgvOpt.SetColMiddleCenter(DataGridView_List, 5);
+                    DgvOpt.SetColMiddleCenter(DataGridView_List, 6);
+                    DgvOpt.SetColMiddleCenter(DataGridView_List, 7);
                 }
             }
             else
@@ -542,7 +543,7 @@ namespace 联友生产辅助工具.仓储中心
                 string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
                     JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
 
-                mssql.SQLexcute(FormLogin.infObj.connYF, sqlstr);
+                mssql.SQLexcute(connYF, sqlstr);
 
                 DataGridView_List.Rows.Remove(DataGridView_List.Rows[0]);
             }

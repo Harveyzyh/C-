@@ -8,6 +8,7 @@
  <Column Name="条码编号" DataType="System.String" PropName="Column"/>
  <Column Name="打印时间" DataType="System.String" PropName="Column"/>
  <Column Name="送货日期" DataType="System.String" PropName="Column"/>
+ <Column Name="备注" DataType="System.String" PropName="Column"/>
 
 </TableDataSource>
 

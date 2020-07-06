@@ -35,6 +35,7 @@
             // 
             // comboBoxDpt
             // 
+            this.comboBoxDpt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDpt.FormattingEnabled = true;
             this.comboBoxDpt.Location = new System.Drawing.Point(113, 38);
             this.comboBoxDpt.Name = "comboBoxDpt";
@@ -60,7 +61,7 @@
             this.BtnEnter.UseVisualStyleBackColor = true;
             this.BtnEnter.Click += new System.EventHandler(this.BtnEnter_Click);
             // 
-            // 生管排成导入导出部门选择
+            // 生管排程导入导出部门选择
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,7 +71,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "生管排成导入导出部门选择";
+            this.Name = "生管排程导入导出部门选择";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "选择部门";
             this.ResumeLayout(false);

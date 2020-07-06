@@ -136,10 +136,10 @@ namespace 联友生产辅助工具.生管排程
                     {
                         DataTable dttmp = (DataTable)DgvMain.DataSource;
 
-                        excelObj.FilePath = Path.GetDirectoryName(saveFileDialog.FileName);
-                        excelObj.FileName = Path.GetFileName(saveFileDialog.FileName);
-                        excelObj.IsWrite = true;
-                        excelObj.CellDt = dttmp;
+                        excelObj.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                        excelObj.fileName = Path.GetFileName(saveFileDialog.FileName);
+                        excelObj.isWrite = true;
+                        excelObj.cellDt = dttmp;
 
                         Excel excel = new Excel();
                         excel.ExcelOpt(excelObj);

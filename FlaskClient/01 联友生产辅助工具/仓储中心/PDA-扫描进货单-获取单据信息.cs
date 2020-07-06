@@ -9,6 +9,7 @@ namespace 联友生产辅助工具.仓储中心
     {
         Mssql mssql = new Mssql();
         DataTable dt = new DataTable();
+        string connYF = FormLogin.infObj.connYF;
         int Index = 0;
         
         private string Title = PDA_扫描进货单.Title;
@@ -72,7 +73,7 @@ namespace 联友生产辅助工具.仓储中心
                             + "AND MQ003 = '34' AND MQ004 = '2'"
                             + "AND MQ001 LIKE '%{0}%' "
                             + "ORDER BY MQ001 ");
-            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -87,7 +88,7 @@ namespace 联友生产辅助工具.仓储中心
             string sqlstr = ("SELECT RTRIM(MA001) 供应商编号, RTRIM(MA002) 简称 FROM COMFORT..PURMA "
                             + "WHERE MA001 LIKE '%{0}%' "
                             + "ORDER BY MA001 ");
-            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -103,7 +104,7 @@ namespace 联友生产辅助工具.仓储中心
                             + "FROM COMFORT..CMSMC "
                             + "WHERE MC001 LIKE '%{0}%' "
                             + "ORDER BY LEN(MC001) DESC, MC001");
-            dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;

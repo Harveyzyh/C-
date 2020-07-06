@@ -8,7 +8,6 @@ using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
-using 联友生产辅助工具.测试;
 using 联友生产辅助工具.生产排程模块;
 
 namespace HarveyZ
@@ -21,7 +20,6 @@ namespace HarveyZ
         private static List<string> menuIgnoreList = new List<string> {
             "关闭当前界面",
             "帮助",
-            "测试",
             "ERP",
             "此用户没有任何权限"
         };
@@ -70,7 +68,6 @@ namespace HarveyZ
         {
             if (FormLogin.infObj.userId != "001114")
             {
-                测试ToolStripMenuItem.Visible = false;
                 ERPToolStripMenuItem.Visible = false;
             }
         }
@@ -284,15 +281,6 @@ namespace HarveyZ
         }
         #endregion
 
-        #region 测试部分
-        private void 测试_3ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form frm = new 测试_3();
-            FormOpenInit(frm);
-            frm.Visible = true;
-        }
-        #endregion
-
         #region 菜单栏设置
 
         #region 菜单栏其他选项
@@ -343,6 +331,20 @@ namespace HarveyZ
         private void 仓储中心_扫描进货单采购平台ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             扫描进货单_采购平台 frm = new 扫描进货单_采购平台();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 仓储中心_扫描进货单联友分公司ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            扫描进货单_联友分公司 frm = new 扫描进货单_联友分公司();
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 仓储中心_扫描进货单Excel导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            扫描进货单_Excel导入 frm = new 扫描进货单_Excel导入();
             FormOpenInit(frm);
             frm.Show();
         }

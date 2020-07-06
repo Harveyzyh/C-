@@ -36,28 +36,36 @@ namespace 联友生产辅助工具.生产日报表
             ButtonReportSelectLayout.Enabled = false;
 
             //部门判断、权限设置
-            if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
+            if (FormLogin.infObj.userDpt.Length > 2)
             {
-                ComboBoxReportDptType.Text = FormLogin.infObj.userDpt;
-                ComboBoxReportSelectType.Text = "全部";
-            }
-            else
-            {
-                string sqlstr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + FormLogin.infObj.userId + "'";
-                DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
-                if (dttmp != null)
+                if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
                 {
-                    string role = dttmp.Rows[0][0].ToString();
-                    if (role == "Super")
+                    ComboBoxReportDptType.Text = FormLogin.infObj.userDpt;
+                    ComboBoxReportSelectType.Text = "全部";
+                }
+                else
+                {
+                    string sqlstr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + FormLogin.infObj.userId + "'";
+                    DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+                    if (dttmp != null)
                     {
-                        ComboBoxReportDptType.Text = "全部";
-                        ComboBoxReportSelectType.Text = "全部";
-                    }
-                    else if (role == "生管")
-                    {
+                        string role = dttmp.Rows[0][0].ToString();
+                        if (role == "Super")
+                        {
+                            ComboBoxReportDptType.Text = "全部";
+                            ComboBoxReportSelectType.Text = "全部";
+                        }
+                        else if (role == "生管")
+                        {
 
-                        ComboBoxReportDptType.Text = "全部";
-                        ComboBoxReportSelectType.Text = "全部";
+                            ComboBoxReportDptType.Text = "全部";
+                            ComboBoxReportSelectType.Text = "全部";
+                        }
+                        else
+                        {
+                            ComboBoxReportDptType.Text = "全部";
+                            ComboBoxReportSelectType.Text = "全部";
+                        }
                     }
                     else
                     {
@@ -65,11 +73,11 @@ namespace 联友生产辅助工具.生产日报表
                         ComboBoxReportSelectType.Text = "全部";
                     }
                 }
-                else
-                {
-                    ComboBoxReportDptType.Text = "全部";
-                    ComboBoxReportSelectType.Text = "全部";
-                }
+            }
+            else
+            {
+                ComboBoxReportDptType.Text = "全部";
+                ComboBoxReportSelectType.Text = "全部";
             }
 
             DtpFlag = false;//初始化调整时间时不执行相关操作
@@ -409,10 +417,10 @@ namespace 联友生产辅助工具.生产日报表
                 {
                     DataTable dttmp = (DataTable)DgvMain.DataSource;
 
-                    excelObj.FilePath = Path.GetDirectoryName(saveFileDialog.FileName);
-                    excelObj.FileName = Path.GetFileName(saveFileDialog.FileName);
-                    excelObj.IsWrite = true;
-                    excelObj.CellDt = dttmp;
+                    excelObj.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                    excelObj.fileName = Path.GetFileName(saveFileDialog.FileName);
+                    excelObj.isWrite = true;
+                    excelObj.cellDt = dttmp;
 
                     Excel excel = new Excel();
                     excel.ExcelOpt(excelObj);

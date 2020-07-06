@@ -79,64 +79,6 @@ namespace 联友中山分公司生产辅助工具.销售管理
         #endregion
 
         #region UI按钮
-        private void 销货单别查_Click(object sender, EventArgs e)
-        {
-            Mode = "TypeID";
-            Title = "单别";
-            //Title = "单别|单据简称";
-            录入销货单_获取单据信息 frm = new 录入销货单_获取单据信息();
-            if(frm.ShowDialog() == DialogResult.Cancel)
-            {
-                if (GetMain != null)
-                {
-                    销货单别.Text = GetMain + "-" + GetOther;
-                    TypeID = GetMain;
-                    GetMain = null;
-                    GetOther = null;
-                }
-                frm.Dispose();
-            }
-        }
-
-        private void 客户查_Click(object sender, EventArgs e)
-        {
-            Mode = "CustmerID";
-            Title = "客户编号";
-            //Title = "供应商编号|简称";
-            录入销货单_获取单据信息 frm = new 录入销货单_获取单据信息();
-            if (frm.ShowDialog() == DialogResult.Cancel)
-            {
-                if (GetMain != null)
-                {
-                    客户.Text = GetMain + "-" + GetOther;
-                    SupplierID = GetMain;
-                    GetMain = null;
-                    GetOther = null;
-                }
-                frm.Dispose();
-                MsgFlag = true;
-            }
-        }
-
-        private void 销货仓库查_Click(object sender, EventArgs e)
-        {
-            Mode = "PositionID";
-            Title = "仓库编号";
-            //Title = "仓库编号|仓库名称";
-            录入销货单_获取单据信息 frm = new 录入销货单_获取单据信息();
-            if (frm.ShowDialog() == DialogResult.Cancel)
-            {
-                if (GetMain != null)
-                {
-                    销货仓库.Text = GetMain + "-" + GetOther;
-                    PositionID = GetMain;
-                    GetMain = null;
-                    GetOther = null;
-                }
-                frm.Dispose();
-            }
-        }
-        
         private void 销货仓库L_MouseClick(object sender, MouseEventArgs e)
         {
             Mode = "PositionID";

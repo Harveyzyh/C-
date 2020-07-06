@@ -12,11 +12,12 @@ namespace 联友生产辅助工具.生管码垛线
     {
         #region 静态数据设置
 
-        private delegate string NewTaskDelegate(DataTable dttmp); //任务代理
+        private delegate void NewTaskDelegate(); //任务代理
+        private NewTaskDelegate dc1 = new NewTaskDelegate(MdHandelClass.GetBoxCode);
 
         private static DataTable showDt = new DataTable();
 
-        private Mssql mssql = new Mssql();
+        private static Mssql mssql = new Mssql();
 
         private static string connMD = FormLogin.infObj.connMD;
         private static string connERP = FormLogin.infObj.connYF;
@@ -77,149 +78,17 @@ namespace 联友生产辅助工具.生管码垛线
         {
             SyncFromPlan();
         }
+
+        private void btnSyncBoxCode_Click(object sender, EventArgs e)
+        {
+            MdHandelClass.SetBefore();
+            SetTypeCode();
+            //MdHandelClass.GetBoxCode();
+            dc1.Invoke();
+        }
         #endregion
 
         #region 导入与数据显示
-        private bool CheckDt(DataTable Dt)
-        {
-            int rowTotal = Dt.Rows.Count;
-            string SC001 = "";
-            string Msg = "";
-            for (int rowIndex = 0; rowIndex < rowTotal; rowIndex++)
-            {
-                if (Dt.Rows[rowIndex][2].ToString() == "生产单号")
-                {
-                    continue;
-                }
-                SC001 = Dt.Rows[rowIndex][2].ToString();
-                if(Normal.GetSubstringCount(SC001, "-") < 2)
-                {
-                    Msg += (rowIndex + 1).ToString() + ",";
-                }
-            }
-            if (Msg == "") return true;
-            else
-            {
-                MessageBox.Show("导入文件中行：" + Msg + "有异常，请检查", "导入失败", MessageBoxButtons.OK);
-                return false;
-            }
-        }
-
-        
-        private string GetTime()
-        {
-            string sqlstr = @"SELECT dbo.f_getTime(1) ";
-            return mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString();
-        }
-
-        private string Dt2SqlStr(DataTable dttmp)//数据表转成sql语句
-        {
-            int insert = 0;
-            int update = 0;
-            int error = 0;
-            string errorstr = "";
-            int row = 0;
-            int row_total = dttmp.Rows.Count;
-            int col_total = dttmp.Columns.Count;
-            string updatestr = "";
-            string insertstr = "";
-            string returnstr = "";
-
-            string SC003 = "";
-            string SC001 = "";
-
-            int SysTime = int.Parse(GetTime());
-            int WorkTime = 0;
-
-            if(dttmp.Rows[0][1].ToString() == "上线日期")
-            {
-                row ++;
-            }
-
-            for (; row < row_total; row++ )
-            {
-                //限定日期
-                try
-                {
-                    SC003 = dttmp.Rows[row][0].ToString().Replace("-", "");
-                    WorkTime = int.Parse(SC003);
-                    if(WorkTime < SysTime)
-                    {
-                        continue;
-                    }
-                }
-                catch
-                {
-                    continue;
-                }
-
-
-                if (dttmp.Rows[row][2].ToString() == "生产单号")
-                {
-                    continue;
-                }
-                else if (dttmp.Rows[row][2].ToString() != "")
-                {
-                    SC001 = dttmp.Rows[row][2].ToString();
-                    SC001 = SC001.Split('-')[0].Trim() + '-' + SC001.Split('-')[1].Trim() + '-' + SC001.Split('-')[2].Trim();
-                    SC001 = SC001.Replace("（新增）", "").Replace("（变更）", "").Replace("（更改）", "").Replace("(新增)", "").Replace("(变更)", "").Replace("(更改)", "");
-                    
-                    returnstr += SC001 + ":" + SC003 + "; ";
-                    if (SC003.Contains("转"))
-                    {
-                        break;
-                    }
-                    
-                    DataTable dttmp2 = mssql.SQLselect(connMD, "SELECT SC001 FROM SCHEDULE WHERE SC001 = '" + SC001 + "'");
-
-                    if (dttmp2 != null)
-                    {
-                        updatestr = "UPDATE SCHEDULE SET "
-                                    + " MODIFIER = '" + FormLogin.infObj.userId + "', MODI_DATE = (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
-                                    + " SC003 = '" + SC003 + "', "
-                                    + " SC038 = 'N' "
-                                    + " WHERE SC001 = '" + SC001 + "' ";
-
-                        if (0 == mssql.SQLexcute(connMD, updatestr))
-                        {
-                            update++;
-                        }
-                        else
-                        {
-                            error++;
-                            if (errorstr == "")
-                            {
-                                errorstr += SC001;
-                            }
-                            else errorstr += "; " + SC001;
-                        }
-                    }
-                    else
-                    {
-                        insertstr = "INSERT INTO SCHEDULE (CREATOR, CREATE_DATE, SC001, SC003) VALUES ( "
-                                  + "'" + FormLogin.infObj.userId + "', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), "
-                                  + "'" + SC001 + "', '" + SC003 + "')";
-                        
-                        if (0 == mssql.SQLexcute(connMD, insertstr))
-                        {
-                            insert++;
-                        }
-                        else
-                        {
-                            error++;
-                            if (errorstr == "")
-                            {
-                                errorstr += SC001;
-                            }
-                            else errorstr += "; " + SC001;
-                        }
-                    }
-                }
-                else continue;
-            }
-            return returnstr;
-        }
-
         private void DgvShow(bool show) //数据库资料显示到界面
         {
             string show_sqlstr = " SELECT DISTINCT "
@@ -290,21 +159,7 @@ namespace 联友生产辅助工具.生管码垛线
         #region 获取ERP订单信息,直接从WG_DB里面取数据
         private void SyncFromPlan()
         {
-            //string sqlstr = @"DELETE FROM SCHEDULE WHERE SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112) AND SC039 != 'Y' 
-
-            //                INSERT INTO SCHEDULE(CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, 
-            //                SC005, SC006, SC007, SC008, SC009, SC010, SC011, SC012, SC013, SC014, 
-            //                SC015, SC016, SC017, SC018, SC019, SC020, SC021, SC022, SC023, SC024, SC025, SC026)
-            //                SELECT CREATOR, CREATE_DATE, SC001, SC002, SC003, SC004, SC005, SC006, SC007, SC008, 
-            //                SC009, SC010, SC011, SC012, SC013, SC014, SC015, SC016, SC017, SC018, SC019, SC020, 
-            //                SC021, SC022, SC023, SC024, SC025, SC026 
-            //                FROM WG_DB..SC_PLAN
-            //                WHERE SC023 IN ('生产五部', '生产二部') 
-            //                AND SC003 >= CONVERT(VARCHAR(20), GETDATE(), 112)
-
-            //                UPDATE SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), DATEADD(DAY, -1, GETDATE()), 112) AND SC039 != 'Y' ";
-
-            mssql.SQLexcute(connERP, "EXEC dbo.MdPlanInsert ");
+            mssql.SQLexcute(connMD, "EXEC dbo.MdPlanInsert ");
 
             SetTypeCode();
 
@@ -318,7 +173,8 @@ namespace 联友生产辅助工具.生管码垛线
         #region 获取纸箱编码
         private void SetBoxCode()
         {
-            SetBoxCodeByProc(); //使用存储过程来更新信息
+            //SetBoxCodeByProc(); //使用存储过程来更新信息
+            dc1.Invoke();
         }
 
         private void SetBoxCodeByProc()
@@ -336,6 +192,107 @@ namespace 联友生产辅助工具.生管码垛线
         private void SetTypeCodeByProc()
         {
             mssql.SQLexcute(connMD, "EXEC dbo.SplitCodeUpdate ");
+        }
+        #endregion
+
+        #region 其他处理类
+        private static class MdHandelClass
+        {
+            public static void SetBefore()
+            {
+                string sqlstr = @"UPDATE dbo.SCHEDULE SET SC038 = 'n' WHERE SC003 >= CONVERT(VARCHAR(20), DATEADD(DAY, -1, GETDATE()), 112) AND SC039 != 'Y'";
+                mssql.SQLexcute(connMD, sqlstr);
+            }
+
+            /// <summary>
+            /// 获取纸箱编码
+            /// </summary>
+            /// <param name="beforeDay">前置天数</param>
+            public static void GetBoxCode()
+            {
+                string sc001 = "";
+                string sc040 = "";
+
+                string boxNameStr = "";
+
+                string sqlstrBoxName = "SELECT BoxName, Spec from BoxNameCode where Valid = 1 order by Spec";
+
+                string sqlstrList = @"SELECT SC001 FROM dbo.SCHEDULE(NOLOCK) WHERE 1=1 AND SC039 = 'N' AND SC038 = 'y' AND SC039 != 'Y' ORDER BY SC003, SC001";
+
+                string sqlstrMocta = @"SELECT TA001 FROM dbo.MOCTA(NOLOCK) INNER JOIN dbo.MOCTB(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 WHERE RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028) = '{0}'";
+
+                string sqlstrMoctb = @"SELECT TOP 1 ISNULL(MBU01, '') FROM dbo.MOCTA(NOLOCK) 
+					                    INNER JOIN dbo.MOCTB(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 
+                                        LEFT JOIN dbo.INVMB(NOLOCK) ON MB001 = TB003 
+					                    WHERE 1=1 AND MBU02 IS NOT NULL 
+					                    AND RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028) = '{0}' 
+                                        AND ({1})  
+					                    ORDER BY MBU02 DESC ";
+
+                string sqlstrUdtSc040 = @"UPDATE ROBOT_TEST.dbo.SCHEDULE SET SC040 = '{1}', SC038 = 'Y' WHERE SC001 = '{0}' ";
+
+                string sqlstrUdtSc036 = @"UPDATE ROBOT_TEST.dbo.SCHEDULE SET SC036 = ISNULL(BoxCode, 'NULL') FROM dbo.SCHEDULE LEFT JOIN ROBOT_TEST.dbo.BoxSizeCode ON BoxSize = SC040 WHERE SC001 = '{0}'";
+
+                //构建纸箱名称的sql语句
+                DataTable dtBoxName = mssql.SQLselect(connMD, sqlstrBoxName);
+                if (dtBoxName != null)
+                {
+                    for (int rowIndex = 0; rowIndex < dtBoxName.Rows.Count; rowIndex++) {
+                        if (boxNameStr == "")
+                        {
+                            boxNameStr = string.Format(" (TB012 LIKE '%{0}%' AND TB006 LIKE '%{1}%') ", dtBoxName.Rows[rowIndex][0].ToString(), dtBoxName.Rows[rowIndex][1].ToString());
+                        }
+                        else
+                        {
+                            boxNameStr += string.Format("OR (TB012 LIKE '%{0}%' AND TB006 LIKE '%{1}%') ", dtBoxName.Rows[rowIndex][0].ToString(), dtBoxName.Rows[rowIndex][1].ToString());
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+
+                DataTable dtList = mssql.SQLselect(connMD, sqlstrList);
+                if (dtList != null)
+                {
+                    for(int rowIndex =0; rowIndex < dtList.Rows.Count; rowIndex++)
+                    {
+                        sc040 = "";
+                        sc001 = dtList.Rows[rowIndex][0].ToString();
+
+                        if(mssql.SQLexist(connERP, string.Format(sqlstrMocta, sc001)))
+                        {
+                            DataTable dt = mssql.SQLselect(connERP, string.Format(sqlstrMoctb, sc001, boxNameStr));
+                            if (dt != null)
+                            {
+                                sc040 = dt.Rows[0][0].ToString();
+                            }
+                            else
+                            {
+                                sc040 = "不存在纸箱";
+                            }
+                        }
+                        else
+                        {
+                            sc040 = "不存在工单";
+                        }
+
+                        mssql.SQLexcute(connMD, string.Format(sqlstrUdtSc040, sc001, sc040));
+                        mssql.SQLexcute(connMD, string.Format(sqlstrUdtSc036, sc001));
+                    }
+                }
+            }
+
+
+            /// <summary>
+            /// 获取订单分类码
+            /// </summary>
+            public static void GetSplitCOde()
+            {
+
+            }
         }
         #endregion
     }

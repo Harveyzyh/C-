@@ -33,6 +33,7 @@
             this.销售管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.销售管理_导入客户订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.销售管理_录入销货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.销售管理_录入销退单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭当前界面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,8 @@
             // 
             this.销售管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.销售管理_导入客户订单ToolStripMenuItem,
-            this.销售管理_录入销货单ToolStripMenuItem});
+            this.销售管理_录入销货单ToolStripMenuItem,
+            this.销售管理_录入销退单ToolStripMenuItem});
             this.销售管理ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.销售管理ToolStripMenuItem.Name = "销售管理ToolStripMenuItem";
             this.销售管理ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
@@ -88,6 +90,13 @@
             this.销售管理_录入销货单ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.销售管理_录入销货单ToolStripMenuItem.Text = "录入销货单";
             this.销售管理_录入销货单ToolStripMenuItem.Click += new System.EventHandler(this.销售管理_录入销货单ToolStripMenuItem_Click);
+            // 
+            // 销售管理_录入销退单ToolStripMenuItem
+            // 
+            this.销售管理_录入销退单ToolStripMenuItem.Name = "销售管理_录入销退单ToolStripMenuItem";
+            this.销售管理_录入销退单ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.销售管理_录入销退单ToolStripMenuItem.Text = "录入销退单";
+            this.销售管理_录入销退单ToolStripMenuItem.Click += new System.EventHandler(this.销售管理_录入销退单ToolStripMenuItem_Click);
             // 
             // 管理ToolStripMenuItem
             // 
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ToolStripMenuItem 销售管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 销售管理_导入客户订单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 销售管理_录入销货单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 销售管理_录入销退单ToolStripMenuItem;
     }
 }
 

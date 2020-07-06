@@ -10,6 +10,8 @@ namespace 联友生产辅助工具.仓储中心
         private static InfoObject infObj = null;
         private static LldGenerate generate = null;
 
+        string connYF = FormLogin.infObj.connYF;
+
         DataTable dt = null;
 
         public 生成领料单_获取单据信息(InfoObject _infObj, LldGenerate _generate)
@@ -57,7 +59,7 @@ namespace 联友生产辅助工具.仓储中心
             }
 
 
-            dt = infObj.sql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode, sqlstr2));
+            dt = infObj.sql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim(), infObj.dpt, infObj.tradeMode, sqlstr2));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
