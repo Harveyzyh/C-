@@ -54,20 +54,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel12, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\0 Lib\Microsoft.Office.Interop.Excel12.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,29 +90,6 @@
     <Reference Include="System.Core">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\System.Net.Http.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\System.Net.Http.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\System.Net.Http.Primitives.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0 Lib\System.Net.Http.WebRequest.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Extensions">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq">
       <Private>False</Private>
@@ -152,39 +119,33 @@
   <ItemGroup>
     <Compile Include="Module\ClassObject.cs" />
     <Compile Include="Module\ClassUserManager.cs" />
-    <Compile Include="Module\ClassDataConvert.cs" />
-    <Compile Include="Module\ClassNetWork.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Module\ClassOffice.cs" />
     <Compile Include="Module\ClassSql.cs" />
-    <Compile Include="Module\ClassZip.cs" />
     <Compile Include="Module\Common.Helper.Crypto.cs" />
     <Compile Include="Module\DataGridViewAutoFilter.cs" />
-    <Compile Include="Module\ERP.cs" />
-    <Compile Include="Module\ERP_CREATE_PURTG.cs" />
+    <Compile Include="Module\ERPClass.cs" />
     <Compile Include="Module\Global.cs" />
     <Compile Include="Module\ClassNormal.cs" />
     <Compile Include="Module\ClassPermission.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\IniHelper.cs" />
-    <Compile Include="仓储中心\扫描进货单-Excel导入.cs">
+    <Compile Include="仓储中心\录入进货单-Excel导入.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\扫描进货单-Excel导入.Designer.cs">
-      <DependentUpon>扫描进货单-Excel导入.cs</DependentUpon>
+    <Compile Include="仓储中心\录入进货单-Excel导入.Designer.cs">
+      <DependentUpon>录入进货单-Excel导入.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\扫描进货单-联友分公司.cs">
+    <Compile Include="仓储中心\录入进货单-联友分公司.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\扫描进货单-联友分公司.Designer.cs">
-      <DependentUpon>扫描进货单-联友分公司.cs</DependentUpon>
+    <Compile Include="仓储中心\录入进货单-联友分公司.Designer.cs">
+      <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\扫描进货单-采购平台.cs">
+    <Compile Include="仓储中心\录入进货单-采购平台.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\扫描进货单-采购平台.Designer.cs">
-      <DependentUpon>扫描进货单-采购平台.cs</DependentUpon>
+    <Compile Include="仓储中心\录入进货单-采购平台.Designer.cs">
+      <DependentUpon>录入进货单-采购平台.cs</DependentUpon>
     </Compile>
     <Compile Include="仓储中心\生成领料单-获取单据信息.cs">
       <SubType>Form</SubType>
@@ -197,6 +158,12 @@
     </Compile>
     <Compile Include="仓储中心\生成领料单.Designer.cs">
       <DependentUpon>生成领料单.cs</DependentUpon>
+    </Compile>
+    <Compile Include="报表\销货信息%28带入库部门%29查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="报表\销货信息%28带入库部门%29查询.Designer.cs">
+      <DependentUpon>销货信息%28带入库部门%29查询.cs</DependentUpon>
     </Compile>
     <Compile Include="生产排程模块\生产排程.cs">
       <SubType>Form</SubType>
@@ -282,23 +249,23 @@
     <Compile Include="主界面.Designer.cs">
       <DependentUpon>主界面.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\PDA-扫描进货单-获取单据信息.cs">
+    <Compile Include="仓储中心\录入进货单-获取单据信息.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\PDA-扫描进货单-获取单据信息.Designer.cs">
-      <DependentUpon>PDA-扫描进货单-获取单据信息.cs</DependentUpon>
+    <Compile Include="仓储中心\录入进货单-获取单据信息.Designer.cs">
+      <DependentUpon>录入进货单-获取单据信息.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\PDA-扫描进货单.cs">
+    <Compile Include="仓储中心\录入进货单.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\PDA-扫描进货单.Designer.cs">
-      <DependentUpon>PDA-扫描进货单.cs</DependentUpon>
+    <Compile Include="仓储中心\录入进货单.Designer.cs">
+      <DependentUpon>录入进货单.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\PDA_扫描领料单.cs">
+    <Compile Include="仓储中心\扫描领料单.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="仓储中心\PDA_扫描领料单.designer.cs">
-      <DependentUpon>PDA_扫描领料单.cs</DependentUpon>
+    <Compile Include="仓储中心\扫描领料单.designer.cs">
+      <DependentUpon>扫描领料单.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -362,20 +329,23 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="仓储中心\扫描进货单-Excel导入.resx">
-      <DependentUpon>扫描进货单-Excel导入.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\录入进货单-Excel导入.resx">
+      <DependentUpon>录入进货单-Excel导入.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\扫描进货单-联友分公司.resx">
-      <DependentUpon>扫描进货单-联友分公司.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\录入进货单-联友分公司.resx">
+      <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\扫描进货单-采购平台.resx">
-      <DependentUpon>扫描进货单-采购平台.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\录入进货单-采购平台.resx">
+      <DependentUpon>录入进货单-采购平台.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\生成领料单-获取单据信息.resx">
       <DependentUpon>生成领料单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\生成领料单.resx">
       <DependentUpon>生成领料单.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="报表\销货信息%28带入库部门%29查询.resx">
+      <DependentUpon>销货信息%28带入库部门%29查询.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生产日报表\日报表部门工作组线别维护.resx">
       <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
@@ -416,14 +386,14 @@
     <EmbeddedResource Include="主界面.resx">
       <DependentUpon>主界面.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\PDA-扫描进货单-获取单据信息.resx">
-      <DependentUpon>PDA-扫描进货单-获取单据信息.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\录入进货单-获取单据信息.resx">
+      <DependentUpon>录入进货单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\PDA-扫描进货单.resx">
-      <DependentUpon>PDA-扫描进货单.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\录入进货单.resx">
+      <DependentUpon>录入进货单.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\PDA_扫描领料单.resx">
-      <DependentUpon>PDA_扫描领料单.cs</DependentUpon>
+    <EmbeddedResource Include="仓储中心\扫描领料单.resx">
+      <DependentUpon>扫描领料单.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

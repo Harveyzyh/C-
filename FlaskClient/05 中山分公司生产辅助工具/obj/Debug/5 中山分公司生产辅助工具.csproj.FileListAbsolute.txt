@@ -12,7 +12,6 @@ Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.用户管理.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销货单.resources
-Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.导入客户订单.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.exe
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.pdb
@@ -21,3 +20,5 @@ Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\Microsof
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\System.Data.dll
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单.resources
 Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单.resources

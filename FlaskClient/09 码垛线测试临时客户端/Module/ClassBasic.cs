@@ -12,6 +12,48 @@ using System.Drawing;
 
 namespace HarveyZ
 {
+    public class Msg
+    {
+        /// <summary>
+        /// 提示框
+        /// </summary>
+        /// <param name="msg">信息内容</param>
+        public static void Show(string msg)
+        {
+            MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel);
+        }
+
+        public static void Show(string msg, string title)
+        {
+            MessageBox.Show(msg, title, MessageBoxButtons.OKCancel);
+        }
+
+        public static void Show(string msg, string title, MessageBoxButtons btn)
+        {
+            MessageBox.Show(msg, title, btn);
+        }
+
+        public static void Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
+        {
+            MessageBox.Show(msg, title, btn, icon);
+        }
+
+        public static void ShowErr(string msg)
+        {
+            MessageBox.Show(msg, "错误", MessageBoxButtons.OKCancel);
+        }
+
+        public static void ShowErr(string msg, MessageBoxButtons btn)
+        {
+            MessageBox.Show(msg, "错误", btn);
+        }
+
+        public static void ShowErr(string msg, MessageBoxButtons btn, MessageBoxIcon icon)
+        {
+            MessageBox.Show(msg, "错误", btn, icon);
+        }
+    }
+
     public class IPInfo
     {
         public static string GetIpAddress()
@@ -50,8 +92,7 @@ namespace HarveyZ
             return resultstr;
         }
     }
-
-
+    
     public class UpdateMe
     {
         #region ftp文件下载更新
@@ -66,7 +107,7 @@ namespace HarveyZ
             string prodName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name.Trim();
             string prodVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             string prodPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            System.Diagnostics.Process p = System.Diagnostics.Process.GetCurrentProcess();
+            Process p = Process.GetCurrentProcess();
             string pid = p.Id.ToString();
             bool _needUpdateFlag = false;
 
@@ -92,7 +133,7 @@ namespace HarveyZ
             }
             if (_needUpdateFlag)
             {
-                System.Diagnostics.Process.Start(prodPath + "\\" + "程序更新.exe", "\"" + prodName.Trim() + "\" \"" + prodVersion.Trim() + "\" \"" + prodPath + "\" \"" + _conStr + "\" \"" + pid + "\"");
+                Process.Start(prodPath + "\\" + "程序更新.exe", "\"" + prodName.Trim() + "\" \"" + prodVersion.Trim() + "\" \"" + prodPath + "\" \"" + _conStr + "\" \"" + pid + "\"");
             }
         }
         #endregion
@@ -127,20 +168,20 @@ namespace HarveyZ
 
         public static void ProgUpdate(string ProgName, string UpdateUrl)
         {
-            string Path = System.IO.Directory.GetCurrentDirectory();
+            string Path = Directory.GetCurrentDirectory();
             try
             {
                 string[] arg = new string[2];
                 arg[0] = UpdateUrl;
                 arg[1] = ProgName;
                 StartProcess(Path + "\\" + "AutoUpdate.exe", arg);
-                System.Environment.Exit(0);
+                Environment.Exit(0);
             }
             catch (Win32Exception)
             {
                 if (MessageBox.Show("找不到更新软件，程序即将退出!", "错误", MessageBoxButtons.OK) == DialogResult.OK)
                 {
-                    System.Environment.Exit(0);
+                    Environment.Exit(0);
                 }
             }
 
@@ -148,13 +189,83 @@ namespace HarveyZ
         #endregion
     }
 
-
-    public class FormOpt
+    public class HttpDownloadFile
     {
+        public static void Download(string url, string fileName)
+        {
+            WebClient client = new WebClient();
+            string URLAddress = url;
+            string path = Directory.GetCurrentDirectory();
 
+            if (Directory.Exists(path + @"\temp") == false)//如果不存在就创建file文件夹
+            {
+                Directory.CreateDirectory(path + @"\temp");
+            }
+            string FilePath = path + @"\temp\" + Path.GetFileName(URLAddress);
+
+            //下载文件
+            client.DownloadFile(URLAddress, FilePath);
+
+            var kk = System.IO.Path.GetFileName(URLAddress).Split('.');
+            string LastName = kk[kk.Length - 1];
+            string filePath1 = path + @"\temp\" + fileName;
+            string filePath2 = path + @"\" + fileName;
+            FileInfo fi1 = new FileInfo(filePath1);
+            FileInfo fi2 = new FileInfo(filePath2);
+            try
+            {
+
+                //Ensure that the target does not exist.
+                fi2.Delete();
+
+                //Copy the file.
+                fi1.CopyTo(filePath2, true);
+            }
+            catch
+            {
+                if (MessageBox.Show("程序替换失败，请联系资讯部！\r\n更新程序即将退出！", "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
     }
+    
+    public class FileVersion
+    {
+        public static void JudgeFile(string url, DataTable fileDt)
+        {
+            string path = Directory.GetCurrentDirectory();
+            if (Directory.Exists(path + @"\temp") == false)//如果不存在就创建file文件夹
+            {
+                Directory.CreateDirectory(path + @"\temp");
+            }
 
+            foreach (DataRow dr in fileDt.Rows)
+            {
+                GetFile(url, path, dr["FileName"].ToString(), dr["FileVersion"].ToString());
+            }
+            Directory.Delete(path + @"\temp\", true);
+        }
 
+        private static void GetFile(string url, string path, string fileName, string fileVersion)
+        {
+            if (File.Exists(path + @"\" + fileName))
+            {
+                FileVersionInfo info = FileVersionInfo.GetVersionInfo(path + @"\" + fileName);
+                //产品版本不一致
+                if (info.ProductVersion != fileVersion)
+                {
+                    HttpDownloadFile.Download(url + fileName, fileName);
+                }
+            }
+            else
+            {
+                HttpDownloadFile.Download(url + fileName, fileName);
+            }
+        }
+    }
+    
     public class FileOpt
     {
         public static bool OpenFile(string filter, out string filePath, out string fileName)
@@ -258,8 +369,7 @@ namespace HarveyZ
             return rtnStr;
         }
     }
-
-
+    
     public class DgvOpt
     {
         #region 行背景颜色
@@ -311,7 +421,7 @@ namespace HarveyZ
                 }
 
                 //其余列设置为可写
-                SetColWritable(dgv, ListOpt.ListDif(dgvList, colList));
+                //SetColWritable(dgv, ListOpt.ListDif(dgvList, colList));
             }
         }
 
@@ -391,13 +501,16 @@ namespace HarveyZ
             }
             if (dgv != null)
             {
+                //先将所有列readonly
+                SetColReadonly(dgv, dgvList);
+
                 foreach (int col in colList)
                 {
                     SetColWritable(dgv, col);
                 }
 
                 //其余列设置为只读
-                SetColReadonly(dgv, ListOpt.ListDif(dgvList, colList));
+                //SetColReadonly(dgv, ListOpt.ListDif(dgvList, colList));
             }
         }
 
@@ -745,8 +858,7 @@ namespace HarveyZ
         }
         #endregion
     }
-
-
+    
     public class DtOpt
     {
         public static void DtDateFormat(DataTable Dt, List<int> FormatList)

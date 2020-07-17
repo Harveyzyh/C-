@@ -14,7 +14,7 @@ namespace 联友生产辅助工具.生产日报表
     public partial class 日报表修改 : Form
     {
         Mssql mssql = new Mssql();
-        public static string strConnection = 日报表新增.strConnection;
+        public static string strConnection = FormLogin.infObj.connWG;
         bool DtpFlag = false;
 
         #region Init
@@ -64,9 +64,9 @@ namespace 联友生产辅助工具.生产日报表
             {
                 string sqlstr = " SELECT B.WGroup AS 工作组, B.Serial AS 系列, Line AS 生产线别, B.PlanNumber AS 计划数量, B.WorkNumber AS 生产数量, B.Workers AS 人数, B.Hours AS 工时, B.StopHours AS 停工工时, B.TotalHours AS 总工时, "
                               + " B.Capacity AS 产量每人每小时, B.OrderID AS 生产单号, B.Remark AS 备注 "
-                              + " FROM WG_DB..SC_DAILYRECORD AS B "
-                              + " LEFT JOIN(SELECT WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup, Serial) AS A ON A.WGroup = B.WGroup AND A.Serial = B.Serial "
-                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
+                              + " FROM dbo.SC_DRY_DAILYRECORD AS B "
+                              + " LEFT JOIN(SELECT WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM dbo.SC_DRY_DAILYRECORD GROUP BY WGroup, Serial) AS A ON A.WGroup = B.WGroup AND A.Serial = B.Serial "
+                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM dbo.SC_DRY_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
                               + " WHERE B.WGroup IN("
                               + XL_List + ")";
 
@@ -136,7 +136,7 @@ namespace 联友生产辅助工具.生产日报表
                 OrderID = DataGridView_List.Rows[Index].Cells[10].Value.ToString();
                 Remark = DataGridView_List.Rows[Index].Cells[11].Value.ToString();
 
-                sqlstr = "SELECT WGroup, Serial FROM WG_DB..SC_DAILYRECORD "
+                sqlstr = "SELECT WGroup, Serial FROM dbo.SC_DRY_DAILYRECORD "
                        + "WHERE 1=1 "
                        + "AND WorkDate = '" + WorkDate + "' "
                        + "AND Serial = '" + Serial + "' "
@@ -166,7 +166,7 @@ namespace 联友生产辅助工具.生产日报表
                 }
                 else
                 {
-                    sqlstr = "UPDATE WG_DB..SC_DAILYRECORD SET "
+                    sqlstr = "UPDATE dbo.SC_DRY_DAILYRECORD SET "
                            + "ModiFier = '" + ModiFier + "', "
                            + "Modi_Date = '" + Modi_Date + "', "
                            + "PlanNumber = '" + PlanNumber + "', "
@@ -196,7 +196,7 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportUpdateXLSelect_Click(object sender, EventArgs e)
         {
-            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_XL2GY";
+            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM dbo.SC_DRY_XL2GY";
 
             Form formxl = new 日报表获取组别系列(sqlstr);
             formxl.ShowDialog();

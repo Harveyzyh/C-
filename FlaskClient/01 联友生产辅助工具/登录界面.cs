@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 
@@ -26,15 +28,19 @@ namespace HarveyZ
             //判断是否在debug模式
             #if DEBUG
             infObj.testFlag = true;
-            this.Text += "    -DEBUG";
             #endif
+            
+            if (infObj.testFlag)
+            {
+                this.Text += "     -DEBUG";
+            }
+
+            if (infObj.remoteFlag)
+            {
+                this.Text += "     -Remote";
+            }
 
             FormLogin_Init(); //配置信息获取
-            
-            if (main.GetNewVersion())
-            {
-                UpdateMe.ProgUpdate(infObj.progName, infObj.updateHost + @"/download/" + infObj.progName + ".exe");
-            }
 
             labelVersion.Text = "Ver: " + infObj.progVer;
 
@@ -43,6 +49,43 @@ namespace HarveyZ
 
             textBoxUid.Text = infObj.userId;
             textBoxUid.SelectAll();
+
+            //添加组件列表
+            DataRow dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "AutoUpdate.exe"; dr["FileVersion"] = "1.0.0.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "ICSharpCode.SharpZipLib.dll";dr["FileVersion"] = "0.86.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "Microsoft.CSharp.dll"; dr["FileVersion"] = "4.0.30319.1";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "Microsoft.Office.Interop.Excel12.dll"; dr["FileVersion"] = "12.0.4518.1014";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "NPOI.dll"; dr["FileVersion"] = "2.0.0.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "NPOI.OOXML.dll"; dr["FileVersion"] = "2.0.0.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "NPOI.OpenXml4Net.dll"; dr["FileVersion"] = "2.0.0.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "NPOI.OpenXmlFormats.dll"; dr["FileVersion"] = "2.0.0.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "NPOI.xml"; dr["FileVersion"] = "";
+            infObj.componentFileDt.Rows.Add(dr);
+
+            FileVersion.JudgeFile(infObj.updateHost+ @"/download/", infObj.componentFileDt);
+
+            //更新程序
+            if (main.GetNewVersion())
+            {
+                UpdateMe.ProgUpdate(infObj.progName, infObj.updateHost + @"/download/" + infObj.progName + ".exe");
+            }
         }
 
         #endregion
@@ -162,7 +205,7 @@ namespace HarveyZ
         {
             bool Exist;//定义一个bool变量，用来表示是否已经运行
                        //创建Mutex互斥对象
-            System.Threading.Mutex newMutex = new System.Threading.Mutex(true, "仅一次", out Exist);
+            Mutex newMutex = new Mutex(true, "仅一次", out Exist);
             if (Exist)//如果没有运行
             {
                 newMutex.ReleaseMutex();//运行新窗体
@@ -333,11 +376,30 @@ namespace HarveyZ
         private List<string> _userPermList = new List<string> { };
         private List<string> _menuItemList = new List<string> { };
 
+        private DataTable _componentFileDt = new DataTable();
+
         private ERP_UserLogin _userLogin = null;
         private UserPermission _userPermission = null;
 
+        /// <summary>
+        /// Class InfoObject 初始化
+        /// </summary>
+        public InfoObject()
+        {
+            _componentFileDt.Columns.Add("FileName", Type.GetType("System.String"));
+            _componentFileDt.Columns.Add("FileVersion", Type.GetType("System.String"));
+        }
+
+        /// <summary>
+        /// 是否为远端登录flag
+        /// </summary>
         public bool remoteFlag { get { return _remoteFlag; } set { _remoteFlag = value; } }
+
+        /// <summary>
+        /// 应用程序所处的绝对路径
+        /// </summary>
         public string localPath { get { return _localPath; } set { _localPath = value; } }
+
 
         public string userPwd { get { return _userPwd; } set { _userPwd = value; } }
 
@@ -345,13 +407,39 @@ namespace HarveyZ
 
         public bool connFlag { get { return _connFlag; } set { _connFlag = value; } }
 
+        /// <summary>
+        /// 软件所处于的模式，区分ERP和Client
+        /// </summary>
         public string systemType { get { return _systemType; } set { _systemType = value; } }
 
+        /// <summary>
+        /// 初始化ini文件所在目录，绝对路径
+        /// </summary>
         public string mainIniFilePath { get { return _mainIniFilePath; } set { _mainIniFilePath = value; } }
+
+        /// <summary>
+        /// 用户拥有的权限
+        /// </summary>
         public List<string> userPermList { get { return _userPermList; } set { _userPermList = value; } }
+
+        /// <summary>
+        /// 菜单栏的所有项目
+        /// </summary>
         public List<string> menuItemList { get { return _menuItemList; } set { _menuItemList = value; } }
 
+        /// <summary>
+        /// 应用程序必须组件的存储dt
+        /// </summary>
+        public DataTable componentFileDt { get { return _componentFileDt; } set { _componentFileDt = value; } }
+
+        /// <summary>
+        /// 用户登录的模块
+        /// </summary>
         public ERP_UserLogin userLogin { get { return _userLogin; } set { _userLogin = value; } }
+
+        /// <summary>
+        /// 用户权限模块
+        /// </summary>
         public UserPermission userPermission { get { return _userPermission; } set { _userPermission = value; } }
 
     }

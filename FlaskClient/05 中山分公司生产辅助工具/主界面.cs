@@ -287,7 +287,7 @@ namespace HarveyZ
         #region 销售管理
         private void 销售管理_导入客户订单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            导入客户订单 frm = new 导入客户订单();
+            录入客户订单 frm = new 录入客户订单();
             FormOpenInit(frm);
             frm.Show();
         }

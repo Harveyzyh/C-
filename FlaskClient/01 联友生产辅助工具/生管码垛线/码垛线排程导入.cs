@@ -77,6 +77,10 @@ namespace 联友生产辅助工具.生管码垛线
         private void btnSyncFromPlan_Click(object sender, EventArgs e)
         {
             SyncFromPlan();
+
+            DgvShow(true);
+
+            MessageBox.Show("同步工作已完成", "完成");
         }
 
         private void btnSyncBoxCode_Click(object sender, EventArgs e)
@@ -85,6 +89,30 @@ namespace 联友生产辅助工具.生管码垛线
             SetTypeCode();
             //MdHandelClass.GetBoxCode();
             dc1.Invoke();
+            DgvShow(true);
+            MessageBox.Show("更新完成", "提示");
+        }
+
+        private void btnOutput_Click(object sender, EventArgs e)
+        {
+            Excel excel = new Excel();
+            Excel.Excel_Base excelObj = new Excel.Excel_Base();
+
+            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.defauleFileName = "生产日报表导出_" + DateTime.Now.ToString("yyyy-MM-dd");
+            excelObj.isWrite = true;
+
+            if (excel.ExcelOpt(excelObj))
+            {
+                if (excelObj.status)
+                {
+                    Msg.Show("Excel导出成功！");
+                }
+                else
+                {
+                    MessageBox.Show(excelObj.msg, "错误");
+                }
+            }
         }
         #endregion
 
@@ -164,9 +192,6 @@ namespace 联友生产辅助工具.生管码垛线
             SetTypeCode();
 
             SetBoxCode();
-            
-            DgvShow(true);
-            MessageBox.Show("同步工作已完成", "完成");
         }
         #endregion
 
@@ -231,7 +256,7 @@ namespace 联友生产辅助工具.生管码垛线
 
                 string sqlstrUdtSc040 = @"UPDATE ROBOT_TEST.dbo.SCHEDULE SET SC040 = '{1}', SC038 = 'Y' WHERE SC001 = '{0}' ";
 
-                string sqlstrUdtSc036 = @"UPDATE ROBOT_TEST.dbo.SCHEDULE SET SC036 = ISNULL(BoxCode, 'NULL') FROM dbo.SCHEDULE LEFT JOIN ROBOT_TEST.dbo.BoxSizeCode ON BoxSize = SC040 WHERE SC001 = '{0}'";
+                string sqlstrUdtSc036 = @"UPDATE ROBOT_TEST.dbo.SCHEDULE SET SC036 = ISNULL(BoxCode, 'NULL') FROM dbo.SCHEDULE LEFT JOIN ROBOT_TEST.dbo.BoxSizeCode ON BoxSize = SC040 WHERE (SC036 = 'NULL' OR SC036 = '' OR SC036 IS NULL) ";
 
                 //构建纸箱名称的sql语句
                 DataTable dtBoxName = mssql.SQLselect(connMD, sqlstrBoxName);
@@ -250,7 +275,7 @@ namespace 联友生产辅助工具.生管码垛线
                 }
                 else
                 {
-                    return;
+                    boxNameStr = " 1=1 ";
                 }
 
 
@@ -280,8 +305,8 @@ namespace 联友生产辅助工具.生管码垛线
                         }
 
                         mssql.SQLexcute(connMD, string.Format(sqlstrUdtSc040, sc001, sc040));
-                        mssql.SQLexcute(connMD, string.Format(sqlstrUdtSc036, sc001));
                     }
+                    mssql.SQLexcute(connMD, sqlstrUdtSc036);
                 }
             }
 

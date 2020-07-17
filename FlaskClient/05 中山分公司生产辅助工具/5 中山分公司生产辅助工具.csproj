@@ -112,6 +112,18 @@
     <Compile Include="登录界面.designer.cs">
       <DependentUpon>登录界面.cs</DependentUpon>
     </Compile>
+    <Compile Include="销售管理\录入客户订单-获取单据信息.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="销售管理\录入客户订单-获取单据信息.Designer.cs">
+      <DependentUpon>录入客户订单-获取单据信息.cs</DependentUpon>
+    </Compile>
+    <Compile Include="销售管理\录入客户订单.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="销售管理\录入客户订单.Designer.cs">
+      <DependentUpon>录入客户订单.cs</DependentUpon>
+    </Compile>
     <Compile Include="销售管理\录入销退单.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,12 +154,6 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="销售管理\导入客户订单.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="销售管理\导入客户订单.Designer.cs">
-      <DependentUpon>导入客户订单.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -164,6 +170,12 @@
     <EmbeddedResource Include="登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="销售管理\录入客户订单-获取单据信息.resx">
+      <DependentUpon>录入客户订单-获取单据信息.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="销售管理\录入客户订单.resx">
+      <DependentUpon>录入客户订单.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="销售管理\录入销退单.resx">
       <DependentUpon>录入销退单.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,9 +190,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="管理\权限管理.resx">
       <DependentUpon>权限管理.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="销售管理\导入客户订单.resx">
-      <DependentUpon>导入客户订单.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

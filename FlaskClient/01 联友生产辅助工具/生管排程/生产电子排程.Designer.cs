@@ -43,6 +43,7 @@
             this.CmBoxDptType = new System.Windows.Forms.ComboBox();
             this.LabelReportSelectDpt = new System.Windows.Forms.Label();
             this.LabelReportSelectStartDate = new System.Windows.Forms.Label();
+            this.labelSlSum = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.labelSlSum);
             this.PanelTitle.Controls.Add(this.TxBoxName);
             this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.TxBoxOrder);
@@ -93,7 +95,7 @@
             this.PanelTitle.Controls.Add(this.LabelReportSelectStartDate);
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Name = "PanelTitle";
-            this.PanelTitle.Size = new System.Drawing.Size(830, 75);
+            this.PanelTitle.Size = new System.Drawing.Size(1027, 75);
             this.PanelTitle.TabIndex = 4;
             // 
             // TxBoxName
@@ -185,13 +187,6 @@
             this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmBoxDptType.Font = new System.Drawing.Font("宋体", 12F);
             this.CmBoxDptType.FormattingEnabled = true;
-            this.CmBoxDptType.Items.AddRange(new object[] {
-            "生产一部",
-            "生产二部",
-            "生产三部",
-            "生产四部",
-            "生产五部",
-            "全部"});
             this.CmBoxDptType.Location = new System.Drawing.Point(210, 41);
             this.CmBoxDptType.Name = "CmBoxDptType";
             this.CmBoxDptType.Size = new System.Drawing.Size(147, 24);
@@ -218,11 +213,20 @@
             this.LabelReportSelectStartDate.TabIndex = 15;
             this.LabelReportSelectStartDate.Text = "起始日期：";
             // 
+            // labelSlSum
+            // 
+            this.labelSlSum.AutoSize = true;
+            this.labelSlSum.Location = new System.Drawing.Point(858, 45);
+            this.labelSlSum.Name = "labelSlSum";
+            this.labelSlSum.Size = new System.Drawing.Size(97, 15);
+            this.labelSlSum.TabIndex = 24;
+            this.labelSlSum.Text = "订单总数量：";
+            // 
             // 生产电子排程
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 396);
+            this.ClientSize = new System.Drawing.Size(1138, 396);
             this.Controls.Add(this.PanelTitle);
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);
@@ -254,6 +258,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TxBoxOrder;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelSlSum;
     }
 }
 

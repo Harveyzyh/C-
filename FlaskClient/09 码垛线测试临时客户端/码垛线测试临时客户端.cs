@@ -121,7 +121,7 @@ namespace 码垛线测试临时客户端
                 dgv_Main.DataSource = null;
             }
             string sqlstr = "SELECT SC.SC001 订单号, SUBSTRING(SC003,1, 4) + '-' + SUBSTRING(SC003, 5, 2) + '-' + SUBSTRING(SC003, 7, 2) 生产日期, "
-                            + "SC010 品名, SC013 数量, SC036 纸箱编码, "
+                            + "SC010 品名, SC013 数量, SC036 纸箱编码, SC040 纸箱尺寸, "
                             + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
                             + "FROM SCHEDULE AS SC "
@@ -167,14 +167,13 @@ namespace 码垛线测试临时客户端
                     btn_Test_Save.Enabled = true;
                     dgv_Main.ReadOnly = false;
                     dgv_Main.Columns[0].Width = 130;
-                    dgv_Main.Columns[0].ReadOnly = true;
-                    dgv_Main.Columns[1].ReadOnly = true;
-                    dgv_Main.Columns[6].ReadOnly = true;
-                    dgv_Main.Columns[7].ReadOnly = true;
-                    dgv_Main.Columns[8].ReadOnly = true;
-                    dgv_Main.Columns[9].ReadOnly = true;
-                    dgv_Main.Columns[10].ReadOnly = true;
-                    dgv_Main.Columns[11].ReadOnly = true;
+                    List<int> list = new List<int>();
+                    list.Add(3);
+                    list.Add(4);
+                    list.Add(5);
+                    list.Add(6);
+                    list.Add(7);
+                    DgvOpt.SetColWritable(dgv_Main, list);
                 }
                 else
                 {
@@ -183,13 +182,14 @@ namespace 码垛线测试临时客户端
                 }
                 dgv_Main.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgv_Main.Columns[0].Width = 130;
-                dgv_Main.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                DgvOpt.SetColMiddleCenter(dgv_Main, "生产日期");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "数量");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "纸箱编码");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "纸箱尺寸");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "订单编码");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "栈板号");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "已过机数量");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "已完成");
                 dgv_Main.Columns[10].Width = 135;
                 dgv_Main.Columns[11].Width = 135;
             }
@@ -202,13 +202,13 @@ namespace 码垛线测试临时客户端
 
         private void Save_Test()
         {
-            string sqlstr = "UPDATE SCHEDULE SET SC013 = '{1}', SC036 = '{2}', SC037 = '{3}', SC010 = '{4}' WHERE SC001 = '{0}'";
+            string sqlstr = "UPDATE SCHEDULE SET SC013 = '{1}', SC010 = '{2}', SC036 = '{3}', SC037 = '{4}', SC040 = '{5}' WHERE SC001 = '{0}'";
             string sql_tmp = null;
             int Count = Main_dt.Rows.Count;
             int Index = 0;
             for(Index = 0; Index < Count; Index++)
             {
-                sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index][0], Main_dt.Rows[Index][3], Main_dt.Rows[Index][4], Main_dt.Rows[Index][5], Main_dt.Rows[Index][2]);
+                sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index]["订单号"], Main_dt.Rows[Index]["数量"], Main_dt.Rows[Index]["品名"], Main_dt.Rows[Index]["纸箱编码"], Main_dt.Rows[Index]["订单编码"], Main_dt.Rows[Index]["纸箱尺寸"]);
                 mssql.SQLexcute(strConnection_ROBOT, sql_tmp);
             }
             MessageBox.Show("已保存！", "提示");

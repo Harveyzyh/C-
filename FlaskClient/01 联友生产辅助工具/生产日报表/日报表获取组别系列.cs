@@ -12,7 +12,7 @@ namespace 联友生产辅助工具.生产日报表
 {
     public partial class 日报表获取组别系列 : Form
     {
-        public string strConnection = 日报表新增.strConnection;
+        public string strConnection = FormLogin.infObj.connWG;
 
         Mssql mssql = new Mssql();
 

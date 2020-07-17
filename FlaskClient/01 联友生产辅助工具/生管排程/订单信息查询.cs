@@ -91,10 +91,11 @@ namespace 联友生产辅助工具.生管排程
 
             if (!CmBoxType.Items.Contains(CmBoxType.Text))
             {
-                MessageBox.Show("订单类型选择错误， 请重新选择", "错误");
+                Msg.ShowErr("订单类型选择错误， 请重新选择");
             }
             else
             {
+                DgvMain.DataSource = null;
                 DataTable showDt = mssql.SQLselect(connCOMFORT, sqlstr);
 
                 if (showDt != null)
@@ -108,7 +109,7 @@ namespace 联友生产辅助工具.生管排程
                 }
                 else
                 {
-                    MessageBox.Show("没有查询到数据", "提示", MessageBoxButtons.OK);
+                    Msg.ShowErr("没有查询到数据");
                     BtnOutput.Enabled = false;
                 }
             }
@@ -121,38 +122,21 @@ namespace 联友生产辅助工具.生管排程
 
         private void BtnOutput_Click(object sender, EventArgs e)
         {
+            Excel excel = new Excel();
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
+            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.defauleFileName = "订单信息导出_" + CmBoxType.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd");
+            excelObj.isWrite = true;
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            saveFileDialog.Filter = "Excel 2007|*.xlsx";
-            saveFileDialog.FileName = "订单信息导出_" + CmBoxType.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd");
-            saveFileDialog.RestoreDirectory = true;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (excel.ExcelOpt(excelObj))
             {
-                try
+                if (excelObj.status)
                 {
-                    if (DgvMain.DataSource != null)
-                    {
-                        DataTable dttmp = (DataTable)DgvMain.DataSource;
-
-                        excelObj.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
-                        excelObj.fileName = Path.GetFileName(saveFileDialog.FileName);
-                        excelObj.isWrite = true;
-                        excelObj.cellDt = dttmp;
-
-                        Excel excel = new Excel();
-                        excel.ExcelOpt(excelObj);
-                        MessageBox.Show("Excel导出成功！", "提示");
-                    }
-                    else
-                    {
-                        MessageBox.Show("导出失败，没找到数据来源", "错误");
-                    }
+                    Msg.Show("Excel导出成功！");
                 }
-                catch (IOException)
+                else
                 {
-                    MessageBox.Show("文件保存失败,请确保该文件没被打开！", "错误");
+                    Msg.ShowErr(excelObj.msg);
                 }
             }
         }

@@ -1,0 +1,19 @@
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\4 码垛线-ERP单据生成程序.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\码垛线_ERP单据生成程序.FastReportPreview.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\码垛线_ERP单据生成程序.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\码垛线_ERP单据生成程序.码垛线_ERP单据生成程序.resources
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\4 码垛线-ERP单据生成程序.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\码垛线-ERP单据生成程序.exe
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\码垛线-ERP单据生成程序.pdb
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\FastReport.Bars.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\FastReport.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\FastReport.Editor.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\FastReport.VSDesign.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\System.Data.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\System.Deployment.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\System.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\System.Drawing.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\System.Xml.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Debug\FastReport.Web.dll
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\码垛线-ERP单据生成程序.exe
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Debug\码垛线-ERP单据生成程序.pdb

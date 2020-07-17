@@ -30,3 +30,11 @@ C:\Users\CM-ZXB-03\Desktop\FlaskClient\9 码垛线测试临时客户端\obj\Rele
 C:\Users\CM-ZXB-03\Desktop\FlaskClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.码垛线测试临时客户端.resources
 C:\Users\CM-ZXB-03\Desktop\FlaskClient\9 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.Properties.Resources.resources
 C:\Users\CM-ZXB-03\Desktop\FlaskClient\9 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.exe
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.pdb
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.exe
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.pdb
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.码垛线测试临时客户端.resources
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Release\9 码垛线测试临时客户端.csproj.GenerateResource.Cache

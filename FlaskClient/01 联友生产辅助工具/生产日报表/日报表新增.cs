@@ -14,7 +14,7 @@ namespace 联友生产辅助工具.生产日报表
     public partial class 日报表新增 : Form
     {
         Mssql mssql = new Mssql();
-        public static string strConnection = FormLogin.infObj.connMD;
+        public static string strConnection = FormLogin.infObj.connWG;
         bool DtpFlag = false;
 
         #region Init
@@ -206,10 +206,10 @@ namespace 联友生产辅助工具.生产日报表
                 string sqlstr = " SELECT A.WGroup AS 工作组, A.Serial AS 系列, A.Line AS 生产线别,  "
                               + " '0' AS 计划数量, '0' AS 生产数量, '0' AS 人数, '0' AS 工时, '0' AS 停工工时, '0' AS 总工时, "
                               + " '0' AS 产量每人每小时, '' AS 生产单号, '' AS 备注 "
-                              + " FROM WG_DB..SC_LineList AS A"
-                              + " LEFT JOIN(SELECT WorkDpt, WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WorkDpt, WGroup, Serial) "
+                              + " FROM dbo.SC_DRY_LineList AS A"
+                              + " LEFT JOIN(SELECT WorkDpt, WGroup, Serial, SUM(CONVERT(INT, WorkNumber)) AS S FROM dbo.SC_DRY_DAILYRECORD GROUP BY WorkDpt, WGroup, Serial) "
                               + " AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND A.Dpt = B.WorkDpt "
-                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM WG_DB..SC_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
+                              + " LEFT JOIN (SELECT WGroup, SUM(CONVERT(INT, WorkNumber)) AS S FROM dbo.SC_DRY_DAILYRECORD GROUP BY WGroup) AS C ON C.WGroup = B.WGroup "
                               + " WHERE 1 = 1 "
                               + " AND A.Dpt = '" + FormLogin.infObj.userDpt + "' "
                               + " AND A.Valid = 1 "
@@ -287,7 +287,7 @@ namespace 联友生产辅助工具.生产日报表
                     OrderID = DataGridView_List.Rows[Index].Cells[10].Value.ToString();
                     Remark = DataGridView_List.Rows[Index].Cells[11].Value.ToString();
 
-                    sqlstr = "INSERT INTO WG_DB..SC_DAILYRECORD (Creator, Create_Date, WorkDpt, WorkDate, WGroup, Serial, Line, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark)"
+                    sqlstr = "INSERT INTO dbo.SC_DRY_DAILYRECORD (Creator, Create_Date, WorkDpt, WorkDate, WGroup, Serial, Line, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark)"
                            + "VALUES("
                            + "'" + Creator + "', "
                            + "'" + Create_Date + "', "
@@ -315,7 +315,7 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportInputXLSelect_Click(object sender, EventArgs e)//选择系列
         {
-            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_XL2GY";
+            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM dbo.SC_DRY_XL2GY";
 
             Form formxl = new 日报表获取组别系列(sqlstr);
             formxl.ShowDialog();

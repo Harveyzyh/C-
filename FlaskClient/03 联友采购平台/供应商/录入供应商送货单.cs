@@ -456,12 +456,18 @@ namespace 联友采购平台.供应商
             excelObj.isTitleRow = true;
             excelObj.isWrite = false;
 
-            excel.ExcelOpt(excelObj);
-
-            if (excelObj.status == "Yes")
+            if (excel.ExcelOpt(excelObj))
             {
-                DataTable dt = excelObj.cellDt;
-                return dt;
+                if (excelObj.status)
+                {
+                    DataTable dt = excelObj.dataDt;
+                    return dt;
+                }
+                else
+                {
+                    MessageBox.Show(excelObj.msg, "错误");
+                    return null;
+                }
             }
             else
             {
@@ -482,15 +488,20 @@ namespace 联友采购平台.供应商
                 for (int colIndex = 0; colIndex < dt.Columns.Count; colIndex++)
                 {
                     dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace(" ", "");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("\n", "");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("\t", "");
                     dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("采购数量", "送货量");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("送货数量", "送货量");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("送货数", "送货量");
+                    dt.Columns[colIndex].ColumnName = dt.Columns[colIndex].ColumnName.Replace("送货量", "送货量");
 
                     if (dt.Columns[colIndex].ColumnName == "品号") isPhFlag = true;
                     if (dt.Columns[colIndex].ColumnName == "送货量") isSlFlag = true;
                 }
 
-                if (! (isPhFlag && isSlFlag))
+                if (!(isPhFlag && isSlFlag))
                 {
-                    MessageBox.Show("导入的表格表头不存在“品号”或“送货数量”，请检查。", "错误", MessageBoxButtons.OK);
+                    MessageBox.Show("导入的表格表头不存在“品号”或“送货量”，请检查。", "错误", MessageBoxButtons.OK);
                     return null;
                 }
 
@@ -504,19 +515,41 @@ namespace 联友采购平台.供应商
                 dtNew.Columns.Add(new DataColumn("品号".ToString(), typeof(string)));
                 dtNew.Columns.Add(new DataColumn("送货量".ToString(), typeof(float)));
 
-                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
                 {
-                    dr = dtNew.NewRow();
-                    if(pn != dt.Rows[rowIndex]["品号"].ToString())
+                    if (dt.Rows[rowIndex]["品号"].ToString() != "")
                     {
-                        pn = dt.Rows[rowIndex]["品号"].ToString();
-                        dr["品号"] = pn;
-                        dr["送货量"] = float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
-                        dtNew.Rows.Add(dr);
+                        if (pn != dt.Rows[rowIndex]["品号"].ToString())
+                        {
+                            dr = dtNew.NewRow();
+                            pn = dt.Rows[rowIndex]["品号"].ToString();
+                            dr["品号"] = pn;
+                            try
+                            {
+                                dr["送货量"] = float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+                                dtNew.Rows.Add(dr);
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                float sl = float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+                                dtNew.Rows[dtNew.Rows.Count - 1]["送货量"] = float.Parse(dtNew.Rows[dtNew.Rows.Count - 1]["送货量"].ToString()) + sl;
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+                        }
                     }
                     else
                     {
-                        dtNew.Rows[dtNew.Rows.Count - 1]["送货量"] = float.Parse(dtNew.Rows[dtNew.Rows.Count - 1]["送货量"].ToString()) + float.Parse(dt.Rows[rowIndex]["送货量"].ToString());
+                        continue;
                     }
                 }
             }

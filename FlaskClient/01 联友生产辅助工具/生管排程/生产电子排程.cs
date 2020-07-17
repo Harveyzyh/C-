@@ -33,6 +33,7 @@ namespace 联友生产辅助工具.生管排程
             BtnOutput.Enabled = false;
             DtpEndDate.Checked = false;
             DgvShow();
+            SetCmBoxDptTypeList();
         }
 
         #region 窗口大小变化设置
@@ -56,6 +57,20 @@ namespace 联友生产辅助工具.生管排程
         #endregion
 
         #region 逻辑设计
+        private void SetCmBoxDptTypeList()
+        {
+            string sqlstr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by [Index]";
+            DataTable dt = mssql.SQLselect(connWG, sqlstr);
+            if (dt != null)
+            {
+                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    CmBoxDptType.Items.Add(dt.Rows[rowIndex][0].ToString());
+                }
+                CmBoxDptType.SelectedIndex = 0;
+            }
+        }
+
         private bool CheckDt(DataTable dt)
         {
             if(dt.Columns.Count != 28)
@@ -183,8 +198,8 @@ namespace 联友生产辅助工具.生管排程
 
         private void SqlInsertWork(string WorkDate, DataTable dt)
         {
-            string sqlstrDel = @"DELETE FROM WG_DB..SC_PLAN WHERE SC003 >= '{0}' AND SC023 = '{1}'";
-            string sqlstrInsert = @"INSERT INTO WG_DB..SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
+            string sqlstrDel = @"DELETE FROM WG_DB.dbo.SC_PLAN WHERE SC003 >= '{0}' AND SC023 = '{1}'";
+            string sqlstrInsert = @"INSERT INTO WG_DB.dbo.SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
                                     VALUES ('{0}', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), 
                                     '{1}', '{2}', '{3}', '{4}', '{5}') ";
             mssql.SQLexcute(connWG, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
@@ -247,8 +262,6 @@ namespace 联友生产辅助工具.生管排程
 
         private void DgvShow() //数据库资料显示到界面
         {
-            List<string> dptList = new List<string>{"生产一部", "生产二部", "生产三部", "生产四部", "生产五部" };
-
             string sqlstrShow = @" SELECT SUBSTRING(CREATE_DATE, 1, 8) 导入日期, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
                                     SC012 规格, SC011 保友品名, SC013 订单数量, SC014 赠品测试量, SC015 配置方案, 
                                     SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
@@ -259,7 +272,7 @@ namespace 联友生产辅助工具.生管排程
             if (TxBoxName.Text != "") sqlstrShow += @" AND SC010 LIKE '%" + TxBoxName.Text + "%' ";
             if (DtpStartDate.Checked) sqlstrShow += @" AND SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";
             if (DtpEndDate.Checked) sqlstrShow += @" AND SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
-            if (dptList.Contains(CmBoxDptType.Text)) sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
+            if (CmBoxDptType.Text != "全部") sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
             sqlstrShow += " ORDER BY SUBSTRING(CREATE_DATE, 1, 8), SC003, SC001 ";
             DataTable showDt = mssql.SQLselect(connWG, sqlstrShow);
 
@@ -270,14 +283,34 @@ namespace 联友生产辅助工具.生管排程
                 DgvOpt.SetRowBackColor(DgvMain);
                 DgvMain.Columns[3].Width = 180;
                 BtnOutput.Enabled = true;
+
+                float slSum = 0;
+                for (int rowIndex = 0; rowIndex < showDt.Rows.Count; rowIndex++)
+                {
+                    try
+                    {
+                        slSum += float.Parse(showDt.Rows[rowIndex]["订单数量"].ToString());
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+                labelSlSum.Text = "订单总数量：" + slSum.ToString();
             }
             else
             {
+                labelSlSum.Text = "订单总数量：0";
                 DgvMain.DataSource = null;
                 BtnOutput.Enabled = false;
             }
         }
 
+        /// <summary>
+        /// 根据界面选择的部门，修改dataDt中的部门列
+        /// </summary>
+        /// <param name="Dpt">传入的部门</param>
+        /// <param name="dt">需要处理的dt</param>
         private void SetInputDtDpt(string Dpt, DataTable dt)
         {
             for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
@@ -309,33 +342,22 @@ namespace 联友生产辅助工具.生管排程
                 {
                     Excel excel = new Excel();
                     Excel.Excel_Base excelObj = new Excel.Excel_Base();
+                    excelObj.isTitleRow = true;
+                    excelObj.isWrite = false;
 
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    openFileDialog.Filter = "Excel文件|*.xlsx;*.xls";
-                    openFileDialog.RestoreDirectory = true;
-                    openFileDialog.FilterIndex = 1;
-                   
-
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    if (excel.ExcelOpt(excelObj))
                     {
-                        frm.Show();
 
-                        excelObj.filePath = Path.GetDirectoryName(openFileDialog.FileName);
-                        excelObj.fileName = Path.GetFileName(openFileDialog.FileName);
-                        excelObj.isWrite = false;
-                        excelObj.isTitleRow = true;
-
-                        excel.ExcelOpt(excelObj);
-
-                        if (CheckDt(excelObj.cellDt))
+                        if (excelObj.status == true)
                         {
-                            SetInputDtDpt(Dpt, excelObj.cellDt);
-                            GetInsertDt(excelObj.cellDt);
-                            
+                            SetInputDtDpt(Dpt, excelObj.dataDt);
+                            GetInsertDt(excelObj.dataDt);
                             MessageBox.Show("导入成功", "提示");
                             DgvShow();
+                        }
+                        else
+                        {
+                            Msg.Show(excelObj.msg);
                         }
                     }
                 }
@@ -352,30 +374,21 @@ namespace 联友生产辅助工具.生管排程
 
         private void BtnOutput_Click(object sender, EventArgs e)
         {
+            Excel excel = new Excel();
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
+            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.defauleFileName = "生产排程导出_" + DateTime.Now.ToString("yyyy-MM-dd");
+            excelObj.isWrite = true;
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            saveFileDialog.Filter = "Excel 2007|*.xlsx";
-            saveFileDialog.FileName = "生产排程导出_" + DateTime.Now.ToString("yyyy-MM-dd");
-            saveFileDialog.RestoreDirectory = true;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (excel.ExcelOpt(excelObj))
             {
-                try
+                if (excelObj.status)
                 {
-                    excelObj.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
-                    excelObj.fileName = Path.GetFileName(saveFileDialog.FileName);
-                    excelObj.isWrite = true;
-
-                    excelObj.cellDt = (DataTable)DgvMain.DataSource;
-
-                    Excel excel = new Excel();
-                    excel.ExcelOpt(excelObj);
-                    MessageBox.Show("Excel导出成功！", "提示");
+                    Msg.Show("Excel导出成功！");
                 }
-                catch (IOException)
+                else
                 {
-                    MessageBox.Show("文件保存失败,请确保该文件没被打开！", "错误");
+                    Msg.Show(excelObj.msg, "错误");
                 }
             }
         }

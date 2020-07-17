@@ -13,7 +13,7 @@ namespace 联友生产辅助工具.生产日报表
     public partial class 日报表部门工作组线别维护 : Form
     {
         Mssql mssql = new Mssql();
-        public static string strConnection = FormLogin.infObj.connMD;
+        public static string strConnection = FormLogin.infObj.connWG;
 
         public 日报表部门工作组线别维护()
         {
@@ -70,28 +70,28 @@ namespace 联友生产辅助工具.生产日报表
         #region 逻辑处理
         private void ButtonReflash_Work()
         {
-            string sqlstr_insert = " INSERT INTO WG_DB..SC_LineList (Dpt, WGroup, Serial, Line) "
+            string sqlstr_insert = " INSERT INTO dbo.SC_DRY_LineList (Dpt, WGroup, Serial, Line) "
                           + " SELECT A.Dpt, B.WGroup, B.Serial, A.Line "
-                          + " FROM WG_DB..SC_Dpt2Line AS A "
-                          + " INNER JOIN WG_DB..SC_XL2GY AS B ON B.Valid = 1 "
+                          + " FROM dbo.SC_DRY_Dpt2Line AS A "
+                          + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON B.Valid = 1 "
                           + " AND A.Valid = 1 "
-                          + " AND NOT EXISTS(SELECT 1 FROM WG_DB..SC_LineList AS C WHERE C.[Dpt] = A.[Dpt] "
-                          + " AND C.[WGroup] = B.[WGroup] Collate Chinese_PRC_CS_AS AND C.[Serial] = B.[Serial] Collate Chinese_PRC_CS_AS AND C.[Line] = A.[Line])";
+                          + " AND NOT EXISTS(SELECT 1 FROM dbo.SC_DRY_LineList AS C WHERE C.[Dpt] = A.[Dpt] "
+                          + " AND C.[WGroup] = B.[WGroup] AND C.[Serial] = B.[Serial] AND C.[Line] = A.[Line])";
             mssql.SQLexcute(strConnection, sqlstr_insert);
 
 
             string sqlstr_select = "";
             if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
             {
-                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM WG_DB..SC_LineList AS A "
-                              + " INNER JOIN WG_DB..SC_XL2GY AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND B.Valid = 1 "
+                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
+                              + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND B.Valid = 1 "
                               + " WHERE 1 = 1 "
                               + " AND Dpt = '" + FormLogin.infObj.userDpt + "' ";
             }
             else
             {
-                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM WG_DB..SC_LineList AS A "
-                              + " INNER JOIN WG_DB..SC_XL2GY AS B ON A.WGroup = B.WGroup Collate Chinese_PRC_CS_AS AND A.Serial = B.Serial Collate Chinese_PRC_CS_AS AND B.Valid = 1 ";
+                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
+                              + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND B.Valid = 1 ";
             }
             
             DataTable dt = mssql.SQLselect(strConnection, sqlstr_select);
@@ -113,7 +113,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             string boolStr = "";
             string sqlstr_update = "";
-            string sqlstr_update_tmp = " UPDATE WG_DB..SC_LineList SET Valid = {4} WHERE Dpt = '{0}' AND WGroup = '{1}' AND Serial = '{2}' AND Line = '{3}'; ";
+            string sqlstr_update_tmp = " UPDATE dbo.SC_DRY_LineList SET Valid = {4} WHERE Dpt = '{0}' AND WGroup = '{1}' AND Serial = '{2}' AND Line = '{3}'; ";
 
             for (int rowIndex = 0;rowIndex < DgvMain.RowCount; rowIndex++)
             {

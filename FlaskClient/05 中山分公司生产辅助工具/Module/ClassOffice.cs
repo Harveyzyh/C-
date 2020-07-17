@@ -1,6 +1,7 @@
 ﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
@@ -10,152 +11,118 @@ namespace HarveyZ
 
     public class Excel
     {
-        private Excel_Base newExcel = null;
+        private Excel_Base excel = null;
 
         #region 基类
         public class Excel_Base
         {
-            private string filePath = null;//路径
-            private string fileName = null;//文件名
-            private int sheetIndex = 0;
-            private bool isTitleRow = false;//是否有首行
-            private bool isWrite = false;//是否为写入模式
-            private DataTable titleDt = null;//表头内容
-            private DataTable titleFormat = null;//表头格式
-            private DataTable cellDt = null;//数据内容
-            private string status = null;//打开返回状态
+            private string _filePath = null;//路径
+            private string _fileName = null;//文件名
+            private string _defauleFileName = null;
+            private int _sheetIndex = 0;
+            private bool _isTitleRow = false;//是否有首行
+            private bool _isWrite = false;//是否为写入模式
+            private DataTable _titleDt = null;//表头内容
+            private DataTable _titleFormat = null;//表头格式
+            private DataTable _dataDt = null;//数据内容
+            private bool _status = false;//打开返回状态
+            private string _msg = "";
 
-            public string FilePath
-            {
-                get
-                {
-                    return filePath;
-                }
-                set
-                {
-                    filePath = value;
-                }
-            }
+            /// <summary>
+            /// 绝对路径
+            /// </summary>
+            public string filePath { get { return _filePath; } set { _filePath = value; } }
 
-            public string FileName
-            {
-                get
-                {
-                    return fileName;
-                }
-                set
-                {
-                    fileName = value;
-                }
-            }
+            /// <summary>
+            /// 完整文件名
+            /// </summary>
+            public string fileName { get { return _fileName; } set { _fileName = value; } }
 
-            public int SheetIndex
-            {
-                get
-                {
-                    return sheetIndex;
-                }
-                set
-                {
-                    if (value >= 0)
-                    {
-                        sheetIndex = value;
-                    }
-                }
-            }
+            /// <summary>
+            /// 保存文件时的默认文件名
+            /// </summary>
+            public string defauleFileName { get { return _defauleFileName; } set { _defauleFileName = value; } }
 
-            public bool IsTitleRow
-            {
-                get
-                {
-                    return isTitleRow;
-                }
-                set
-                {
-                    isTitleRow = value;
-                }
-            }
+            /// <summary>
+            /// 页序号
+            /// </summary>
+            public int sheetIndex { get { return _sheetIndex; } set { if (value >= 0) _sheetIndex = value; } }
 
-            public bool IsWrite
-            {
-                get
-                {
-                    return isWrite;
-                }
-                set
-                {
-                    isWrite = value;
-                }
-            }
+            /// <summary>
+            /// 是否存在首行
+            /// </summary>
+            public bool isTitleRow { get { return _isTitleRow; } set { _isTitleRow = value; } }
 
-            public DataTable TitleDt
-            {
-                get
-                {
-                    return titleDt;
-                }
-                set
-                {
-                    titleDt = value;
-                }
-            }
+            /// <summary>
+            /// 是否为写入模式
+            /// </summary>
+            public bool isWrite { get { return _isWrite; } set { _isWrite = value; } }
 
-            public DataTable TitleFormat
-            {
-                get
-                {
-                    return titleFormat;
-                }
-                set
-                {
-                    titleFormat = value;
-                }
-            }
+            public DataTable titleDt { get { return _titleDt; } set { _titleDt = value; } }
 
-            public DataTable CellDt
-            {
-                get
-                {
-                    return cellDt;
-                }
-                set
-                {
-                    cellDt = value;
-                }
-            }
+            public DataTable titleFormat { get { return _titleFormat; } set { _titleFormat = value; } }
 
-            public string Status
-            {
-                get
-                {
-                    return status;
-                }
-                set
-                {
-                    status = value;
-                }
-            }
+            /// <summary>
+            /// 传入或传出的数据内容
+            /// </summary>
+            public DataTable dataDt { get { return _dataDt; } set { _dataDt = value; } }
+
+            /// <summary>
+            /// 处理状态
+            /// </summary>
+            public bool status { get { return _status; } set { _status = value; } }
+
+            /// <summary>
+            /// 返回的异常信息
+            /// </summary>
+            public string msg { get { return _msg; } set { _msg = value; } }
         }
         #endregion
 
         #region Excel操作判断及分类处理
-        public void ExcelOpt(object obj)
+        public bool ExcelOpt(Excel_Base obj)
         {
-            newExcel = (Excel_Base)obj;
-            if (newExcel.IsWrite)
+            excel = obj;
+
+            if (excel.isWrite) //写Excel
             {
-                if (newExcel.CellDt == null)
+                if (excel.fileName == null)
                 {
-                    MessageBox.Show("保存的Excel内容为空！", "错误");
+                    if (SaveFile())
+                    {
+                        OutportExcel();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     OutportExcel();
+                    return true;
                 }
             }
-            else
+            else //读Excel
             {
-                ImportExcel();
+                if (excel.fileName == null)
+                {
+                    if (OpenFile())
+                    {
+                        ImportExcel();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    ImportExcel();
+                    return true;
+                }
             }
         }
         #endregion
@@ -163,23 +130,22 @@ namespace HarveyZ
         #region 读Excel
         private void ImportExcel()
         {
-            string fileName = newExcel.FileName;
-            string filePath = newExcel.FilePath;
-            int sheetIndex = newExcel.SheetIndex;
+            string fileName = excel.fileName;
+            string filePath = excel.filePath;
+            string fullPath = null;
+            int sheetIndex = excel.sheetIndex;
             DataTable cellDt = new DataTable();
             ICell cell = null;
             int rowIndex = 0;
 
-
-            string path = Path.Combine(filePath, fileName);
-
+            fullPath = Path.Combine(filePath, fileName);
 
             try
             {
-                FileStream fsRead = File.OpenRead(path);
+                FileStream fsRead = File.OpenRead(fullPath);
                 IWorkbook wk = null;
                 //获取后缀名
-                string extension = path.Substring(path.LastIndexOf(".")).ToString().ToLower();
+                string extension = fullPath.Substring(fullPath.LastIndexOf(".")).ToString().ToLower();
                 //判断是否是excel文件
                 if (extension == ".xlsx" || extension == ".xls")
                 {
@@ -202,7 +168,7 @@ namespace HarveyZ
                     //创建列
                     for (int i = headrow.FirstCellNum; i < headrow.Cells.Count; i++)
                     {
-                        if (newExcel.IsTitleRow)
+                        if (excel.isTitleRow)
                         {
                             cell = headrow.GetCell(i);
                             cellDt.Columns.Add(GetCellValue(cell).Replace("\n", ""));
@@ -210,13 +176,13 @@ namespace HarveyZ
                         }
                         else
                         {
-                            cellDt.Columns.Add("Col" + (i + 1).ToString());
+                            cellDt.Columns.Add(new DataColumn("Col" + (i + 1).ToString(), typeof(string)));
+                            //cellDt.Columns.Add("Col" + (i + 1).ToString());
                             rowIndex = 0;
                         }
 
                     }
-
-
+                    
                     //读取每行,从第二行起
                     for (int r = rowIndex; r <= sheet.LastRowNum; r++)
                     {
@@ -241,13 +207,18 @@ namespace HarveyZ
                         }
                     }
                 }
-                newExcel.Status = "Yes";
-                newExcel.CellDt = cellDt;
+                excel.status =true;
+                excel.dataDt = cellDt;
             }
             catch (IOException)
             {
-                newExcel.Status = "Error";
-                MessageBox.Show("Excel文件：" + fileName + "已被打开，请先将该文件关闭再执行导入操作！", "错误", MessageBoxButtons.OK);
+                excel.status = false;
+                excel.msg = "Excel文件：" + fileName + "已被打开，请先将该文件关闭再执行导入操作！";
+            }
+            catch(Exception e)
+            {
+                excel.status = false;
+                excel.msg = e.ToString();
             }
         }
 
@@ -267,7 +238,7 @@ namespace HarveyZ
                 case CellType.Numeric: //数字类型
                     if (HSSFDateUtil.IsCellDateFormatted(cell))//日期类型
                     {
-                        return cell.DateCellValue.ToString("yyyy-MM-dd");
+                        return cell.DateCellValue.ToString("yyyyMMdd");
                     }
                     else //其它数字
                     {
@@ -287,7 +258,7 @@ namespace HarveyZ
                     }
                     catch
                     {
-                        return cell.NumericCellValue.ToString();
+                        return cell.StringCellValue.ToString();
                     }
             }
         }
@@ -296,14 +267,19 @@ namespace HarveyZ
         #region 写Excel
         private void OutportExcel()
         {
-            string fileName = newExcel.FileName;
-            string filePath = newExcel.FilePath;
-            int sheetIndex = newExcel.SheetIndex;
-            DataTable cellDt = newExcel.CellDt;
-            DataTable formatDt = newExcel.TitleFormat;
+            string fileName = excel.fileName;
+            string filePath = excel.filePath;
+            int sheetIndex = excel.sheetIndex;
+            DataTable cellDt = excel.dataDt;
 
             string path = Path.Combine(filePath, fileName);
 
+            if (cellDt == null)
+            {
+                excel.status = false;
+                excel.msg = "写入对象为null";
+                return;
+            }
 
             IWorkbook workbook;
             string fileExt = Path.GetExtension(path).ToLower();
@@ -317,14 +293,10 @@ namespace HarveyZ
             {
                 ICell cell = row.CreateCell(i);
                 cell.SetCellValue(cellDt.Columns[i].ColumnName);
-                //if(formatDt != null) // 列宽
-                //{
-
-                //}
             }
 
             //数据  
-            if (cellDt != null)
+            if (cellDt.Rows.Count > 0)
             {
                 for (int i = 0; i < cellDt.Rows.Count; i++)
                 {
@@ -347,6 +319,47 @@ namespace HarveyZ
             {
                 fs.Write(buf, 0, buf.Length);
                 fs.Flush();
+            }
+            excel.status = true;
+        }
+        #endregion
+
+        #region fileDialog
+        public bool OpenFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = "Excel文件|*.xlsx;*.xls";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                excel.filePath = Path.GetDirectoryName(openFileDialog.FileName);
+                excel.fileName = Path.GetFileName(openFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
+
+        public bool SaveFile()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            saveFileDialog.Filter = "Excel 2007|*.xlsx";
+            saveFileDialog.FileName = string.IsNullOrEmpty(excel.defauleFileName) ? "": excel.defauleFileName;
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                excel.filePath = Path.GetDirectoryName(saveFileDialog.FileName);
+                excel.fileName = Path.GetFileName(saveFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         #endregion

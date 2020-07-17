@@ -315,9 +315,6 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.订单类别编码添加.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.纸箱编码添加.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.FormLogin.resources
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描进货单_获取单据信息.resources
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描进货单.resources
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.PDA_扫描领料单.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.Properties.Resources.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表修改.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生产日报表.日报表新增.resources
@@ -329,9 +326,14 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\1 联友生产辅助工具.csproj.GenerateResource.Cache
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Release\联友生产辅助工具.exe
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Release\联友生产辅助工具.pdb
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.扫描进货单_采购平台.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.主界面.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.生管码垛线.码垛线客户端.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.权限管理.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.FastReport模板发布.resources
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.扫描进货单_联友分公司.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.录入进货单_Excel导入.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.录入进货单_联友分公司.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.录入进货单_采购平台.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.录入进货单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.录入进货单.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.仓储中心.扫描领料单.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.报表.销货信息_带入库部门_查询.resources

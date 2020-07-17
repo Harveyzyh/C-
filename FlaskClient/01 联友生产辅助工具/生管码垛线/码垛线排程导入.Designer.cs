@@ -32,10 +32,11 @@
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.btnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnSyncBoxCode = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSyncFromPlan = new System.Windows.Forms.Button();
             this.btnOutput = new System.Windows.Forms.Button();
-            this.btnSyncBoxCode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.btnSyncBoxCode);
             this.PanelTitle.Controls.Add(this.label1);
             this.PanelTitle.Controls.Add(this.btnSyncFromPlan);
@@ -80,14 +82,33 @@
             this.PanelTitle.Controls.Add(this.btnShow);
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Name = "PanelTitle";
-            this.PanelTitle.Size = new System.Drawing.Size(740, 38);
+            this.PanelTitle.Size = new System.Drawing.Size(858, 38);
             this.PanelTitle.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(522, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(157, 15);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "同步或更新用时比较久";
+            // 
+            // btnSyncBoxCode
+            // 
+            this.btnSyncBoxCode.Location = new System.Drawing.Point(390, 4);
+            this.btnSyncBoxCode.Name = "btnSyncBoxCode";
+            this.btnSyncBoxCode.Size = new System.Drawing.Size(125, 30);
+            this.btnSyncBoxCode.TabIndex = 8;
+            this.btnSyncBoxCode.Text = "只更新纸箱信息";
+            this.btnSyncBoxCode.UseVisualStyleBackColor = true;
+            this.btnSyncBoxCode.Click += new System.EventHandler(this.btnSyncBoxCode_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(578, 12);
+            this.label1.Location = new System.Drawing.Point(700, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 15);
             this.label1.TabIndex = 7;
@@ -112,17 +133,7 @@
             this.btnOutput.TabIndex = 5;
             this.btnOutput.Text = "导出";
             this.btnOutput.UseVisualStyleBackColor = true;
-            this.btnOutput.Visible = false;
-            // 
-            // btnSyncBoxCode
-            // 
-            this.btnSyncBoxCode.Location = new System.Drawing.Point(390, 4);
-            this.btnSyncBoxCode.Name = "btnSyncBoxCode";
-            this.btnSyncBoxCode.Size = new System.Drawing.Size(125, 30);
-            this.btnSyncBoxCode.TabIndex = 8;
-            this.btnSyncBoxCode.Text = "只更新纸箱信息";
-            this.btnSyncBoxCode.UseVisualStyleBackColor = true;
-            this.btnSyncBoxCode.Click += new System.EventHandler(this.btnSyncBoxCode_Click);
+            this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
             // 码垛线排程导入
             // 
@@ -152,6 +163,7 @@
         private System.Windows.Forms.Button btnSyncFromPlan;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSyncBoxCode;
+        private System.Windows.Forms.Label label2;
     }
 }
 

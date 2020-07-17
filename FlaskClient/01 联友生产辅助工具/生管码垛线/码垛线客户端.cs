@@ -116,7 +116,7 @@ namespace 联友生产辅助工具.生管码垛线
                 dgv_Main.DataSource = null;
             }
             string sqlstr = "SELECT SC.SC001 订单号, SUBSTRING(SC003,1, 4) + '-' + SUBSTRING(SC003, 5, 2) + '-' + SUBSTRING(SC003, 7, 2) 生产日期, "
-                            + "SC010 品名, SC013 数量, SC036 纸箱编码, "
+                            + "SC010 品名, SC013 数量, SC036 纸箱编码, SC040 纸箱尺寸, "
                             + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
                             + "FROM SCHEDULE AS SC "

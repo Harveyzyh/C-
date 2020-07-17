@@ -6,3 +6,5 @@
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\码垛线测试临时客户端\bin\Debug\码垛线测试临时客户端.pdb
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\码垛线测试临时客户端\obj\Debug\码垛线测试临时客户端.exe
 \\Mac\Home\Documents\GitHub\C-\联友生产辅助工具\码垛线测试临时客户端\obj\Debug\码垛线测试临时客户端.pdb
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Debug\码垛线测试临时客户端.exe
+Y:\GitHub\C-\FlaskClient\09 码垛线测试临时客户端\obj\Debug\码垛线测试临时客户端.pdb

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(码垛线测试临时客户端));
             this.panel_Title = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.txb_Fine = new System.Windows.Forms.TextBox();
             this.btn_Show_Type = new System.Windows.Forms.Button();
             this.btn_Fine = new System.Windows.Forms.Button();
@@ -39,8 +41,6 @@
             this.btn_Reflash = new System.Windows.Forms.Button();
             this.btn_Test_Reset = new System.Windows.Forms.Button();
             this.dgv_Main = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Main)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,26 @@
             this.panel_Title.Name = "panel_Title";
             this.panel_Title.Size = new System.Drawing.Size(1321, 59);
             this.panel_Title.TabIndex = 0;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.dateTimePicker1.Location = new System.Drawing.Point(623, 20);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(105, 21);
+            this.dateTimePicker1.TabIndex = 10;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(566, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "上线日期：";
             // 
             // txb_Fine
             // 
@@ -157,29 +177,9 @@
             this.dgv_Main.Name = "dgv_Main";
             this.dgv_Main.RowHeadersVisible = false;
             this.dgv_Main.RowTemplate.Height = 23;
-            this.dgv_Main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgv_Main.Size = new System.Drawing.Size(1321, 772);
             this.dgv_Main.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(566, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "上线日期：";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.dateTimePicker1.Location = new System.Drawing.Point(623, 20);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(105, 21);
-            this.dateTimePicker1.TabIndex = 10;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // 码垛线测试临时客户端
             // 
