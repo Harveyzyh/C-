@@ -14,13 +14,21 @@ namespace 联友生产辅助工具.仓储中心
         Mssql mssql = new Mssql();
 
         string conn = FormLogin.infObj.connYF;
+        
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
 
         string xa007 = "";
         private bool MsgFlag = false;
 
-        public 扫描领料单()
+        public 扫描领料单(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             Button_Upload.Enabled = false;
             DgvOpt.SetRowBackColor(DataGridView_List);
         }

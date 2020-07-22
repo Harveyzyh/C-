@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using HarveyZ;
+using System.Collections.Generic;
 
 namespace 联友生产辅助工具.生管码垛线
 {
     public partial class 码垛线客户端 : Form
     {
         #region 数据库连接字
-        public string strConnection = FormLogin.infObj.connMD;
+        public string connMD = FormLogin.infObj.connMD;
         #endregion
 
         #region 局部变量
         private Mssql mssql = new Mssql();
         private DataTable Main_dt = null;
+
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
 
         private bool TestFlag = false;
         private bool FindFlag = false;
@@ -24,9 +30,11 @@ namespace 联友生产辅助工具.生管码垛线
         private string FindStr = "";
         #endregion
 
-        public 码垛线客户端()
+        public 码垛线客户端(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             Form_MainResized_Work();
             Init();
         }
@@ -47,7 +55,7 @@ namespace 联友生产辅助工具.生管码垛线
             dgv_Main.Size = new Size(FormWidth, FormHeight-panel_Title.Height-7);
         }
         #endregion
-        
+
         private void Init()
         {
             Dgv_Show();
@@ -100,6 +108,7 @@ namespace 联友生产辅助工具.生管码垛线
             else//显示为测试模式
             {
                 btn_Reflash.Visible = true;
+                //btn_Test_Add.Visible = true;
                 btn_Test_Reset.Visible = true;
                 btn_Test_Save.Visible = true;
                 btn_Show_Type.Visible = true;
@@ -111,11 +120,11 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void Dgv_Show()
         {
-            if(dgv_Main.DataSource != null)
+            if (dgv_Main.DataSource != null)
             {
                 dgv_Main.DataSource = null;
             }
-            string sqlstr = "SELECT SC.SC001 订单号, SUBSTRING(SC003,1, 4) + '-' + SUBSTRING(SC003, 5, 2) + '-' + SUBSTRING(SC003, 7, 2) 生产日期, "
+            string sqlstr = "SELECT SC.SC001 订单号, SC003 上线日期, "
                             + "SC010 品名, SC013 数量, SC036 纸箱编码, SC040 纸箱尺寸, "
                             + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
@@ -146,13 +155,14 @@ namespace 联友生产辅助工具.生管码垛线
                     sqlstr += "AND SC.SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + "' AND SC.SC039 != 'Y' ";
                 }
             }
-            
+
             sqlstr += "ORDER BY KEY_ID ";
 
-            Main_dt = mssql.SQLselect(strConnection, sqlstr);
+            Main_dt = mssql.SQLselect(connMD, sqlstr);
 
-            if(Main_dt != null)
+            if (Main_dt != null)
             {
+                DtOpt.DtDateFormat(Main_dt, "上线日期");
                 dgv_Main.DataSource = Main_dt;
                 DgvOpt.SetRowBackColor(dgv_Main);
 
@@ -160,15 +170,13 @@ namespace 联友生产辅助工具.生管码垛线
                 {
                     btn_Test_Save.Enabled = true;
                     dgv_Main.ReadOnly = false;
-                    dgv_Main.Columns[0].Width = 130;
-                    dgv_Main.Columns[0].ReadOnly = true;
-                    dgv_Main.Columns[1].ReadOnly = true;
-                    dgv_Main.Columns[6].ReadOnly = true;
-                    dgv_Main.Columns[7].ReadOnly = true;
-                    dgv_Main.Columns[8].ReadOnly = true;
-                    dgv_Main.Columns[9].ReadOnly = true;
-                    dgv_Main.Columns[10].ReadOnly = true;
-                    dgv_Main.Columns[11].ReadOnly = true;
+                    List<int> list = new List<int>();
+                    list.Add(3);
+                    list.Add(4);
+                    list.Add(5);
+                    list.Add(6);
+                    list.Add(7);
+                    DgvOpt.SetColWritable(dgv_Main, list);
                 }
                 else
                 {
@@ -176,16 +184,18 @@ namespace 联友生产辅助工具.生管码垛线
                     dgv_Main.ReadOnly = true;
                 }
                 dgv_Main.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[0].Width = 130;
-                dgv_Main.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[10].Width = 135;
-                dgv_Main.Columns[11].Width = 135;
+                DgvOpt.SetColMiddleCenter(dgv_Main, "生产日期");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "数量");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "纸箱编码");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "纸箱尺寸");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "订单编码");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "栈板号");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "已过机数量");
+                DgvOpt.SetColMiddleCenter(dgv_Main, "已完成");
+                DgvOpt.SetColWidth(dgv_Main, "最早过机时间", 135);
+                DgvOpt.SetColWidth(dgv_Main, "最迟过机时间", 135);
+                DgvOpt.SetColWidth(dgv_Main, "订单号", 130);
+                DgvOpt.SetColWidth(dgv_Main, "品名", 250);
             }
             else
             {
@@ -196,14 +206,14 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void Save_Test()
         {
-            string sqlstr = "UPDATE SCHEDULE SET SC013 = '{1}', SC036 = '{2}', SC037 = '{3}', SC010 = '{4}' WHERE SC001 = '{0}'";
+            string sqlstr = "UPDATE SCHEDULE SET SC013 = '{1}', SC010 = '{2}', SC036 = '{3}', SC037 = '{4}', SC040 = '{5}' WHERE SC001 = '{0}'";
             string sql_tmp = null;
             int Count = Main_dt.Rows.Count;
             int Index = 0;
-            for(Index = 0; Index < Count; Index++)
+            for (Index = 0; Index < Count; Index++)
             {
-                sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index][0], Main_dt.Rows[Index][3], Main_dt.Rows[Index][4], Main_dt.Rows[Index][5], Main_dt.Rows[Index][2]);
-                mssql.SQLexcute(strConnection, sql_tmp);
+                sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index]["订单号"], Main_dt.Rows[Index]["数量"], Main_dt.Rows[Index]["品名"], Main_dt.Rows[Index]["纸箱编码"], Main_dt.Rows[Index]["订单编码"], Main_dt.Rows[Index]["纸箱尺寸"]);
+                mssql.SQLexcute(connMD, sql_tmp);
             }
             MessageBox.Show("已保存！", "提示");
             Dgv_Show();
@@ -244,8 +254,8 @@ namespace 联友生产辅助工具.生管码垛线
         {
             string sqlstr1 = "DELETE FROM PdData WHERE SC001 IN(SELECT SC001 FROM SCHEDULE WHERE SC039 = 'Y')";
             string sqlstr2 = "UPDATE SCHEDULE SET SC033 = 0, SC003 = CONVERT(VARCHAR(20), GETDATE(), 112) WHERE SC039 = 'Y'";
-            mssql.SQLexcute(strConnection, sqlstr1);
-            mssql.SQLexcute(strConnection, sqlstr2);
+            mssql.SQLexcute(connMD, sqlstr1);
+            mssql.SQLexcute(connMD, sqlstr2);
             MessageBox.Show("订单信息已重置", "成功");
             Dgv_Show();
         }

@@ -19,15 +19,23 @@ namespace 联友生产辅助工具.生管码垛线
 
         private static Mssql mssql = new Mssql();
 
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
         private static string connMD = FormLogin.infObj.connMD;
         private static string connERP = FormLogin.infObj.connYF;
 
         #endregion
 
         #region 窗体设计
-        public 码垛线排程导入()
+        public 码垛线排程导入(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }

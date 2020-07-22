@@ -16,14 +16,21 @@ namespace 联友生产辅助工具.生管排程
         
         private Mssql mssql = new Mssql();
 
-        private static string connWG = FormLogin.infObj.connWG;
-        private static string connERP = FormLogin.infObj.connYF;
+        private string connWG = FormLogin.infObj.connWG;
+        private string connERP = FormLogin.infObj.connYF;
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
         #endregion
 
         #region 窗体设计
-        public 生产电子排程()
+        public 生产电子排程(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }
@@ -34,6 +41,7 @@ namespace 联友生产辅助工具.生管排程
             DtpEndDate.Checked = false;
             DgvShow();
             SetCmBoxDptTypeList();
+            UI();
         }
 
         #region 窗口大小变化设置
@@ -56,7 +64,8 @@ namespace 联友生产辅助工具.生管排程
 
         #endregion
 
-        #region 逻辑设计
+        #region 
+
         private void SetCmBoxDptTypeList()
         {
             string sqlstr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by [Index]";
@@ -282,7 +291,6 @@ namespace 联友生产辅助工具.生管排程
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetRowBackColor(DgvMain);
                 DgvMain.Columns[3].Width = 180;
-                BtnOutput.Enabled = true;
 
                 float slSum = 0;
                 for (int rowIndex = 0; rowIndex < showDt.Rows.Count; rowIndex++)
@@ -302,7 +310,6 @@ namespace 联友生产辅助工具.生管排程
             {
                 labelSlSum.Text = "订单总数量：0";
                 DgvMain.DataSource = null;
-                BtnOutput.Enabled = false;
             }
         }
 
@@ -328,6 +335,7 @@ namespace 联友生产辅助工具.生管排程
         private void BtnShow_Click(object sender, EventArgs e) //刷新按钮
         {
             DgvShow();
+            UI();
         }
 
         private void BtnInput_Click(object sender, EventArgs e)
@@ -390,6 +398,39 @@ namespace 联友生产辅助工具.生管排程
                 {
                     Msg.Show(excelObj.msg, "错误");
                 }
+            }
+        }
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UI()
+        {
+            if (newFlag)
+            {
+                BtnInput.Enabled = true;
+            }
+            else
+            {
+                BtnInput.Enabled = false;
+            }
+            if (DgvMain.DataSource != null)
+            {
+                BtnPrint.Enabled = true;
+            }
+            else
+            {
+                BtnPrint.Enabled = false;
+            }
+            if(DgvMain.DataSource != null && outFlag)
+            {
+                BtnOutput.Enabled = true;
+            }
+            else
+            {
+                BtnOutput.Enabled = false;
             }
         }
         #endregion

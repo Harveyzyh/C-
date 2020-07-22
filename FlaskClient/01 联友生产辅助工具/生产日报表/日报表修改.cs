@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using HarveyZ;
 
 namespace 联友生产辅助工具.生产日报表
@@ -17,10 +12,18 @@ namespace 联友生产辅助工具.生产日报表
         public static string strConnection = FormLogin.infObj.connWG;
         bool DtpFlag = false;
 
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
         #region Init
-        public 日报表修改()
+        public 日报表修改(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
 
             FormMainInit();
 

@@ -12,9 +12,16 @@ namespace HarveyZ
     public partial class 权限管理 : Form
     {
         static Mssql mssql = new Mssql();
-        public 权限管理()
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+        public 权限管理(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Resized_Work();
             BtnSave.Enabled = false;
             ShowUser();
@@ -58,6 +65,8 @@ namespace HarveyZ
             {
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetRowBackColor(DgvMain);
+                DgvOpt.SetColHeadMiddleCenter(DgvMain);
+                DgvOpt.SetColReadonly(DgvMain, "权限名");
                 BtnSave.Enabled = true;
                 BtnReset.Enabled = true;
             }
@@ -77,15 +86,29 @@ namespace HarveyZ
             DataTable saveDt = (DataTable)DgvMain.DataSource;
             if (saveDt != null)
             {
-                List<string> userPermList = new List<string> { };
+                DataTable dt = new DataTable();
+                DataRow dr = null;
+                dt.Columns.Add("PermName", Type.GetType("System.String"));
+                dt.Columns.Add("New", Type.GetType("System.String"));
+                dt.Columns.Add("Edit", Type.GetType("System.String"));
+                dt.Columns.Add("Del", Type.GetType("System.String"));
+                dt.Columns.Add("Out", Type.GetType("System.String"));
+                dt.Columns.Add("Lock", Type.GetType("System.String"));
                 for (int rowIndex = 0; rowIndex < saveDt.Rows.Count; rowIndex++)
                 {
-                    if (saveDt.Rows[rowIndex][0].Equals(true))
+                    if (saveDt.Rows[rowIndex]["有效码"].Equals(true))
                     {
-                        userPermList.Add(saveDt.Rows[rowIndex][1].ToString());
+                        dr = dt.NewRow();
+                        dr["PermName"] = saveDt.Rows[rowIndex]["权限名"].ToString();
+                        dr["New"] = saveDt.Rows[rowIndex]["新增"].Equals(true) ? "1" : "0";
+                        dr["Edit"] = saveDt.Rows[rowIndex]["编辑"].Equals(true) ? "1" : "0";
+                        dr["Del"] = saveDt.Rows[rowIndex]["删除"].Equals(true) ? "1" : "0";
+                        dr["Out"] = saveDt.Rows[rowIndex]["输出"].Equals(true) ? "1" : "0";
+                        dr["Lock"] = saveDt.Rows[rowIndex]["锁定"].Equals(true) ? "1" : "0";
+                        dt.Rows.Add(dr);
                     }
                 }
-                FormLogin.infObj.userPermission.SetPermUser(TextBoxU_ID.Text, userPermList);
+                FormLogin.infObj.userPermission.SetPermUser(TextBoxU_ID.Text, dt);
                 MessageBox.Show("保存成功");
             }
         }

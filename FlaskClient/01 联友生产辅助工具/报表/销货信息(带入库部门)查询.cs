@@ -15,9 +15,17 @@ namespace 联友生产辅助工具.报表
         private string conn = FormLogin.infObj.connYF;
         private Mssql mssql = new Mssql();
 
-        public 销货信息_带入库部门_查询()
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
+        public 销货信息_带入库部门_查询(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }
@@ -94,29 +102,28 @@ namespace 联友生产辅助工具.报表
         private void DgvShow()
         {
             DgvMain.DataSource = null;
-            string dateTime = dateTimePicker1.Value.ToString("yyyyMM");
-            string sqlstr = @"declare @Dates varchar(20), @StartDate varchar(20), @EndDate varchar(20)
-                                set @Dates = '{0}'
-                                set @StartDate = @Dates + '01'
-                                set @EndDate = @Dates + '31'
+            string dateTime1 = dateTimePicker1.Value.ToString("yyyyMMdd");
+            string dateTime2 = dateTimePicker2.Value.ToString("yyyyMMdd");
+            string sqlstr = @"
                                 SELECT DISTINCT A1 AS 销货单号, A2 AS 客户简称, 
-                                A4 AS 品号, A5 AS 品名, A6 AS 规格, B2 AS 仓库名称, 
+                                A4 AS 品号, A5 AS 品名, A6 AS 规格, A9 网布颜色, B2 AS 仓库名称, 
                                 A7 AS 销货数量, A3 AS 订单单号, 
                                 A8 AS 销货日期, 
                                 B3 AS 销货部门 
                                 FROM 
                                 (SELECT DISTINCT RTRIM(COPTH.TH001) + '-' + RTRIM(COPTH.TH002) + '-' + RTRIM(COPTH.TH003)AS A1, RTRIM(MA002) AS A2, 
                                 RTRIM(COPTH.TH014) + '-' + RTRIM(COPTH.TH015) + '-' + RTRIM(COPTH.TH016) AS A3, RTRIM(COPTH.TH004) AS A4, 
-                                RTRIM(INVMB.MB002) AS A5, RTRIM(INVMB.MB003) AS A6, CONVERT(FLOAT, TH008) AS A7, 
+                                RTRIM(INVMB.MB002) AS A5, RTRIM(INVMB.MB003) AS A6, COPTQ.UDF07 AS A9, CONVERT(FLOAT, TH008) AS A7, 
                                 SUBSTRING(COPTG.TG003, 1, 4) + '-' + SUBSTRING(COPTG.TG003, 5, 2) + '-' + SUBSTRING(COPTG.TG003, 7, 2) AS A8 
                                 FROM COPTG 
                                 INNER JOIN COPTH ON COPTG.TG001 = COPTH.TH001 AND COPTG.TG002 = COPTH.TH002 
                                 LEFT JOIN COPTD ON COPTD.TD001 = COPTH.TH014 AND COPTD.TD002 = COPTH.TH015 AND COPTD.TD003 = COPTH.TH016 AND COPTD.TD004 = COPTH.TH004 
+																LEFT JOIN COPTQ ON COPTD.TD004 = COPTQ.TQ001 AND COPTD.TD053 = COPTQ.TQ002 
                                 LEFT JOIN COPTC ON COPTC.TC001 = COPTD.TD001 AND COPTC.TC002 = COPTD.TD002 
                                 LEFT JOIN COPMA ON COPMA.MA001 = COPTC.TC004 
                                 INNER JOIN INVMB ON INVMB.MB001 = COPTH.TH004 
                                 WHERE 1=1 
-                                AND COPTG.TG003 BETWEEN @StartDate AND @EndDate 
+                                AND COPTG.TG003 BETWEEN '{0}' AND '{1}' 
                                 AND TG023 = 'Y' 
                                 AND (COPTH.TH004 LIKE '1%' OR COPTH.TH004 LIKE '2%')) AS A 
                                 LEFT JOIN 
@@ -135,7 +142,7 @@ namespace 联友生产辅助工具.报表
                                 ) AS B ON A1 = B1 
                                 ORDER BY A1 
                                 ";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, dateTime));
+            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, dateTime1, dateTime2));
 
             if (dt != null)
             {
@@ -144,6 +151,7 @@ namespace 联友生产辅助工具.报表
                 DgvOpt.SetColWidth(DgvMain, "订单单号", 150);
                 DgvOpt.SetColWidth(DgvMain, "品名", 200);
                 DgvOpt.SetColWidth(DgvMain, "规格", 200);
+                DgvOpt.SetColWidth(DgvMain, "网布颜色", 150);
             }
             else
             {

@@ -14,9 +14,17 @@ namespace HarveyZ
     {
         private static FastReportContentUpload_Main frMain = new FastReportContentUpload_Main(FormLogin.infObj.connWG);
 
-        public FastReport模板发布()
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
+        public FastReport模板发布(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             Init();
         }
 

@@ -165,12 +165,6 @@
     <Compile Include="报表\销货信息%28带入库部门%29查询.Designer.cs">
       <DependentUpon>销货信息%28带入库部门%29查询.cs</DependentUpon>
     </Compile>
-    <Compile Include="生产排程模块\生产排程.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="生产排程模块\生产排程.Designer.cs">
-      <DependentUpon>生产排程.cs</DependentUpon>
-    </Compile>
     <Compile Include="生产日报表\日报表部门工作组线别维护.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,40 +195,46 @@
     <Compile Include="生管排程\订单信息查询.Designer.cs">
       <DependentUpon>订单信息查询.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\码垛线客户端.cs">
+    <Compile Include="码垛线\码垛线报表.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\码垛线客户端.Designer.cs">
+    <Compile Include="码垛线\码垛线报表.Designer.cs">
+      <DependentUpon>码垛线报表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="码垛线\码垛线客户端.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="码垛线\码垛线客户端.Designer.cs">
       <DependentUpon>码垛线客户端.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\纸箱名称添加.cs">
+    <Compile Include="码垛线\纸箱名称添加.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\纸箱名称添加.Designer.cs">
+    <Compile Include="码垛线\纸箱名称添加.Designer.cs">
       <DependentUpon>纸箱名称添加.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\纸箱名称管理.cs">
+    <Compile Include="码垛线\纸箱名称管理.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\纸箱名称管理.Designer.cs">
+    <Compile Include="码垛线\纸箱名称管理.Designer.cs">
       <DependentUpon>纸箱名称管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\订单类别编码管理.cs">
+    <Compile Include="码垛线\订单类别编码管理.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\订单类别编码管理.Designer.cs">
+    <Compile Include="码垛线\订单类别编码管理.Designer.cs">
       <DependentUpon>订单类别编码管理.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\订单类别编码添加.cs">
+    <Compile Include="码垛线\订单类别编码添加.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\订单类别编码添加.Designer.cs">
+    <Compile Include="码垛线\订单类别编码添加.Designer.cs">
       <DependentUpon>订单类别编码添加.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\纸箱编码添加.cs">
+    <Compile Include="码垛线\纸箱编码添加.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\纸箱编码添加.Designer.cs">
+    <Compile Include="码垛线\纸箱编码添加.Designer.cs">
       <DependentUpon>纸箱编码添加.cs</DependentUpon>
     </Compile>
     <Compile Include="登录界面.cs">
@@ -305,16 +305,16 @@
     <Compile Include="生产日报表\日报表部门线别维护.Designer.cs">
       <DependentUpon>日报表部门线别维护.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\码垛线排程导入.cs">
+    <Compile Include="码垛线\码垛线排程导入.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\码垛线排程导入.Designer.cs">
+    <Compile Include="码垛线\码垛线排程导入.Designer.cs">
       <DependentUpon>码垛线排程导入.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管码垛线\纸箱编码管理.cs">
+    <Compile Include="码垛线\纸箱编码管理.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管码垛线\纸箱编码管理.Designer.cs">
+    <Compile Include="码垛线\纸箱编码管理.Designer.cs">
       <DependentUpon>纸箱编码管理.cs</DependentUpon>
     </Compile>
     <Compile Include="管理\FastReport模板发布.cs">
@@ -362,22 +362,25 @@
     <EmbeddedResource Include="生管排程\订单信息查询.resx">
       <DependentUpon>订单信息查询.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\码垛线客户端.resx">
+    <EmbeddedResource Include="码垛线\码垛线报表.resx">
+      <DependentUpon>码垛线报表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="码垛线\码垛线客户端.resx">
       <DependentUpon>码垛线客户端.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\纸箱名称添加.resx">
+    <EmbeddedResource Include="码垛线\纸箱名称添加.resx">
       <DependentUpon>纸箱名称添加.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\纸箱名称管理.resx">
+    <EmbeddedResource Include="码垛线\纸箱名称管理.resx">
       <DependentUpon>纸箱名称管理.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\订单类别编码管理.resx">
+    <EmbeddedResource Include="码垛线\订单类别编码管理.resx">
       <DependentUpon>订单类别编码管理.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\订单类别编码添加.resx">
+    <EmbeddedResource Include="码垛线\订单类别编码添加.resx">
       <DependentUpon>订单类别编码添加.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\纸箱编码添加.resx">
+    <EmbeddedResource Include="码垛线\纸箱编码添加.resx">
       <DependentUpon>纸箱编码添加.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="登录界面.resx">
@@ -419,10 +422,10 @@
     <EmbeddedResource Include="生产日报表\日报表获取组别系列.resx">
       <DependentUpon>日报表获取组别系列.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\码垛线排程导入.resx">
+    <EmbeddedResource Include="码垛线\码垛线排程导入.resx">
       <DependentUpon>码垛线排程导入.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管码垛线\纸箱编码管理.resx">
+    <EmbeddedResource Include="码垛线\纸箱编码管理.resx">
       <DependentUpon>纸箱编码管理.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="管理\FastReport模板发布.resx">

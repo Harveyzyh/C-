@@ -257,16 +257,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // 码垛线生成并打印出货清单
+            // 码垛线_ERP单据生成程序
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 606);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "码垛线生成并打印出货清单";
+            this.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.Name = "码垛线_ERP单据生成程序";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "码垛线出货清单打印程序";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();

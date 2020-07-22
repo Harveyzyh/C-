@@ -18,12 +18,20 @@ namespace 联友生产辅助工具.生管码垛线
         private static DataTable showDt = new DataTable();
         public static string connStrRobot = 纸箱编码管理.connStrRobot;
         private static Mssql mssql = new Mssql();
+
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
         #endregion
 
         #region 窗体设计
-        public 纸箱名称管理()
+        public 纸箱名称管理(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }

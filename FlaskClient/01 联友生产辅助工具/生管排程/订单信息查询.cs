@@ -13,11 +13,19 @@ namespace 联友生产辅助工具.生管排程
 {
     public partial class 订单信息查询 : Form
     {
-        Mssql mssql = new Mssql();
-        string connCOMFORT = FormLogin.infObj.connYF;
-        public 订单信息查询()
+        private Mssql mssql = new Mssql();
+        private string connCOMFORT = FormLogin.infObj.connYF;
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
+        public 订单信息查询(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Resized_Work();
         }
         

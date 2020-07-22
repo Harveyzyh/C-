@@ -471,13 +471,56 @@ namespace HarveyZ
     {
         #region 私有变量
         private Mssql mssql = new Mssql();
-        private string conn = null;
+        private string connYF = null;
+        private string connMD = null;
+        private HeadObject headObj = null;
+        private DetailObject detailObj = null;
         #endregion
 
         #region 对象类
         class HeadObject
         {
+            private string _company = "COMFORT";
+            private string _creator = "Robot";
+            private string _usr_group = "";
+            private string _printId = "";
+            private string _tg001 = "";
+            private string _tg002 = "";
+            private string _tf001 = "5803";
+            private string _tf002 = "";
+            private string _tf004 = "01";
+            private string _tf005 = "";
+            private string _tf006 = "N";
+            private string _tf007 = "N";
+            private int _tf008 = 0;
+            private string _tf009 = "N";
+            private string _tf010 = "N";
+            private string _tf011 = "6";
+            private string _tf014 = "N";
+            private int _tf015 = 0;
+            private string _tf016 = "080B";
+            private string _tf033 = "";
 
+            public string company { get { return _company; } }
+            public string creator { get { return _creator; } }
+            public string usr_group { get { return _usr_group; } set { _usr_group = value; } }
+            public string printId { get { return _printId; } set { _printId = value; } }
+            public string tf001 { get { return _tf001; } set { _tf001 = value; } }
+            public string tf002 { get { return _tf002; } set { _tf002 = value; } }
+            public string tg001 { get { return _tg001; } set { _tg001 = value; } }
+            public string tg002 { get { return _tg002; } set { _tg002 = value; } }
+            public string tf004 { get { return _tf004; } set { _tf004 = value; } }
+            public string tf005 { get { return _tf005; } set { _tf005 = value; } }
+            public string tf006 { get { return _tf006; } set { _tf006 = value; } }
+            public string tf007 { get { return _tf007; } set { _tf007 = value; } }
+            public int tf008 { get { return _tf008; } set { _tf008 = value; } }
+            public string tf009 { get { return _tf009; } set { _tf009 = value; } }
+            public string tf010 { get { return _tf010; } set { _tf010 = value; } }
+            public string tf011 { get { return _tf011; } set { _tf011 = value; } }
+            public string tf014 { get { return _tf014; } set { _tf014 = value; } }
+            public int tf015 { get { return _tf015; } set { _tf015 = value; } }
+            public string tf016 { get { return _tf016; } set { _tf016 = value; } }
+            public string tf033 { get { return _tf033; } set { _tf033 = value; } }
         }
 
         class DetailObject
@@ -487,24 +530,127 @@ namespace HarveyZ
         #endregion
 
         #region 主方法
-        public ERP_Create_Moctf_Md(string conn)
+        public ERP_Create_Moctf_Md(string connYF, string connMD)
         {
-            this.conn = conn;
+            this.connYF = connYF;
+            this.connMD = connMD;
+            headObj = new HeadObject();
+            detailObj = new DetailObject();
         }
 
-        public string HandelDef(string flowId)
+        public void HandelDef()
         {
-            return "";
-        }
+            GetPrintId();
 
-        public string HandelDef(DataTable dt)
-        {
-            return "";
+            if (headObj.printId != null)
+            {
+                GetUsrGroup();
+                GetTf002();
+                //注释了的待修改
+                InsertHead();
+                InsertDetail();
+                UpdateHeadSl();
+                UpdateXhOutFlag();
+            }
         }
         #endregion
 
         #region 业务逻辑
+        private void GetPrintId()
+        {
+            string sqlstr = @"SELECT TOP 1 PrintId, TG001, TG002 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 1 AND ScrkOutFlag = 0 ORDER BY Create_Date ";
+            DataTable dt = mssql.SQLselect(connMD, sqlstr);
+            if (dt != null)
+            {
+                if (dt.Rows[0]["TG002"].ToString() != "")
+                {
+                    headObj.printId = dt.Rows[0]["PrintId"].ToString();
+                    headObj.tg001 = dt.Rows[0]["TG001"].ToString();
+                    headObj.tg002 = dt.Rows[0]["TG002"].ToString();
+                }
+                else
+                {
+                    headObj.printId = null;
+                    headObj.tg001 = null;
+                    headObj.tg002 = null;
+                }
+            }
+            else
+            {
+                headObj.printId = null;
+                headObj.tg001 = null;
+                headObj.tg002 = null;
+            }
+        }
 
+        private void GetUsrGroup()
+        {
+            string sqlstr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.creator));
+            if (dt != null)
+            {
+                headObj.usr_group = dt.Rows[0][0].ToString();
+            }
+            else
+            {
+                headObj.usr_group = "";
+            }
+        }
+
+        private void GetTf002()
+        {
+            string sqlstr = @"exec P_GETDH '{0}'";
+            headObj.tf002 = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.tf001)).Rows[0][0].ToString();
+        }
+
+        private void InsertHead()
+        {
+            string sqlstr = @"INSERT INTO dbo.MOCTF (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TF001, TF002, TF003, TF012, 
+                                        TF004, TF005, TF006, TF007, TF008, TF009, TF010, TF011, TF013, TF014, TF015, TF016) 
+			                    VALUES('{0}', '{1}','{2}', dbo.f_getTime(1), 1, '{3}', '{4}', LEFT(dbo.f_getTime(1), 8), LEFT(dbo.f_getTime(1), 8), 
+                                        '01', '', 'N', 'N', 0, 'N', 'N', '{5}', '', 'N', 0, '{6}')";
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.company, headObj.creator, headObj.usr_group, headObj.tf001, headObj.tf002, headObj.tf011, headObj.tf016));
+        }
+
+        private void InsertDetail()
+        {
+            string sqlstr = @"INSERT INTO dbo.MOCTG (COMPANY, CREATOR, CREATE_DATE, USR_GROUP, FLAG, TG001, TG002, TG003, TG004, TG005, TG006, TG007, TG009, TG010, TG011, TG013, TG014, TG015, TG016, TG017, TG020, 
+                                TG022, TG023, TG024, TG031, TG035, TG036, TG037, TG038, TGC01)
+                                SELECT MOCTF.COMPANY, MOCTF.CREATOR, MOCTF.CREATE_DATE, MOCTF.USR_GROUP, MOCTF.FLAG, TF001, TF002, RIGHT('0000' + CONVERT(VARCHAR(20), ROW_NUMBER() Over (ORDER BY TH003)), 4) AS TG003, 
+	                                TH004 AS TG004, TH005 AS TG005, TH006 AS TG006, TH009 AS TG007, 1 AS TG009, TH007 AS TG010, TH008 AS TG011, TH008 AS TG013, TA001 AS TG014, TA002 AS TG015, '0' AS TG016, TH015 AS TG017, 
+	                                '' AS TG020, 'N' AS TG022, 0 AS TG023, 'N' AS TG024, TA058 AS TG031, 'N' AS TG035, '##########' AS TG036, TH009 AS TG037, TH008 AS TG038, '2' AS TGC01
+                                FROM dbo.COPTG 
+                                INNER JOIN dbo.COPTH ON TG001 = TH001 AND TG002 = TH002 
+                                INNER JOIN dbo.MOCTF ON TF001 = '{2}' AND TF002 = '{3}'
+                                INNER JOIN 
+                                (SELECT TA1.TA001, MIN(TA1.TA002) TA002, TA1.TA058, TA1.TA026, TA1.TA027, TA1.TA028 
+                                FROM dbo.MOCTA AS TA1
+                                WHERE TA1.TA001 = '5101' AND TA1.TA011 NOT IN ('Y', 'y') GROUP BY TA1.TA001, TA1.TA058, TA1.TA026, TA1.TA027, TA1.TA028) AS MOCTA
+                                ON TA026 = TH014 AND TA027 = TH015 AND TA028 = TH016 
+                                WHERE 1=1
+                                AND COPTG.TG001 = '{0}' AND COPTG.TG002 = '{1}'";
+
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002, headObj.tf001, headObj.tf002));
+        }
+
+        private void UpdateHeadSl()
+        {
+            string sqlstr = @"UPDATE dbo.MOCTF SET TF023 = TF023S, TF024 = TF024S
+                            FROM 
+                            (SELECT TG001, TG002, SUM(TG011) AS TF023S, SUM(TG013) AS TF024S FROM dbo.MOCTG 
+                            WHERE TG001 = '{0}' AND TG002 = '{1}'
+                            GROUP BY TG001, TG002
+                            ) AS A 
+                            WHERE TG001 = TF001 AND TG002 = TF002";
+
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tf001, headObj.tf002));
+        }
+
+        private void UpdateXhOutFlag()
+        {
+            string sqlstr = @"UPDATE dbo.PrintData SET TF001 = '{1}', TF002 = '{2}', ScrkOutFlag = 1, ScrkOutDate = getdate() WHERE PrintId = '{0}' ";
+            mssql.SQLexcute(connMD, string.Format(sqlstr, headObj.printId, headObj.tf001, headObj.tf002));
+        }
         #endregion
     }
     #endregion
@@ -557,12 +703,30 @@ namespace HarveyZ
     {
         #region 私有变量
         private Mssql mssql = new Mssql();
-        private string conn = null;
+        private string connMD = null;
+        private string connYF = null;
+        private HeadObject headObj = null;
+        private DetailObject detailObj = null;
         #endregion
 
         #region 对象类
         class HeadObject
         {
+            private string _creator = "Robot";
+            private string _company = "COMFORT";
+            private string _usr_group = "";
+            private string _printId = "";
+            private string _tg001 = "";
+            private string _tg002 = "";
+            private string _tg004 = "";
+
+            public string creator { get { return _creator; } }
+            public string company { get { return _company; } }
+            public string usr_group { get { return _usr_group; } set { _usr_group = value; } }
+            public string printId { get { return _printId; } set { _printId = value; } }
+            public string tg001 { get { return _tg001; } set { _tg001 = value; } }
+            public string tg002 { get { return _tg002; } set { _tg002 = value; } }
+            public string tg004 { get { return _tg004; } set { _tg004 = value; } }
 
         }
 
@@ -573,24 +737,243 @@ namespace HarveyZ
         #endregion
 
         #region 主方法
-        public ERP_Create_Coptg_Md(string conn)
+        public ERP_Create_Coptg_Md(string connYF, string connMD)
         {
-            this.conn = conn;
+            this.connYF = connYF;
+            this.connMD = connMD;
+            headObj = new HeadObject();
+            detailObj = new DetailObject();
         }
 
-        public string HandelDef(string flowId)
+        public void HandelDef()
         {
-            return "";
-        }
+            GetPrintId();
 
-        public string HandelDef(DataTable dt)
-        {
-            return "";
+            if(headObj.printId != null)
+            {
+                GetUsrGroup();
+                GetTg002();
+                InsertHead();
+                UpdateHead();
+                InsertDetail();
+                UpdateDetail();
+                UpdateDetailMoney();
+                UpdateHeadMoney();
+                UpdateXhOutFlag();
+            }
         }
         #endregion
 
         #region 业务逻辑
+        private void GetPrintId()
+        {
+            string sqlstr = @"SELECT TOP 1 PrintId, TG001, TG004 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 0 ORDER BY Create_Date ";
+            DataTable dt = mssql.SQLselect(connMD, sqlstr);
+            if (dt != null)
+            {
+                if (dt.Rows[0]["TG004"].ToString() != "")
+                {
+                    headObj.printId = dt.Rows[0]["PrintId"].ToString();
+                    headObj.tg001 = dt.Rows[0]["TG001"].ToString();
+                    headObj.tg004 = dt.Rows[0]["TG004"].ToString();
+                }
+                else
+                {
+                    headObj.printId = null;
+                    headObj.tg001 = null;
+                    headObj.tg004 = null;
+                }
+            }
+            else
+            {
+                headObj.printId = null;
+                headObj.tg001 = null;
+                headObj.tg004 = null;
+            }
+        }
 
+        private void GetUsrGroup()
+        {
+            string sqlstr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.creator));
+            if (dt != null)
+            {
+                headObj.usr_group = dt.Rows[0][0].ToString();
+            }
+            else
+            {
+                headObj.usr_group = "";
+            }
+        }
+
+        private void GetTg002()
+        {
+            string sqlstr = @"exec P_GETDH '{0}'";
+            headObj.tg002 = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.tg001)).Rows[0][0].ToString();
+        }
+
+        private void InsertHead()
+        {
+            string sqlstr = @"INSERT INTO COMFORT.dbo.COPTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG042) 
+			                    VALUES('{0}', '{1}','{2}', dbo.f_getTime(1), 1, '{3}', '{4}', LEFT(dbo.f_getTime(1), 8), LEFT(dbo.f_getTime(1), 8))";
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
+        }
+
+        private void UpdateHead()
+        {
+            string sqlstr1 = @"UPDATE dbo.COPTG SET TG010 = '01', TG020 = '', TG022 = 0, TG023 = 'N', 
+			                    TG024 = 'N', TG031 = 'N', TG036 = 'N', TG037 = 'N' 
+			                    WHERE TG001 = '{0}' AND TG002 = '{1}'";
+            string sqlstr2 = @"UPDATE dbo.COPTG SET TG004 = MA001, TG005 = MA015, TG006 = MA016, 
+			                    TG008 = MA027, 
+			                    TG009 = MA064, 
+			                    TG011 = MA014, 
+			                    TG012 = MG004, 
+			                    TG016 = MA037, 
+			                    TG017 = MA038, 
+			                    TG026 = MA085, 
+			                    TG044 = MA101, 
+			                    TG047 = MA083, 
+			                    TG068 = MA113 
+			                    FROM (
+				                    SELECT COPMAC.*, ISNULL(COPTGC.MG004, 0) AS MG004 FROM dbo.COPMA AS COPMAC
+				                    LEFT JOIN(
+					                    SELECT MA2.MA001, MA2.MA021, MG.MG002, MG.MG004 FROM dbo.COPMA AS MA2 
+					                    LEFT JOIN dbo.CMSMG AS MG ON MG.MG001 = MA2.MA014 
+						                    AND MG002 = (SELECT MAX(MG2.MG002) FROM CMSMG AS MG2 WHERE MG2.MG001 = MG.MG001 AND CONVERT(FLOAT, MG2.MG002) <= CONVERT(FLOAT, CONVERT(VARCHAR(8), GETDATE(), 112)))
+				                    ) AS COPTGC ON COPTGC.MA001 = COPMAC.MA001
+				                    WHERE COPMAC.MA001 = '{2}'
+			                    ) AS COPMA
+			                    WHERE TG001 = '{0}' AND TG002 ='{1}' ";
+            string sqlstr3 = @"UPDATE dbo.COPTG SET TG044 =(CASE WHEN TG017 IN ('3','4','9') THEN 0 ELSE ISNULL(MA004, 0) END) FROM dbo.COPTG 
+                                LEFT JOIN dbo.CMSMA ON CMSMA.COMPANY ='{2}' WHERE TG001 = '{0}' AND TG002 = '{1}' ";
+
+            mssql.SQLexcute(connYF, string.Format(sqlstr1, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(sqlstr2, headObj.tg001, headObj.tg002, headObj.tg004));
+            mssql.SQLexcute(connYF, string.Format(sqlstr3, headObj.tg001, headObj.tg002, headObj.company));
+        }
+
+        private void InsertDetail()
+        {
+            string sqlstr = @"INSERT INTO dbo.COPTH (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TH001, TH002, TH003, TH008, TH014, TH015, TH016)
+			SELECT '{1}' AS COMPANY, '{2}' AS CREATOR, '{3}' AS USR_GROUP, dbo.f_getTime(1) AS CREATE_DATE, 1 AS FLAG, 
+			'{4}' AS TH001, '{5}' AS TH002, RIGHT('00000' + CONVERT(VARCHAR(20), ROW_NUMBER() Over (ORDER BY SC001)), 4) AS TH003, TH008, TH014, TH015, TH016
+			FROM (SELECT SC001, SUBSTRING(SC001, 1, 4) AS TH014, 
+			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), 1, CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) - 1) AS TH015, 
+			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), (CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) + 1), LEN(SUBSTRING(SC001, 6, LEN(SC001)))) AS TH016, 
+			COUNT(SC001) AS TH008
+			FROM [192.168.0.198].ROBOT_TEST.dbo.PdData AS PdData
+			WHERE PrintId = '{0}'
+			AND Pd_Sta = 'OK'
+			GROUP BY SC001, SUBSTRING(SC001, 1, 4), 
+			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), 1, CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) - 1), 
+			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), (CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) + 1), LEN(SUBSTRING(SC001, 6, LEN(SC001)))) 
+			) AS PdData2";
+
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.printId, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
+        }
+
+        private void UpdateDetail()
+        {
+            string sqlstr = @"UPDATE dbo.COPTH SET 
+			                    COPTH.CREATE_DATE = COPTG.CREATE_DATE,
+			                    TH004 = TD004, 
+			                    TH005 = TD005, 
+			                    TH006 = TD006, 
+			                    TH007 = TD007,
+			                    TH009 = TD010, 
+			                    TH012 = TD011, 
+			                    TH017 = TH015, 
+			                    TH018 = TD020, 
+			                    TH019 = TD014, 
+			                    TH020 = 'N', 
+			                    TH021 = 'N', 
+			                    TH025 = TD026, 
+			                    TH026 = 'N', 
+			                    TH031 = '1', 
+			                    TH048 = TD037, 
+			                    TH049 = TD042, 
+			                    TH050 = TD043, 
+			                    TH055 = '', 
+			                    TH056 = '##########', 
+			                    TH063 = TD061, 
+			                    TH064 = TD062, 
+			                    COPTH.UDF01 = COPTD.UDF01, 
+			                    COPTH.UDF03 = TQ003, 
+			                    COPTH.UDF04 = COPTD.UDF08, 
+			                    COPTH.UDF05 = TD053, 
+			                    COPTH.UDF10 = COPTD.UDF10 
+		
+			                    FROM dbo.COPTH AS COPTH
+			                    INNER JOIN dbo.COPTG ON TG001 = TH001 AND TG002 = TH002 
+			                    LEFT JOIN dbo.COPTD AS COPTD ON TH014 = TD001 AND TH015 = TD002 AND TH016 = TD003
+			                    LEFT JOIN dbo.COPTQ AS COPTQ ON TQ001 = TD004 AND TQ002 = TD053
+			                    WHERE 1=1
+			                    AND TH001 = '{0}' AND TH002 = '{1}' ";
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+        }
+
+        private void UpdateDetailMoney()
+        {
+            string sqlstr = @"UPDATE dbo.COPTH SET 
+			                    TH013 = TH013C, 
+			                    TH035 = TH035C, 
+			                    TH036 = TH036C, 
+			                    TH037 = TH037C, 
+			                    TH038 = TH038C 
+			                    FROM (
+				                    SELECT TG001 AS TG001C, TG002 AS TG002C, TH003 AS TH003C, 
+				                    (CASE 
+					                    WHEN TG017 = '1' THEN ROUND(TH008 * TH012 * TH025, 2) 
+					                    WHEN TG017 = '2' THEN ROUND(TH008 * TH012 * TH025, 2) 
+					                    WHEN TG017 IN ('3', '4', '9') THEN ROUND(TH008 * TH012 * TH025, 2) END) TH013C, 
+				                    (CASE 
+					                    WHEN TG017 = '1' THEN ROUND(TH008 * TH012 * TH025 / (1 + TG044), 2) 
+					                    WHEN TG017 = '2' THEN ROUND(TH008 * TH012 * TH025, 2)  
+					                    WHEN TG017 IN ('3', '4', '9') THEN ROUND(TH008 * TH012 * TH025, 2) END) TH035C, 
+				                    (CASE 
+					                    WHEN TG017 = '1' THEN ROUND(TH008 * TH012 * TH025, 2) - ROUND(TH008 * TH012 * TH025 / (1 + TG044), 2) 
+					                    WHEN TG017 = '2' THEN ROUND(TH008 * TH012 * TH025 * TG044, 2) 
+					                    WHEN TG017 IN ('3', '4', '9') THEN 0 END) TH036C, 
+				                    (CASE 
+					                    WHEN TG017 = '1' THEN ROUND(ROUND(TH008 * TH012 * TH025 / (1 + TG044), 2) * TG012, 2) 
+					                    WHEN TG017 = '2' THEN ROUND(ROUND(TH008 * TH012 * TH025, 2) * TG012, 2) 
+					                    WHEN TG017 IN ('3', '4', '9') THEN ROUND(TH008 * TH012 * TG012 * TH025, 2) END) TH037C, 
+				                    (CASE 
+					                    WHEN TG017 = '1' THEN ROUND((ROUND(TH008 * TH012 * TH025, 2) - ROUND(TH008 * TH012 * TH025 / (1 + TG044), 2)) * TG012, 2) 
+					                    WHEN TG017 = '2' THEN ROUND(TH008 * TH012 * TH025 * TG044 * TG012, 2)  
+					                    WHEN TG017 IN ('3', '4', '9') THEN 0 END) TH038C 
+				                    FROM COPTH 
+				                    INNER JOIN dbo.COPTG ON TG001 = TH001 AND TG002 = TH002
+				                    WHERE TG001 = '{0}' AND TG002 = '{1}'
+			                    ) AS A0
+			                    WHERE TH001 = TG001C AND TH002 = TG002C AND TH003 = TH003C ";
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+        }
+
+        private void UpdateHeadMoney()
+        {
+            string sqlstr = @"UPDATE dbo.COPTG SET 
+			                    TG033 = TG033S, 
+			                    TG045 = TG045S, 
+			                    TG013 = TG013S, 
+			                    TG046 = TG046S, 
+			                    TG025 = TG025S 
+			                    FROM 
+			                    (SELECT TH001, TH002, SUM(TH008) AS TG033S, SUM(TH037) AS TG045S, SUM(TH035) AS TG013S, SUM(TH038) AS TG046S, SUM(TH036) AS TG025S FROM dbo.COPTH 
+			                    WHERE TH001 = '{0}' AND TH002 = '{1}'
+			                    GROUP BY TH001, TH002
+			                    ) AS A 
+			                    WHERE TG001 = TH001 AND TG002 = TH002";
+
+            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+        }
+
+        private void UpdateXhOutFlag()
+        {
+            string sqlstr = @"UPDATE dbo.PrintData SET TG001 = '{1}', TG002 = '{2}', XhOutFlag = 1, XhOutDate = getdate() WHERE PrintId = '{0}' ";
+            mssql.SQLexcute(connMD, string.Format(sqlstr, headObj.printId, headObj.tg001, headObj.tg002));
+        }
         #endregion
     }
     #endregion

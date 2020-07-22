@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
@@ -13,13 +10,25 @@ namespace 码垛线测试临时客户端
 {
     public partial class 码垛线测试临时客户端 : Form
     {
+        #region 公共静态变量
+        //软件信息
+        public static string ProgVersion = "";
+        public static string ProgName = "";
+        //服务器URL
+        public static string HttpURL = "";
+        private string UpdateUrl = "";
+        #endregion
+
         #region 数据库连接字
-        public const string strConnection_ROBOT = "Server=192.168.0.198;initial catalog=ROBOT_TEST;user id=sa;password=COMfort123456;Connect Timeout=5";
+        private string connMD = Global_Const.strConnection_MD;
+        private string connWG = Global_Const.strConnection_WG;
         #endregion
 
         #region 局部变量
         private Mssql mssql = new Mssql();
         private DataTable Main_dt = null;
+
+        private static DataTable componentFileDt = new DataTable();
 
         private bool TestFlag = false;
         private bool FindFlag = false;
@@ -54,9 +63,82 @@ namespace 码垛线测试临时客户端
         
         private void Init()
         {
+            //判断是否在debug模式
+            #if DEBUG
+            this.Text += "   -DEBUG";
+            #endif
+
+            //从文件详细信息中获取程序名称
+            ProgName = Application.ProductName.ToString();
+            ProgVersion = Application.ProductVersion.ToString();
+
+            this.Text += "   -Ver." + ProgVersion;
+
+            HttpURL = GetHttpURL();
+
+            //自动下载组件
+            componentFileDt.Columns.Add("FileName", Type.GetType("System.String"));
+            componentFileDt.Columns.Add("FileVersion", Type.GetType("System.String"));
+            DataRow dr = componentFileDt.NewRow();
+            dr["FileName"] = "AutoUpdate.exe"; dr["FileVersion"] = "1.0.0.0";
+            componentFileDt.Rows.Add(dr);
+
+            FileVersion.JudgeFile(HttpURL + @"/download/", componentFileDt);
+
+
+            //检查软件是否存在更新版本
+            if (GetNewVersion())
+            {
+                UpdateMe.ProgUpdate(ProgName, UpdateUrl);
+            }
+
+
             Dgv_Show();
             Btn_Show_Work();
         }
+
+        #region 软件更新检测
+        private string GetHttpURL()
+        {
+            try
+            {
+                string sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Local' AND Valid = 'Y'";
+
+                var get = mssql.SQLselect(connWG, sqlstr).Rows[0][0].ToString();
+                return get;
+            }
+            catch
+            {
+                if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    Environment.Exit(0);
+                }
+                return null;
+            }
+
+        }
+
+        private bool GetNewVersion()
+        {
+            string Msg;
+            if (VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg))
+            {
+                UpdateUrl = HttpURL + @"/download/" + ProgName + ".exe";
+                return true;
+            }
+            else
+            {
+                if (Msg != null)
+                {
+                    if (MessageBox.Show(Msg, "错误", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                return false;
+            }
+        }
+        #endregion
 
         private void Btn_Show_Work()
         {
@@ -120,7 +202,7 @@ namespace 码垛线测试临时客户端
             {
                 dgv_Main.DataSource = null;
             }
-            string sqlstr = "SELECT SC.SC001 订单号, SUBSTRING(SC003,1, 4) + '-' + SUBSTRING(SC003, 5, 2) + '-' + SUBSTRING(SC003, 7, 2) 生产日期, "
+            string sqlstr = "SELECT SC.SC001 订单号, SC003 上线日期, "
                             + "SC010 品名, SC013 数量, SC036 纸箱编码, SC040 纸箱尺寸, "
                             + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
@@ -148,17 +230,17 @@ namespace 码垛线测试临时客户端
                 }
                 else
                 {
-                    //sqlstr += "AND SC.SC003 = CONVERT(VARCHAR(20), GETDATE(), 112) AND SC.SC039 != 'Y' ";
                     sqlstr += "AND SC.SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + "' AND SC.SC039 != 'Y' ";
                 }
             }
             
             sqlstr += "ORDER BY KEY_ID ";
 
-            Main_dt = mssql.SQLselect(strConnection_ROBOT, sqlstr);
+            Main_dt = mssql.SQLselect(connMD, sqlstr);
 
             if(Main_dt != null)
             {
+                DtOpt.DtDateFormat(Main_dt, "上线日期");
                 dgv_Main.DataSource = Main_dt;
                 DgvOpt.SetRowBackColor(dgv_Main);
 
@@ -166,7 +248,6 @@ namespace 码垛线测试临时客户端
                 {
                     btn_Test_Save.Enabled = true;
                     dgv_Main.ReadOnly = false;
-                    dgv_Main.Columns[0].Width = 130;
                     List<int> list = new List<int>();
                     list.Add(3);
                     list.Add(4);
@@ -181,7 +262,6 @@ namespace 码垛线测试临时客户端
                     dgv_Main.ReadOnly = true;
                 }
                 dgv_Main.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgv_Main.Columns[0].Width = 130;
                 DgvOpt.SetColMiddleCenter(dgv_Main, "生产日期");
                 DgvOpt.SetColMiddleCenter(dgv_Main, "数量");
                 DgvOpt.SetColMiddleCenter(dgv_Main, "纸箱编码");
@@ -190,8 +270,10 @@ namespace 码垛线测试临时客户端
                 DgvOpt.SetColMiddleCenter(dgv_Main, "栈板号");
                 DgvOpt.SetColMiddleCenter(dgv_Main, "已过机数量");
                 DgvOpt.SetColMiddleCenter(dgv_Main, "已完成");
-                dgv_Main.Columns[10].Width = 135;
-                dgv_Main.Columns[11].Width = 135;
+                DgvOpt.SetColWidth(dgv_Main, "最早过机时间", 135);
+                DgvOpt.SetColWidth(dgv_Main, "最迟过机时间", 135);
+                DgvOpt.SetColWidth(dgv_Main, "订单号", 130);
+                DgvOpt.SetColWidth(dgv_Main, "品名", 250);
             }
             else
             {
@@ -209,7 +291,7 @@ namespace 码垛线测试临时客户端
             for(Index = 0; Index < Count; Index++)
             {
                 sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index]["订单号"], Main_dt.Rows[Index]["数量"], Main_dt.Rows[Index]["品名"], Main_dt.Rows[Index]["纸箱编码"], Main_dt.Rows[Index]["订单编码"], Main_dt.Rows[Index]["纸箱尺寸"]);
-                mssql.SQLexcute(strConnection_ROBOT, sql_tmp);
+                mssql.SQLexcute(connMD, sql_tmp);
             }
             MessageBox.Show("已保存！", "提示");
             Dgv_Show();
@@ -250,8 +332,8 @@ namespace 码垛线测试临时客户端
         {
             string sqlstr1 = "DELETE FROM PdData WHERE SC001 IN(SELECT SC001 FROM SCHEDULE WHERE SC039 = 'Y')";
             string sqlstr2 = "UPDATE SCHEDULE SET SC033 = 0, SC003 = CONVERT(VARCHAR(20), GETDATE(), 112) WHERE SC039 = 'Y'";
-            mssql.SQLexcute(strConnection_ROBOT, sqlstr1);
-            mssql.SQLexcute(strConnection_ROBOT, sqlstr2);
+            mssql.SQLexcute(connMD, sqlstr1);
+            mssql.SQLexcute(connMD, sqlstr2);
             MessageBox.Show("订单信息已重置", "成功");
             Dgv_Show();
         }

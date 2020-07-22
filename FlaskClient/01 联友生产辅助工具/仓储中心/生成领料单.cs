@@ -13,10 +13,17 @@ namespace 联友生产辅助工具.仓储中心
 
         private static InfoObject infObj = generate.infObj;
 
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
 
-        public 生成领料单()
+        public 生成领料单(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             FormMain_Resized_Work();
 
             Init();

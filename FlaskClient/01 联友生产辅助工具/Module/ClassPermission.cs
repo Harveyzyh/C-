@@ -46,13 +46,13 @@ namespace HarveyZ
         #endregion
 
         #region 用户权限操作
-        public List<string> GetPermUser(string U_ID)
+        public List<string> GetPermUser(string uId)
         {
             List<string> backList = new List<string> { };
             string sqlstr = @"SELECT Name FROM WG_PERM_BASE 
-                                INNER JOIN WG_PERM_USER ON WG_PERM_USER.Perm_ID = WG_PERM_BASE.K_ID 
-                                WHERE WG_PERM_USER.U_ID = '{0}' ";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, U_ID));
+                                INNER JOIN WG_PERM_USER ON WG_PERM_USER.Perm_ID = WG_PERM_BASE.K_ID AND WG_PERM_USER.Type = WG_PERM_BASE.Type
+                                WHERE WG_PERM_USER.U_ID = '{0}' AND WG_PERM_USER.Type = '{1}' ";
+            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, uId, type));
             if (dt != null)
             {
                 for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
@@ -61,6 +61,27 @@ namespace HarveyZ
                 }
             }
             return backList;
+        }
+
+        public void GetPermUserDetail(string uId, string permName, out bool newFlag, out bool editFlag, out bool delFlag, out bool outFlag, out bool lockFlag)
+        {
+            newFlag = false;
+            editFlag = false;
+            delFlag = false;
+            outFlag = false;
+            lockFlag = false;
+            string sqlstr = @"SELECT WG_PERM_USER.New, WG_PERM_USER.Edit, WG_PERM_USER.Del, WG_PERM_USER.Out, WG_PERM_USER.Lock FROM WG_PERM_BASE 
+                                INNER JOIN WG_PERM_USER ON WG_PERM_USER.Perm_ID = WG_PERM_BASE.K_ID AND WG_PERM_USER.Type = WG_PERM_BASE.Type
+                                WHERE WG_PERM_USER.U_ID = '{0}' AND WG_PERM_USER.Type = '{1}' AND WG_PERM_BASE.Name = '{2}'";
+            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, uId, type, permName));
+            if (dt != null)
+            {
+                if (dt.Rows[0]["New"].Equals(true)) newFlag = true;
+                if (dt.Rows[0]["Edit"].Equals(true)) editFlag = true;
+                if (dt.Rows[0]["Del"].Equals(true)) delFlag = true;
+                if (dt.Rows[0]["Out"].Equals(true)) outFlag = true;
+                if (dt.Rows[0]["Lock"].Equals(true)) lockFlag = true;
+            }
         }
 
         public void SetPermUser(string U_ID, List<string> getList)
@@ -84,12 +105,43 @@ namespace HarveyZ
                 }
             }
         }
+
+        public void SetPermUser(string U_ID, DataTable dt)
+        {
+            string sqlstrDel = @" DELETE FROM WG_PERM_USER WHERE U_ID = '{0}' AND Type = '{1}'";
+            string sqlstrNew = @" INSERT INTO WG_PERM_USER (Type, U_ID, U_NAME, Perm_ID, New, Edit, Del, Out, Lock) 
+                                    SELECT Type, WG_USER.U_ID, WG_USER.U_NAME, WG_PERM_BASE.K_ID, 
+                                    '{3}' New, '{4}' Edit, '{5}' Del, '{6}' Out, '{7}' Lock  
+                                    FROM WG_PERM_BASE 
+                                    INNER JOIN WG_USER ON TYPE = Type 
+                                    WHERE 1=1 
+                                    AND WG_PERM_BASE.Name = '{1}' 
+                                    AND WG_USER.U_ID = '{0}' 
+                                    AND TYPE = '{2}'";
+
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                mssql.SQLexcute(conn, string.Format(sqlstrDel, U_ID, type));
+                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex ++)
+                {
+                    mssql.SQLexcute(conn, string.Format(sqlstrNew, U_ID, dt.Rows[rowIndex]["PermName"].ToString(), type,
+                        dt.Rows[rowIndex]["New"].ToString(), dt.Rows[rowIndex]["Edit"].ToString(), dt.Rows[rowIndex]["Del"].ToString(),
+                        dt.Rows[rowIndex]["Out"].ToString(), dt.Rows[rowIndex]["Lock"].ToString()));
+                }
+            }
+        }
         #endregion
 
         #region 显示权限明细
         public DataTable ShowUserPerm(string U_ID)
         {
-            string sqlstr = @"SELECT CONVERT(BIT, (CASE WHEN U.Perm_ID IS NULL THEN 0 ELSE 1 END)) AS 有效码 , B.Name 权限名 
+            string sqlstr = @"SELECT CONVERT(BIT, (CASE WHEN U.Perm_ID IS NULL THEN 0 ELSE 1 END)) AS 有效码, 
+                                CAST(ISNULL(U.New, 0) AS BIT) 新增, 
+                                CAST(ISNULL(U.Edit, 0) AS BIT) 编辑, 
+                                CAST(ISNULL(U.Del, 0) AS BIT) 删除, 
+                                CAST(ISNULL(U.Out, 0) AS BIT) 输出, 
+                                CAST(ISNULL(U.Lock, 0) AS BIT) 锁定, 
+                                B.Name 权限名 
                                 FROM ( SELECT Type, K_ID, Name FROM WG_PERM_BASE WHERE Valid = 1) AS B 
                                 LEFT JOIN WG_PERM_USER AS U ON B.K_ID = U.Perm_ID AND B.Type = U.Type AND U.U_ID = '{0}' 
                                 WHERE 1 = 1 AND B.Type = '{1}' 

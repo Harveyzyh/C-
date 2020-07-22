@@ -13,6 +13,12 @@ namespace 联友生产辅助工具.仓储中心
         static string connYF = FormLogin.infObj.connYF;
         ERP_Create_Purtg createPurtg = new ERP_Create_Purtg(connYF);
 
+        private bool newFlag = false;
+        private bool editFlag = false;
+        private bool delFlag = false;
+        private bool outFlag = false;
+        private bool lockFlag = false;
+
         public static string Mode = null;
         public static string Title = null;
         public static string GetMain = null;
@@ -31,9 +37,11 @@ namespace 联友生产辅助工具.仓储中心
         #endregion
 
         #region 窗口初始化
-        public 录入进货单_Excel导入()
+        public 录入进货单_Excel导入(string text = "")
         {
             InitializeComponent();
+            this.Text = text == "" ? this.Text : text;
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             Init();
         }
 

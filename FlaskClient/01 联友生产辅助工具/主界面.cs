@@ -8,7 +8,6 @@ using 联友生产辅助工具.仓储中心;
 using 联友生产辅助工具.生产日报表;
 using 联友生产辅助工具.生管码垛线;
 using 联友生产辅助工具.生管排程;
-using 联友生产辅助工具.生产排程模块;
 using 联友生产辅助工具.报表;
 
 namespace HarveyZ
@@ -294,21 +293,14 @@ namespace HarveyZ
         #region 管理
         private void 管理_权限管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            权限管理 frm = new 权限管理();
-            FormOpenInit(frm);
-            frm.Show();
-        }
-
-        private void 管理_用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            权限管理 frm = new 权限管理();
+            权限管理 frm = new 权限管理("管理_权限管理");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 管理_FastReport模板发布ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FastReport模板发布 frm = new FastReport模板发布();
+            FastReport模板发布 frm = new FastReport模板发布("管理_FastReport模板发布");
             FormOpenInit(frm);
             frm.Show();
         }
@@ -317,42 +309,42 @@ namespace HarveyZ
         #region 仓储中心
         private void 仓储中心_扫描领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            扫描领料单 frm = new 扫描领料单();
+            扫描领料单 frm = new 扫描领料单("仓储中心_扫描领料单");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 仓储中心_录入进货单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入进货单 frm = new 录入进货单();
+            录入进货单 frm = new 录入进货单("仓储中心_录入进货单");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 仓储中心_录入进货单采购平台ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入进货单_采购平台 frm = new 录入进货单_采购平台();
+            录入进货单_采购平台 frm = new 录入进货单_采购平台("仓储中心_录入进货单采购平台");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 仓储中心_录入进货单联友分公司ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入进货单_联友分公司 frm = new 录入进货单_联友分公司();
+            录入进货单_联友分公司 frm = new 录入进货单_联友分公司("仓储中心_录入进货单联友分公司");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 仓储中心_录入进货单Excel导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入进货单_Excel导入 frm = new 录入进货单_Excel导入();
+            录入进货单_Excel导入 frm = new 录入进货单_Excel导入("仓储中心_录入进货单Excel导入");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 仓储中心_生成领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            生成领料单 frm = new 生成领料单();
+            生成领料单 frm = new 生成领料单("仓储中心_生成领料单");
             FormOpenInit(frm);
             frm.Show();
         }
@@ -361,42 +353,42 @@ namespace HarveyZ
         #region 生产日报表
         private void 生产日报表_查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表查询 frm = new 日报表查询();
+            日报表查询 frm = new 日报表查询("生产日报表_查询");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生产日报表_新增ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表新增 frm = new 日报表新增();
+            日报表新增 frm = new 日报表新增("生产日报表_新增");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生产日报表_修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表修改 frm = new 日报表修改();
+            日报表修改 frm = new 日报表修改("生产日报表_修改");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生产日报表_系列组别维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表维护组别系列 frm = new 日报表维护组别系列();
+            日报表维护组别系列 frm = new 日报表维护组别系列("生产日报表_系列组别维护");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生产日报表_部门线别维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表部门线别维护 frm = new 日报表部门线别维护();
+            日报表部门线别维护 frm = new 日报表部门线别维护("生产日报表_部门线别维护");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生产日报表_工作组线别维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            日报表部门工作组线别维护 frm = new 日报表部门工作组线别维护();
+            日报表部门工作组线别维护 frm = new 日报表部门工作组线别维护("生产日报表_工作组线别维护");
             FormOpenInit(frm);
             frm.Show();
         }
@@ -406,63 +398,58 @@ namespace HarveyZ
         #region 码垛线
         private void 码垛线_排程导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线排程导入 frm = new 码垛线排程导入();
+            码垛线排程导入 frm = new 码垛线排程导入("码垛线_排程导入");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 码垛线_纸箱编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            纸箱编码管理 frm = new 纸箱编码管理();
+            纸箱编码管理 frm = new 纸箱编码管理("码垛线_纸箱编码管理");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 码垛线_订单类别编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            订单类别编码管理 frm = new 订单类别编码管理();
+            订单类别编码管理 frm = new 订单类别编码管理("码垛线_订单类别编码管理");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 码垛线_纸箱名称管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            纸箱名称管理 frm = new 纸箱名称管理();
+            纸箱名称管理 frm = new 纸箱名称管理("码垛线_纸箱名称管理");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 码垛线_客户端ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线客户端 frm = new 码垛线客户端();
+            码垛线客户端 frm = new 码垛线客户端("码垛线_客户端");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 码垛线_码垛线报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            码垛线报表 frm = new 码垛线报表("码垛线_码垛线报表");
+            FormOpenInit(frm);
+            frm.Show();
         }
         #endregion
 
         #region 生产排程
         private void 生管_电子排程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            生产电子排程 frm = new 生产电子排程();
+            生产电子排程 frm = new 生产电子排程("生管_电子排程");
             FormOpenInit(frm);
             frm.Show();
         }
 
         private void 生管_订单信息查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            订单信息查询 frm = new 订单信息查询();
-            FormOpenInit(frm);
-            frm.Show();
-        }
-
-        private void 生管_生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            生产排程 frm = new 生产排程();
+            订单信息查询 frm = new 订单信息查询("生管_订单信息查询");
             FormOpenInit(frm);
             frm.Show();
         }
@@ -471,7 +458,7 @@ namespace HarveyZ
         #region 报表
         private void 报表_销货信息带入库部门ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            销货信息_带入库部门_查询 frm = new 销货信息_带入库部门_查询();
+            销货信息_带入库部门_查询 frm = new 销货信息_带入库部门_查询("报表_销货信息带入库部门");
             FormOpenInit(frm);
             frm.Show();
         }

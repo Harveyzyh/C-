@@ -501,16 +501,13 @@ namespace HarveyZ
             }
             if (dgv != null)
             {
-                //先将所有列readonly
-                SetColReadonly(dgv, dgvList);
-
                 foreach (int col in colList)
                 {
                     SetColWritable(dgv, col);
                 }
 
                 //其余列设置为只读
-                //SetColReadonly(dgv, ListOpt.ListDif(dgvList, colList));
+                SetColReadonly(dgv, ListOpt.ListDif(dgvList, colList));
             }
         }
 
@@ -834,6 +831,18 @@ namespace HarveyZ
             if (dgv.RowCount > 0 && dgv != null)
             {
                 dgv.CurrentCell = dgv.Rows[dgv.RowCount - 1].Cells[0];
+            }
+        }
+
+        public static void SelectLastRow(DataGridView dgv = null, int rowIndex = -1)
+        {
+            if (rowIndex >= 0)
+            {
+                int kk = dgv.RowCount;
+                if (dgv.RowCount > 0 && dgv.RowCount >= rowIndex && dgv != null)
+                {
+                    dgv.CurrentCell = dgv.Rows[rowIndex].Cells[0];
+                }
             }
         }
 

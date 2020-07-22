@@ -834,6 +834,18 @@ namespace HarveyZ
             }
         }
 
+        public static void SelectLastRow(DataGridView dgv = null, int rowIndex = -1)
+        {
+            if (rowIndex >= 0)
+            {
+                int kk = dgv.RowCount;
+                if (dgv.RowCount > 0 && dgv.RowCount >= rowIndex && dgv != null)
+                {
+                    dgv.CurrentCell = dgv.Rows[rowIndex].Cells[0];
+                }
+            }
+        }
+
         #region 行颜色
         public static void SetRowFontColor(DataGridView dgv, int row, Color color)
         {
