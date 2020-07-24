@@ -1,4 +1,4 @@
-﻿namespace 码垛线_ERP单据生成程序
+﻿namespace HarveyZ
 {
     partial class FastReportPreview
     {

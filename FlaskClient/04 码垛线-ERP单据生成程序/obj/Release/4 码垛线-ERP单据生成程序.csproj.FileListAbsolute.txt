@@ -22,7 +22,7 @@ Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\码垛�
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Release\码垛线-ERP单据生成程序.exe
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\bin\Release\码垛线-ERP单据生成程序.pdb
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\4 码垛线-ERP单据生成程序.csprojResolveAssemblyReference.cache
-Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.FastReportPreview.resources
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.Properties.Resources.resources
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.码垛线_ERP单据生成程序.resources
 Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\4 码垛线-ERP单据生成程序.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\HarveyZ.FastReportPreview.resources

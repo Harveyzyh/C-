@@ -54,6 +54,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="FastReport, Version=2019.3.5.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\100 FastReport\Framework 4.0\FastReport.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel12, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\0 Lib\Microsoft.Office.Interop.Excel12.dll</HintPath>
@@ -129,6 +133,12 @@
     <Compile Include="Module\ClassPermission.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\IniHelper.cs" />
+    <Compile Include="仓储中心\录入退货单.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="仓储中心\录入退货单.Designer.cs">
+      <DependentUpon>录入退货单.cs</DependentUpon>
+    </Compile>
     <Compile Include="仓储中心\录入进货单-Excel导入.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +150,12 @@
     </Compile>
     <Compile Include="仓储中心\录入进货单-联友分公司.Designer.cs">
       <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
+    </Compile>
+    <Compile Include="仓储中心\录入退货单-获取单据信息.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="仓储中心\录入退货单-获取单据信息.Designer.cs">
+      <DependentUpon>录入退货单-获取单据信息.cs</DependentUpon>
     </Compile>
     <Compile Include="仓储中心\录入进货单-采购平台.cs">
       <SubType>Form</SubType>
@@ -194,6 +210,18 @@
     </Compile>
     <Compile Include="生管排程\订单信息查询.Designer.cs">
       <DependentUpon>订单信息查询.cs</DependentUpon>
+    </Compile>
+    <Compile Include="码垛线\ERP单据预览.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="码垛线\ERP单据预览.Designer.cs">
+      <DependentUpon>ERP单据预览.cs</DependentUpon>
+    </Compile>
+    <Compile Include="码垛线\ERP单据生成程序.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="码垛线\ERP单据生成程序.Designer.cs">
+      <DependentUpon>ERP单据生成程序.cs</DependentUpon>
     </Compile>
     <Compile Include="码垛线\码垛线报表.cs">
       <SubType>Form</SubType>
@@ -329,11 +357,17 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="仓储中心\录入退货单.resx">
+      <DependentUpon>录入退货单.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入进货单-Excel导入.resx">
       <DependentUpon>录入进货单-Excel导入.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入进货单-联友分公司.resx">
       <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="仓储中心\录入退货单-获取单据信息.resx">
+      <DependentUpon>录入退货单-获取单据信息.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入进货单-采购平台.resx">
       <DependentUpon>录入进货单-采购平台.cs</DependentUpon>
@@ -361,6 +395,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\订单信息查询.resx">
       <DependentUpon>订单信息查询.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="码垛线\ERP单据预览.resx">
+      <DependentUpon>ERP单据预览.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="码垛线\ERP单据生成程序.resx">
+      <DependentUpon>ERP单据生成程序.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="码垛线\码垛线报表.resx">
       <DependentUpon>码垛线报表.cs</DependentUpon>

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using FastReport.Editor;
 using FastReport;
 using System.IO;
 
@@ -370,6 +369,7 @@ namespace 码垛线_ERP单据生成程序
         #region 窗体UI-打印列表
         private void dgvList_Show(DataTable dt)
         {
+            dgvList.DataSource = null;
             int rowIndex = -1;
             if (dgvList.DataSource != null)
             {
@@ -461,7 +461,7 @@ namespace 码垛线_ERP单据生成程序
         #region 打印列表明细
         private void GetListData() //打印列表显示信息的获取
         {
-            string sqlstr = @"SELECT * FROM VPrintList ORDER BY 打印序号";
+            string sqlstr = @"SELECT * FROM VPrintList WHERE (CONVERT(VARCHAR(20), 创建时间, 112) = CONVERT(VARCHAR(20), GETDATE(), 112) OR CONVERT(VARCHAR(20), 销货单生成时间, 112) = CONVERT(VARCHAR(20), GETDATE(), 112)) ORDER BY 打印序号";
             DataTable dt = mssql.SQLselect(connRobot, sqlstr);
             dgvList_Show(dt);
         }

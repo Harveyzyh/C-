@@ -36,6 +36,7 @@
             this.仓储中心_录入进货单联友分公司ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_录入进货单Excel导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_录入进货单采购平台ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.仓储中心_录入退货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.仓储中心_生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生产部_生产日报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,12 +53,12 @@
             this.工程部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_排程导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.码垛线_客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.码垛线_码垛线报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线配置管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_纸箱名称管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_纸箱编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.码垛线_订单类别编码管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.码垛线_客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.码垛线_码垛线报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.报表_销货信息带入库部门ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +74,7 @@
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.码垛线_ERP单据生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -106,6 +108,7 @@
             this.仓储中心_录入进货单联友分公司ToolStripMenuItem,
             this.仓储中心_录入进货单Excel导入ToolStripMenuItem,
             this.仓储中心_录入进货单采购平台ToolStripMenuItem,
+            this.仓储中心_录入退货单ToolStripMenuItem,
             this.仓储中心_生成领料单ToolStripMenuItem});
             this.仓储中心ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.仓储中心ToolStripMenuItem.Name = "仓储中心ToolStripMenuItem";
@@ -147,6 +150,13 @@
             this.仓储中心_录入进货单采购平台ToolStripMenuItem.Text = "录入进货单-采购平台";
             this.仓储中心_录入进货单采购平台ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_录入进货单采购平台ToolStripMenuItem_Click);
             // 
+            // 仓储中心_录入退货单ToolStripMenuItem
+            // 
+            this.仓储中心_录入退货单ToolStripMenuItem.Name = "仓储中心_录入退货单ToolStripMenuItem";
+            this.仓储中心_录入退货单ToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.仓储中心_录入退货单ToolStripMenuItem.Text = "录入退货单";
+            this.仓储中心_录入退货单ToolStripMenuItem.Click += new System.EventHandler(this.仓储中心_录入退货单ToolStripMenuItem_Click);
+            // 
             // 仓储中心_生成领料单ToolStripMenuItem
             // 
             this.仓储中心_生成领料单ToolStripMenuItem.Name = "仓储中心_生成领料单ToolStripMenuItem";
@@ -177,21 +187,21 @@
             // 生产日报表_新增ToolStripMenuItem
             // 
             this.生产日报表_新增ToolStripMenuItem.Name = "生产日报表_新增ToolStripMenuItem";
-            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.生产日报表_新增ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_新增ToolStripMenuItem.Text = "新增";
             this.生产日报表_新增ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_新增ToolStripMenuItem_Click);
             // 
             // 生产日报表_修改ToolStripMenuItem
             // 
             this.生产日报表_修改ToolStripMenuItem.Name = "生产日报表_修改ToolStripMenuItem";
-            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.生产日报表_修改ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_修改ToolStripMenuItem.Text = "修改";
             this.生产日报表_修改ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_修改ToolStripMenuItem_Click);
             // 
             // 生产日报表_查询ToolStripMenuItem
             // 
             this.生产日报表_查询ToolStripMenuItem.Name = "生产日报表_查询ToolStripMenuItem";
-            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.生产日报表_查询ToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.生产日报表_查询ToolStripMenuItem.Text = "查询";
             this.生产日报表_查询ToolStripMenuItem.Click += new System.EventHandler(this.生产日报表_查询ToolStripMenuItem_Click);
             // 
@@ -265,7 +275,8 @@
             this.码垛线_排程导入ToolStripMenuItem,
             this.码垛线_客户端ToolStripMenuItem,
             this.码垛线_码垛线报表ToolStripMenuItem,
-            this.码垛线配置管理ToolStripMenuItem});
+            this.码垛线配置管理ToolStripMenuItem,
+            this.码垛线_ERP单据生成ToolStripMenuItem});
             this.码垛线ToolStripMenuItem.Name = "码垛线ToolStripMenuItem";
             this.码垛线ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.码垛线ToolStripMenuItem.Text = "码垛线";
@@ -276,6 +287,20 @@
             this.码垛线_排程导入ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.码垛线_排程导入ToolStripMenuItem.Text = "码垛线排程导入";
             this.码垛线_排程导入ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_排程导入ToolStripMenuItem_Click);
+            // 
+            // 码垛线_客户端ToolStripMenuItem
+            // 
+            this.码垛线_客户端ToolStripMenuItem.Name = "码垛线_客户端ToolStripMenuItem";
+            this.码垛线_客户端ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.码垛线_客户端ToolStripMenuItem.Text = "码垛线客户端";
+            this.码垛线_客户端ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_客户端ToolStripMenuItem_Click);
+            // 
+            // 码垛线_码垛线报表ToolStripMenuItem
+            // 
+            this.码垛线_码垛线报表ToolStripMenuItem.Name = "码垛线_码垛线报表ToolStripMenuItem";
+            this.码垛线_码垛线报表ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.码垛线_码垛线报表ToolStripMenuItem.Text = "码垛线报表";
+            this.码垛线_码垛线报表ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_码垛线报表ToolStripMenuItem_Click);
             // 
             // 码垛线配置管理ToolStripMenuItem
             // 
@@ -307,20 +332,6 @@
             this.码垛线_订单类别编码管理ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.码垛线_订单类别编码管理ToolStripMenuItem.Text = "订单类别编码管理";
             this.码垛线_订单类别编码管理ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_订单类别编码管理ToolStripMenuItem_Click);
-            // 
-            // 码垛线_客户端ToolStripMenuItem
-            // 
-            this.码垛线_客户端ToolStripMenuItem.Name = "码垛线_客户端ToolStripMenuItem";
-            this.码垛线_客户端ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.码垛线_客户端ToolStripMenuItem.Text = "码垛线客户端";
-            this.码垛线_客户端ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_客户端ToolStripMenuItem_Click);
-            // 
-            // 码垛线_码垛线报表ToolStripMenuItem
-            // 
-            this.码垛线_码垛线报表ToolStripMenuItem.Name = "码垛线_码垛线报表ToolStripMenuItem";
-            this.码垛线_码垛线报表ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.码垛线_码垛线报表ToolStripMenuItem.Text = "码垛线报表";
-            this.码垛线_码垛线报表ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_码垛线报表ToolStripMenuItem_Click);
             // 
             // 报表ToolStripMenuItem
             // 
@@ -446,6 +457,13 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
+            // 码垛线_ERP单据生成ToolStripMenuItem
+            // 
+            this.码垛线_ERP单据生成ToolStripMenuItem.Name = "码垛线_ERP单据生成ToolStripMenuItem";
+            this.码垛线_ERP单据生成ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.码垛线_ERP单据生成ToolStripMenuItem.Text = "ERP单据生成";
+            this.码垛线_ERP单据生成ToolStripMenuItem.Click += new System.EventHandler(this.码垛线_ERP单据生成ToolStripMenuItem_Click);
+            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -523,5 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem 报表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 报表_销货信息带入库部门ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_码垛线报表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 仓储中心_录入退货单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 码垛线_ERP单据生成ToolStripMenuItem;
     }
 }

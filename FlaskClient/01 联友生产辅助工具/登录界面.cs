@@ -78,6 +78,15 @@ namespace HarveyZ
             dr = infObj.componentFileDt.NewRow();
             dr["FileName"] = "NPOI.xml"; dr["FileVersion"] = "";
             infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "FastReport.Bars.dll"; dr["FileVersion"] = "2019.3.5.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "FastReport.dll"; dr["FileVersion"] = "2019.3.5.0";
+            infObj.componentFileDt.Rows.Add(dr);
+            dr = infObj.componentFileDt.NewRow();
+            dr["FileName"] = "FastReport.Editor.dll"; dr["FileVersion"] = "2019.3.5.0";
+            infObj.componentFileDt.Rows.Add(dr);
 
             FileVersion.JudgeFile(infObj.updateHost+ @"/download/", infObj.componentFileDt);
 

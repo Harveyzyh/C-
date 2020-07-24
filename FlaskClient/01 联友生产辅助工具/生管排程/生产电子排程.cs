@@ -225,7 +225,7 @@ namespace 联友生产辅助工具.生管排程
                                 SC002 = X00, SC004 = X01, SC005 = X02, SC006 = X03, SC007 = X04, SC008 = X05, 
                                 SC009 = X06, SC010 = X07, SC011 = X08, SC012 = X09, SC015 = X10, 
                                 SC016 = X11, SC017 = X12, SC018 = X13, SC019 = X14, SC020 = X15, SC021 = X16, 
-                                SC022 = X17, SC024 = X18, SC025 = X19, SC026 = X20, SC027 = X21, SC028 = X22 
+                                SC022 = X17, SC024 = X18, SC025 = X19, SC026 = X20, SC027 = X21, SC028 = X22, SC029 = X23 
                                 FROM WG_DB.dbo.SC_PLAN
                                 INNER JOIN (
 	                                SELECT 
@@ -253,7 +253,8 @@ namespace 联友生产辅助工具.生管排程
 	                                RTRIM(COPTD.UDF10) AS X19,
 	                                RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) AS X20,
 	                                SUBSTRING(COPTD.CREATE_DATE,1,14) AS X21, 
-	                                RTRIM(COPTD.TD004) AS X22 
+	                                RTRIM(COPTD.TD004) AS X22, 
+                                    RTRIM(COPTQ.UDF07) AS X23 
 	                                FROM COMFORT.dbo.COPTD AS COPTD 
 	                                Left JOIN COMFORT.dbo.COPTC AS COPTC On COPTD.TD001=COPTC.TC001 and COPTD.TD002=COPTC.TC002 
 	                                Left JOIN COMFORT.dbo.COPTQ AS COPTQ On COPTD.TD053=COPTQ.TQ002 and COPTD.TD004=COPTQ.TQ001 
@@ -272,10 +273,10 @@ namespace 联友生产辅助工具.生管排程
         private void DgvShow() //数据库资料显示到界面
         {
             string sqlstrShow = @" SELECT SUBSTRING(CREATE_DATE, 1, 8) 导入日期, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
-                                    SC012 规格, SC011 保友品名, SC013 订单数量, SC014 赠品测试量, SC015 配置方案, 
+                                    SC012 规格, SC011 保友品名, SC013 订单数量, SC014 赠品测试量, SC028 品号, SC015 配置方案, SC029 网布颜色, 
                                     SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
                                     SC006 变更原因, SC007 出货日期, SC008 验货日期, SC009 PO#, SC018 柜型柜数, SC019 目的地, 
-                                    SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期, SC028 品号 
+                                    SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期 
                                     FROM WG_DB..SC_PLAN WHERE 1 = 1 ";
             if (TxBoxOrder.Text != "") sqlstrShow += @" AND SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
             if (TxBoxName.Text != "") sqlstrShow += @" AND SC010 LIKE '%" + TxBoxName.Text + "%' ";

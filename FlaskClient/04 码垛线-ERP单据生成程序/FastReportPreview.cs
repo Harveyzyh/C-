@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FastReport;
 
-namespace 码垛线_ERP单据生成程序
+namespace HarveyZ
 {
     public partial class FastReportPreview : Form
     {

@@ -54,12 +54,12 @@ namespace 联友生产辅助工具.生管码垛线
         private void FormMain_Resized_Work()
         {
             //窗框大小
-            int FormWidth, FormHeight;
-            FormWidth = Width;
-            FormHeight = Height;
-            PanelTitle.Size = new Size(FormWidth, PanelTitle.Height);
-            DgvMain.Location = new Point(0, PanelTitle.Height + 2);
-            DgvMain.Size = new Size(FormWidth, FormHeight - PanelTitle.Height - 2);
+            //int FormWidth, FormHeight;
+            //FormWidth = Width;
+            //FormHeight = Height;
+            //PanelTitle.Size = new Size(FormWidth, PanelTitle.Height);
+            //DgvMain.Location = new Point(0, PanelTitle.Height + 2);
+            //DgvMain.Size = new Size(FormWidth, FormHeight - PanelTitle.Height - 2);
         }
         #endregion
 

@@ -342,6 +342,13 @@ namespace HarveyZ
             frm.Show();
         }
 
+        private void 仓储中心_录入退货单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            录入退货单 frm = new 录入退货单("仓储中心_录入退货单");
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
         private void 仓储中心_生成领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             生成领料单 frm = new 生成领料单("仓储中心_生成领料单");
@@ -427,6 +434,13 @@ namespace HarveyZ
         private void 码垛线_客户端ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             码垛线客户端 frm = new 码垛线客户端("码垛线_客户端");
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 码垛线_ERP单据生成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            码垛线_ERP单据生成程序 frm = new 码垛线_ERP单据生成程序("码垛线_ERP单据生成");
             FormOpenInit(frm);
             frm.Show();
         }

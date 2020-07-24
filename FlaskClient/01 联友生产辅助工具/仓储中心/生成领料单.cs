@@ -510,8 +510,32 @@ namespace 联友生产辅助工具.仓储中心
 
         private void MocteUdt() //其他额外情况的更新
         {
-            string sqlstr1 = @" P_MOCTC_CREATE_AFTER_WG @TC001='{0}', @TC002='{1}' ";
-            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr1, infObj.db, infObj.dh));
+            //string sqlstr = @" P_MOCTC_CREATE_AFTER_WG @TC001='{0}', @TC002='{1}' ";
+
+            //订单的指定气压棒供应商更新
+            //领料单身带出信息
+            string sqlstr = @"UPDATE MOCTE SET TE010 = COPTD.UDF09, TE023 = MA002
+	                            FROM MOCTE
+	                            INNER JOIN MOCTA ON TE011 = TA001 AND TE012 = TA002
+	                            INNER JOIN COPTD ON TD001 = TA026 AND TD002 = TA027 AND TD003 = TA028
+	                            INNER JOIN PURMA ON MA001 = COPTD.UDF09
+	                            WHERE 1 = 1
+	                            AND TE004 IN('3020501004', '3020501014', '3020502014', '3020502023'
+			                            , '3020501005', '3020501012', '3020501016', '3020502015', '3020502024', '3020502026')
+	                            AND TE001 = '{0}' AND TE002 = '{1}'
+	
+	                                 
+	                            UPDATE MOCTE SET 
+	                            MOCTE.UDF05 = TA026, -- 订单单别 
+	                            MOCTE.UDF06 = TA027, -- 订单单号
+	                            MOCTE.UDF07 = TD013, -- 订单预计交货日 
+	                            MOCTE.UDF08 = TA010 -- 工单预计完工日 
+	                            FROM MOCTE 
+	                            LEFT JOIN MOCTA ON TE011 = TA001 AND TE012 = TA002 
+	                            LEFT JOIN COPTD ON TA026 = TD001 AND TA027 = TD002 AND TA028 = TD003 
+	                            WHERE 1=1
+	                            AND TE001 = '{0}' AND TE002 = '{1}' ";
+            infObj.sql.SQLexcute(FormLogin.infObj.connYF, string.Format(sqlstr, infObj.db, infObj.dh));
         }
 
         private void MoctcUdt()
