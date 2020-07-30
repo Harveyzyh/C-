@@ -85,6 +85,7 @@ namespace 联友生产辅助工具.报表
             excelObj.dataDt = (DataTable)DgvMain.DataSource;
             excelObj.defauleFileName = "销货明细_" + DateTime.Now.ToString("yyyy-MM-dd");
             excelObj.isWrite = true;
+            excelObj.dataDt.TableName = "销货明细";
 
             if (excel.ExcelOpt(excelObj))
             {

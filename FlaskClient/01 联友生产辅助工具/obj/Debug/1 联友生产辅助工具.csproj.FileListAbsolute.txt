@@ -169,3 +169,8 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅�
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.仓储中心.录入退货单_获取单据信息.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.报表.销货信息_带入库部门_查询.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.码垛线报表.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Debug\FastReport.dll
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Debug\FastReport.Bars.dll
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Debug\FastReport.Editor.dll
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.ERP单据预览.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.码垛线_ERP单据生成程序.resources
