@@ -23,6 +23,7 @@ namespace 联友生产辅助工具.生管排程
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
         #endregion
 
         #region 窗体设计
@@ -30,7 +31,7 @@ namespace 联友生产辅助工具.生管排程
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }
@@ -41,6 +42,7 @@ namespace 联友生产辅助工具.生管排程
             DtpEndDate.Checked = false;
             DgvShow();
             SetCmBoxDptTypeList();
+            SetContextMenuStripTypeList();
             UI();
         }
 
@@ -64,11 +66,149 @@ namespace 联友生产辅助工具.生管排程
 
         #endregion
 
-        #region 
+        #region 按钮
+        private void UI()
+        {
+            if (newFlag)
+            {
+                BtnInput.Enabled = true;
+            }
+            else
+            {
+                BtnInput.Enabled = false;
+            }
+            if (DgvMain.DataSource != null && outFlag)
+            {
+                BtnOutput.Enabled = true;
+            }
+            else
+            {
+                BtnOutput.Enabled = false;
+            }
+        }
+
+        private void BtnShow_Click(object sender, EventArgs e) //刷新按钮
+        {
+            DgvShow();
+            UI();
+        }
+
+        private void BtnInput_Click(object sender, EventArgs e)
+        {
+            Form formInput = new 生管排程导入导出部门选择("导入");
+            formInput.ShowDialog();
+            string Dpt = 生管排程导入导出部门选择.Dpt;
+            if (Dpt != null)
+            {
+                Form frm = new 生产排程导入中();
+                try
+                {
+                    Excel excel = new Excel();
+                    Excel.Excel_Base excelObj = new Excel.Excel_Base();
+                    excelObj.isTitleRow = true;
+                    excelObj.isWrite = false;
+
+                    if (excel.ExcelOpt(excelObj))
+                    {
+
+                        if (excelObj.status == true)
+                        {
+                            SetInputDtDpt(Dpt, excelObj.dataDt);
+                            GetInsertDt(excelObj.dataDt);
+                            MessageBox.Show("导入成功", "提示");
+                            DgvShow();
+                        }
+                        else
+                        {
+                            Msg.Show(excelObj.msg);
+                        }
+                    }
+                }
+                catch (Exception es)
+                {
+                    MessageBox.Show(es.ToString());
+                }
+                finally
+                {
+                    frm.Dispose();
+                }
+            }
+        }
+
+        private void BtnOutput_Click(object sender, EventArgs e)
+        {
+            Excel excel = new Excel();
+            Excel.Excel_Base excelObj = new Excel.Excel_Base();
+            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.defauleFileName = "生产排程导出_" + DateTime.Now.ToString("yyyy-MM-dd");
+            excelObj.isWrite = true;
+
+            if (excel.ExcelOpt(excelObj))
+            {
+                if (excelObj.status)
+                {
+                    Msg.Show("Excel导出成功！");
+                }
+                else
+                {
+                    Msg.Show(excelObj.msg, "错误");
+                }
+            }
+        }
+
+        private void DgvMain_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (contextMenuStrip_DgvMain.Items.Count > 0)
+                {
+                    if (e.RowIndex >= 0)
+                    {
+                        contextMenuStrip_DgvMain.Visible = true;
+                        DgvMain.ClearSelection();
+                        DgvMain.Rows[e.RowIndex].Selected = true;
+                        DgvMain.CurrentCell = DgvMain.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                        contextMenuStrip_DgvMain.Show(MousePosition.X, MousePosition.Y);
+                    }
+                }
+            }
+        }
+
+        private void contextMenuStrip_DgvMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            contextMenuStrip_DgvMain.Visible = false;
+            if (e.ClickedItem.Text == "打印标签")
+            {
+                contextMenuStrip_DgvMain_ItemClicked_PrintLabel();
+            }
+            if (e.ClickedItem.Text == "修改")
+            {
+                contextMenuStrip_DgvMain_ItemClicked_Edit();
+            }
+            if (e.ClickedItem.Text == "删除")
+            {
+                contextMenuStrip_DgvMain_ItemClicked_Delete();
+            }
+        }
+        #endregion
+
+        #region 逻辑
+        private void SetContextMenuStripTypeList()
+        {
+            if (editFlag)
+            {
+                contextMenuStrip_DgvMain.Items.Add("修改");
+                contextMenuStrip_DgvMain.Items.Add("删除");
+            }
+            //if (printFlag)
+            //{
+            //    contextMenuStrip_DgvMain.Items.Add("打印标签");
+            //}
+        }
 
         private void SetCmBoxDptTypeList()
         {
-            string sqlstr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by [Index]";
+            string sqlstr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by K_ID";
             DataTable dt = mssql.SQLselect(connWG, sqlstr);
             if (dt != null)
             {
@@ -80,55 +220,10 @@ namespace 联友生产辅助工具.生管排程
             }
         }
 
-        private bool CheckDt(DataTable dt)
-        {
-            if(dt.Columns.Count != 28)
-            {
-                MessageBox.Show("导入文件格式有异常", "错误");
-                return false;
-            }
-
-            int rowTotal = dt.Rows.Count;
-            string SC001 = "", SC003 = "";
-            string Msg = "";
-            for (int rowIndex = 0; rowIndex < rowTotal; rowIndex++)
-            {
-                if (dt.Rows[rowIndex][2].ToString() == "生产单号")
-                {
-                    continue;
-                }
-
-                if (dt.Rows[rowIndex][13].ToString() == "") dt.Rows[rowIndex][13] = "0";
-
-                SC001 = dt.Rows[rowIndex][2].ToString();
-                SC003 = dt.Rows[rowIndex][0].ToString();
-
-                if(Normal.GetSubstringCount(SC001, "-") != 2 || SC003 == "")
-                {
-                    Msg += (rowIndex + 1).ToString() + ",";
-                }
-            }
-            if (Msg == "") return true;
-            else
-            {
-                MessageBox.Show("导入文件中行：" + Msg + "有异常，请检查", "导入失败", MessageBoxButtons.OK);
-                return false;
-            }
-        }
-
         private int GetNowDate()
         {
             string sqlstr = @"SELECT isnull(LEFT(dbo.f_getTime(1), 8), 0) ";
             return int.Parse(mssql.SQLselect(connERP, sqlstr).Rows[0][0].ToString());
-        }
-
-        private int GetLastDate()
-        {
-            //限定日期
-            //获取最后天期限需要增加的天数
-            int dateAdd = 365;
-            string sqlstr = @"SELECT isnull(CONVERT(VARCHAR(8), DATEADD(DAY, {0}, GETDATE()), 112), 0) ";
-            return int.Parse(mssql.SQLselect(connERP, string.Format(sqlstr, dateAdd)).Rows[0][0].ToString());
         }
 
         private string GetInsertDt(DataTable dt)//数据表转成sql语句
@@ -148,7 +243,6 @@ namespace 联友生产辅助工具.生管排程
             string SC003 = "", SC001 = "";
 
             int SysDate = GetNowDate();
-            int LastDate = GetLastDate();
             int WorkTime = 0;
             
             for (; rowIndex < row_total; rowIndex++ )
@@ -158,7 +252,7 @@ namespace 联友生产辅助工具.生管排程
                 {
                     SC003 = dt.Rows[rowIndex][0].ToString().Replace("-", "").Replace("/", "");
                     WorkTime = int.Parse(SC003);
-                    if(WorkTime < SysDate || WorkTime > LastDate)
+                    if(WorkTime < SysDate)
                     {
                         continue;
                     }
@@ -208,8 +302,8 @@ namespace 联友生产辅助工具.生管排程
         private void SqlInsertWork(string WorkDate, DataTable dt)
         {
             string sqlstrDel = @"DELETE FROM WG_DB.dbo.SC_PLAN WHERE SC003 >= '{0}' AND SC023 = '{1}'";
-            string sqlstrInsert = @"INSERT INTO WG_DB.dbo.SC_PLAN (CREATOR, CREATE_DATE, SC001, SC003, SC013, SC014, SC023) 
-                                    VALUES ('{0}', (CONVERT(VARCHAR(20), GETDATE(), 112) + REPLACE(CONVERT(VARCHAR(20), GETDATE(), 24), ':', '')), 
+            string sqlstrInsert = @"INSERT INTO WG_DB.dbo.SC_PLAN (CREATOR, CREATE_DATE, K_ID, SC001, SC003, SC013, SC014, SC023) 
+                                    VALUES ('{0}', LEFT(COMFORT.dbo.f_getTime(1), 14), (SELECT ISNULL(MAX(K_ID), 0) + 1 FROM WG_DB.dbo.SC_PLAN), 
                                     '{1}', '{2}', '{3}', '{4}', '{5}') ";
             mssql.SQLexcute(connWG, string.Format(sqlstrDel, WorkDate, dt.Rows[0][4].ToString()));
             for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
@@ -272,44 +366,88 @@ namespace 联友生产辅助工具.生管排程
 
         private void DgvShow() //数据库资料显示到界面
         {
-            string sqlstrShow = @" SELECT SUBSTRING(CREATE_DATE, 1, 8) 导入日期, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
-                                    SC012 规格, SC011 保友品名, SC013 订单数量, SC014 赠品测试量, SC028 品号, SC015 配置方案, SC029 网布颜色, 
+            string sqlstrShow = @" SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
+                                    SC012 规格, SC011 保友品名, SC013 上线数量, ISNULL(CAST(TD008 + TD024 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, ISNULL(SC3013, 0) 总已排数量,
+									SC028 品号, SC015 配置方案, 
                                     SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
                                     SC006 变更原因, SC007 出货日期, SC008 验货日期, SC009 PO#, SC018 柜型柜数, SC019 目的地, 
                                     SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期 
-                                    FROM WG_DB..SC_PLAN WHERE 1 = 1 ";
+                                    FROM WG_DB.dbo.SC_PLAN 
+									LEFT JOIN COMFORT.dbo.COPTD ON RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) = SC001
+									LEFT JOIN (SELECT SC2.SC001 SC2001, SUM(SC2.SC013) SC2013 FROM WG_DB.dbo.SC_PLAN AS SC2 WHERE SC2.SC003 <= CONVERT(VARCHAR(8), GETDATE(), 112) GROUP BY SC2.SC001) AS SC2 ON SC2001 = SC001
+									LEFT JOIN (SELECT SC3.SC001 SC3001, SUM(SC3.SC013) SC3013 FROM WG_DB.dbo.SC_PLAN AS SC3 GROUP BY SC3.SC001) AS SC3 ON SC3001 = SC001 
+                                    WHERE 1 = 1 ";
             if (TxBoxOrder.Text != "") sqlstrShow += @" AND SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
             if (TxBoxName.Text != "") sqlstrShow += @" AND SC010 LIKE '%" + TxBoxName.Text + "%' ";
             if (DtpStartDate.Checked) sqlstrShow += @" AND SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";
             if (DtpEndDate.Checked) sqlstrShow += @" AND SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
             if (CmBoxDptType.Text != "全部") sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
-            sqlstrShow += " ORDER BY SUBSTRING(CREATE_DATE, 1, 8), SC003, SC001 ";
+            if (CheckBoxShowSlError.Checked) sqlstrShow += @"AND SC3013 > CAST(TD008 + TD024 AS FLOAT) ";
+            sqlstrShow += " ORDER BY SC003, SC001 ";
             DataTable showDt = mssql.SQLselect(connWG, sqlstrShow);
 
             if (showDt != null)
             {
+
                 DtOpt.DtDateFormat(showDt, "日期");
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetRowBackColor(DgvMain);
-                DgvMain.Columns[3].Width = 180;
+                DgvOpt.SetColHeadMiddleCenter(DgvMain);
+                DgvOpt.SetColMiddleCenter(DgvMain, "数量");
+                DgvOpt.SetColWidth(DgvMain, "订单号", 180);
 
-                float slSum = 0;
-                for (int rowIndex = 0; rowIndex < showDt.Rows.Count; rowIndex++)
+                //计算合计，因为排序不一样，会出现订单数量的重复，需要重新排序去重
+                float sxSum = 0;
+                float ddSum = 0;
+                DataTable sumDt = showDt.Copy();
+                DataView sumDv = sumDt.DefaultView;
+                sumDv.Sort = "订单号 ASC";
+                sumDt = sumDv.ToTable();
+                string ddTmp = "";
+                for (int rowIndex = 0; rowIndex < sumDt.Rows.Count; rowIndex++)
                 {
                     try
                     {
-                        slSum += float.Parse(showDt.Rows[rowIndex]["订单数量"].ToString());
+                        sxSum += float.Parse(sumDt.Rows[rowIndex]["上线数量"].ToString());
+                        if (ddTmp != sumDt.Rows[rowIndex]["订单号"].ToString())
+                        {
+                            ddTmp = sumDt.Rows[rowIndex]["订单号"].ToString();
+                            ddSum += float.Parse(sumDt.Rows[rowIndex]["ERP订单数量"].ToString());
+                        }
                     }
                     catch
                     {
                         continue;
                     }
                 }
-                labelSlSum.Text = "订单总数量：" + slSum.ToString();
+                labelSxSlSum.Text = "上线总数量：" + sxSum.ToString();
+                labelDdSlSum.Text = "订单总数量：" + ddSum.ToString();
+
+
+                //总已排数量>ERP订单量，红字
+                for(int rowIndex = 0; rowIndex < DgvMain.Rows.Count; rowIndex++)
+                {
+                    try
+                    {
+                        if (float.Parse(DgvMain.Rows[rowIndex].Cells["总已排数量"].Value.ToString()) > float.Parse(DgvMain.Rows[rowIndex].Cells["ERP订单数量"].Value.ToString()))
+                        {
+                            DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
             }
             else
             {
-                labelSlSum.Text = "订单总数量：0";
+                labelSxSlSum.Text = "上线总数量：0";
+                labelDdSlSum.Text = "订单总数量：0";
                 DgvMain.DataSource = null;
             }
         }
@@ -330,109 +468,39 @@ namespace 联友生产辅助工具.生管排程
                 dt.Rows[rowIndex][22] = Dpt;
             }
         }
-        #endregion
 
-        #region 按钮
-        private void BtnShow_Click(object sender, EventArgs e) //刷新按钮
+        private void contextMenuStrip_DgvMain_ItemClicked_Edit()
         {
-            DgvShow();
-            UI();
+            int rowIndex = DgvMain.CurrentCell.RowIndex;
         }
 
-        private void BtnInput_Click(object sender, EventArgs e)
+        private void contextMenuStrip_DgvMain_ItemClicked_Delete()
         {
-            Form formInput = new 生管排程导入导出部门选择("导入");
-            formInput.ShowDialog();
-            string Dpt = 生管排程导入导出部门选择.Dpt;
-            if (Dpt != null)
+            string sqlstr = @"DELETE FROM dbo.SC_PLAN WHERE K_ID = '{0}' AND SC001 = '{1}' AND SC003 = '{2}' AND SC013 = '{3}' AND SC023 = '{4}'";
+            int rowIndex = DgvMain.CurrentCell.RowIndex;
+            string msg = string.Format("是否确认删除当前行！\n\n序号：'{0}'\n订单号：'{1}'\n上线日期'{2}'\n生产车间：'{3}'\n上线数量：'{4}'",
+                    DgvMain.Rows[rowIndex].Cells["序号"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["订单号"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["上线日期"].Value.ToString().Replace("-", ""),
+                    DgvMain.Rows[rowIndex].Cells["生产车间"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["上线数量"].Value.ToString());
+
+            if (Msg.Show(msg) == DialogResult.OK)
             {
-                Form frm = new 生产排程导入中();
-                try
-                {
-                    Excel excel = new Excel();
-                    Excel.Excel_Base excelObj = new Excel.Excel_Base();
-                    excelObj.isTitleRow = true;
-                    excelObj.isWrite = false;
-
-                    if (excel.ExcelOpt(excelObj))
-                    {
-
-                        if (excelObj.status == true)
-                        {
-                            SetInputDtDpt(Dpt, excelObj.dataDt);
-                            GetInsertDt(excelObj.dataDt);
-                            MessageBox.Show("导入成功", "提示");
-                            DgvShow();
-                        }
-                        else
-                        {
-                            Msg.Show(excelObj.msg);
-                        }
-                    }
-                }
-                catch(Exception es)
-                {
-                    MessageBox.Show(es.ToString());
-                }
-                finally
-                {
-                    frm.Dispose();
-                }
+                mssql.SQLexcute(connWG, string.Format(sqlstr, DgvMain.Rows[rowIndex].Cells["序号"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["订单号"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["上线日期"].Value.ToString().Replace("-", ""),
+                    DgvMain.Rows[rowIndex].Cells["上线数量"].Value.ToString(),
+                    DgvMain.Rows[rowIndex].Cells["生产车间"].Value.ToString()
+                    ));
+                DgvShow();
             }
         }
 
-        private void BtnOutput_Click(object sender, EventArgs e)
+        private void contextMenuStrip_DgvMain_ItemClicked_PrintLabel()
         {
-            Excel excel = new Excel();
-            Excel.Excel_Base excelObj = new Excel.Excel_Base();
-            excelObj.dataDt = (DataTable)DgvMain.DataSource;
-            excelObj.defauleFileName = "生产排程导出_" + DateTime.Now.ToString("yyyy-MM-dd");
-            excelObj.isWrite = true;
+            int rowIndex = DgvMain.CurrentCell.RowIndex;
 
-            if (excel.ExcelOpt(excelObj))
-            {
-                if (excelObj.status)
-                {
-                    Msg.Show("Excel导出成功！");
-                }
-                else
-                {
-                    Msg.Show(excelObj.msg, "错误");
-                }
-            }
-        }
-
-        private void BtnPrint_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UI()
-        {
-            if (newFlag)
-            {
-                BtnInput.Enabled = true;
-            }
-            else
-            {
-                BtnInput.Enabled = false;
-            }
-            if (DgvMain.DataSource != null)
-            {
-                BtnPrint.Enabled = true;
-            }
-            else
-            {
-                BtnPrint.Enabled = false;
-            }
-            if(DgvMain.DataSource != null && outFlag)
-            {
-                BtnOutput.Enabled = true;
-            }
-            else
-            {
-                BtnOutput.Enabled = false;
-            }
         }
         #endregion
     }

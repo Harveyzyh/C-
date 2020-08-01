@@ -22,6 +22,7 @@ namespace 联友生产辅助工具.生管码垛线
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
 
         private bool TestFlag = false;
         private bool FindFlag = false;
@@ -34,7 +35,7 @@ namespace 联友生产辅助工具.生管码垛线
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Form_MainResized_Work();
             Init();
         }

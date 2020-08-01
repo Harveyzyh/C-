@@ -18,12 +18,13 @@ namespace 联友生产辅助工具.仓储中心
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
 
         public 生成领料单(string text = "")
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             FormMain_Resized_Work();
 
             Init();

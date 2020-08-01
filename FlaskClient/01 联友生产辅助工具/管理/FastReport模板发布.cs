@@ -19,12 +19,13 @@ namespace HarveyZ
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
 
         public FastReport模板发布(string text = "")
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Init();
         }
 

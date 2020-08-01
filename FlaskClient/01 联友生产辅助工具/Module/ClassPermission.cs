@@ -63,14 +63,15 @@ namespace HarveyZ
             return backList;
         }
 
-        public void GetPermUserDetail(string uId, string permName, out bool newFlag, out bool editFlag, out bool delFlag, out bool outFlag, out bool lockFlag)
+        public void GetPermUserDetail(string uId, string permName, out bool newFlag, out bool editFlag, out bool delFlag, out bool outFlag, out bool lockFlag, out bool printFlag)
         {
             newFlag = false;
             editFlag = false;
             delFlag = false;
             outFlag = false;
             lockFlag = false;
-            string sqlstr = @"SELECT WG_PERM_USER.New, WG_PERM_USER.Edit, WG_PERM_USER.Del, WG_PERM_USER.Out, WG_PERM_USER.Lock FROM WG_PERM_BASE 
+            printFlag = false;
+            string sqlstr = @"SELECT WG_PERM_USER.New, WG_PERM_USER.Edit, WG_PERM_USER.Del, WG_PERM_USER.Out, WG_PERM_USER.Lock, WG_PERM_USER.[Print] FROM WG_PERM_BASE 
                                 INNER JOIN WG_PERM_USER ON WG_PERM_USER.Perm_ID = WG_PERM_BASE.K_ID AND WG_PERM_USER.Type = WG_PERM_BASE.Type
                                 WHERE WG_PERM_USER.U_ID = '{0}' AND WG_PERM_USER.Type = '{1}' AND WG_PERM_BASE.Name = '{2}'";
             DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, uId, type, permName));
@@ -81,6 +82,7 @@ namespace HarveyZ
                 if (dt.Rows[0]["Del"].Equals(true)) delFlag = true;
                 if (dt.Rows[0]["Out"].Equals(true)) outFlag = true;
                 if (dt.Rows[0]["Lock"].Equals(true)) lockFlag = true;
+                if (dt.Rows[0]["Print"].Equals(true)) printFlag = true;
             }
         }
 
@@ -109,9 +111,9 @@ namespace HarveyZ
         public void SetPermUser(string U_ID, DataTable dt)
         {
             string sqlstrDel = @" DELETE FROM WG_PERM_USER WHERE U_ID = '{0}' AND Type = '{1}'";
-            string sqlstrNew = @" INSERT INTO WG_PERM_USER (Type, U_ID, U_NAME, Perm_ID, New, Edit, Del, Out, Lock) 
+            string sqlstrNew = @" INSERT INTO WG_PERM_USER (Type, U_ID, U_NAME, Perm_ID, New, Edit, Del, Out, Lock, [Print]) 
                                     SELECT Type, WG_USER.U_ID, WG_USER.U_NAME, WG_PERM_BASE.K_ID, 
-                                    '{3}' New, '{4}' Edit, '{5}' Del, '{6}' Out, '{7}' Lock  
+                                    '{3}' New, '{4}' Edit, '{5}' Del, '{6}' Out, '{7}' Lock, '{8}' [Print]  
                                     FROM WG_PERM_BASE 
                                     INNER JOIN WG_USER ON TYPE = Type 
                                     WHERE 1=1 
@@ -126,7 +128,7 @@ namespace HarveyZ
                 {
                     mssql.SQLexcute(conn, string.Format(sqlstrNew, U_ID, dt.Rows[rowIndex]["PermName"].ToString(), type,
                         dt.Rows[rowIndex]["New"].ToString(), dt.Rows[rowIndex]["Edit"].ToString(), dt.Rows[rowIndex]["Del"].ToString(),
-                        dt.Rows[rowIndex]["Out"].ToString(), dt.Rows[rowIndex]["Lock"].ToString()));
+                        dt.Rows[rowIndex]["Out"].ToString(), dt.Rows[rowIndex]["Lock"].ToString(), dt.Rows[rowIndex]["Print"].ToString()));
                 }
             }
         }
@@ -140,6 +142,7 @@ namespace HarveyZ
                                 CAST(ISNULL(U.Edit, 0) AS BIT) 编辑, 
                                 CAST(ISNULL(U.Del, 0) AS BIT) 删除, 
                                 CAST(ISNULL(U.Out, 0) AS BIT) 输出, 
+                                CAST(ISNULL(U.[Print], 0) AS BIT) 打印, 
                                 CAST(ISNULL(U.Lock, 0) AS BIT) 锁定, 
                                 B.Name 权限名 
                                 FROM ( SELECT Type, K_ID, Name FROM WG_PERM_BASE WHERE Valid = 1) AS B 

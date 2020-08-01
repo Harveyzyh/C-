@@ -18,39 +18,39 @@ namespace HarveyZ
         /// 提示框
         /// </summary>
         /// <param name="msg">信息内容</param>
-        public static void Show(string msg)
+        public static DialogResult Show(string msg)
         {
-            MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel);
         }
 
-        public static void Show(string msg, string title)
+        public static DialogResult Show(string msg, string title)
         {
-            MessageBox.Show(msg, title, MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, title, MessageBoxButtons.OKCancel);
         }
 
-        public static void Show(string msg, string title, MessageBoxButtons btn)
+        public static DialogResult Show(string msg, string title, MessageBoxButtons btn)
         {
-            MessageBox.Show(msg, title, btn);
+            return MessageBox.Show(msg, title, btn);
         }
 
-        public static void Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
+        public static DialogResult Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
         {
-            MessageBox.Show(msg, title, btn, icon);
+            return MessageBox.Show(msg, title, btn, icon);
         }
 
-        public static void ShowErr(string msg)
+        public static DialogResult ShowErr(string msg)
         {
-            MessageBox.Show(msg, "错误", MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, "错误", MessageBoxButtons.OKCancel);
         }
 
-        public static void ShowErr(string msg, MessageBoxButtons btn)
+        public static DialogResult ShowErr(string msg, MessageBoxButtons btn)
         {
-            MessageBox.Show(msg, "错误", btn);
+            return MessageBox.Show(msg, "错误", btn);
         }
 
-        public static void ShowErr(string msg, MessageBoxButtons btn, MessageBoxIcon icon)
+        public static DialogResult ShowErr(string msg, MessageBoxButtons btn, MessageBoxIcon icon)
         {
-            MessageBox.Show(msg, "错误", btn, icon);
+            return MessageBox.Show(msg, "错误", btn, icon);
         }
     }
 

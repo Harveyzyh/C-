@@ -22,6 +22,7 @@ namespace 联友生产辅助工具.仓储中心
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
 
         public static string Mode = null;
         public static string Title = null;
@@ -44,7 +45,7 @@ namespace 联友生产辅助工具.仓储中心
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Init();
 
             DgvOpt.SetRowBackColor(DataGridView_List);

@@ -17,11 +17,12 @@ namespace HarveyZ
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
         public 权限管理(string text = "")
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             FormMain_Resized_Work();
             BtnSave.Enabled = false;
             ShowUser();
@@ -94,6 +95,7 @@ namespace HarveyZ
                 dt.Columns.Add("Del", Type.GetType("System.String"));
                 dt.Columns.Add("Out", Type.GetType("System.String"));
                 dt.Columns.Add("Lock", Type.GetType("System.String"));
+                dt.Columns.Add("Print", Type.GetType("System.String"));
                 for (int rowIndex = 0; rowIndex < saveDt.Rows.Count; rowIndex++)
                 {
                     if (saveDt.Rows[rowIndex]["有效码"].Equals(true))
@@ -105,6 +107,7 @@ namespace HarveyZ
                         dr["Del"] = saveDt.Rows[rowIndex]["删除"].Equals(true) ? "1" : "0";
                         dr["Out"] = saveDt.Rows[rowIndex]["输出"].Equals(true) ? "1" : "0";
                         dr["Lock"] = saveDt.Rows[rowIndex]["锁定"].Equals(true) ? "1" : "0";
+                        dr["Print"] = saveDt.Rows[rowIndex]["打印"].Equals(true) ? "1" : "0";
                         dt.Rows.Add(dr);
                     }
                 }

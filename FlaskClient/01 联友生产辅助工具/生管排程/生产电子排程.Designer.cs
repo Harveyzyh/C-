@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
-            this.BtnPrint = new System.Windows.Forms.Button();
-            this.labelSlSum = new System.Windows.Forms.Label();
+            this.labelSxSlSum = new System.Windows.Forms.Label();
             this.TxBoxName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TxBoxOrder = new System.Windows.Forms.TextBox();
@@ -45,6 +45,9 @@
             this.CmBoxDptType = new System.Windows.Forms.ComboBox();
             this.LabelReportSelectDpt = new System.Windows.Forms.Label();
             this.LabelReportSelectStartDate = new System.Windows.Forms.Label();
+            this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.labelDdSlSum = new System.Windows.Forms.Label();
+            this.CheckBoxShowSlError = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -64,12 +67,13 @@
             this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
             this.DgvMain.RowTemplate.Height = 23;
-            this.DgvMain.Size = new System.Drawing.Size(622, 135);
+            this.DgvMain.Size = new System.Drawing.Size(978, 249);
             this.DgvMain.TabIndex = 2;
+            this.DgvMain.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDown);
             // 
             // BtnShow
             // 
-            this.BtnShow.Location = new System.Drawing.Point(728, 4);
+            this.BtnShow.Location = new System.Drawing.Point(819, 34);
             this.BtnShow.Margin = new System.Windows.Forms.Padding(4);
             this.BtnShow.Name = "BtnShow";
             this.BtnShow.Size = new System.Drawing.Size(90, 30);
@@ -81,8 +85,9 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelTitle.Controls.Add(this.BtnPrint);
-            this.PanelTitle.Controls.Add(this.labelSlSum);
+            this.PanelTitle.Controls.Add(this.CheckBoxShowSlError);
+            this.PanelTitle.Controls.Add(this.labelDdSlSum);
+            this.PanelTitle.Controls.Add(this.labelSxSlSum);
             this.PanelTitle.Controls.Add(this.TxBoxName);
             this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.TxBoxOrder);
@@ -98,32 +103,21 @@
             this.PanelTitle.Controls.Add(this.LabelReportSelectStartDate);
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Name = "PanelTitle";
-            this.PanelTitle.Size = new System.Drawing.Size(1027, 75);
+            this.PanelTitle.Size = new System.Drawing.Size(1126, 75);
             this.PanelTitle.TabIndex = 4;
             // 
-            // BtnPrint
+            // labelSxSlSum
             // 
-            this.BtnPrint.Location = new System.Drawing.Point(861, 4);
-            this.BtnPrint.Name = "BtnPrint";
-            this.BtnPrint.Size = new System.Drawing.Size(90, 30);
-            this.BtnPrint.TabIndex = 25;
-            this.BtnPrint.Text = "打印标签";
-            this.BtnPrint.UseVisualStyleBackColor = true;
-            this.BtnPrint.Visible = false;
-            this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
-            // 
-            // labelSlSum
-            // 
-            this.labelSlSum.AutoSize = true;
-            this.labelSlSum.Location = new System.Drawing.Point(858, 45);
-            this.labelSlSum.Name = "labelSlSum";
-            this.labelSlSum.Size = new System.Drawing.Size(97, 15);
-            this.labelSlSum.TabIndex = 24;
-            this.labelSlSum.Text = "订单总数量：";
+            this.labelSxSlSum.AutoSize = true;
+            this.labelSxSlSum.Location = new System.Drawing.Point(916, 45);
+            this.labelSxSlSum.Name = "labelSxSlSum";
+            this.labelSxSlSum.Size = new System.Drawing.Size(97, 15);
+            this.labelSxSlSum.TabIndex = 24;
+            this.labelSxSlSum.Text = "上线总数量：";
             // 
             // TxBoxName
             // 
-            this.TxBoxName.Location = new System.Drawing.Point(680, 38);
+            this.TxBoxName.Location = new System.Drawing.Point(663, 38);
             this.TxBoxName.Name = "TxBoxName";
             this.TxBoxName.Size = new System.Drawing.Size(138, 24);
             this.TxBoxName.TabIndex = 23;
@@ -131,7 +125,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(622, 45);
+            this.label2.Location = new System.Drawing.Point(614, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 22;
@@ -236,6 +230,31 @@
             this.LabelReportSelectStartDate.TabIndex = 15;
             this.LabelReportSelectStartDate.Text = "起始日期：";
             // 
+            // contextMenuStrip_DgvMain
+            // 
+            this.contextMenuStrip_DgvMain.Name = "contextMenuStrip_DgvMain";
+            this.contextMenuStrip_DgvMain.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip_DgvMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_DgvMain_ItemClicked);
+            // 
+            // labelDdSlSum
+            // 
+            this.labelDdSlSum.AutoSize = true;
+            this.labelDdSlSum.Location = new System.Drawing.Point(916, 17);
+            this.labelDdSlSum.Name = "labelDdSlSum";
+            this.labelDdSlSum.Size = new System.Drawing.Size(97, 15);
+            this.labelDdSlSum.TabIndex = 25;
+            this.labelDdSlSum.Text = "订单总数量：";
+            // 
+            // CheckBoxShowSlError
+            // 
+            this.CheckBoxShowSlError.AutoSize = true;
+            this.CheckBoxShowSlError.Location = new System.Drawing.Point(617, 9);
+            this.CheckBoxShowSlError.Name = "CheckBoxShowSlError";
+            this.CheckBoxShowSlError.Size = new System.Drawing.Size(238, 19);
+            this.CheckBoxShowSlError.TabIndex = 26;
+            this.CheckBoxShowSlError.Text = "只显示总已排数量>ERP订单数量";
+            this.CheckBoxShowSlError.UseVisualStyleBackColor = true;
+            // 
             // 生产电子排程
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -272,8 +291,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TxBoxOrder;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelSlSum;
-        private System.Windows.Forms.Button BtnPrint;
+        private System.Windows.Forms.Label labelSxSlSum;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DgvMain;
+        private System.Windows.Forms.Label labelDdSlSum;
+        private System.Windows.Forms.CheckBox CheckBoxShowSlError;
     }
 }
 

@@ -21,6 +21,7 @@ namespace 联友生产辅助工具.生管码垛线
         private bool delFlag = false;
         private bool outFlag = false;
         private bool lockFlag = false;
+        private bool printFlag = false;
 
         private string connWG = FormLogin.infObj.connWG;
         private string connERP = FormLogin.infObj.connYF;
@@ -32,7 +33,7 @@ namespace 联友生产辅助工具.生管码垛线
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
+            FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             FormMain_Init();
             FormMain_Resized_Work();
         }
