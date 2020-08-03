@@ -454,9 +454,9 @@ namespace HarveyZ
         #endregion
 
         #region 生产排程
-        private void 生管_电子排程ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 生管_生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            生产电子排程 frm = new 生产电子排程("生管_电子排程");
+            生产排程 frm = new 生产排程("生管_生产排程");
             FormOpenInit(frm);
             frm.Show();
         }
@@ -464,6 +464,13 @@ namespace HarveyZ
         private void 生管_订单信息查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             订单信息查询 frm = new 订单信息查询("生管_订单信息查询");
+            FormOpenInit(frm);
+            frm.Show();
+        }
+
+        private void 生管_未排订单查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            未排订单查询 frm = new 未排订单查询("生管_未排订单查询");
             FormOpenInit(frm);
             frm.Show();
         }

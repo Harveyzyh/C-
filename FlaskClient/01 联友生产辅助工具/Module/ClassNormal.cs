@@ -36,6 +36,11 @@ namespace HarveyZ
                 returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2) + " "
                     + datestr.Substring(8, 2) + ":" + datestr.Substring(10, 2) + ":" + datestr.Substring(12, 2);
             }
+            else if (strlenth == 12)
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2) + " "
+                    + datestr.Substring(8, 2) + ":" + datestr.Substring(10, 2);
+            }
             else if (strlenth == 8)
             {
                 returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2);

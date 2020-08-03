@@ -187,11 +187,23 @@
     <Compile Include="生产日报表\日报表部门工作组线别维护.Designer.cs">
       <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
     </Compile>
+    <Compile Include="生管排程\生产排程修改.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\生产排程修改.Designer.cs">
+      <DependentUpon>生产排程修改.cs</DependentUpon>
+    </Compile>
     <Compile Include="生管排程\生产排程导入中.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="生管排程\生产排程导入中.Designer.cs">
       <DependentUpon>生产排程导入中.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\未排订单查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\未排订单查询.Designer.cs">
+      <DependentUpon>未排订单查询.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\生管排成导入导出部门选择.cs">
       <SubType>Form</SubType>
@@ -199,11 +211,11 @@
     <Compile Include="生管排程\生管排成导入导出部门选择.Designer.cs">
       <DependentUpon>生管排成导入导出部门选择.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管排程\生产电子排程.cs">
+    <Compile Include="生管排程\生产排程.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管排程\生产电子排程.Designer.cs">
-      <DependentUpon>生产电子排程.cs</DependentUpon>
+    <Compile Include="生管排程\生产排程.Designer.cs">
+      <DependentUpon>生产排程.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\订单信息查询.cs">
       <SubType>Form</SubType>
@@ -384,14 +396,20 @@
     <EmbeddedResource Include="生产日报表\日报表部门工作组线别维护.resx">
       <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\生产排程修改.resx">
+      <DependentUpon>生产排程修改.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程导入中.resx">
       <DependentUpon>生产排程导入中.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\未排订单查询.resx">
+      <DependentUpon>未排订单查询.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生管排成导入导出部门选择.resx">
       <DependentUpon>生管排成导入导出部门选择.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管排程\生产电子排程.resx">
-      <DependentUpon>生产电子排程.cs</DependentUpon>
+    <EmbeddedResource Include="生管排程\生产排程.resx">
+      <DependentUpon>生产排程.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\订单信息查询.resx">
       <DependentUpon>订单信息查询.cs</DependentUpon>

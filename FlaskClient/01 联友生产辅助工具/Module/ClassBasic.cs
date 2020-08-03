@@ -842,6 +842,7 @@ namespace HarveyZ
                 if (dgv.RowCount > 0 && dgv.RowCount >= rowIndex && dgv != null)
                 {
                     dgv.CurrentCell = dgv.Rows[rowIndex].Cells[0];
+                    dgv.Rows[rowIndex].Selected = true;
                 }
             }
         }
@@ -896,14 +897,8 @@ namespace HarveyZ
                         formatList.Add(colIndex);
                     }
                 }
+                DtDateFormat(Dt, formatList);
 
-                for (int rowIndex = 0; rowIndex < Dt.Rows.Count; rowIndex++)
-                {
-                    foreach (int listIndex in formatList)
-                    {
-                        Dt.Rows[rowIndex][listIndex] = Normal.ConvertDate(Dt.Rows[rowIndex][listIndex].ToString());
-                    }
-                }
             }
         }
 

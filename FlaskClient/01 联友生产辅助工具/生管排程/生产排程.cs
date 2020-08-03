@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace 联友生产辅助工具.生管排程
 {
-    public partial class 生产电子排程 : Form
+    public partial class 生产排程 : Form
     {
         #region 静态数据设置
         private delegate string NewTaskDelegate(DataTable dttmp); //任务代理
@@ -27,7 +27,7 @@ namespace 联友生产辅助工具.生管排程
         #endregion
 
         #region 窗体设计
-        public 生产电子排程(string text = "")
+        public 生产排程(string text = "")
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
@@ -177,9 +177,9 @@ namespace 联友生产辅助工具.生管排程
         private void contextMenuStrip_DgvMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             contextMenuStrip_DgvMain.Visible = false;
-            if (e.ClickedItem.Text == "打印标签")
+            if (e.ClickedItem.Text == "增加")
             {
-                contextMenuStrip_DgvMain_ItemClicked_PrintLabel();
+                contextMenuStrip_DgvMain_ItemClicked_New();
             }
             if (e.ClickedItem.Text == "修改")
             {
@@ -195,15 +195,9 @@ namespace 联友生产辅助工具.生管排程
         #region 逻辑
         private void SetContextMenuStripTypeList()
         {
-            if (editFlag)
-            {
-                contextMenuStrip_DgvMain.Items.Add("修改");
-                contextMenuStrip_DgvMain.Items.Add("删除");
-            }
-            //if (printFlag)
-            //{
-            //    contextMenuStrip_DgvMain.Items.Add("打印标签");
-            //}
+            if (newFlag) contextMenuStrip_DgvMain.Items.Add("增加");
+            if (editFlag) contextMenuStrip_DgvMain.Items.Add("修改");
+            if (delFlag) contextMenuStrip_DgvMain.Items.Add("删除");
         }
 
         private void SetCmBoxDptTypeList()
@@ -313,6 +307,7 @@ namespace 联友生产辅助工具.生管排程
             }
         }
         
+        //补全基本信息
         private void UptInfo()
         {
             string sqlstr = @"UPDATE WG_DB.dbo.SC_PLAN SET 
@@ -364,11 +359,11 @@ namespace 联友生产辅助工具.生管排程
             mssql.SQLexcute(connWG, sqlstr);
         }
 
-        private void DgvShow() //数据库资料显示到界面
+        private void DgvShow(int index = 0) //数据库资料显示到界面
         {
             string sqlstrShow = @" SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
-                                    SC012 规格, SC011 保友品名, SC013 上线数量, ISNULL(CAST(TD008 + TD024 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, ISNULL(SC3013, 0) 总已排数量,
-									SC028 品号, SC015 配置方案, 
+                                    SC012 规格, SC011 保友品名, SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, ISNULL(SC3013, 0) 总已排数量,
+									(CASE COPTD.UDF04 WHEN '1' THEN '1.内销' WHEN '2' THEN '2.一般贸易' WHEN '3' THEN '3.合同' ELSE COPTD.UDF04 END) 贸易方式, SC028 品号, SC015 配置方案, 
                                     SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
                                     SC006 变更原因, SC007 出货日期, SC008 验货日期, SC009 PO#, SC018 柜型柜数, SC019 目的地, 
                                     SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期 
@@ -382,7 +377,8 @@ namespace 联友生产辅助工具.生管排程
             if (DtpStartDate.Checked) sqlstrShow += @" AND SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";
             if (DtpEndDate.Checked) sqlstrShow += @" AND SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
             if (CmBoxDptType.Text != "全部") sqlstrShow += @" AND SC023 = '" + CmBoxDptType.Text + "' ";
-            if (CheckBoxShowSlError.Checked) sqlstrShow += @"AND SC3013 > CAST(TD008 + TD024 AS FLOAT) ";
+            if (CheckBoxShowSlBig.Checked) sqlstrShow += @"AND SC3013 > ISNULL(CAST(TD008 AS FLOAT), 0) ";
+            if (CheckBoxShowSlSmall.Checked) sqlstrShow += @"AND SC3013 < ISNULL(CAST(TD008 AS FLOAT), 0) ";
             sqlstrShow += " ORDER BY SC003, SC001 ";
             DataTable showDt = mssql.SQLselect(connWG, sqlstrShow);
 
@@ -433,6 +429,10 @@ namespace 联友生产辅助工具.生管排程
                         {
                             DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Red;
                         }
+                        else if (float.Parse(DgvMain.Rows[rowIndex].Cells["总已排数量"].Value.ToString()) < float.Parse(DgvMain.Rows[rowIndex].Cells["ERP订单数量"].Value.ToString()))
+                        {
+                            DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                        }
                         else
                         {
                             DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
@@ -443,11 +443,23 @@ namespace 联友生产辅助工具.生管排程
                         continue;
                     }
                 }
+
+                // 定位到传入的序号
+                for (int rowIndex = 0; rowIndex < DgvMain.Rows.Count; rowIndex++)
+                {
+                    if(DgvMain.Rows[rowIndex].Cells["序号"].Value.ToString() == index.ToString())
+                    {
+                        DgvOpt.SelectLastRow(DgvMain, rowIndex);
+                        break;
+                    }
+                }
+                labelCount.Text = "总行数：" + DgvMain.Rows.Count.ToString();
             }
             else
             {
                 labelSxSlSum.Text = "上线总数量：0";
                 labelDdSlSum.Text = "订单总数量：0";
+                labelCount.Text = "总行数：0";
                 DgvMain.DataSource = null;
             }
         }
@@ -469,9 +481,41 @@ namespace 联友生产辅助工具.生管排程
             }
         }
 
+        private void contextMenuStrip_DgvMain_ItemClicked_New()
+        {
+            string index = "";
+            生产排程修改 frm = new 生产排程修改("New", "", "", "", "", "", "", "", "", "");
+            if (frm.ShowDialog() == DialogResult.Cancel)
+            {
+                index = 生产排程修改.indexRtn;
+                UptInfo();
+                frm.Dispose();
+                int i = 0;
+                if (int.TryParse(index, out i))
+                {
+                    DgvShow(i);
+                }
+                else
+                {
+                    DgvShow();
+                }
+            }
+        }
+
         private void contextMenuStrip_DgvMain_ItemClicked_Edit()
         {
             int rowIndex = DgvMain.CurrentCell.RowIndex;
+            string index = "";
+            生产排程修改 frm = new 生产排程修改("Edit", DgvMain.Rows[rowIndex].Cells["序号"].Value.ToString(), DgvMain.Rows[rowIndex].Cells["订单号"].Value.ToString(),
+                DgvMain.Rows[rowIndex].Cells["品号"].Value.ToString(), DgvMain.Rows[rowIndex].Cells["品名"].Value.ToString(), DgvMain.Rows[rowIndex].Cells["规格"].Value.ToString(),
+                DgvMain.Rows[rowIndex].Cells["配置方案"].Value.ToString(), DgvMain.Rows[rowIndex].Cells["上线日期"].Value.ToString(), DgvMain.Rows[rowIndex].Cells["生产车间"].Value.ToString(),
+                DgvMain.Rows[rowIndex].Cells["上线数量"].Value.ToString());
+            if (frm.ShowDialog() == DialogResult.Cancel)
+            {
+                index = 生产排程修改.indexRtn;
+                frm.Dispose();
+                DgvShow(int.Parse(index));
+            }
         }
 
         private void contextMenuStrip_DgvMain_ItemClicked_Delete()
@@ -495,12 +539,6 @@ namespace 联友生产辅助工具.生管排程
                     ));
                 DgvShow();
             }
-        }
-
-        private void contextMenuStrip_DgvMain_ItemClicked_PrintLabel()
-        {
-            int rowIndex = DgvMain.CurrentCell.RowIndex;
-
         }
         #endregion
     }

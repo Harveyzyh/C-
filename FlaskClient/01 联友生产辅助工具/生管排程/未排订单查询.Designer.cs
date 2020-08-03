@@ -1,6 +1,6 @@
 ﻿namespace 联友生产辅助工具.生管排程
 {
-    partial class 生产电子排程
+    partial class 未排订单查询
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
-            this.labelSxSlSum = new System.Windows.Forms.Label();
+            this.labelDdSlSum = new System.Windows.Forms.Label();
             this.TxBoxName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TxBoxOrder = new System.Windows.Forms.TextBox();
@@ -40,14 +39,8 @@
             this.DtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.BtnOutput = new System.Windows.Forms.Button();
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
-            this.BtnInput = new System.Windows.Forms.Button();
             this.LabelReportSelectEndDate = new System.Windows.Forms.Label();
-            this.CmBoxDptType = new System.Windows.Forms.ComboBox();
-            this.LabelReportSelectDpt = new System.Windows.Forms.Label();
             this.LabelReportSelectStartDate = new System.Windows.Forms.Label();
-            this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.labelDdSlSum = new System.Windows.Forms.Label();
-            this.CheckBoxShowSlError = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -69,11 +62,10 @@
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(978, 249);
             this.DgvMain.TabIndex = 2;
-            this.DgvMain.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDown);
             // 
             // BtnShow
             // 
-            this.BtnShow.Location = new System.Drawing.Point(819, 34);
+            this.BtnShow.Location = new System.Drawing.Point(3, 37);
             this.BtnShow.Margin = new System.Windows.Forms.Padding(4);
             this.BtnShow.Name = "BtnShow";
             this.BtnShow.Size = new System.Drawing.Size(90, 30);
@@ -85,9 +77,7 @@
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelTitle.Controls.Add(this.CheckBoxShowSlError);
             this.PanelTitle.Controls.Add(this.labelDdSlSum);
-            this.PanelTitle.Controls.Add(this.labelSxSlSum);
             this.PanelTitle.Controls.Add(this.TxBoxName);
             this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.TxBoxOrder);
@@ -95,29 +85,26 @@
             this.PanelTitle.Controls.Add(this.DtpEndDate);
             this.PanelTitle.Controls.Add(this.BtnOutput);
             this.PanelTitle.Controls.Add(this.DtpStartDate);
-            this.PanelTitle.Controls.Add(this.BtnInput);
             this.PanelTitle.Controls.Add(this.BtnShow);
             this.PanelTitle.Controls.Add(this.LabelReportSelectEndDate);
-            this.PanelTitle.Controls.Add(this.CmBoxDptType);
-            this.PanelTitle.Controls.Add(this.LabelReportSelectDpt);
             this.PanelTitle.Controls.Add(this.LabelReportSelectStartDate);
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(1126, 75);
             this.PanelTitle.TabIndex = 4;
             // 
-            // labelSxSlSum
+            // labelDdSlSum
             // 
-            this.labelSxSlSum.AutoSize = true;
-            this.labelSxSlSum.Location = new System.Drawing.Point(916, 45);
-            this.labelSxSlSum.Name = "labelSxSlSum";
-            this.labelSxSlSum.Size = new System.Drawing.Size(97, 15);
-            this.labelSxSlSum.TabIndex = 24;
-            this.labelSxSlSum.Text = "上线总数量：";
+            this.labelDdSlSum.AutoSize = true;
+            this.labelDdSlSum.Location = new System.Drawing.Point(575, 44);
+            this.labelDdSlSum.Name = "labelDdSlSum";
+            this.labelDdSlSum.Size = new System.Drawing.Size(97, 15);
+            this.labelDdSlSum.TabIndex = 25;
+            this.labelDdSlSum.Text = "订单总数量：";
             // 
             // TxBoxName
             // 
-            this.TxBoxName.Location = new System.Drawing.Point(663, 38);
+            this.TxBoxName.Location = new System.Drawing.Point(419, 37);
             this.TxBoxName.Name = "TxBoxName";
             this.TxBoxName.Size = new System.Drawing.Size(138, 24);
             this.TxBoxName.TabIndex = 23;
@@ -125,7 +112,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(614, 45);
+            this.label2.Location = new System.Drawing.Point(370, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 22;
@@ -133,7 +120,7 @@
             // 
             // TxBoxOrder
             // 
-            this.TxBoxOrder.Location = new System.Drawing.Point(452, 38);
+            this.TxBoxOrder.Location = new System.Drawing.Point(208, 37);
             this.TxBoxOrder.Name = "TxBoxOrder";
             this.TxBoxOrder.Size = new System.Drawing.Size(147, 24);
             this.TxBoxOrder.TabIndex = 21;
@@ -142,7 +129,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 11F);
-            this.label1.Location = new System.Drawing.Point(373, 45);
+            this.label1.Location = new System.Drawing.Point(129, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 15);
             this.label1.TabIndex = 20;
@@ -160,7 +147,7 @@
             // 
             // BtnOutput
             // 
-            this.BtnOutput.Location = new System.Drawing.Point(5, 37);
+            this.BtnOutput.Location = new System.Drawing.Point(3, 3);
             this.BtnOutput.Name = "BtnOutput";
             this.BtnOutput.Size = new System.Drawing.Size(90, 30);
             this.BtnOutput.TabIndex = 5;
@@ -179,16 +166,6 @@
             this.DtpStartDate.TabIndex = 18;
             this.DtpStartDate.TabStop = false;
             // 
-            // BtnInput
-            // 
-            this.BtnInput.Location = new System.Drawing.Point(5, 4);
-            this.BtnInput.Name = "BtnInput";
-            this.BtnInput.Size = new System.Drawing.Size(90, 30);
-            this.BtnInput.TabIndex = 4;
-            this.BtnInput.Text = "导入";
-            this.BtnInput.UseVisualStyleBackColor = true;
-            this.BtnInput.Click += new System.EventHandler(this.BtnInput_Click);
-            // 
             // LabelReportSelectEndDate
             // 
             this.LabelReportSelectEndDate.AutoSize = true;
@@ -198,27 +175,6 @@
             this.LabelReportSelectEndDate.Size = new System.Drawing.Size(82, 15);
             this.LabelReportSelectEndDate.TabIndex = 16;
             this.LabelReportSelectEndDate.Text = "结束日期：";
-            // 
-            // CmBoxDptType
-            // 
-            this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmBoxDptType.Font = new System.Drawing.Font("宋体", 12F);
-            this.CmBoxDptType.FormattingEnabled = true;
-            this.CmBoxDptType.Location = new System.Drawing.Point(210, 41);
-            this.CmBoxDptType.Name = "CmBoxDptType";
-            this.CmBoxDptType.Size = new System.Drawing.Size(147, 24);
-            this.CmBoxDptType.TabIndex = 17;
-            this.CmBoxDptType.TabStop = false;
-            // 
-            // LabelReportSelectDpt
-            // 
-            this.LabelReportSelectDpt.AutoSize = true;
-            this.LabelReportSelectDpt.Font = new System.Drawing.Font("宋体", 11F);
-            this.LabelReportSelectDpt.Location = new System.Drawing.Point(129, 45);
-            this.LabelReportSelectDpt.Name = "LabelReportSelectDpt";
-            this.LabelReportSelectDpt.Size = new System.Drawing.Size(82, 15);
-            this.LabelReportSelectDpt.TabIndex = 14;
-            this.LabelReportSelectDpt.Text = "生产部门：";
             // 
             // LabelReportSelectStartDate
             // 
@@ -230,32 +186,7 @@
             this.LabelReportSelectStartDate.TabIndex = 15;
             this.LabelReportSelectStartDate.Text = "起始日期：";
             // 
-            // contextMenuStrip_DgvMain
-            // 
-            this.contextMenuStrip_DgvMain.Name = "contextMenuStrip_DgvMain";
-            this.contextMenuStrip_DgvMain.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip_DgvMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_DgvMain_ItemClicked);
-            // 
-            // labelDdSlSum
-            // 
-            this.labelDdSlSum.AutoSize = true;
-            this.labelDdSlSum.Location = new System.Drawing.Point(916, 17);
-            this.labelDdSlSum.Name = "labelDdSlSum";
-            this.labelDdSlSum.Size = new System.Drawing.Size(97, 15);
-            this.labelDdSlSum.TabIndex = 25;
-            this.labelDdSlSum.Text = "订单总数量：";
-            // 
-            // CheckBoxShowSlError
-            // 
-            this.CheckBoxShowSlError.AutoSize = true;
-            this.CheckBoxShowSlError.Location = new System.Drawing.Point(617, 9);
-            this.CheckBoxShowSlError.Name = "CheckBoxShowSlError";
-            this.CheckBoxShowSlError.Size = new System.Drawing.Size(238, 19);
-            this.CheckBoxShowSlError.TabIndex = 26;
-            this.CheckBoxShowSlError.Text = "只显示总已排数量>ERP订单数量";
-            this.CheckBoxShowSlError.UseVisualStyleBackColor = true;
-            // 
-            // 生产电子排程
+            // 生产电子排程未排订单
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,7 +195,7 @@
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "生产电子排程";
+            this.Name = "生产电子排程未排订单";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "生管排程导入";
             this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
@@ -280,21 +211,15 @@
         private System.Windows.Forms.Button BtnShow;
         private System.Windows.Forms.Panel PanelTitle;
         private System.Windows.Forms.Button BtnOutput;
-        private System.Windows.Forms.Button BtnInput;
         private System.Windows.Forms.DateTimePicker DtpEndDate;
         private System.Windows.Forms.DateTimePicker DtpStartDate;
         private System.Windows.Forms.Label LabelReportSelectEndDate;
-        private System.Windows.Forms.ComboBox CmBoxDptType;
-        private System.Windows.Forms.Label LabelReportSelectDpt;
         private System.Windows.Forms.Label LabelReportSelectStartDate;
         private System.Windows.Forms.TextBox TxBoxName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TxBoxOrder;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelSxSlSum;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DgvMain;
         private System.Windows.Forms.Label labelDdSlSum;
-        private System.Windows.Forms.CheckBox CheckBoxShowSlError;
     }
 }
 

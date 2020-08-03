@@ -138,7 +138,6 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅�
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生产日报表.日报表部门工作组线别维护.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生产排程导入中.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生管排程导入导出部门选择.resources
-Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生产电子排程.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.订单信息查询.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱名称添加.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.纸箱名称管理.resources
@@ -174,3 +173,6 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Debug\FastReport.Bars.d
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\bin\Debug\FastReport.Editor.dll
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.ERP单据预览.resources
 Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管码垛线.码垛线_ERP单据生成程序.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.未排订单查询.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生产排程修改.resources
+Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.生管排程.生产排程.resources
