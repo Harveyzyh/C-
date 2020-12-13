@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.仓储中心
+namespace HarveyZ.仓储中心
 {
     public partial class 录入进货单_Excel导入 : Form
     {
@@ -29,7 +29,6 @@ namespace 联友生产辅助工具.仓储中心
         private string SupplierID = null;
         private string TypeID = "3401";
         private string PositionID = "P013";
-        private string MaterielID = null;
         private string LoginUid = FormLogin.infObj.userId;
         private string LoginUserGroup = FormLogin.infObj.userGroup;
 
@@ -248,6 +247,7 @@ namespace 联友生产辅助工具.仓储中心
         private void btnLayoutDefault_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
+            dt.TableName = "Excel导入-模板";
             dt.Columns.Add("品号", Type.GetType("System.String"));
             dt.Columns.Add("品名", Type.GetType("System.String"));
             dt.Columns.Add("规格", Type.GetType("System.String"));
@@ -258,7 +258,7 @@ namespace 联友生产辅助工具.仓储中心
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
             excelObj.isWrite = true;
             excelObj.defauleFileName = "录入进货单-Excel导入-模板";
-            excelObj.dataDt = dt;
+            excelObj.dataSet.Tables.Add(dt);
 
             if (excel.ExcelOpt(excelObj))
             {
@@ -300,8 +300,8 @@ namespace 联友生产辅助工具.仓储中心
 
         private string GetTime()
         {
-            string sqlstr = "SELECT dbo.f_getTime(1) ";
-            DataTable dt = mssql.SQLselect(connYF, sqlstr);
+            string slqStr = "SELECT dbo.f_getTime(1) ";
+            DataTable dt = mssql.SQLselect(connYF, slqStr);
             if(dt != null)
             {
                 return dt.Rows[0][0].ToString();
@@ -336,14 +336,14 @@ namespace 联友生产辅助工具.仓储中心
 
         private void AddData()
         {
-            string sqlstr = @"SELECT RTRIM(MB002) 品名, RTRIM(MB003) 规格 FROM COMFORT.dbo.INVMB WHERE MB001 = '{0}' ";
+            string slqStr = @"SELECT RTRIM(MB002) 品名, RTRIM(MB003) 规格 FROM COMFORT.dbo.INVMB WHERE MB001 = '{0}' ";
             DataTable dt = ReadExcel();
             dt = DtConvert(dt);
             if (dt != null)
             {
                 for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
                 {
-                    DataTable dt2 = mssql.SQLselect(connYF, string.Format(sqlstr, dt.Rows[rowIndex]["品号"].ToString()));
+                    DataTable dt2 = mssql.SQLselect(connYF, string.Format(slqStr, dt.Rows[rowIndex]["品号"].ToString()));
 
                     int row = dgvMain.Rows.Add();
                     dgvMain.Rows[row].Cells["序号"].Value = "";
@@ -397,10 +397,10 @@ namespace 联友生产辅助工具.仓储中心
                 string JHXA013 = dgvMain.Rows[0].Cells["送货单号"].Value.ToString();
                 string JHXA015 = dgvMain.Rows[0].Cells["供应商"].Value.ToString();
                 string ID = (Index+1).ToString();
-                string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
+                string slqStr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
                     JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
 
-                mssql.SQLexcute(connYF, sqlstr);
+                mssql.SQLexcute(connYF, slqStr);
 
                 dgvMain.Rows.Remove(dgvMain.Rows[0]);
             }
@@ -426,8 +426,8 @@ namespace 联友生产辅助工具.仓储中心
 
         private float GetDsl(string MaterielID, string SupplierID)
         {
-            string sqlstr = "SELECT RTRIM(TD004), RTRIM(TC004), SL FROM V_PURTD_SL_WG WHERE TD004 = '{0}' AND TC004 = '{1}' ";
-            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(sqlstr, MaterielID, SupplierID));
+            string slqStr = "SELECT RTRIM(TD004), RTRIM(TC004), SL FROM V_PURTD_SL_WG WHERE TD004 = '{0}' AND TC004 = '{1}' ";
+            DataTable dt = mssql.SQLselect(FormLogin.infObj.connYF, string.Format(slqStr, MaterielID, SupplierID));
             if (dt != null)
             {
                 try

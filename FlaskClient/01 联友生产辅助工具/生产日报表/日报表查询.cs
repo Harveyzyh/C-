@@ -10,7 +10,7 @@ using System.IO;
 using HarveyZ;
 using DataGridViewAutoFilter;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表查询: Form
     {
@@ -54,8 +54,8 @@ namespace 联友生产辅助工具.生产日报表
                 }
                 else
                 {
-                    string sqlstr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + FormLogin.infObj.userId + "'";
-                    DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+                    string slqStr = "SELECT ROLE FROM WG_DB..WG_USER WHERE U_ID = '" + FormLogin.infObj.userId + "'";
+                    DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
                     if (dttmp != null)
                     {
                         string role = dttmp.Rows[0][0].ToString();
@@ -169,7 +169,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             bool NullFlag = false;
 
-            string sqlstr = "", sql_date = "", sql_dpt = "", WGroup_List = "";
+            string slqStr = "", sql_date = "", sql_dpt = "", WGroup_List = "";
 
             //日期范围
             if (DtpReportSelectStartDate.Checked)
@@ -198,25 +198,25 @@ namespace 联友生产辅助工具.生产日报表
             //汇总方式
             if (ComboBoxReportSelectType.Text == "全部")
             {
-                sqlstr = " SELECT WorkDpt AS 生产部门, SUBSTRING(WorkDate,1,4) + '-' + SUBSTRING(WorkDate,5,2) + '-' + SUBSTRING(WorkDate,7,2) AS 生产日期, "
+                slqStr = " SELECT WorkDpt AS 生产部门, SUBSTRING(WorkDate,1,4) + '-' + SUBSTRING(WorkDate,5,2) + '-' + SUBSTRING(WorkDate,7,2) AS 生产日期, "
                    + " WGroup AS 组别, Serial AS 系列, Line AS 线别, PlanNumber AS 计划数量, "
                    + " WorkNumber AS 生产数量, Workers AS 人数, Hours AS 工时, StopHours AS 停工工时, TotalHours AS 总工时, Capacity AS 产量每人每小时, "
                    + " OrderID AS 生产单号, Remark AS 备注 FROM WG_DB..SC_DRY_DAILYRECORD "
                    + " WHERE 1 = 1 "
                    + " AND (PlanNumber <> '0' OR WorkNumber <> '0') ";
-                sqlstr += sql_date + sql_dpt;
-                sqlstr += WGroup_List;
+                slqStr += sql_date + sql_dpt;
+                slqStr += WGroup_List;
             }
             else if(ComboBoxReportSelectType.Text == "组别-系列")
             {
-                string sqlstr2 = "";
-                sqlstr = "";
-                sqlstr2 = " SELECT DISTINCT WGroup FROM WG_DB..SC_DRY_DAILYRECORD ";
-                sqlstr2 += " WHERE 1=1 ";
-                sqlstr2 += sql_date + sql_dpt;
-                sqlstr2 += WGroup_List;
+                string slqStr2 = "";
+                slqStr = "";
+                slqStr2 = " SELECT DISTINCT WGroup FROM WG_DB..SC_DRY_DAILYRECORD ";
+                slqStr2 += " WHERE 1=1 ";
+                slqStr2 += sql_date + sql_dpt;
+                slqStr2 += WGroup_List;
 
-                DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr2);
+                DataTable dttmp2 = mssql.SQLselect(strConnection, slqStr2);
                 if(dttmp2 != null)
                 {
                     NullFlag = false;
@@ -227,39 +227,39 @@ namespace 联友生产辅助工具.生产日报表
                         string WGroup = dttmp2.Rows[Index][0].ToString();
                         if(Index > 0)
                         {
-                            sqlstr += " UNION ";
+                            slqStr += " UNION ";
                         }
-                        sqlstr += " SELECT WGroup AS 组别, Serial AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, Hours))) AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                        sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                        sqlstr += " WHERE 1 = 1 ";
-                        sqlstr += sql_date + sql_dpt;
-                        sqlstr += " AND WGroup = '" + WGroup + "'";
-                        sqlstr += " GROUP BY WGroup, Serial ";
+                        slqStr += " SELECT WGroup AS 组别, Serial AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, Hours))) AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                        slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                        slqStr += " WHERE 1 = 1 ";
+                        slqStr += sql_date + sql_dpt;
+                        slqStr += " AND WGroup = '" + WGroup + "'";
+                        slqStr += " GROUP BY WGroup, Serial ";
 
-                        sqlstr += " UNION ";
-                        sqlstr += " SELECT WGroup AS 组别, '小计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                        sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                        sqlstr += " WHERE 1 = 1 ";
-                        sqlstr += sql_date + sql_dpt;
-                        sqlstr += " AND WGroup = '" + WGroup + "'";
-                        sqlstr += " GROUP BY WGroup";
+                        slqStr += " UNION ";
+                        slqStr += " SELECT WGroup AS 组别, '小计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                        slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                        slqStr += " WHERE 1 = 1 ";
+                        slqStr += sql_date + sql_dpt;
+                        slqStr += " AND WGroup = '" + WGroup + "'";
+                        slqStr += " GROUP BY WGroup";
                     }
 
-                    sqlstr += " UNION ";
+                    slqStr += " UNION ";
 
-                    sqlstr += " SELECT '' AS 组别, '总计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                    sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                    sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                    sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                    sqlstr += " WHERE 1 = 1 ";
-                    sqlstr += sql_date + sql_dpt;
-                    sqlstr += WGroup_List;
+                    slqStr += " SELECT '' AS 组别, '总计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                    slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                    slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                    slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                    slqStr += " WHERE 1 = 1 ";
+                    slqStr += sql_date + sql_dpt;
+                    slqStr += WGroup_List;
 
-                    sqlstr += " ORDER BY 组别 DESC ";
+                    slqStr += " ORDER BY 组别 DESC ";
                 }
                 else
                 {
@@ -268,21 +268,21 @@ namespace 联友生产辅助工具.生产日报表
             }
             else if(ComboBoxReportSelectType.Text == "部门-组别-系列")
             {
-                string sqlstr3 = "";
-                string sqlstr2 = "";
-                sqlstr = "";
+                string slqStr3 = "";
+                string slqStr2 = "";
+                slqStr = "";
 
-                sqlstr2 = " SELECT DISTINCT WGroup FROM WG_DB..SC_DRY_DAILYRECORD ";
-                sqlstr2 += " WHERE 1=1 ";
-                sqlstr2 += sql_date + sql_dpt;
-                sqlstr2 += WGroup_List;
+                slqStr2 = " SELECT DISTINCT WGroup FROM WG_DB..SC_DRY_DAILYRECORD ";
+                slqStr2 += " WHERE 1=1 ";
+                slqStr2 += sql_date + sql_dpt;
+                slqStr2 += WGroup_List;
 
-                sqlstr3 = " SELECT DISTINCT WorkDpt FROM WG_DB..SC_DRY_DAILYRECORD ";
-                sqlstr3 += " WHERE 1=1 ";
-                sqlstr3 += sql_date + sql_dpt;
+                slqStr3 = " SELECT DISTINCT WorkDpt FROM WG_DB..SC_DRY_DAILYRECORD ";
+                slqStr3 += " WHERE 1=1 ";
+                slqStr3 += sql_date + sql_dpt;
 
-                DataTable dttmp2 = mssql.SQLselect(strConnection, sqlstr2);
-                DataTable dttmp3 = mssql.SQLselect(strConnection, sqlstr3);
+                DataTable dttmp2 = mssql.SQLselect(strConnection, slqStr2);
+                DataTable dttmp3 = mssql.SQLselect(strConnection, slqStr3);
 
                 if (dttmp3 != null)
                 {
@@ -294,40 +294,40 @@ namespace 联友生产辅助工具.生产日报表
                         string WGroup = dttmp2.Rows[Index][0].ToString();
                         if (Index > 0)
                         {
-                            sqlstr += " UNION ";
+                            slqStr += " UNION ";
                         }
 
-                        sqlstr += " SELECT WorkDpt AS 生产部门, WGroup AS 组别, Serial AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, Hours))) AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                        sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                        sqlstr += " WHERE 1 = 1 ";
-                        sqlstr += sql_date + sql_dpt;
-                        sqlstr += " AND WGroup = '" + WGroup + "'";
-                        sqlstr += " GROUP BY WorkDpt, WGroup, Serial ";
+                        slqStr += " SELECT WorkDpt AS 生产部门, WGroup AS 组别, Serial AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, Hours))) AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                        slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                        slqStr += " WHERE 1 = 1 ";
+                        slqStr += sql_date + sql_dpt;
+                        slqStr += " AND WGroup = '" + WGroup + "'";
+                        slqStr += " GROUP BY WorkDpt, WGroup, Serial ";
 
-                        sqlstr += " UNION ";
-                        sqlstr += " SELECT WorkDpt AS 生产部门, WGroup AS 组别, '小计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                        sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                        sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                        sqlstr += " WHERE 1 = 1 ";
-                        sqlstr += sql_date + sql_dpt;
-                        sqlstr += " AND WGroup = '" + WGroup + "'";
-                        sqlstr += " GROUP BY WorkDpt, WGroup";
+                        slqStr += " UNION ";
+                        slqStr += " SELECT WorkDpt AS 生产部门, WGroup AS 组别, '小计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                        slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                        slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                        slqStr += " WHERE 1 = 1 ";
+                        slqStr += sql_date + sql_dpt;
+                        slqStr += " AND WGroup = '" + WGroup + "'";
+                        slqStr += " GROUP BY WorkDpt, WGroup";
                     }
 
-                    sqlstr += " UNION ";
+                    slqStr += " UNION ";
 
-                    sqlstr += " SELECT '' AS 生产部门, '' AS 组别, '总计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
-                    sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
-                    sqlstr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
-                    sqlstr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
-                    sqlstr += " WHERE 1 = 1 ";
-                    sqlstr += sql_date + sql_dpt;
-                    sqlstr += WGroup_List;
+                    slqStr += " SELECT '' AS 生产部门, '' AS 组别, '总计' AS 系列, CONVERT(VARCHAR(50), SUM(CONVERT(INT, PlanNumber))) AS 计划数量, CONVERT(VARCHAR(50), SUM(CONVERT(INT, WorkNumber))) AS 生产数量, ";
+                    slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(INT, Workers))) AS 人数, '' AS 工时, CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, StopHours))) AS 停工工时, ";
+                    slqStr += " CONVERT(VARCHAR(50), SUM(CONVERT(FLOAT, TotalHours))) AS 总工时, CONVERT(VARCHAR(50), (SUM(CONVERT(FLOAT, Capacity))) / COUNT(Capacity)) AS 产量每人每小时 ";
+                    slqStr += " FROM WG_DB..SC_DRY_DAILYRECORD ";
+                    slqStr += " WHERE 1 = 1 ";
+                    slqStr += sql_date + sql_dpt;
+                    slqStr += WGroup_List;
 
-                    sqlstr += " ORDER BY 组别 DESC ";
+                    slqStr += " ORDER BY 组别 DESC ";
                 }
                 else
                 {
@@ -337,7 +337,7 @@ namespace 联友生产辅助工具.生产日报表
 
             if (!NullFlag)
             {
-                DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+                DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
                 DgvMain.DataSource = null;
                 if(dttmp != null)
                 {
@@ -435,9 +435,9 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportSelectWG_Click(object sender, EventArgs e)
         {
-            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_DRY_XL2GY";
+            string slqStr = "SELECT DISTINCT WGroup AS 组别 FROM WG_DB..SC_DRY_XL2GY";
 
-            Form formxl = new 日报表获取组别系列(sqlstr);
+            Form formxl = new 日报表获取组别系列(slqStr);
             formxl.ShowDialog();
             formxl.Dispose();
         }

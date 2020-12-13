@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生管排程
+﻿namespace HarveyZ.生管排程
 {
     partial class 生产排程修改
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(生产排程修改));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +44,8 @@
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.textBoxDd = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -177,6 +180,26 @@
             this.textBoxDd.Name = "textBoxDd";
             this.textBoxDd.Size = new System.Drawing.Size(130, 21);
             this.textBoxDd.TabIndex = 0;
+            this.textBoxDd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxDd_KeyDown);
+            this.textBoxDd.Leave += new System.EventHandler(this.textBoxDd_Leave);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(317, 60);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 12);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "ERP订单数量：";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(335, 95);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "已排数量：";
             // 
             // 生产排程修改
             // 
@@ -184,6 +207,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 363);
             this.ControlBox = false;
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.textBoxDd);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnSave);
@@ -199,6 +224,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "生产排程修改";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "生产排程修改";
@@ -224,5 +250,7 @@
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.TextBox textBoxDd;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

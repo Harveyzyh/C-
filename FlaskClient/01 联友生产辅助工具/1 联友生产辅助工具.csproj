@@ -145,23 +145,11 @@
     <Compile Include="仓储中心\录入进货单-Excel导入.Designer.cs">
       <DependentUpon>录入进货单-Excel导入.cs</DependentUpon>
     </Compile>
-    <Compile Include="仓储中心\录入进货单-联友分公司.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="仓储中心\录入进货单-联友分公司.Designer.cs">
-      <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
-    </Compile>
     <Compile Include="仓储中心\录入退货单-获取单据信息.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="仓储中心\录入退货单-获取单据信息.Designer.cs">
       <DependentUpon>录入退货单-获取单据信息.cs</DependentUpon>
-    </Compile>
-    <Compile Include="仓储中心\录入进货单-采购平台.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="仓储中心\录入进货单-采购平台.Designer.cs">
-      <DependentUpon>录入进货单-采购平台.cs</DependentUpon>
     </Compile>
     <Compile Include="仓储中心\生成领料单-获取单据信息.cs">
       <SubType>Form</SubType>
@@ -175,6 +163,18 @@
     <Compile Include="仓储中心\生成领料单.Designer.cs">
       <DependentUpon>生成领料单.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module\FastReport打印预览.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module\FastReport打印预览.Designer.cs">
+      <DependentUpon>FastReport打印预览.cs</DependentUpon>
+    </Compile>
+    <Compile Include="品管\成品标签打印.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="品管\成品标签打印.Designer.cs">
+      <DependentUpon>成品标签打印.cs</DependentUpon>
+    </Compile>
     <Compile Include="报表\销货信息%28带入库部门%29查询.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,17 +187,29 @@
     <Compile Include="生产日报表\日报表部门工作组线别维护.Designer.cs">
       <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
     </Compile>
+    <Compile Include="生管排程\工单信息管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\工单信息管理.Designer.cs">
+      <DependentUpon>工单信息管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\排程物料导出_生产.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\排程物料导出_生产.Designer.cs">
+      <DependentUpon>排程物料导出_生产.cs</DependentUpon>
+    </Compile>
     <Compile Include="生管排程\生产排程修改.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="生管排程\生产排程修改.Designer.cs">
       <DependentUpon>生产排程修改.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管排程\生产排程导入中.cs">
+    <Compile Include="Module\数据导入中.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管排程\生产排程导入中.Designer.cs">
-      <DependentUpon>生产排程导入中.cs</DependentUpon>
+    <Compile Include="Module\数据导入中.Designer.cs">
+      <DependentUpon>数据导入中.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\未排订单查询.cs">
       <SubType>Form</SubType>
@@ -205,17 +217,41 @@
     <Compile Include="生管排程\未排订单查询.Designer.cs">
       <DependentUpon>未排订单查询.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管排程\生管排成导入导出部门选择.cs">
+    <Compile Include="生管排程\生产排程导入.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管排程\生管排成导入导出部门选择.Designer.cs">
-      <DependentUpon>生管排成导入导出部门选择.cs</DependentUpon>
+    <Compile Include="生管排程\生产排程导入.Designer.cs">
+      <DependentUpon>生产排程导入.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门选择.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门选择.Designer.cs">
+      <DependentUpon>生产排程部门选择.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\生产排程.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="生管排程\生产排程.Designer.cs">
       <DependentUpon>生产排程.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门添加.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门添加.Designer.cs">
+      <DependentUpon>生产排程部门添加.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\生产排程部门管理.Designer.cs">
+      <DependentUpon>生产排程部门管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="生管排程\自动LRP计划队列.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\自动LRP计划队列.Designer.cs">
+      <DependentUpon>自动LRP计划队列.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\订单信息查询.cs">
       <SubType>Form</SubType>
@@ -345,11 +381,11 @@
     <Compile Include="生产日报表\日报表部门线别维护.Designer.cs">
       <DependentUpon>日报表部门线别维护.cs</DependentUpon>
     </Compile>
-    <Compile Include="码垛线\码垛线排程导入.cs">
+    <Compile Include="码垛线\码垛线排程.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="码垛线\码垛线排程导入.Designer.cs">
-      <DependentUpon>码垛线排程导入.cs</DependentUpon>
+    <Compile Include="码垛线\码垛线排程.Designer.cs">
+      <DependentUpon>码垛线排程.cs</DependentUpon>
     </Compile>
     <Compile Include="码垛线\纸箱编码管理.cs">
       <SubType>Form</SubType>
@@ -369,20 +405,44 @@
     <Compile Include="管理\权限管理.Designer.cs">
       <DependentUpon>权限管理.cs</DependentUpon>
     </Compile>
+    <Compile Include="管理\版本发布.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="管理\版本发布.Designer.cs">
+      <DependentUpon>版本发布.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护ERP\客户配置维护_勾选项替换.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护ERP\客户配置维护_勾选项替换.Designer.cs">
+      <DependentUpon>客户配置维护_勾选项替换.cs</DependentUpon>
+    </Compile>
+    <Compile Include="财务\成本异常报表导出.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="财务\成本异常报表导出.Designer.cs">
+      <DependentUpon>成本异常报表导出.cs</DependentUpon>
+    </Compile>
+    <Compile Include="采购\排程物料导出_采购.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="采购\排程物料导出_采购.Designer.cs">
+      <DependentUpon>排程物料导出_采购.cs</DependentUpon>
+    </Compile>
+    <Compile Include="采购\批量采购数量汇总.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="采购\批量采购数量汇总.Designer.cs">
+      <DependentUpon>批量采购数量汇总.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="仓储中心\录入退货单.resx">
       <DependentUpon>录入退货单.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入进货单-Excel导入.resx">
       <DependentUpon>录入进货单-Excel导入.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\录入进货单-联友分公司.resx">
-      <DependentUpon>录入进货单-联友分公司.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入退货单-获取单据信息.resx">
       <DependentUpon>录入退货单-获取单据信息.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="仓储中心\录入进货单-采购平台.resx">
-      <DependentUpon>录入进货单-采购平台.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\生成领料单-获取单据信息.resx">
       <DependentUpon>生成领料单-获取单据信息.cs</DependentUpon>
@@ -390,26 +450,50 @@
     <EmbeddedResource Include="仓储中心\生成领料单.resx">
       <DependentUpon>生成领料单.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Module\FastReport打印预览.resx">
+      <DependentUpon>FastReport打印预览.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="品管\成品标签打印.resx">
+      <DependentUpon>成品标签打印.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="报表\销货信息%28带入库部门%29查询.resx">
       <DependentUpon>销货信息%28带入库部门%29查询.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生产日报表\日报表部门工作组线别维护.resx">
       <DependentUpon>日报表部门工作组线别维护.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\工单信息管理.resx">
+      <DependentUpon>工单信息管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\排程物料导出_生产.resx">
+      <DependentUpon>排程物料导出_生产.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程修改.resx">
       <DependentUpon>生产排程修改.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管排程\生产排程导入中.resx">
-      <DependentUpon>生产排程导入中.cs</DependentUpon>
+    <EmbeddedResource Include="Module\数据导入中.resx">
+      <DependentUpon>数据导入中.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\未排订单查询.resx">
       <DependentUpon>未排订单查询.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="生管排程\生管排成导入导出部门选择.resx">
-      <DependentUpon>生管排成导入导出部门选择.cs</DependentUpon>
+    <EmbeddedResource Include="生管排程\生产排程导入.resx">
+      <DependentUpon>生产排程导入.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\生产排程部门选择.resx">
+      <DependentUpon>生产排程部门选择.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程.resx">
       <DependentUpon>生产排程.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\生产排程部门添加.resx">
+      <DependentUpon>生产排程部门添加.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\生产排程部门管理.resx">
+      <DependentUpon>生产排程部门管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\自动LRP计划队列.resx">
+      <DependentUpon>自动LRP计划队列.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\订单信息查询.resx">
       <DependentUpon>订单信息查询.cs</DependentUpon>
@@ -480,8 +564,8 @@
     <EmbeddedResource Include="生产日报表\日报表获取组别系列.resx">
       <DependentUpon>日报表获取组别系列.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="码垛线\码垛线排程导入.resx">
-      <DependentUpon>码垛线排程导入.cs</DependentUpon>
+    <EmbeddedResource Include="码垛线\码垛线排程.resx">
+      <DependentUpon>码垛线排程.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="码垛线\纸箱编码管理.resx">
       <DependentUpon>纸箱编码管理.cs</DependentUpon>
@@ -492,7 +576,21 @@
     <EmbeddedResource Include="管理\权限管理.resx">
       <DependentUpon>权限管理.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <EmbeddedResource Include="管理\版本发布.resx">
+      <DependentUpon>版本发布.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护ERP\客户配置维护_勾选项替换.resx">
+      <DependentUpon>客户配置维护_勾选项替换.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="财务\成本异常报表导出.resx">
+      <DependentUpon>成本异常报表导出.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="采购\排程物料导出_采购.resx">
+      <DependentUpon>排程物料导出_采购.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="采购\批量采购数量汇总.resx">
+      <DependentUpon>批量采购数量汇总.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -523,6 +621,7 @@
   <ItemGroup>
     <Content Include="logo-ly.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

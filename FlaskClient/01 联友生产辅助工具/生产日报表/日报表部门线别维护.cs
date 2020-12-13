@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表部门线别维护 : Form
     {

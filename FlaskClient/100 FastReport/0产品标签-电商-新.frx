@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/12/2020 11:22:35" ReportInfo.Modified="11/21/2020 17:59:14" ReportInfo.CreatorVersion="2019.3.5.0">
+  <Dictionary>
+    <TableDataSource Name="Dict" ReferenceName="Data.Dict" DataType="System.Int32" Enabled="true">
+      <Column Name="序号" DataType="System.String" PropName="Column"/>
+      <Column Name="客户编号" DataType="System.String" PropName="Column"/>
+      <Column Name="单号" DataType="System.String" PropName="Column"/>
+      <Column Name="品号" DataType="System.String" PropName="Column"/>
+      <Column Name="产品名称" DataType="System.String" PropName="Column"/>
+      <Column Name="颜色" DataType="System.String" PropName="Column"/>
+      <Column Name="净重" DataType="System.String" PropName="Column"/>
+      <Column Name="毛重" DataType="System.String" PropName="Column"/>
+      <Column Name="纸箱尺寸" DataType="System.String" PropName="Column"/>
+      <Column Name="备注" DataType="System.String" PropName="Column"/>
+      <Column Name="商品代码" DataType="System.String" PropName="Column"/>
+      <Column Name="电商代码" DataType="System.String" PropName="Column"/>
+      <Column Name="检验日期" DataType="System.String" PropName="Column"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="90" PaperHeight="130" LeftMargin="0" TopMargin="1" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="宋体, 60pt">
+    <DataBand Name="Data1" Width="340.2" Height="481.95" DataSource="Dict">
+      <TextObject Name="Text1" Left="9.45" Width="66.15" Height="85.05" Border.Lines="All" Text="产品标签&#13;&#10;Label" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text2" Left="236.25" Width="94.5" Height="85.05" Border.Lines="Right, Top, Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="9.45" Top="160.65" Width="66.15" Height="37.8" Border.Lines="All" Text="商品代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="75.6" Top="160.65" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.商品代码]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text5" Left="9.45" Top="85.05" Width="66.15" Height="37.8" Border.Lines="All" Text="单号" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="75.6" Top="85.05" Width="255.15" Height="37.8" Border.Lines="All" Text="【[Dict.单号]】" HorzAlign="Center" VertAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text7" Left="9.45" Top="198.45" Width="66.15" Height="37.8" Border.Lines="All" Text="产品名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="75.6" Top="198.45" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.产品名称]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text9" Left="9.45" Top="236.25" Width="66.15" Height="37.8" Border.Lines="All" Text="颜色" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="75.6" Top="236.25" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.颜色]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text11" Left="170.1" Top="274.05" Width="66.15" Height="37.8" Border.Lines="All" Text="净重" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="236.25" Top="274.05" Width="94.5" Height="37.8" Border.Lines="All" Text="[Dict.净重]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Left="9.45" Top="274.05" Width="66.15" Height="37.8" Border.Lines="All" Text="毛重" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="75.6" Top="274.05" Width="94.5" Height="37.8" Border.Lines="All" Text="[Dict.毛重]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text15" Left="9.45" Top="311.85" Width="66.15" Height="37.8" Border.Lines="All" Text="纸箱尺寸" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="75.6" Top="311.85" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.纸箱尺寸]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text17" Left="9.45" Top="349.65" Width="66.15" Height="37.8" Border.Lines="All" Text="检验员/日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 7pt, style=Bold"/>
+      <TextObject Name="Text18" Left="75.6" Top="349.65" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.检验日期]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text19" Left="9.45" Top="387.45" Width="66.15" Height="28.35" Border.Lines="All" Text="生产厂家" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text20" Left="75.6" Top="387.45" Width="255.15" Height="28.35" Border.Lines="All" Text="联友家具" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text21" Left="9.45" Top="415.8" Width="66.15" Height="28.35" Border.Lines="All" Text="生产基地" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text22" Left="75.6" Top="415.8" Width="255.15" Height="28.35" Border.Lines="All" Text="广东省广州市南沙区鹿颈管理区3号工业园" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt, style=Bold"/>
+      <BarcodeObject Name="Barcode1" Left="245.7" Width="87.65" Height="86.75" AutoSize="false" Expression="[Dict.单号]+'/'+[Dict.品号]" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+      <TextObject Name="Text23" Left="75.6" Width="160.65" Height="85.05" Border.Lines="Left, Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Left="9.45" Top="122.85" Width="66.15" Height="37.8" Border.Lines="All" Text="客户编码" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="75.6" Top="122.85" Width="255.15" Height="37.8" Border.Lines="All" Text="[Dict.客户编号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text26" Left="9.45" Top="444.15" Width="66.15" Height="28.35" Border.Lines="All" Text="联系电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text27" Left="75.6" Top="444.15" Width="255.15" Height="28.35" Border.Lines="All" Text="020-34687757" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt, style=Bold"/>
+      <BarcodeObject Name="Barcode2" Left="85.05" Top="9.45" Width="155.45" Height="66.15" AutoSize="false" Expression="[Dict.电商代码]" Barcode="Code128" Barcode.AutoEncode="true"/>
+    </DataBand>
+  </ReportPage>
+</Report>

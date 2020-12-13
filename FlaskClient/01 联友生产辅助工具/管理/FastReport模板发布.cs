@@ -12,7 +12,7 @@ namespace HarveyZ
 {
     public partial class FastReport模板发布 : Form
     {
-        private static FastReportContentUpload_Main frMain = new FastReportContentUpload_Main(FormLogin.infObj.connWG);
+        private FastReportManager frManager = new FastReportManager(FormLogin.infObj.connWG);
 
         private bool newFlag = false;
         private bool editFlag = false;
@@ -31,10 +31,7 @@ namespace HarveyZ
 
         private void Init()
         {
-            foreach(string tmp in frMain.GetPrintType())
-            {
-                ComboBoxPrintType.Items.Add(tmp);
-            }
+            SetComboBoxPrintTypeList();
         }
 
         private void BtnOpenFile_Click(object sender, EventArgs e)
@@ -51,84 +48,62 @@ namespace HarveyZ
 
         private void ComboBoxPrintType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (string tmp in frMain.GetPrintName(ComboBoxPrintType.SelectedItem.ToString()))
-            {
-                ComboBoxPrintName.Items.Add(tmp);
-            }
+            string printType = ComboBoxPrintType.SelectedItem == null ? ComboBoxPrintType.Text.Trim() : ComboBoxPrintType.SelectedItem.ToString();
+
+            SetComboBoxPrintNameList(printType);
         }
 
         private void BtnUpload_Click(object sender, EventArgs e)
         {
-            if (frMain.UploadContent(ComboBoxPrintType.SelectedItem.ToString(), ComboBoxPrintName.SelectedItem.ToString(), textBox1.Text))
+            string printType = ComboBoxPrintType.SelectedItem == null ? ComboBoxPrintType.Text.Trim() : ComboBoxPrintType.SelectedItem.ToString();
+            string printName = ComboBoxPrintName.SelectedItem == null ? ComboBoxPrintName.Text.Trim() : ComboBoxPrintName.SelectedItem.ToString();
+            string context = textBox1.Text;
+
+            if (frManager.SetPrintFile(printType, printName, context))
             {
-                MessageBox.Show("上传成功", "提示", MessageBoxButtons.OK);
+                Msg.Show("上传成功", "提示", MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("上传失败", "提示", MessageBoxButtons.OK);
+                Msg.Show("上传失败", "提示", MessageBoxButtons.OK);
             }
         }
-    }
 
-    public class FastReportContentUpload_Main
-    {
-        private static string connWG = "";
-        private static Mssql mssql = new Mssql();
-
-        public FastReportContentUpload_Main(string conn)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
-            connWG = conn;
-        }
+            string printType = ComboBoxPrintType.SelectedItem == null ? ComboBoxPrintType.Text.Trim() : ComboBoxPrintType.SelectedItem.ToString();
+            string printName = ComboBoxPrintName.SelectedItem == null ? ComboBoxPrintName.Text.Trim() : ComboBoxPrintName.SelectedItem.ToString();
 
-        public List<string> GetPrintType()
-        {
-            List<string> rtnList = new List<string>();
-            string sqlstr = @"SELECT DISTINCT PRINT_TYPE FROM WG_DB.dbo.WG_PRINT ORDER BY PRINT_TYPE ";
-            DataTable dt = mssql.SQLselect(connWG, sqlstr);
-            if (dt != null)
+            if (Msg.Show(string.Format("确认删除FastReport模板。类型：{0}， 名称：{1} ？", printType, printName)) == DialogResult.OK)
             {
-                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                if (frManager.DelPrintFile(printType, printName))
                 {
-                    rtnList.Add(dt.Rows[rowIndex][0].ToString());
-                }
-            }
-            return rtnList;
-        }
-
-        public List<string> GetPrintName(string printType)
-        {
-            List<string> rtnList = new List<string>();
-            string sqlstr = @"SELECT DISTINCT PRINT_NAME FROM WG_DB.dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' ORDER BY PRINT_NAME ";
-            DataTable dt = mssql.SQLselect(connWG, string.Format(sqlstr, printType));
-            if (dt != null)
-            {
-                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    rtnList.Add(dt.Rows[rowIndex][0].ToString());
-                }
-            }
-            return rtnList;
-        }
-
-        public bool UploadContent(string printType, string printName, string content)
-        {
-            string sqlstrExist = @"SELECT CONTENT FROM WG_DB.dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
-            string sqlstrUpdate = @"UPDATE WG_DB.dbo.WG_PRINT SET CONTENT = '{2}' WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
-            string sqlstrInsert = @"INSERT INTO WG_DB.dbo.WG_PRINT(PRINT_TYPE, PRINT_NAME, CONTENT) VALUES('{0}', '{1}', '{2}') ";
-            try {
-                if (mssql.SQLexist(connWG, string.Format(sqlstrExist, printType, printName)))
-                {
-                    mssql.SQLexcute(connWG, string.Format(sqlstrUpdate, printType, printName, content.Replace(@"'", @"''")));
+                    Msg.Show("删除成功", "提示", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    mssql.SQLexcute(connWG, string.Format(sqlstrInsert, printType, printName, content.Replace(@"'", @"''")));
+                    Msg.Show("删除失败", "提示", MessageBoxButtons.OK);
                 }
-                return true;
             }
-            catch
+        }
+
+        private void SetComboBoxPrintTypeList()
+        {
+            ComboBoxPrintType.Items.Clear();
+
+            foreach (string tmp in frManager.GetPrintTypeList())
             {
-                return false;
+                ComboBoxPrintType.Items.Add(tmp);
+            }
+        }
+
+        private void SetComboBoxPrintNameList(string printType)
+        {
+            ComboBoxPrintName.Items.Clear();
+
+            foreach (string tmp in frManager.GetPrintNameList(printType))
+            {
+                ComboBoxPrintName.Items.Add(tmp);
             }
         }
     }

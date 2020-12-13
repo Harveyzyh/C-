@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Dictionary>
+<TableDataSource Name="Dict" ReferenceName="Data.Dict" DataType="System.Int32" Enabled="true">
+
+ <Column Name="序号" DataType="System.String" PropName="Column"/>
+ <Column Name="客户编号" DataType="System.String" PropName="Column"/>
+ <Column Name="单号" DataType="System.String" PropName="Column"/>
+ <Column Name="品号" DataType="System.String" PropName="Column"/>
+ <Column Name="产品名称" DataType="System.String" PropName="Column"/>
+ <Column Name="颜色" DataType="System.String" PropName="Column"/>
+ <Column Name="净重" DataType="System.String" PropName="Column"/>
+ <Column Name="毛重" DataType="System.String" PropName="Column"/>
+ <Column Name="纸箱尺寸" DataType="System.String" PropName="Column"/>
+ <Column Name="备注" DataType="System.String" PropName="Column"/>
+ <Column Name="商品代码" DataType="System.String" PropName="Column"/>
+ <Column Name="电商代码" DataType="System.String" PropName="Column"/>
+ <Column Name="检验日期" DataType="System.String" PropName="Column"/>
+
+</TableDataSource>
+
+</Dictionary>

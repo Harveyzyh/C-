@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.仓储中心
+﻿namespace HarveyZ.仓储中心
 {
     partial class 录入进货单
     {

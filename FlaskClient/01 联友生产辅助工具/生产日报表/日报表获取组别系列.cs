@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表获取组别系列 : Form
     {
@@ -20,16 +20,16 @@ namespace 联友生产辅助工具.生产日报表
         public static bool XL_ChangeFlag = false;
         public static string XL_List = "";
 
-        public 日报表获取组别系列(string sqlstr)
+        public 日报表获取组别系列(string slqStr)
         {
             InitializeComponent();
             XL_List = "";
-            Init(sqlstr);
+            Init(slqStr);
         }
 
-        private void Init(string sqlstr)
+        private void Init(string slqStr)
         {
-            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
             dataGridView1.DataSource = dttmp;
             if(dttmp != null)
             {

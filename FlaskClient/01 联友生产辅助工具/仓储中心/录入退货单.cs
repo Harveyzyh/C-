@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.仓储中心
+namespace HarveyZ.仓储中心
 {
     public partial class 录入退货单 : Form
     {
@@ -308,8 +308,8 @@ namespace 联友生产辅助工具.仓储中心
 
         private string GetTime()
         {
-            string sqlstr = "SELECT dbo.f_getTime(1) ";
-            DataTable dt = mssql.SQLselect(connYF, sqlstr);
+            string slqStr = "SELECT dbo.f_getTime(1) ";
+            DataTable dt = mssql.SQLselect(connYF, slqStr);
             if(dt != null)
             {
                 return dt.Rows[0][0].ToString();
@@ -322,10 +322,10 @@ namespace 联友生产辅助工具.仓储中心
 
         private DataTable GetMaterielInfo(string MaterielID, string SupplierID)
         {
-            string sqlstr = "SELECT RTRIM(TH004), RTRIM(MB002), RTRIM(MB003), RTRIM(TG005), SL FROM V_PURTH_SL_WG "
+            string slqStr = "SELECT RTRIM(TH004), RTRIM(MB002), RTRIM(MB003), RTRIM(TG005), SL FROM V_PURTH_SL_WG "
                             + "INNER JOIN INVMB ON MB001 = TH004 "
                             + "WHERE TH004 = '{0}' AND TG005 = '{1}' ";
-            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, MaterielID, SupplierID));
+            DataTable dt = mssql.SQLselect(connYF, string.Format(slqStr, MaterielID, SupplierID));
             if(dt != null)
             {
                 return dt;
@@ -338,8 +338,8 @@ namespace 联友生产辅助工具.仓储中心
 
         private bool GetMaterielExist(string MaterielID)
         {
-            string sqlstr = "SELECT MB001 FROM INVMB WHERE MB001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, MaterielID));
+            string slqStr = "SELECT MB001 FROM INVMB WHERE MB001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(connYF, string.Format(slqStr, MaterielID));
             if(dt != null)
             {
                 return true;
@@ -499,10 +499,10 @@ namespace 联友生产辅助工具.仓储中心
                 string THXA013 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
                 string THXA015 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
                 string ID = (Index+1).ToString();
-                string sqlstr = string.Format(sql, LoginUid, LoginUserGroup, Time, THXA001, THXA002, THXA003, 
+                string slqStr = string.Format(sql, LoginUid, LoginUserGroup, Time, THXA001, THXA002, THXA003, 
                     THXA004, flowId, THXA007, THXA008, THXA009, THXA013, THXA015, ID);
 
-                mssql.SQLexcute(connYF, sqlstr);
+                mssql.SQLexcute(connYF, slqStr);
 
                 DataGridView_List.Rows.Remove(DataGridView_List.Rows[0]);
             }

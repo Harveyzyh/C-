@@ -154,5 +154,20 @@ namespace HarveyZ
                 }
             }
         }
+
+        public string SQLTime(string SQLstr, int lenth = 0)
+        {
+            string sqlstr = "";
+            if (lenth == 0)
+            {
+                sqlstr = @"SELECT REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(varchar(25), GETDATE(), 25), '-', ''), ' ', ''), ':', ''), '.', '') ";
+            }
+            else
+            {
+                sqlstr = @"SELECT LEFT( REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(varchar(25), GETDATE(), 25), '-', ''), ' ', ''), ':', ''), '.', ''), {0}) ";
+                sqlstr = string.Format(sqlstr, lenth);
+            }
+            return SQLselect(SQLstr, sqlstr).Rows[0][0].ToString();
+        }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using HarveyZ;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表新增 : Form
     {
@@ -212,7 +212,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             if (XL_List != "")
             {
-                string sqlstr = " SELECT A.WGroup AS 工作组, A.Serial AS 系列, A.Line AS 生产线别,  "
+                string slqStr = " SELECT A.WGroup AS 工作组, A.Serial AS 系列, A.Line AS 生产线别,  "
                               + " '0' AS 计划数量, '0' AS 生产数量, '0' AS 人数, '0' AS 工时, '0' AS 停工工时, '0' AS 总工时, "
                               + " '0' AS 产量每人每小时, '' AS 生产单号, '' AS 备注 "
                               + " FROM dbo.SC_DRY_LineList AS A"
@@ -224,7 +224,7 @@ namespace 联友生产辅助工具.生产日报表
                               + " AND A.Valid = 1 "
                               + " AND A.WGroup IN(" + XL_List + ") "
                               + " ORDER BY A.Serial, A.WGroup, A.Line, C.S DESC, B.S DESC "; 
-                DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+                DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
                 DataGridView_List.DataSource = dttmp;
                 if (dttmp != null)
                 {
@@ -267,7 +267,7 @@ namespace 联友生产辅助工具.生产日报表
         {
             int row = DataGridView_List.RowCount;
             int Index = 0;
-            string sqlstr = "";
+            string slqStr = "";
 
             string Creator = FormLogin.infObj.userId;
             string Create_Date = mssql.SQLselect(strConnection, "SELECT CONVERT(VARCHAR(20), GETDATE(), 112)").Rows[0][0].ToString();
@@ -296,7 +296,7 @@ namespace 联友生产辅助工具.生产日报表
                     OrderID = DataGridView_List.Rows[Index].Cells[10].Value.ToString();
                     Remark = DataGridView_List.Rows[Index].Cells[11].Value.ToString();
 
-                    sqlstr = "INSERT INTO dbo.SC_DRY_DAILYRECORD (Creator, Create_Date, WorkDpt, WorkDate, WGroup, Serial, Line, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark)"
+                    slqStr = "INSERT INTO dbo.SC_DRY_DAILYRECORD (Creator, Create_Date, WorkDpt, WorkDate, WGroup, Serial, Line, PlanNumber, WorkNumber, Workers, Hours, StopHours, TotalHours, Capacity, OrderID, Remark)"
                            + "VALUES("
                            + "'" + Creator + "', "
                            + "'" + Create_Date + "', "
@@ -315,7 +315,7 @@ namespace 联友生产辅助工具.生产日报表
                            + "'" + OrderID + "', "
                            + "'" + Remark + "' "
                            + ")";
-                     mssql.SQLexcute(strConnection, sqlstr);
+                     mssql.SQLexcute(strConnection, slqStr);
                 }
             }
             MessageBox.Show("保存已完成！", "提示", MessageBoxButtons.OK);
@@ -324,9 +324,9 @@ namespace 联友生产辅助工具.生产日报表
 
         private void ButtonReportInputXLSelect_Click(object sender, EventArgs e)//选择系列
         {
-            string sqlstr = "SELECT DISTINCT WGroup AS 组别 FROM dbo.SC_DRY_XL2GY";
+            string slqStr = "SELECT DISTINCT WGroup AS 组别 FROM dbo.SC_DRY_XL2GY";
 
-            Form formxl = new 日报表获取组别系列(sqlstr);
+            Form formxl = new 日报表获取组别系列(slqStr);
             formxl.ShowDialog();
             if (日报表获取组别系列.XL_ChangeFlag)
             {

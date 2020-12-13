@@ -12,45 +12,275 @@ using System.Drawing;
 
 namespace HarveyZ
 {
+    class Normal
+    {
+        /// <summary>
+        /// 计算字符串中子串出现的次数
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <param name="substring">子串</param>
+        /// <returns>出现的次数</returns>
+        public static int GetSubstringCount(string str, string substring)
+        {
+            if (str.Contains(substring))
+            {
+                string strReplaced = str.Replace(substring, "");
+                return (str.Length - strReplaced.Length) / substring.Length;
+            }
+
+            return 0;
+        }
+
+        public static string ConvertDate(string datestr) //显示日期转换 加 -
+        {
+            string returnstr = "";
+            int strlenth = datestr.Length;
+            if (strlenth == 14)
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2) + " "
+                    + datestr.Substring(8, 2) + ":" + datestr.Substring(10, 2) + ":" + datestr.Substring(12, 2);
+            }
+            else if (strlenth == 12)
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2) + " "
+                    + datestr.Substring(8, 2) + ":" + datestr.Substring(10, 2);
+            }
+            else if (strlenth == 8)
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2);
+            }
+            else if (strlenth == 6)
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2);
+            }
+            else if ((strlenth > 8) & (strlenth < 14))
+            {
+                returnstr = datestr.Substring(0, 4) + "-" + datestr.Substring(4, 2) + "-" + datestr.Substring(6, 2);
+            }
+            else
+            {
+                returnstr = datestr;
+            }
+
+            return returnstr;
+        }
+
+        public static void ConvertDate(DataTable dt, string colName)
+        {
+            if (dt != null)
+            {
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    dt.Rows[rowIndex][colName] = ConvertDate(dt.Rows[rowIndex][colName].ToString());
+                }
+            }
+        }
+
+        public static string ConverslqStr(string slqStr, string Type = "str") //转SQL前部分字段转换
+        {
+            string returnstr = "";
+
+            if (Type == "str")
+            {
+                returnstr = slqStr.Replace("^", "[^]").Replace("%", "[%]").Replace("[", "[[]").Replace("'", "‘");
+            }
+
+            return returnstr;
+        }
+    }
+
+    class FastReportManager
+    {
+        private Mssql mssql = new Mssql();
+        private string conn = null;
+
+        public FastReportManager(string conn = "")
+        {
+            this.conn = conn;
+        }
+
+        public string GetPrintFile(string printType, string printName)
+        {
+            string slqStr = @"SELECT CONTENT FROM dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, printType, printName));
+            if (dt != null)
+            {
+                return dt.Rows[0][0].ToString();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<string> GetPrintTypeList()
+        {
+            List<string> rtnList = new List<string>();
+            string slqStr = @"SELECT DISTINCT PRINT_TYPE FROM dbo.WG_PRINT ORDER BY PRINT_TYPE ";
+            DataTable dt = mssql.SQLselect(conn, slqStr);
+            if (dt != null)
+            {
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    rtnList.Add(dt.Rows[rowIndex][0].ToString());
+                }
+            }
+            return rtnList;
+        }
+        public List<string> GetPrintNameList(string printType)
+        {
+            List<string> rtnList = new List<string>();
+            string slqStr = @"SELECT DISTINCT PRINT_NAME FROM WG_DB.dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' ORDER BY PRINT_NAME ";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, printType));
+            if (dt != null)
+            {
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    rtnList.Add(dt.Rows[rowIndex][0].ToString());
+                }
+            }
+            return rtnList;
+        }
+
+        public bool SetPrintFile(string printType, string printName, string content)
+        {
+            string slqStrExist = @"SELECT CONTENT FROM dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
+            string slqStrUpdate = @"UPDATE dbo.WG_PRINT SET CONTENT = '{2}' WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
+            string slqStrInsert = @"INSERT INTO dbo.WG_PRINT(PRINT_TYPE, PRINT_NAME, CONTENT) VALUES('{0}', '{1}', '{2}') ";
+            try
+            {
+                if (mssql.SQLexist(conn, string.Format(slqStrExist, printType, printName)))
+                {
+                    mssql.SQLexcute(conn, string.Format(slqStrUpdate, printType, printName, content.Replace(@"'", @"''")));
+                }
+                else
+                {
+                    mssql.SQLexcute(conn, string.Format(slqStrInsert, printType, printName, content.Replace(@"'", @"''")));
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DelPrintFile(string printType, string printName)
+        {
+            try
+            {
+                string slqStr = @"DELETE FROM dbo.WG_PRINT WHERE PRINT_TYPE = '{0}' AND PRINT_NAME = '{1}' ";
+                mssql.SQLexcute(conn, string.Format(slqStr, printType, printName));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
+
+    class VersionManeger
+    {
+        private static Mssql mssql = new Mssql();
+        private static string conn = null;
+
+        public VersionManeger(string _conn = "")
+        {
+            conn = _conn;
+        }
+
+        public void SetProgVersion(string ProgName, string Version)
+        {
+            string slqStr = @"UPDATE WG_APP_INF SET Version = '{1}', Valid = 1 WHERE ProgName = '{0}' ";
+            mssql.SQLexcute(conn, string.Format(slqStr, ProgName, Version));
+        }
+
+        public bool GetNewVersion(string ProgName, string NowVersion, out string Msg)
+        {
+            bool result = false;
+            Msg = null;
+            if (Normal.GetSubstringCount(NowVersion, ".") == 3)
+            {
+                string slqStr = @"SELECT Version, Valid FROM WG_APP_INF WHERE ProgName = '{0}'";
+                DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, ProgName));
+                if (dt != null)
+                {
+                    bool valid = dt.Rows[0][1].Equals(true) ? true : false;
+                    if (valid)
+                    {
+                        var NewVersionList = dt.Rows[0][0].ToString().Split('.');
+                        var NowVersionList = NowVersion.Split('.');
+                        for (int index = 0; index < 4; index++)
+                        {
+                            if (int.Parse(NewVersionList[index]) > int.Parse(NowVersionList[index]))
+                            {
+                                result = true;
+                                break;
+                            }
+                            if (int.Parse(NewVersionList[index]) < int.Parse(NowVersionList[index]))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Msg = "程序： " + ProgName + " 已停用，如有疑问，请联系资讯部，谢谢！";
+                    }
+                }
+                else
+                {
+                    Msg = "新版本检测：传入程序名称错误";
+                }
+            }
+            else
+            {
+                Msg = "新版本检测：传入程序版本错误";
+            }
+            return result;
+        }
+    }
+
     public class Msg
     {
         /// <summary>
         /// 提示框
         /// </summary>
         /// <param name="msg">信息内容</param>
-        public static void Show(string msg)
+        public static DialogResult Show(string msg)
         {
-            MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel);
         }
 
-        public static void Show(string msg, string title)
+        public static DialogResult Show(string msg, string title)
         {
-            MessageBox.Show(msg, title, MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, title, MessageBoxButtons.OKCancel);
         }
 
-        public static void Show(string msg, string title, MessageBoxButtons btn)
+        public static DialogResult Show(string msg, string title, MessageBoxButtons btn)
         {
-            MessageBox.Show(msg, title, btn);
+            return MessageBox.Show(msg, title, btn);
         }
 
-        public static void Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
+        public static DialogResult Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
         {
-            MessageBox.Show(msg, title, btn, icon);
+            return MessageBox.Show(msg, title, btn, icon);
         }
 
-        public static void ShowErr(string msg)
+        public static DialogResult ShowErr(string msg)
         {
-            MessageBox.Show(msg, "错误", MessageBoxButtons.OKCancel);
+            return MessageBox.Show(msg, "错误", MessageBoxButtons.OKCancel);
         }
 
-        public static void ShowErr(string msg, MessageBoxButtons btn)
+        public static DialogResult ShowErr(string msg, MessageBoxButtons btn)
         {
-            MessageBox.Show(msg, "错误", btn);
+            return MessageBox.Show(msg, "错误", btn);
         }
 
-        public static void ShowErr(string msg, MessageBoxButtons btn, MessageBoxIcon icon)
+        public static DialogResult ShowErr(string msg, MessageBoxButtons btn, MessageBoxIcon icon)
         {
-            MessageBox.Show(msg, "错误", btn, icon);
+            return MessageBox.Show(msg, "错误", btn, icon);
         }
     }
 
@@ -376,12 +606,65 @@ namespace HarveyZ
         /// <summary>
         /// 设置Dgv中单双行背景颜色不一致
         /// </summary>
-        /// <param name="dgv">传入需要处理的Dgv</param>
+        /// <param name="dgv">DataGridView</param>
         public static void SetRowBackColor(DataGridView dgv)
         {
             //行颜色
             dgv.RowsDefaultCellStyle.BackColor = Color.Bisque;
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+        }
+
+        /// <summary>
+        /// 设置Dgv中单双行背景颜色不一致
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <param name="color1">奇数行颜色</param>
+        /// <param name="color2">偶数行颜色</param>
+        public static void SetRowBackColor(DataGridView dgv, Color color1, Color color2)
+        {
+            //行颜色
+            dgv.RowsDefaultCellStyle.BackColor = color1;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = color2;
+        }
+        #endregion
+
+        #region 字体颜色
+        public static void SetRowFontColor(DataGridView dgv, int rowIndex, Color color)
+        {
+            if (dgv != null)
+            {
+                dgv.Rows[rowIndex].DefaultCellStyle.ForeColor = color;
+            }
+        }
+
+        public static void SetRowFontColor(DataGridView dgv, List<int> rowList, Color color)
+        {
+            if (dgv != null)
+            {
+                foreach(int row in rowList)
+                {
+                    SetRowFontColor(dgv, row, color);
+                }
+            }
+        }
+
+        public static void SetColumnFontColor(DataGridView dgv, int colIndex, Color color)
+        {
+            if (dgv != null)
+            {
+                dgv.Columns[colIndex].DefaultCellStyle.ForeColor = color;
+            }
+        }
+
+        public static void SetColumnFontColor(DataGridView dgv, List<int> colList, Color color)
+        {
+            if (dgv != null)
+            {
+                foreach (int row in colList)
+                {
+                    SetColumnFontColor(dgv, row, color);
+                }
+            }
         }
         #endregion
 
@@ -806,6 +1089,7 @@ namespace HarveyZ
         }
         #endregion
 
+        #region 排序
         /// <summary>
         /// 设置所有列不需要排序
         /// </summary>
@@ -820,7 +1104,9 @@ namespace HarveyZ
                 }
             }
         }
+        #endregion
 
+        #region 行选择
         /// <summary>
         /// 设置Dgv选中最后一行
         /// </summary>
@@ -834,6 +1120,11 @@ namespace HarveyZ
             }
         }
 
+        /// <summary>
+        /// 选中行，根据行索引定位
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <param name="rowIndex">行号</param>
         public static void SelectLastRow(DataGridView dgv = null, int rowIndex = -1)
         {
             if (rowIndex >= 0)
@@ -842,26 +1133,34 @@ namespace HarveyZ
                 if (dgv.RowCount > 0 && dgv.RowCount >= rowIndex && dgv != null)
                 {
                     dgv.CurrentCell = dgv.Rows[rowIndex].Cells[0];
+                    dgv.Rows[rowIndex].Selected = true;
                 }
             }
         }
 
-        #region 行颜色
-        public static void SetRowFontColor(DataGridView dgv, int row, Color color)
+        /// <summary>
+        /// 选中行，根据列名称来索引到行，只选中第一次出现索引的行
+        /// 建议使用具有唯一标识的列
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <param name="colName">列名称</param>
+        /// <param name="index">列中的索引</param>
+        public static void SelectLastRow(DataGridView dgv = null, string colName = null, string index = null)
         {
-            if (dgv != null)
+            if (dgv != null && dgv.Columns.Count> 0 && dgv.Rows.Count > 0 && colName != null && index != null)
             {
-                dgv.Rows[row].DefaultCellStyle.ForeColor = color;
-            }
-        }
-
-        public static void SetRowFontColor(DataGridView dgv, List<int> rowList, Color color)
-        {
-            if (dgv != null)
-            {
-                foreach(int row in rowList)
+                if (dgv.Columns.Contains(colName))
                 {
-                    SetRowFontColor(dgv, row, color);
+                    //int colIndex = dgv.Columns.IndexOf(dgv.Columns[colName]);
+                    for(int rowIndex = 0; rowIndex < dgv.Rows.Count; rowIndex++)
+                    {
+                        if (dgv.Rows[rowIndex].Cells[colName].Value.ToString() == index)
+                        {
+                            dgv.CurrentCell = dgv.Rows[rowIndex].Cells[colName];
+                            dgv.Rows[rowIndex].Selected = true;
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -896,14 +1195,8 @@ namespace HarveyZ
                         formatList.Add(colIndex);
                     }
                 }
+                DtDateFormat(Dt, formatList);
 
-                for (int rowIndex = 0; rowIndex < Dt.Rows.Count; rowIndex++)
-                {
-                    foreach (int listIndex in formatList)
-                    {
-                        Dt.Rows[rowIndex][listIndex] = Normal.ConvertDate(Dt.Rows[rowIndex][listIndex].ToString());
-                    }
-                }
             }
         }
 
@@ -953,6 +1246,29 @@ namespace HarveyZ
                 }
             }
             return list3;
+        }
+    }
+
+    public class DateTimePickerOpt
+    {
+        public static void DateTimeValueChange_Start(DateTimePicker dtp1, DateTimePicker dtp2)
+        {
+            if (dtp1.Value > dtp2.Value)
+            {
+                bool check = dtp2.Checked;
+                dtp2.Value = dtp1.Value;
+                dtp2.Checked = check;
+            }
+        }
+
+        public static void DateTimeValueChange_End(DateTimePicker dtp1, DateTimePicker dtp2)
+        {
+            if (dtp1.Value > dtp2.Value)
+            {
+                bool check = dtp1.Checked;
+                dtp1.Value = dtp2.Value;
+                dtp1.Checked = check;
+            }
         }
     }
 }

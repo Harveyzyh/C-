@@ -160,8 +160,8 @@ namespace HarveyZ
         #region 业务逻辑
         private void GetHeadTime(HeadObject headObj)
         {
-            string sqlstr = "select dbo.f_getTime(1)";
-            DataTable dt = mssql.SQLselect(conn, sqlstr);
+            string slqStr = "select dbo.f_getTime(1)";
+            DataTable dt = mssql.SQLselect(conn, slqStr);
             if (dt != null)
             {
                 headObj.Time = dt.Rows[0][0].ToString();
@@ -170,7 +170,7 @@ namespace HarveyZ
 
         private void GetHeadInfo(HeadObject headObj)
         {
-            string sqlstr = @"SELECT DISTINCT RTRIM(JHXA.COMPANY) 公司别, RTRIM(JHXA.CREATOR) 创建人, RTRIM(JHXA.USR_GROUP) 用户组, 
+            string slqStr = @"SELECT DISTINCT RTRIM(JHXA.COMPANY) 公司别, RTRIM(JHXA.CREATOR) 创建人, RTRIM(JHXA.USR_GROUP) 用户组, 
                                 RTRIM(JHXA001) 进货单别, RTRIM(JHXA004) 进货日期, RTRIM(JHXA002) 供应商编号, RTRIM(JHXA013) 送货单号, 
                                 RTRIM(MA021) 交易币种, MG2.MG003 汇率, 
                                 RTRIM(MA030) 发票种类, 
@@ -187,7 +187,7 @@ namespace HarveyZ
                                 INNER JOIN (SELECT MAX(MG002) MAXMG02, MG001 MAXMG01 FROM dbo.CMSMG GROUP BY MG001) AS MG 
                                 ON MG.MAXMG01 = CMSMG.MG001 AND MG.MAXMG02 = CMSMG.MG002) AS MG2 ON MG2.MG001 = MA021 
                                 WHERE JHXA005 IN ('{0}') AND JHXA011 = 'N' ";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, headObj.FlowId));
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, headObj.FlowId));
             if (dt != null)
             {
                 headObj.Company = dt.Rows[0][0].ToString();
@@ -210,8 +210,8 @@ namespace HarveyZ
 
         private void GetHeadTG002(HeadObject headObj)
         {
-            string sqlstr = "EXEC dbo.P_GETDH '{0}'";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, headObj.TG001));
+            string slqStr = "EXEC dbo.P_GETDH '{0}'";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, headObj.TG001));
             if (dt != null)
             {
                 headObj.TG002 = dt.Rows[0][0].ToString();
@@ -221,11 +221,11 @@ namespace HarveyZ
         // 写入单头
         private void SetHeadInfo(HeadObject headObj)
         {
-            string sqlstr = @"INSERT INTO dbo.PURTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG004, TG005, 
+            string slqStr = @"INSERT INTO dbo.PURTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG004, TG005, 
                                 TG006, TG007, TG008, TG009, TG010, TG013, TG014, TG015, TG021, TG030, TG033, TG016, TG043, TG052) 
                                 VALUES('{0}', '{1}', '{2}', '{3}', '1', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', 
                                 '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '', '', '' )";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.Company, headObj.Uid, headObj.Ugroup, headObj.Time, headObj.TG001,
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.Company, headObj.Uid, headObj.Ugroup, headObj.Time, headObj.TG001,
                 headObj.TG002, headObj.TG003, headObj.TG004, headObj.TG005, headObj.TG006, headObj.TG007, headObj.TG008, headObj.TG009,
                 headObj.TG010, headObj.TG013, headObj.TG014, headObj.TG015, headObj.TG021, headObj.TG030, headObj.TG033));
         }
@@ -269,16 +269,16 @@ namespace HarveyZ
         //根据流水号，获获取临时表的明细
         private void GetLsDt(HeadObject headObj, DetailObject detailObj)
         {
-            string sqlstr = @"SELECT RTRIM(MB001), RTRIM(MB002), RTRIM(MB003), RTRIM(MB004), 
+            string slqStr = @"SELECT RTRIM(MB001), RTRIM(MB002), RTRIM(MB003), RTRIM(MB004), 
                                 RTRIM(JHXA003), RTRIM(JHXA009) FROM INVMB 
                                 INNER JOIN dbo.JH_LYXA ON JHXA007 = MB001 WHERE 1=1 AND JHXA005 = '{0}' ORDER BY ID";
-            detailObj.LsDt = mssql.SQLselect(conn, string.Format(sqlstr, headObj.FlowId));
+            detailObj.LsDt = mssql.SQLselect(conn, string.Format(slqStr, headObj.FlowId));
         }
 
         //可进货采购单明细逻辑
         private void GetSlDt(HeadObject headObj, DetailObject detailObj)
         {
-            string sqlstr = @"SELECT DISTINCT TOP 200 TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) 
+            string slqStr = @"SELECT DISTINCT TOP 200 TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) 
                                 FROM dbo.PURTH(NOLOCK) AS PURTH 
                                 INNER JOIN dbo.PURTG(NOLOCK) AS PURTG ON TG001 = TH001 AND TG002 = TH002
                                 WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 
@@ -292,8 +292,8 @@ namespace HarveyZ
                                 AND (TD008 - TD015 - ( SELECT isnull( SUM ( TH007 ), 0 ) FROM dbo.PURTH PURTH 
                                 WHERE TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 AND TH030 = 'N' )) > 0 
                                 AND TD016 = 'N' AND TC014 = 'Y' AND TC001 <> '3305' AND TC001 <> '3306' 
-                                ORDER BY TC003 DESC, TD012, TD001 DESC, RTRIM(TD002), TD003";
-            detailObj.SlDt = mssql.SQLselect(conn, string.Format(sqlstr, headObj.TG005, detailObj.TH004));
+                                ORDER BY TC003, TD012, TD001 DESC, RTRIM(TD002), TD003";
+            detailObj.SlDt = mssql.SQLselect(conn, string.Format(slqStr, headObj.TG005, detailObj.TH004));
         }
 
         //数量
@@ -340,7 +340,7 @@ namespace HarveyZ
             detailObj.TH019 = Math.Round(float.Parse(detailObj.TH007) * float.Parse(detailObj.TH018), 6, MidpointRounding.AwayFromZero).ToString();
             detailObj.TH003 = detailObj.RowIndex.ToString().PadLeft(4, '0');
 
-            string sqlstr = @"INSERT INTO dbo.PURTH(COMPANY,CREATOR,USR_GROUP,CREATE_DATE,FLAG, 
+            string slqStr = @"INSERT INTO dbo.PURTH(COMPANY,CREATOR,USR_GROUP,CREATE_DATE,FLAG, 
                                 TH001,TH002,TH003,TH004,TH005,TH006,TH007,TH008,TH009,TH010, 
                                 TH011,TH012,TH013,TH014,TH015,TH016,TH018,TH019,TH026,TH027, 
                                 TH029,TH030,TH031,TH032,TH033,TH034,TH035,TH042,TH043,TH044, 
@@ -349,7 +349,7 @@ namespace HarveyZ
                                 '{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}', 
                                 '{18}','{19}','{20}','{21}','N','{22}','N','N','N','N','{23}', 
                                 '{24}','{25}','{26}','N','N','0','{27}','{28}','1','##########','{29}')";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.Company, headObj.Uid, headObj.Ugroup, headObj.Time, headObj.TG001, headObj.TG002,
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.Company, headObj.Uid, headObj.Ugroup, headObj.Time, headObj.TG001, headObj.TG002,
                 detailObj.TH003, detailObj.TH004, detailObj.TH005, detailObj.TH006, detailObj.TH007, detailObj.TH008, detailObj.TH009, detailObj.TH010,
                 detailObj.TH011, detailObj.TH012, detailObj.TH013, detailObj.TH014, detailObj.TH015, detailObj.TH016, detailObj.TH018, detailObj.TH019,
                 detailObj.TH027, detailObj.TH033, detailObj.TH034, detailObj.TH035, detailObj.TH042, detailObj.TH064, detailObj.TH065, detailObj.THC02));
@@ -358,7 +358,7 @@ namespace HarveyZ
         //更新单头税率，汇率 
         private void UptHeadInfo2(HeadObject headObj)
         {
-            string sqlstr = @"UPDATE dbo.PURTG SET TG008 = ISNULL(MG003, 1) FROM dbo.PURTG 
+            string slqStr = @"UPDATE dbo.PURTG SET TG008 = ISNULL(MG003, 1) FROM dbo.PURTG 
                             LEFT JOIN( 
                                 SELECT G.MG001, G.MG003 FROM(
                                     SELECT MG001, MAX(MG002) MG002 FROM CMSMG
@@ -371,13 +371,13 @@ namespace HarveyZ
 
                             UPDATE dbo.PURTG SET TG030 = ISNULL(MA004, 0) FROM COMFORT.dbo.PURTG LEFT JOIN dbo.CMSMA ON CMSMA.COMPANY = 'COMFORT' 
                             WHERE TG001 = '{0}' AND TG002 ='{1}'  ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.TG001, headObj.TG002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.TG001, headObj.TG002));
         }
 
         //更新单身金额信息
         private void UptDetailMoney(HeadObject headObj)
         {
-            string sqlstr = @"UPDATE dbo.PURTH  SET 
+            string slqStr = @"UPDATE dbo.PURTH  SET 
                                 TH045 = CAST(ROUND(TH019/(1+CONVERT(FLOAT, TG030)),2) AS  NUMERIC(10,2)), 
                                 TH046 = CAST(ROUND(TH019 - (TH019/(1+CONVERT(FLOAT, TG030))),2) AS  NUMERIC(10,2)), 
                                 TH047 = CAST(ROUND((TH019 * CONVERT(FLOAT, TG008)/(1+CONVERT(FLOAT, TG030))),2) 
@@ -386,13 +386,13 @@ namespace HarveyZ
                                 (TH019 * CONVERT(FLOAT, TG008)/(1+CONVERT(FLOAT, TG030))),2) AS  NUMERIC(10,2)) 
                                 FROM PURTH INNER JOIN dbo.PURTG AS PURTG ON TG001 = TH001 AND TG002 = TH002 
                                 WHERE TG001= '{0}' AND TG002= '{1}' ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.TG001, headObj.TG002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.TG001, headObj.TG002));
         }
 
         //更新单头金额信息
         private void UptHeadMoney(HeadObject headObj)
         {
-            string sqlstr = @"UPDATE A SET TG017=SUMTH019,TG019=SUMTH046,TG026=SUMTH015,TG028=SUMTH045,TG031=SUMTH047, 
+            string slqStr = @"UPDATE A SET TG017=SUMTH019,TG019=SUMTH046,TG026=SUMTH015,TG028=SUMTH045,TG031=SUMTH047, 
                                 TG032=SUMTH048,TG040=SUMTH050,TG041=SUMTH052,TG053=SUMTH007,TG054=SUMTH049 
                                 FROM COMFORT.dbo.PURTG A 
                                 INNER JOIN (SELECT TH001,TH002,SUMTH019=SUM(TH019),SUMTH046=SUM(TH046), 
@@ -404,15 +404,15 @@ namespace HarveyZ
                                 INNER JOIN dbo.CMSMA ON 1=1 
                                 GROUP BY TH001,TH002)  AS B ON A.TG001=B.TH001 AND A.TG002=B.TH002 
                                 WHERE TG001= '{0}' AND TG002= '{1}' ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.TG001, headObj.TG002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.TG001, headObj.TG002));
         }
 
         private void UptJHXAInfo(HeadObject headObj)
         {
             string time = mssql.SQLselect(conn, "select dbo.f_getTime(1)").Rows[0][0].ToString();
-            string sqlstr = @"UPDATE dbo.JH_LYXA SET MODIFIER='{1}', MODI_DATE='{2}', 
+            string slqStr = @"UPDATE dbo.JH_LYXA SET MODIFIER='{1}', MODI_DATE='{2}', 
                                 FLAG=(convert(int,dbo.JH_LYXA.FLAG))%999+1, JHXA011 = 'Y', UDF01 = '{3}'WHERE  JHXA005 = '{0}' ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.FlowId, headObj.Uid, time, headObj.TG001 + '-' + headObj.TG002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.FlowId, headObj.Uid, time, headObj.TG001 + '-' + headObj.TG002));
         }
         #endregion
     }
@@ -579,10 +579,10 @@ namespace HarveyZ
         #region 业务逻辑
         private void GetFlowIdInfo()
         {
-            string sqlstr = @"SELECT TOP 1 THXA001 AS TI001, THXA004 AS TI003, THXA002 AS TI004, THXA004 AS TJ011, 
+            string slqStr = @"SELECT TOP 1 THXA001 AS TI001, THXA004 AS TI003, THXA002 AS TI004, THXA004 AS TJ011, 
                                 COMPANY, CREATOR, USR_GROUP  
                                 FROM dbo.TH_LYXA WHERE THXA005 = '{0}' AND THXA011 = 'N'";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, headObj.flowId));
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, headObj.flowId));
             if (dt != null)
             {
                 headObj.ti001 = dt.Rows[0]["TI001"].ToString();
@@ -597,13 +597,13 @@ namespace HarveyZ
 
         private void GetTi002()
         {
-            string sqlstr = @"EXEC dbo.P_GETDH '{0}' ";
-            headObj.ti002 = mssql.SQLselect(conn, string.Format(sqlstr, headObj.ti001)).Rows[0][0].ToString();
+            string slqStr = @"EXEC dbo.P_GETDH '{0}' ";
+            headObj.ti002 = mssql.SQLselect(conn, string.Format(slqStr, headObj.ti001)).Rows[0][0].ToString();
         }
 
         private void InsertHead()
         {
-            string sqlstr = @"INSERT INTO dbo.PURTI(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG,TI001, TI002, TI003, TI004, TI005, TI006, 
+            string slqStr = @"INSERT INTO dbo.PURTI(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG,TI001, TI002, TI003, TI004, TI005, TI006, 
                                 TI007, TI008, TI009, TI010, TI011, TI012, TI013, TI014, TI015, TI016, TI017, TI018, TI019, TI020, TI021, 
                                 TI022, TI023, TI024, TI025, TI026, TI027, TI028, TI029, TI030, TI031, TI032, TI033, TI034, TI035, TI036, 
                                 TI037, TI038, TI039, TI040)
@@ -618,19 +618,19 @@ namespace HarveyZ
 	                                AND MG002 = (SELECT MAX(MG2.MG002) FROM CMSMG AS MG2 WHERE MG2.MG001 = MG.MG001 AND CONVERT(FLOAT, MG2.MG002) <= CONVERT(FLOAT, CONVERT(VARCHAR(8), GETDATE(), 112)))
                                 WHERE 1=1
                                 AND MA001 = '{6}'";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.company, headObj.creator, headObj.usrGroup, headObj.ti001, headObj.ti002,
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.company, headObj.creator, headObj.usrGroup, headObj.ti001, headObj.ti002,
                 headObj.ti003, headObj.ti004));
         }
 
         private DataTable GetDetailInfo()
         {
-            string sqlstr = @"SELECT THXA007 AS TJ004, THXA009 DSL, ID FROM dbo.TH_LYXA WHERE THXA005 = '{0}' AND THXA011 = 'N' ";
-            return mssql.SQLselect(conn, string.Format(sqlstr, headObj.flowId));
+            string slqStr = @"SELECT THXA007 AS TJ004, THXA009 DSL, ID FROM dbo.TH_LYXA WHERE THXA005 = '{0}' AND THXA011 = 'N' ";
+            return mssql.SQLselect(conn, string.Format(slqStr, headObj.flowId));
         }
 
         private DataTable GetSlInfo()
         {
-            string sqlstr = @"SELECT TOP 200 TG005, RTRIM(TH004) AS TH004, RTRIM(TH001) AS TH001, RTRIM(TH002) AS TH002, RTRIM(TH003) AS TH003, TH007-ISNULL(TJ009, 0) AS TH007 
+            string slqStr = @"SELECT TOP 200 TG005, RTRIM(TH004) AS TH004, RTRIM(TH001) AS TH001, RTRIM(TH002) AS TH002, RTRIM(TH003) AS TH003, TH007-ISNULL(TJ009, 0) AS TH007 
 	                            FROM dbo.PURTG(NOLOCK) INNER JOIN dbo.PURTH(NOLOCK) ON TG001 = TH001 AND TG002 = TH002 
 	                            INNER JOIN dbo.PURTD ON TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 AND TD016 != 'y'
 	                            LEFT JOIN (
@@ -642,7 +642,7 @@ namespace HarveyZ
 	                            AND TG001 NOT IN ('')
 	                            AND TG005 = '{0}' AND TH004 = '{1}'
 	                            ORDER BY PURTG.CREATE_DATE DESC";
-            return mssql.SQLselect(conn, string.Format(sqlstr, headObj.ti004, detailObj.tj004));
+            return mssql.SQLselect(conn, string.Format(slqStr, headObj.ti004, detailObj.tj004));
         }
 
         private void HandelDetail()
@@ -692,7 +692,7 @@ namespace HarveyZ
         {
             detailObj.xh += 1;
             string xh = detailObj.xh.ToString().ToString().PadLeft(4, '0');
-            string sqlstr = @"INSERT INTO dbo.PURTJ (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TJ001, TJ002, TJ003, TJ004, TJ005, TJ006, TJ007, 
+            string slqStr = @"INSERT INTO dbo.PURTJ (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TJ001, TJ002, TJ003, TJ004, TJ005, TJ006, TJ007, 
                                 TJ008, TJ009, TJ010, TJ011, TJ012, TJ013, TJ014, TJ015, TJ016, TJ017, TJ018, TJ019, TJ020, TJ021, TJ022, TJ023, TJ024, 
                                 TJ025, TJ026, TJ027, TJ028, TJ029, TJ030, TJ031, TJ032, TJ033, TJ034, TJ035, TJ036, TJ037, TJ038, TJ039, TJ040, TJ041, 
                                 TJ042, TJ043, TJ044, TJ045, TJ046, TJ047, TJ048, TJ049, TJ053, TJ056, TJC01, TJC02, UDF02)
@@ -710,13 +710,13 @@ namespace HarveyZ
                                 INNER JOIN dbo.PURTD ON TH011 = TD001 AND TH012 = TD002 AND TH013 = TD003 
                                 INNER JOIN dbo.PURTI ON TI001 = '{0}' AND TI002 = '{1}'
                                 WHERE TH001 = '{3}' AND TH002 = '{4}' AND TH003 = '{5}'";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.ti001, headObj.ti002, xh, detailObj.tj013, detailObj.tj014, detailObj.tj015,
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.ti001, headObj.ti002, xh, detailObj.tj013, detailObj.tj014, detailObj.tj015,
                 detailObj.csl, detailObj.tj011));
         }
 
         private void UpdateDetailMoney()
         {
-            string sqlstr = @"UPDATE dbo.PURTJ SET 
+            string slqStr = @"UPDATE dbo.PURTJ SET 
 			                    TJ010 = TJ010C, 
 			                    TJ030 = TJ030C, 
 			                    TJ031 = TJ031C, 
@@ -749,12 +749,12 @@ namespace HarveyZ
 				                    WHERE TI001 = '{0}' AND TI002 = '{1}'
 			                    ) AS A0 
 			                    WHERE TJ001 = TI001C AND TJ002 = TI002C AND TJ003 = TJ003C ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.ti001, headObj.ti002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.ti001, headObj.ti002));
         }
 
         private void UpdateHeadMoney()
         {
-            string sqlstr = @"UPDATE dbo.PURTI SET 
+            string slqStr = @"UPDATE dbo.PURTI SET 
 			                    TI022 = TI022S, 
 			                    TI028 = TI028S, 
 			                    TI011 = TI011S, 
@@ -766,21 +766,21 @@ namespace HarveyZ
 			                    GROUP BY TJ001, TJ002
 			                    ) AS A 
 			                    WHERE TI001 = TJ001 AND TI002 = TJ002";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.ti001, headObj.ti002));
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.ti001, headObj.ti002));
         }
 
         private void UpdateDetailFlag()
         {
-            string sqlstr = @"UPDATE dbo.TH_LYXA SET THXA011 = 'Y' WHERE THXA005 = '{0}' AND ID = '{1}'";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.flowId, detailObj.id));
+            string slqStr = @"UPDATE dbo.TH_LYXA SET THXA011 = 'Y' WHERE THXA005 = '{0}' AND ID = '{1}'";
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.flowId, detailObj.id));
         }
 
         private void UpdateFlag()
         {
-            string sqlstr = @"UPDATE dbo.TH_LYXA SET MODIFIER = '{1}', MODI_DATE = dbo.f_getTime(1), 
+            string slqStr = @"UPDATE dbo.TH_LYXA SET MODIFIER = '{1}', MODI_DATE = dbo.f_getTime(1), 
                                 FLAG=(convert(int,dbo.TH_LYXA.FLAG))%999+1, THXA011 = 'Y', UDF01 = '{2}' 
                                 WHERE THXA005 = '{0}' ";
-            mssql.SQLexcute(conn, string.Format(sqlstr, headObj.flowId, headObj.creator, 
+            mssql.SQLexcute(conn, string.Format(slqStr, headObj.flowId, headObj.creator, 
                 headObj.ti001 + '-' + headObj.ti002));
         }
         #endregion
@@ -867,7 +867,6 @@ namespace HarveyZ
             {
                 GetUsrGroup();
                 GetTf002();
-                //注释了的待修改
                 InsertHead();
                 InsertDetail();
                 UpdateHeadSl();
@@ -879,8 +878,8 @@ namespace HarveyZ
         #region 业务逻辑
         private void GetPrintId()
         {
-            string sqlstr = @"SELECT TOP 1 PrintId, TG001, TG002 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 1 AND ScrkOutFlag = 0 ORDER BY Create_Date ";
-            DataTable dt = mssql.SQLselect(connMD, sqlstr);
+            string slqStr = @"SELECT TOP 1 PrintId, TG001, TG002 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 1 AND ScrkOutFlag = 0 ORDER BY Create_Date ";
+            DataTable dt = mssql.SQLselect(connMD, slqStr);
             if (dt != null)
             {
                 if (dt.Rows[0]["TG002"].ToString() != "")
@@ -906,8 +905,8 @@ namespace HarveyZ
 
         private void GetUsrGroup()
         {
-            string sqlstr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.creator));
+            string slqStr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(connYF, string.Format(slqStr, headObj.creator));
             if (dt != null)
             {
                 headObj.usr_group = dt.Rows[0][0].ToString();
@@ -920,22 +919,22 @@ namespace HarveyZ
 
         private void GetTf002()
         {
-            string sqlstr = @"exec P_GETDH '{0}'";
-            headObj.tf002 = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.tf001)).Rows[0][0].ToString();
+            string slqStr = @"exec P_GETDH '{0}'";
+            headObj.tf002 = mssql.SQLselect(connYF, string.Format(slqStr, headObj.tf001)).Rows[0][0].ToString();
         }
 
         private void InsertHead()
         {
-            string sqlstr = @"INSERT INTO dbo.MOCTF (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TF001, TF002, TF003, TF012, 
+            string slqStr = @"INSERT INTO dbo.MOCTF (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TF001, TF002, TF003, TF012, 
                                         TF004, TF005, TF006, TF007, TF008, TF009, TF010, TF011, TF013, TF014, TF015, TF016) 
 			                    VALUES('{0}', '{1}','{2}', dbo.f_getTime(1), 1, '{3}', '{4}', LEFT(dbo.f_getTime(1), 8), LEFT(dbo.f_getTime(1), 8), 
                                         '01', '', 'N', 'N', 0, 'N', 'N', '{5}', '', 'N', 0, '{6}')";
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.company, headObj.creator, headObj.usr_group, headObj.tf001, headObj.tf002, headObj.tf011, headObj.tf016));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.company, headObj.creator, headObj.usr_group, headObj.tf001, headObj.tf002, headObj.tf011, headObj.tf016));
         }
 
         private void InsertDetail()
         {
-            string sqlstr = @"INSERT INTO dbo.MOCTG (COMPANY, CREATOR, CREATE_DATE, USR_GROUP, FLAG, TG001, TG002, TG003, TG004, TG005, TG006, TG007, TG009, TG010, TG011, TG013, TG014, TG015, TG016, TG017, TG020, 
+            string slqStr = @"INSERT INTO dbo.MOCTG (COMPANY, CREATOR, CREATE_DATE, USR_GROUP, FLAG, TG001, TG002, TG003, TG004, TG005, TG006, TG007, TG009, TG010, TG011, TG013, TG014, TG015, TG016, TG017, TG020, 
                                 TG022, TG023, TG024, TG031, TG035, TG036, TG037, TG038, TGC01)
                                 SELECT MOCTF.COMPANY, MOCTF.CREATOR, MOCTF.CREATE_DATE, MOCTF.USR_GROUP, MOCTF.FLAG, TF001, TF002, RIGHT('0000' + CONVERT(VARCHAR(20), ROW_NUMBER() Over (ORDER BY TH003)), 4) AS TG003, 
 	                                TH004 AS TG004, TH005 AS TG005, TH006 AS TG006, TH009 AS TG007, 1 AS TG009, TH007 AS TG010, TH008 AS TG011, TH008 AS TG013, TA001 AS TG014, TA002 AS TG015, '0' AS TG016, TH015 AS TG017, 
@@ -951,12 +950,12 @@ namespace HarveyZ
                                 WHERE 1=1
                                 AND COPTG.TG001 = '{0}' AND COPTG.TG002 = '{1}'";
 
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002, headObj.tf001, headObj.tf002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.tg001, headObj.tg002, headObj.tf001, headObj.tf002));
         }
 
         private void UpdateHeadSl()
         {
-            string sqlstr = @"UPDATE dbo.MOCTF SET TF023 = TF023S, TF024 = TF024S
+            string slqStr = @"UPDATE dbo.MOCTF SET TF023 = TF023S, TF024 = TF024S
                             FROM 
                             (SELECT TG001, TG002, SUM(TG011) AS TF023S, SUM(TG013) AS TF024S FROM dbo.MOCTG 
                             WHERE TG001 = '{0}' AND TG002 = '{1}'
@@ -964,13 +963,13 @@ namespace HarveyZ
                             ) AS A 
                             WHERE TG001 = TF001 AND TG002 = TF002";
 
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tf001, headObj.tf002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.tf001, headObj.tf002));
         }
 
         private void UpdateXhOutFlag()
         {
-            string sqlstr = @"UPDATE dbo.PrintData SET TF001 = '{1}', TF002 = '{2}', ScrkOutFlag = 1, ScrkOutDate = getdate() WHERE PrintId = '{0}' ";
-            mssql.SQLexcute(connMD, string.Format(sqlstr, headObj.printId, headObj.tf001, headObj.tf002));
+            string slqStr = @"UPDATE dbo.PrintData SET TF001 = '{1}', TF002 = '{2}', ScrkOutFlag = 1, ScrkOutDate = getdate() WHERE PrintId = '{0}' ";
+            mssql.SQLexcute(connMD, string.Format(slqStr, headObj.printId, headObj.tf001, headObj.tf002));
         }
         #endregion
     }
@@ -1088,8 +1087,8 @@ namespace HarveyZ
         #region 业务逻辑
         private void GetPrintId()
         {
-            string sqlstr = @"SELECT TOP 1 PrintId, TG001, TG004 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 0 ORDER BY Create_Date ";
-            DataTable dt = mssql.SQLselect(connMD, sqlstr);
+            string slqStr = @"SELECT TOP 1 PrintId, TG001, TG004 FROM ROBOT_TEST.dbo.PrintData WHERE STATUSS = 0 AND XhOutFlag = 0 ORDER BY Create_Date ";
+            DataTable dt = mssql.SQLselect(connMD, slqStr);
             if (dt != null)
             {
                 if (dt.Rows[0]["TG004"].ToString() != "")
@@ -1115,8 +1114,8 @@ namespace HarveyZ
 
         private void GetUsrGroup()
         {
-            string sqlstr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
-            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.creator));
+            string slqStr = @"SELECT isnull(RTRIM(MF004), '') FROM dbo.ADMMF WHERE MF001 = '{0}' ";
+            DataTable dt = mssql.SQLselect(connYF, string.Format(slqStr, headObj.creator));
             if (dt != null)
             {
                 headObj.usr_group = dt.Rows[0][0].ToString();
@@ -1129,23 +1128,23 @@ namespace HarveyZ
 
         private void GetTg002()
         {
-            string sqlstr = @"exec P_GETDH '{0}'";
-            headObj.tg002 = mssql.SQLselect(connYF, string.Format(sqlstr, headObj.tg001)).Rows[0][0].ToString();
+            string slqStr = @"exec P_GETDH '{0}'";
+            headObj.tg002 = mssql.SQLselect(connYF, string.Format(slqStr, headObj.tg001)).Rows[0][0].ToString();
         }
 
         private void InsertHead()
         {
-            string sqlstr = @"INSERT INTO COMFORT.dbo.COPTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG042) 
+            string slqStr = @"INSERT INTO COMFORT.dbo.COPTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG042) 
 			                    VALUES('{0}', '{1}','{2}', dbo.f_getTime(1), 1, '{3}', '{4}', LEFT(dbo.f_getTime(1), 8), LEFT(dbo.f_getTime(1), 8))";
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
         }
 
         private void UpdateHead()
         {
-            string sqlstr1 = @"UPDATE dbo.COPTG SET TG010 = '01', TG020 = '', TG022 = 0, TG023 = 'N', 
+            string slqStr1 = @"UPDATE dbo.COPTG SET TG010 = '01', TG020 = '', TG022 = 0, TG023 = 'N', 
 			                    TG024 = 'N', TG031 = 'N', TG036 = 'N', TG037 = 'N' 
 			                    WHERE TG001 = '{0}' AND TG002 = '{1}'";
-            string sqlstr2 = @"UPDATE dbo.COPTG SET TG004 = MA001, TG005 = MA015, TG006 = MA016, 
+            string slqStr2 = @"UPDATE dbo.COPTG SET TG004 = MA001, TG005 = MA015, TG006 = MA016, 
 			                    TG008 = MA027, 
 			                    TG009 = MA064, 
 			                    TG011 = MA014, 
@@ -1166,24 +1165,24 @@ namespace HarveyZ
 				                    WHERE COPMAC.MA001 = '{2}'
 			                    ) AS COPMA
 			                    WHERE TG001 = '{0}' AND TG002 ='{1}' ";
-            string sqlstr3 = @"UPDATE dbo.COPTG SET TG044 =(CASE WHEN TG017 IN ('3','4','9') THEN 0 ELSE ISNULL(MA004, 0) END) FROM dbo.COPTG 
+            string slqStr3 = @"UPDATE dbo.COPTG SET TG044 =(CASE WHEN TG017 IN ('3','4','9') THEN 0 ELSE ISNULL(MA004, 0) END) FROM dbo.COPTG 
                                 LEFT JOIN dbo.CMSMA ON CMSMA.COMPANY ='{2}' WHERE TG001 = '{0}' AND TG002 = '{1}' ";
 
-            mssql.SQLexcute(connYF, string.Format(sqlstr1, headObj.tg001, headObj.tg002));
-            mssql.SQLexcute(connYF, string.Format(sqlstr2, headObj.tg001, headObj.tg002, headObj.tg004));
-            mssql.SQLexcute(connYF, string.Format(sqlstr3, headObj.tg001, headObj.tg002, headObj.company));
+            mssql.SQLexcute(connYF, string.Format(slqStr1, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr2, headObj.tg001, headObj.tg002, headObj.tg004));
+            mssql.SQLexcute(connYF, string.Format(slqStr3, headObj.tg001, headObj.tg002, headObj.company));
         }
 
         private void InsertDetail()
         {
-            string sqlstr = @"INSERT INTO dbo.COPTH (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TH001, TH002, TH003, TH008, TH014, TH015, TH016)
+            string slqStr = @"INSERT INTO dbo.COPTH (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TH001, TH002, TH003, TH008, TH014, TH015, TH016)
 			SELECT '{1}' AS COMPANY, '{2}' AS CREATOR, '{3}' AS USR_GROUP, dbo.f_getTime(1) AS CREATE_DATE, 1 AS FLAG, 
 			'{4}' AS TH001, '{5}' AS TH002, RIGHT('00000' + CONVERT(VARCHAR(20), ROW_NUMBER() Over (ORDER BY SC001)), 4) AS TH003, TH008, TH014, TH015, TH016
 			FROM (SELECT SC001, SUBSTRING(SC001, 1, 4) AS TH014, 
 			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), 1, CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) - 1) AS TH015, 
 			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), (CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) + 1), LEN(SUBSTRING(SC001, 6, LEN(SC001)))) AS TH016, 
 			COUNT(SC001) AS TH008
-			FROM [192.168.0.198].ROBOT_TEST.dbo.PdData AS PdData
+			FROM [192.168.0.198].ROBOT_TEST.dbo.PdData_BAK AS PdData
 			WHERE PrintId = '{0}'
 			AND Pd_Sta = 'OK'
 			GROUP BY SC001, SUBSTRING(SC001, 1, 4), 
@@ -1191,12 +1190,12 @@ namespace HarveyZ
 			SUBSTRING(SUBSTRING(SC001, 6, LEN(SC001)), (CHARINDEX('-', SUBSTRING(SC001, 6, LEN(SC001))) + 1), LEN(SUBSTRING(SC001, 6, LEN(SC001)))) 
 			) AS PdData2";
 
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.printId, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.printId, headObj.company, headObj.creator, headObj.usr_group, headObj.tg001, headObj.tg002));
         }
 
         private void UpdateDetail()
         {
-            string sqlstr = @"UPDATE dbo.COPTH SET 
+            string slqStr = @"UPDATE dbo.COPTH SET 
 			                    COPTH.CREATE_DATE = COPTG.CREATE_DATE,
 			                    TH004 = TD004, 
 			                    TH005 = TD005, 
@@ -1231,12 +1230,12 @@ namespace HarveyZ
 			                    LEFT JOIN dbo.COPTQ AS COPTQ ON TQ001 = TD004 AND TQ002 = TD053
 			                    WHERE 1=1
 			                    AND TH001 = '{0}' AND TH002 = '{1}' ";
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.tg001, headObj.tg002));
         }
 
         private void UpdateDetailMoney()
         {
-            string sqlstr = @"UPDATE dbo.COPTH SET 
+            string slqStr = @"UPDATE dbo.COPTH SET 
 			                    TH013 = TH013C, 
 			                    TH035 = TH035C, 
 			                    TH036 = TH036C, 
@@ -1269,12 +1268,12 @@ namespace HarveyZ
 				                    WHERE TG001 = '{0}' AND TG002 = '{1}'
 			                    ) AS A0
 			                    WHERE TH001 = TG001C AND TH002 = TG002C AND TH003 = TH003C ";
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.tg001, headObj.tg002));
         }
 
         private void UpdateHeadMoney()
         {
-            string sqlstr = @"UPDATE dbo.COPTG SET 
+            string slqStr = @"UPDATE dbo.COPTG SET 
 			                    TG033 = TG033S, 
 			                    TG045 = TG045S, 
 			                    TG013 = TG013S, 
@@ -1287,13 +1286,13 @@ namespace HarveyZ
 			                    ) AS A 
 			                    WHERE TG001 = TH001 AND TG002 = TH002";
 
-            mssql.SQLexcute(connYF, string.Format(sqlstr, headObj.tg001, headObj.tg002));
+            mssql.SQLexcute(connYF, string.Format(slqStr, headObj.tg001, headObj.tg002));
         }
 
         private void UpdateXhOutFlag()
         {
-            string sqlstr = @"UPDATE dbo.PrintData SET TG001 = '{1}', TG002 = '{2}', XhOutFlag = 1, XhOutDate = getdate() WHERE PrintId = '{0}' ";
-            mssql.SQLexcute(connMD, string.Format(sqlstr, headObj.printId, headObj.tg001, headObj.tg002));
+            string slqStr = @"UPDATE dbo.PrintData SET TG001 = '{1}', TG002 = '{2}', XhOutFlag = 1, XhOutDate = getdate() WHERE PrintId = '{0}' ";
+            mssql.SQLexcute(connMD, string.Format(slqStr, headObj.printId, headObj.tg001, headObj.tg002));
         }
         #endregion
     }

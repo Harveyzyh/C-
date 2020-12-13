@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using HarveyZ;
 using System.Collections;
 
-namespace 联友生产辅助工具.生管码垛线
+namespace HarveyZ.生管码垛线
 {
     public partial class 订单类别编码管理 : Form
     {
@@ -65,9 +65,9 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void ShowTypeSplitCode()
         {
-            //string sqlstr = @"SELECT K_ID 序号, PO_Class 订单类别, PO_Type 描述备注, TypeCode 类别代码, Valid 有效码 FROM SplitTypeCode ORDER BY K_ID ";
-            string sqlstr = @"Select InType 订单单别, InTypeName 订单单别名称, OutType 销货单别, OutTypeName 销货单别名称, SplitType 区分方式, Spec 描述备注, TypeCode 订单类别码, Remark 备注, PrintType 打印模板文件名 from SplitTypeCode";
-            showDt = mssql.SQLselect(connStrRobot, sqlstr);
+            //string slqStr = @"SELECT K_ID 序号, PO_Class 订单类别, PO_Type 描述备注, TypeCode 类别代码, Valid 有效码 FROM SplitTypeCode ORDER BY K_ID ";
+            string slqStr = @"Select InType 订单单别, InTypeName 订单单别名称, OutType 销货单别, OutTypeName 销货单别名称, SplitType 区分方式, Spec 描述备注, TypeCode 订单类别码, Remark 备注, PrintType 打印模板文件名 from SplitTypeCode";
+            showDt = mssql.SQLselect(connStrRobot, slqStr);
 
 
             DgvMain.DataSource = null;
@@ -100,14 +100,14 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            string sqlstr = @"UPDATE SplitTypeCode SET Valid = '{3}' WHERE PO_Class = '{0}' AND PO_Type = '{1}' AND TypeCode = '{2}' ";
+            string slqStr = @"UPDATE SplitTypeCode SET Valid = '{3}' WHERE PO_Class = '{0}' AND PO_Type = '{1}' AND TypeCode = '{2}' ";
             for(int rowIndex = 0; rowIndex < showDtTmp.Rows.Count; rowIndex++)
             {
                 for (int colIndex = 0; colIndex < showDtTmp.Columns.Count; colIndex++)
                 {
                     if(showDtTmp.Rows[rowIndex][colIndex].ToString() != DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString())
                     {
-                        mssql.SQLexcute(connStrRobot, string.Format(sqlstr, DgvMain.Rows[rowIndex].Cells[1].Value.ToString(),
+                        mssql.SQLexcute(connStrRobot, string.Format(slqStr, DgvMain.Rows[rowIndex].Cells[1].Value.ToString(),
                             DgvMain.Rows[rowIndex].Cells[2].Value.ToString(),
                             DgvMain.Rows[rowIndex].Cells[3].Value.ToString(), 
                             DgvMain.Rows[rowIndex].Cells[4].Value.ToString()).Replace("'True'", "1").Replace("'False'", "0"));

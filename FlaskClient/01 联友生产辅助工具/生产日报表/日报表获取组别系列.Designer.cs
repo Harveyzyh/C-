@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生产日报表
+﻿namespace HarveyZ.生产日报表
 {
     partial class 日报表获取组别系列
     {

@@ -95,8 +95,8 @@ namespace HarveyZ
         #region 添加用户
         public bool AddUser(string U_ID, string U_PWD, string DPT, string TYPE)
         {
-            string sqlstr = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', 'Y', '{4}') ";
-            mssql.SQLexcute(connWG, string.Format(sqlstr, U_ID, U_PWD, DPT, TYPE));
+            string slqStr = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', 'Y', '{4}') ";
+            mssql.SQLexcute(connWG, string.Format(slqStr, U_ID, U_PWD, DPT, TYPE));
             return false;
         }
         #endregion
@@ -105,14 +105,14 @@ namespace HarveyZ
         public bool ChangePwd(string U_ID, string OldPwd, string NewPwd, out string Msg)
         {
             Msg = null;
-            string sqlstrFind = @" SELECT U_PWD FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}'";
-            string sqlstrUpt = @" UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{}' WHERE U_ID = '{0}' ";
-            DataTable dt = mssql.SQLselect(connWG, string.Format(sqlstrFind, U_ID));
+            string slqStrFind = @" SELECT U_PWD FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}'";
+            string slqStrUpt = @" UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{}' WHERE U_ID = '{0}' ";
+            DataTable dt = mssql.SQLselect(connWG, string.Format(slqStrFind, U_ID));
             if(dt != null)
             {
                 if(dt.Rows[0][0].ToString() == OldPwd)
                 {
-                    mssql.SQLexcute(connWG, string.Format(sqlstrUpt, U_ID, NewPwd));
+                    mssql.SQLexcute(connWG, string.Format(slqStrUpt, U_ID, NewPwd));
                     return true;
                 }
                 else
@@ -256,8 +256,8 @@ namespace HarveyZ
 
         private void GetWgInf()
         {
-            string sqlstr = @"SELECT U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}'";
-            DataTable dt = mssql.SQLselect(connWG, string.Format(sqlstr, userObj.Uid, type));
+            string slqStr = @"SELECT U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}'";
+            DataTable dt = mssql.SQLselect(connWG, string.Format(slqStr, userObj.Uid, type));
             if (dt != null)
             {
                 userObj.WgExise = true;
@@ -276,14 +276,14 @@ namespace HarveyZ
         
         private void GetErpInf()
         {
-            string sqlstr = @" SELECT RTRIM(MA001) UID, ISNULL(RTRIM(MA002), '') NAME, ISNULL(RTRIM(ME002), '') DPT, 
+            string slqStr = @" SELECT RTRIM(MA001) UID, ISNULL(RTRIM(MA002), '') NAME, ISNULL(RTRIM(ME002), '') DPT, 
                                 RTRIM(MA003) ERPPWD, RTRIM(MA005) ERPVALID, ISNULL(RTRIM(MF004), '') USR_GROUP 
                                 FROM DSCSYS.dbo.DSCMA AS DSCMA 
                                 LEFT JOIN CMSMV ON MV001 = MA001 
                                 LEFT JOIN CMSME ON ME001 = MV004 
                                 LEFT JOIN ADMMF ON MF001 = MA001
                                 WHERE MA001 = '{0}'";
-            DataTable dt = mssql.SQLselect(connYF, string.Format(sqlstr, userObj.Uid));
+            DataTable dt = mssql.SQLselect(connYF, string.Format(slqStr, userObj.Uid));
             if (dt != null)
             {
                 userObj.ErpExist = true;
@@ -327,15 +327,15 @@ namespace HarveyZ
         private void InsertWgInf()
         {
             userObj.ErpPwd = userObj.ErpPwd.Replace("'", "''");
-            string sqlstr = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', 'Y', 'ERP') ";
-            mssql.SQLexcute(connWG, string.Format(sqlstr, userObjRtn.Uid, userObjRtn.Name, userObjRtn.Pwd, userObj.ErpPwd, userObjRtn.Dpt));
+            string slqStr = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', 'Y', 'ERP') ";
+            mssql.SQLexcute(connWG, string.Format(slqStr, userObjRtn.Uid, userObjRtn.Name, userObjRtn.Pwd, userObj.ErpPwd, userObjRtn.Dpt));
         }
 
         private void UpdateWgInf()
         {
             userObj.ErpPwd = userObj.ErpPwd.Replace("'", "''");
-            string sqlstr = @"UPDATE WG_DB.dbo.WG_USER SET U_NAME = '{1}', U_PWD = '{2}', ERP_PWD = '{3}', DPT = '{4}', FLAG = 'Y' WHERE U_ID = '{0}'";
-            mssql.SQLexcute(connWG, string.Format(sqlstr, userObjRtn.Uid, userObjRtn.Name, userObjRtn.Pwd, userObj.ErpPwd, userObjRtn.Dpt));
+            string slqStr = @"UPDATE WG_DB.dbo.WG_USER SET U_NAME = '{1}', U_PWD = '{2}', ERP_PWD = '{3}', DPT = '{4}', FLAG = 'Y' WHERE U_ID = '{0}'";
+            mssql.SQLexcute(connWG, string.Format(slqStr, userObjRtn.Uid, userObjRtn.Name, userObjRtn.Pwd, userObj.ErpPwd, userObjRtn.Dpt));
         }
 
         private void GetPermission()
@@ -347,9 +347,9 @@ namespace HarveyZ
         #region 获取所有用户信息
         public DataTable GetUserInfo()
         {
-            string sqlstr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 
+            string slqStr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 
                                 FROM WG_USER WHERE TYPE = 'ERP' ORDER BY U_ID ";
-            return mssql.SQLselect(connWG, sqlstr);
+            return mssql.SQLselect(connWG, slqStr);
         }
         #endregion
 
@@ -358,8 +358,8 @@ namespace HarveyZ
         {
             try
             {
-                string sqlstr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' AND TYPE = 'ERP'";
-                mssql.SQLexcute(connWG, string.Format(sqlstr, U_id));
+                string slqStr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' AND TYPE = 'ERP'";
+                mssql.SQLexcute(connWG, string.Format(slqStr, U_id));
                 return true;
             }
             catch
@@ -446,12 +446,12 @@ namespace HarveyZ
         public bool AddUser(string U_ID, string U_NAME, string U_PWD, string DPT, out string msg)
         {
             msg = "";
-            string sqlstrSelect = @"SELECT U_ID FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}' ";
-            string sqlstrIns = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', 'Y', '{4}') ";
+            string slqStrSelect = @"SELECT U_ID FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}' ";
+            string slqStrIns = @"INSERT INTO WG_DB.dbo.WG_USER (U_ID, U_NAME, U_PWD, DPT, FLAG, TYPE) VALUES('{0}', '{1}', '{2}', '{3}', 'Y', '{4}') ";
 
-            if (!mssql.SQLexist(conn, string.Format(sqlstrSelect, U_ID, type)))
+            if (!mssql.SQLexist(conn, string.Format(slqStrSelect, U_ID, type)))
             {
-                mssql.SQLexcute(conn, string.Format(sqlstrIns, U_ID, U_NAME, CEncrypt.GetMd5Str(U_PWD), DPT, type));
+                mssql.SQLexcute(conn, string.Format(slqStrIns, U_ID, U_NAME, CEncrypt.GetMd5Str(U_PWD), DPT, type));
                 return true;
             }
             else
@@ -467,14 +467,14 @@ namespace HarveyZ
         public bool ChangePwd(string U_ID, string OldPwd, string NewPwd, out string Msg)
         {
             Msg = null;
-            string sqlstrFind = @" SELECT U_PWD FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}'";
-            string sqlstrUpt = @" UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{1}' WHERE U_ID = '{0}' AND TYPE = '{2}'";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstrFind, U_ID, type));
+            string slqStrFind = @" SELECT U_PWD FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}'";
+            string slqStrUpt = @" UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{1}' WHERE U_ID = '{0}' AND TYPE = '{2}'";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStrFind, U_ID, type));
             if (dt != null)
             {
                 if (dt.Rows[0][0].ToString() == CEncrypt.GetMd5Str(OldPwd))
                 {
-                    mssql.SQLexcute(conn, string.Format(sqlstrUpt, U_ID, CEncrypt.GetMd5Str(NewPwd), type));
+                    mssql.SQLexcute(conn, string.Format(slqStrUpt, U_ID, CEncrypt.GetMd5Str(NewPwd), type));
                     return true;
                 }
                 else
@@ -494,9 +494,9 @@ namespace HarveyZ
         #region 获取所有用户信息
         public DataTable GetUserInfo()
         {
-            string sqlstr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 
+            string slqStr = @"SELECT U_ID 账号, U_NAME 用户名, DPT 部门, FLAG 不允许重置密码, TYPE 账号来源类型 
                                 FROM WG_USER WHERE TYPE = '{0}' ORDER BY U_ID ";
-            return mssql.SQLselect(conn, string.Format(sqlstr, type));
+            return mssql.SQLselect(conn, string.Format(slqStr, type));
         }
         #endregion
 
@@ -505,8 +505,8 @@ namespace HarveyZ
         {
             try
             {
-                string sqlstr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' AND TYPE = '{1}'";
-                mssql.SQLexcute(conn, string.Format(sqlstr, U_id, type));
+                string slqStr = @"UPDATE WG_USER SET FLAG = 'N' WHERE U_ID = '{0}' AND TYPE = '{1}'";
+                mssql.SQLexcute(conn, string.Format(slqStr, U_id, type));
                 return true;
             }
             catch
@@ -567,8 +567,8 @@ namespace HarveyZ
 
         private void GetWgInf()
         {
-            string sqlstr = @"SELECT U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}' ";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, userObj.Uid, type));
+            string slqStr = @"SELECT U_ID, U_NAME, U_PWD, ERP_PWD, DPT, FLAG, TYPE FROM WG_DB.dbo.WG_USER WHERE U_ID = '{0}' AND TYPE = '{1}' ";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, userObj.Uid, type));
             if (dt != null)
             {
                 userObj.WgExise = true;
@@ -592,8 +592,8 @@ namespace HarveyZ
 
         private void UpdateWgInf()
         {
-            string sqlstr = @"UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{1}', FLAG = 'Y' WHERE U_ID = '{0}'";
-            mssql.SQLexcute(conn, string.Format(sqlstr, userObjRtn.Uid, userObjRtn.Pwd));
+            string slqStr = @"UPDATE WG_DB.dbo.WG_USER SET U_PWD = '{1}', FLAG = 'Y' WHERE U_ID = '{0}'";
+            mssql.SQLexcute(conn, string.Format(slqStr, userObjRtn.Uid, userObjRtn.Pwd));
         }
 
         private void GetPermission()

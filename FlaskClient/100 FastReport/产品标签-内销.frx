@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" TextQuality="Regular" ReportInfo.Description="Demonstrates how to use the Table object. Notes:&#13;&#10;- to set the number of columns and rows, use &quot;ColumnCount&quot; and &quot;RowCount&quot; properties. Also you can add new columns/rows from the column/row context menu;&#13;&#10;- to join/split cells, use the context menu of a cell;&#13;&#10;- to set the column/row autosize, use the context menu of a column/row." ReportInfo.Created="01/17/2008 17:08:04" ReportInfo.Modified="11/03/2020 22:58:20" ReportInfo.CreatorVersion="2019.3.5.0">
+  <Styles Name="Standard">
+    <Style Name="Title" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Header" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Group" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Data" Font="Arial, 10pt"/>
+    <Style Name="Footer" Font="Arial, 10pt"/>
+    <Style Name="EvenRows" Fill.Color="WhiteSmoke" Font="Arial, 10pt"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Dict" ReferenceName="Data.Dict" DataType="System.Int32" Enabled="true">
+      <Column Name="备注" DataType="System.String" PropName="Column"/>
+      <Column Name="品号" DataType="System.String" PropName="Column"/>
+      <Column Name="产品名称" DataType="System.String" PropName="Column"/>
+      <Column Name="单号" DataType="System.String" PropName="Column"/>
+      <Column Name="电商代码" DataType="System.String" PropName="Column"/>
+      <Column Name="检验日期" DataType="System.String" PropName="Column"/>
+      <Column Name="净重" DataType="System.String" PropName="Column"/>
+      <Column Name="客户编号" DataType="System.String" PropName="Column"/>
+      <Column Name="毛重" DataType="System.String" PropName="Column"/>
+      <Column Name="商品代码" DataType="System.String" PropName="Column"/>
+      <Column Name="序号" DataType="System.String" PropName="Column"/>
+      <Column Name="颜色" DataType="System.String" PropName="Column"/>
+      <Column Name="纸箱尺寸" DataType="System.String" PropName="Column"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15" Columns.Count="3" Columns.Width="99" Columns.Positions="0,99,198" Watermark.Font="Arial, 60pt">
+    <DataBand Name="Data1" Width="374.22" Height="396.9" CanGrow="true" Guides="0" DataSource="Dict">
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="359.1" Height="378" Border.Lines="All" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Left="9.45" Top="9.45" Width="255.15" Height="47.25" Border.Lines="All" Text="产品贴标" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt, style=Bold"/>
+      <TextObject Name="Text3" Left="9.45" Top="56.7" Width="122.85" Height="56.7" Border.Lines="All" Text="客户编号" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt"/>
+      <TextObject Name="Text4" Left="9.45" Top="113.4" Width="122.85" Height="47.25" Border.Lines="All" Text="单号" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt"/>
+      <TextObject Name="Text5" Left="9.45" Top="160.65" Width="122.85" Height="47.25" Border.Lines="All" Text="名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt"/>
+      <TextObject Name="Text6" Left="9.45" Top="207.9" Width="122.85" Height="47.25" Border.Lines="All" Text="颜色" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt"/>
+      <TextObject Name="Text7" Left="9.45" Top="255.15" Width="122.85" Height="47.25" Border.Lines="All" Text="检验员/日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text8" Left="9.45" Top="302.4" Width="122.85" Height="85.05" Border.Lines="All" Text="备注[Dict.序号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text9" Left="132.3" Top="56.7" Width="132.3" Height="56.7" Border.Lines="All" Text="[Dict.客户编号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text10" Left="132.3" Top="113.4" Width="236.25" Height="47.25" Border.Lines="All" Text="【[Dict.单号]】" HorzAlign="Center" VertAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text11" Left="132.3" Top="160.65" Width="236.25" Height="47.25" Border.Lines="All" Text="[Dict.产品名称]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text12" Left="-9450" Top="-9450" Width="236.25" Height="56.7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text13" Left="132.3" Top="207.9" Width="236.25" Height="47.25" Border.Lines="All" Text="[Dict.颜色]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text14" Left="132.3" Top="255.15" Width="236.25" Height="47.25" Border.Lines="All" Text="[Dict.检验日期]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <TextObject Name="Text15" Left="132.3" Top="302.4" Width="236.25" Height="85.05" Border.Lines="All" Text="[Dict.备注]" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt"/>
+      <BarcodeObject Name="Barcode1" Left="264.6" Top="18.9" Width="106.55" Height="97.1" CanGrow="true" AutoSize="false" Expression="[Dict.单号]+'/'+[Dict.品号]" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </DataBand>
+  </ReportPage>
+</Report>

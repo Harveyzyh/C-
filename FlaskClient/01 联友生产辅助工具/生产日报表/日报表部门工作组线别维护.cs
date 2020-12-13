@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表部门工作组线别维护 : Form
     {
@@ -79,31 +79,31 @@ namespace 联友生产辅助工具.生产日报表
         #region 逻辑处理
         private void ButtonReflash_Work()
         {
-            string sqlstr_insert = " INSERT INTO dbo.SC_DRY_LineList (Dpt, WGroup, Serial, Line) "
+            string slqStr_insert = " INSERT INTO dbo.SC_DRY_LineList (Dpt, WGroup, Serial, Line) "
                           + " SELECT A.Dpt, B.WGroup, B.Serial, A.Line "
                           + " FROM dbo.SC_DRY_Dpt2Line AS A "
                           + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON B.Valid = 1 "
                           + " AND A.Valid = 1 "
                           + " AND NOT EXISTS(SELECT 1 FROM dbo.SC_DRY_LineList AS C WHERE C.[Dpt] = A.[Dpt] "
                           + " AND C.[WGroup] = B.[WGroup] AND C.[Serial] = B.[Serial] AND C.[Line] = A.[Line])";
-            mssql.SQLexcute(strConnection, sqlstr_insert);
+            mssql.SQLexcute(strConnection, slqStr_insert);
 
 
-            string sqlstr_select = "";
+            string slqStr_select = "";
             if (FormLogin.infObj.userDpt.Substring(0, 2) == "生产")
             {
-                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
+                slqStr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
                               + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND B.Valid = 1 "
                               + " WHERE 1 = 1 "
                               + " AND Dpt = '" + FormLogin.infObj.userDpt + "' ";
             }
             else
             {
-                sqlstr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
+                slqStr_select = " SELECT A.Dpt 生产部门, A.WGroup 工作组, A.Serial 系列, A.Line 线别, A.Valid 有效码 FROM dbo.SC_DRY_LineList AS A "
                               + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON A.WGroup = B.WGroup AND A.Serial = B.Serial AND B.Valid = 1 ";
             }
             
-            DataTable dt = mssql.SQLselect(strConnection, sqlstr_select);
+            DataTable dt = mssql.SQLselect(strConnection, slqStr_select);
             DgvMain.DataSource = null;
             if (dt != null)
             {
@@ -121,8 +121,8 @@ namespace 联友生产辅助工具.生产日报表
         private void ButtonSave_Work()
         {
             string boolStr = "";
-            string sqlstr_update = "";
-            string sqlstr_update_tmp = " UPDATE dbo.SC_DRY_LineList SET Valid = {4} WHERE Dpt = '{0}' AND WGroup = '{1}' AND Serial = '{2}' AND Line = '{3}'; ";
+            string slqStr_update = "";
+            string slqStr_update_tmp = " UPDATE dbo.SC_DRY_LineList SET Valid = {4} WHERE Dpt = '{0}' AND WGroup = '{1}' AND Serial = '{2}' AND Line = '{3}'; ";
 
             for (int rowIndex = 0;rowIndex < DgvMain.RowCount; rowIndex++)
             {
@@ -130,12 +130,12 @@ namespace 联友生产辅助工具.生产日报表
                 if (DgvMain.Rows[rowIndex].Cells[4].Value.ToString() == "True") boolStr = "1";
                 else if (DgvMain.Rows[rowIndex].Cells[4].Value.ToString() == "False") boolStr = "0";
 
-                sqlstr_update += string.Format(sqlstr_update_tmp, DgvMain.Rows[rowIndex].Cells[0].Value.ToString(),
+                slqStr_update += string.Format(slqStr_update_tmp, DgvMain.Rows[rowIndex].Cells[0].Value.ToString(),
                 DgvMain.Rows[rowIndex].Cells[1].Value.ToString(), DgvMain.Rows[rowIndex].Cells[2].Value.ToString(),
                 DgvMain.Rows[rowIndex].Cells[3].Value.ToString(), boolStr);
 
             }
-            mssql.SQLexcute(strConnection, sqlstr_update);
+            mssql.SQLexcute(strConnection, slqStr_update);
             MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK);
             ButtonReflash_Work();
         }

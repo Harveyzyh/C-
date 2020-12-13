@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using HarveyZ;
 using System.Collections.Generic;
 
-namespace 联友生产辅助工具.生管码垛线
+namespace HarveyZ.生管码垛线
 {
     public partial class 码垛线客户端 : Form
     {
@@ -125,7 +125,7 @@ namespace 联友生产辅助工具.生管码垛线
             {
                 dgv_Main.DataSource = null;
             }
-            string sqlstr = "SELECT SC.SC001 订单号, SC003 上线日期, "
+            string slqStr = "SELECT SC.SC001 订单号, SC003 上线日期, "
                             + "SC010 品名, SC013 数量, SC036 纸箱编码, SC040 纸箱尺寸, "
                             + "SC037 订单编码, '' 订单类别, MD_No 栈板号, ISNULL(PDCOUNT, 0) 已过机数量, "
                             + "(CASE SC033 WHEN '1' THEN 'Y' ELSE 'N'END ) 已完成, PD2.MIXDATE 最早过机时间, PD2.MAXDATE 最迟过机时间 "
@@ -142,24 +142,24 @@ namespace 联友生产辅助工具.生管码垛线
 
             if (TestFlag)
             {
-                sqlstr += "AND SC.SC039 = 'Y' ";
+                slqStr += "AND SC.SC039 = 'Y' ";
             }
             else
             {
                 if (FindFlag)
                 {
-                    sqlstr += "AND SC.SC001 LIKE '%" + FindStr.Trim() + "%' ";
+                    slqStr += "AND SC.SC001 LIKE '%" + FindStr.Trim() + "%' ";
                     FindStr = "";
                 }
                 else
                 {
-                    sqlstr += "AND SC.SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + "' AND SC.SC039 != 'Y' ";
+                    slqStr += "AND SC.SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + "' AND SC.SC039 != 'Y' ";
                 }
             }
 
-            sqlstr += "ORDER BY KEY_ID ";
+            slqStr += "ORDER BY KEY_ID ";
 
-            Main_dt = mssql.SQLselect(connMD, sqlstr);
+            Main_dt = mssql.SQLselect(connMD, slqStr);
 
             if (Main_dt != null)
             {
@@ -207,13 +207,13 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void Save_Test()
         {
-            string sqlstr = "UPDATE SCHEDULE SET SC013 = '{1}', SC010 = '{2}', SC036 = '{3}', SC037 = '{4}', SC040 = '{5}' WHERE SC001 = '{0}'";
+            string slqStr = "UPDATE SCHEDULE SET SC013 = '{1}', SC010 = '{2}', SC036 = '{3}', SC037 = '{4}', SC040 = '{5}' WHERE SC001 = '{0}'";
             string sql_tmp = null;
             int Count = Main_dt.Rows.Count;
             int Index = 0;
             for (Index = 0; Index < Count; Index++)
             {
-                sql_tmp = string.Format(sqlstr, Main_dt.Rows[Index]["订单号"], Main_dt.Rows[Index]["数量"], Main_dt.Rows[Index]["品名"], Main_dt.Rows[Index]["纸箱编码"], Main_dt.Rows[Index]["订单编码"], Main_dt.Rows[Index]["纸箱尺寸"]);
+                sql_tmp = string.Format(slqStr, Main_dt.Rows[Index]["订单号"], Main_dt.Rows[Index]["数量"], Main_dt.Rows[Index]["品名"], Main_dt.Rows[Index]["纸箱编码"], Main_dt.Rows[Index]["订单编码"], Main_dt.Rows[Index]["纸箱尺寸"]);
                 mssql.SQLexcute(connMD, sql_tmp);
             }
             MessageBox.Show("已保存！", "提示");
@@ -253,10 +253,10 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void btn_Test_Reset_Click(object sender, EventArgs e)
         {
-            string sqlstr1 = "DELETE FROM PdData WHERE SC001 IN(SELECT SC001 FROM SCHEDULE WHERE SC039 = 'Y')";
-            string sqlstr2 = "UPDATE SCHEDULE SET SC033 = 0, SC003 = CONVERT(VARCHAR(20), GETDATE(), 112) WHERE SC039 = 'Y'";
-            mssql.SQLexcute(connMD, sqlstr1);
-            mssql.SQLexcute(connMD, sqlstr2);
+            string slqStr1 = "DELETE FROM PdData WHERE SC001 IN(SELECT SC001 FROM SCHEDULE WHERE SC039 = 'Y')";
+            string slqStr2 = "UPDATE SCHEDULE SET SC033 = 0, SC003 = CONVERT(VARCHAR(20), GETDATE(), 112) WHERE SC039 = 'Y'";
+            mssql.SQLexcute(connMD, slqStr1);
+            mssql.SQLexcute(connMD, slqStr2);
             MessageBox.Show("订单信息已重置", "成功");
             Dgv_Show();
         }

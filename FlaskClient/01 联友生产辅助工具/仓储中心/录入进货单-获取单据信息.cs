@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.仓储中心
+namespace HarveyZ.仓储中心
 {
     public partial class 录入进货单_获取单据信息 : Form
     {
@@ -15,8 +15,8 @@ namespace 联友生产辅助工具.仓储中心
         private string Title = "";
         private string Mode = "";
 
-        public string GetMain = "";
-        public string GetOther = "";
+        public string GetMain = null;
+        public string GetOther = null;
 
         public 录入进货单_获取单据信息(string conn, string title, string mode)
         {
@@ -74,13 +74,13 @@ namespace 联友生产辅助工具.仓储中心
         private void GetTypeID()
         {
             dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MQ001) 单别, RTRIM(MQ002) 单据名称, RTRIM(MQ019) 核对采购 "
+            string slqStr = ("SELECT RTRIM(MQ001) 单别, RTRIM(MQ002) 单据名称, RTRIM(MQ019) 核对采购 "
                             + "FROM CMSMQ "
                             + "WHERE 1=1 "
                             + "AND MQ003 = '34' AND MQ004 = '2'"
                             + "AND MQ001 LIKE '%{0}%' "
                             + "ORDER BY MQ001 ");
-            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(slqStr, textBox1.Text.Trim()));
             if(dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -92,10 +92,10 @@ namespace 联友生产辅助工具.仓储中心
         private void GetSupplierID()
         {
             dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MA001) 供应商编号, RTRIM(MA002) 简称 FROM COMFORT..PURMA "
+            string slqStr = ("SELECT RTRIM(MA001) 供应商编号, RTRIM(MA002) 简称 FROM COMFORT..PURMA "
                             + "WHERE MA001 LIKE '%{0}%' "
                             + "ORDER BY MA001 ");
-            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(slqStr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;
@@ -107,11 +107,11 @@ namespace 联友生产辅助工具.仓储中心
         private void GetPositionID()
         {
             dataGridView1.DataSource = null;
-            string sqlstr = ("SELECT RTRIM(MC001) 仓库编号, RTRIM(MC002) 仓库名称, RTRIM(MC003) 工厂编号 "
+            string slqStr = ("SELECT RTRIM(MC001) 仓库编号, RTRIM(MC002) 仓库名称, RTRIM(MC003) 工厂编号 "
                             + "FROM COMFORT..CMSMC "
                             + "WHERE MC001 LIKE '%{0}%' "
                             + "ORDER BY LEN(MC001) DESC, MC001");
-            dt = mssql.SQLselect(connYF, string.Format(sqlstr, textBox1.Text.Trim()));
+            dt = mssql.SQLselect(connYF, string.Format(slqStr, textBox1.Text.Trim()));
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;

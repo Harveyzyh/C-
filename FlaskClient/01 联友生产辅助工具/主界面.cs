@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using 联友生产辅助工具.仓储中心;
-using 联友生产辅助工具.生产日报表;
-using 联友生产辅助工具.生管码垛线;
-using 联友生产辅助工具.生管排程;
-using 联友生产辅助工具.报表;
+using HarveyZ.仓储中心;
+using HarveyZ.生产日报表;
+using HarveyZ.生管码垛线;
+using HarveyZ.生管排程;
+using HarveyZ.品管;
+using HarveyZ.财务;
+using HarveyZ.采购;
+using HarveyZ.报表;
+using HarveyZ.维护ERP;
 
 namespace HarveyZ
 {
@@ -64,11 +66,12 @@ namespace HarveyZ
             SetTestPermission();
         }
 
+        // 测试账户才会显示的菜单
         private void SetTestPermission()
         {
             if (FormLogin.infObj.userId != "001114")
             {
-                ERPToolStripMenuItem.Visible = false;
+
             }
         }
 
@@ -208,7 +211,7 @@ namespace HarveyZ
                 frm.WindowState = FormWindowState.Minimized;
                 frm.WindowState = FormWindowState.Maximized;
             }
-            
+
             statusLabelLocalConn.Width = 150;
             statusLabelLocalConn.TextAlign = ContentAlignment.MiddleCenter;
             statusLabelIP.Width = 180;
@@ -298,11 +301,21 @@ namespace HarveyZ
             frm.Show();
         }
 
-        private void 管理_FastReport模板发布ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 管理_版本发布ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FastReport模板发布 frm = new FastReport模板发布("管理_FastReport模板发布");
+            版本发布 frm = new 版本发布("管理_版本发布");
             FormOpenInit(frm);
             frm.Show();
+        }
+
+        private void 管理_FastReport模板发布ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                FastReport模板发布 frm = new FastReport模板发布("管理_FastReport模板发布");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
         #endregion
 
@@ -321,39 +334,34 @@ namespace HarveyZ
             frm.Show();
         }
 
-        private void 仓储中心_录入进货单采购平台ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            录入进货单_采购平台 frm = new 录入进货单_采购平台("仓储中心_录入进货单采购平台");
-            FormOpenInit(frm);
-            frm.Show();
-        }
-
-        private void 仓储中心_录入进货单联友分公司ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            录入进货单_联友分公司 frm = new 录入进货单_联友分公司("仓储中心_录入进货单联友分公司");
-            FormOpenInit(frm);
-            frm.Show();
-        }
-
         private void 仓储中心_录入进货单Excel导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入进货单_Excel导入 frm = new 录入进货单_Excel导入("仓储中心_录入进货单Excel导入");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                录入进货单_Excel导入 frm = new 录入进货单_Excel导入("仓储中心_录入进货单Excel导入");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 仓储中心_录入退货单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            录入退货单 frm = new 录入退货单("仓储中心_录入退货单");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                录入退货单 frm = new 录入退货单("仓储中心_录入退货单");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 仓储中心_生成领料单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            生成领料单 frm = new 生成领料单("仓储中心_生成领料单");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                生成领料单 frm = new 生成领料单("仓储中心_生成领料单");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
         #endregion
 
@@ -405,55 +413,83 @@ namespace HarveyZ
         #region 码垛线
         private void 码垛线_排程导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线排程导入 frm = new 码垛线排程导入("码垛线_排程导入");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                码垛线排程导入 frm = new 码垛线排程导入("码垛线_排程导入");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_纸箱编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            纸箱编码管理 frm = new 纸箱编码管理("码垛线_纸箱编码管理");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                纸箱编码管理 frm = new 纸箱编码管理("码垛线_纸箱编码管理");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_订单类别编码管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            订单类别编码管理 frm = new 订单类别编码管理("码垛线_订单类别编码管理");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                订单类别编码管理 frm = new 订单类别编码管理("码垛线_订单类别编码管理");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_纸箱名称管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            纸箱名称管理 frm = new 纸箱名称管理("码垛线_纸箱名称管理");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                纸箱名称管理 frm = new 纸箱名称管理("码垛线_纸箱名称管理");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_客户端ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线客户端 frm = new 码垛线客户端("码垛线_客户端");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                码垛线客户端 frm = new 码垛线客户端("码垛线_客户端");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_ERP单据生成ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线_ERP单据生成程序 frm = new 码垛线_ERP单据生成程序("码垛线_ERP单据生成");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                码垛线_ERP单据生成程序 frm = new 码垛线_ERP单据生成程序("码垛线_ERP单据生成");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 码垛线_码垛线报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            码垛线报表 frm = new 码垛线报表("码垛线_码垛线报表");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                码垛线报表 frm = new 码垛线报表("码垛线_码垛线报表");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
         #endregion
 
         #region 生产排程
+
+        private void 生管_生产排程部门管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            生产排程部门管理 frm = new 生产排程部门管理("生管_生产排程部门管理");
+            FormOpenInit(frm);
+            frm.Show();
+        }
         private void 生管_生产排程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             生产排程 frm = new 生产排程("生管_生产排程");
@@ -463,26 +499,119 @@ namespace HarveyZ
 
         private void 生管_订单信息查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            订单信息查询 frm = new 订单信息查询("生管_订单信息查询");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                订单信息查询 frm = new 订单信息查询("生管_订单信息查询");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
         private void 生管_未排订单查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            未排订单查询 frm = new 未排订单查询("生管_未排订单查询");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                未排订单查询 frm = new 未排订单查询("生管_未排订单查询");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
+
+        private void 生管_简易排程导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+
+            }
+        }
+
+        private void 生管_排程物料导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                排程物料导出_生产 frm = new 排程物料导出_生产("生管_排程物料导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 生管_自动LRP计划队列ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                自动LRP计划队列 frm = new 自动LRP计划队列("生管_自动LRP计划队列");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+        #endregion
+
+        #region 品管部
+        private void 品管部_成品标签打印ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                成品标签打印 frm = new 成品标签打印("品管部_成品标签打印");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+        #endregion
+
+        #region 采购
+        private void 采购_排程物料导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+
+            }
+        }
+
+        private void 采购_批量采购数量汇总ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                批量采购数量汇总 frm = new 批量采购数量汇总("采购_批量采购数量汇总");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        #endregion
+
+        #region 财务部
+        private void 财务部_成本异常报表导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                成本异常报表导出 frm = new 成本异常报表导出("财务部_成本异常报表导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
         #endregion
 
         #region 报表
         private void 报表_销货信息带入库部门ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            销货信息_带入库部门_查询 frm = new 销货信息_带入库部门_查询("报表_销货信息带入库部门");
+            if (FormLogin.StopModuleOpen())
+            {
+                销货信息_带入库部门_查询 frm = new 销货信息_带入库部门_查询("报表_销货信息带入库部门");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+        #endregion
+
+        #region ERP
+        private void ERP_客户配置维护_勾选项替换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            客户配置维护_勾选项替换 frm = new 客户配置维护_勾选项替换("客户配置维护_勾选项替换");
             FormOpenInit(frm);
             frm.Show();
         }
+
         #endregion
 
         #endregion

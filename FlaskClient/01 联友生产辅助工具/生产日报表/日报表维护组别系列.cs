@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.生产日报表
+namespace HarveyZ.生产日报表
 {
     public partial class 日报表维护组别系列 : Form
     {
@@ -55,9 +55,9 @@ namespace 联友生产辅助工具.生产日报表
         {
             getitem();
             
-            string sqlstr = "";
-            sqlstr = "SELECT WGroup AS 组别, Serial AS 系列, Valid AS 有效码 FROM dbo.SC_DRY_XL2GY ORDER BY Serial, K_ID DESC ";
-            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+            string slqStr = "";
+            slqStr = "SELECT WGroup AS 组别, Serial AS 系列, Valid AS 有效码 FROM dbo.SC_DRY_XL2GY ORDER BY Serial, K_ID DESC ";
+            DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
 
             DgvMain.DataSource = null;
 
@@ -67,8 +67,6 @@ namespace 联友生产辅助工具.生产日报表
 
                 int Columns = dttmp.Columns.Count;
                 int Rows = dttmp.Rows.Count;
-                int Row_Index = 0;
-                int Index;
 
                 DgvMain.DataSource = dttmp;
                 DgvOpt.SetRowBackColor(DgvMain);
@@ -95,8 +93,8 @@ namespace 联友生产辅助工具.生产日报表
 
         private void getitem()
         {
-            string sqlstr = "SELECT DISTINCT WGroup FROM dbo.SC_DRY_XL2GY ORDER BY WGroup";
-            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+            string slqStr = "SELECT DISTINCT WGroup FROM dbo.SC_DRY_XL2GY ORDER BY WGroup";
+            DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
             if(dttmp != null)
             {
                 comboBox1.Items.Clear();
@@ -123,9 +121,9 @@ namespace 联友生产辅助工具.生产日报表
                 DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
         }
         
-        private bool seach(string sqlstr)
+        private bool seach(string slqStr)
         {
-            DataTable dttmp = mssql.SQLselect(strConnection, sqlstr);
+            DataTable dttmp = mssql.SQLselect(strConnection, slqStr);
             if (dttmp != null)
             {
                 return true;
@@ -139,7 +137,7 @@ namespace 联友生产辅助工具.生产日报表
         private void commit()
         {
             int Index, RowCount;
-            string sqlstr1, sqlstr2;
+            string slqStr1, slqStr2;
             string WGroup, Serial, Valid;
             RowCount = DgvMain.RowCount;
 
@@ -156,45 +154,45 @@ namespace 联友生产辅助工具.生产日报表
                     Valid = "0";
                 }
 
-                sqlstr1 = "SELECT Serial FROM dbo.SC_DRY_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Valid = '" +  Valid + "' ";
-                if (seach(sqlstr1))
+                slqStr1 = "SELECT Serial FROM dbo.SC_DRY_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' AND Valid = '" +  Valid + "' ";
+                if (seach(slqStr1))
                 {
                     continue;
                 }
                 else
                 {
-                    sqlstr2 = "UPDATE dbo.SC_DRY_XL2GY SET Valid = '" + Valid + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
-                    mssql.SQLexcute(strConnection, sqlstr2);
+                    slqStr2 = "UPDATE dbo.SC_DRY_XL2GY SET Valid = '" + Valid + "' WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "' ";
+                    mssql.SQLexcute(strConnection, slqStr2);
                 }
             }
         }
 
         private void commit_LineList()
         {
-            string sqlstr_insert = " INSERT INTO dbo.SC_DRY_LineList (Dpt, WGroup, Serial, Line) "
+            string slqStr_insert = " INSERT INTO dbo.SC_DRY_LineList (Dpt, WGroup, Serial, Line) "
                           + " SELECT A.Dpt, B.WGroup, B.Serial, A.Line "
                           + " FROM sbo.SC_DRY_Dpt2Line AS A "
                           + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON B.Valid = 1 "
                           + " AND A.Valid = 1 "
                           + " AND NOT EXISTS(SELECT 1 FROM dbo.SC_DRY_LineList AS C WHERE C.Dpt = A.Dpt "
                           + " AND C.WGroup = B.WGroup AND C.Serial = B.Serial AND C.Line = A.Line)";
-            mssql.SQLexcute(strConnection, sqlstr_insert);
+            mssql.SQLexcute(strConnection, slqStr_insert);
 
-            string sqlstr_update = "UPDATE dbo.SC_DRY_LineList SET Valid=0 "
+            string slqStr_update = "UPDATE dbo.SC_DRY_LineList SET Valid=0 "
                                  + " FROM dbo.SC_DRY_LineList AS A "
                                  + " INNER JOIN dbo.SC_DRY_XL2GY AS B ON B.WGroup = A.WGroup AND B.Serial"
                                  + " WHERE B.Valid = 0 ";
-            mssql.SQLexcute(strConnection, sqlstr_update);
+            mssql.SQLexcute(strConnection, slqStr_update);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string WGroup = comboBox1.Text.Trim();
             string Serial = textBox1.Text.Trim();
-            string sqlstr1, sqlstr2;
+            string slqStr1, slqStr2;
 
-            sqlstr1 = "SELECT Serial FROM dbo.SC_DRY_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "'";
-            if (seach(sqlstr1))
+            slqStr1 = "SELECT Serial FROM dbo.SC_DRY_XL2GY WHERE Serial = '" + Serial + "' AND WGroup = '" + WGroup + "'";
+            if (seach(slqStr1))
             {
                 MessageBox.Show("组别：" + WGroup + "，系列：" + Serial + "已存在，请确认！保存失败。", "提示", MessageBoxButtons.OK);
             }
@@ -206,8 +204,8 @@ namespace 联友生产辅助工具.生产日报表
                 }
                 else
                 {
-                    sqlstr2 = "INSERT INTO dbo.SC_DRY_XL2GY (WGroup, Serial) VALUES('" + WGroup + "', '" + Serial + "')";
-                    mssql.SQLexcute(strConnection, sqlstr2);
+                    slqStr2 = "INSERT INTO dbo.SC_DRY_XL2GY (WGroup, Serial) VALUES('" + WGroup + "', '" + Serial + "')";
+                    mssql.SQLexcute(strConnection, slqStr2);
                     MessageBox.Show("组别：" + WGroup + "，系列：" + Serial + "新增成功！", "提示", MessageBoxButtons.OK);
                     commit();
                     commit_LineList();

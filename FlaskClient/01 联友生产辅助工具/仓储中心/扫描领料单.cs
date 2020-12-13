@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace 联友生产辅助工具.仓储中心
+namespace HarveyZ.仓储中心
 {
     public partial class 扫描领料单 : Form
     {
@@ -32,6 +32,7 @@ namespace 联友生产辅助工具.仓储中心
             FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Button_Upload.Enabled = false;
             DgvOpt.SetRowBackColor(DataGridView_List);
+            dateTimePicker1.Value = DateTime.Now.AddDays(2);
         }
 
         #region 窗口大小变化设置
@@ -54,14 +55,6 @@ namespace 联友生产辅助工具.仓储中心
         }
         #endregion
 
-        #region 判断是否有后台在运行
-        private bool checkJobExists() {
-            string sqlstr = @" SELECT * FROM  DSCSYS.dbo.JOBQUEUE WHERE JOBNAME = 'BMSAB01' AND STATUS IN ('P', 'N') ";
-            if (mssql.SQLselect(conn, sqlstr) == null) return false;
-            else return true;
-        }
-        #endregion
-
         private void button1_Click(object sender, EventArgs e)
         {
             button1_Work();
@@ -69,20 +62,28 @@ namespace 联友生产辅助工具.仓储中心
 
         private void button1_Work()
         {
-            if (TextBox_Danhao.Text != "")
+            DataGridView_List.DataSource = null;
+            if (checkBox1.Checked)
             {
-                string danhao_L = TextBox_Danhao.Text;
-                string[] danhao_arry = danhao_L.Split('-');
-                string danbie = danhao_arry[0];
-                string danhao = danhao_arry[1];
-                check(danbie, danhao);
+                showList("", "");
             }
             else
             {
-                MessageBox.Show("请录入单别单号", "错误");
-                Button_Upload.Enabled = false;
-                dttmp = null;
-                DataGridView_List.DataSource = null;
+                if (TextBox_Danhao.Text != "")
+                {
+                    string danhao_L = TextBox_Danhao.Text;
+                    string[] danhao_arry = danhao_L.Split('-');
+                    string danbie = danhao_arry[0];
+                    string danhao = danhao_arry[1];
+                    check(danbie, danhao);
+                }
+                else
+                {
+                    MessageBox.Show("请录入单别单号", "错误");
+                    Button_Upload.Enabled = false;
+                    dttmp = null;
+                    DataGridView_List.DataSource = null;
+                }
             }
         }
 
@@ -108,11 +109,35 @@ namespace 联友生产辅助工具.仓储中心
             MsgFlag = true;
             insertsql();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            DataGridView_List.DataSource = null;
+            if (checkBox1.Checked)
+            {
+                TextBox_Danhao.Text = "";
+                TextBox_Danhao.Enabled = false;
+                dateTimePicker1.Enabled = true;
+            }
+            else
+            {
+                TextBox_Danhao.Enabled = true;
+                dateTimePicker1.Enabled = false;
+            }
+        }
+
+        #region 判断是否有后台在运行
+        private bool checkJobExists() {
+            string slqStr = @" SELECT * FROM  DSCSYS.dbo.JOBQUEUE WHERE JOBNAME = 'BMSAB01' AND STATUS IN ('P', 'N') ";
+            if (mssql.SQLselect(conn, slqStr) == null) return false;
+            else return true;
+        }
+        #endregion
         
         private string getTime()
         {
-            string sqlstr = @"SELECT dbo.f_getTime(1) ";
-            return mssql.SQLselect(conn, sqlstr).Rows[0][0].ToString();
+            string slqStr = @"SELECT dbo.f_getTime(1) ";
+            return mssql.SQLselect(conn, slqStr).Rows[0][0].ToString();
         }
 
         private void check(string danbie, string danhao)
@@ -139,44 +164,20 @@ namespace 联友生产辅助工具.仓储中心
 
         private bool checkMOCTC(string danbie, string danhao)
         {
-            string sqlstr = "SELECT TC001, TC002 FROM MOCTC WHERE TC001 = '" + danbie + "' AND TC002 = '" + danhao + "'";
-            DataTable dttmp2 = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
-            if (dttmp2 != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            string slqStr = "SELECT TC001, TC002 FROM MOCTC WHERE TC001 = '{0}' AND TC002 = '{1}'";
+            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, danbie, danhao));
         }
 
         private bool checkLLXA(string danbie, string danhao)
         {
-            string sqlstr = "SELECT LLXA001 FROM LL_LYXA WHERE LLXA001='" + danbie + "' AND LLXA002='" + danhao + "'";
-            DataTable dttmp2 = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
-            if (dttmp2 != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            string slqStr = "SELECT LLXA001 FROM LL_LYXA WHERE LLXA001='{0}' AND LLXA002='{1}'";
+            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, danbie, danhao));
         }
 
         private bool checkLLXA007(string LLXA007)
         {
-            string sqlstr = "SELECT LLXA007 FROM LL_LYXA WHERE LLXA007='" + LLXA007 + "'";
-            DataTable dttmp2 = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
-            if (dttmp2 != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            string slqStr = "SELECT LLXA007 FROM LL_LYXA WHERE LLXA007='{0}'";
+            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, LLXA007));
         }
 
         private string getLLXA007()
@@ -199,21 +200,42 @@ namespace 联友生产辅助工具.仓储中心
             if (!checkJobExists())
             {
                 xa007 = getLLXA007();
-                string sqlstr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
-                    + " TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017,TE008 AS LLXA013,MC002,TE009 AS LLXA011,"
-                    + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
-                    + " '" + xa007 + "' AS LLXA007 "
-                    + " FROM VMOCTEJ WHERE TE001 = '" + danbie + "' AND TE002 = '" + danhao + "'";
-                dttmp = mssql.SQLselect(FormLogin.infObj.connYF, sqlstr);
+                string slqStr = "";
+                if (!checkBox1.Checked)
+                {
+                    slqStr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
+                        + " TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017,TE008 AS LLXA013,MC002,TE009 AS LLXA011,"
+                        + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
+                        + " '" + xa007 + "' AS LLXA007 "
+                        + " FROM VMOCTEJ WHERE TE001 = '" + danbie + "' AND TE002 = '" + danhao + "'";
+                }
+                else
+                {
+                    slqStr = @"SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,
+                                TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017, TE008 AS LLXA013, MC002, TE009 AS LLXA011,
+                                   MW002, TE010 AS LLXA015, TE011 AS LLXA009, TE012 AS LLXA010, TE014 AS LLXA018, "
+                            + "'" + xa007 + @"' AS LLXA007
+                                FROM MOCTE(NOLOCK) 
+                                INNER JOIN MOCTC(NOLOCK) ON TE001 = TC001 AND TE002 = TC002 
+                                INNER JOIN CMSMC(NOLOCK) ON TE008 = MC001 
+                                INNER JOIN CMSMW(NOLOCK) ON TE009 = MW001 
+                                INNER JOIN MOCTB(NOLOCK) ON TB001 = TE011 AND TB002 = TE012 AND TB003 = TE004 AND TB006 = TE009
+                                INNER JOIN MOCTA(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 
+                                INNER JOIN WG_DB.dbo.SC_PLAN(NOLOCK) ON K_ID = MOCTA.UDF02 
+                                LEFT JOIN (SELECT DISTINCT LLXA001, LLXA002 FROM LL_LYXA(NOLOCK)) AS A ON A.LLXA001 = TC001 AND A.LLXA002 = TC002
+                                WHERE 1 = 1
+                                AND A.LLXA001 IS NULL
+                                AND SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + @"'
+                                AND TA013 = 'Y'
+                                AND TC009 = 'N'
+                                AND TE019 = 'N' 
+                                AND (RTRIM(TC019) = '' OR TC019 IS NULL)
+                                ORDER BY TE001, TE002, TE003";
+                }
+
+                dttmp = mssql.SQLselect(FormLogin.infObj.connYF, slqStr);
                 if (dttmp != null)
                 {
-
-                    string sqlstr2 = @"SELECT * FROM MOCTC WHERE TC004 IN ('Y003', 'Y0031', 'Y0032') AND TC001 = '" + danbie + "' AND TC002 = '" + danhao + "' ";
-                    if (mssql.SQLselect(FormLogin.infObj.connYF, sqlstr2) != null)
-                    {
-                        MessageBox.Show("此为坐垫组领料单！", "错误", MessageBoxButtons.OK);
-                    }
-
                     DataGridView_List.DataSource = dttmp;
                     Button_Upload.Enabled = true;
                     label1.Text = "领料单共" + dttmp.Rows.Count.ToString() + "条！";
@@ -233,10 +255,7 @@ namespace 联友生产辅助工具.仓储中心
 
         private void insertsql()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-
-            string sqlstr = "";
-            string detail = "";
+            string slqStr = "";
             string danhao = "";
             int index;
             if (dttmp != null)
@@ -272,14 +291,12 @@ namespace 联友生产辅助工具.仓储中心
                     xa017 = dttmp.Rows[index][6].ToString().Trim();
                     xa018 = dttmp.Rows[index][14].ToString().Trim();
 
-                    detail += xa012 + ":" + xa017 + "; ";
-
-                    sqlstr += "INSERT INTO LL_LYXA (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( 'COMFORT', "
+                    slqStr += "INSERT INTO LL_LYXA (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, LLXA001, LLXA002, LLXA003, LLXA007, LLXA009, LLXA010, LLXA011, LLXA012, LLXA013, LLXA015, LLXA017, LLXA018) VALUES ( 'COMFORT', "
                             +  "'" + FormLogin.infObj.userId + "', '" + FormLogin.infObj.userGroup + "', '" + create_date + "', '" + xa001 + "', '" + xa002 + "', '" + xa003 + "', '" + xa007 + "', '" + xa009 + "','" + xa010 + "', '" + xa011 + "', '" + xa012 + "','" 
                             + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')   ";
                     
                 }
-                mssql.SQLexcute(FormLogin.infObj.connYF, sqlstr);
+                mssql.SQLexcute(FormLogin.infObj.connYF, slqStr);
 
                 DataGridView_List.DataSource = null;
                 Button_Upload.Enabled = false;

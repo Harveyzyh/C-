@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生管码垛线
+﻿namespace HarveyZ.生管码垛线
 {
     partial class 纸箱名称添加
     {

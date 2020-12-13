@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.报表
+﻿namespace HarveyZ.报表
 {
     partial class 销货信息_带入库部门_查询
     {
@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.DtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -44,16 +44,34 @@
             // 
             this.PanelTitle.BackColor = System.Drawing.SystemColors.Control;
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelTitle.Controls.Add(this.dateTimePicker2);
+            this.PanelTitle.Controls.Add(this.DtpEndDate);
             this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.btnOutput);
             this.PanelTitle.Controls.Add(this.btnSelect);
-            this.PanelTitle.Controls.Add(this.dateTimePicker1);
+            this.PanelTitle.Controls.Add(this.DtpStartDate);
             this.PanelTitle.Controls.Add(this.label1);
             this.PanelTitle.Location = new System.Drawing.Point(2, 2);
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(809, 50);
             this.PanelTitle.TabIndex = 0;
+            // 
+            // DtpEndDate
+            // 
+            this.DtpEndDate.CustomFormat = "yyyy-MM-dd";
+            this.DtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpEndDate.Location = new System.Drawing.Point(297, 11);
+            this.DtpEndDate.Name = "DtpEndDate";
+            this.DtpEndDate.Size = new System.Drawing.Size(115, 21);
+            this.DtpEndDate.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(237, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "销货结束：";
             // 
             // btnOutput
             // 
@@ -75,17 +93,16 @@
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // dateTimePicker1
+            // DtpStartDate
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.dateTimePicker1.Location = new System.Drawing.Point(78, 9);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker1.TabIndex = 0;
-            this.dateTimePicker1.TabStop = false;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.DtpStartDate.CustomFormat = "yyyy-MM-dd";
+            this.DtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpStartDate.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.DtpStartDate.Location = new System.Drawing.Point(78, 11);
+            this.DtpStartDate.Name = "DtpStartDate";
+            this.DtpStartDate.Size = new System.Drawing.Size(115, 21);
+            this.DtpStartDate.TabIndex = 0;
+            this.DtpStartDate.TabStop = false;
             // 
             // label1
             // 
@@ -109,24 +126,6 @@
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(237, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "销货结束：";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(297, 9);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker2.TabIndex = 5;
-            // 
             // 销货信息_带入库部门_查询
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -147,12 +146,12 @@
         #endregion
 
         private System.Windows.Forms.Panel PanelTitle;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker DtpStartDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DgvMain;
         private System.Windows.Forms.Button btnOutput;
         private System.Windows.Forms.Button btnSelect;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker DtpEndDate;
         private System.Windows.Forms.Label label2;
     }
 }

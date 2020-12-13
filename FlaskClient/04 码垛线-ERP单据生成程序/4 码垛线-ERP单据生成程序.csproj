@@ -83,7 +83,7 @@
     <Compile Include="FastReportPreview.Designer.cs">
       <DependentUpon>FastReportPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="IniHelper.cs" />
+    <Compile Include="Module\IniHelper.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\ClassNormal.cs" />
     <Compile Include="Module\ClassSql.cs" />

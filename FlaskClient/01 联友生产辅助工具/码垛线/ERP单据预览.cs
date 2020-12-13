@@ -16,7 +16,6 @@ namespace HarveyZ
         private string tg002 = "";
         private string md_no = "";
         private string print_id = "";
-        private string printerName = "";
         private string frx = "";
         private Report report = new Report();
         public ERP单据预览(string tg001, string tg002, string md_no, string print_id, string frx)

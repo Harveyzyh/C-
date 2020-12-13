@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HarveyZ
+﻿namespace HarveyZ
 {
     public class InfoObjectBase
     {
@@ -24,6 +19,9 @@ namespace HarveyZ
         private string _apiHost = null;
         private string _updateHost = null;
 
+        private bool _globalStopFlag = false;
+        private string _globalStopDate = "20300301";
+
         public string userId { get { return _userId; } set { _userId = value; } }
         public string userName { get { return _userName; } set { _userName = value; } }
         public string userDpt { get { return _userDpt; } set { _userDpt = value; } }
@@ -40,5 +38,8 @@ namespace HarveyZ
 
         public string apiHost { get { return _apiHost; } set { _apiHost = value; } }
         public string updateHost { get { return _updateHost; } set { _updateHost = value; } }
+
+        public bool globalStopFlag { get { return _globalStopFlag; } set { _globalStopFlag = value; } }
+        public string globalStopDate { get { return _globalStopDate; } }
     }
 }

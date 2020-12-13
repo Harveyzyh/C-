@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using FastReport;
 using System.IO;
 
-namespace 联友生产辅助工具.生管码垛线
+namespace HarveyZ.生管码垛线
 {
     public partial class 码垛线_ERP单据生成程序 : Form
     {
@@ -21,17 +21,15 @@ namespace 联友生产辅助工具.生管码垛线
         public static string ProgName = "";
         //服务器URL
         public static string HttpURL = "";
-        private string UpdateUrl = "";
         #endregion
 
         #region 局域静态变量
+        private static string connRobot = FormLogin.infObj.connMD;
+        private static string connYF = FormLogin.infObj.connYF;
+        public static string connWG = FormLogin.infObj.connWG;
         private Mssql mssql = new Mssql();
-        private static string connRobot = Global_Const.strConnection_MD;
-        private static string connYF = Global_Const.strConnection_YF;
-        public static string connWG = Global_Const.strConnection_WG;
+        private FastReportManager frManager = new FastReportManager(connWG);
         
-        private static string printFilePath = "";
-
         private static DataTable componentFileDt = new DataTable();
         #endregion
 
@@ -49,7 +47,6 @@ namespace 联友生产辅助工具.生管码垛线
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
-            //FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag);
             Init();
             FormMain_Resized_Work();
         }
@@ -139,6 +136,7 @@ namespace 联友生产辅助工具.生管码垛线
             }
             
             dgvDetail_Show(GetDetailData());
+            dgvDetail_Show2(GetDetailData_List());
 
             tabControl1.SelectedTab = tabControl1.TabPages[1];
         }
@@ -149,7 +147,7 @@ namespace 联友生产辅助工具.生管码垛线
             label4.Text = tg002;
             label7.Text = md_no;
             label8.Text = printId;
-            string sqlstr = @"SELECT COPTH.TH003 AS 序号, RTRIM(COPTH.TH004) AS 品号, RTRIM(COPTH.TH005) AS 品名, RTRIM(COPTH.TH006) AS 规格,
+            string slqStr = @"SELECT COPTH.TH003 AS 序号, RTRIM(COPTH.TH004) AS 品号, RTRIM(COPTH.TH005) AS 品名, RTRIM(COPTH.TH006) AS 规格,
                                 RTRIM(COPTH.TH014) + '-' + RTRIM(COPTH.TH015) + '-' + RTRIM(COPTH.TH016) AS 生产单号, 
                                 CONVERT(VARCHAR(10), CONVERT(FLOAT, COPTH.TH008)) AS 数量, RTRIM(COPTH.TH009) AS 单位, 
                                 RTRIM(COPTH.UDF03) AS 描述备注, RTRIM(COPTH.UDF04) AS 保友品名, RTRIM(COPTH.UDF05) AS 配置方案, RTRIM(COPTH.UDF10) AS 产品电商代码, 
@@ -162,19 +160,47 @@ namespace 联友生产辅助工具.生管码垛线
                                 LEFT JOIN [192.168.0.99].COMFORT.dbo.CMSMV ON COPTG.CREATOR = CMSMV.MV001 
                                 WHERE RTRIM(TH001) = '{0}' AND RTRIM(TH002) = '{1}'
                                 ORDER BY COPTH.TH003";
-            DataTable dt = mssql.SQLselect(connRobot, string.Format(sqlstr, tg001, tg002));
+            DataTable dt = mssql.SQLselect(connRobot, string.Format(slqStr, tg001, tg002));
             return dt;
+        }
+        
+        private DataTable GetDetailData_List()
+        {
+            string slqStr = @"SELECT PrintId 打印序号, SC001 订单号, COUNT(*) 数量 FROM PdData 
+                                WHERE Pd_Sta = 'OK'
+                                AND PrintId = {0} 
+                                GROUP BY PrintId, SC001 
+                                ORDER BY SC001";
+            DataTable dt = mssql.SQLselect(connRobot, string.Format(slqStr, printId));
+            return dt;
+        }
+
+        #endregion
+
+        #region 记录明细预览
+        private void dgvDetail_Show2(DataTable dt)
+        {
+            dgvDetail2.DataSource = null;
+            if (dt != null)
+            {
+                dgvDetail2.DataSource = dt;
+                DgvOpt.SetRowBackColor(dgvDetail2);
+                DgvOpt.SetColWidth(dgvDetail2, "订单号", 150);
+                dgvDetail2.ReadOnly = true;
+                DgvOpt.SetColMiddleCenter(dgvDetail2);
+                DgvOpt.SetColHeadMiddleCenter(dgvDetail2);
+            }
         }
         #endregion
 
         #region 打印列表明细
         private void GetListData() //打印列表显示信息的获取
         {
-            string sqlstr = @"SELECT * FROM VPrintList 
+            string slqStr = @"SELECT * FROM VPrintList 
                                 WHERE (CONVERT(VARCHAR(20), 创建时间, 112) between '{0}' and '{1}' 
                                 OR CONVERT(VARCHAR(20), 销货单生成时间, 112) between '{0}' and '{1}')
                                 ORDER BY 打印序号";
-            DataTable dt = mssql.SQLselect(connRobot, string.Format(sqlstr, DtpStart.Value.ToString("yyyyMMdd"), DtpEnd.Value.ToString("yyyyMMdd")));
+            DataTable dt = mssql.SQLselect(connRobot, string.Format(slqStr, DtpStart.Value.ToString("yyyyMMdd"), DtpEnd.Value.ToString("yyyyMMdd")));
             dgvList_Show(dt);
         }
         #endregion
@@ -205,21 +231,14 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void btnPrintPreview_Click(object sender, EventArgs e)
         {
-            ERP单据预览 previewForm = new ERP单据预览(tg001, tg002, md_no, printId, getfrx(printFileName));
+            string printFrx = frManager.GetPrintFile("码垛线销货单", printFileName);
+            ERP单据预览 previewForm = new ERP单据预览(tg001, tg002, md_no, printId, printFrx);
             if(previewForm.ShowDialog() == DialogResult.Cancel)
             {
                 previewForm.Dispose();
             }
         }
         #endregion
-
-        //获取打印格式
-        private string getfrx(string fileName)
-        {
-            string sqlstr = @"SELECT CONTENT FROM dbo.WG_PRINT WHERE PRINT_TYPE = '码垛线销货单' AND PRINT_NAME = '{0}' ";
-            string frx = mssql.SQLselect(connWG, string.Format(sqlstr, fileName)).Rows[0][0].ToString();
-            return frx;
-        }
 
         private void BtnShow_Click(object sender, EventArgs e)
         {

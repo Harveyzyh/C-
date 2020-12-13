@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnOpenFile
@@ -50,7 +51,7 @@
             // 
             // BtnUpload
             // 
-            this.BtnUpload.Location = new System.Drawing.Point(32, 88);
+            this.BtnUpload.Location = new System.Drawing.Point(32, 89);
             this.BtnUpload.Name = "BtnUpload";
             this.BtnUpload.Size = new System.Drawing.Size(75, 23);
             this.BtnUpload.TabIndex = 1;
@@ -111,11 +112,22 @@
             this.textBox1.Size = new System.Drawing.Size(629, 312);
             this.textBox1.TabIndex = 7;
             // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Location = new System.Drawing.Point(134, 89);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(75, 23);
+            this.BtnDelete.TabIndex = 8;
+            this.BtnDelete.Text = "删除";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
             // FastReport模板发布
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 564);
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -141,5 +153,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button BtnDelete;
     }
 }

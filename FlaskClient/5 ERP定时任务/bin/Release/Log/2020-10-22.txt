@@ -1,0 +1,22 @@
+09:47:55: Information: AutoLrpPlan Work Start! 
+
+09:47:55: Information: AutoLrpPlan: 配置信息：全局使能锁：True, 计算低阶码：False，计算层级码：False，发放工单：True，发放请购单：False，最大执行次数：3
+09:47:55: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+09:47:55: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+09:47:56: Information: AutoLrpPlan: Work With PlanDd:2205-073399     0002  - PlanId:A22050733990002  - Wlno: 10920303  - Pz: 保友 TW黑LE黑 LY340塑胶脚 
+09:47:56: Information: AutoLrpPlan: Set Working Flag planDd: 2205-073399     0002
+09:47:56: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2205-073399     0002  - PlanId: A22050733990002  - JobId: 20201022000303 
+09:48:30: Information: AutoLrpPlan: Job Done: JobId: 20201022000303'
+09:48:30: Information: AutoLrpPlan: Insert Job Layout Sc PlanId: A22050733990002  - JobId: 20201022000304 
+09:48:43: Information: AutoLrpPlan: Job Done: JobId: 20201022000304'
+09:48:43: Information: AutoLrpPlan: Set Work Done Flag planDd: 2205-073399     0002
+09:48:43: Information: AutoLrpPlan: Insert Job Clean PlanId: A22050733990002  - JobId: 20201022000305 
+09:48:52: Information: AutoLrpPlan: Job Done: JobId: 20201022000305'
+09:48:53: Information: AutoLrpPlan: Work With PlanDd:2205-073397     0001  - PlanId:A22050733970001  - Wlno: 108203135  - Pz: 保友 LE黑针车 中英文说明书 
+09:48:53: Information: AutoLrpPlan: Set Working Flag planDd: 2205-073397     0001
+09:48:53: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2205-073397     0001  - PlanId: A22050733970001  - JobId: 20201022000306 
+09:49:27: Information: AutoLrpPlan: Job Done: JobId: 20201022000306'
+09:49:28: Information: AutoLrpPlan: Insert Job Layout Sc PlanId: A22050733970001  - JobId: 20201022000307 
+09:49:38: Information: AutoLrpPlan: Job Done: JobId: 20201022000307'
+09:49:38: Information: AutoLrpPlan: Set Work Done Flag planDd: 2205-073397     0001
+09:49:38: Information: AutoLrpPlan: Insert Job Clean PlanId: A22050733970001  - JobId: 20201022000308 

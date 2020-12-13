@@ -10,20 +10,20 @@ namespace HarveyZ
         /// <summary>
         /// 数据库连接测试，超时时间为3秒
         /// </summary>
-        /// <param name="strConnection">数据库连接字</param>
-        public bool SQLlinkTest(string strConnection) //数据库连接测试
+        /// <param name="connStr">数据库连接字</param>
+        public bool SQLlinkTest(string connStr) //数据库连接测试
         {
             bool CanConnectDB = false;
-            using (SqlConnection testConnection = new SqlConnection(strConnection))
+            using (SqlConnection testConn = new SqlConnection(connStr))
             {
                 try
                 {
-                    testConnection.Open();
-                    SqlCommand testCmd = testConnection.CreateCommand();
+                    testConn.Open();
+                    SqlCommand testCmd = testConn.CreateCommand();
                     testCmd.CommandTimeout = 3;
                     CanConnectDB = true;
-                    testConnection.Close();
-                    testConnection.Dispose();
+                    testConn.Close();
+                    testConn.Dispose();
                 }
                 catch { }
                 if (CanConnectDB)
@@ -41,16 +41,16 @@ namespace HarveyZ
         /// <summary>
         /// 数据库-增，改，删
         /// </summary>
-        /// <param name="SQLstr">数据库连接字符串</param>
-        /// <param name="SqlStr">本数据库中表示DeviceID</param>
-        public int SQLexcute(string ConnStr, string SqlStr, int workCount = 0)
+        /// <param name="connStr">数据库连接字符串</param>
+        /// <param name="slqStr">本数据库中表示DeviceID</param>
+        public int SQLexcute(string connStr, string slqStr, int workCount = 0)
         {
-            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SqlStr, conn);
+                    SqlCommand cmd = new SqlCommand(slqStr, conn);
                     cmd.CommandTimeout = 120;
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -62,7 +62,7 @@ namespace HarveyZ
                     workCount++;
                     if (workCount < 5)
                     {
-                        return SQLexcute(ConnStr, SqlStr, workCount);
+                        return SQLexcute(connStr, slqStr, workCount);
                     }
                     else
                     {
@@ -83,16 +83,16 @@ namespace HarveyZ
         /// <summary>
         /// 数据库-查
         /// </summary>
-        /// <param name="SQLstr">数据库连接字符串</param>
-        /// <param name="CMDstr">本数据库中表示DeviceID</param>
-        public DataTable SQLselect(string SQLstr, string CMDstr)
+        /// <param name="connStr">数据库连接字符串</param>
+        /// <param name="slqStr">本数据库中表示DeviceID</param>
+        public DataTable SQLselect(string connStr, string slqStr)
         {
-            using (SqlConnection conn = new SqlConnection(SQLstr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 try
                 {
                     DataTable dttmp = new DataTable();
-                    SqlDataAdapter sdatmp = new SqlDataAdapter(CMDstr, conn);
+                    SqlDataAdapter sdatmp = new SqlDataAdapter(slqStr, conn);
                     sdatmp.Fill(dttmp);
                     sdatmp.Dispose();
                     if (dttmp.Rows.Count <= 0)
@@ -121,16 +121,16 @@ namespace HarveyZ
         /// <summary>
         /// 数据库-查-是否存在
         /// </summary>
-        /// <param name="SQLstr">数据库连接字符串</param>
-        /// <param name="CMDstr">查询语句</param>
-        public bool SQLexist(string SQLstr, string CMDstr)
+        /// <param name="connStr">数据库连接字符串</param>
+        /// <param name="slqStr">查询语句</param>
+        public bool SQLexist(string connStr, string slqStr)
         {
-            using (SqlConnection conn = new SqlConnection(SQLstr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 try
                 {
                     DataTable dttmp = new DataTable();
-                    SqlDataAdapter sdatmp = new SqlDataAdapter(CMDstr, conn);
+                    SqlDataAdapter sdatmp = new SqlDataAdapter(slqStr, conn);
                     sdatmp.Fill(dttmp);
                     sdatmp.Dispose();
                     if (dttmp.Rows.Count <= 0)
@@ -153,6 +153,21 @@ namespace HarveyZ
                     conn.Dispose();
                 }
             }
+        }
+
+        public string SQLTime(string connStr, int lenth = 0)
+        {
+            string slqStr = "";
+            if (lenth == 0)
+            {
+                slqStr = @"SELECT REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(varchar(25), GETDATE(), 25), '-', ''), ' ', ''), ':', ''), '.', '') ";
+            }
+            else
+            {
+                slqStr = @"SELECT LEFT( REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(varchar(25), GETDATE(), 25), '-', ''), ' ', ''), ':', ''), '.', ''), {0}) ";
+                slqStr = string.Format(slqStr, lenth);
+            }
+            return SQLselect(connStr, slqStr).Rows[0][0].ToString();
         }
     }
 }

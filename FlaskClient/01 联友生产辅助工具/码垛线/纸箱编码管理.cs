@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using HarveyZ;
 using System.Collections;
 
-namespace 联友生产辅助工具.生管码垛线
+namespace HarveyZ.生管码垛线
 {
     public partial class 纸箱编码管理 : Form
     {
@@ -65,8 +65,8 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void ShowBoxCode()
         {
-            string sqlstr = @"SELECT BoxSize 纸箱尺寸, BoxCode 纸箱编码, BoxSet 纸箱码放方式, Valid 有效码 FROM BoxSizeCode ORDER BY BoxCode, BoxSize ";
-            showDt = mssql.SQLselect(connStrRobot, sqlstr);
+            string slqStr = @"SELECT BoxSize 纸箱尺寸, BoxCode 纸箱编码, BoxSet 纸箱码放方式, Valid 有效码 FROM BoxSizeCode ORDER BY BoxCode, BoxSize ";
+            showDt = mssql.SQLselect(connStrRobot, slqStr);
             
             DgvMain.DataSource = null;
             if (showDt != null)
@@ -95,7 +95,7 @@ namespace 联友生产辅助工具.生管码垛线
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            string sqlstr = @"UPDATE BoxSizeCode SET BoxCode = '{1}', BoxSet = '{2}', Valid = '{3}' WHERE BoxSize = '{0}' ";
+            string slqStr = @"UPDATE BoxSizeCode SET BoxCode = '{1}', BoxSet = '{2}', Valid = '{3}' WHERE BoxSize = '{0}' ";
             for(int rowIndex = 0; rowIndex < showDtTmp.Rows.Count; rowIndex++)
             {
                 for (int colIndex = 0; colIndex < showDtTmp.Columns.Count; colIndex++)
@@ -103,7 +103,7 @@ namespace 联友生产辅助工具.生管码垛线
                     string kk = DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString();
                     if (showDtTmp.Rows[rowIndex][colIndex].ToString() != DgvMain.Rows[rowIndex].Cells[colIndex].Value.ToString())
                     {
-                        mssql.SQLexcute(connStrRobot, string.Format(sqlstr, DgvMain.Rows[rowIndex].Cells[0].Value.ToString(),
+                        mssql.SQLexcute(connStrRobot, string.Format(slqStr, DgvMain.Rows[rowIndex].Cells[0].Value.ToString(),
                             DgvMain.Rows[rowIndex].Cells[1].Value.ToString(),
                             DgvMain.Rows[rowIndex].Cells[2].Value.ToString(),
                             DgvMain.Rows[rowIndex].Cells[3].Value.ToString()).Replace("'True'", "1").Replace("'False'", "0"));

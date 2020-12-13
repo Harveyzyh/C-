@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生管码垛线
+﻿namespace HarveyZ.生管码垛线
 {
     partial class 码垛线_ERP单据生成程序
     {
@@ -32,8 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(码垛线_ERP单据生成程序));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DgvMain = new System.Windows.Forms.DataGridView();
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.DtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.DtpStart = new System.Windows.Forms.DateTimePicker();
             this.BtnShow = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvDetail = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -46,23 +51,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnPrintPreview = new System.Windows.Forms.Button();
-            this.DgvMain = new System.Windows.Forms.DataGridView();
-            this.DtpStart = new System.Windows.Forms.DateTimePicker();
-            this.DtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvDetail2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -84,6 +89,27 @@
             this.tabPage1.Text = "打印列表";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // DgvMain
+            // 
+            this.DgvMain.AllowUserToAddRows = false;
+            this.DgvMain.AllowUserToDeleteRows = false;
+            this.DgvMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DgvMain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvMain.BackgroundColor = System.Drawing.Color.White;
+            this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvMain.Location = new System.Drawing.Point(3, 45);
+            this.DgvMain.MultiSelect = false;
+            this.DgvMain.Name = "DgvMain";
+            this.DgvMain.ReadOnly = true;
+            this.DgvMain.RowHeadersVisible = false;
+            this.DgvMain.RowTemplate.Height = 23;
+            this.DgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvMain.Size = new System.Drawing.Size(943, 530);
+            this.DgvMain.TabIndex = 1;
+            this.DgvMain.TabStop = false;
+            this.DgvMain.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvList_CellMouseDoubleClick);
+            // 
             // PanelTitle
             // 
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -98,6 +124,24 @@
             this.PanelTitle.Size = new System.Drawing.Size(943, 42);
             this.PanelTitle.TabIndex = 0;
             // 
+            // DtpEnd
+            // 
+            this.DtpEnd.CustomFormat = "yyyy-MM-dd";
+            this.DtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpEnd.Location = new System.Drawing.Point(244, 6);
+            this.DtpEnd.Name = "DtpEnd";
+            this.DtpEnd.Size = new System.Drawing.Size(113, 21);
+            this.DtpEnd.TabIndex = 2;
+            // 
+            // DtpStart
+            // 
+            this.DtpStart.CustomFormat = "yyyy-MM-dd";
+            this.DtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpStart.Location = new System.Drawing.Point(61, 6);
+            this.DtpStart.Name = "DtpStart";
+            this.DtpStart.Size = new System.Drawing.Size(113, 21);
+            this.DtpStart.TabIndex = 1;
+            // 
             // BtnShow
             // 
             this.BtnShow.Location = new System.Drawing.Point(415, 4);
@@ -107,6 +151,24 @@
             this.BtnShow.Text = "查询";
             this.BtnShow.UseVisualStyleBackColor = true;
             this.BtnShow.Click += new System.EventHandler(this.BtnShow_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "起始日：";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(196, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 12);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "结束日：";
             // 
             // tabPage2
             // 
@@ -236,62 +298,29 @@
             this.btnPrintPreview.UseVisualStyleBackColor = true;
             this.btnPrintPreview.Click += new System.EventHandler(this.btnPrintPreview_Click);
             // 
-            // DgvMain
+            // tabPage3
             // 
-            this.DgvMain.AllowUserToAddRows = false;
-            this.DgvMain.AllowUserToDeleteRows = false;
-            this.DgvMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DgvMain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgvMain.BackgroundColor = System.Drawing.Color.White;
-            this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvMain.Location = new System.Drawing.Point(3, 45);
-            this.DgvMain.MultiSelect = false;
-            this.DgvMain.Name = "DgvMain";
-            this.DgvMain.ReadOnly = true;
-            this.DgvMain.RowHeadersVisible = false;
-            this.DgvMain.RowTemplate.Height = 23;
-            this.DgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvMain.Size = new System.Drawing.Size(943, 530);
-            this.DgvMain.TabIndex = 1;
-            this.DgvMain.TabStop = false;
-            this.DgvMain.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvList_CellMouseDoubleClick);
+            this.tabPage3.Controls.Add(this.dgvDetail2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(951, 580);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "记录信息";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // DtpStart
+            // dgvDetail2
             // 
-            this.DtpStart.CustomFormat = "yyyy-MM-dd";
-            this.DtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpStart.Location = new System.Drawing.Point(61, 6);
-            this.DtpStart.Name = "DtpStart";
-            this.DtpStart.Size = new System.Drawing.Size(113, 21);
-            this.DtpStart.TabIndex = 1;
-            // 
-            // DtpEnd
-            // 
-            this.DtpEnd.CustomFormat = "yyyy-MM-dd";
-            this.DtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpEnd.Location = new System.Drawing.Point(244, 6);
-            this.DtpEnd.Name = "DtpEnd";
-            this.DtpEnd.Size = new System.Drawing.Size(113, 21);
-            this.DtpEnd.TabIndex = 2;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "起始日：";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(196, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 12);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "结束日：";
+            this.dgvDetail2.AllowUserToAddRows = false;
+            this.dgvDetail2.AllowUserToDeleteRows = false;
+            this.dgvDetail2.BackgroundColor = System.Drawing.Color.White;
+            this.dgvDetail2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetail2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetail2.Location = new System.Drawing.Point(0, 0);
+            this.dgvDetail2.Name = "dgvDetail2";
+            this.dgvDetail2.ReadOnly = true;
+            this.dgvDetail2.RowTemplate.Height = 23;
+            this.dgvDetail2.Size = new System.Drawing.Size(951, 580);
+            this.dgvDetail2.TabIndex = 0;
             // 
             // 码垛线_ERP单据生成程序
             // 
@@ -308,13 +337,15 @@
             this.Resize += new System.EventHandler(this.FormMain_Resized);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).EndInit();
             this.PanelTitle.ResumeLayout(false);
             this.PanelTitle.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,6 +372,8 @@
         private System.Windows.Forms.DateTimePicker DtpStart;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dgvDetail2;
     }
 }
 

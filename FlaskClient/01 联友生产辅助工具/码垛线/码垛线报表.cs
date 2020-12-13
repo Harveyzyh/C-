@@ -7,7 +7,7 @@ using HarveyZ;
 using System.Collections.Generic;
 using System.Timers;
 
-namespace 联友生产辅助工具.生管码垛线
+namespace HarveyZ.生管码垛线
 {
     public partial class 码垛线报表 : Form
     {
@@ -74,7 +74,7 @@ namespace 联友生产辅助工具.生管码垛线
         {
             Excel excel = new Excel();
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
-            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.dataSet.Tables.Add((DataTable)DgvMain.DataSource);
             excelObj.defauleFileName = "码垛线报表_" + DateTime.Now.ToString("yyyy-MM-dd");
             excelObj.isWrite = true;
 
@@ -109,7 +109,7 @@ namespace 联友生产辅助工具.生管码垛线
         #region 业务逻辑
         private void DgvShow() //数据库资料显示到界面
         {
-            string sqlstrShow = @" SELECT SC.SC003 上线日期, SC.SC001 生产单号, 
+            string slqStrShow = @" SELECT SC.SC003 上线日期, SC.SC001 生产单号, 
 	                                    CAST(SC.SC013 AS FLOAT) 上线数量, ISNULL(PD2.SL, 0) AS 上线日过机数量, ISNULL(PD1.SL, 0) AS 总过机数量, SC033 是否完成, 
 	                                    SC010 品名, SC011 保友品名, SC012 规格, SC015 配置方案, SC016 配置描述, SC017 描述备注
                                     FROM dbo.SCHEDULE AS SC 
@@ -120,12 +120,12 @@ namespace 联友生产辅助工具.生管码垛线
 	                                    SELECT SC001, CONVERT(VARCHAR(8), Pd_date, 112) AS DT, COUNT(*) AS SL FROM  dbo.PdData GROUP BY SC001, CONVERT(VARCHAR(8), Pd_date, 112)
                                     ) AS PD2 ON PD2.SC001 = SC.SC001 AND PD2.DT = SC.SC003 
                                     WHERE 1=1 ";
-            if (TxBoxOrder.Text != "") sqlstrShow += @" AND SC.SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
-            if (TxBoxName.Text != "") sqlstrShow += @" AND SC.SC010 LIKE '%" + TxBoxName.Text + "%' ";
-            if (DtpStartDate.Checked) sqlstrShow += @" AND SC.SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";
-            if (DtpEndDate.Checked) sqlstrShow += @" AND SC.SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
-            sqlstrShow += " ORDER BY SC003, SC.SC001 ";
-            DataTable showDt = mssql.SQLselect(connMD, sqlstrShow);
+            if (TxBoxOrder.Text != "") slqStrShow += @" AND SC.SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
+            if (TxBoxName.Text != "") slqStrShow += @" AND SC.SC010 LIKE '%" + TxBoxName.Text + "%' ";
+            if (DtpStartDate.Checked) slqStrShow += @" AND SC.SC003 >= '" + DtpStartDate.Value.ToString("yyyyMMdd") + "' ";
+            if (DtpEndDate.Checked) slqStrShow += @" AND SC.SC003 <= '" + DtpEndDate.Value.ToString("yyyyMMdd") + "' ";
+            slqStrShow += " ORDER BY SC003, SC.SC001 ";
+            DataTable showDt = mssql.SQLselect(connMD, slqStrShow);
 
             if (showDt != null)
             {

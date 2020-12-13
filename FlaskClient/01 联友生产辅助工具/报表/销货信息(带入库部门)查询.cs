@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HarveyZ;
 
-namespace 联友生产辅助工具.报表
+namespace HarveyZ.报表
 {
     public partial class 销货信息_带入库部门_查询 : Form
     {
@@ -69,11 +69,6 @@ namespace 联友生产辅助工具.报表
             }
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSelect_Click(object sender, EventArgs e)
         {
             DgvShow();
@@ -83,10 +78,10 @@ namespace 联友生产辅助工具.报表
         {
             Excel excel = new Excel();
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
-            excelObj.dataDt = (DataTable)DgvMain.DataSource;
+            excelObj.dataSet.Tables.Add((DataTable)DgvMain.DataSource);
+            excelObj.dataSet.Tables[0].TableName = "销货明细";
             excelObj.defauleFileName = "销货明细_" + DateTime.Now.ToString("yyyy-MM-dd");
             excelObj.isWrite = true;
-            excelObj.dataDt.TableName = "销货明细";
 
             if (excel.ExcelOpt(excelObj))
             {
@@ -104,9 +99,9 @@ namespace 联友生产辅助工具.报表
         private void DgvShow()
         {
             DgvMain.DataSource = null;
-            string dateTime1 = dateTimePicker1.Value.ToString("yyyyMMdd");
-            string dateTime2 = dateTimePicker2.Value.ToString("yyyyMMdd");
-            string sqlstr = @"
+            string dateTime1 = DtpStartDate.Value.ToString("yyyyMMdd");
+            string dateTime2 = DtpEndDate.Value.ToString("yyyyMMdd");
+            string slqStr = @"
                                 SELECT DISTINCT A1 AS 销货单号, A2 AS 客户简称, 
                                 A4 AS 品号, A5 AS 品名, A6 AS 规格, A9 网布颜色, B2 AS 仓库名称, 
                                 A7 AS 销货数量, A3 AS 订单单号, 
@@ -144,7 +139,7 @@ namespace 联友生产辅助工具.报表
                                 ) AS B ON A1 = B1 
                                 ORDER BY A1 
                                 ";
-            DataTable dt = mssql.SQLselect(conn, string.Format(sqlstr, dateTime1, dateTime2));
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, dateTime1, dateTime2));
 
             if (dt != null)
             {

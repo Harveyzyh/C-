@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using HarveyZ;
-using System.IO;
 
-namespace 联友生产辅助工具.生管排程
+namespace HarveyZ.生管排程
 {
     public partial class 订单信息查询 : Form
     {
@@ -51,7 +45,7 @@ namespace 联友生产辅助工具.生管排程
 
         private void DgvShow()
         {
-            string sqlstr = @"SELECT '' AS 上线日期, 
+            string slqStr = @"SELECT '' AS 上线日期, 
                             (CASE WHEN TC004='0118' THEN '内销' ELSE '外销' END) 订单类型, 
                             (RTRIM(COPTD.TD001) +'-'+ RTRIM(COPTD.TD002) +'-'+COPTD.TD003+(CASE WHEN COPTF.UDF51='1' THEN '(新增)' WHEN COPTF.UDF51='0' THEN '(变更)' ELSE '' END)) AS 生产单号, 
                             RTRIM(COPMA.MA002) AS 客户名称, 
@@ -90,13 +84,13 @@ namespace 联友生产辅助工具.生管排程
                             LEFT JOIN (SELECT TD001 AS TDTD001, TD002 AS TDTD002, TD003 AS TDTD003, TD013 AS TDTD013, UDF52 AS TDUDF52 FROM COPTD AS COPTD) K ON TDTD001 = TD001 AND TDTD002 = TD002 AND TDTD003 = TD003 AND CONVERT(INT, SUBSTRING(COPTD.CREATE_DATE, 1, 8)) = CONVERT(INT, TDUDF52) AND CONVERT(INT, TD013) - CONVERT(INT, TDUDF52) <=2 
                             LEFT JOIN CMSME AS CMSME ON CMSME.ME001 = INVMB.MB445 
                             WHERE 1=1 AND (COPTC.TC027 = 'Y') ";
-            if (DtpStartDate.Checked) sqlstr += @"AND COPTD.UDF12 > '" + DtpStartDate.Value.ToString("yyyyMMddhhmmss") + "' ";
-            if (DtpEndDate.Checked) sqlstr += @"AND COPTD.UDF12 < '" + DtpEndDate.Value.ToString("yyyyMMddhhmmss") + "' ";
-            if (CmBoxType.Text == "生产三部") sqlstr += @"AND RTRIM(COPTD.TD005)LIKE '%NUM%' ";
-            if (CmBoxType.Text == "原材料") sqlstr += @"AND (COPTD.TD004 LIKE '3%' OR COPTD.TD004 LIKE '4%' ) ";
-            if (CmBoxType.Text == "半成品") sqlstr += @"AND COPTD.TD004 LIKE '2%' ";
+            if (DtpStartDate.Checked) slqStr += @"AND COPTD.UDF12 > '" + DtpStartDate.Value.ToString("yyyyMMddhhmmss") + "' ";
+            if (DtpEndDate.Checked) slqStr += @"AND COPTD.UDF12 < '" + DtpEndDate.Value.ToString("yyyyMMddhhmmss") + "' ";
+            if (CmBoxType.Text == "生产三部") slqStr += @"AND RTRIM(COPTD.TD005)LIKE '%NUM%' ";
+            if (CmBoxType.Text == "原材料") slqStr += @"AND (COPTD.TD004 LIKE '3%' OR COPTD.TD004 LIKE '4%' ) ";
+            if (CmBoxType.Text == "半成品") slqStr += @"AND COPTD.TD004 LIKE '2%' ";
 
-            sqlstr += @"ORDER BY TD002, TD003 ";
+            slqStr += @"ORDER BY TD002, TD003 ";
 
             if (!CmBoxType.Items.Contains(CmBoxType.Text))
             {
@@ -105,7 +99,7 @@ namespace 联友生产辅助工具.生管排程
             else
             {
                 DgvMain.DataSource = null;
-                DataTable showDt = mssql.SQLselect(connCOMFORT, sqlstr);
+                DataTable showDt = mssql.SQLselect(connCOMFORT, slqStr);
 
                 if (showDt != null)
                 {

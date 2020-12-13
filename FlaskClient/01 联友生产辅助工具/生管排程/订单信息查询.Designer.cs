@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生管排程
+﻿namespace HarveyZ.生管排程
 {
     partial class 订单信息查询
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(订单信息查询));
             this.PanelTitle = new System.Windows.Forms.Panel();
             this.BtnOutput = new System.Windows.Forms.Button();
             this.BtnSelect = new System.Windows.Forms.Button();
@@ -173,6 +174,7 @@
             this.Controls.Add(this.DgvMain);
             this.Controls.Add(this.PanelTitle);
             this.Font = new System.Drawing.Font("宋体", 11F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "订单信息查询";
             this.Text = "订单信息导出";

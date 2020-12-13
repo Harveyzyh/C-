@@ -1,0 +1,49 @@
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\联友中山分公司生产辅助工具.exe
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\联友中山分公司生产辅助工具.pdb
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\NPOI.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\NPOI.OOXML.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\NPOI.OpenXml4Net.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\NPOI.OpenXmlFormats.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\ICSharpCode.SharpZipLib.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\NPOI.xml
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.Properties.Resources.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.主界面.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.用户管理.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销货单.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.exe
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.pdb
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销货单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\Microsoft.CSharp.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\bin\Debug\System.Data.dll
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单_获取单据信息.resources
+Y:\GitHub\C-\FlaskClient\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.exe
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.pdb
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\联友中山分公司生产辅助工具.exe
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\联友中山分公司生产辅助工具.pdb
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\Microsoft.CSharp.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\NPOI.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\NPOI.OOXML.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\System.Data.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\bin\Debug\NPOI.xml
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\5 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.Properties.Resources.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.主界面.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单_获取单据信息.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入客户订单.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销退单_获取单据信息.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销货单.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\联友中山分公司生产辅助工具.销售管理.录入销货单_获取单据信息.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.用户管理.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\HarveyZ.数据导入中.resources
+\\Mac\Home\Documents\C#\05 中山分公司生产辅助工具\obj\Debug\5 中山分公司生产辅助工具.csproj.GenerateResource.Cache

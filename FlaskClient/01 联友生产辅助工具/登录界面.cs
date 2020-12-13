@@ -96,6 +96,19 @@ namespace HarveyZ
                 UpdateMe.ProgUpdate(infObj.progName, infObj.updateHost + @"/download/" + infObj.progName + ".exe");
             }
         }
+        
+        public static bool StopModuleOpen()
+        {
+            if (infObj.globalStopFlag)
+            {
+                Msg.ShowErr("该功能已于" + Normal.ConvertDate(infObj.globalStopDate) + "停用");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         #endregion
 
@@ -206,7 +219,6 @@ namespace HarveyZ
                 }
             }
         }
-
         #endregion
 
         #region 程序不能多开设定
@@ -241,6 +253,7 @@ namespace HarveyZ
             GetProgInfo();
             GetRemoteFlag();
             SetConnInfo();
+            SetModuleOpenFlag();
 
             InitMainIniPath();
             InitUserId();
@@ -293,20 +306,42 @@ namespace HarveyZ
             }
         }
 
+        /// <summary>
+        /// 设置标志位
+        /// 当服务器日期大于Object中设定的日期，设定StopFlag为true
+        /// </summary>
+        private void SetModuleOpenFlag()
+        {
+            string timeYF = infObj.sql.SQLTime(infObj.connYF, 8);
+            string timeMD = infObj.sql.SQLTime(infObj.connMD, 8);
+            if (int.Parse(timeYF) > int.Parse(infObj.globalStopDate) || int.Parse(timeMD) > int.Parse(infObj.globalStopDate))
+            {
+                infObj.globalStopFlag = true;
+            }
+            else
+            {
+                infObj.globalStopFlag = false;
+            }
+        }
+
+        /// <summary>
+        /// 获取服务器的更新URL
+        /// </summary>
+        /// <returns>True,False</returns>
         public bool GetUpdateHost()
         {
             try
             {
-                string sqlstr = "";
+                string slqStr = "";
                 if (infObj.remoteFlag)
                 {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Remote' AND Valid = 'Y'";
+                    slqStr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Remote' AND Valid = 'Y'";
                 }
                 else
                 {
-                    sqlstr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Local' AND Valid = 'Y'";
+                    slqStr = "SELECT ServerURL FROM WG_CONFIG WHERE ConfigName='APP_Server' AND Type='Local' AND Valid = 'Y'";
                 }
-                infObj.updateHost = infObj.sql.SQLselect(infObj.connWG, sqlstr).Rows[0][0].ToString();
+                infObj.updateHost = infObj.sql.SQLselect(infObj.connWG, slqStr).Rows[0][0].ToString();
                 return true;
             }
             catch
@@ -408,7 +443,6 @@ namespace HarveyZ
         /// 应用程序所处的绝对路径
         /// </summary>
         public string localPath { get { return _localPath; } set { _localPath = value; } }
-
 
         public string userPwd { get { return _userPwd; } set { _userPwd = value; } }
 

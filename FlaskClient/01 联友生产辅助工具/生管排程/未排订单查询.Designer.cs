@@ -1,4 +1,4 @@
-﻿namespace 联友生产辅助工具.生管排程
+﻿namespace HarveyZ.生管排程
 {
     partial class 未排订单查询
     {
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(未排订单查询));
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
@@ -41,6 +43,7 @@
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.LabelReportSelectEndDate = new System.Windows.Forms.Label();
             this.LabelReportSelectStartDate = new System.Windows.Forms.Label();
+            this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +65,7 @@
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(978, 249);
             this.DgvMain.TabIndex = 2;
+            this.DgvMain.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDown);
             // 
             // BtnShow
             // 
@@ -186,7 +190,13 @@
             this.LabelReportSelectStartDate.TabIndex = 15;
             this.LabelReportSelectStartDate.Text = "起始日期：";
             // 
-            // 生产电子排程未排订单
+            // contextMenuStrip_DgvMain
+            // 
+            this.contextMenuStrip_DgvMain.Name = "contextMenuStrip_DgvMain";
+            this.contextMenuStrip_DgvMain.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip_DgvMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip_DgvMain_ItemClicked);
+            // 
+            // 未排订单查询
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -194,8 +204,9 @@
             this.Controls.Add(this.PanelTitle);
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 11F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "生产电子排程未排订单";
+            this.Name = "未排订单查询";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "生管排程导入";
             this.SizeChanged += new System.EventHandler(this.FormMain_Resized);
@@ -220,6 +231,7 @@
         private System.Windows.Forms.TextBox TxBoxOrder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelDdSlSum;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DgvMain;
     }
 }
 

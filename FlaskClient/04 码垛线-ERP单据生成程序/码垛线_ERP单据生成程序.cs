@@ -1,12 +1,7 @@
 ﻿using HarveyZ;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using FastReport;
 using System.IO;
@@ -25,10 +20,14 @@ namespace 码垛线_ERP单据生成程序
         #endregion
 
         #region 局域静态变量
-        private Mssql mssql = new Mssql();
-        private static string connRobot = Global_Const.strConnection_MD;
+        private static string connMD = Global_Const.strConnection_MD;
         private static string connYF = Global_Const.strConnection_YF;
         public static string connWG = Global_Const.strConnection_WG;
+        private Mssql mssql = new Mssql();
+        private VersionManeger verManager = new VersionManeger(connWG);
+
+        private static int globalStopDate = 20300301;
+        private static bool globalStopFlag = false;
 
         private static string localPath = "";
         private static string iniFilePath = "";
@@ -49,6 +48,7 @@ namespace 码垛线_ERP单据生成程序
         private static System.Timers.Timer timerOutScrk = null;
         private static System.Timers.Timer timerPrint = null;
         private static System.Timers.Timer timerUpdate = null;
+        private static System.Timers.Timer timerShowList = null;
 
         private static bool workPrintFlag = false;
         private static bool workXhFlag = false;
@@ -61,6 +61,7 @@ namespace 码垛线_ERP单据生成程序
         private delegate void DelegateScrkCreateWork();
         private delegate void DelegatePrintWork();
         private delegate void DelegateUpdateWork();
+        private delegate void DelegateShowListWork();
         #endregion
 
         #region PrintPreview变量
@@ -77,7 +78,19 @@ namespace 码垛线_ERP单据生成程序
         {
             InitializeComponent();
             GetMutilOpen();
+            StopModuleOpen();
             Init();
+        }
+
+        private void StopModuleOpen()
+        {
+            string timeYF = mssql.SQLTime(connYF, 8);
+            string timeMD = mssql.SQLTime(connMD, 8);
+            if (int.Parse(timeYF) > globalStopDate || int.Parse(timeMD) > globalStopDate)
+            {
+                Msg.ShowErr("该软件已停用，所有自动处理已停用！");
+                globalStopFlag = true;
+            }
         }
 
         private void Init()
@@ -111,30 +124,6 @@ namespace 码垛线_ERP单据生成程序
             dr = componentFileDt.NewRow();
             dr["FileName"] = "FastReport.Editor.dll"; dr["FileVersion"] = "2019.3.5.0";
             componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "ICSharpCode.SharpZipLib.dll"; dr["FileVersion"] = "0.86.0";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "Microsoft.CSharp.dll"; dr["FileVersion"] = "4.0.30319.1";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "Microsoft.Office.Interop.Excel12.dll"; dr["FileVersion"] = "12.0.4518.1014";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "NPOI.dll"; dr["FileVersion"] = "2.0.0.0";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "NPOI.OOXML.dll"; dr["FileVersion"] = "2.0.0.0";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "NPOI.OpenXml4Net.dll"; dr["FileVersion"] = "2.0.0.0";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "NPOI.OpenXmlFormats.dll"; dr["FileVersion"] = "2.0.0.0";
-            //componentFileDt.Rows.Add(dr);
-            //dr = componentFileDt.NewRow();
-            //dr["FileName"] = "NPOI.xml"; dr["FileVersion"] = "";
-            //componentFileDt.Rows.Add(dr);
 
             FileVersion.JudgeFile(HttpURL + @"/download/", componentFileDt);
 
@@ -171,7 +160,7 @@ namespace 码垛线_ERP单据生成程序
             }
             catch
             {
-                if (MessageBox.Show("错误", "获取后台服务器配置失败，请联系咨询部！", MessageBoxButtons.OK) == DialogResult.OK)
+                if (MessageBox.Show("获取后台服务器配置失败，请联系咨询部！", "错误", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
@@ -183,7 +172,7 @@ namespace 码垛线_ERP单据生成程序
         private bool GetNewVersion()
         {
             string Msg;
-            if (VersionManeger.GetNewVersion(ProgName, ProgVersion, out Msg))
+            if (verManager.GetNewVersion(ProgName, ProgVersion, out Msg))
             {
                 UpdateUrl = HttpURL + @"/download/" + ProgName + ".exe";
                 return true;
@@ -369,44 +358,43 @@ namespace 码垛线_ERP单据生成程序
         #region 窗体UI-打印列表
         private void dgvList_Show(DataTable dt)
         {
-            dgvList.DataSource = null;
             int rowIndex = -1;
-            if (dgvList.DataSource != null)
+            if(dt != null && dgvList.DataSource != null)
             {
-                rowIndex = dgvList.CurrentRow.Index;
+                rowIndex = dgvList.CurrentCell.RowIndex;
             }
 
-            if(dt != null)
+            dgvList.DataSource = null;
+
+            if (dt != null)
             {
                 dgvList.DataSource = dt;
                 DgvOpt.SetRowBackColor(dgvList);
                 dgvList.ReadOnly = true;
+                DgvOpt.SelectLastRow(dgvList, rowIndex);
+                
+                DgvOpt.SetColHeadMiddleCenter(dgvList);
+
+                DgvOpt.SetColMiddleCenter(dgvList, "打印序号");
+                DgvOpt.SetColMiddleCenter(dgvList, "栈板号");
+                DgvOpt.SetColMiddleCenter(dgvList, "箱数");
+                DgvOpt.SetColMiddleCenter(dgvList, "正在打印");
+                DgvOpt.SetColMiddleCenter(dgvList, "已打印");
+                DgvOpt.SetColMiddleCenter(dgvList, "异常");
+                DgvOpt.SetColMiddleCenter(dgvList, "已生成生产入库单");
+                DgvOpt.SetColMiddleCenter(dgvList, "已生成销货单");
+
+                DgvOpt.SetColWidth(dgvList, "打印序号", 60);
+                DgvOpt.SetColWidth(dgvList, "栈板号", 60);
+                DgvOpt.SetColWidth(dgvList, "箱数", 40);
+                DgvOpt.SetColWidth(dgvList, "正在打印", 60);
+                DgvOpt.SetColWidth(dgvList, "已打印", 60);
+                DgvOpt.SetColWidth(dgvList, "异常", 40);
+                DgvOpt.SetColWidth(dgvList, "时间", 120);
+                DgvOpt.SetColWidth(dgvList, "已生成", 120);
+                DgvOpt.SetColWidth(dgvList, "销货单别", 60);
+                DgvOpt.SetColWidth(dgvList, "生产入库单别", 90);
             }
-
-            DgvOpt.SelectLastRow(dgvList, rowIndex);
-
-            DgvOpt.SetColHeadMiddleCenter(dgvList);
-
-            DgvOpt.SetColMiddleCenter(dgvList, "打印序号");
-            DgvOpt.SetColMiddleCenter(dgvList, "栈板号");
-            DgvOpt.SetColMiddleCenter(dgvList, "箱数");
-            DgvOpt.SetColMiddleCenter(dgvList, "正在打印");
-            DgvOpt.SetColMiddleCenter(dgvList, "已打印");
-            DgvOpt.SetColMiddleCenter(dgvList, "异常");
-            DgvOpt.SetColMiddleCenter(dgvList, "已生成生产入库单");
-            DgvOpt.SetColMiddleCenter(dgvList, "已生成销货单");
-
-            DgvOpt.SetColWidth(dgvList, "打印序号", 60);
-            DgvOpt.SetColWidth(dgvList, "栈板号", 60);
-            DgvOpt.SetColWidth(dgvList, "箱数", 40);
-            DgvOpt.SetColWidth(dgvList, "正在打印", 60);
-            DgvOpt.SetColWidth(dgvList, "已打印", 60);
-            DgvOpt.SetColWidth(dgvList, "异常", 40);
-            DgvOpt.SetColWidth(dgvList, "时间", 120);
-            DgvOpt.SetColWidth(dgvList, "已生成", 120);
-            DgvOpt.SetColWidth(dgvList, "销货单别", 60);
-            DgvOpt.SetColWidth(dgvList, "生产入库单别", 90);
-
         }
 
         private void dgvList_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -429,12 +417,13 @@ namespace 码垛线_ERP单据生成程序
                 btnPrintPreview.Enabled = true;
             }
             
-            dgvDetail_Show(GetDetailData());
+            dgvDetail_Show(GetDetailData_Show());
+            dgvDetail_Show2(GetDetailData_List());
 
             tabControl1.SelectedTab = tabControl1.TabPages[1];
         }
 
-        private DataTable GetDetailData()
+        private DataTable GetDetailData_Show()
         {
             label3.Text = tg001;
             label4.Text = tg002;
@@ -453,16 +442,59 @@ namespace 码垛线_ERP单据生成程序
                                 LEFT JOIN [192.168.0.99].COMFORT.dbo.CMSMV ON COPTG.CREATOR = CMSMV.MV001 
                                 WHERE RTRIM(TH001) = '{0}' AND RTRIM(TH002) = '{1}'
                                 ORDER BY COPTH.TH003";
-            DataTable dt = mssql.SQLselect(connRobot, string.Format(sqlstr, tg001, tg002));
+            DataTable dt = mssql.SQLselect(connMD, string.Format(sqlstr, tg001, tg002));
             return dt;
+        }
+
+        private DataTable GetDetailData_List()
+        {
+            string sqlstr = @"SELECT PrintId 打印序号, SC001 订单号, COUNT(*) 数量 FROM PdData 
+                                WHERE Pd_Sta = 'OK'
+                                AND PrintId = {0} 
+                                GROUP BY PrintId, SC001 
+                                ORDER BY SC001";
+            DataTable dt = mssql.SQLselect(connMD, string.Format(sqlstr, printId));
+            return dt;
+        }
+
+
+        #endregion
+
+        #region 记录明细预览
+        private void dgvDetail_Show2(DataTable dt)
+        {
+            dgvDetail.DataSource = null;
+            if (dt != null)
+            {
+                dgvDetail2.DataSource = dt;
+                DgvOpt.SetRowBackColor(dgvDetail2);
+                DgvOpt.SetColWidth(dgvDetail2, "订单号", 150);
+                dgvDetail2.ReadOnly = true;
+                DgvOpt.SetColMiddleCenter(dgvDetail2);
+                DgvOpt.SetColHeadMiddleCenter(dgvDetail2);
+            }
         }
         #endregion
 
         #region 打印列表明细
+        private void SetShowListTimer()
+        {
+            timerUpdate = new System.Timers.Timer(5 * 1000);//实例化Timer类，设置间隔时间为1000毫秒；
+            timerUpdate.Elapsed += new System.Timers.ElapsedEventHandler(ShowListTimerWork);//到达时间的时候执行事件；
+            timerUpdate.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
+            timerUpdate.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+        }
+
+        private void ShowListTimerWork(object source, System.Timers.ElapsedEventArgs e) //自动更新定时器溢出执行
+        {
+            DelegateShowListWork delegateShowLIstWork = new DelegateShowListWork(GetListData);
+            BeginInvoke(delegateShowLIstWork);
+        }
+
         private void GetListData() //打印列表显示信息的获取
         {
             string sqlstr = @"SELECT * FROM VPrintList WHERE (CONVERT(VARCHAR(20), 创建时间, 112) = CONVERT(VARCHAR(20), GETDATE(), 112) OR CONVERT(VARCHAR(20), 销货单生成时间, 112) = CONVERT(VARCHAR(20), GETDATE(), 112)) ORDER BY 打印序号";
-            DataTable dt = mssql.SQLselect(connRobot, sqlstr);
+            DataTable dt = mssql.SQLselect(connMD, sqlstr);
             dgvList_Show(dt);
         }
         #endregion
@@ -504,19 +536,19 @@ namespace 码垛线_ERP单据生成程序
         #region 定时器主逻辑
         private void WorkStart()
         {
-            if (autoOutXhFlag == "Y")
+            if (autoOutXhFlag == "Y" && !globalStopFlag)
             {
                 this.Text += "    -生成销货单已开启";
                 SetOutXhTimer();
             }
 
-            if (autoOutScrkFlag == "Y")
+            if (autoOutScrkFlag == "Y" && !globalStopFlag)
             {
                 this.Text += "    -生成生产入库单已开启";
                 SetOutScrkTimer();
             }
 
-            if (autoPrintFlag == "Y")
+            if (autoPrintFlag == "Y" && !globalStopFlag)
             {
                 this.Text += "    -自动打印已开启";
                 SetPrintTimer();
@@ -527,7 +559,8 @@ namespace 码垛线_ERP单据生成程序
                 this.Text += "    -自动更新程序已开启";
                 SetUpdateTimer();
             }
-            GetListData();
+            SetShowListTimer();
+            //GetListData();
         }
         #endregion
 
@@ -540,7 +573,7 @@ namespace 码垛线_ERP单据生成程序
             timerUpdate.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
         }
 
-        private void SoftwareUpdateTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
+        private void SoftwareUpdateTimerWork(object source, System.Timers.ElapsedEventArgs e) //自动更新定时器溢出执行
         {
             DelegateUpdateWork delegateUpdateWork = new DelegateUpdateWork(SoftwareUpdate);
             dgvList.BeginInvoke(delegateUpdateWork);
@@ -567,7 +600,7 @@ namespace 码垛线_ERP单据生成程序
             timerPrint.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
         }
 
-        private void PrintTimerWork(object source, System.Timers.ElapsedEventArgs e) //销货单生成定时器溢出执行
+        private void PrintTimerWork(object source, System.Timers.ElapsedEventArgs e) //自动打印定时器溢出执行
         {
             workPrintFlag = true;
             PrintWork();
@@ -590,7 +623,7 @@ namespace 码垛线_ERP单据生成程序
                                 WHERE STATUSS = 0 AND XhOutFlag = 1 AND PrintFlag = 0 AND PrintingFlag = 0
                                 ORDER BY Create_Date ";
 
-            DataTable dt = mssql.SQLselect(connRobot, sqlstr);
+            DataTable dt = mssql.SQLselect(connMD, sqlstr);
 
             if (dt != null)
             {
@@ -600,7 +633,7 @@ namespace 码垛线_ERP单据生成程序
                 string printFileName = dt.Rows[0][3].ToString();
                 string printIdc = dt.Rows[0][4].ToString();
 
-                mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintingFlag = 1 WHERE PrintId = {0}",
+                mssql.SQLexcute(connMD, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintingFlag = 1 WHERE PrintId = {0}",
                                                             printIdc));
 
 
@@ -613,7 +646,7 @@ namespace 码垛线_ERP单据生成程序
                 report.PrintSettings.ShowDialog = false;
                 report.Print();
 
-                mssql.SQLexcute(connRobot, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintFlag = 1, PrintDate = getdate(), PrintingFlag = 0 WHERE PrintId = {0}",
+                mssql.SQLexcute(connMD, string.Format(" UPDATE ROBOT_TEST.dbo.PrintData SET PrintFlag = 1, PrintDate = getdate(), PrintingFlag = 0 WHERE PrintId = {0}",
                                                             printIdc));
             }
         }
@@ -638,15 +671,12 @@ namespace 码垛线_ERP单据生成程序
         {
             workXhFlag = true;
             XhCreateWork();
-            GetListData();
             workXhFlag = false;
         }
 
         private void XhCreateWork() 
         {
-            //string sqlstr = @" EXEC ROBOT_TEST.dbo.P_COPTG_CREATE_WORK ";
-            //mssql.SQLexcute(connRobot, sqlstr);
-            ERP_Create_Coptg_Md coptgMd = new ERP_Create_Coptg_Md(connYF, connRobot);
+            ERP_Create_Coptg_Md coptgMd = new ERP_Create_Coptg_Md(connYF, connMD);
             coptgMd.HandelDef();
         }
         #endregion
@@ -671,21 +701,13 @@ namespace 码垛线_ERP单据生成程序
         {
             workScrkFlag = true;
             ScrkCreateWork();
-            GetListData();
             workScrkFlag = false;
         }
 
         private void ScrkCreateWork() 
         {
-            ERP_Create_Moctf_Md moctfMd = new ERP_Create_Moctf_Md(connYF, connRobot);
+            ERP_Create_Moctf_Md moctfMd = new ERP_Create_Moctf_Md(connYF, connMD);
             moctfMd.HandelDef();
-        }
-        #endregion
-        
-        #region 测试项
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PrintWork();
         }
         #endregion
     }
