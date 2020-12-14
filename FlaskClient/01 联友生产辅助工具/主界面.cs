@@ -549,7 +549,8 @@ namespace HarveyZ
         #region 品管部
         private void 品管部_成品标签打印ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FormLogin.StopModuleOpen())
+            //if (FormLogin.StopModuleOpen())
+            if (false)
             {
                 成品标签打印 frm = new 成品标签打印("品管部_成品标签打印");
                 FormOpenInit(frm);
@@ -563,7 +564,9 @@ namespace HarveyZ
         {
             if (FormLogin.StopModuleOpen())
             {
-
+                排程物料导出_采购 frm = new 排程物料导出_采购("采购_排程物料导出");
+                FormOpenInit(frm);
+                frm.Show();
             }
         }
 

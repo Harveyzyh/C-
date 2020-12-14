@@ -82,10 +82,13 @@ namespace HarveyZ.仓储中心
 
                     for (int rowIdx2 = 0; rowIdx2 < infObj.gdDt.Rows.Count; rowIdx2++)
                     {
-                        if (dtRow[0].ToString() == infObj.gdDt.Rows[rowIdx2][0].ToString() && dtRow[1].ToString() == infObj.gdDt.Rows[rowIdx2][1].ToString())
+                        if (infObj.gdDt.Rows.Count > 0)
                         {
-                            flag = false;
-                            break;
+                            if (dtRow[0].ToString() == infObj.gdDt.Rows[rowIdx2][0].ToString() && dtRow[1].ToString() == infObj.gdDt.Rows[rowIdx2][1].ToString())
+                            {
+                                flag = false;
+                                break;
+                            }
                         }
                     }
                     if (flag) infObj.gdDt.ImportRow(dtRow);
@@ -96,18 +99,18 @@ namespace HarveyZ.仓储中心
 
         private void GetDt()
         {
-            //string slqStr = "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
-            //        + " WHERE 部门编号 LIKE '%{1}%' AND 贸易方式 LIKE '%{2}%' "
-            //        + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' "
-            //        + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
-            //        + " {3} ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)";
-
-
             string slqStr = "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
-                    + " WHERE 1=1  "
+                    + " WHERE 部门编号 LIKE '%{1}%' AND 贸易方式 LIKE '%{2}%' "
                     + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' "
                     + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
                     + " {3} ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)";
+
+
+            //string slqStr = "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
+            //        + " WHERE 1=1 AND 部门编号 LIKE '%{1}%' "
+            //        + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' "
+            //        + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
+            //        + " {3} ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)";
 
             string slqStr2 = " AND  RTRIM(工单单号) IN ({0}) ";
             string slqStr3 = "";
@@ -150,11 +153,6 @@ namespace HarveyZ.仓储中心
 
         private void GetDt2()
         {
-            //string slqStr = @"SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd 
-            //                    WHERE 部门编号='{0}' AND 贸易方式='{1}' AND 审核日期 = convert(varchar(8), getdate(), 112) 
-            //                    AND NOT EXISTS(SELECT 1 FROM MOCTE WHERE TE011 = 工单单别 AND TE012 = 工单单号)";
-
-
             string slqStr = @"SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd 
                                 WHERE 审核日期 = convert(varchar(8), getdate(), 112) 
                                 AND NOT EXISTS(SELECT 1 FROM MOCTE WHERE TE011 = 工单单别 AND TE012 = 工单单号)";

@@ -216,7 +216,7 @@ namespace ERP定时任务
         private void SoftwareUpdateTimerWork(object source, System.Timers.ElapsedEventArgs e) 
         {
             delegateUpdateWork = new DelegateUpdateWork(SoftwareUpdate);
-            textBoxLog.BeginInvoke(delegateUpdateWork);
+            BeginInvoke(delegateUpdateWork);
         }
 
         private void SoftwareUpdate() 
@@ -279,9 +279,9 @@ namespace ERP定时任务
             //计算品号纸箱尺寸
             if ((dayOfWeek == 1 || dayOfWeek == 3 || dayOfWeek == 5) && hour == 1 && minute == 0) textBoxLog.BeginInvoke(delegateBoxSizeMainWork);
             //计算标准BOM
-            if ((dayOfWeek == 1 || dayOfWeek == 3) && hour == 1 && minute == 10) textBoxLog.BeginInvoke(delegateBomListMainWork);
+            if ((dayOfWeek == 1 || dayOfWeek == 3) && hour == 1 && minute == 10) BeginInvoke(delegateBomListMainWork);
             //自动跑Lrp计划
-            if (minute == 0) textBoxLog.BeginInvoke(delegateAutoLrpMainWork);
+            if (minute == 0) BeginInvoke(delegateAutoLrpMainWork);
         }
 
         private void BOMB05MainWork()
@@ -438,38 +438,6 @@ namespace ERP定时任务
                 logAppendText("GetBomList: Work Start!");
                 thread.Start();
             }
-        }
-        #endregion
-
-        #region 测试
-        private void SetTestTimer()
-        {
-            mainTimer = new System.Timers.Timer(5 * 1000);//实例化Timer类，设置间隔时间为1000毫秒；
-            mainTimer.Elapsed += new System.Timers.ElapsedEventHandler(testTimerWork);//到达时间的时候执行事件；
-            mainTimer.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
-            mainTimer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-
-            //代理初始化
-            delegateTestMainWork = new DelegateMainWork(TestMainWork);
-        }
-
-        private void testTimerWork(object source, System.Timers.ElapsedEventArgs e)
-        {
-            int dayOfWeek = int.Parse(DateTime.Now.DayOfWeek.ToString("d"));
-            int year = DateTime.Now.Year;
-            int month = DateTime.Now.Month;
-            int day = DateTime.Now.Day;
-            int hour = DateTime.Now.Hour;
-            int minute = DateTime.Now.Minute;
-            
-            //测试
-            textBoxLog.BeginInvoke(delegateTestMainWork);
-        }
-
-        private void TestMainWork()
-        {
-            logAppendText("Test Work Start!");
-            textBoxLog.BeginInvoke(delegateBomListMainWork);
         }
         #endregion
     }

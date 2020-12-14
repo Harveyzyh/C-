@@ -129,7 +129,6 @@
     <Compile Include="Module\DataGridViewAutoFilter.cs" />
     <Compile Include="Module\ERPClass.cs" />
     <Compile Include="Module\Global.cs" />
-    <Compile Include="Module\ClassNormal.cs" />
     <Compile Include="Module\ClassPermission.cs" />
     <Compile Include="Module\ClassBasic.cs" />
     <Compile Include="Module\IniHelper.cs" />

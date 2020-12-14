@@ -110,6 +110,8 @@ namespace HarveyZ.生管排程
                 DtpEndWorkDate.Enabled = false;
                 CmBoxDptType.Enabled = false;
                 TxBoxDptWorkTime.Enabled = false;
+                //DtpStartDdDate.Checked = true;
+                //DtpEndDdDate.Checked = true;
             }
             else
             {
@@ -321,7 +323,7 @@ namespace HarveyZ.生管排程
         #region 右键按钮处理逻辑
         private void SetContextMenuStripTypeList()
         {
-            if (printFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("打印成品标签");
+            //if (printFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("打印成品标签");
             if (editFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("查看工单信息");
             contextMenuStrip_DgvMain.Items.Add("复制");
             contextMenuStrip_DgvMain.Items.Add("查询当前订单号");
@@ -474,7 +476,7 @@ namespace HarveyZ.生管排程
                                 LEFT JOIN MOCTA ON RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028) = SC001 AND TA015 = SC013 AND TA006 = SC028 AND TA013 NOT IN ('V', 'U') AND TA011 NOT IN ('y') 
                                 WHERE 1=1
                                 AND NOT EXISTS(SELECT 1 FROM WG_DB..SC_PLAN AS SC2 WHERE SC_PLAN.SC001 = SC2.SC001 GROUP BY SC2.SC001, SC2.SC003, SC2.SC013, SC2.SC023 HAVING COUNT(*) > 1)
-                                AND NOT EXISTS(SELECT 1 FROM MOCTA AS TA2 WHERE RTRIM(TA2.TA026)+'-'+RTRIM(TA2.TA027)+'-'+RTRIM(TA2.TA028) = SC001 GROUP BY RTRIM(TA2.TA026)+'-'+RTRIM(TA2.TA027)+'-'+RTRIM(TA2.TA028), TA015 HAVING COUNT(*) > 1)
+                                AND NOT EXISTS(SELECT 1 FROM MOCTA AS TA2 WHERE RTRIM(TA2.TA026)+'-'+RTRIM(TA2.TA027)+'-'+RTRIM(TA2.TA028) = SC001 AND TA2.TA015 = SC013 AND TA2.TA006 = SC028 GROUP BY RTRIM(TA2.TA026)+'-'+RTRIM(TA2.TA027)+'-'+RTRIM(TA2.TA028), TA015 HAVING COUNT(*) > 1)
                                 AND TA001 = '5101'
                                 AND (MOCTA.UDF02 IS NULL OR MOCTA.UDF02 != SC_PLAN.K_ID)
                                 AND SC003 >= '20200901'";
@@ -673,7 +675,7 @@ namespace HarveyZ.生管排程
                                     SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期 
                                     FROM WG_DB.dbo.SC_PLAN 
             */
-            string slqStrShow = @" SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, RTRIM(COPTD.TD005) 品名, 
+            string sqlStrShow = @" SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, RTRIM(COPTD.TD005) 品名, 
                                     RTRIM(COPTD.TD006) 规格, RTRIM(COPTD.UDF08) 保友品名, SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, 
                                     ISNULL(SC3013, 0) 总已排数量, ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) 绑定工单生产数量, 
                                     CAST(ISNULL(INVMB.UDF51 * SC013, 0) AS FLOAT) 生产工时, 
@@ -696,17 +698,18 @@ namespace HarveyZ.生管排程
 										AS MOCTA ON MOCTA.TD = SC001 AND MOCTA.UDF02 = K_ID AND MOCTA.TA006 = SC028 
                                     LEFT JOIN COMFORT.dbo.INVMB ON TD004 = MB001 
                                     WHERE 1 = 1 ";
-            if (TxBoxOrder.Text != "") slqStrShow += @" AND SC001 LIKE '%" + TxBoxOrder.Text + "%' ";
-            if (TxBoxName.Text != "") slqStrShow += @" AND SC010 LIKE '%" + TxBoxName.Text + "%' ";
-            if (DtpStartWorkDate.Checked) slqStrShow += @" AND SC003 >= '" + DtpStartWorkDate.Value.ToString("yyyyMMdd") + "' ";
-            if (DtpEndWorkDate.Checked) slqStrShow += @" AND SC003 <= '" + DtpEndWorkDate.Value.ToString("yyyyMMdd") + "' ";
-            if (CmBoxDptType.Text != "全部") slqStrShow += @" AND SC023 LIKE '" + CmBoxDptType.Text + "' ";
-            if (CmBoxShowType.Text == "总已排数量>ERP订单数量") slqStrShow += @"AND SC3013 > ISNULL(CAST(TD008 AS FLOAT), 0) ";
-            if (CmBoxShowType.Text == "总已排数量<ERP订单数量") slqStrShow += @"AND SC3013 < ISNULL(CAST(TD008 AS FLOAT), 0) ";
-            if (CmBoxShowType.Text == "上线数量不等于绑定工单产量") slqStrShow += @"AND SC013 != ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) ";
-            if (CmBoxShowType.Text == "已排但存在变更订单") slqStrShow += @"AND COPTD.UDF12 > SC029 ";
-            slqStrShow += " ORDER BY SC003, SC001 ";
-            DataTable showDt = mssql.SQLselect(connWG, slqStrShow);
+            if (TxBoxOrder.Text != "") sqlStrShow += string.Format(@" AND SC001 LIKE '%{0}%' ", TxBoxOrder.Text);
+            if (TxBoxName.Text != "") sqlStrShow += string.Format(@" AND SC010 LIKE '%{0}%' ", TxBoxName.Text);
+            if (TxBoxWlno.Text != "") sqlStrShow += string.Format(@" AND SC028 LIKE '%{0}%' ", TxBoxWlno.Text);
+            if (DtpStartWorkDate.Checked) sqlStrShow += string.Format(@" AND SC003 >= '{0}' ", DtpStartWorkDate.Value.ToString("yyyyMMdd"));
+            if (DtpEndWorkDate.Checked) sqlStrShow += string.Format(@" AND SC003 <= '{0}' ", DtpEndWorkDate.Value.ToString("yyyyMMdd"));
+            if (CmBoxDptType.Text != "全部") sqlStrShow += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
+            if (CmBoxShowType.Text == "总已排数量>ERP订单数量") sqlStrShow += @"AND SC3013 > ISNULL(CAST(TD008 AS FLOAT), 0) ";
+            if (CmBoxShowType.Text == "总已排数量<ERP订单数量") sqlStrShow += @"AND SC3013 < ISNULL(CAST(TD008 AS FLOAT), 0) ";
+            if (CmBoxShowType.Text == "上线数量不等于绑定工单产量") sqlStrShow += @"AND SC013 != ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) ";
+            if (CmBoxShowType.Text == "已排但存在变更订单") sqlStrShow += @"AND COPTD.UDF12 > SC029 ";
+            sqlStrShow += " ORDER BY SC003, SC001 ";
+            DataTable showDt = mssql.SQLselect(connWG, sqlStrShow);
 
             if (showDt != null)
             {
@@ -857,7 +860,7 @@ namespace HarveyZ.生管排程
 
         private void DgvShow2()
         {
-            string slqStrShow = @"SELECT RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) AS 订单号, RTRIM(MA002) AS 客户名称, RTRIM(TD004) AS 品号, RTRIM(TD005) AS 品名, RTRIM(TD006) AS 规格, 
+            string sqlStrShow = @"SELECT RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) AS 订单号, RTRIM(MA002) AS 客户名称, RTRIM(TD004) AS 品号, RTRIM(TD005) AS 品名, RTRIM(TD006) AS 规格, 
                                     CAST(TD008 AS FLOAT) AS 订单数量, RTRIM(TD053) AS 配置方案, TD013 预交货日, COPTD.UDF12 AS 订单时间
                                     FROM COMFORT.dbo.COPTD 
                                     INNER JOIN COMFORT.dbo.COPTC ON TC001 = TD001 AND TC002 = TD002 AND TC027 = 'Y' AND TD016 NOT IN ('Y', 'y') AND TD008-TD009 > 0 
@@ -868,10 +871,13 @@ namespace HarveyZ.生管排程
                                     AND SC001 IS NULL 
                                     AND LEFT(COPTD.UDF12, 8) >= '20200301'
                                     AND TC001 NOT IN ('2217') ";
-            if (TxBoxOrder.Text != "") slqStrShow += @" AND RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) LIKE '%" + TxBoxOrder.Text + "%' ";
-            if (TxBoxName.Text != "") slqStrShow += @" AND TD005 LIKE '%" + TxBoxName.Text + "%' ";
-            slqStrShow += " ORDER BY COPTD.UDF12, RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) ";
-            DataTable showDt = mssql.SQLselect(connWG, slqStrShow);
+            if (TxBoxOrder.Text != "") sqlStrShow += string.Format(@" AND RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) LIKE '%{0}%' ", TxBoxOrder.Text);
+            if (TxBoxName.Text != "") sqlStrShow += string.Format(@" AND TD005 LIKE '%{0}%' ", TxBoxName.Text);
+            if (TxBoxWlno.Text != "") sqlStrShow += string.Format(@" AND TD004 LIKE '%{0}%' ", TxBoxWlno.Text);
+            if (DtpStartDdDate.Checked) sqlStrShow += string.Format(@"AND LEFT(COPTD.UDF12, 8) >= '{0}' ", DtpStartDdDate.Value.ToString("yyyyMMdd"));
+            if (DtpEndDdDate.Checked) sqlStrShow += string.Format(@"AND LEFT(COPTD.UDF12, 8) <= '{0}' ", DtpEndDdDate.Value.ToString("yyyyMMdd"));
+            sqlStrShow += " ORDER BY COPTD.UDF12, RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) ";
+            DataTable showDt = mssql.SQLselect(connWG, sqlStrShow);
 
             if (showDt != null)
             {

@@ -285,3 +285,121 @@ Y:\GitHub\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\联友生产辅�
 \\Mac\Home\Documents\1 开发\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程导入.resources
 \\Mac\Home\Documents\1 开发\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门选择.resources
 \\Mac\Home\Documents\1 开发\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.自动LRP计划队列.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
+C:\C#\C#\01 联友生产辅助工具\bin\Debug\联友生产辅助工具.exe
+C:\C#\C#\01 联友生产辅助工具\bin\Debug\联友生产辅助工具.pdb
+C:\C#\C#\01 联友生产辅助工具\bin\Debug\FastReport.dll
+C:\C#\C#\01 联友生产辅助工具\bin\Debug\FastReport.Bars.dll
+C:\C#\C#\01 联友生产辅助工具\bin\Debug\FastReport.Editor.dll
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csprojResolveAssemblyReference.cache
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入退货单.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单_Excel导入.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入退货单_获取单据信息.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.生成领料单_获取单据信息.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.生成领料单.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FastReport打印预览.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.品管.成品标签打印.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.报表.销货信息_带入库部门_查询.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表部门工作组线别维护.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.工单信息管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.排程物料导出_生产.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程修改.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.数据导入中.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.未排订单查询.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程导入.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门选择.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门添加.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.自动LRP计划队列.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.订单信息查询.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.ERP单据预览.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线_ERP单据生成程序.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线报表.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线客户端.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱名称添加.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱名称管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.订单类别编码管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.订单类别编码添加.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱编码添加.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.主界面.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单_获取单据信息.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.扫描领料单.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.Properties.Resources.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表修改.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表新增.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表查询.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表维护组别系列.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表获取组别系列.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线排程导入.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱编码管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FastReport模板发布.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.权限管理.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.版本发布.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.维护ERP.客户配置维护_勾选项替换.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.成本异常报表导出.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.排程物料导出_采购.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.批量采购数量汇总.resources
+C:\C#\C#\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csproj.GenerateResource.Cache
+C:\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.exe
+C:\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.pdb
+C:\C#\01 联友生产辅助工具\bin\Debug\联友生产辅助工具.exe
+C:\C#\01 联友生产辅助工具\bin\Debug\联友生产辅助工具.pdb
+C:\C#\01 联友生产辅助工具\bin\Debug\FastReport.dll
+C:\C#\01 联友生产辅助工具\bin\Debug\FastReport.Bars.dll
+C:\C#\01 联友生产辅助工具\bin\Debug\FastReport.Editor.dll
+C:\C#\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csprojResolveAssemblyReference.cache
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入退货单.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单_Excel导入.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入退货单_获取单据信息.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.生成领料单_获取单据信息.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.生成领料单.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FastReport打印预览.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.品管.成品标签打印.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.报表.销货信息_带入库部门_查询.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表部门工作组线别维护.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.工单信息管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.排程物料导出_生产.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程修改.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.数据导入中.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.未排订单查询.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程导入.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门选择.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门添加.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.生产排程部门管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.自动LRP计划队列.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.订单信息查询.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.ERP单据预览.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线_ERP单据生成程序.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线报表.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线客户端.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱名称添加.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱名称管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.订单类别编码管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.订单类别编码添加.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱编码添加.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FormLogin.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.主界面.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单_获取单据信息.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.录入进货单.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.仓储中心.扫描领料单.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\联友生产辅助工具.Properties.Resources.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表修改.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表新增.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表查询.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表维护组别系列.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生产日报表.日报表获取组别系列.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.码垛线排程导入.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.生管码垛线.纸箱编码管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.FastReport模板发布.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.权限管理.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.版本发布.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.维护ERP.客户配置维护_勾选项替换.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.成本异常报表导出.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.排程物料导出_采购.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.批量采购数量汇总.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csproj.GenerateResource.Cache

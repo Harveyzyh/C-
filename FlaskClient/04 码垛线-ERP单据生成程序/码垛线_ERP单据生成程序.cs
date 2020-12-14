@@ -448,7 +448,7 @@ namespace 码垛线_ERP单据生成程序
 
         private DataTable GetDetailData_List()
         {
-            string sqlstr = @"SELECT PrintId 打印序号, SC001 订单号, COUNT(*) 数量 FROM PdData 
+            string sqlstr = @"SELECT PrintId 打印序号, SC001 订单号, COUNT(*) 数量 FROM PdData_BAK 
                                 WHERE Pd_Sta = 'OK'
                                 AND PrintId = {0} 
                                 GROUP BY PrintId, SC001 

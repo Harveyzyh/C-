@@ -215,6 +215,7 @@ namespace HarveyZ.仓储中心
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            infObj.dhs = "";
             infObj.order = textBoxOrder.Text;
             infObj.cpName = textBoxCpName.Text;
             infObj.orderNum = textBoxOrderNum.Text;
@@ -476,11 +477,20 @@ namespace HarveyZ.仓储中心
 
         public void work()
         {
+            // 按工单单一生成
+            //infObj.gdDtTmp = infObj.gdDt.Clone();
             //for (int rowIdx = 0; rowIdx < infObj.gdDt.Rows.Count; rowIdx++)
             //{
-            //infObj.gdRow = infObj.gdDt.Rows[rowIdx];
+            //    infObj.gdDtTmp.Clear();
+            //    infObj.gdDtTmp.ImportRow(infObj.gdDt.Rows[rowIdx]);
+            //
+
+            // 不按工单单一生成
             if (infObj.gdDt != null)
             {
+                infObj.gdDtTmp = infObj.gdDt.Copy();
+                //
+
                 MoctcIns();
                 MoctdIns();
                 MoctdUdt();
@@ -499,9 +509,9 @@ namespace HarveyZ.仓储中心
         
         private void MoctcIns()
         {
-            infObj.tradeMode = infObj.gdDt.Rows[0]["贸易方式"].ToString();
-            infObj.center = infObj.gdDt.Rows[0]["工作中心"].ToString();
-            infObj.dpt = infObj.gdDt.Rows[0]["部门编号"].ToString();
+            infObj.tradeMode = infObj.gdDtTmp.Rows[0]["贸易方式"].ToString();
+            infObj.center = infObj.gdDtTmp.Rows[0]["工作中心"].ToString();
+            infObj.dpt = infObj.gdDtTmp.Rows[0]["部门编号"].ToString();
 
             string slqStr = "INSERT INTO MOCTC(COMPANY, CREATOR, CREATE_DATE, FLAG, TC001, TC002, TC003, TC004, TC005, TC006, TC007, TC008, TC009, TC010, "
                           + "TC011, TC012, TC013, TC014, TC015, TC016, TC017, TC018, TC019, TC020, TC021, TC022, TC023, TC024, TC025, TC026, TC027, TC028, "
@@ -518,9 +528,9 @@ namespace HarveyZ.仓储中心
                           + "TD010, TD011, TD012, TD013, TD014, TD015, TD016, TD017, TD018, TD019, TD020, TD021, TD022, TD023, TD024, TD025, TDC01) "
                           + "VALUES ('COMFORT   ', '{6}', '', dbo.f_getTime(1), 1, '{0}', '{1}', '{2}', '{3}', '3', {4}, '{5}', '1', "
                           + "'', '', '', '', 'N', '', '*', '', '2', '', 'N', ' ', '', '', .000000, .000000, .000000, '2');";
-            for (int rowIdx = 0; rowIdx < infObj.gdDt.Rows.Count; rowIdx++)
+            for (int rowIdx = 0; rowIdx < infObj.gdDtTmp.Rows.Count; rowIdx++)
             {
-                DataRow row = infObj.gdDt.Rows[rowIdx];
+                DataRow row = infObj.gdDtTmp.Rows[rowIdx];
 
                 string gdb = row[0].ToString();
                 string gdh = row[1].ToString();
@@ -643,16 +653,10 @@ namespace HarveyZ.仓储中心
         private bool _generateSucc = false;
 
         private DataTable _gdDt = null;
-        private DataRow _gdRow = null;
+        private DataTable _gdDtTmp = null;
 
         private string _groupList = "";
 
-        public string getGdslqStr { get { return "SELECT CAST(0 AS BIT) 选择, V_GetWscGd.* From V_GetWscGd "
-                    + " WHERE 部门编号='{1}' AND 贸易方式='{2}' "
-                    + " AND (RTRIM(工单单别) + '-' + RTRIM(工单单号) LIKE '%{0}%' OR 订单号 LIKE '%{0}%' " 
-                    + " OR 椅型 LIKE '%{0}%' OR 规格 LIKE '%{0}%' OR 成品品号 LIKE '%{0}%' OR 客户编号 LIKE '%{0}%') "
-                    + " ORDER BY RTRIM(工单单别) + '-' + RTRIM(工单单号)"; } }
-        
         public string db { get { return _db; } set { _db = value; } }
         public string dh { get { return _dh; } set { _dh = value; } }
         public string dhs { get { return _dhs; } set { _dhs = value; } }
@@ -667,7 +671,7 @@ namespace HarveyZ.仓储中心
         public int gdScCount { get { return _gdScCount; }set { _gdScCount = value; } }
         public bool gengerateSucc { get { return _generateSucc; } set { _generateSucc = value; } }
         public DataTable gdDt { get { return _gdDt; } set { _gdDt = value; } }
-        public DataRow gdRow { get { return _gdRow; } set { _gdRow = value; } }
+        public DataTable gdDtTmp { get { return _gdDtTmp; } set { _gdDtTmp = value; } }
         public string GroupList { get { return _groupList; } set { _groupList = value; } }
     }
 }

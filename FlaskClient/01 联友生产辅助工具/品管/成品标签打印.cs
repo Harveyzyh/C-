@@ -149,7 +149,7 @@ namespace HarveyZ.品管
                     TextBoxJdCode.Text = dt.Rows[0]["描述备注"].ToString();
 
                     string colorStr = dt.Rows[0]["配置方案"].ToString();
-                    if(colorStr.Substring(0 ,2) == "保友")
+                    if(colorStr.Substring(0 ,2) == "保友" || colorStr.Substring(0, 2) == "京东" || colorStr.Substring(0, 2) == "电商")
                     {
                         colorStr = colorStr.Substring(3, colorStr.Length).TrimStart();
                     }

@@ -35,3 +35,12 @@ Y:\GitHub\C-\FlaskClient\04 码垛线-ERP单据生成程序\obj\Release\HarveyZ.
 \\Mac\Home\Documents\1 开发\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.Properties.Resources.resources
 \\Mac\Home\Documents\1 开发\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.码垛线_ERP单据生成程序.resources
 \\Mac\Home\Documents\1 开发\C#\04 码垛线-ERP单据生成程序\obj\Release\4 码垛线-ERP单据生成程序.csproj.GenerateResource.Cache
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线-ERP单据生成程序.exe
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线-ERP单据生成程序.pdb
+C:\C#\04 码垛线-ERP单据生成程序\bin\Release\码垛线-ERP单据生成程序.exe
+C:\C#\04 码垛线-ERP单据生成程序\bin\Release\码垛线-ERP单据生成程序.pdb
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\4 码垛线-ERP单据生成程序.csprojResolveAssemblyReference.cache
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\HarveyZ.FastReportPreview.resources
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.Properties.Resources.resources
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\码垛线_ERP单据生成程序.码垛线_ERP单据生成程序.resources
+C:\C#\04 码垛线-ERP单据生成程序\obj\Release\4 码垛线-ERP单据生成程序.csproj.GenerateResource.Cache

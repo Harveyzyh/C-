@@ -602,6 +602,127 @@ namespace HarveyZ
     
     public class DgvOpt
     {
+        #region 显示
+        /// <summary>
+        /// 标准初始化
+        /// </summary>
+        /// <param name="dgv">dgv控件</param>
+        /// <param name="readOnlyFlag">dgv是否整体只读</param>
+        /// <param name="colHeadMiddleFlag">dgv列头是否居中显示</param>
+        /// <param name="colMiddleCenterFlag">dgv单元格是否整体居中显示</param>
+        public static void NormalInit(DataGridView dgv, bool readOnlyFlag = false, bool colHeadMiddleFlag = false, bool colMiddleCenterFlag = false)
+        {
+            SetRowBackColor(dgv);
+
+            if (readOnlyFlag)
+            {
+                SetColReadonly(dgv);
+            }
+            if (colHeadMiddleFlag)
+            {
+                SetColHeadMiddleCenter(dgv);
+            }
+            if (colMiddleCenterFlag)
+            {
+                SetColMiddleCenter(dgv);
+            }
+        }
+
+        public static void SetShow(DataGridView dgv)
+        {
+            dgv.DataSource = null;
+        }
+
+        public static void SetShow(DataGridView dgv, DataTable dt)
+        {
+            if(dt != null)
+            {
+                dgv.DataSource = dt;
+            }
+            else
+            {
+                Msg.Show("没有数据！");
+            }
+        }
+
+        public static void SetShow(DataGridView dgv, DataView dv)
+        {
+            if (dv != null)
+            {
+                dgv.DataSource = dv;
+            }
+            else
+            {
+                Msg.Show("没有数据！");
+            }
+        }
+        #endregion
+
+        #region 数据处理
+        public static object GetCellValue(DataGridView dgv, int rowIndex, int colIndex)
+        {
+            if (dgv != null)
+            {
+                if(dgv.Rows.Count >= rowIndex && dgv.Columns.Count >= colIndex)
+                {
+                    return dgv.Rows[rowIndex].Cells[colIndex].Value;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static object GetCellValue(DataGridView dgv, int rowIndex, string colName)
+        {
+            if (dgv != null)
+            {
+                if (dgv.Columns.Contains(colName))
+                {
+                    int colIndex = dgv.Columns[colName].Index;
+                    return GetCellValue(dgv, rowIndex, colIndex);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SetCellValue(DataGridView dgv, int rowIndex, int colIndex, object obj)
+        {
+            if (dgv != null)
+            {
+                if (dgv.Rows.Count >= rowIndex && dgv.Columns.Count >= colIndex)
+                {
+                    dgv.Rows[rowIndex].Cells[colIndex].Value = obj;
+                }
+            }
+        }
+
+        public static void SetCellValue(DataGridView dgv, int rowIndex, string colName, object obj)
+        {
+            if (dgv != null)
+            {
+                if (dgv.Columns.Contains(colName))
+                {
+                    int colIndex = dgv.Columns[colName].Index;
+                    SetCellValue(dgv, rowIndex, colIndex, obj);
+                }
+            }
+        }
+
+        #endregion
+
         #region 行背景颜色
         /// <summary>
         /// 设置Dgv中单双行背景颜色不一致
@@ -1161,6 +1282,28 @@ namespace HarveyZ
                             return;
                         }
                     }
+                }
+            }
+        }
+
+        public static void RemoveRow(DataGridView dgv = null)
+        {
+            if (dgv != null)
+            {
+                for (int index = 0; index < dgv.Rows.Count; index++)
+                {
+                    RemoveRow(dgv, 0);
+                }
+            }
+        }
+
+        public static void RemoveRow(DataGridView dgv = null, int index = -1)
+        {
+            if (dgv != null && index != -1)
+            {
+                if (dgv.Rows.Count > index)
+                {
+                    dgv.Rows.RemoveAt(index);
                 }
             }
         }
