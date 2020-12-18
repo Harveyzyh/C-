@@ -20,7 +20,7 @@
         private string _updateHost = null;
 
         private bool _globalStopFlag = false;
-        private string _globalStopDate = "20300301";
+        private string _globalStopDate = "20220301";
 
         public string userId { get { return _userId; } set { _userId = value; } }
         public string userName { get { return _userName; } set { _userName = value; } }

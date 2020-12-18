@@ -97,9 +97,16 @@ namespace HarveyZ.品管
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-            AddPrintDt();
-            FastReport打印预览 frm = new FastReport打印预览(printDs, getfrx(ComboBoxPrintName.SelectedItem.ToString()));
-            frm.ShowDialog();
+            try
+            {
+                AddPrintDt();
+                FastReport打印预览 frm = new FastReport打印预览(printDs, getfrx(ComboBoxPrintName.SelectedItem.ToString()));
+                frm.ShowDialog();
+            }
+            catch
+            {
+                Msg.ShowErr("打印出现错误。");
+            }
         }
 
         #endregion
@@ -147,11 +154,20 @@ namespace HarveyZ.品管
                     TextBoxKhpz.Text = dt.Rows[0]["配置方案"].ToString();
                     TextBoxPzms.Text = dt.Rows[0]["配置描述"].ToString();
                     TextBoxJdCode.Text = dt.Rows[0]["描述备注"].ToString();
-
+                    
                     string colorStr = dt.Rows[0]["配置方案"].ToString();
-                    if(colorStr.Substring(0 ,2) == "保友" || colorStr.Substring(0, 2) == "京东" || colorStr.Substring(0, 2) == "电商")
+                    try
+                    { if (colorStr.Substring(0, 3) == "保友 " || colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
+                        {
+                            if (colorStr.Length > 3)
+                            {
+                                colorStr = colorStr.Substring(3, colorStr.Length - 3);
+                            }
+                        }
+                    }
+                    catch
                     {
-                        colorStr = colorStr.Substring(3, colorStr.Length).TrimStart();
+                        
                     }
 
                     TextBoxColor.Text = colorStr;

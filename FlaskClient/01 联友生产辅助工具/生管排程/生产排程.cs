@@ -323,7 +323,7 @@ namespace HarveyZ.生管排程
         #region 右键按钮处理逻辑
         private void SetContextMenuStripTypeList()
         {
-            //if (printFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("打印成品标签");
+            if (printFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("打印成品标签");
             if (editFlag && CmBoxShowType.Text != "未排订单") contextMenuStrip_DgvMain.Items.Add("查看工单信息");
             contextMenuStrip_DgvMain.Items.Add("复制");
             contextMenuStrip_DgvMain.Items.Add("查询当前订单号");

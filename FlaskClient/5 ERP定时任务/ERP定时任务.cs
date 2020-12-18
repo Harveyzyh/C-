@@ -24,7 +24,7 @@ namespace ERP定时任务
         private VersionManeger versionManager = new VersionManeger(connWG);
         private Logger logger = new Logger();
 
-        private static int globalStopDate = 20300301;
+        private static int globalStopDate = 20220301;
         private static bool globalStopFlag = false;
 
         private static System.Timers.Timer testTimer = null;
@@ -48,6 +48,8 @@ namespace ERP定时任务
         private DelegateMainWork delegateUpdateMoctaMainWork = null;
         private DelegateMainWork delegateUpdatePurtaMainWork = null;
         private DelegateMainWork delegateDeleteCoptrErrorMainWork = null;
+
+        private DelegateMainWork delegateScPlanSnapShotMainWork = null;
 
         private DelegateMainWork delegateBoxSizeMainWork = null;
         private DelegateMainWork delegateBomListMainWork = null;
@@ -246,6 +248,8 @@ namespace ERP定时任务
             delegateUpdatePurtaMainWork = new DelegateMainWork(UpdatePurtaMainWork);
             delegateDeleteCoptrErrorMainWork = new DelegateMainWork(DeleteCoptrErrorMainWork);
 
+            delegateScPlanSnapShotMainWork = new DelegateMainWork(CreateScPlanSnapShotMainWork);
+
             delegateBoxSizeMainWork = new DelegateMainWork(BoxSizeMainWork);
             delegateBomListMainWork = new DelegateMainWork(BomListMainWork);
             delegateAutoLrpMainWork = new DelegateMainWork(AutoLrpMainWork);
@@ -265,23 +269,26 @@ namespace ERP定时任务
             int hour = DateTime.Now.Hour;
             int minute = DateTime.Now.Minute;
 
+            //计算低阶码
+            if (hour == 0 && minute == 35) BeginInvoke(delegateBOMB05MainWork);
             //计算层级吗
-            if (hour == 1 && minute == 5) textBoxLog.BeginInvoke(delegateBOMB05MainWork);
-            //计算层级吗
-            if (hour == 2 && minute == 5) textBoxLog.BeginInvoke(delegateCOPAB02MainWork);
+            if (hour == 1 && minute == 5) BeginInvoke(delegateCOPAB02MainWork);
             //更新工单单头的部门信息为审核者信息
-            if (minute % 10 == 0 && hour >= 8 && hour <= 20) textBoxLog.BeginInvoke(delegateUpdateMoctaMainWork);
+            if (minute % 10 == 0 && hour >= 8 && hour <= 20) BeginInvoke(delegateUpdateMoctaMainWork);
             //请购单-异常修复
-            if (minute % 10 == 0  && hour >= 8 && hour <= 20) textBoxLog.BeginInvoke(delegateUpdatePurtaMainWork);
-            //删除层级码带X -- 停用
-            //if (hour == 1 && minute == 0) textBoxLog.BeginInvoke(delegateDeleteCoptrErrorMainWork);
+            if (minute % 10 == 0  && hour >= 8 && hour <= 20) BeginInvoke(delegateUpdatePurtaMainWork);
+            //删除层级码带X
+            if (hour == 0 && minute == 30) BeginInvoke(delegateDeleteCoptrErrorMainWork);
+
+            //创建排程镜像
+            if (hour == 23 && minute == 00) BeginInvoke(delegateScPlanSnapShotMainWork);
 
             //计算品号纸箱尺寸
-            if ((dayOfWeek == 1 || dayOfWeek == 3 || dayOfWeek == 5) && hour == 1 && minute == 0) textBoxLog.BeginInvoke(delegateBoxSizeMainWork);
+            if ((dayOfWeek == 1 || dayOfWeek == 3 || dayOfWeek == 5) && hour == 1 && minute == 0) BeginInvoke(delegateBoxSizeMainWork);
             //计算标准BOM
             if ((dayOfWeek == 1 || dayOfWeek == 3) && hour == 1 && minute == 10) BeginInvoke(delegateBomListMainWork);
             //自动跑Lrp计划
-            if (minute == 0) BeginInvoke(delegateAutoLrpMainWork);
+            if (minute == 0 && hour >= 8 && hour <= 22) BeginInvoke(delegateAutoLrpMainWork);
         }
 
         private void BOMB05MainWork()
@@ -408,6 +415,19 @@ namespace ERP定时任务
 
                                 END ";
             mssql.SQLexcute(connYF, sqlStr);
+        }
+
+        private void CreateScPlanSnapShotMainWork()
+        {
+            logAppendText("Create ScPlan Snapshot: Work Start!");
+            logger.Instance.WriteLog("Create ScPlan Snapshot: Work Start!");
+            string sqlStr = @"INSERT INTO SC_PLAN_Snapshot(SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029)
+                                SELECT CONVERT(VARCHAR(8), GETDATE(), 112) SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029 FROM SC_PLAN 
+                                WHERE 1=1
+                                AND SC003 >= CONVERT(VARCHAR(8), DATEADD(DAY, -1, GETDATE()), 112)
+                                AND NOT EXISTS(SELECT 1 FROM SC_PLAN_Snapshot AS A INNER JOIN SC_PLAN AS B ON A.K_ID = B.K_ID AND A.SC001 = B.SC001 AND A.SC000 = CONVERT(VARCHAR(8), GETDATE(), 112))
+                                ORDER BY K_ID";
+            mssql.SQLexcute(connWG, sqlStr);
         }
 
         private void BoxSizeMainWork()
