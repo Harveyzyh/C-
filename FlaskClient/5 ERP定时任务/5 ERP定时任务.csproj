@@ -69,6 +69,7 @@
     <Compile Include="ERP定时任务.Designer.cs">
       <DependentUpon>ERP定时任务.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleJob.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

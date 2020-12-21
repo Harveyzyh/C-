@@ -19,22 +19,27 @@ namespace ERP定时任务
             this.logger = logger;
         }
 
+        private void log(string text)
+        {
+            logger.Instance.WriteLog("GetInvmbBoxSize: " + text);
+        }
+
         public void MainWork()
         {
             workFlag = true;
-            logger.Instance.WriteLog("GetInvmbBoxSize: Work Start!");
+            log("Work Start!");
             try
             {
                 BoxSizeSelect();
             }
             catch (Exception e)
             {
-                logger.Instance.WriteLog("GetInvmbBoxSize: Work Error.\n\r\t" + e.ToString());
+                log("Work Error.\n\r\t" + e.ToString());
             }
             finally
             {
 
-                logger.Instance.WriteLog("GetInvmbBoxSize: Work Finished!");
+                log("Work Finished!");
                 workFlag = false;
             }
         }

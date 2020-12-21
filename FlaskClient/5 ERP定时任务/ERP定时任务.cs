@@ -26,8 +26,6 @@ namespace ERP定时任务
 
         private static int globalStopDate = 20220301;
         private static bool globalStopFlag = false;
-
-        private static System.Timers.Timer testTimer = null;
         private static System.Timers.Timer mainTimer = null;
         private static System.Timers.Timer updateTimer = null;
 
@@ -35,14 +33,12 @@ namespace ERP定时任务
         #endregion
 
         #region 代理变量
-        private bool testEnableFlag = false;
 
         private delegate void DelegateMainWork();
         private delegate void DelegateUpdateWork();
         
         private DelegateUpdateWork delegateUpdateWork = null;
-
-        private DelegateMainWork delegateTestMainWork = null;
+        
         private DelegateMainWork delegateBOMB05MainWork = null;
         private DelegateMainWork delegateCOPAB02MainWork = null;
         private DelegateMainWork delegateUpdateMoctaMainWork = null;
@@ -58,6 +54,13 @@ namespace ERP定时任务
         private InvmbBoxSize boxSize = null;
         private BomList bomList = null;
         private AutoLrpPlan autoLrp = null;
+
+        private ERP_BOMB05 bomb05 = null;
+        private ERP_COPAB02 copab02 = null;
+        private FixMocta fixMocta = null;
+        private FixPurta fixPurta = null;
+        private CreateScPlanSnapShot scplanSnapshot = null;
+        private DeleteCoptrError deleteCoptr = null;
         #endregion
 
         #region 初始化
@@ -114,6 +117,7 @@ namespace ERP定时任务
             //开始工作
             WorkStart();
             logAppendText("定时任务初始化已完成!");
+            logger.Instance.WriteLog("定时任务初始化已完成!");
         }
 
         private void logAppendText(string text)
@@ -200,7 +204,6 @@ namespace ERP定时任务
         #region 定时器主逻辑
         private void WorkStart()
         {
-            //if(testEnableFlag) SetTestTimer();
             SetUpdateTimer();
             SetMainTimer();
         }
@@ -242,22 +245,29 @@ namespace ERP定时任务
             mainTimer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
 
             //代理初始化
-            delegateBOMB05MainWork = new DelegateMainWork(BOMB05MainWork);
-            delegateCOPAB02MainWork = new DelegateMainWork(COPAB02MainWork);
-            delegateUpdateMoctaMainWork = new DelegateMainWork(UpdateMoctaMainWork);
-            delegateUpdatePurtaMainWork = new DelegateMainWork(UpdatePurtaMainWork);
-            delegateDeleteCoptrErrorMainWork = new DelegateMainWork(DeleteCoptrErrorMainWork);
+            //delegateBOMB05MainWork = new DelegateMainWork(BOMB05MainWork);
+            //delegateCOPAB02MainWork = new DelegateMainWork(COPAB02MainWork);
+            //delegateUpdateMoctaMainWork = new DelegateMainWork(UpdateMoctaMainWork);
+            //delegateUpdatePurtaMainWork = new DelegateMainWork(UpdatePurtaMainWork);
+            //delegateDeleteCoptrErrorMainWork = new DelegateMainWork(DeleteCoptrErrorMainWork);
 
-            delegateScPlanSnapShotMainWork = new DelegateMainWork(CreateScPlanSnapShotMainWork);
+            //delegateScPlanSnapShotMainWork = new DelegateMainWork(CreateScPlanSnapShotMainWork);
 
-            delegateBoxSizeMainWork = new DelegateMainWork(BoxSizeMainWork);
-            delegateBomListMainWork = new DelegateMainWork(BomListMainWork);
-            delegateAutoLrpMainWork = new DelegateMainWork(AutoLrpMainWork);
+            //delegateBoxSizeMainWork = new DelegateMainWork(BoxSizeMainWork);
+            //delegateBomListMainWork = new DelegateMainWork(BomListMainWork);
+            //delegateAutoLrpMainWork = new DelegateMainWork(AutoLrpMainWork);
 
             //实例初始化
             boxSize = new InvmbBoxSize(mssql, connYF, logger);
             bomList = new BomList(mssql, connYF, logger);
             autoLrp = new AutoLrpPlan(mssql, connYF, connWG, logger);
+
+            scplanSnapshot = new CreateScPlanSnapShot(mssql, connWG, logger);
+            fixMocta = new FixMocta(mssql, connYF, logger);
+            fixPurta = new FixPurta(mssql, connYF, logger);
+            bomb05 = new ERP_BOMB05(mssql, connYF, logger);
+            copab02 = new ERP_COPAB02(mssql, connYF, logger);
+            deleteCoptr = new DeleteCoptrError(mssql, connYF, logger);
         }
 
         private void mainTimerWork(object source, System.Timers.ElapsedEventArgs e)
@@ -270,164 +280,170 @@ namespace ERP定时任务
             int minute = DateTime.Now.Minute;
 
             //计算低阶码
-            if (hour == 0 && minute == 35) BeginInvoke(delegateBOMB05MainWork);
+            if (hour == 0 && minute == 35)
+            {
+                if (!bomb05.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(bomb05.MainWork));
+                    logAppendText("ERP Job BOMB05: Work Start!");
+                    thread.Start();
+                }
+            }
+
             //计算层级吗
-            if (hour == 1 && minute == 5) BeginInvoke(delegateCOPAB02MainWork);
+            if (hour == 1 && minute == 5)
+            {
+                if (!copab02.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(copab02.MainWork));
+                    logAppendText("ERP Job COPAB02: Work Start!");
+                    thread.Start();
+                }
+            }
+
             //更新工单单头的部门信息为审核者信息
-            if (minute % 10 == 0 && hour >= 8 && hour <= 20) BeginInvoke(delegateUpdateMoctaMainWork);
+            if (minute % 2 == 0 && hour >= 8 && hour <= 20) 
+            {
+                if (!fixMocta.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(fixMocta.MainWork));
+                    logAppendText("Fix Mocta Department Info: Work Start!");
+                    thread.Start();
+                }
+                else
+                {
+                    logAppendText("Fix Mocta Department Info: Working!");
+                }
+            }
+
             //请购单-异常修复
-            if (minute % 10 == 0  && hour >= 8 && hour <= 20) BeginInvoke(delegateUpdatePurtaMainWork);
+            if (minute % 2 == 0 && hour >= 8 && hour <= 20) 
+            {
+                if (!fixPurta.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(fixPurta.MainWork));
+                    logAppendText("Fix Purta Info: Work Start!");
+                    thread.Start();
+                }
+                else
+                {
+                    logAppendText("Fix Purta Info: Working!");
+                }
+            }
             //删除层级码带X
-            if (hour == 0 && minute == 30) BeginInvoke(delegateDeleteCoptrErrorMainWork);
+            if (hour == 0 && minute == 30)
+            {
+                if (!deleteCoptr.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(deleteCoptr.MainWork));
+                    logAppendText("Delete Coptr Error Info: Work Start!");
+                    thread.Start();
+                }
+            }
 
             //创建排程镜像
-            if (hour == 23 && minute == 00) BeginInvoke(delegateScPlanSnapShotMainWork);
+            if (hour == 23 && minute == 00)
+            {
+                if (!scplanSnapshot.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(scplanSnapshot.MainWork));
+                    logAppendText("Create Scplan Snapshot: Work Start!");
+                    thread.Start();
+                }
+            }
 
             //计算品号纸箱尺寸
-            if ((dayOfWeek == 1 || dayOfWeek == 3 || dayOfWeek == 5) && hour == 1 && minute == 0) BeginInvoke(delegateBoxSizeMainWork);
+            if ((dayOfWeek == 1 || dayOfWeek == 3 || dayOfWeek == 5) && hour == 1 && minute == 0)
+            {
+                if (!boxSize.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(boxSize.MainWork));
+                    logAppendText("GetBoxSize: Work Start!");
+                    thread.Start();
+                }
+            }
+
             //计算标准BOM
-            if ((dayOfWeek == 1 || dayOfWeek == 3) && hour == 1 && minute == 10) BeginInvoke(delegateBomListMainWork);
+            if ((dayOfWeek == 1 || dayOfWeek == 3) && hour == 1 && minute == 10)
+            {
+                if (!bomList.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(bomList.MainWork));
+                    logAppendText("GetBomList: Work Start!");
+                    thread.Start();
+                }
+            }
+
             //自动跑Lrp计划
-            if (minute == 0 && hour >= 8 && hour <= 22) BeginInvoke(delegateAutoLrpMainWork);
+            if (minute == 0 && hour >= 8 && hour <= 22)
+            {
+                if (!autoLrp.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(autoLrp.MainWork));
+                    logAppendText("AutoLrpPlan: Work Start!");
+                    thread.Start();
+                }
+            }
         }
 
         private void BOMB05MainWork()
         {
-            logAppendText("Add ERP Job BOMB05: Work Start!");
-            logger.Instance.WriteLog("Add ERP Job BOMB05 Work Start!");
-            string sqlStr = @"
-                            DECLARE @NYR VARCHAR(20)
-                            DECLARE @XH INT
-                            DECLARE @JOBID VARCHAR(20)
-                            DECLARE @SUBID VARCHAR(20)
-                            SELECT @NYR = CONVERT(VARCHAR(20), GETDATE(), 112)
-
-                            IF NOT EXISTS(SELECT * FROM [DSCSYS].[dbo].[JOBQUEUE] WHERE JOBNAME = 'BOMB05' AND STATUS IN ('P', 'N'))
-                            BEGIN
-	                            IF EXISTS(SELECT * FROM [DSCSYS].[dbo].[JOBQUEUE] WHERE SUBSTRING(JOBID, 1, 8) = @NYR )
-	                            BEGIN
-		                            SELECT  @XH = CONVERT(INT, SUBSTRING(MAX(JOBID), 9, 6)) 
-			                            FROM [DSCSYS].[dbo].[JOBQUEUE] WHERE SUBSTRING(JOBID, 1, 8) = @NYR
-	                            END
-	                            ELSE 
-	                            BEGIN
-		                            SET @XH = 0
-	                            END
-
-	                            SELECT @JOBID = @NYR + RIGHT('000000' + CAST(@XH + 1 AS VARCHAR(6)), 6)
-	                            SELECT @SUBID = @NYR + '0001'
-
-	                            INSERT INTO [DSCSYS].[dbo].[JOBQUEUE] ([JOBID], [SUBID], [COMPANYID], [USERID], [USEDALIAS], [JOBNAME], [EXTNAME], [COMPROGID], [JOBOPTION], [GENTYPE], [GENSTATUS], 
-	                            [PRIORITY], [STATUS], [PROGRESS], [DTREQUEST], [DTRECEIVE], [DTSCHEDULE], [DTSTART], [DTFINISH], [RESULT], [STYLE], [PROCESSER], [FLAG], [NOTIFY]) 
-	                            VALUES (@JOBID, @SUBID, 'COMFORT', 'Robot', 'COMFORT', 'BOMB05', '', 'BOMB05S.Class1', 
-	                            0x44532056415249414E54202030313030180100000C2000000100000000000000010000000C2000000100000001000000030000000C20000001000000000000000100000008000000060000000990E9623B4EF64EC154F753080000000400000073007000300031000C20000001000000000000000100000008000000070000001F7510624C006F006700876563680800000006000000630068006B004C006F0067000C20000001000000000000000100000008000000040000005C4F1A4EE5651F67080000000B000000650064005000720069006E00740044006100740065000C2000000100000001000000030000000C200000010000000000000002000000080000000100000004000800000000000000080000000000000008000000010000004E000800000000000000, 
-	                            1, 1, 3, 'N', NULL, GETDATE(), GETDATE(), GETDATE(), NULL, NULL, NULL, 'B', '', 1, '')
-                            END";
-            mssql.SQLexcute(connYF, sqlStr);
+            if (!bomb05.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(bomb05.MainWork));
+                logAppendText("ERP Job BOMB05: Work Start!");
+                thread.Start();
+            }
         }
 
         private void COPAB02MainWork()
         {
-            logAppendText("Add ERP Job COPAB02: Work Start!");
-            logger.Instance.WriteLog("Add ERP Job COPAB02 Work Start!");
-            string sqlStr = @"
-                            DECLARE @NYR VARCHAR(20)
-                            DECLARE @XH INT
-                            DECLARE @JOBID VARCHAR(20)
-                            DECLARE @SUBID VARCHAR(20)
-                            SELECT @NYR = CONVERT(VARCHAR(20), GETDATE(), 112)
-
-                            IF NOT EXISTS(SELECT * FROM [DSCSYS].[dbo].[JOBQUEUE] WHERE JOBNAME = 'COPAB02' AND STATUS IN ('P', 'N'))
-                            BEGIN
-	                            IF EXISTS(SELECT * FROM DSCSYS..JOBQUEUE WHERE SUBSTRING(JOBID, 1, 8) = @NYR )
-	                            BEGIN 
-		                            SELECT  @XH = CONVERT(INT, SUBSTRING(MAX(JOBID), 9, 6)) FROM DSCSYS..JOBQUEUE WHERE SUBSTRING(JOBID, 1, 8) = @NYR 
-	                            END
-	                            ELSE 
-	                            BEGIN
-		                            SET @XH = 0
-	                            END
-
-	                            SELECT @JOBID = @NYR + RIGHT('000000' + CAST(@XH + 1 AS VARCHAR(6)), 6)
-	                            SELECT @SUBID = @NYR + '0001'
-
-	                            INSERT INTO [DSCSYS]..[JOBQUEUE] ([JOBID], [SUBID], [COMPANYID], [USERID], [USEDALIAS], [JOBNAME], [EXTNAME], [COMPROGID], [JOBOPTION], [GENTYPE], [GENSTATUS], 
-	                            [PRIORITY], [STATUS], [PROGRESS], [DTREQUEST], [DTRECEIVE], [DTSCHEDULE], [DTSTART], [DTFINISH], [RESULT], [STYLE], [PROCESSER], [FLAG], [NOTIFY]) 
-	                            VALUES (@JOBID, @SUBID, 'COMFORT', 'Robot', 'COMFORT', 'COPAB02', '', 'COPAB02S.Class1', 
-	                            0x44532056415249414E54202030313030640100000C2000000100000000000000010000000C2000000100000001000000040000000C20000001000000000000000100000008000000040000000990E962C154F753080000000400000073007000300031000C20000001000000000000000100000008000000070000000990E96242004F004D00E5651F67080000000400000073007000300032000C20000001000000000000000100000008000000070000001F7510624C006F006700876563680800000006000000630068006B004C006F0067000C20000001000000000000000100000008000000040000005C4F1A4EE5651F67080000000B000000650064005000720069006E00740044006100740065000C2000000100000001000000040000000C200000010000000000000000000000080000000100000005000C2000000100000000000000020000000800000001000000040008000000000000000800000000000000080000000100000059000800000000000000, 
-	                            1, 1, 3, 'N', NULL, GETDATE(), GETDATE(), GETDATE(), NULL, NULL, NULL, 'B', '', 1, '');
-                            END";
-            mssql.SQLexcute(connYF, sqlStr);
+            if (!copab02.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(copab02.MainWork));
+                logAppendText("ERP Job COPAB02: Work Start!");
+                thread.Start();
+            }
         }
 
         private void UpdateMoctaMainWork()
         {
-            logAppendText("Fix Mocta Department Info: Work Start!");
-            logger.Instance.WriteLog("Fix Mocta Department Info Work Start!");
-            string sqlStr = @"
-                            UPDATE COMFORT.dbo.MOCTA 
-                            SET TA064 = MV004, TA021 = MD001 
-
-                            FROM COMFORT.dbo.MOCTA 
-
-                            INNER JOIN COMFORT.dbo.CMSMV ON MV001 = TA041 
-
-                            INNER JOIN COMFORT.dbo.CMSMD ON MD015 = MV004 AND MD001 IN ('1' ,'6' , '7') 
-
-                            WHERE 1=1 
-                            AND TA013 = 'Y'  
-
-                            AND TA011 NOT IN ('Y', 'y') 
-
-                            AND (TA064 != MV004 OR MD001 != TA021) 
-                            AND (MD001 IS NOT NULL OR RTRIM(MD001) != '') 
-                            AND (MV004 IS NOT NULL OR RTRIM(MV004) != '') ";
-            mssql.SQLexcute(connYF, sqlStr);
+            if (!fixMocta.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(fixMocta.MainWork));
+                logAppendText("Fix Mocta Department Info: Work Start!");
+                thread.Start();
+            }
         }
 
         private void UpdatePurtaMainWork()
         {
-            logAppendText("Fix Purta Info: Work Start!");
-            logger.Instance.WriteLog("Fix Purta Info Work Start!");
-            string sqlStr = @"EXEC dbo.P_PURTA_FIX_WORK ";
-            mssql.SQLexcute(connYF, sqlStr);
+            if (!fixPurta.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(fixPurta.MainWork));
+                logAppendText("Fix Purta Info: Work Start!");
+                thread.Start();
+            }
         }
 
         private void DeleteCoptrErrorMainWork()
         {
-            logAppendText("Delete Coptr Error Info: Work Start!");
-            logger.Instance.WriteLog("Delete Coptr Error Info Work Start!");
-            string sqlStr = @"IF EXISTS (SELECT* FROM DSCSYS.dbo.JOBQUEUE WHERE JOBNAME IN ('COPAB02', 'COPAB01') AND STATUS IN ('P', 'N'))
-                                BEGIN
-	                                DELETE FROM [COMFORT].[dbo].[COPTR] WHERE TR003 like 'X%' 
-	                                AND TR001 NOT LIKE '6%'
-	                                AND TR001 NOT LIKE '7%'
-	                                AND TR001 NOT LIKE '8%'
-	                                AND TR001 NOT LIKE '9%'
-
-
-	                                UPDATE COPTR SET TR003 = SUBSTRING(TR003, 2, LEN(TR003)) 
-	                                WHERE (TR001 LIKE '6%' 
-	                                OR TR001 LIKE '7%'
-	                                OR TR001 LIKE '8%'
-	                                OR TR001 LIKE '9%')
-	                                AND TR003 LIKE 'X%'
-
-                                END ";
-            mssql.SQLexcute(connYF, sqlStr);
+            if (!deleteCoptr.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(deleteCoptr.MainWork));
+                logAppendText("Delete Coptr Error Info: Work Start!");
+                thread.Start();
+            }
         }
 
         private void CreateScPlanSnapShotMainWork()
         {
-            logAppendText("Create ScPlan Snapshot: Work Start!");
-            logger.Instance.WriteLog("Create ScPlan Snapshot: Work Start!");
-            string sqlStr = @"INSERT INTO SC_PLAN_Snapshot(SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029)
-                                SELECT CONVERT(VARCHAR(8), GETDATE(), 112) SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029 FROM SC_PLAN 
-                                WHERE 1=1
-                                AND SC003 >= CONVERT(VARCHAR(8), DATEADD(DAY, -1, GETDATE()), 112)
-                                AND NOT EXISTS(SELECT 1 FROM SC_PLAN_Snapshot AS A INNER JOIN SC_PLAN AS B ON A.K_ID = B.K_ID AND A.SC001 = B.SC001 AND A.SC000 = CONVERT(VARCHAR(8), GETDATE(), 112))
-                                ORDER BY K_ID";
-            mssql.SQLexcute(connWG, sqlStr);
+            if (!scplanSnapshot.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(scplanSnapshot.MainWork));
+                logAppendText("Create Scplan Snapshot: Work Start!");
+                thread.Start();
+            }
         }
 
         private void BoxSizeMainWork()
