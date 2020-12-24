@@ -109,6 +109,7 @@ namespace HarveyZ.采购
             }
             DtOpt.DtDateFormat(dtShow, "日期");
             DgvOpt.SetShow(DgvMain, dtShow);
+            DgvOpt.SetColWidth(DgvMain, "生产单号", 180);
             UI();
         }
 
@@ -132,6 +133,33 @@ namespace HarveyZ.采购
                 {
                     Msg.Show(excelObj.msg, "错误");
                 }
+            }
+        }
+
+        private void CheckBoxAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckBoxAll.Checked == true)
+            {
+                CheckBoxNew.Checked = false;
+                CheckBoxFinished.Checked = false;
+            }
+        }
+
+        private void CheckBoxNew_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckBoxNew.Checked == true)
+            {
+                CheckBoxAll.Checked = false;
+                CheckBoxFinished.Checked = false;
+            }
+        }
+
+        private void CheckBoxFinished_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckBoxFinished.Checked == true)
+            {
+                CheckBoxAll.Checked = false;
+                CheckBoxNew.Checked = false;
             }
         }
         #endregion
@@ -189,22 +217,26 @@ namespace HarveyZ.采购
         private DataTable GetPlanKid()
         {
             string sqlStr = @"SELECT DISTINCT K_ID 
-                                FROM WG_DB.dbo.SC_PLAN AS SCPLAN 
-                                INNER JOIN MOCTA AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
-                                INNER JOIN MOCTB AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
-                                INNER JOIN INVMB AS INVMB ON INVMB.MB001 = MOCTA.TA006 
-                                INNER JOIN CMSMW AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
-                                INNER JOIN INVMB AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
+                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
+                                INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
+                                INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
+                                INNER JOIN INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
+                                INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
+                                INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
                                 WHERE 1=1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
 
-            if (!CheckBoxFinished.Checked)
+            if (CheckBoxFinished.Checked)
+            {
+                sqlStr += @"AND SCPLAN.SC031 IS NOT NULL ";
+            }
+            if (CheckBoxNew.Checked)
             {
                 sqlStr += @"AND SCPLAN.SC031 IS NULL ";
             }
 
-            sqlStr += @"AND MOCTB.TB011 IN ('1', '2') 
+            sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
                         AND MOCTA.TA011 != 'y' 
                         AND INVMB2.MB034 NOT IN ('R')
                         ORDER BY K_ID ";
@@ -213,30 +245,34 @@ namespace HarveyZ.采购
 
         private DataTable GetShowDt()
         {
-            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, INVMB.UDF12 产品系列, 
-                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, MOCTB.TB006 工艺, CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
-                                RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 批号, RTRIM(PURMA.MA002) 批号说明
-                                FROM WG_DB.dbo.SC_PLAN AS SCPLAN 
-                                INNER JOIN MOCTA AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
-                                INNER JOIN MOCTB AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
-                                INNER JOIN INVMB AS INVMB ON INVMB.MB001 = MOCTA.TA006 
-                                INNER JOIN CMSMW AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
-                                INNER JOIN INVMB AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
-                                LEFT JOIN PURMA AS PURMA ON PURMA.MA001 = INVMB2.MB032 
+            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, INVMB.UDF12 产品系列, SCPLAN.SC001 生产单号, 
+                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格,  CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
+                                CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 主供应商, RTRIM(PURMA.MA002) 供应商名称
+                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
+                                INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
+                                INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
+                                INNER JOIN INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
+                                INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
+                                INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
+                                LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032 
                                 WHERE 1=1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
 
-            if (!CheckBoxFinished.Checked)
+            if (CheckBoxFinished.Checked)
+            {
+                sqlStr += @"AND SCPLAN.SC031 IS NOT NULL ";
+            }
+            if (CheckBoxNew.Checked)
             {
                 sqlStr += @"AND SCPLAN.SC031 IS NULL ";
             }
 
-            sqlStr += @"AND MOCTB.TB011 IN ('1', '2') 
-                            AND MOCTA.TA011 != 'y' 
-                            AND INVMB2.MB034 NOT IN ('R')
-                            GROUP BY SCPLAN.SC003, INVMB.UDF12, RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), MOCTB.TB006, RTRIM(CMSMW.MW002), CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
-                            ORDER BY SCPLAN.SC003, RTRIM(MOCTB.TB003), MOCTB.TB006 ";
+            sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
+                        AND MOCTA.TA011 != 'y' 
+                        AND INVMB2.MB034 NOT IN ('R')
+                        GROUP BY SCPLAN.SC003, INVMB.UDF12, SCPLAN.SC001, RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
+                        ORDER BY SCPLAN.SC003, RTRIM(MOCTB.TB003) ";
             return mssql.SQLselect(connYF, sqlStr); ;
         }
 

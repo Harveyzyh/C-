@@ -94,7 +94,7 @@
             this.BtnPrint.Name = "BtnPrint";
             this.BtnPrint.Size = new System.Drawing.Size(75, 23);
             this.BtnPrint.TabIndex = 7;
-            this.BtnPrint.Text = "打印";
+            this.BtnPrint.Text = "打印预览";
             this.BtnPrint.UseVisualStyleBackColor = true;
             this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 

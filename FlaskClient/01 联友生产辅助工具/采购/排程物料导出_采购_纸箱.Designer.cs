@@ -1,6 +1,6 @@
-﻿namespace HarveyZ.生管排程
+﻿namespace HarveyZ.采购
 {
-    partial class 排程物料导出_生产
+    partial class 排程物料导出_采购_纸箱
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.PanelTitle = new System.Windows.Forms.Panel();
-            this.CheckBoxAll = new System.Windows.Forms.CheckBox();
-            this.CheckBoxNew = new System.Windows.Forms.CheckBox();
-            this.CheckBoxFinished = new System.Windows.Forms.CheckBox();
             this.DtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -39,8 +36,6 @@
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
-            this.CmBoxDptType = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -49,56 +44,16 @@
             // 
             this.PanelTitle.BackColor = System.Drawing.SystemColors.Control;
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelTitle.Controls.Add(this.CmBoxDptType);
-            this.PanelTitle.Controls.Add(this.CheckBoxAll);
-            this.PanelTitle.Controls.Add(this.CheckBoxNew);
-            this.PanelTitle.Controls.Add(this.CheckBoxFinished);
             this.PanelTitle.Controls.Add(this.DtpEndDate);
             this.PanelTitle.Controls.Add(this.label2);
             this.PanelTitle.Controls.Add(this.btnOutput);
             this.PanelTitle.Controls.Add(this.btnSelect);
             this.PanelTitle.Controls.Add(this.DtpStartDate);
             this.PanelTitle.Controls.Add(this.label1);
-            this.PanelTitle.Controls.Add(this.label3);
             this.PanelTitle.Location = new System.Drawing.Point(2, 2);
             this.PanelTitle.Name = "PanelTitle";
-            this.PanelTitle.Size = new System.Drawing.Size(809, 85);
+            this.PanelTitle.Size = new System.Drawing.Size(809, 55);
             this.PanelTitle.TabIndex = 0;
-            // 
-            // CheckBoxAll
-            // 
-            this.CheckBoxAll.AutoSize = true;
-            this.CheckBoxAll.Location = new System.Drawing.Point(305, 50);
-            this.CheckBoxAll.Name = "CheckBoxAll";
-            this.CheckBoxAll.Size = new System.Drawing.Size(72, 16);
-            this.CheckBoxAll.TabIndex = 8;
-            this.CheckBoxAll.Text = "显示全部";
-            this.CheckBoxAll.UseVisualStyleBackColor = true;
-            this.CheckBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
-            // 
-            // CheckBoxNew
-            // 
-            this.CheckBoxNew.AutoSize = true;
-            this.CheckBoxNew.Checked = true;
-            this.CheckBoxNew.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxNew.Location = new System.Drawing.Point(162, 50);
-            this.CheckBoxNew.Name = "CheckBoxNew";
-            this.CheckBoxNew.Size = new System.Drawing.Size(120, 16);
-            this.CheckBoxNew.TabIndex = 7;
-            this.CheckBoxNew.Text = "只显示未导出物料";
-            this.CheckBoxNew.UseVisualStyleBackColor = true;
-            this.CheckBoxNew.CheckedChanged += new System.EventHandler(this.CheckBoxNew_CheckedChanged);
-            // 
-            // CheckBoxFinished
-            // 
-            this.CheckBoxFinished.AutoSize = true;
-            this.CheckBoxFinished.Location = new System.Drawing.Point(20, 50);
-            this.CheckBoxFinished.Name = "CheckBoxFinished";
-            this.CheckBoxFinished.Size = new System.Drawing.Size(120, 16);
-            this.CheckBoxFinished.TabIndex = 6;
-            this.CheckBoxFinished.Text = "只显示已导出物料";
-            this.CheckBoxFinished.UseVisualStyleBackColor = true;
-            this.CheckBoxFinished.CheckedChanged += new System.EventHandler(this.CheckBoxFinished_CheckedChanged);
             // 
             // DtpEndDate
             // 
@@ -173,32 +128,14 @@
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
             // 
-            // CmBoxDptType
-            // 
-            this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmBoxDptType.FormattingEnabled = true;
-            this.CmBoxDptType.Location = new System.Drawing.Point(461, 46);
-            this.CmBoxDptType.Name = "CmBoxDptType";
-            this.CmBoxDptType.Size = new System.Drawing.Size(141, 20);
-            this.CmBoxDptType.TabIndex = 9;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(401, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "生产部门：";
-            // 
-            // 排程物料导出_生产
+            // 排程物料导出_采购_纸箱
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 605);
             this.Controls.Add(this.DgvMain);
             this.Controls.Add(this.PanelTitle);
-            this.Name = "排程物料导出_生产";
+            this.Name = "排程物料导出_采购_纸箱";
             this.Text = "排程生产物料导出";
             this.Resize += new System.EventHandler(this.FormMain_Resized);
             this.PanelTitle.ResumeLayout(false);
@@ -218,10 +155,5 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.DateTimePicker DtpEndDate;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox CheckBoxFinished;
-        private System.Windows.Forms.CheckBox CheckBoxAll;
-        private System.Windows.Forms.CheckBox CheckBoxNew;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox CmBoxDptType;
     }
 }

@@ -4,6 +4,7 @@ using System;
 
 namespace ERP定时任务
 {
+
     public class ERP_BOMB05
     {
         private Mssql mssql = null;
@@ -26,21 +27,24 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("ERP_BOMB05", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
@@ -100,21 +104,24 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("ERP_COPAB02", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
@@ -173,21 +180,24 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("Fix_Mocta", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
@@ -237,20 +247,23 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("Fix_Purta", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
-                log("Work Finished!");
-                workFlag = false;
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
@@ -304,10 +317,10 @@ namespace ERP定时任务
 				                TB010 AS TR005, TB009 AS TR006, 1 AS TR007, TB007 AS TR008, MA021 AS TR009, TB017 AS TR010, TB018 AS TR011, TB026 AS TR012, 
 				                TB019 AS TR013, TB008 AS TR014, TB032 AS TR015, TB024 AS TR016, 'N' AS TR017, 'N' AS TR018, '' AS TR019, TB035 AS TR020, 
 				                TB038 AS TR021, TB040 AS TR022, TB041 AS TR023, TB028 AS TR024, TB042 AS TR025, TB043 AS TR026, TB044 AS TR027
-				                FROM dbo.PURTB  
-				                INNER JOIN dbo.PURTA ON TA001 = TB001 AND TA002 = TB002 
-				                LEFT JOIN dbo.PURMA ON MA001 = TB010
-				                LEFT JOIN (SELECT TOP 1 COMPANY, CREATOR, CREATE_DATE, FLAG FROM dbo.PURTR WHERE RTRIM(TR001)+'-'+RTRIM(TR002) = '{0}') AS K ON 1=1
+				                FROM dbo.PURTB(NOLOCK)  
+				                INNER JOIN dbo.PURTA(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 
+				                LEFT JOIN dbo.PURMA(NOLOCK) ON MA001 = TB010
+				                LEFT JOIN (SELECT TOP 1 COMPANY, CREATOR, CREATE_DATE, FLAG FROM dbo.PURTR(NOLOCK) WHERE RTRIM(TR001)+'-'+RTRIM(TR002) = '{0}') AS K ON 1=1
 				                WHERE 1=1
 				                AND RTRIM(TB001)+'-'+RTRIM(TB002) = '{0}' 
 				                AND NOT EXISTS(SELECT 1 FROM dbo.PURTR(NOLOCK) WHERE TB001 = TR001 AND TB002 = TR002 AND TB003 = TR003)";
@@ -346,21 +359,24 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("CleanCoptrX", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
@@ -409,31 +425,36 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("SCPLAN_Snapshot", "Work"))
             {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error./n" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 
         private void Work()
         {
-            string sqlStr = @"INSERT INTO SC_PLAN_Snapshot(SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029)
+            string sqlStr = @"
+                                DELETE FROM SC_PLAN_Snapshot WHERE SC000 <= CONVERT(VARCHAR(8), DATEADD(DAY, -3, GETDATE()), 112)
+
+                                INSERT INTO SC_PLAN_Snapshot(SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029)
                                 SELECT CONVERT(VARCHAR(8), GETDATE(), 112) SC000, K_ID, SC001, SC003, SC013, SC023, SC028, SC029 FROM SC_PLAN 
                                 WHERE 1=1
-                                AND SC003 >= CONVERT(VARCHAR(8), DATEADD(DAY, -1, GETDATE()), 112)
-                                AND NOT EXISTS(SELECT 1 FROM SC_PLAN_Snapshot AS A INNER JOIN SC_PLAN AS B ON A.K_ID = B.K_ID AND A.SC001 = B.SC001 AND A.SC000 = CONVERT(VARCHAR(8), GETDATE(), 112))
+                                AND NOT EXISTS(SELECT 1 FROM SC_PLAN_Snapshot AS A WHERE A.K_ID = SC_PLAN.K_ID AND A.SC001 = SC_PLAN.SC001 AND A.SC000 = CONVERT(VARCHAR(8), GETDATE(), 112))
                                 ORDER BY K_ID";
             mssql.SQLexcute(connWG, sqlStr);
         }

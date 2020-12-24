@@ -6,3 +6,11 @@
 \\Mac\Home\Documents\1 开发\C#\03 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.Properties.Resources.resources
 \\Mac\Home\Documents\1 开发\C#\03 码垛线测试临时客户端\obj\Release\3 码垛线测试临时客户端.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\1 开发\C#\03 码垛线测试临时客户端\obj\Release\3 码垛线测试临时客户端.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\bin\Release\码垛线测试临时客户端.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\3 码垛线测试临时客户端.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.码垛线测试临时客户端.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\码垛线测试临时客户端.Properties.Resources.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\03 码垛线测试临时客户端\obj\Release\3 码垛线测试临时客户端.csproj.GenerateResource.Cache

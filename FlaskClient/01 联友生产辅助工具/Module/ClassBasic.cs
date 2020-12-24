@@ -263,6 +263,11 @@ namespace HarveyZ
             return MessageBox.Show(msg, title, btn);
         }
 
+        public static DialogResult Show(string msg, MessageBoxButtons btn)
+        {
+            return MessageBox.Show(msg, "提示", btn);
+        }
+
         public static DialogResult Show(string msg, string title, MessageBoxButtons btn, MessageBoxIcon icon)
         {
             return MessageBox.Show(msg, title, btn, icon);

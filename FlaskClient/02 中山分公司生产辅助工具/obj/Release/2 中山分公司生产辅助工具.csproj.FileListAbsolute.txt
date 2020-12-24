@@ -47,3 +47,28 @@
 \\Mac\Home\Documents\1 开发\C#\02 中山分公司生产辅助工具\obj\Release\HarveyZ.用户管理.resources
 \\Mac\Home\Documents\1 开发\C#\02 中山分公司生产辅助工具\obj\Release\HarveyZ.数据导入中.resources
 \\Mac\Home\Documents\1 开发\C#\02 中山分公司生产辅助工具\obj\Release\2 中山分公司生产辅助工具.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\联友中山分公司生产辅助工具.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\联友中山分公司生产辅助工具.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\Microsoft.CSharp.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\NPOI.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\NPOI.OOXML.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\NPOI.OpenXml4Net.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\NPOI.OpenXmlFormats.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\System.Data.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\ICSharpCode.SharpZipLib.dll
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\bin\Release\NPOI.xml
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\2 中山分公司生产辅助工具.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.Properties.Resources.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\HarveyZ.主界面.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\HarveyZ.FormLogin.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入客户订单_获取单据信息.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入客户订单.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销退单.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销退单_获取单据信息.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销货单.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\联友中山分公司生产辅助工具.销售管理.录入销货单_获取单据信息.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\HarveyZ.用户管理.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\HarveyZ.数据导入中.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\02 中山分公司生产辅助工具\obj\Release\2 中山分公司生产辅助工具.csproj.GenerateResource.Cache

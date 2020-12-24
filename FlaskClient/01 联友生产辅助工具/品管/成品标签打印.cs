@@ -159,6 +159,17 @@ namespace HarveyZ.品管
                     try
                     { if (colorStr.Substring(0, 3) == "保友 " || colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
                         {
+                            // 修改打印模板
+                            if (colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
+                            {
+                                ComboBoxPrintName.SelectedIndex = 1;
+                            }
+                            else
+                            {
+                                ComboBoxPrintName.SelectedIndex = 0;
+                            }
+
+                            // 修改颜色名称
                             if (colorStr.Length > 3)
                             {
                                 colorStr = colorStr.Substring(3, colorStr.Length - 3);

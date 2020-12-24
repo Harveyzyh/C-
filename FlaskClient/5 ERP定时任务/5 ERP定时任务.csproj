@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoLrpPlan.cs" />
-    <Compile Include="HandelClass.cs" />
     <Compile Include="BomList.cs" />
     <Compile Include="InvmbBoxSize.cs" />
     <Compile Include="Module\ClassBasic.cs" />

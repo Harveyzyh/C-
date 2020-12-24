@@ -1,0 +1,196 @@
+11:40:39: Information: 定时任务初始化已完成!
+12:03:30: Information: 定时任务初始化已完成!
+12:21:44: Information: 定时任务初始化已完成!
+12:21:52: Information: 定时任务初始化已完成!
+12:22:52: Information: Fix Mocta Department Info: Work Start!
+12:22:52: Information: Fix Mocta Department Info: Work Finished!
+12:24:52: Information: Fix Mocta Department Info: Work Start!
+12:24:53: Information: Fix Mocta Department Info: Work Finished!
+12:25:46: Information: 定时任务初始化已完成!
+12:32:50: Information: 定时任务初始化已完成!    1.0.2.30
+12:32:56: Information: 定时任务初始化已完成!    1.0.2.30
+12:40:56: Information: Fix Mocta Department Info: Work Start!
+12:40:56: Information: Fix Purta Info: Work Start!
+12:40:57: Information: Fix Mocta Department Info: Work Finished!
+12:41:13: Information: Fix Purta Info: Work Finished!
+12:50:57: Information: Fix Mocta Department Info: Work Start!
+12:50:57: Information: Fix Mocta Department Info: Work Finished!
+13:00:57: Information: AutoLrpPlan: Work Start!
+13:00:57: Information: Fix Mocta Department Info: Work Start!
+13:00:57: Information: Fix Purta Info: Work Start!
+13:00:57: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：False, Max Lrp Count：3
+13:00:57: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+13:00:57: Information: Fix Mocta Department Info: Work Finished!
+13:00:57: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+13:01:01: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0029  - PlanId:A22010173990029  - Wlno: 10170302  - Pz: 专友 TW-15蓝色 标案散货包装  - LrpCount: 0 
+13:01:01: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0029
+13:01:01: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0029  - PlanId: A22010173990029  - JobId: 20201222000207 
+13:01:14: Information: Fix Purta Info: Work Finished!
+13:01:31: Information: AutoLrpPlan: Job Done: JobId: 20201222000207'
+13:01:32: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990029  - JobId: 20201222000208 
+13:01:44: Information: AutoLrpPlan: Job Done: JobId: 20201222000208'
+13:01:44: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0029
+13:01:44: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990029  - JobId: 20201222000209 
+13:01:54: Information: AutoLrpPlan: Job Done: JobId: 20201222000209'
+13:01:55: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0030  - PlanId:A22010173990030  - Wlno: 10460302  - Pz: 专友 TW-16银白色 铝合金脚 标案散货包装  - LrpCount: 0 
+13:01:55: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0030
+13:01:55: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0030  - PlanId: A22010173990030  - JobId: 20201222000210 
+13:02:33: Information: AutoLrpPlan: Job Done: JobId: 20201222000210'
+13:02:34: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990030  - JobId: 20201222000211 
+13:02:43: Information: AutoLrpPlan: Job Done: JobId: 20201222000211'
+13:02:43: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0030
+13:02:43: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990030  - JobId: 20201222000212 
+13:02:49: Information: AutoLrpPlan: Job Done: JobId: 20201222000212'
+13:02:50: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0031  - PlanId:A22010173990031  - Wlno: 10460302  - Pz: 专友 ZB2黑色 铝合金脚 标案散货包装  - LrpCount: 0 
+13:02:50: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0031
+13:02:50: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0031  - PlanId: A22010173990031  - JobId: 20201222000213 
+13:03:27: Information: AutoLrpPlan: Job Done: JobId: 20201222000213'
+13:03:27: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990031  - JobId: 20201222000214 
+13:03:33: Information: AutoLrpPlan: Job Done: JobId: 20201222000214'
+13:03:33: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0031
+13:03:33: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990031  - JobId: 20201222000215 
+13:03:37: Information: AutoLrpPlan: Job Done: JobId: 20201222000215'
+13:03:38: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0032  - PlanId:A22010173990032  - Wlno: 10450321  - Pz: 专友 ZB1银灰色 无轮子 低头枕  - LrpCount: 0 
+13:03:38: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0032
+13:03:39: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0032  - PlanId: A22010173990032  - JobId: 20201222000216 
+13:12:33: Information: AutoLrpPlan: Job Done: JobId: 20201222000216'
+13:12:34: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990032  - JobId: 20201222000219 
+13:12:39: Information: AutoLrpPlan: Job Done: JobId: 20201222000219'
+13:12:39: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0032
+13:12:39: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990032  - JobId: 20201222000220 
+13:12:50: Information: AutoLrpPlan: Job Done: JobId: 20201222000220'
+13:12:51: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0033  - PlanId:A22010173990033  - Wlno: 10600101  - Pz: 专友 BM-51黑色 无轮子 低头枕  - LrpCount: 0 
+13:12:51: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0033
+13:12:51: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0033  - PlanId: A22010173990033  - JobId: 20201222000221 
+13:12:56: Information: 定时任务初始化已完成!    1.0.2.30
+13:13:52: Information: AutoLrpPlan: Job Done: JobId: 20201222000221'
+13:13:53: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990033  - JobId: 20201222000222 
+13:14:03: Information: AutoLrpPlan: Job Done: JobId: 20201222000222'
+13:14:04: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0033
+13:14:04: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990033  - JobId: 20201222000223 
+13:14:11: Information: AutoLrpPlan: Job Done: JobId: 20201222000223'
+13:14:12: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0034  - PlanId:A22010173990034  - Wlno: 10600104  - Pz: 专友 ZB6红色 无轮子 低头枕 新款脚踏  - LrpCount: 0 
+13:14:12: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0034
+13:14:13: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0034  - PlanId: A22010173990034  - JobId: 20201222000224 
+13:15:16: Information: AutoLrpPlan: Job Done: JobId: 20201222000224'
+13:15:16: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990034  - JobId: 20201222000226 
+13:15:24: Information: AutoLrpPlan: Job Done: JobId: 20201222000226'
+13:15:25: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0034
+13:15:25: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990034  - JobId: 20201222000227 
+13:15:29: Information: AutoLrpPlan: Job Done: JobId: 20201222000227'
+13:15:32: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0035  - PlanId:A22010173990035  - Wlno: 10570309  - Pz: 专友 BM-51黑色 无轮子  - LrpCount: 0 
+13:15:32: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0035
+13:15:32: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0035  - PlanId: A22010173990035  - JobId: 20201222000228 
+13:16:44: Information: AutoLrpPlan: Job Done: JobId: 20201222000228'
+13:16:45: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990035  - JobId: 20201222000229 
+13:16:52: Information: AutoLrpPlan: Job Done: JobId: 20201222000229'
+13:16:52: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0035
+13:16:52: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990035  - JobId: 20201222000230 
+13:16:56: Information: AutoLrpPlan: Job Done: JobId: 20201222000230'
+13:16:57: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0036  - PlanId:A22010173990036  - Wlno: 10620111  - Pz: 专友 ZB5蓝色 无轮子 电竞扶手  - LrpCount: 0 
+13:16:57: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0036
+13:16:58: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0036  - PlanId: A22010173990036  - JobId: 20201222000231 
+13:17:53: Information: AutoLrpPlan: Job Done: JobId: 20201222000231'
+13:17:54: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990036  - JobId: 20201222000232 
+13:18:02: Information: AutoLrpPlan: Job Done: JobId: 20201222000232'
+13:18:02: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0036
+13:18:02: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990036  - JobId: 20201222000233 
+13:18:06: Information: AutoLrpPlan: Job Done: JobId: 20201222000233'
+13:18:09: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0037  - PlanId:A22010173990037  - Wlno: 10630104  - Pz: 专友 ZB2黑色 无轮子  - LrpCount: 0 
+13:18:09: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0037
+13:18:09: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0037  - PlanId: A22010173990037  - JobId: 20201222000234 
+13:19:07: Information: AutoLrpPlan: Job Done: JobId: 20201222000234'
+13:19:08: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990037  - JobId: 20201222000235 
+13:19:15: Information: AutoLrpPlan: Job Done: JobId: 20201222000235'
+13:19:15: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0037
+13:19:15: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990037  - JobId: 20201222000236 
+13:19:19: Information: AutoLrpPlan: Job Done: JobId: 20201222000236'
+13:19:20: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0038  - PlanId:A22010173990038  - Wlno: 10650104  - Pz: 专友 ZB5蓝 无轮子 电竞扶手 新脚踏 80S  - LrpCount: 0 
+13:19:20: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0038
+13:19:20: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0038  - PlanId: A22010173990038  - JobId: 20201222000237 
+13:20:21: Information: AutoLrpPlan: Job Done: JobId: 20201222000237'
+13:20:22: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990038  - JobId: 20201222000238 
+13:20:29: Information: AutoLrpPlan: Job Done: JobId: 20201222000238'
+13:20:29: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0038
+13:20:29: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990038  - JobId: 20201222000239 
+13:20:34: Information: AutoLrpPlan: Job Done: JobId: 20201222000239'
+13:20:35: Information: AutoLrpPlan: Work With PlanDd:2201-017399     0039  - PlanId:A22010173990039  - Wlno: 10910103  - Pz: 专友 CI-00黑色 铝脚 无轮子 无APP  - LrpCount: 0 
+13:20:35: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017399     0039
+13:20:35: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017399     0039  - PlanId: A22010173990039  - JobId: 20201222000240 
+13:20:56: Information: Fix Mocta Department Info: Work Start!
+13:20:56: Information: Fix Purta Info: Work Start!
+13:20:56: Information: Fix Mocta Department Info: Work Finished!
+13:21:03: Information: Fix Purta Info: Work Finished!
+13:21:23: Information: AutoLrpPlan: Job Done: JobId: 20201222000240'
+13:21:24: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010173990039  - JobId: 20201222000241 
+13:21:30: Information: AutoLrpPlan: Job Done: JobId: 20201222000241'
+13:21:31: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017399     0039
+13:21:31: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010173990039  - JobId: 20201222000242 
+13:21:35: Information: AutoLrpPlan: Job Done: JobId: 20201222000242'
+13:21:37: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0006  - PlanId:A22040013680006  - Wlno: 10620110  - Pz: 专友 BM-51黑色 无轮子 CM9001扶手  - LrpCount: 0 
+13:21:37: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0006
+13:21:37: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0006  - PlanId: A22040013680006  - JobId: 20201222000243 
+13:22:30: Information: AutoLrpPlan: Job Done: JobId: 20201222000243'
+13:22:31: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680006  - JobId: 20201222000244 
+13:22:38: Information: AutoLrpPlan: Job Done: JobId: 20201222000244'
+13:22:38: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0006
+13:22:38: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680006  - JobId: 20201222000245 
+13:22:42: Information: AutoLrpPlan: Job Done: JobId: 20201222000245'
+13:22:43: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0007  - PlanId:A22040013680007  - Wlno: 10620110  - Pz: 专友 ZB1银灰色 无轮子 CM9001扶手  - LrpCount: 0 
+13:22:43: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0007
+13:22:44: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0007  - PlanId: A22040013680007  - JobId: 20201222000246 
+13:23:34: Information: AutoLrpPlan: Job Done: JobId: 20201222000246'
+13:23:35: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680007  - JobId: 20201222000247 
+13:23:42: Information: AutoLrpPlan: Job Done: JobId: 20201222000247'
+13:23:42: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0007
+13:23:42: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680007  - JobId: 20201222000248 
+13:23:47: Information: AutoLrpPlan: Job Done: JobId: 20201222000248'
+13:23:48: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0008  - PlanId:A22040013680008  - Wlno: 10600101  - Pz: 专友 KMD-34绿色 无轮子 低头枕  - LrpCount: 0 
+13:23:48: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0008
+13:23:48: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0008  - PlanId: A22040013680008  - JobId: 20201222000249 
+13:24:41: Information: AutoLrpPlan: Job Done: JobId: 20201222000249'
+13:24:42: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680008  - JobId: 20201222000250 
+13:24:48: Information: AutoLrpPlan: Job Done: JobId: 20201222000250'
+13:24:48: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0008
+13:24:48: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680008  - JobId: 20201222000251 
+13:24:52: Information: AutoLrpPlan: Job Done: JobId: 20201222000251'
+13:24:53: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0009  - PlanId:A22040013680009  - Wlno: 10600101  - Pz: 专友 W09-53灰色 无轮子 低头枕  - LrpCount: 0 
+13:24:53: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0009
+13:24:54: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0009  - PlanId: A22040013680009  - JobId: 20201222000252 
+13:25:47: Information: AutoLrpPlan: Job Done: JobId: 20201222000252'
+13:25:48: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680009  - JobId: 20201222000253 
+13:25:55: Information: AutoLrpPlan: Job Done: JobId: 20201222000253'
+13:25:55: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0009
+13:25:55: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680009  - JobId: 20201222000254 
+13:25:59: Information: AutoLrpPlan: Job Done: JobId: 20201222000254'
+13:26:00: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0010  - PlanId:A22040013680010  - Wlno: 10600101  - Pz: 专友 BM-51黑色 无轮子 低头枕  - LrpCount: 0 
+13:26:00: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0010
+13:26:01: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0010  - PlanId: A22040013680010  - JobId: 20201222000255 
+13:26:49: Information: AutoLrpPlan: Job Done: JobId: 20201222000255'
+13:26:50: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680010  - JobId: 20201222000256 
+13:26:56: Information: AutoLrpPlan: Job Done: JobId: 20201222000256'
+13:26:56: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0010
+13:26:56: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680010  - JobId: 20201222000257 
+13:27:00: Information: AutoLrpPlan: Job Done: JobId: 20201222000257'
+13:27:03: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0011  - PlanId:A22040013680011  - Wlno: 10600101  - Pz: 专友 ZB8咖啡色 无轮子 低头枕  - LrpCount: 0 
+13:27:03: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0011
+13:27:04: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0011  - PlanId: A22040013680011  - JobId: 20201222000258 
+13:27:58: Information: AutoLrpPlan: Job Done: JobId: 20201222000258'
+13:27:59: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680011  - JobId: 20201222000259 
+13:28:06: Information: AutoLrpPlan: Job Done: JobId: 20201222000259'
+13:28:06: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0011
+13:28:06: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680011  - JobId: 20201222000260 
+13:28:10: Information: AutoLrpPlan: Job Done: JobId: 20201222000260'
+13:28:11: Information: AutoLrpPlan: Work With PlanDd:2204-001368     0012  - PlanId:A22040013680012  - Wlno: 10600104  - Pz: 专友 BM-51黑色 无轮子 低头枕 新款脚踏  - LrpCount: 0 
+13:28:11: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2204-001368     0012
+13:28:12: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2204-001368     0012  - PlanId: A22040013680012  - JobId: 20201222000261 
+13:29:13: Information: AutoLrpPlan: Job Done: JobId: 20201222000261'
+13:29:14: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22040013680012  - JobId: 20201222000262 
+13:29:21: Information: AutoLrpPlan: Job Done: JobId: 20201222000262'
+13:29:21: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2204-001368     0012
+13:29:21: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22040013680012  - JobId: 20201222000263 
+13:29:25: Information: AutoLrpPlan: Job Done: JobId: 20201222000263'
+13:29:25: Information: AutoLrpPlan: Not Found Order List!
+13:29:25: Information: AutoLrpPlan: Work Finished! 
+
+13:31:35: Information: 定时任务初始化已完成!   -Ver 1.0.2.30

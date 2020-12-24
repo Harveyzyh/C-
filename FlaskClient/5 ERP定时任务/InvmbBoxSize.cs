@@ -26,21 +26,24 @@ namespace ERP定时任务
 
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
-            try
+            if (ERP定时任务.GetConfig("INVMBBoxSize", "Work"))
             {
-                BoxSizeSelect();
-            }
-            catch (Exception e)
-            {
-                log("Work Error.\n\r\t" + e.ToString());
-            }
-            finally
-            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    BoxSizeSelect();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error.\n\r\t" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 

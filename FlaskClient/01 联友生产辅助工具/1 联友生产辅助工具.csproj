@@ -210,12 +210,6 @@
     <Compile Include="Module\数据导入中.Designer.cs">
       <DependentUpon>数据导入中.cs</DependentUpon>
     </Compile>
-    <Compile Include="生管排程\未排订单查询.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="生管排程\未排订单查询.Designer.cs">
-      <DependentUpon>未排订单查询.cs</DependentUpon>
-    </Compile>
     <Compile Include="生管排程\生产排程导入.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -422,6 +416,12 @@
     <Compile Include="财务\成本异常报表导出.Designer.cs">
       <DependentUpon>成本异常报表导出.cs</DependentUpon>
     </Compile>
+    <Compile Include="采购\排程物料导出_采购_纸箱.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="采购\排程物料导出_采购_纸箱.Designer.cs">
+      <DependentUpon>排程物料导出_采购_纸箱.cs</DependentUpon>
+    </Compile>
     <Compile Include="采购\排程物料导出_采购.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,9 +472,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Module\数据导入中.resx">
       <DependentUpon>数据导入中.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="生管排程\未排订单查询.resx">
-      <DependentUpon>未排订单查询.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程导入.resx">
       <DependentUpon>生产排程导入.cs</DependentUpon>
@@ -583,6 +580,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="财务\成本异常报表导出.resx">
       <DependentUpon>成本异常报表导出.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="采购\排程物料导出_采购_纸箱.resx">
+      <DependentUpon>排程物料导出_采购_纸箱.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="采购\排程物料导出_采购.resx">
       <DependentUpon>排程物料导出_采购.cs</DependentUpon>

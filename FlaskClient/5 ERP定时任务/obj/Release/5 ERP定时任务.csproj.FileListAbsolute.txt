@@ -14,3 +14,11 @@ C:\C#\5 ERP定时任务\obj\Release\5 ERP定时任务.csprojResolveAssemblyRefer
 C:\C#\5 ERP定时任务\obj\Release\ERP定时任务.Properties.Resources.resources
 C:\C#\5 ERP定时任务\obj\Release\ERP定时任务.ERP定时任务.resources
 C:\C#\5 ERP定时任务\obj\Release\5 ERP定时任务.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\ERP定时任务.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\ERP定时任务.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\bin\Release\ERP定时任务.exe
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\bin\Release\ERP定时任务.pdb
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\5 ERP定时任务.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\ERP定时任务.Properties.Resources.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\ERP定时任务.ERP定时任务.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\5 ERP定时任务\obj\Release\5 ERP定时任务.csproj.GenerateResource.Cache

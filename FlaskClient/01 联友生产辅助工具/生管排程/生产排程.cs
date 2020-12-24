@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using HarveyZ.品管;
+using System.Collections.Generic;
 
 namespace HarveyZ.生管排程
 {
@@ -112,9 +113,11 @@ namespace HarveyZ.生管排程
                 TxBoxDptWorkTime.Enabled = false;
                 //DtpStartDdDate.Checked = true;
                 //DtpEndDdDate.Checked = true;
+                panelStatusType.Enabled = false;
             }
             else
             {
+                panelStatusType.Enabled = true;
                 DtpStartWorkDate.Enabled = true;
                 DtpEndWorkDate.Enabled = true;
                 CmBoxDptType.Enabled = true;
@@ -316,6 +319,12 @@ namespace HarveyZ.生管排程
                 contextMenuStrip_DgvMain_ItemClicked_Select(e.ClickedItem.Text);
             }
         }
+
+        private void CheckBoxStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            DgvMain.DataSource = null;
+            UI();
+        }
         #endregion
 
         #region 逻辑
@@ -455,6 +464,7 @@ namespace HarveyZ.生管排程
         }
         #endregion
 
+        #region 数据初始化逻辑
         private void SetCmBoxDptTypeList()
         {
             string slqStr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by K_ID";
@@ -506,6 +516,7 @@ namespace HarveyZ.生管排程
                 return "0";
             }
         }
+        #endregion
 
         #region 导入导出数据
         private DataTable GetInsertDt(DataTable dt)//数据表转成sql语句
@@ -524,6 +535,9 @@ namespace HarveyZ.生管排程
             string SC003 = "", SC001 = "";
 
             int SysDate = GetNowDate();
+            //导入日期偏移量
+            int dayOffset = 30;
+            int SysDate2 = int.Parse(DateTime.ParseExact(SysDate.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture).AddDays(dayOffset).ToString("yyyyMMdd"));
             int WorkTime = 0;
             
             for (; rowIndex < row_total; rowIndex++ )
@@ -533,7 +547,7 @@ namespace HarveyZ.生管排程
                 {
                     SC003 = dt.Rows[rowIndex][0].ToString().Replace("-", "").Replace("/", "");
                     WorkTime = int.Parse(SC003);
-                    if(WorkTime < SysDate)
+                    if(WorkTime < SysDate || WorkTime >= SysDate2)
                     {
                         continue;
                     }
@@ -661,63 +675,194 @@ namespace HarveyZ.生管排程
         #endregion
 
         #region 数据显示
+        /// <summary>
+        /// 对datatable作数据整理
+        /// </summary>
+        /// <param name="dt"></param>
+        private void ShowDtConvert(DataTable dt)
+        {
+            //更新状态列
+            if (dt != null)
+            {
+                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+                {
+                    if (dt.Rows[rowIndex]["生产车间N"].ToString() == "")
+                    {
+                        dt.Rows[rowIndex]["状态"] += "新增";
+                    }
+                    else
+                    {
+                        if (dt.Rows[rowIndex]["上线日期N"].ToString() != dt.Rows[rowIndex]["上线日期"].ToString())
+                        {
+                            if (dt.Rows[rowIndex]["上线日期N"].ToString() != "")
+                            {
+                                int dateBack = int.Parse(dt.Rows[rowIndex]["上线日期N"].ToString().Replace("-", ""));
+                                int dateNew = int.Parse(dt.Rows[rowIndex]["上线日期"].ToString().Replace("-", ""));
+
+                                if (dateBack < dateNew)
+                                {
+                                    dt.Rows[rowIndex]["状态"] += "上线延后，";
+                                }
+                                if (dateBack > dateNew)
+                                {
+                                    dt.Rows[rowIndex]["状态"] += "上线提前，";
+                                }
+                            }
+                        }
+                        if (dt.Rows[rowIndex]["生产车间"].ToString() != dt.Rows[rowIndex]["生产车间N"].ToString() && dt.Rows[rowIndex]["生产车间N"].ToString() != "")
+                        {
+                            dt.Rows[rowIndex]["状态"] += "部门变更，";
+                        }
+                        if (dt.Rows[rowIndex]["上线数量"].ToString() != dt.Rows[rowIndex]["上线数量N"].ToString() && dt.Rows[rowIndex]["生产车间N"].ToString() != "")
+                        {
+                            dt.Rows[rowIndex]["状态"] += "数量变更，";
+                        }
+                        dt.Rows[rowIndex]["状态"] = dt.Rows[rowIndex]["状态"].ToString().TrimEnd('，');
+                    }
+                }
+            }
+            dt.Columns.Remove(dt.Columns["生产车间N"]);
+            dt.Columns.Remove(dt.Columns["上线数量N"]);
+            dt.Columns.Remove(dt.Columns["上线日期N"]);
+        }
+
+        /// <summary>
+        /// 状态类型勾选项，返回sql语句
+        /// </summary>
+        /// <returns></returns>
+        private DataTable GetStatusTypeSelectDt(DataTable dt)
+        {
+            DataTable dt2 = dt.Copy();
+            DataView dv = dt2.DefaultView;
+
+            if (CheckBoxStatusTypeEmpty.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 = '' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 = '' ";
+                }
+            }
+            if (CheckBoxStatusTypeNew.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%新增%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%新增%' ";
+                }
+            }
+            if (CheckBoxStatusTypeDateEarly.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%上线提前%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%上线提前%' ";
+                }
+            }
+            if (CheckBoxStatusTypeDateDelay.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%上线延后%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%上线延后%' ";
+                }
+            }
+            if (CheckBoxStatusTypeSlChange.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%数量变更%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%数量变更%' ";
+                }
+            }
+            if (CheckBoxStatusTypeDptChange.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%部门变更%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%部门变更%' ";
+                }
+            }
+
+            dt2 = dv.ToTable();
+            return dt2;
+        }
+
+        /// <summary>
+        /// 已排订单的显示
+        /// </summary>
+        /// <param name="index"></param>
         private void DgvShow(int index = 0) //数据库资料显示到界面
         {
-            /*
-            SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, SC010 品名, 
-                                    SC012 规格, SC011 保友品名, SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, 
-                                    ISNULL(SC3013, 0) 总已排数量, ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) 绑定工单产量, 
-									(CASE COPTD.UDF04 WHEN '1' THEN '1.内销' WHEN '2' THEN '2.一般贸易' WHEN '3' THEN '3.合同' ELSE COPTD.UDF04 END) 贸易方式, 
-                                    (CASE TD016 WHEN 'Y' THEN 'Y.自动结束' WHEN 'y' THEN 'y.指定结束' ELSE '' END) 结束, 
-                                    SC028 品号, SC015 配置方案, 
-                                    SC016 配置方案描述, SC017 描述备注, SC004 客户名称, SC005 注意事项, 
-                                    SC006 变更原因, SC007 出货日期, SC008 验货日期, SC009 PO#, SC018 柜型柜数, SC019 目的地, 
-                                    SC024 客户编码, SC025 电商编码, SC026 急单, SC027 订单日期 
-                                    FROM WG_DB.dbo.SC_PLAN 
-            */
-            string sqlStrShow = @" SELECT K_ID 序号, SC003 上线日期, SC023 生产车间, SC001 订单号, SC002 订单类型, RTRIM(COPTD.TD005) 品名, 
-                                    RTRIM(COPTD.TD006) 规格, RTRIM(COPTD.UDF08) 保友品名, SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, 
+            string sqlStrShow = @" SELECT SC1.K_ID 序号, '' AS 状态, SC1.SC003 上线日期, SC1.SC023 生产车间, SC1.SC001 订单号, SC1.SC002 订单类型, RTRIM(COPTD.TD005) 品名, 
+                                    RTRIM(COPTD.TD006) 规格, RTRIM(COPTD.UDF08) 保友品名, SC1.SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, 
                                     ISNULL(SC3013, 0) 总已排数量, ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) 绑定工单生产数量, 
-                                    CAST(ISNULL(INVMB.UDF51 * SC013, 0) AS FLOAT) 生产工时, 
+                                    CAST(ISNULL(INVMB.UDF51 * SC1.SC013, 0) AS FLOAT) 生产工时, 
 									(CASE COPTD.UDF04 WHEN '1' THEN '1.内销' WHEN '2' THEN '2.一般贸易' WHEN '3' THEN '3.合同' ELSE COPTD.UDF04 END) 贸易方式, 
                                     (CASE TD016 WHEN 'Y' THEN 'Y.自动结束' WHEN 'y' THEN 'y.指定结束' ELSE '' END) 结束, 
                                     RTRIM(TD004) 品号, RTRIM(TD053) 配置方案, 
                                     RTRIM(COPTQ.TQ003) 配置方案描述, RTRIM((COPTQ.UDF07+COPTD.TD020)) 描述备注, RTRIM(MA002) 客户名称, RTRIM(COPTC.TC015) 注意事项, 
-                                    SC006 变更原因, RTRIM((CASE WHEN COPTD.TD013 = '' THEN '' WHEN COPTD.TD013 IS NULL THEN '' ELSE COPTD.TD013 END)) 出货日期, 
-                                    RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) 急单, RTRIM(COPTD.UDF12) 订单时间, SC029 排程时间  
+                                    SC1.SC006 变更原因, RTRIM((CASE WHEN COPTD.TD013 = '' THEN '' WHEN COPTD.TD013 IS NULL THEN '' ELSE COPTD.TD013 END)) 出货日期, 
+                                    RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) 急单, RTRIM(COPTD.UDF12) 订单时间, SC1.SC029 排程时间,   
+                                    ISNULL(SC0.SC013, -1) 上线数量N, ISNULL(SC0.SC023, '') 生产车间N, ISNULL(SC0.SC003, '') 上线日期N  
 
-                                    FROM WG_DB.dbo.SC_PLAN 
-									LEFT JOIN COMFORT.dbo.COPTD ON RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) = SC001 
+                                    FROM WG_DB.dbo.SC_PLAN AS SC1
+                                    LEFT JOIN WG_DB.dbo.SC_PLAN_Snapshot AS SC0 ON SC0.K_ID = SC1.K_ID AND SC0.SC001 = SC1.SC001 AND SC0.SC000 = CONVERT(VARCHAR(8), DATEADD(DAY, -2, GETDATE()), 112)
+									LEFT JOIN COMFORT.dbo.COPTD ON RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) = SC1.SC001 
                                     LEFT JOIN COMFORT.dbo.COPTQ ON TQ001 = TD004 AND TQ002 = TD053 
                                     LEFT JOIN COMFORT.dbo.COPTC ON TC001 = TD001 AND TC002 = TD002 
                                     LEFT JOIN COMFORT.dbo.COPMA ON MA001 = TC004 
-									LEFT JOIN (SELECT SC2.SC001 SC2001, SUM(SC2.SC013) SC2013 FROM WG_DB.dbo.SC_PLAN AS SC2 WHERE SC2.SC003 <= CONVERT(VARCHAR(8), GETDATE(), 112) GROUP BY SC2.SC001) AS SC2 ON SC2001 = SC001 
-									LEFT JOIN (SELECT SC3.SC001 SC3001, SUM(SC3.SC013) SC3013 FROM WG_DB.dbo.SC_PLAN AS SC3 GROUP BY SC3.SC001) AS SC3 ON SC3001 = SC001 
+									LEFT JOIN (SELECT SC2.SC001 SC2001, SUM(SC2.SC013) SC2013 FROM WG_DB.dbo.SC_PLAN AS SC2 WHERE SC2.SC003 <= CONVERT(VARCHAR(8), GETDATE(), 112) GROUP BY SC2.SC001) AS SC2 ON SC2001 = SC1.SC001 
+									LEFT JOIN (SELECT SC3.SC001 SC3001, SUM(SC3.SC013) SC3013 FROM WG_DB.dbo.SC_PLAN AS SC3 GROUP BY SC3.SC001) AS SC3 ON SC3001 = SC1.SC001 
 									LEFT JOIN (SELECT SUM(TA015) TA015, TA006, RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028) TD, UDF02 FROM COMFORT.dbo.MOCTA 
                                             WHERE TA013 NOT IN ('V', 'U') GROUP BY RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028), TA006, UDF02) 
-										AS MOCTA ON MOCTA.TD = SC001 AND MOCTA.UDF02 = K_ID AND MOCTA.TA006 = SC028 
+										AS MOCTA ON MOCTA.TD = SC1.SC001 AND MOCTA.UDF02 = SC1.K_ID AND MOCTA.TA006 = SC1.SC028 
                                     LEFT JOIN COMFORT.dbo.INVMB ON TD004 = MB001 
                                     WHERE 1 = 1 ";
-            if (TxBoxOrder.Text != "") sqlStrShow += string.Format(@" AND SC001 LIKE '%{0}%' ", TxBoxOrder.Text);
-            if (TxBoxName.Text != "") sqlStrShow += string.Format(@" AND SC010 LIKE '%{0}%' ", TxBoxName.Text);
-            if (TxBoxWlno.Text != "") sqlStrShow += string.Format(@" AND SC028 LIKE '%{0}%' ", TxBoxWlno.Text);
-            if (DtpStartWorkDate.Checked) sqlStrShow += string.Format(@" AND SC003 >= '{0}' ", DtpStartWorkDate.Value.ToString("yyyyMMdd"));
-            if (DtpEndWorkDate.Checked) sqlStrShow += string.Format(@" AND SC003 <= '{0}' ", DtpEndWorkDate.Value.ToString("yyyyMMdd"));
-            if (CmBoxDptType.Text != "全部") sqlStrShow += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
+            if (TxBoxOrder.Text != "") sqlStrShow += string.Format(@" AND SC1.SC001 LIKE '%{0}%' ", TxBoxOrder.Text);
+            if (TxBoxName.Text != "") sqlStrShow += string.Format(@" AND SC1.SC010 LIKE '%{0}%' ", TxBoxName.Text);
+            if (TxBoxWlno.Text != "") sqlStrShow += string.Format(@" AND SC1.SC028 LIKE '%{0}%' ", TxBoxWlno.Text);
+            if (DtpStartWorkDate.Checked) sqlStrShow += string.Format(@" AND SC1.SC003 >= '{0}' ", DtpStartWorkDate.Value.ToString("yyyyMMdd"));
+            if (DtpEndWorkDate.Checked) sqlStrShow += string.Format(@" AND SC1.SC003 <= '{0}' ", DtpEndWorkDate.Value.ToString("yyyyMMdd"));
+            if (CmBoxDptType.Text != "全部") sqlStrShow += string.Format(@" AND SC1.SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
             if (CmBoxShowType.Text == "总已排数量>ERP订单数量") sqlStrShow += @"AND SC3013 > ISNULL(CAST(TD008 AS FLOAT), 0) ";
             if (CmBoxShowType.Text == "总已排数量<ERP订单数量") sqlStrShow += @"AND SC3013 < ISNULL(CAST(TD008 AS FLOAT), 0) ";
-            if (CmBoxShowType.Text == "上线数量不等于绑定工单产量") sqlStrShow += @"AND SC013 != ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) ";
-            if (CmBoxShowType.Text == "已排但存在变更订单") sqlStrShow += @"AND COPTD.UDF12 > SC029 ";
-            sqlStrShow += " ORDER BY SC003, SC001 ";
+            if (CmBoxShowType.Text == "上线数量不等于绑定工单产量") sqlStrShow += @"AND SC1.SC013 != ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) ";
+            if (CmBoxShowType.Text == "已排但存在变更订单") sqlStrShow += @"AND COPTD.UDF12 > SC1.SC029 ";
+
+            sqlStrShow += " ORDER BY SC1.SC003, SC1.SC001 ";
             DataTable showDt = mssql.SQLselect(connWG, sqlStrShow);
 
             if (showDt != null)
             {
                 DtOpt.DtDateFormat(showDt, "时间");
                 DtOpt.DtDateFormat(showDt, "日期");
+
+                ShowDtConvert(showDt);
+                showDt = GetStatusTypeSelectDt(showDt);
+
                 DgvMain.DataSource = showDt;
                 DgvOpt.SetRowBackColor(DgvMain);
                 DgvOpt.SetColHeadMiddleCenter(DgvMain);
+                DgvOpt.SetColMiddleCenter(DgvMain, "序号");
                 DgvOpt.SetColMiddleCenter(DgvMain, "数量");
                 DgvOpt.SetColMiddleCenter(DgvMain, "工时");
                 DgvOpt.SetColWidth(DgvMain, "订单号", 180);
@@ -803,11 +948,12 @@ namespace HarveyZ.生管排程
                 labelWorkTime.Text = "排程总工时：" + workTimeSum.ToString();
 
 
-                //总已排数量>ERP订单量，红字
+                
                 for (int rowIndex = 0; rowIndex < DgvMain.Rows.Count; rowIndex++)
                 {
                     try
                     {
+                        //总已排数量>ERP订单量，红字
                         if (float.Parse(DgvMain.Rows[rowIndex].Cells["总已排数量"].Value.ToString()) > float.Parse(DgvMain.Rows[rowIndex].Cells["ERP订单数量"].Value.ToString()))
                         {
                             DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Purple;
@@ -824,6 +970,10 @@ namespace HarveyZ.生管排程
                         if (DgvMain.Rows[rowIndex].Cells["结束"].Value.ToString() == "y.指定结束")
                         {
                             DgvMain.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        }
+                        if(DgvMain.Rows[rowIndex].Cells["状态"].Value.ToString() != "")
+                        {
+                            DgvMain.Rows[rowIndex].Cells["状态"].Style.BackColor = Color.YellowGreen;
                         }
                     }
                     catch
@@ -858,6 +1008,9 @@ namespace HarveyZ.生管排程
             }
         }
 
+        /// <summary>
+        /// 未排订单的显示
+        /// </summary>
         private void DgvShow2()
         {
             string sqlStrShow = @"SELECT RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) AS 订单号, RTRIM(MA002) AS 客户名称, RTRIM(TD004) AS 品号, RTRIM(TD005) AS 品名, RTRIM(TD006) AS 规格, 
@@ -968,6 +1121,7 @@ namespace HarveyZ.生管排程
             }
         }
         #endregion
+
         #endregion
     }
 }

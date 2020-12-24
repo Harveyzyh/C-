@@ -49,9 +49,8 @@
             this.生管_生产排程部门管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生管_生产排程ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生管_订单信息查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生管_未排订单查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生管_简易排程导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生管_排程物料导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.生管_自动LRP计划队列ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.采购ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.采购_排程物料导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.采购_批量采购数量汇总ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +86,7 @@
             this.statusLabelLocalConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生管_自动LRP计划队列ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.采购_排程物料导出_纸箱ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -219,8 +218,6 @@
             this.生管_生产排程部门管理ToolStripMenuItem,
             this.生管_生产排程ToolStripMenuItem,
             this.生管_订单信息查询ToolStripMenuItem,
-            this.生管_未排订单查询ToolStripMenuItem,
-            this.生管_简易排程导出ToolStripMenuItem,
             this.生管_排程物料导出ToolStripMenuItem,
             this.生管_自动LRP计划队列ToolStripMenuItem});
             this.生管ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
@@ -272,20 +269,6 @@
             this.生管_订单信息查询ToolStripMenuItem.Text = "订单信息查询";
             this.生管_订单信息查询ToolStripMenuItem.Click += new System.EventHandler(this.生管_订单信息查询ToolStripMenuItem_Click);
             // 
-            // 生管_未排订单查询ToolStripMenuItem
-            // 
-            this.生管_未排订单查询ToolStripMenuItem.Name = "生管_未排订单查询ToolStripMenuItem";
-            this.生管_未排订单查询ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.生管_未排订单查询ToolStripMenuItem.Text = "未排订单查询";
-            this.生管_未排订单查询ToolStripMenuItem.Click += new System.EventHandler(this.生管_未排订单查询ToolStripMenuItem_Click);
-            // 
-            // 生管_简易排程导出ToolStripMenuItem
-            // 
-            this.生管_简易排程导出ToolStripMenuItem.Name = "生管_简易排程导出ToolStripMenuItem";
-            this.生管_简易排程导出ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.生管_简易排程导出ToolStripMenuItem.Text = "简易排程导出";
-            this.生管_简易排程导出ToolStripMenuItem.Click += new System.EventHandler(this.生管_简易排程导出ToolStripMenuItem_Click);
-            // 
             // 生管_排程物料导出ToolStripMenuItem
             // 
             this.生管_排程物料导出ToolStripMenuItem.Name = "生管_排程物料导出ToolStripMenuItem";
@@ -293,10 +276,18 @@
             this.生管_排程物料导出ToolStripMenuItem.Text = "排程物料导出";
             this.生管_排程物料导出ToolStripMenuItem.Click += new System.EventHandler(this.生管_排程物料导出ToolStripMenuItem_Click);
             // 
+            // 生管_自动LRP计划队列ToolStripMenuItem
+            // 
+            this.生管_自动LRP计划队列ToolStripMenuItem.Name = "生管_自动LRP计划队列ToolStripMenuItem";
+            this.生管_自动LRP计划队列ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.生管_自动LRP计划队列ToolStripMenuItem.Text = "自动LRP计划队列";
+            this.生管_自动LRP计划队列ToolStripMenuItem.Click += new System.EventHandler(this.生管_自动LRP计划队列ToolStripMenuItem_Click);
+            // 
             // 采购ToolStripMenuItem
             // 
             this.采购ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.采购_排程物料导出ToolStripMenuItem,
+            this.采购_排程物料导出_纸箱ToolStripMenuItem,
             this.采购_批量采购数量汇总ToolStripMenuItem});
             this.采购ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.采购ToolStripMenuItem.Name = "采购ToolStripMenuItem";
@@ -306,14 +297,14 @@
             // 采购_排程物料导出ToolStripMenuItem
             // 
             this.采购_排程物料导出ToolStripMenuItem.Name = "采购_排程物料导出ToolStripMenuItem";
-            this.采购_排程物料导出ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.采购_排程物料导出ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.采购_排程物料导出ToolStripMenuItem.Text = "排程物料导出";
             this.采购_排程物料导出ToolStripMenuItem.Click += new System.EventHandler(this.采购_排程物料导出ToolStripMenuItem_Click);
             // 
             // 采购_批量采购数量汇总ToolStripMenuItem
             // 
             this.采购_批量采购数量汇总ToolStripMenuItem.Name = "采购_批量采购数量汇总ToolStripMenuItem";
-            this.采购_批量采购数量汇总ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.采购_批量采购数量汇总ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.采购_批量采购数量汇总ToolStripMenuItem.Text = "批量采购数量汇总";
             this.采购_批量采购数量汇总ToolStripMenuItem.Click += new System.EventHandler(this.采购_批量采购数量汇总ToolStripMenuItem_Click);
             // 
@@ -578,12 +569,12 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // 生管_自动LRP计划队列ToolStripMenuItem
+            // 采购_排程物料导出_纸箱ToolStripMenuItem
             // 
-            this.生管_自动LRP计划队列ToolStripMenuItem.Name = "生管_自动LRP计划队列ToolStripMenuItem";
-            this.生管_自动LRP计划队列ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.生管_自动LRP计划队列ToolStripMenuItem.Text = "自动LRP计划队列";
-            this.生管_自动LRP计划队列ToolStripMenuItem.Click += new System.EventHandler(this.生管_自动LRP计划队列ToolStripMenuItem_Click);
+            this.采购_排程物料导出_纸箱ToolStripMenuItem.Name = "采购_排程物料导出_纸箱ToolStripMenuItem";
+            this.采购_排程物料导出_纸箱ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.采购_排程物料导出_纸箱ToolStripMenuItem.Text = "排程物料导出_纸箱";
+            this.采购_排程物料导出_纸箱ToolStripMenuItem.Click += new System.EventHandler(this.采购_排程物料导出纸箱ToolStripMenuItem_Click);
             // 
             // 主界面
             // 
@@ -661,7 +652,6 @@
         private System.Windows.Forms.ToolStripMenuItem 码垛线_码垛线报表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 仓储中心_录入退货单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 码垛线_ERP单据生成ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 生管_未排订单查询ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_生产排程部门管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 品管部ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 品管部_成品标签打印ToolStripMenuItem;
@@ -670,12 +660,12 @@
         private System.Windows.Forms.ToolStripMenuItem 财务部ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 财务部_成本异常报表导出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 采购_批量采购数量汇总ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 生管_简易排程导出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_排程物料导出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eRP不开放ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ERP_客户配置维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ERP_客户配置维护_勾选项替换ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 管理_版本发布ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_自动LRP计划队列ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 采购_排程物料导出_纸箱ToolStripMenuItem;
     }
 }

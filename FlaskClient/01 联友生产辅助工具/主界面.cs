@@ -330,7 +330,7 @@ namespace HarveyZ
         private void 仓储中心_录入进货单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             录入进货单 frm = new 录入进货单("仓储中心_录入进货单");
-            FormOpenInit(frm);
+            //FormOpenInit(frm);
             frm.Show();
         }
 
@@ -339,7 +339,7 @@ namespace HarveyZ
             if (FormLogin.StopModuleOpen())
             {
                 录入进货单_Excel导入 frm = new 录入进货单_Excel导入("仓储中心_录入进货单Excel导入");
-                FormOpenInit(frm);
+                //FormOpenInit(frm);
                 frm.Show();
             }
         }
@@ -507,24 +507,6 @@ namespace HarveyZ
             }
         }
 
-        private void 生管_未排订单查询ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (FormLogin.StopModuleOpen())
-            {
-                未排订单查询 frm = new 未排订单查询("生管_未排订单查询");
-                FormOpenInit(frm);
-                frm.Show();
-            }
-        }
-
-        private void 生管_简易排程导出ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (FormLogin.StopModuleOpen())
-            {
-
-            }
-        }
-
         private void 生管_排程物料导出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (FormLogin.StopModuleOpen())
@@ -564,6 +546,16 @@ namespace HarveyZ
             if (FormLogin.StopModuleOpen())
             {
                 排程物料导出_采购 frm = new 排程物料导出_采购("采购_排程物料导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 采购_排程物料导出纸箱ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                排程物料导出_采购_纸箱 frm = new 排程物料导出_采购_纸箱("采购_排程物料导出_纸箱");
                 FormOpenInit(frm);
                 frm.Show();
             }

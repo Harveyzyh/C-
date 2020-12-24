@@ -56,9 +56,12 @@ namespace HarveyZ.生管排程
                 inputDt.Columns.Add("客户名称");
                 if (inputDt.Columns.Contains("交货日期")) inputDt.Columns.Remove("交货日期");
                 inputDt.Columns.Add("交货日期");
+                if (inputDt.Columns.Contains("已排行数")) inputDt.Columns.Remove("已排行数");
+                inputDt.Columns.Add("已排行数");
 
                 DtOpt.DtDateFormat(inputDt, "日期");
                 DgvPreDo.DataSource = inputDt;
+                DgvOpt.SetColHeadMiddleCenter(DgvPreDo);
                 DgvOpt.SetColReadonly(DgvPreDo);
                 DgvOpt.SetColMiddleCenter(DgvPreDo, "状态");
                 DgvOpt.SetColMiddleCenter(DgvPreDo, "日期");
@@ -146,22 +149,29 @@ namespace HarveyZ.生管排程
 
         private void DgvPreDo_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                // 显示定位
-                if (e.RowIndex >= 0)
+                if (e.Button == MouseButtons.Right)
                 {
-                    contextMenuStrip_DgvPreDo.Visible = true;
-                    DgvPreDo.ClearSelection();
-                    DgvPreDo.Rows[e.RowIndex].Selected = true;
-                    DgvPreDo.CurrentCell = DgvPreDo.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    contextMenuStrip_DgvPreDo.Show(MousePosition.X, MousePosition.Y);
+                    // 显示定位
+                    if (e.RowIndex >= 0)
+                    {
+                        contextMenuStrip_DgvPreDo.Visible = true;
+                        DgvPreDo.ClearSelection();
+                        DgvPreDo.Rows[e.RowIndex].Selected = true;
+                        DgvPreDo.CurrentCell = DgvPreDo.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                        contextMenuStrip_DgvPreDo.Show(MousePosition.X, MousePosition.Y);
+                    }
+                }
+
+                if (e.Button == MouseButtons.Left)
+                {
+                    ShowDoneData(e.RowIndex);
                 }
             }
-
-            if (e.Button == MouseButtons.Left)
+            catch
             {
-                ShowDoneData(e.RowIndex);
+
             }
         }
 
@@ -196,7 +206,7 @@ namespace HarveyZ.生管排程
             else
             {
                 Msg.Show("已全部导入！");
-                DgvDone.Rows.Clear();
+                DgvDone.DataSource = null;
             }
             UI();
         }
@@ -217,6 +227,7 @@ namespace HarveyZ.生管排程
                 float slPre = float.Parse(DgvPreDo.Rows[rowIndex].Cells["上线数量"].Value.ToString());
                 float slErp = float.Parse(DgvPreDo.Rows[rowIndex].Cells["ERP订单数量"].Value.ToString());
                 float slDone = float.Parse(DgvPreDo.Rows[rowIndex].Cells["已排数量"].Value.ToString());
+                float count = float.Parse(DgvPreDo.Rows[rowIndex].Cells["已排行数"].Value.ToString());
 
                 if (GetPreExistPlanData(rowIndex))
                 {
@@ -233,8 +244,16 @@ namespace HarveyZ.生管排程
                     }
                     else
                     {
-                        DgvPreDo.Rows[rowIndex].Cells["状态"].Value = "异常";
-                        DgvPreDo.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        if ((slPre == slErp) && (slPre == slDone) && (count == 1))
+                        {
+                            DgvPreDo.Rows[rowIndex].Cells["状态"].Value = "变更日期车间";
+                            DgvPreDo.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Purple;
+                        }
+                        else
+                        {
+                            DgvPreDo.Rows[rowIndex].Cells["状态"].Value = "异常";
+                            DgvPreDo.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        }
                     }
                 }
             }
@@ -258,9 +277,11 @@ namespace HarveyZ.生管排程
                                 LEFT JOIN COPMA(NOLOCK) ON MA001 = TC004
                                 WHERE RTRIM(TD001) + '-' + RTRIM(TD002) + '-' + RTRIM(TD003) = '{0}'";
 
-            string sqlStr2 = @"SELECT ISNULL(CAST(SUM(SC013) AS FLOAT), 0) 已排数量 FROM SC_PLAN(NOLOCK) WHERE SC001 = '{0}' GROUP BY SC001";
+            string sqlStr2 = @"SELECT ISNULL(CAST(SUM(SC013) AS FLOAT), 0) 已排数量 FROM SC_PLAN(NOLOCK) WHERE SC001 = '{0}' GROUP BY SC001 ";
+            string sqlStr3 = @"SELECT ISNULL(COUNT(SC001), 0) 已排行数 FROM SC_PLAN(NOLOCK) WHERE SC001 = '{0}' GROUP BY SC001, SC003, SC013, SC023 ";
             DataTable dt1 = mssql.SQLselect(connYF, string.Format(sqlStr1, dd));
             DataTable dt2 = mssql.SQLselect(connWG, string.Format(sqlStr2, dd));
+            DataTable dt3 = mssql.SQLselect(connWG, string.Format(sqlStr3, dd));
             if (dt1 != null)
             {
                 DtOpt.DtDateFormat(dt1, "日期");
@@ -284,6 +305,15 @@ namespace HarveyZ.生管排程
             else
             {
                 DgvPreDo.Rows[rowIndex].Cells["已排数量"].Value = "0";
+            }
+
+            if (dt3 != null)
+            {
+                DgvPreDo.Rows[rowIndex].Cells["已排行数"].Value = dt3.Rows[0]["已排行数"].ToString();
+            }
+            else
+            {
+                DgvPreDo.Rows[rowIndex].Cells["已排行数"].Value = "0";
             }
 
             ignore = false;
@@ -396,6 +426,17 @@ namespace HarveyZ.生管排程
                             rowIndexOffset++;
                         }
                     }
+                    else if(DgvPreDo.Rows[rowIndexOffset].Cells["状态"].Value.ToString() == "变更日期车间")
+                    {
+                        if (InputDataWork2(rowIndexOffset))
+                        {
+                            DgvPreDo.Rows.RemoveAt(rowIndexOffset);
+                        }
+                        else
+                        {
+                            rowIndexOffset++;
+                        }
+                    }
                     else if(DgvPreDo.Rows[rowIndexOffset].Cells["状态"].Value.ToString() == "异常")
                     {
                         rowIndexOffset++;
@@ -406,7 +447,6 @@ namespace HarveyZ.生管排程
 
         private bool InputDataWork(int rowIndex)
         {
-            string dd = DgvPreDo.Rows[rowIndex].Cells["生产单号"].Value.ToString();
             string slqStr = @"INSERT INTO WG_DB.dbo.SC_PLAN (CREATOR, CREATE_DATE, K_ID, SC001, SC003, SC013, SC023) 
                                     VALUES ('{0}', LEFT(COMFORT.dbo.f_getTime(1), 14), (SELECT ISNULL(MAX(K_ID), 0) + 1 FROM WG_DB.dbo.SC_PLAN), 
                                     '{1}', '{2}', '{3}', '{4}') ";
@@ -414,6 +454,22 @@ namespace HarveyZ.生管排程
                         DgvPreDo.Rows[rowIndex].Cells["生产单号"].Value.ToString(),
                         DgvPreDo.Rows[rowIndex].Cells["上线日期"].Value.ToString().Replace("-", ""),
                         DgvPreDo.Rows[rowIndex].Cells["上线数量"].Value.ToString(),
+                        DgvPreDo.Rows[rowIndex].Cells["生产车间"].Value.ToString()));
+            return rtn == 0 ? true : false;
+        }
+
+        private bool InputDataWork2(int rowIndex)
+        {
+            string slqStr = @"UPDATE WG_DB.dbo.SC_PLAN SET SC003 = '{2}', SC023 = '{3}', SC028 = '' WHERE SC001 = '{0}' AND SC013 = '{1}' ";
+            string aa = string.Format(slqStr,
+                        DgvPreDo.Rows[rowIndex].Cells["生产单号"].Value.ToString(),
+                        DgvPreDo.Rows[rowIndex].Cells["上线数量"].Value.ToString(),
+                        DgvPreDo.Rows[rowIndex].Cells["上线日期"].Value.ToString().Replace("-", ""),
+                        DgvPreDo.Rows[rowIndex].Cells["生产车间"].Value.ToString());
+            int rtn = mssql.SQLexcute(connWG, string.Format(slqStr, 
+                        DgvPreDo.Rows[rowIndex].Cells["生产单号"].Value.ToString(),
+                        DgvPreDo.Rows[rowIndex].Cells["上线数量"].Value.ToString(),
+                        DgvPreDo.Rows[rowIndex].Cells["上线日期"].Value.ToString().Replace("-", ""),
                         DgvPreDo.Rows[rowIndex].Cells["生产车间"].Value.ToString()));
             return rtn == 0 ? true : false;
         }

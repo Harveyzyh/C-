@@ -20,22 +20,25 @@ namespace ERP定时任务
         }
         public void MainWork()
         {
-            workFlag = true;
-            log("Work Start!");
+            if (ERP定时任务.GetConfig("GetBomList", "Work"))
+            {
+                workFlag = true;
+                log("Work Start!");
 
-            try
-            {
-                Work();
-            }
-            catch (Exception e)
-            {
-                log("Work Error: \n" + e.ToString());
-            }
-            finally
-            {
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error: \n" + e.ToString());
+                }
+                finally
+                {
 
-                log("Work Finished!");
-                workFlag = false;
+                    log("Work Finished!");
+                    workFlag = false;
+                }
             }
         }
 

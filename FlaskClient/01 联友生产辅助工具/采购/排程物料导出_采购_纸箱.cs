@@ -6,15 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using HarveyZ;
 
-namespace HarveyZ.生管排程
+namespace HarveyZ.采购
 {
-    public partial class 排程物料导出_生产 : Form
+    public partial class 排程物料导出_采购_纸箱 : Form
     {
+        private string connYF = FormLogin.infObj.connYF;
+        private string connWG = FormLogin.infObj.connWG;
         private Mssql mssql = new Mssql();
 
-        private string connWG = FormLogin.infObj.connWG;
-        private string connYF = FormLogin.infObj.connYF;
         private bool newFlag = false;
         private bool editFlag = false;
         private bool delFlag = false;
@@ -22,9 +23,8 @@ namespace HarveyZ.生管排程
         private bool lockFlag = false;
         private bool printFlag = false;
 
-        private List<string> kidList = new List<string>();
-
-        public 排程物料导出_生产(string text = "")
+        #region 初始化
+        public 排程物料导出_采购_纸箱(string text = "")
         {
             InitializeComponent();
             this.Text = text == "" ? this.Text : text;
@@ -33,12 +33,12 @@ namespace HarveyZ.生管排程
             FormMain_Resized_Work();
         }
 
-        private void FormMain_Init()
+        private void FormMain_Init() // 窗体显示初始化
         {
             UI();
-            SetCmBoxDptTypeList();
             DgvOpt.NormalInit(DgvMain, readOnlyFlag: true, colHeadMiddleFlag: true);
         }
+        #endregion
 
         #region 窗口大小变化设置
         private void FormMain_Resized(object sender, EventArgs e)
@@ -101,13 +101,10 @@ namespace HarveyZ.生管排程
             {
                 dtShow = GetShowDt();
             }
-            if (dtShow != null)
-            {
-                SetPlanKid(GetPlanKid());
-            }
             DtOpt.DtDateFormat(dtShow, "日期");
             DgvOpt.SetShow(DgvMain, dtShow);
             DgvOpt.SetColWidth(DgvMain, "生产单号", 180);
+            DgvOpt.SetColWidth(DgvMain, "采购单号", 180);
             UI();
         }
 
@@ -124,7 +121,6 @@ namespace HarveyZ.生管排程
             {
                 if (excelObj.status)
                 {
-                    UpdOutputFlag();
                     Msg.Show("Excel导出成功！");
                 }
                 else
@@ -133,76 +129,13 @@ namespace HarveyZ.生管排程
                 }
             }
         }
-
-        private void CheckBoxAll_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckBoxAll.Checked == true)
-            {
-                CheckBoxNew.Checked = false;
-                CheckBoxFinished.Checked = false;
-            }
-        }
-
-        private void CheckBoxNew_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckBoxNew.Checked == true)
-            {
-                CheckBoxAll.Checked = false;
-                CheckBoxFinished.Checked = false;
-            }
-        }
-
-        private void CheckBoxFinished_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckBoxFinished.Checked == true)
-            {
-                CheckBoxAll.Checked = false;
-                CheckBoxNew.Checked = false;
-            }
-        }
         #endregion
 
         #region 逻辑
-        private void SetCmBoxDptTypeList()
-        {
-            string slqStr = @"Select Dpt from SC_PLAN_DPT_TYPE WHERE Type = 'Out' and Valid = 1 order by K_ID";
-            DataTable dt = mssql.SQLselect(connWG, slqStr);
-            if (dt != null)
-            {
-                for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    CmBoxDptType.Items.Add(dt.Rows[rowIndex][0].ToString());
-                }
-                CmBoxDptType.SelectedIndex = 0;
-            }
-        }
-
         private string GetTime()
         {
             string slqStr = @"SELECT LEFT(dbo.f_getTime(1), 14) ";
             return mssql.SQLselect(connYF, slqStr).Rows[0][0].ToString();
-        }
-
-        private void UpdOutputFlag()
-        {
-            string time = GetTime();
-            string slqStr = @"UPDATE SC_PLAN SET SC030 = '{1}' WHERE K_ID = '{0}' ";
-            string kidTmp = "";
-            if (kidList.Count > 0)
-            {
-                foreach(string kid in kidList)
-                {
-                    if (kid != kidTmp)
-                    {
-                        kidTmp = kid;
-                        mssql.SQLexcute(connWG, string.Format(slqStr, kid, time));
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
         }
 
         private bool CheckErrData()
@@ -222,44 +155,16 @@ namespace HarveyZ.生管排程
                                     WHERE 1 = 1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
-            if (CmBoxDptType.Text != "全部") sqlStr += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
             sqlStr += @"AND SC013 != ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) ";
             return mssql.SQLexist(connWG, sqlStr);
         }
 
-        private DataTable GetPlanKid()
-        {
-            string sqlStr = @"SELECT DISTINCT K_ID 
-                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
-                                INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
-                                INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
-                                INNER JOIN INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
-                                INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
-                                WHERE 1=1 ";
-            sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
-            sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
-            if (CmBoxDptType.Text != "全部") sqlStr += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
-
-            if (CheckBoxFinished.Checked)
-            {
-                sqlStr += @"AND SCPLAN.SC030 IS NOT NULL ";
-            }
-            if (CheckBoxNew.Checked)
-            {
-                sqlStr += @"AND SCPLAN.SC030 IS NULL ";
-            }
-
-            sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
-                        AND MOCTA.TA011 != 'y' 
-                        ORDER BY K_ID ";
-            return mssql.SQLselect(connYF, sqlStr);
-        }
-
         private DataTable GetShowDt()
         {
-            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, SCPLAN.SC023 生产车间, SCPLAN.SC001 生产单号, RTRIM(INVMB.MB001) 成品品号, RTRIM(INVMB.MB002) 成品品名, RTRIM(INVMB.MB003) 成品规格, INVMB.UDF12 产品系列, 
-                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, MOCTB.TB006 工艺, CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
-                                RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 批号, RTRIM(PURMA.MA002) 批号说明
+            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, INVMB.UDF12 产品系列, SCPLAN.SC001 生产单号, ISNULL(PURTR.TR019, '') 采购单号, 
+                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, 
+                                CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
+                                CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 批号, RTRIM(PURMA.MA002) 批号说明
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
                                 INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
                                 INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
@@ -267,38 +172,22 @@ namespace HarveyZ.生管排程
                                 INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
                                 INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
                                 LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032 
+                                LEFT JOIN PURTB(NOLOCK) AS PURTB ON RTRIM(PURTB.TB029) + '-' + RTRIM(PURTB.TB030) + '-' + RTRIM(PURTB.TB031) = SCPLAN.SC001 AND MOCTB.TB003 = PURTB.TB004
+                                LEFT JOIN PURTR(NOLOCK) AS PURTR ON PURTR.TR001 = PURTB.TB001 AND PURTR.TR002 = PURTB.TB002 AND PURTR.TR003 = PURTB.TB003 AND TR017 = 'Y'
                                 WHERE 1=1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
-            if (CmBoxDptType.Text != "全部") sqlStr += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
 
-            if (CheckBoxFinished.Checked)
-            {
-                sqlStr += @"AND SCPLAN.SC030 IS NOT NULL ";
-            }
-            if (CheckBoxNew.Checked)
-            {
-                sqlStr += @"AND SCPLAN.SC030 IS NULL ";
-            }
-
-            sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
+            sqlStr += @"AND MOCTB.TB012 = '纸箱'
+                        AND MOCTB.TB011 IN ('1', '2', '3', '5')
                         AND MOCTA.TA011 != 'y' 
-                        GROUP BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(INVMB.MB001), RTRIM(INVMB.MB002), RTRIM(INVMB.MB003), INVMB.UDF12, 
-                            RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), MOCTB.TB006, RTRIM(CMSMW.MW002), CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
-                        ORDER BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(MOCTB.TB003), MOCTB.TB006 ";
+                        AND INVMB2.MB034 NOT IN ('R') 
+                        GROUP BY SCPLAN.SC003, INVMB.UDF12, SCPLAN.SC001, 
+                        PURTR.TR019, 
+                        RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), 
+                        CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
+                        ORDER BY SCPLAN.SC003, RTRIM(MOCTB.TB003)";
             return mssql.SQLselect(connYF, sqlStr); ;
-        }
-
-        private void SetPlanKid(DataTable dt)
-        {
-            kidList.Clear();
-            if(dt != null)
-            {
-                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    kidList.Add(dt.Rows[rowIndex]["K_ID"].ToString());
-                }
-            }
         }
 
         #endregion

@@ -38,18 +38,6 @@ namespace ERP定时任务
         private delegate void DelegateUpdateWork();
         
         private DelegateUpdateWork delegateUpdateWork = null;
-        
-        private DelegateMainWork delegateBOMB05MainWork = null;
-        private DelegateMainWork delegateCOPAB02MainWork = null;
-        private DelegateMainWork delegateUpdateMoctaMainWork = null;
-        private DelegateMainWork delegateUpdatePurtaMainWork = null;
-        private DelegateMainWork delegateDeleteCoptrErrorMainWork = null;
-
-        private DelegateMainWork delegateScPlanSnapShotMainWork = null;
-
-        private DelegateMainWork delegateBoxSizeMainWork = null;
-        private DelegateMainWork delegateBomListMainWork = null;
-        private DelegateMainWork delegateAutoLrpMainWork = null;
 
         private InvmbBoxSize boxSize = null;
         private BomList bomList = null;
@@ -67,7 +55,6 @@ namespace ERP定时任务
         public ERP定时任务()
         {
             InitializeComponent();
-            GetMutilOpen();
             StopModuleOpen();
             Init();
         }
@@ -116,13 +103,37 @@ namespace ERP定时任务
 
             //开始工作
             WorkStart();
-            logAppendText("定时任务初始化已完成!");
-            logger.Instance.WriteLog("定时任务初始化已完成!");
+            logAppendText("定时任务初始化已完成!" + "   -Ver " +  ProgVersion);
+            logger.Instance.WriteLog("定时任务初始化已完成!" + "   -Ver " + ProgVersion);
         }
 
+        /// <summary>
+        /// 日志写入
+        /// </summary>
+        /// <param name="text"></param>
         private void logAppendText(string text)
         {
             textBoxLog.AppendText(DateTime.Now.ToString("yyyy-MM-dd HH:mm\t") + text + " \r\n");
+        }
+
+        /// <summary>
+        /// 获取配置信息
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        public static bool GetConfig(string configName, string typeName)
+        {
+            if (configName != null && typeName != null)
+            {
+                Mssql sql = new Mssql();
+                string sqlStr = @"SELECT Valid FROM WG_CONFIG WHERE ConfigName = '{0}' AND Type = '{1}' AND Valid = 'Y' ";
+                return sql.SQLexist(connWG, string.Format(sqlStr, configName, typeName));
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #region 软件更新检测
@@ -174,30 +185,17 @@ namespace ERP定时任务
             }
         }
         #endregion
-
-        #region 程序不能多开设定
-        private void GetMutilOpen()
-        {
-            bool Exist;//定义一个bool变量，用来表示是否已经运行
-                       //创建Mutex互斥对象
-            System.Threading.Mutex newMutex = new System.Threading.Mutex(true, "仅一次", out Exist);
-            if (Exist)//如果没有运行
-            {
-                newMutex.ReleaseMutex();//运行新窗体
-            }
-            else
-            {
-                MessageBox.Show("本程序已正在运行！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);//弹出提示信息
-                Environment.Exit(0);
-            }
-        }
-        #endregion
         #endregion
 
         #region 界面
         private void BtnAutoLrpRun_Click(object sender, EventArgs e)
         {
-            textBoxLog.BeginInvoke(delegateAutoLrpMainWork);
+            if (!autoLrp.workFlag)
+            {
+                Thread thread = new Thread(new ThreadStart(autoLrp.MainWork));
+                logAppendText("AutoLrpPlan: Work Start!");
+                thread.Start();
+            }
         }
         #endregion
 
@@ -244,19 +242,6 @@ namespace ERP定时任务
             mainTimer.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             mainTimer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
 
-            //代理初始化
-            //delegateBOMB05MainWork = new DelegateMainWork(BOMB05MainWork);
-            //delegateCOPAB02MainWork = new DelegateMainWork(COPAB02MainWork);
-            //delegateUpdateMoctaMainWork = new DelegateMainWork(UpdateMoctaMainWork);
-            //delegateUpdatePurtaMainWork = new DelegateMainWork(UpdatePurtaMainWork);
-            //delegateDeleteCoptrErrorMainWork = new DelegateMainWork(DeleteCoptrErrorMainWork);
-
-            //delegateScPlanSnapShotMainWork = new DelegateMainWork(CreateScPlanSnapShotMainWork);
-
-            //delegateBoxSizeMainWork = new DelegateMainWork(BoxSizeMainWork);
-            //delegateBomListMainWork = new DelegateMainWork(BomListMainWork);
-            //delegateAutoLrpMainWork = new DelegateMainWork(AutoLrpMainWork);
-
             //实例初始化
             boxSize = new InvmbBoxSize(mssql, connYF, logger);
             bomList = new BomList(mssql, connYF, logger);
@@ -302,7 +287,7 @@ namespace ERP定时任务
             }
 
             //更新工单单头的部门信息为审核者信息
-            if (minute % 2 == 0 && hour >= 8 && hour <= 20) 
+            if (minute % 10 == 0 && hour >= 8 && hour <= 20) 
             {
                 if (!fixMocta.workFlag)
                 {
@@ -317,7 +302,7 @@ namespace ERP定时任务
             }
 
             //请购单-异常修复
-            if (minute % 2 == 0 && hour >= 8 && hour <= 20) 
+            if (minute % 20 == 0 && hour >= 8 && hour <= 20) 
             {
                 if (!fixPurta.workFlag)
                 {
@@ -383,96 +368,6 @@ namespace ERP定时任务
                     logAppendText("AutoLrpPlan: Work Start!");
                     thread.Start();
                 }
-            }
-        }
-
-        private void BOMB05MainWork()
-        {
-            if (!bomb05.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(bomb05.MainWork));
-                logAppendText("ERP Job BOMB05: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void COPAB02MainWork()
-        {
-            if (!copab02.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(copab02.MainWork));
-                logAppendText("ERP Job COPAB02: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void UpdateMoctaMainWork()
-        {
-            if (!fixMocta.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(fixMocta.MainWork));
-                logAppendText("Fix Mocta Department Info: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void UpdatePurtaMainWork()
-        {
-            if (!fixPurta.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(fixPurta.MainWork));
-                logAppendText("Fix Purta Info: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void DeleteCoptrErrorMainWork()
-        {
-            if (!deleteCoptr.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(deleteCoptr.MainWork));
-                logAppendText("Delete Coptr Error Info: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void CreateScPlanSnapShotMainWork()
-        {
-            if (!scplanSnapshot.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(scplanSnapshot.MainWork));
-                logAppendText("Create Scplan Snapshot: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void BoxSizeMainWork()
-        {
-            if (!boxSize.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(boxSize.MainWork));
-                logAppendText("GetBoxSize: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void AutoLrpMainWork()
-        {
-            if (!autoLrp.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(autoLrp.MainWork));
-                logAppendText("AutoLrpPlan: Work Start!");
-                thread.Start();
-            }
-        }
-
-        private void BomListMainWork()
-        {
-            if (!bomList.workFlag)
-            {
-                Thread thread = new Thread(new ThreadStart(bomList.MainWork));
-                logAppendText("GetBomList: Work Start!");
-                thread.Start();
             }
         }
         #endregion

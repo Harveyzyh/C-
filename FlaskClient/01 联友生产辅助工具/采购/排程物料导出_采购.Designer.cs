@@ -37,6 +37,8 @@
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
+            this.CheckBoxNew = new System.Windows.Forms.CheckBox();
+            this.CheckBoxAll = new System.Windows.Forms.CheckBox();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -45,6 +47,8 @@
             // 
             this.PanelTitle.BackColor = System.Drawing.SystemColors.Control;
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.CheckBoxAll);
+            this.PanelTitle.Controls.Add(this.CheckBoxNew);
             this.PanelTitle.Controls.Add(this.CheckBoxFinished);
             this.PanelTitle.Controls.Add(this.DtpEndDate);
             this.PanelTitle.Controls.Add(this.label2);
@@ -62,10 +66,11 @@
             this.CheckBoxFinished.AutoSize = true;
             this.CheckBoxFinished.Location = new System.Drawing.Point(20, 50);
             this.CheckBoxFinished.Name = "CheckBoxFinished";
-            this.CheckBoxFinished.Size = new System.Drawing.Size(108, 16);
+            this.CheckBoxFinished.Size = new System.Drawing.Size(120, 16);
             this.CheckBoxFinished.TabIndex = 6;
-            this.CheckBoxFinished.Text = "显示已导出物料";
+            this.CheckBoxFinished.Text = "只显示已导出物料";
             this.CheckBoxFinished.UseVisualStyleBackColor = true;
+            this.CheckBoxFinished.CheckedChanged += new System.EventHandler(this.CheckBoxFinished_CheckedChanged);
             // 
             // DtpEndDate
             // 
@@ -140,14 +145,38 @@
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
             // 
-            // 排程生产物料导出
+            // CheckBoxNew
+            // 
+            this.CheckBoxNew.AutoSize = true;
+            this.CheckBoxNew.Checked = true;
+            this.CheckBoxNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxNew.Location = new System.Drawing.Point(162, 50);
+            this.CheckBoxNew.Name = "CheckBoxNew";
+            this.CheckBoxNew.Size = new System.Drawing.Size(120, 16);
+            this.CheckBoxNew.TabIndex = 7;
+            this.CheckBoxNew.Text = "只显示未导出物料";
+            this.CheckBoxNew.UseVisualStyleBackColor = true;
+            this.CheckBoxNew.CheckedChanged += new System.EventHandler(this.CheckBoxNew_CheckedChanged);
+            // 
+            // CheckBoxAll
+            // 
+            this.CheckBoxAll.AutoSize = true;
+            this.CheckBoxAll.Location = new System.Drawing.Point(305, 50);
+            this.CheckBoxAll.Name = "CheckBoxAll";
+            this.CheckBoxAll.Size = new System.Drawing.Size(72, 16);
+            this.CheckBoxAll.TabIndex = 8;
+            this.CheckBoxAll.Text = "显示全部";
+            this.CheckBoxAll.UseVisualStyleBackColor = true;
+            this.CheckBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
+            // 
+            // 排程物料导出_采购
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 605);
             this.Controls.Add(this.DgvMain);
             this.Controls.Add(this.PanelTitle);
-            this.Name = "排程生产物料导出";
+            this.Name = "排程物料导出_采购";
             this.Text = "排程生产物料导出";
             this.Resize += new System.EventHandler(this.FormMain_Resized);
             this.PanelTitle.ResumeLayout(false);
@@ -168,5 +197,7 @@
         private System.Windows.Forms.DateTimePicker DtpEndDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox CheckBoxFinished;
+        private System.Windows.Forms.CheckBox CheckBoxNew;
+        private System.Windows.Forms.CheckBox CheckBoxAll;
     }
 }
