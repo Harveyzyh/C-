@@ -246,7 +246,9 @@ namespace HarveyZ.采购
         private DataTable GetShowDt()
         {
             string sqlStr = @"SELECT SCPLAN.SC003 排程日期, INVMB.UDF12 产品系列, SCPLAN.SC001 生产单号, 
-                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格,  CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
+                                (CASE COPTD.UDF04 WHEN '1' THEN '内销' WHEN '2' THEN '一般贸易' WHEN '3' THEN '合同' ELSE COPTD.UDF04 END) 贸易方式, 
+                                RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格,  
+                                CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
                                 CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 主供应商, RTRIM(PURMA.MA002) 供应商名称
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
                                 INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
@@ -254,7 +256,8 @@ namespace HarveyZ.采购
                                 INNER JOIN INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
                                 INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
                                 INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
-                                LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032 
+                                LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032
+                                LEFT JOIN COPTD(NOLOCK) AS COPTD ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
                                 WHERE 1=1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
@@ -271,7 +274,10 @@ namespace HarveyZ.采购
             sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
                         AND MOCTA.TA011 != 'y' 
                         AND INVMB2.MB034 NOT IN ('R')
-                        GROUP BY SCPLAN.SC003, INVMB.UDF12, SCPLAN.SC001, RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
+                        GROUP BY SCPLAN.SC003, INVMB.UDF12, SCPLAN.SC001, 
+                            (CASE COPTD.UDF04 WHEN '1' THEN '内销' WHEN '2' THEN '一般贸易' WHEN '3' THEN '合同' ELSE COPTD.UDF04 END), 
+                            RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), 
+                            CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
                         ORDER BY SCPLAN.SC003, RTRIM(MOCTB.TB003) ";
             return mssql.SQLselect(connYF, sqlStr); ;
         }
