@@ -33,6 +33,14 @@
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.panelStatusType = new System.Windows.Forms.Panel();
+            this.CheckBoxStatusTypeNew = new System.Windows.Forms.CheckBox();
+            this.CheckBoxStatusTypeSlChange = new System.Windows.Forms.CheckBox();
+            this.CheckBoxStatusTypeDptChange = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CheckBoxStatusTypeEmpty = new System.Windows.Forms.CheckBox();
+            this.CheckBoxStatusTypeDateDelay = new System.Windows.Forms.CheckBox();
+            this.CheckBoxStatusTypeDateEarly = new System.Windows.Forms.CheckBox();
             this.panelLabelShow = new System.Windows.Forms.Panel();
             this.labelDdSlSum = new System.Windows.Forms.Label();
             this.labelSxSlSum = new System.Windows.Forms.Label();
@@ -45,7 +53,6 @@
             this.labelWorkTime = new System.Windows.Forms.Label();
             this.TxBoxDptWorkTime = new System.Windows.Forms.TextBox();
             this.labelDptWorkTime = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.TxBoxWlno = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.CmBoxShowType = new System.Windows.Forms.ComboBox();
@@ -69,17 +76,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTipBtnSetIndex = new System.Windows.Forms.ToolTip(this.components);
-            this.CheckBoxStatusTypeEmpty = new System.Windows.Forms.CheckBox();
-            this.CheckBoxStatusTypeDateEarly = new System.Windows.Forms.CheckBox();
-            this.CheckBoxStatusTypeDateDelay = new System.Windows.Forms.CheckBox();
-            this.CheckBoxStatusTypeSlChange = new System.Windows.Forms.CheckBox();
-            this.CheckBoxStatusTypeDptChange = new System.Windows.Forms.CheckBox();
-            this.panelStatusType = new System.Windows.Forms.Panel();
-            this.CheckBoxStatusTypeNew = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
-            this.panelLabelShow.SuspendLayout();
             this.panelStatusType.SuspendLayout();
+            this.panelLabelShow.SuspendLayout();
             this.SuspendLayout();
             // 
             // DgvMain
@@ -140,8 +140,110 @@
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
             this.PanelTitle.Margin = new System.Windows.Forms.Padding(2);
             this.PanelTitle.Name = "PanelTitle";
-            this.PanelTitle.Size = new System.Drawing.Size(1639, 140);
+            this.PanelTitle.Size = new System.Drawing.Size(1146, 140);
             this.PanelTitle.TabIndex = 4;
+            // 
+            // panelStatusType
+            // 
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeNew);
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeSlChange);
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDptChange);
+            this.panelStatusType.Controls.Add(this.label9);
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeEmpty);
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDateDelay);
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDateEarly);
+            this.panelStatusType.Location = new System.Drawing.Point(83, 66);
+            this.panelStatusType.Name = "panelStatusType";
+            this.panelStatusType.Size = new System.Drawing.Size(596, 37);
+            this.panelStatusType.TabIndex = 52;
+            // 
+            // CheckBoxStatusTypeNew
+            // 
+            this.CheckBoxStatusTypeNew.AutoSize = true;
+            this.CheckBoxStatusTypeNew.Checked = true;
+            this.CheckBoxStatusTypeNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeNew.Location = new System.Drawing.Point(143, 9);
+            this.CheckBoxStatusTypeNew.Name = "CheckBoxStatusTypeNew";
+            this.CheckBoxStatusTypeNew.Size = new System.Drawing.Size(54, 18);
+            this.CheckBoxStatusTypeNew.TabIndex = 52;
+            this.CheckBoxStatusTypeNew.Text = "新增";
+            this.CheckBoxStatusTypeNew.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeNew.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
+            // 
+            // CheckBoxStatusTypeSlChange
+            // 
+            this.CheckBoxStatusTypeSlChange.AutoSize = true;
+            this.CheckBoxStatusTypeSlChange.Checked = true;
+            this.CheckBoxStatusTypeSlChange.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeSlChange.Location = new System.Drawing.Point(406, 9);
+            this.CheckBoxStatusTypeSlChange.Name = "CheckBoxStatusTypeSlChange";
+            this.CheckBoxStatusTypeSlChange.Size = new System.Drawing.Size(82, 18);
+            this.CheckBoxStatusTypeSlChange.TabIndex = 50;
+            this.CheckBoxStatusTypeSlChange.Text = "数量变更";
+            this.CheckBoxStatusTypeSlChange.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeSlChange.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
+            // 
+            // CheckBoxStatusTypeDptChange
+            // 
+            this.CheckBoxStatusTypeDptChange.AutoSize = true;
+            this.CheckBoxStatusTypeDptChange.Checked = true;
+            this.CheckBoxStatusTypeDptChange.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeDptChange.Location = new System.Drawing.Point(506, 9);
+            this.CheckBoxStatusTypeDptChange.Name = "CheckBoxStatusTypeDptChange";
+            this.CheckBoxStatusTypeDptChange.Size = new System.Drawing.Size(82, 18);
+            this.CheckBoxStatusTypeDptChange.TabIndex = 51;
+            this.CheckBoxStatusTypeDptChange.Text = "部门变更";
+            this.CheckBoxStatusTypeDptChange.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeDptChange.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 11F);
+            this.label9.Location = new System.Drawing.Point(7, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "状态类型：";
+            // 
+            // CheckBoxStatusTypeEmpty
+            // 
+            this.CheckBoxStatusTypeEmpty.AutoSize = true;
+            this.CheckBoxStatusTypeEmpty.Checked = true;
+            this.CheckBoxStatusTypeEmpty.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeEmpty.Location = new System.Drawing.Point(89, 9);
+            this.CheckBoxStatusTypeEmpty.Name = "CheckBoxStatusTypeEmpty";
+            this.CheckBoxStatusTypeEmpty.Size = new System.Drawing.Size(40, 18);
+            this.CheckBoxStatusTypeEmpty.TabIndex = 47;
+            this.CheckBoxStatusTypeEmpty.Text = "空";
+            this.CheckBoxStatusTypeEmpty.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeEmpty.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
+            // 
+            // CheckBoxStatusTypeDateDelay
+            // 
+            this.CheckBoxStatusTypeDateDelay.AutoSize = true;
+            this.CheckBoxStatusTypeDateDelay.Checked = true;
+            this.CheckBoxStatusTypeDateDelay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeDateDelay.Location = new System.Drawing.Point(309, 9);
+            this.CheckBoxStatusTypeDateDelay.Name = "CheckBoxStatusTypeDateDelay";
+            this.CheckBoxStatusTypeDateDelay.Size = new System.Drawing.Size(82, 18);
+            this.CheckBoxStatusTypeDateDelay.TabIndex = 49;
+            this.CheckBoxStatusTypeDateDelay.Text = "上线延后";
+            this.CheckBoxStatusTypeDateDelay.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeDateDelay.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
+            // 
+            // CheckBoxStatusTypeDateEarly
+            // 
+            this.CheckBoxStatusTypeDateEarly.AutoSize = true;
+            this.CheckBoxStatusTypeDateEarly.Checked = true;
+            this.CheckBoxStatusTypeDateEarly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypeDateEarly.Location = new System.Drawing.Point(211, 9);
+            this.CheckBoxStatusTypeDateEarly.Name = "CheckBoxStatusTypeDateEarly";
+            this.CheckBoxStatusTypeDateEarly.Size = new System.Drawing.Size(82, 18);
+            this.CheckBoxStatusTypeDateEarly.TabIndex = 48;
+            this.CheckBoxStatusTypeDateEarly.Text = "上线提前";
+            this.CheckBoxStatusTypeDateEarly.UseVisualStyleBackColor = true;
+            this.CheckBoxStatusTypeDateEarly.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
             // 
             // panelLabelShow
             // 
@@ -158,7 +260,7 @@
             this.panelLabelShow.Controls.Add(this.labelDptWorkTime);
             this.panelLabelShow.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelLabelShow.Font = new System.Drawing.Font("宋体", 11F);
-            this.panelLabelShow.Location = new System.Drawing.Point(1298, 0);
+            this.panelLabelShow.Location = new System.Drawing.Point(805, 0);
             this.panelLabelShow.Name = "panelLabelShow";
             this.panelLabelShow.Size = new System.Drawing.Size(339, 138);
             this.panelLabelShow.TabIndex = 41;
@@ -271,19 +373,9 @@
             this.labelDptWorkTime.TabIndex = 34;
             this.labelDptWorkTime.Text = "生产工时：";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 11F);
-            this.label9.Location = new System.Drawing.Point(7, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 15);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "状态类型：";
-            // 
             // TxBoxWlno
             // 
-            this.TxBoxWlno.Location = new System.Drawing.Point(524, 106);
+            this.TxBoxWlno.Location = new System.Drawing.Point(518, 106);
             this.TxBoxWlno.Margin = new System.Windows.Forms.Padding(2);
             this.TxBoxWlno.Name = "TxBoxWlno";
             this.TxBoxWlno.Size = new System.Drawing.Size(146, 23);
@@ -292,7 +384,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(482, 110);
+            this.label8.Location = new System.Drawing.Point(476, 110);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 14);
@@ -311,7 +403,7 @@
             "上线数量不等于绑定工单产量",
             "已排但存在变更订单",
             "未排订单"});
-            this.CmBoxShowType.Location = new System.Drawing.Point(380, 38);
+            this.CmBoxShowType.Location = new System.Drawing.Point(374, 38);
             this.CmBoxShowType.Name = "CmBoxShowType";
             this.CmBoxShowType.Size = new System.Drawing.Size(285, 24);
             this.CmBoxShowType.TabIndex = 43;
@@ -320,7 +412,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(310, 42);
+            this.label7.Location = new System.Drawing.Point(304, 42);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 14);
             this.label7.TabIndex = 42;
@@ -331,7 +423,7 @@
             this.DtpEndDdDate.Checked = false;
             this.DtpEndDdDate.CustomFormat = "yyyy-MM-dd";
             this.DtpEndDdDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpEndDdDate.Location = new System.Drawing.Point(683, 5);
+            this.DtpEndDdDate.Location = new System.Drawing.Point(668, 5);
             this.DtpEndDdDate.Name = "DtpEndDdDate";
             this.DtpEndDdDate.ShowCheckBox = true;
             this.DtpEndDdDate.Size = new System.Drawing.Size(129, 23);
@@ -343,7 +435,7 @@
             this.DtpStartDdDate.Checked = false;
             this.DtpStartDdDate.CustomFormat = "yyyy-MM-dd";
             this.DtpStartDdDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpStartDdDate.Location = new System.Drawing.Point(536, 5);
+            this.DtpStartDdDate.Location = new System.Drawing.Point(521, 5);
             this.DtpStartDdDate.Name = "DtpStartDdDate";
             this.DtpStartDdDate.ShowCheckBox = true;
             this.DtpStartDdDate.Size = new System.Drawing.Size(129, 23);
@@ -353,7 +445,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(466, 9);
+            this.label3.Location = new System.Drawing.Point(451, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 14);
             this.label3.TabIndex = 37;
@@ -375,7 +467,7 @@
             // 
             // TxBoxName
             // 
-            this.TxBoxName.Location = new System.Drawing.Point(351, 106);
+            this.TxBoxName.Location = new System.Drawing.Point(345, 106);
             this.TxBoxName.Margin = new System.Windows.Forms.Padding(2);
             this.TxBoxName.Name = "TxBoxName";
             this.TxBoxName.Size = new System.Drawing.Size(121, 23);
@@ -385,7 +477,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(309, 110);
+            this.label2.Location = new System.Drawing.Point(303, 110);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 14);
@@ -394,7 +486,7 @@
             // 
             // TxBoxOrder
             // 
-            this.TxBoxOrder.Location = new System.Drawing.Point(156, 106);
+            this.TxBoxOrder.Location = new System.Drawing.Point(150, 106);
             this.TxBoxOrder.Margin = new System.Windows.Forms.Padding(2);
             this.TxBoxOrder.Name = "TxBoxOrder";
             this.TxBoxOrder.Size = new System.Drawing.Size(146, 23);
@@ -405,7 +497,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 11F);
-            this.label1.Location = new System.Drawing.Point(96, 110);
+            this.label1.Location = new System.Drawing.Point(90, 110);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 15);
@@ -416,7 +508,7 @@
             // 
             this.DtpEndWorkDate.CustomFormat = "yyyy-MM-dd";
             this.DtpEndWorkDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpEndWorkDate.Location = new System.Drawing.Point(320, 5);
+            this.DtpEndWorkDate.Location = new System.Drawing.Point(314, 5);
             this.DtpEndWorkDate.Margin = new System.Windows.Forms.Padding(2);
             this.DtpEndWorkDate.Name = "DtpEndWorkDate";
             this.DtpEndWorkDate.ShowCheckBox = true;
@@ -440,7 +532,7 @@
             // 
             this.DtpStartWorkDate.CustomFormat = "yyyy-MM-dd";
             this.DtpStartWorkDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpStartWorkDate.Location = new System.Drawing.Point(171, 5);
+            this.DtpStartWorkDate.Location = new System.Drawing.Point(165, 5);
             this.DtpStartWorkDate.Margin = new System.Windows.Forms.Padding(2);
             this.DtpStartWorkDate.Name = "DtpStartWorkDate";
             this.DtpStartWorkDate.ShowCheckBox = true;
@@ -465,7 +557,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 11F);
-            this.label6.Location = new System.Drawing.Point(299, 9);
+            this.label6.Location = new System.Drawing.Point(293, 9);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(23, 15);
@@ -477,7 +569,7 @@
             this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmBoxDptType.Font = new System.Drawing.Font("宋体", 12F);
             this.CmBoxDptType.FormattingEnabled = true;
-            this.CmBoxDptType.Location = new System.Drawing.Point(171, 37);
+            this.CmBoxDptType.Location = new System.Drawing.Point(165, 37);
             this.CmBoxDptType.Margin = new System.Windows.Forms.Padding(2);
             this.CmBoxDptType.Name = "CmBoxDptType";
             this.CmBoxDptType.Size = new System.Drawing.Size(129, 24);
@@ -489,7 +581,7 @@
             // 
             this.LabelReportSelectDpt.AutoSize = true;
             this.LabelReportSelectDpt.Font = new System.Drawing.Font("宋体", 11F);
-            this.LabelReportSelectDpt.Location = new System.Drawing.Point(96, 41);
+            this.LabelReportSelectDpt.Location = new System.Drawing.Point(90, 41);
             this.LabelReportSelectDpt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelReportSelectDpt.Name = "LabelReportSelectDpt";
             this.LabelReportSelectDpt.Size = new System.Drawing.Size(82, 15);
@@ -500,7 +592,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(96, 9);
+            this.label5.Location = new System.Drawing.Point(90, 9);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 15);
@@ -510,7 +602,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(664, 9);
+            this.label4.Location = new System.Drawing.Point(649, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(21, 14);
             this.label4.TabIndex = 39;
@@ -528,103 +620,11 @@
             this.toolTipBtnSetIndex.InitialDelay = 500;
             this.toolTipBtnSetIndex.ReshowDelay = 100;
             // 
-            // CheckBoxStatusTypeEmpty
-            // 
-            this.CheckBoxStatusTypeEmpty.AutoSize = true;
-            this.CheckBoxStatusTypeEmpty.Checked = true;
-            this.CheckBoxStatusTypeEmpty.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeEmpty.Location = new System.Drawing.Point(92, 9);
-            this.CheckBoxStatusTypeEmpty.Name = "CheckBoxStatusTypeEmpty";
-            this.CheckBoxStatusTypeEmpty.Size = new System.Drawing.Size(40, 18);
-            this.CheckBoxStatusTypeEmpty.TabIndex = 47;
-            this.CheckBoxStatusTypeEmpty.Text = "空";
-            this.CheckBoxStatusTypeEmpty.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeEmpty.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
-            // CheckBoxStatusTypeDateEarly
-            // 
-            this.CheckBoxStatusTypeDateEarly.AutoSize = true;
-            this.CheckBoxStatusTypeDateEarly.Checked = true;
-            this.CheckBoxStatusTypeDateEarly.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDateEarly.Location = new System.Drawing.Point(230, 9);
-            this.CheckBoxStatusTypeDateEarly.Name = "CheckBoxStatusTypeDateEarly";
-            this.CheckBoxStatusTypeDateEarly.Size = new System.Drawing.Size(82, 18);
-            this.CheckBoxStatusTypeDateEarly.TabIndex = 48;
-            this.CheckBoxStatusTypeDateEarly.Text = "上线提前";
-            this.CheckBoxStatusTypeDateEarly.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeDateEarly.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
-            // CheckBoxStatusTypeDateDelay
-            // 
-            this.CheckBoxStatusTypeDateDelay.AutoSize = true;
-            this.CheckBoxStatusTypeDateDelay.Checked = true;
-            this.CheckBoxStatusTypeDateDelay.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDateDelay.Location = new System.Drawing.Point(332, 9);
-            this.CheckBoxStatusTypeDateDelay.Name = "CheckBoxStatusTypeDateDelay";
-            this.CheckBoxStatusTypeDateDelay.Size = new System.Drawing.Size(82, 18);
-            this.CheckBoxStatusTypeDateDelay.TabIndex = 49;
-            this.CheckBoxStatusTypeDateDelay.Text = "上线延后";
-            this.CheckBoxStatusTypeDateDelay.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeDateDelay.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
-            // CheckBoxStatusTypeSlChange
-            // 
-            this.CheckBoxStatusTypeSlChange.AutoSize = true;
-            this.CheckBoxStatusTypeSlChange.Checked = true;
-            this.CheckBoxStatusTypeSlChange.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeSlChange.Location = new System.Drawing.Point(433, 9);
-            this.CheckBoxStatusTypeSlChange.Name = "CheckBoxStatusTypeSlChange";
-            this.CheckBoxStatusTypeSlChange.Size = new System.Drawing.Size(82, 18);
-            this.CheckBoxStatusTypeSlChange.TabIndex = 50;
-            this.CheckBoxStatusTypeSlChange.Text = "数量变更";
-            this.CheckBoxStatusTypeSlChange.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeSlChange.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
-            // CheckBoxStatusTypeDptChange
-            // 
-            this.CheckBoxStatusTypeDptChange.AutoSize = true;
-            this.CheckBoxStatusTypeDptChange.Checked = true;
-            this.CheckBoxStatusTypeDptChange.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDptChange.Location = new System.Drawing.Point(542, 9);
-            this.CheckBoxStatusTypeDptChange.Name = "CheckBoxStatusTypeDptChange";
-            this.CheckBoxStatusTypeDptChange.Size = new System.Drawing.Size(82, 18);
-            this.CheckBoxStatusTypeDptChange.TabIndex = 51;
-            this.CheckBoxStatusTypeDptChange.Text = "部门变更";
-            this.CheckBoxStatusTypeDptChange.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeDptChange.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
-            // panelStatusType
-            // 
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeNew);
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeSlChange);
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDptChange);
-            this.panelStatusType.Controls.Add(this.label9);
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeEmpty);
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDateDelay);
-            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDateEarly);
-            this.panelStatusType.Location = new System.Drawing.Point(89, 66);
-            this.panelStatusType.Name = "panelStatusType";
-            this.panelStatusType.Size = new System.Drawing.Size(723, 37);
-            this.panelStatusType.TabIndex = 52;
-            // 
-            // CheckBoxStatusTypeNew
-            // 
-            this.CheckBoxStatusTypeNew.AutoSize = true;
-            this.CheckBoxStatusTypeNew.Checked = true;
-            this.CheckBoxStatusTypeNew.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeNew.Location = new System.Drawing.Point(154, 9);
-            this.CheckBoxStatusTypeNew.Name = "CheckBoxStatusTypeNew";
-            this.CheckBoxStatusTypeNew.Size = new System.Drawing.Size(54, 18);
-            this.CheckBoxStatusTypeNew.TabIndex = 52;
-            this.CheckBoxStatusTypeNew.Text = "新增";
-            this.CheckBoxStatusTypeNew.UseVisualStyleBackColor = true;
-            this.CheckBoxStatusTypeNew.CheckedChanged += new System.EventHandler(this.CheckBoxStatus_CheckedChanged);
-            // 
             // 生产排程
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1641, 719);
+            this.ClientSize = new System.Drawing.Size(1149, 719);
             this.Controls.Add(this.PanelTitle);
             this.Controls.Add(this.DgvMain);
             this.Font = new System.Drawing.Font("宋体", 10F);
@@ -636,10 +636,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).EndInit();
             this.PanelTitle.ResumeLayout(false);
             this.PanelTitle.PerformLayout();
-            this.panelLabelShow.ResumeLayout(false);
-            this.panelLabelShow.PerformLayout();
             this.panelStatusType.ResumeLayout(false);
             this.panelStatusType.PerformLayout();
+            this.panelLabelShow.ResumeLayout(false);
+            this.panelLabelShow.PerformLayout();
             this.ResumeLayout(false);
 
         }

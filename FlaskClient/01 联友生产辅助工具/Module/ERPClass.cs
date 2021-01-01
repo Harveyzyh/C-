@@ -40,6 +40,7 @@ namespace HarveyZ
             private string tg021 = null;  // 供应商全称
             private string tg030 = null;  // 增值税率
             private string tg033 = null;  // 付款条件编号
+            private string tgudf02 = ""; // 排程日期
 
             public string FlowId { get { return flowId; } set { flowId = value; } }
             public string Company { get { return company; } set { company = value; } }
@@ -63,6 +64,7 @@ namespace HarveyZ
             public string TG021 { get { return tg021; } set { tg021 = value; } }
             public string TG030 { get { return tg030; } set { tg030 = value; } }
             public string TG033 { get { return tg033; } set { tg033 = value; } }
+            public string TGudf02 { get { return tgudf02; } set { tgudf02 = value; } }
         }
 
         private class DetailObject
@@ -178,7 +180,8 @@ namespace HarveyZ
                                 ELSE (CASE WHEN MA044 ='' OR MA044 IS NULL THEN '1' ELSE MA044 END ) END) AS TC018C, 
                                 RTRIM(MA003) 供应商全称, 
                                 (CASE WHEN TC026 IS NULL THEN MA064 ELSE TC026 END) AS TC026C, 
-                                (CASE WHEN TC027 = '' OR TC027 IS NULL THEN MA055 ELSE TC027 END) AS TC027C 
+                                (CASE WHEN TC027 = '' OR TC027 IS NULL THEN MA055 ELSE TC027 END) AS TC027C, 
+                                ISNULL(JHXA.UDF02, '') 排程日期  
                                 FROM dbo.JH_LYXA AS JHXA 
                                 LEFT JOIN dbo.PURTC AS PURTC ON 1=2 
                                 LEFT JOIN dbo.INVMB AS INVMB ON MB001=JHXA007 
@@ -205,6 +208,7 @@ namespace HarveyZ
                 headObj.TG021 = dt.Rows[0][11].ToString();
                 headObj.TG030 = dt.Rows[0][12].ToString();
                 headObj.TG033 = dt.Rows[0][13].ToString();
+                headObj.TGudf02 = dt.Rows[0]["排程日期"].ToString();
             }
         }
 
@@ -222,12 +226,12 @@ namespace HarveyZ
         private void SetHeadInfo(HeadObject headObj)
         {
             string slqStr = @"INSERT INTO dbo.PURTG (COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, TG001, TG002, TG003, TG004, TG005, 
-                                TG006, TG007, TG008, TG009, TG010, TG013, TG014, TG015, TG021, TG030, TG033, TG016, TG043, TG052) 
+                                TG006, TG007, TG008, TG009, TG010, TG013, TG014, TG015, TG021, TG030, TG033, TG016, TG043, TG052, UDF02) 
                                 VALUES('{0}', '{1}', '{2}', '{3}', '1', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', 
-                                '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '', '', '' )";
+                                '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '', '', '', '{20}' )";
             mssql.SQLexcute(conn, string.Format(slqStr, headObj.Company, headObj.Uid, headObj.Ugroup, headObj.Time, headObj.TG001,
                 headObj.TG002, headObj.TG003, headObj.TG004, headObj.TG005, headObj.TG006, headObj.TG007, headObj.TG008, headObj.TG009,
-                headObj.TG010, headObj.TG013, headObj.TG014, headObj.TG015, headObj.TG021, headObj.TG030, headObj.TG033));
+                headObj.TG010, headObj.TG013, headObj.TG014, headObj.TG015, headObj.TG021, headObj.TG030, headObj.TG033, headObj.TGudf02));
         }
 
         private void SetDetailDef(HeadObject headObj)

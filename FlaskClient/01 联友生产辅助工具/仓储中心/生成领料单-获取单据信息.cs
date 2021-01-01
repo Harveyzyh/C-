@@ -30,8 +30,10 @@ namespace HarveyZ.仓储中心
 
         private void Init()
         {
+            checkBox2.Enabled = GetCreateSingleLL();
             button2.Enabled = false;
             dateTimePicker1.Value = DateTime.Now.AddDays(2);
+
 
             if(gdList != null)
             {
@@ -95,6 +97,12 @@ namespace HarveyZ.仓储中心
                 }
             }
             this.Close();
+        }
+
+        private bool GetCreateSingleLL()
+        {
+            string sqlStr = @"SELECT K_ID FROM dbo.WG_CONFIG WHERE ConfigName = 'ERP_CreateSingleLL'  AND Type = 'Work' AND Valid = 'Y' ";
+            return infObj.sql.SQLexist(infObj.connWG, sqlStr);
         }
 
         private void GetDt()

@@ -462,3 +462,5 @@ C:\C#\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csproj.Ge
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.批量采购数量汇总.resources
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\1 联友生产辅助工具.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.采购.排程物料导出_采购_纸箱.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.生管排程.排程物料导出_汇总.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.手册下载.resources

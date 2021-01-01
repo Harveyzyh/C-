@@ -89,6 +89,8 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Last.SuspendLayout();
@@ -96,6 +98,8 @@
             // 
             // panel_Title
             // 
+            this.panel_Title.Controls.Add(this.dateTimePicker2);
+            this.panel_Title.Controls.Add(this.label2);
             this.panel_Title.Controls.Add(this.label1);
             this.panel_Title.Controls.Add(this.数量T);
             this.panel_Title.Controls.Add(this.条码T);
@@ -131,7 +135,7 @@
             // 
             this.数量T.Location = new System.Drawing.Point(637, 30);
             this.数量T.Name = "数量T";
-            this.数量T.Size = new System.Drawing.Size(178, 24);
+            this.数量T.Size = new System.Drawing.Size(117, 24);
             this.数量T.TabIndex = 16;
             this.数量T.KeyUp += new System.Windows.Forms.KeyEventHandler(this.数量_KeyUp);
             // 
@@ -154,7 +158,8 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-DD";
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(889, 4);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -502,6 +507,24 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Width = 200;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(813, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "排程日期：";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(889, 32);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(161, 24);
+            this.dateTimePicker2.TabIndex = 20;
+            // 
             // 录入进货单
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -568,5 +591,7 @@
         private System.Windows.Forms.LinkLabel 供应商L;
         private System.Windows.Forms.LinkLabel 入库仓库L;
         private System.Windows.Forms.LinkLabel 入库单别L;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label label2;
     }
 }

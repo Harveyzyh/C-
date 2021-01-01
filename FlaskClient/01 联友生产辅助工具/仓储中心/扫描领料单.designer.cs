@@ -37,9 +37,11 @@
             this.Lable_Danhao = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel_Title = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.checkedListBoxGroup = new System.Windows.Forms.CheckedListBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Title.SuspendLayout();
             this.SuspendLayout();
@@ -63,17 +65,17 @@
             this.DataGridView_List.BackgroundColor = System.Drawing.Color.White;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView_List.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.DataGridView_List.Location = new System.Drawing.Point(1, 99);
+            this.DataGridView_List.Location = new System.Drawing.Point(1, 123);
             this.DataGridView_List.Name = "DataGridView_List";
             this.DataGridView_List.ReadOnly = true;
             this.DataGridView_List.RowHeadersVisible = false;
             this.DataGridView_List.RowTemplate.Height = 23;
-            this.DataGridView_List.Size = new System.Drawing.Size(862, 306);
+            this.DataGridView_List.Size = new System.Drawing.Size(862, 282);
             this.DataGridView_List.TabIndex = 1;
             // 
             // Button_Select
             // 
-            this.Button_Select.Location = new System.Drawing.Point(298, 33);
+            this.Button_Select.Location = new System.Drawing.Point(280, 33);
             this.Button_Select.Name = "Button_Select";
             this.Button_Select.Size = new System.Drawing.Size(75, 23);
             this.Button_Select.TabIndex = 2;
@@ -83,7 +85,7 @@
             // 
             // Button_Upload
             // 
-            this.Button_Upload.Location = new System.Drawing.Point(388, 33);
+            this.Button_Upload.Location = new System.Drawing.Point(280, 62);
             this.Button_Upload.Name = "Button_Upload";
             this.Button_Upload.Size = new System.Drawing.Size(75, 23);
             this.Button_Upload.TabIndex = 3;
@@ -94,7 +96,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(524, 12);
+            this.label1.Location = new System.Drawing.Point(18, 71);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 12);
@@ -113,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(524, 34);
+            this.label3.Location = new System.Drawing.Point(164, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 12);
             this.label3.TabIndex = 6;
@@ -121,6 +123,8 @@
             // panel_Title
             // 
             this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Title.Controls.Add(this.checkedListBoxGroup);
+            this.panel_Title.Controls.Add(this.label8);
             this.panel_Title.Controls.Add(this.dateTimePicker1);
             this.panel_Title.Controls.Add(this.label2);
             this.panel_Title.Controls.Add(this.checkBox1);
@@ -132,8 +136,50 @@
             this.panel_Title.Controls.Add(this.Button_Upload);
             this.panel_Title.Location = new System.Drawing.Point(1, 1);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(862, 70);
+            this.panel_Title.Size = new System.Drawing.Size(862, 104);
             this.panel_Title.TabIndex = 7;
+            // 
+            // checkedListBoxGroup
+            // 
+            this.checkedListBoxGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.checkedListBoxGroup.FormattingEnabled = true;
+            this.checkedListBoxGroup.Location = new System.Drawing.Point(425, 2);
+            this.checkedListBoxGroup.MultiColumn = true;
+            this.checkedListBoxGroup.Name = "checkedListBoxGroup";
+            this.checkedListBoxGroup.Size = new System.Drawing.Size(400, 98);
+            this.checkedListBoxGroup.TabIndex = 31;
+            this.checkedListBoxGroup.TabStop = false;
+            this.checkedListBoxGroup.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxGroup_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(371, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 48);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "不上传的\r\n包含勾选\r\n工作组\r\n的领料单：";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Enabled = false;
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(256, 6);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(99, 21);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(195, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "排程日期：";
             // 
             // checkBox1
             // 
@@ -146,26 +192,6 @@
             this.checkBox1.Text = "获取绑定排程工单的领料单";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(195, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "排程日期：";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(256, 6);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(99, 21);
-            this.dateTimePicker1.TabIndex = 9;
-            this.dateTimePicker1.TabStop = false;
             // 
             // 扫描领料单
             // 
@@ -199,6 +225,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckedListBox checkedListBoxGroup;
+        private System.Windows.Forms.Label label8;
     }
 }
 

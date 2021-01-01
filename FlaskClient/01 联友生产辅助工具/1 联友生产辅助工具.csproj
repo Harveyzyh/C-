@@ -192,6 +192,12 @@
     <Compile Include="生管排程\工单信息管理.Designer.cs">
       <DependentUpon>工单信息管理.cs</DependentUpon>
     </Compile>
+    <Compile Include="生管排程\排程物料导出_汇总.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="生管排程\排程物料导出_汇总.Designer.cs">
+      <DependentUpon>排程物料导出_汇总.cs</DependentUpon>
+    </Compile>
     <Compile Include="生管排程\排程物料导出_生产.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,6 +398,12 @@
     <Compile Include="管理\FastReport模板发布.Designer.cs">
       <DependentUpon>FastReport模板发布.cs</DependentUpon>
     </Compile>
+    <Compile Include="管理\手册下载.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="管理\手册下载.Designer.cs">
+      <DependentUpon>手册下载.cs</DependentUpon>
+    </Compile>
     <Compile Include="管理\权限管理.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -463,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\工单信息管理.resx">
       <DependentUpon>工单信息管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="生管排程\排程物料导出_汇总.resx">
+      <DependentUpon>排程物料导出_汇总.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\排程物料导出_生产.resx">
       <DependentUpon>排程物料导出_生产.cs</DependentUpon>
@@ -568,6 +583,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="管理\FastReport模板发布.resx">
       <DependentUpon>FastReport模板发布.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="管理\手册下载.resx">
+      <DependentUpon>手册下载.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="管理\权限管理.resx">
       <DependentUpon>权限管理.cs</DependentUpon>

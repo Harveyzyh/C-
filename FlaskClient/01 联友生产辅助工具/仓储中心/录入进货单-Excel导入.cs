@@ -91,6 +91,7 @@ namespace HarveyZ.仓储中心
                 入库仓库L.Enabled = false;
                 供应商L.Enabled = false;
                 dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
                 送货单号T.Enabled = false;
                 if (check)
                 {
@@ -108,6 +109,7 @@ namespace HarveyZ.仓储中心
                 入库仓库L.Enabled = true;
                 供应商L.Enabled = true;
                 dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
                 送货单号T.Enabled = true;
             }
         }
@@ -252,7 +254,9 @@ namespace HarveyZ.仓储中心
             dt.Columns.Add("品名", Type.GetType("System.String"));
             dt.Columns.Add("规格", Type.GetType("System.String"));
             dt.Columns.Add("数量", Type.GetType("System.String"));
-            dt.TableName = "模板";
+            DataRow dr = dt.NewRow();
+            dr["品号"] = "";
+            dt.Rows.Add(dr);
 
             Excel excel = new Excel();
             Excel.Excel_Base excelObj = new Excel.Excel_Base();
@@ -377,10 +381,10 @@ namespace HarveyZ.仓储中心
             string sql = "INSERT INTO JH_LYXA "
                         + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, JHXA001, JHXA002, JHXA003, "
                         + "JHXA004, JHXA005, JHXA007, JHXA008, JHXA009, "
-                        + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID) "
+                        + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID, UDF02) "
                         + "VALUES('COMFORT', '{0}', '{1}', '{2}', 1, '{3}', '{4}', '{5}', "
                         + "'{6}', '{7}', '{8}', '{9}', '{10}', 'N', 'N', "
-                        + "'{11}', '********************', '{12}', '{13}')";
+                        + "'{11}', '********************', '{12}', '{13}', '{14}')";
             string flowId = GetFlowID();
             string Time = GetTime();
             int Count = dgvMain.RowCount;
@@ -397,8 +401,9 @@ namespace HarveyZ.仓储中心
                 string JHXA013 = dgvMain.Rows[0].Cells["送货单号"].Value.ToString();
                 string JHXA015 = dgvMain.Rows[0].Cells["供应商"].Value.ToString();
                 string ID = (Index+1).ToString();
+                string UDF02 = dateTimePicker2.Value.ToString("yyyyMMdd");
                 string slqStr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
-                    JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
+                    JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID, UDF02);
 
                 mssql.SQLexcute(connYF, slqStr);
 
@@ -514,6 +519,7 @@ namespace HarveyZ.仓储中心
             }
             else
             {
+                Msg.Show(excelObj.msg);
                 return null;
             }
         }
@@ -569,10 +575,11 @@ namespace HarveyZ.仓储中心
                             dr["品号"] = pn;
                             try
                             {
-                                dr["数量"] = float.Parse(dt.Rows[rowIndex]["数量"].ToString());
+                                float sl = float.Parse(dt.Rows[rowIndex]["数量"].ToString());
+                                dr["数量"] = sl;
                                 dtNew.Rows.Add(dr);
                             }
-                            catch
+                            catch(Exception e)
                             {
                                 continue;
                             }

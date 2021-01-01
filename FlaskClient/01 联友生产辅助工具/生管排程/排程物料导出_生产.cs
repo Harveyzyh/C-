@@ -259,14 +259,19 @@ namespace HarveyZ.生管排程
         {
             string sqlStr = @"SELECT SCPLAN.SC003 排程日期, SCPLAN.SC023 生产车间, SCPLAN.SC001 生产单号, RTRIM(INVMB.MB001) 成品品号, RTRIM(INVMB.MB002) 成品品名, RTRIM(INVMB.MB003) 成品规格, INVMB.UDF12 产品系列, 
                                 RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, MOCTB.TB006 工艺, CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
-                                RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 批号, RTRIM(PURMA.MA002) 批号说明
+                                RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, 
+                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 批号, 
+                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
-                                INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
-                                INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
-                                INNER JOIN INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
-                                INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
-                                INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
-                                LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032 
+                                INNER JOIN dbo.MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
+                                INNER JOIN dbo.MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
+                                INNER JOIN dbo.COPTD(NOLOCK) ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
+                                INNER JOIN dbo.INVMB(NOLOCK) AS INVMB ON INVMB.MB001 = MOCTA.TA006 
+                                INNER JOIN dbo.CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
+                                INNER JOIN dbo.INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
+                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA1 ON PURMA1.MA001 = INVMB2.MB032 
+                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06
+                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA3 ON PURMA3.MA001 = COPTD.UDF09 
                                 WHERE 1=1 ";
             sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
@@ -284,7 +289,11 @@ namespace HarveyZ.生管排程
             sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
                         AND MOCTA.TA011 != 'y' 
                         GROUP BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(INVMB.MB001), RTRIM(INVMB.MB002), RTRIM(INVMB.MB003), INVMB.UDF12, 
-                            RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), MOCTB.TB006, RTRIM(CMSMW.MW002), CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
+                            RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), MOCTB.TB006, RTRIM(CMSMW.MW002), 
+                            CONVERT(VARCHAR(100), CMSMW.MW003), 
+                            (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END), 
+                            (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END), 
+                            RTRIM(INVMB2.UDF02)   
                         ORDER BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(MOCTB.TB003), MOCTB.TB006 ";
             return mssql.SQLselect(connYF, sqlStr); ;
         }

@@ -13,7 +13,7 @@ namespace HarveyZ.仓储中心
 
         Mssql mssql = new Mssql();
 
-        string conn = FormLogin.infObj.connYF;
+        string connYF = FormLogin.infObj.connYF;
         
         private bool newFlag = false;
         private bool editFlag = false;
@@ -31,8 +31,15 @@ namespace HarveyZ.仓储中心
             this.Text = text == "" ? this.Text : text;
             FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Button_Upload.Enabled = false;
+            checkedListBoxGroup.Enabled = false;
             DgvOpt.SetRowBackColor(DataGridView_List);
             dateTimePicker1.Value = DateTime.Now.AddDays(2);
+
+            //工作组
+            foreach (string tmp in GetGroupList())
+            {
+                checkedListBoxGroup.Items.Add(tmp);
+            }
         }
 
         #region 窗口大小变化设置
@@ -118,18 +125,50 @@ namespace HarveyZ.仓储中心
                 TextBox_Danhao.Text = "";
                 TextBox_Danhao.Enabled = false;
                 dateTimePicker1.Enabled = true;
+                checkedListBoxGroup.Enabled = true;
             }
             else
             {
                 TextBox_Danhao.Enabled = true;
                 dateTimePicker1.Enabled = false;
+                checkedListBoxGroup.Enabled = false;
+            }
+        }
+
+        private void TextBoxChange(object sender, EventArgs e)
+        {
+            MsgFlag = false;
+        }
+
+        private void checkedListBoxGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataGridView_List.DataSource = null;
+            Button_Upload.Enabled = false;
+        }
+
+        public List<string> GetGroupList()
+        {
+            string slqStr = "SELECT DISTINCT CAST(MW003 AS VARCHAR(100)) MW003 FROM CMSMW WHERE MW003 IS NOT NULL AND CAST(MW003 AS VARCHAR(100)) != '' ";
+            DataTable dt = mssql.SQLselect(connYF, slqStr);
+            if (dt != null)
+            {
+                List<string> groupList = new List<string>();
+                for (int rowIdx = 0; rowIdx < dt.Rows.Count; rowIdx++)
+                {
+                    groupList.Add(dt.Rows[rowIdx][0].ToString());
+                }
+                return groupList;
+            }
+            else
+            {
+                return null;
             }
         }
 
         #region 判断是否有后台在运行
         private bool checkJobExists() {
             string slqStr = @" SELECT * FROM  DSCSYS.dbo.JOBQUEUE WHERE JOBNAME = 'BMSAB01' AND STATUS IN ('P', 'N') ";
-            if (mssql.SQLselect(conn, slqStr) == null) return false;
+            if (mssql.SQLselect(connYF, slqStr) == null) return false;
             else return true;
         }
         #endregion
@@ -137,7 +176,7 @@ namespace HarveyZ.仓储中心
         private string getTime()
         {
             string slqStr = @"SELECT dbo.f_getTime(1) ";
-            return mssql.SQLselect(conn, slqStr).Rows[0][0].ToString();
+            return mssql.SQLselect(connYF, slqStr).Rows[0][0].ToString();
         }
 
         private void check(string danbie, string danhao)
@@ -165,19 +204,19 @@ namespace HarveyZ.仓储中心
         private bool checkMOCTC(string danbie, string danhao)
         {
             string slqStr = "SELECT TC001, TC002 FROM MOCTC WHERE TC001 = '{0}' AND TC002 = '{1}'";
-            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, danbie, danhao));
+            return mssql.SQLexist(connYF, string.Format(slqStr, danbie, danhao));
         }
 
         private bool checkLLXA(string danbie, string danhao)
         {
             string slqStr = "SELECT LLXA001 FROM LL_LYXA WHERE LLXA001='{0}' AND LLXA002='{1}'";
-            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, danbie, danhao));
+            return mssql.SQLexist(connYF, string.Format(slqStr, danbie, danhao));
         }
 
         private bool checkLLXA007(string LLXA007)
         {
             string slqStr = "SELECT LLXA007 FROM LL_LYXA WHERE LLXA007='{0}'";
-            return mssql.SQLexist(FormLogin.infObj.connYF, string.Format(slqStr, LLXA007));
+            return mssql.SQLexist(connYF, string.Format(slqStr, LLXA007));
         }
 
         private string getLLXA007()
@@ -195,15 +234,40 @@ namespace HarveyZ.仓储中心
         	return long_time;
         }
 
+        private string GetWorkGroupNotExistStr()
+        {
+            if(checkedListBoxGroup.CheckedItems.Count > 0)
+            {
+                string GroupList = "";
+                string rtnStr = "AND NOT EXISTS(SELECT 1 FROM MOCTE(NOLOCK) AS TE2 INNER JOIN CMSMW(NOLOCK) AS MW2 ON TE2.TE009 = MW2.MW001 WHERE TE2.TE001 = TC001 AND TE2.TE002 = TC002 AND CAST(MW2.MW003 AS VARCHAR(100)) IN ({0}))";
+                for (int rowIdx = 0; rowIdx < checkedListBoxGroup.CheckedItems.Count; rowIdx++)
+                {
+                    if (rowIdx + 1 == checkedListBoxGroup.CheckedItems.Count)
+                    {
+                        GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "' ";
+                    }
+                    else
+                    {
+                        GroupList += "'" + checkedListBoxGroup.CheckedItems[rowIdx].ToString() + "', ";
+                    }
+                }
+                return string.Format(rtnStr, GroupList);
+            }
+            else
+            {
+                return "";
+            }
+        }
+
         private void showList(string danbie, string danhao)
         {
             if (!checkJobExists())
             {
                 xa007 = getLLXA007();
-                string slqStr = "";
+                string sqlStr = "";
                 if (!checkBox1.Checked)
                 {
-                    slqStr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
+                    sqlStr = "SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,"
                         + " TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017,TE008 AS LLXA013,MC002,TE009 AS LLXA011,"
                         + " MW002,TE010 AS LLXA015,TE011 AS LLXA009,TE012 AS LLXA010,TE014 AS LLXA018,"
                         + " '" + xa007 + "' AS LLXA007 "
@@ -211,7 +275,7 @@ namespace HarveyZ.仓储中心
                 }
                 else
                 {
-                    slqStr = @"SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,
+                    sqlStr = @"SELECT TE001 AS LLXA001,TE002 AS LLXA002,TE003 AS LLXA003,TE004 AS LLXA012,
                                 TE017 AS pinming,TE018 AS guige,CONVERT(FLOAT, TE005) AS LLXA017, TE008 AS LLXA013, MC002, TE009 AS LLXA011,
                                    MW002, TE010 AS LLXA015, TE011 AS LLXA009, TE012 AS LLXA010, TE014 AS LLXA018, "
                             + "'" + xa007 + @"' AS LLXA007
@@ -222,18 +286,19 @@ namespace HarveyZ.仓储中心
                                 INNER JOIN MOCTB(NOLOCK) ON TB001 = TE011 AND TB002 = TE012 AND TB003 = TE004 AND TB006 = TE009
                                 INNER JOIN MOCTA(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 
                                 INNER JOIN WG_DB.dbo.SC_PLAN(NOLOCK) ON K_ID = MOCTA.UDF02 
-                                LEFT JOIN (SELECT DISTINCT LLXA001, LLXA002 FROM LL_LYXA(NOLOCK)) AS A ON A.LLXA001 = TC001 AND A.LLXA002 = TC002
                                 WHERE 1 = 1
-                                AND A.LLXA001 IS NULL
+                                " + GetWorkGroupNotExistStr() + @"
+                                AND NOT EXISTS(SELECT 1 FROM LL_LYXA(NOLOCK) AS A WHERE A.LLXA001 = TC001 AND A.LLXA002 = TC002)
+                                AND NOT EXISTS(SELECT 1 FROM MOCTE(NOLOCK) AS TE2 INNER JOIN CMSMW(NOLOCK) AS MW2 ON TE2.TE009 = MW2.MW001 WHERE TE2.TE001 = TC001 AND TE2.TE002 = TC002 AND CAST(MW2.MW003 AS VARCHAR(100)) IN ('气压棒组'))
                                 AND SC003 = '" + dateTimePicker1.Value.ToString("yyyyMMdd") + @"'
+                                AND LEFT(TC001, 2) = '54'
                                 AND TA013 = 'Y'
                                 AND TC009 = 'N'
                                 AND TE019 = 'N' 
                                 AND (RTRIM(TC019) = '' OR TC019 IS NULL)
                                 ORDER BY TE001, TE002, TE003";
                 }
-
-                dttmp = mssql.SQLselect(FormLogin.infObj.connYF, slqStr);
+                dttmp = mssql.SQLselect(connYF, sqlStr);
                 if (dttmp != null)
                 {
                     DataGridView_List.DataSource = dttmp;
@@ -244,7 +309,14 @@ namespace HarveyZ.仓储中心
                 else
                 {
                     Button_Upload.Enabled = false;
-                    MessageBox.Show("领料单：" + danbie + "-" + danhao + " 已审核！", "错误");
+                    if (checkBox1.Checked)
+                    {
+                        Msg.Show("无数据！");
+                    }
+                    else
+                    {
+                        Msg.Show("领料单：" + danbie + "-" + danhao + " 已审核！", "错误");
+                    }
                 }
             }
             else
@@ -296,7 +368,7 @@ namespace HarveyZ.仓储中心
                             + xa013 + "', '" + xa015 + "', '" + xa017 + "', '" + xa018 + "')   ";
                     
                 }
-                mssql.SQLexcute(FormLogin.infObj.connYF, slqStr);
+                mssql.SQLexcute(connYF, slqStr);
 
                 DataGridView_List.DataSource = null;
                 Button_Upload.Enabled = false;
@@ -314,11 +386,6 @@ namespace HarveyZ.仓储中心
                 Button_Upload.Enabled = false;
                 MessageBox.Show("", "错误");
             }
-        }
-
-        private void TextBoxChange(object sender, EventArgs e)
-        {
-            MsgFlag = false;
         }
     }
 }

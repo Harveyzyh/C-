@@ -326,6 +326,7 @@ namespace HarveyZ.仓储中心
         public LldGenerate()
         {
             infObj.connYF = FormLogin.infObj.connYF;
+            infObj.connWG = FormLogin.infObj.connWG;
             infObj.sql = new Mssql();
 
             infObj.userId = FormLogin.infObj.userId;
@@ -334,6 +335,7 @@ namespace HarveyZ.仓储中心
 
             InitDict();
             InitGdDt();
+            GetCreateSingleLL();
         }
 
         private void InitGdDt()
@@ -359,6 +361,12 @@ namespace HarveyZ.仓储中心
             tradeModeDict.Add("1.内销", "1");
             tradeModeDict.Add("2.一般贸易", "2");
             tradeModeDict.Add("3.合同", "3");
+        }
+
+        private void GetCreateSingleLL()
+        {
+            string sqlStr = @"SELECT K_ID FROM dbo.WG_CONFIG WHERE ConfigName = 'ERP_CreateSingleLL'  AND Type = 'Work' AND Valid = 'Y' ";
+            infObj.CreateSingleLL = infObj.sql.SQLexist(infObj.connWG, sqlStr);
         }
 
         public List<string> GetGroupList()
@@ -477,34 +485,76 @@ namespace HarveyZ.仓储中心
 
         public void work()
         {
-            // 按工单单一生成
-            //infObj.gdDtTmp = infObj.gdDt.Clone();
-            //for (int rowIdx = 0; rowIdx < infObj.gdDt.Rows.Count; rowIdx++)
-            //{
-            //    infObj.gdDtTmp.Clear();
-            //    infObj.gdDtTmp.ImportRow(infObj.gdDt.Rows[rowIdx]);
-            //
-
-            // 不按工单单一生成
-            if (infObj.gdDt != null)
+            if (infObj.CreateSingleLL)
             {
-                infObj.gdDtTmp = infObj.gdDt.Copy();
-                //
-
-                MoctcIns();
-                MoctdIns();
-                MoctdUdt();
-                if (MocteIns())
+                infObj.gdDtTmp = infObj.gdDt.Clone();
+                for (int rowIdx = 0; rowIdx < infObj.gdDt.Rows.Count; rowIdx++)
                 {
-                    MoctcUdt();
-                    infObj.dhs += infObj.dh + ",";
+                    infObj.gdDtTmp.Clear();
+                    infObj.gdDtTmp.ImportRow(infObj.gdDt.Rows[rowIdx]);
+                    MoctcIns();
+                    MoctdIns();
+                    MoctdUdt();
+                    if (MocteIns())
+                    {
+                        MoctcUdt();
+                        infObj.dhs += infObj.dh + ",";
+                    }
+                    else
+                    {
+                        DelMoc();
+                    }
                 }
-                else
-                {
-                    DelMoc();
-                }
+                infObj.gengerateSucc = true;
             }
-            infObj.gengerateSucc = true;
+            else
+            {
+                if (infObj.gdDt != null)
+                {
+                    infObj.gdDtTmp = infObj.gdDt.Copy();
+                    MoctcIns();
+                    MoctdIns();
+                    MoctdUdt();
+                    if (MocteIns())
+                    {
+                        MoctcUdt();
+                        infObj.dhs += infObj.dh + ",";
+                    }
+                    else
+                    {
+                        DelMoc();
+                    }
+                }
+                infObj.gengerateSucc = true;
+            }
+            //// 按工单单一生成
+            ////infObj.gdDtTmp = infObj.gdDt.Clone();
+            ////for (int rowIdx = 0; rowIdx < infObj.gdDt.Rows.Count; rowIdx++)
+            ////{
+            ////    infObj.gdDtTmp.Clear();
+            ////    infObj.gdDtTmp.ImportRow(infObj.gdDt.Rows[rowIdx]);
+            ////
+
+            //// 不按工单单一生成
+            //if (infObj.gdDt != null)
+            //{
+            //    infObj.gdDtTmp = infObj.gdDt.Copy();
+            //    //
+
+            //    MoctcIns();
+            //    MoctdIns();
+            //    MoctdUdt();
+            //    if (MocteIns())
+            //    {
+            //        MoctcUdt();
+            //        infObj.dhs += infObj.dh + ",";
+            //    }
+            //    else
+            //    {
+            //        DelMoc();
+            //    }
+            //}
+            //infObj.gengerateSucc = true;
         }
         
         private void MoctcIns()
@@ -656,6 +706,7 @@ namespace HarveyZ.仓储中心
         private DataTable _gdDtTmp = null;
 
         private string _groupList = "";
+        private bool _createSingleLL = false;
 
         public string db { get { return _db; } set { _db = value; } }
         public string dh { get { return _dh; } set { _dh = value; } }
@@ -673,5 +724,7 @@ namespace HarveyZ.仓储中心
         public DataTable gdDt { get { return _gdDt; } set { _gdDt = value; } }
         public DataTable gdDtTmp { get { return _gdDtTmp; } set { _gdDtTmp = value; } }
         public string GroupList { get { return _groupList; } set { _groupList = value; } }
+
+        public bool CreateSingleLL { get { return _createSingleLL; } set { _createSingleLL = value; } }
     }
 }

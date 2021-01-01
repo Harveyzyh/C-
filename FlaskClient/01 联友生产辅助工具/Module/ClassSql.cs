@@ -51,7 +51,7 @@ namespace HarveyZ
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(slqStr, conn);
-                    cmd.CommandTimeout = 120;
+                    cmd.CommandTimeout = 600;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     conn.Dispose();
@@ -92,7 +92,12 @@ namespace HarveyZ
                 try
                 {
                     DataTable dttmp = new DataTable();
-                    SqlDataAdapter sdatmp = new SqlDataAdapter(slqStr, conn);
+                    SqlCommand cmd = new SqlCommand(slqStr, conn);
+                    cmd.CommandTimeout = 600;
+
+                    //SqlDataAdapter sdatmp = new SqlDataAdapter(slqStr, conn);
+                    SqlDataAdapter sdatmp = new SqlDataAdapter();
+                    sdatmp.SelectCommand = cmd;
                     sdatmp.Fill(dttmp);
                     sdatmp.Dispose();
                     if (dttmp.Rows.Count <= 0)

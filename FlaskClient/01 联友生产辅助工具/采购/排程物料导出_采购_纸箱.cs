@@ -164,7 +164,9 @@ namespace HarveyZ.采购
             string sqlStr = @"SELECT SCPLAN.SC003 排程日期, INVMB.UDF12 产品系列, SCPLAN.SC001 生产单号, (CASE COPTD.UDF04 WHEN '1' THEN '内销' WHEN '2' THEN '一般贸易' WHEN '3' THEN '合同' ELSE COPTD.UDF04 END) 贸易方式, ISNULL(PURTR.TR019, '') 采购单号, 
                                 RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, 
                                 CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
-                                CONVERT(VARCHAR(100), CMSMW.MW003) 组别, INVMB2.MB032 批号, RTRIM(PURMA.MA002) 批号说明
+                                CONVERT(VARCHAR(100), CMSMW.MW003) 组别, 
+                                (CASE WHEN COPTD.UDF04 IN ('3') THEN INVMB2.MB032 ELSE INVMB2.UDF06 END) 供应商, 
+                                (CASE WHEN COPTD.UDF04 IN ('3') THEN RTRIM(PURMA.MA002) ELSE RTRIM(PURMA2.MA002) END) 供应商名称
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
                                 INNER JOIN MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
                                 INNER JOIN MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
@@ -172,6 +174,7 @@ namespace HarveyZ.采购
                                 INNER JOIN CMSMW(NOLOCK) AS CMSMW ON CMSMW.MW001 = MOCTB.TB006 
                                 INNER JOIN INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003 
                                 LEFT JOIN PURMA(NOLOCK) AS PURMA ON PURMA.MA001 = INVMB2.MB032 
+                                LEFT JOIN PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06 
                                 LEFT JOIN PURTB(NOLOCK) AS PURTB ON RTRIM(PURTB.TB029) + '-' + RTRIM(PURTB.TB030) + '-' + RTRIM(PURTB.TB031) = SCPLAN.SC001 AND MOCTB.TB003 = PURTB.TB004
                                 LEFT JOIN PURTR(NOLOCK) AS PURTR ON PURTR.TR001 = PURTB.TB001 AND PURTR.TR002 = PURTB.TB002 AND PURTR.TR003 = PURTB.TB003 AND TR017 = 'Y'
                                 LEFT JOIN COPTD(NOLOCK) AS COPTD ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
@@ -187,7 +190,9 @@ namespace HarveyZ.采购
                             (CASE COPTD.UDF04 WHEN '1' THEN '内销' WHEN '2' THEN '一般贸易' WHEN '3' THEN '合同' ELSE COPTD.UDF04 END), 
                             PURTR.TR019, 
                             RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), 
-                            CONVERT(VARCHAR(100), CMSMW.MW003), INVMB2.MB032, RTRIM(PURMA.MA002)  
+                            CONVERT(VARCHAR(100), CMSMW.MW003), 
+                            (CASE WHEN COPTD.UDF04 IN ('3') THEN INVMB2.MB032 ELSE INVMB2.UDF06 END), 
+                            (CASE WHEN COPTD.UDF04 IN ('3') THEN RTRIM(PURMA.MA002) ELSE RTRIM(PURMA2.MA002) END)  
                         ORDER BY SCPLAN.SC003, RTRIM(MOCTB.TB003)";
             return mssql.SQLselect(connYF, sqlStr); ;
         }

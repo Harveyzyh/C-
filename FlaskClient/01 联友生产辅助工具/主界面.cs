@@ -22,7 +22,6 @@ namespace HarveyZ
         private static List<string> menuIgnoreList = new List<string> {
             "关闭当前界面",
             "帮助",
-            "ERP",
             "此用户没有任何权限"
         };
         #endregion
@@ -291,6 +290,12 @@ namespace HarveyZ
         {
             FormCloseWork();
         }
+
+        private void 帮助_使用手册ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            手册下载 frm = new 手册下载("帮助_使用手册", "联友生产辅助工具-使用手册.pdf");
+            frm.ShowDialog();
+        }
         #endregion
 
         #region 管理
@@ -316,6 +321,12 @@ namespace HarveyZ
                 FormOpenInit(frm);
                 frm.Show();
             }
+        }
+
+        private void 管理_逻辑手册ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            手册下载 frm = new 手册下载("管理_逻辑手册", "联友生产辅助工具-逻辑手册.pdf");
+            frm.ShowDialog();
         }
         #endregion
 
@@ -483,7 +494,6 @@ namespace HarveyZ
         #endregion
 
         #region 生产排程
-
         private void 生管_生产排程部门管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             生产排程部门管理 frm = new 生产排程部门管理("生管_生产排程部门管理");
@@ -512,6 +522,16 @@ namespace HarveyZ
             if (FormLogin.StopModuleOpen())
             {
                 排程物料导出_生产 frm = new 排程物料导出_生产("生管_排程物料导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 生管_排程物料导出_汇总ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                排程物料导出_汇总 frm = new 排程物料导出_汇总("生管_排程物料导出_汇总");
                 FormOpenInit(frm);
                 frm.Show();
             }

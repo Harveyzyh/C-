@@ -481,10 +481,10 @@ namespace HarveyZ.仓储中心
             string sql = "INSERT INTO JH_LYXA "
                         + "(COMPANY, CREATOR, USR_GROUP, CREATE_DATE, FLAG, JHXA001, JHXA002, JHXA003, "
                         + "JHXA004, JHXA005, JHXA007, JHXA008, JHXA009, "
-                        + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID) "
+                        + "JHXA011, JHXA012, JHXA013, JHXA014, JHXA015, ID, UDF02) "
                         + "VALUES('COMFORT', '{0}', '{1}', '{2}', 1, '{3}', '{4}', '{5}', "
                         + "'{6}', '{7}', '{8}', '{9}', '{10}', 'N', 'N', "
-                        + "'{11}', '********************', '{12}', '{13}')";
+                        + "'{11}', '********************', '{12}', '{13}', '{14}')";
             string flowId = GetFlowID();
             string Time = GetTime();
             int Count = DataGridView_List.RowCount;
@@ -501,8 +501,9 @@ namespace HarveyZ.仓储中心
                 string JHXA013 = DataGridView_List.Rows[0].Cells[8].Value.ToString();
                 string JHXA015 = DataGridView_List.Rows[0].Cells[7].Value.ToString();
                 string ID = (Index+1).ToString();
+                string UDF02 = dateTimePicker2.Value.ToString("yyyyMMdd");
                 string slqStr = string.Format(sql, LoginUid, LoginUserGroup, Time, JHXA001, JHXA002, JHXA003, 
-                    JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID);
+                    JHXA004, flowId, JHXA007, JHXA008, JHXA009, JHXA013, JHXA015, ID, UDF02);
 
                 mssql.SQLexcute(connYF, slqStr);
 
@@ -536,6 +537,7 @@ namespace HarveyZ.仓储中心
                 入库仓库L.Enabled = false;
                 供应商L.Enabled = false;
                 dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
                 送货单号T.Enabled = false;
             }
             if (DataGridView_List.RowCount <= 0)
@@ -545,6 +547,7 @@ namespace HarveyZ.仓储中心
                 入库仓库L.Enabled = true;
                 供应商L.Enabled = true;
                 dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
                 送货单号T.Enabled = true;
             }
         }

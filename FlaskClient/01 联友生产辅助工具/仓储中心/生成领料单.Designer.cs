@@ -30,7 +30,6 @@
         {
             this.panel_Title = new System.Windows.Forms.Panel();
             this.labelGdScCount = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
             this.checkedListBoxGroup = new System.Windows.Forms.CheckedListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxCpName = new System.Windows.Forms.TextBox();
@@ -62,7 +61,6 @@
             // 
             this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_Title.Controls.Add(this.labelGdScCount);
-            this.panel_Title.Controls.Add(this.btnTest);
             this.panel_Title.Controls.Add(this.checkedListBoxGroup);
             this.panel_Title.Controls.Add(this.label8);
             this.panel_Title.Controls.Add(this.textBoxCpName);
@@ -88,7 +86,7 @@
             this.panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Title.Location = new System.Drawing.Point(0, 0);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(1173, 100);
+            this.panel_Title.Size = new System.Drawing.Size(1173, 104);
             this.panel_Title.TabIndex = 4;
             // 
             // labelGdScCount
@@ -100,24 +98,14 @@
             this.labelGdScCount.TabIndex = 31;
             this.labelGdScCount.Text = "label9";
             // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(998, 67);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 30;
-            this.btnTest.Text = "测试";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Visible = false;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
             // checkedListBoxGroup
             // 
             this.checkedListBoxGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.checkedListBoxGroup.FormattingEnabled = true;
-            this.checkedListBoxGroup.Location = new System.Drawing.Point(825, 5);
+            this.checkedListBoxGroup.Location = new System.Drawing.Point(825, 2);
+            this.checkedListBoxGroup.MultiColumn = true;
             this.checkedListBoxGroup.Name = "checkedListBoxGroup";
-            this.checkedListBoxGroup.Size = new System.Drawing.Size(105, 82);
+            this.checkedListBoxGroup.Size = new System.Drawing.Size(400, 98);
             this.checkedListBoxGroup.TabIndex = 29;
             this.checkedListBoxGroup.TabStop = false;
             this.checkedListBoxGroup.SelectedValueChanged += new System.EventHandler(this.checkedListBoxGroup_SelectedValueChanged);
@@ -322,14 +310,14 @@
             this.DataGridView_List.BackgroundColor = System.Drawing.Color.Silver;
             this.DataGridView_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataGridView_List.Location = new System.Drawing.Point(0, 100);
+            this.DataGridView_List.Location = new System.Drawing.Point(0, 104);
             this.DataGridView_List.MultiSelect = false;
             this.DataGridView_List.Name = "DataGridView_List";
             this.DataGridView_List.ReadOnly = true;
             this.DataGridView_List.RowHeadersVisible = false;
             this.DataGridView_List.RowTemplate.Height = 23;
             this.DataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridView_List.Size = new System.Drawing.Size(1173, 530);
+            this.DataGridView_List.Size = new System.Drawing.Size(1173, 526);
             this.DataGridView_List.TabIndex = 10;
             this.DataGridView_List.TabStop = false;
             this.DataGridView_List.DoubleClick += new System.EventHandler(this.DataGridView_List_DoubleClick);
@@ -377,7 +365,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckedListBox checkedListBoxGroup;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Label labelGdScCount;
     }
 }
