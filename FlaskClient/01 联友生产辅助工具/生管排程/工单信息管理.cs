@@ -207,8 +207,10 @@ namespace HarveyZ.生管排程
         {
             int rowIndex = DgvMain.CurrentCell.RowIndex;
             string slqStr = @"UPDATE MOCTA SET UDF02 = '{2}' WHERE TA001 = '{0}' AND TA002 = '{1}' ";
+            string slqStr2 = @"UPDATE MOCTA SET UDF03 = SC003 FROM MOCTA INNER JOIN WG_DB.dbo.SC_PLAN ON K_ID = MOCTA.UDF02 WHERE UDF03 != SC003 ";
             mssql.SQLexcute(connYF, string.Format(slqStr, DgvMain.Rows[rowIndex].Cells["工单别"].Value.ToString(),
                 DgvMain.Rows[rowIndex].Cells["工单号"].Value.ToString(), TextBoxIndex.Text));
+            mssql.SQLexcute(connYF, slqStr2);
         }
 
         private void contextMenuStrip_DgvMain_ItemClicked_GdUpdateIndexClean()

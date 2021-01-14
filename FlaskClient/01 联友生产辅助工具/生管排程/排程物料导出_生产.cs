@@ -261,7 +261,8 @@ namespace HarveyZ.生管排程
                                 RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, MOCTB.TB006 工艺, CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
                                 RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, 
                                 (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 批号, 
-                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明
+                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明, 
+                                RTRIM(INVMB2.UDF02) 货位号
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
                                 INNER JOIN dbo.MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
                                 INNER JOIN dbo.MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 

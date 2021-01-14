@@ -56,8 +56,6 @@ namespace HarveyZ.财务
             DataSet ds = new DataSet();
             GetData(ds, dtp);
 
-            Msg.Show(ds.Tables.Count.ToString());
-
             excelObj.dataSet = ds;
             excelObj.defauleFileName = "成本异常" + dateTimePicker1.Value.ToString("yyyy-MM");
             excelObj.isWrite = true;
@@ -87,6 +85,7 @@ namespace HarveyZ.财务
             ds.Tables.Add(GetData8(date));
             ds.Tables.Add(GetData9(date));
             ds.Tables.Add(GetData10(date));
+            ds.Tables.Add(GetData11(date));
         }
 
         private DataTable GetNulData()
@@ -255,6 +254,22 @@ namespace HarveyZ.财务
             DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, date, date2));
             if (dt == null) dt = GetNulData();
             dt.TableName = "是否存在当月暂估当月开票数据";
+            return dt;
+        }
+
+        //退料单成本要素异常
+        private DataTable GetData11(string date)
+        {
+            string slqStr = @"SELECT LA006,LA007,LA008,LA001,LA004,LA013,LH002,LH003,LH004
+                            FROM INVLA 
+                            LEFT JOIN INVLH ON LH002=LA006 AND LH003=LA007 AND LH004=LA008
+                            WHERE SUBSTRING(LA004,1,6)='{0}'
+                            AND LA006 LIKE '56%'
+                            GROUP BY LA006,LA007,LA008,LA001,LA004,LA013,LH002,LH003,LH004 HAVING COUNT(*) > 1
+                            ORDER BY LA006,LA007,LA008 ";
+            DataTable dt = mssql.SQLselect(conn, string.Format(slqStr, date));
+            if (dt == null) dt = GetNulData();
+            dt.TableName = "退料单成本要素异常";
             return dt;
         }
         #endregion

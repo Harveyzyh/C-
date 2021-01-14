@@ -13,6 +13,11 @@
 
     public const string strConnection_WG_R = "Server=183.62.60.226,60043;initial catalog=WG_DB;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
 
+
+
+    public const string strConnection_SW = "Server=192.168.0.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
+    public const string strConnection_SW_R = "Server=192.168.0.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
+
     #endregion
 
 }

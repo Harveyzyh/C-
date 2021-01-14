@@ -157,10 +157,10 @@ namespace HarveyZ.品管
                     
                     string colorStr = dt.Rows[0]["配置方案"].ToString();
                     try
-                    { if (colorStr.Substring(0, 3) == "保友 " || colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
+                    { if (colorStr.Substring(0, 3) == "保友 " || colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 " || colorStr.Substring(0, 3) == "内销 ")
                         {
                             // 修改打印模板
-                            if (colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
+                            if (colorStr.Substring(0, 3) == "保友 " || colorStr.Substring(0, 3) == "京东 " || colorStr.Substring(0, 3) == "电商 ")
                             {
                                 ComboBoxPrintName.SelectedIndex = 1;
                             }
@@ -205,8 +205,8 @@ namespace HarveyZ.品管
                 dr["品号"] = TextBoxWlno.Text;
                 dr["产品名称"] = TextBoxByName.Text;
                 dr["颜色"] = TextBoxColor.Text;
-                dr["净重"] = TextBoxCrossWeight.Text == "" ? "" : TextBoxCrossWeight.Text + "Kg";
-                dr["毛重"] = TextBoxNetWeight.Text == "" ? "" : TextBoxNetWeight.Text + "Kg";
+                dr["毛重"] = TextBoxCrossWeight.Text == "" ? "" : TextBoxCrossWeight.Text + "Kg";
+                dr["净重"] = TextBoxNetWeight.Text == "" ? "" : TextBoxNetWeight.Text + "Kg";
                 dr["纸箱尺寸"] = TextBoxBoxSize.Text;
                 dr["备注"] = TextBoxRemark.Text;
                 dr["商品代码"] = TextBoxByCode.Text;

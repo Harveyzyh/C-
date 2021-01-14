@@ -420,7 +420,7 @@ namespace ERP定时任务
 
         private void log(string text)
         {
-            logger.Instance.WriteLog("Delete Coptr Error Info: " + text);
+            logger.Instance.WriteLog("Create SC_PLAN Snapshot: " + text);
         }
 
         public void MainWork()

@@ -1,0 +1,5 @@
+10:39:29: Information: 定时任务初始化已完成!   -Ver 1.0.2.50
+10:43:39: Information: 定时任务初始化已完成!   -Ver 1.0.2.50
+10:43:42: Information: GetInvmbBoxSize: Work Start!
+10:43:46: Information: GetInvmbBoxSize: Work Finished!
+11:18:04: Information: 定时任务初始化已完成!   -Ver 1.0.2.50

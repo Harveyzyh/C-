@@ -41,17 +41,6 @@ namespace HarveyZ
 
             Form_MainResized_Work();
 
-            this.Text = FormLogin.infObj.progName + "      Ver." + FormLogin.infObj.progVer;
-            if (FormLogin.infObj.testFlag)
-            {
-                this.Text += "     -DEBUG";
-            }
-
-            if (FormLogin.infObj.remoteFlag)
-            {
-                this.Text += "     -Remote";
-            }
-
             StatusBarSetItem();
         }
 
@@ -211,13 +200,19 @@ namespace HarveyZ
                 frm.WindowState = FormWindowState.Maximized;
             }
 
-            statusLabelLocalConn.Width = 150;
-            statusLabelLocalConn.TextAlign = ContentAlignment.MiddleCenter;
+            statusLabelWGConn.Width = 150;
+            statusLabelWGConn.TextAlign = ContentAlignment.MiddleCenter;
+            statusLabelSWConn.Width = 150;
+            statusLabelSWConn.TextAlign = ContentAlignment.MiddleCenter;
+            statusLabelLinkMode.Width = 180;
+            statusLabelLinkMode.TextAlign = ContentAlignment.MiddleCenter;
+            statusLabelAppVersion.Width = 180;
+            statusLabelAppVersion.TextAlign = ContentAlignment.MiddleCenter;
             statusLabelIP.Width = 180;
             statusLabelIP.TextAlign = ContentAlignment.MiddleRight;
 
             statusLabelUser.TextAlign = ContentAlignment.MiddleLeft;
-            statusLabelUser.Width = FormWidth - statusLabelLocalConn.Width - statusLabelIP.Width - 12;
+            statusLabelUser.Width = FormWidth - statusLabelWGConn.Width - statusLabelSWConn.Width - statusLabelIP.Width - statusLabelAppVersion.Width - statusLabelLinkMode.Width - 12;
         }
         #endregion
 
@@ -272,14 +267,15 @@ namespace HarveyZ
         {
             statusLabelUser.Text = "部门：" + FormLogin.infObj.userDpt + "    姓名：" + FormLogin.infObj.userId + "-" + FormLogin.infObj.userName;
             statusLabelIP.Text = "本机IP地址：" + IPInfo.GetIpAddress() + "  ";
-            if (FormLogin.infObj.connFlag)
-            {
-                statusLabelLocalConn.Text = "联友服务器：已连接";
-            }
-            else
-            {
-                statusLabelLocalConn.Text = "联友服务器：未连接";
-            }
+            statusLabelAppVersion.Text = "软件版本：" + FormLogin.infObj.progVer;
+
+            statusLabelWGConn.Text = FormLogin.infObj.connWgFlag ? "生产服务器：已连接" : "生产服务器：未连接";
+
+            statusLabelSWConn.Text = FormLogin.infObj.connSwFlag ? "财务服务器：已连接" : "财务服务器：未连接";
+
+            statusLabelLinkMode.Text = FormLogin.infObj.remoteFlag ? "连接模式：远端模式" : "连接模式：本地模式";
+
+            statusLabelLinkMode.Text += FormLogin.infObj.testFlag ? " -- DEBUG" : "";
         }
         #endregion
 
@@ -604,6 +600,45 @@ namespace HarveyZ
             }
         }
 
+        private void 财务部_刷新会计科目生产ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                刷新会计科目生产 frm = new 刷新会计科目生产("财务部_刷新会计科目生产");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 财务部_品号信息生产导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                品号信息生产导出 frm = new 品号信息生产导出("财务部_品号信息生产导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 财务部_品号信息税务导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                品号信息税务导出 frm = new 品号信息税务导出("财务部_品号信息税务导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+        
+        private void 财务部_领退料明细生产导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                领退料明细生产导出 frm = new 领退料明细生产导出("财务部_领退料明细生产导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
         #endregion
 
         #region 报表
@@ -621,11 +656,23 @@ namespace HarveyZ
         #region ERP
         private void ERP_客户配置维护_勾选项替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            客户配置维护_勾选项替换 frm = new 客户配置维护_勾选项替换("客户配置维护_勾选项替换");
-            FormOpenInit(frm);
-            frm.Show();
+            if (FormLogin.StopModuleOpen())
+            {
+                客户配置维护_勾选项替换 frm = new 客户配置维护_勾选项替换("ERP_客户配置维护_勾选项替换");
+                FormOpenInit(frm);
+                frm.Show();
+            }
         }
 
+        private void ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(FormLogin.StopModuleOpen())
+            {
+                客户配置维护_存在未勾选的配置 frm = new 客户配置维护_存在未勾选的配置("ERP_客户配置维护_存在未勾选的配置");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
         #endregion
 
         #endregion

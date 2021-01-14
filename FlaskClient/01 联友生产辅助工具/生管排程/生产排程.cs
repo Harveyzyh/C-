@@ -536,7 +536,7 @@ namespace HarveyZ.生管排程
 
             int SysDate = GetNowDate();
             //导入日期偏移量
-            int dayOffset = 30;
+            int dayOffset = 365;
             int SysDate2 = int.Parse(DateTime.ParseExact(SysDate.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture).AddDays(dayOffset).ToString("yyyyMMdd"));
             int WorkTime = 0;
             
@@ -699,13 +699,17 @@ namespace HarveyZ.生管排程
                                 int dateBack = int.Parse(dt.Rows[rowIndex]["上线日期N"].ToString().Replace("-", ""));
                                 int dateNew = int.Parse(dt.Rows[rowIndex]["上线日期"].ToString().Replace("-", ""));
 
+                                DateTime dateB = DateTime.ParseExact(dateBack.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture);
+                                DateTime dateN = DateTime.ParseExact(dateNew.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture);
+                                int compNum = dateB.Subtract(dateN).Days;
+
                                 if (dateBack < dateNew)
                                 {
-                                    dt.Rows[rowIndex]["状态"] += "上线延后，";
+                                    dt.Rows[rowIndex]["状态"] += string.Format("上线延后{0}天，", (-1*compNum).ToString());
                                 }
                                 if (dateBack > dateNew)
                                 {
-                                    dt.Rows[rowIndex]["状态"] += "上线提前，";
+                                    dt.Rows[rowIndex]["状态"] += string.Format("上线提前{0}天，", compNum.ToString());
                                 }
                             }
                         }
@@ -816,12 +820,14 @@ namespace HarveyZ.生管排程
                                     RTRIM(COPTD.TD006) 规格, RTRIM(COPTD.UDF08) 保友品名, SC1.SC013 上线数量, ISNULL(CAST(TD008 AS FLOAT), 0) ERP订单数量, ISNULL(SC2013, 0) 至今天已排数量, 
                                     ISNULL(SC3013, 0) 总已排数量, ISNULL(CAST(MOCTA.TA015 AS FLOAT), 0) 绑定工单生产数量, 
                                     CAST(ISNULL(INVMB.UDF51 * SC1.SC013, 0) AS FLOAT) 生产工时, 
+                                    CAST(ISNULL(COPTG.TH008, 0) AS FLOAT) 销货单数量, 
 									(CASE COPTD.UDF04 WHEN '1' THEN '1.内销' WHEN '2' THEN '2.一般贸易' WHEN '3' THEN '3.合同' ELSE COPTD.UDF04 END) 贸易方式, 
                                     (CASE TD016 WHEN 'Y' THEN 'Y.自动结束' WHEN 'y' THEN 'y.指定结束' ELSE '' END) 结束, 
                                     RTRIM(TD004) 品号, RTRIM(TD053) 配置方案, 
                                     RTRIM(COPTQ.TQ003) 配置方案描述, RTRIM((COPTQ.UDF07+COPTD.TD020)) 描述备注, RTRIM(MA002) 客户名称, RTRIM(COPTC.TC015) 注意事项, 
                                     SC1.SC006 变更原因, RTRIM((CASE WHEN COPTD.TD013 = '' THEN '' WHEN COPTD.TD013 IS NULL THEN '' ELSE COPTD.TD013 END)) 出货日期, 
                                     RTRIM((CASE WHEN COPTC.UDF09='否' THEN '' ELSE '是' END)) 急单, RTRIM(COPTD.UDF12) 订单时间, SC1.SC029 排程时间,   
+                                    SC1.SC030 生产物料导出时间, SC1.SC031 采购物料导出时间, 
                                     ISNULL(SC0.SC013, -1) 上线数量N, ISNULL(SC0.SC023, '') 生产车间N, ISNULL(SC0.SC003, '') 上线日期N  
 
                                     FROM WG_DB.dbo.SC_PLAN AS SC1
@@ -835,6 +841,9 @@ namespace HarveyZ.生管排程
 									LEFT JOIN (SELECT SUM(TA015) TA015, TA006, RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028) TD, UDF02 FROM COMFORT.dbo.MOCTA 
                                             WHERE TA013 NOT IN ('V', 'U') GROUP BY RTRIM(TA026)+'-'+RTRIM(TA027)+'-'+RTRIM(TA028), TA006, UDF02) 
 										AS MOCTA ON MOCTA.TD = SC1.SC001 AND MOCTA.UDF02 = SC1.K_ID AND MOCTA.TA006 = SC1.SC028 
+                                    LEFT JOIN (SELECT SUM(TH008) TH008, TH004, RTRIM(TH014)+'-'+RTRIM(TH015)+'-'+RTRIM(TH016) TD FROM COMFORT.dbo.COPTG 
+	                                    INNER JOIN COMFORT.dbo.COPTH ON TH001 = TG001 AND TH002 = TG002 
+	                                    WHERE TG023 NOT IN ('V', 'U') GROUP BY TH004, RTRIM(TH014)+'-'+RTRIM(TH015)+'-'+RTRIM(TH016)) AS COPTG ON COPTG.TD = SC1.SC001
                                     LEFT JOIN COMFORT.dbo.INVMB ON TD004 = MB001 
                                     WHERE 1 = 1 ";
             if (TxBoxOrder.Text != "") sqlStrShow += string.Format(@" AND SC1.SC001 LIKE '%{0}%' ", TxBoxOrder.Text);

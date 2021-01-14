@@ -62,13 +62,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.DgvMain = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.CheckBoxScGd = new System.Windows.Forms.CheckBox();
-            this.CheckBoxWwGd = new System.Windows.Forms.CheckBox();
-            this.CheckBoxSameIndex = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.CheckBoxSameWlno = new System.Windows.Forms.CheckBox();
             this.BtnSelect = new System.Windows.Forms.Button();
+            this.CheckBoxSameWlno = new System.Windows.Forms.CheckBox();
+            this.CheckBoxSameIndex = new System.Windows.Forms.CheckBox();
+            this.CheckBoxWwGd = new System.Windows.Forms.CheckBox();
+            this.CheckBoxScGd = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -111,7 +111,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1322, 179);
+            this.panel1.Size = new System.Drawing.Size(1314, 179);
             this.panel1.TabIndex = 0;
             // 
             // TextBoxMsbz
@@ -390,7 +390,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 179);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1322, 424);
+            this.panel2.Size = new System.Drawing.Size(1314, 424);
             this.panel2.TabIndex = 1;
             // 
             // DgvMain
@@ -406,7 +406,7 @@
             this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
             this.DgvMain.RowTemplate.Height = 23;
-            this.DgvMain.Size = new System.Drawing.Size(1320, 348);
+            this.DgvMain.Size = new System.Drawing.Size(1312, 348);
             this.DgvMain.TabIndex = 1;
             this.DgvMain.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDown);
             // 
@@ -424,61 +424,19 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1320, 74);
+            this.panel3.Size = new System.Drawing.Size(1312, 74);
             this.panel3.TabIndex = 0;
             // 
-            // label12
+            // BtnSelect
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(68, 17);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "工单类型：";
-            // 
-            // CheckBoxScGd
-            // 
-            this.CheckBoxScGd.AutoSize = true;
-            this.CheckBoxScGd.Checked = true;
-            this.CheckBoxScGd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxScGd.Location = new System.Drawing.Point(106, 10);
-            this.CheckBoxScGd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CheckBoxScGd.Name = "CheckBoxScGd";
-            this.CheckBoxScGd.Size = new System.Drawing.Size(75, 21);
-            this.CheckBoxScGd.TabIndex = 1;
-            this.CheckBoxScGd.Text = "生产工单";
-            this.CheckBoxScGd.UseVisualStyleBackColor = true;
-            // 
-            // CheckBoxWwGd
-            // 
-            this.CheckBoxWwGd.AutoSize = true;
-            this.CheckBoxWwGd.Location = new System.Drawing.Point(218, 10);
-            this.CheckBoxWwGd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CheckBoxWwGd.Name = "CheckBoxWwGd";
-            this.CheckBoxWwGd.Size = new System.Drawing.Size(75, 21);
-            this.CheckBoxWwGd.TabIndex = 2;
-            this.CheckBoxWwGd.Text = "委外工单";
-            this.CheckBoxWwGd.UseVisualStyleBackColor = true;
-            // 
-            // CheckBoxSameIndex
-            // 
-            this.CheckBoxSameIndex.AutoSize = true;
-            this.CheckBoxSameIndex.Location = new System.Drawing.Point(102, 40);
-            this.CheckBoxSameIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CheckBoxSameIndex.Name = "CheckBoxSameIndex";
-            this.CheckBoxSameIndex.Size = new System.Drawing.Size(159, 21);
-            this.CheckBoxSameIndex.TabIndex = 3;
-            this.CheckBoxSameIndex.Text = "查看同一排程序号的工单";
-            this.CheckBoxSameIndex.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(57, 42);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 17);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "其他：";
+            this.BtnSelect.Location = new System.Drawing.Point(486, 10);
+            this.BtnSelect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnSelect.Name = "BtnSelect";
+            this.BtnSelect.Size = new System.Drawing.Size(87, 33);
+            this.BtnSelect.TabIndex = 6;
+            this.BtnSelect.Text = "查询";
+            this.BtnSelect.UseVisualStyleBackColor = true;
+            this.BtnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // CheckBoxSameWlno
             // 
@@ -493,16 +451,58 @@
             this.CheckBoxSameWlno.Text = "查看同一成品号的工单";
             this.CheckBoxSameWlno.UseVisualStyleBackColor = true;
             // 
-            // BtnSelect
+            // CheckBoxSameIndex
             // 
-            this.BtnSelect.Location = new System.Drawing.Point(486, 10);
-            this.BtnSelect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BtnSelect.Name = "BtnSelect";
-            this.BtnSelect.Size = new System.Drawing.Size(87, 33);
-            this.BtnSelect.TabIndex = 6;
-            this.BtnSelect.Text = "查询";
-            this.BtnSelect.UseVisualStyleBackColor = true;
-            this.BtnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
+            this.CheckBoxSameIndex.AutoSize = true;
+            this.CheckBoxSameIndex.Location = new System.Drawing.Point(102, 40);
+            this.CheckBoxSameIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CheckBoxSameIndex.Name = "CheckBoxSameIndex";
+            this.CheckBoxSameIndex.Size = new System.Drawing.Size(159, 21);
+            this.CheckBoxSameIndex.TabIndex = 3;
+            this.CheckBoxSameIndex.Text = "查看同一排程序号的工单";
+            this.CheckBoxSameIndex.UseVisualStyleBackColor = true;
+            // 
+            // CheckBoxWwGd
+            // 
+            this.CheckBoxWwGd.AutoSize = true;
+            this.CheckBoxWwGd.Location = new System.Drawing.Point(218, 10);
+            this.CheckBoxWwGd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CheckBoxWwGd.Name = "CheckBoxWwGd";
+            this.CheckBoxWwGd.Size = new System.Drawing.Size(75, 21);
+            this.CheckBoxWwGd.TabIndex = 2;
+            this.CheckBoxWwGd.Text = "委外工单";
+            this.CheckBoxWwGd.UseVisualStyleBackColor = true;
+            // 
+            // CheckBoxScGd
+            // 
+            this.CheckBoxScGd.AutoSize = true;
+            this.CheckBoxScGd.Checked = true;
+            this.CheckBoxScGd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxScGd.Location = new System.Drawing.Point(106, 10);
+            this.CheckBoxScGd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CheckBoxScGd.Name = "CheckBoxScGd";
+            this.CheckBoxScGd.Size = new System.Drawing.Size(75, 21);
+            this.CheckBoxScGd.TabIndex = 1;
+            this.CheckBoxScGd.Text = "生产工单";
+            this.CheckBoxScGd.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(33, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 17);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "工单类型：";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(57, 42);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 17);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "其他：";
             // 
             // contextMenuStrip_DgvMain
             // 
@@ -514,7 +514,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 603);
+            this.ClientSize = new System.Drawing.Size(1314, 603);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F);

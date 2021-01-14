@@ -162,10 +162,10 @@
     <Compile Include="仓储中心\生成领料单.Designer.cs">
       <DependentUpon>生成领料单.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\FastReport打印预览.cs">
+    <Compile Include="BasicForm\FastReport打印预览.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Module\FastReport打印预览.Designer.cs">
+    <Compile Include="BasicForm\FastReport打印预览.Designer.cs">
       <DependentUpon>FastReport打印预览.cs</DependentUpon>
     </Compile>
     <Compile Include="品管\成品标签打印.cs">
@@ -195,7 +195,7 @@
     <Compile Include="生管排程\排程物料导出_汇总.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="生管排程\排程物料导出_汇总.Designer.cs">
+    <Compile Include="生管排程\排程物料导出_汇总.designer.cs">
       <DependentUpon>排程物料导出_汇总.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\排程物料导出_生产.cs">
@@ -210,10 +210,10 @@
     <Compile Include="生管排程\生产排程修改.Designer.cs">
       <DependentUpon>生产排程修改.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\数据导入中.cs">
+    <Compile Include="BasicForm\数据导入中.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Module\数据导入中.Designer.cs">
+    <Compile Include="BasicForm\数据导入中.Designer.cs">
       <DependentUpon>数据导入中.cs</DependentUpon>
     </Compile>
     <Compile Include="生管排程\生产排程导入.cs">
@@ -312,16 +312,16 @@
     <Compile Include="码垛线\纸箱编码添加.Designer.cs">
       <DependentUpon>纸箱编码添加.cs</DependentUpon>
     </Compile>
-    <Compile Include="登录界面.cs">
+    <Compile Include="BasicForm\登录界面.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="登录界面.designer.cs">
+    <Compile Include="BasicForm\登录界面.designer.cs">
       <DependentUpon>登录界面.cs</DependentUpon>
     </Compile>
-    <Compile Include="主界面.cs">
+    <Compile Include="BasicForm\主界面.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="主界面.Designer.cs">
+    <Compile Include="BasicForm\主界面.Designer.cs">
       <DependentUpon>主界面.cs</DependentUpon>
     </Compile>
     <Compile Include="仓储中心\录入进货单-获取单据信息.cs">
@@ -422,6 +422,36 @@
     <Compile Include="维护ERP\客户配置维护_勾选项替换.Designer.cs">
       <DependentUpon>客户配置维护_勾选项替换.cs</DependentUpon>
     </Compile>
+    <Compile Include="维护ERP\客户配置维护_存在未勾选的配置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护ERP\客户配置维护_存在未勾选的配置.Designer.cs">
+      <DependentUpon>客户配置维护_存在未勾选的配置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="财务\刷新会计科目%28生产%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="财务\刷新会计科目%28生产%29.Designer.cs">
+      <DependentUpon>刷新会计科目%28生产%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="财务\领退料明细%28生产%29导出.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="财务\领退料明细%28生产%29导出.Designer.cs">
+      <DependentUpon>领退料明细%28生产%29导出.cs</DependentUpon>
+    </Compile>
+    <Compile Include="财务\品号信息%28生产%29导出.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="财务\品号信息%28生产%29导出.Designer.cs">
+      <DependentUpon>品号信息%28生产%29导出.cs</DependentUpon>
+    </Compile>
+    <Compile Include="财务\品号信息%28税务%29导出.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="财务\品号信息%28税务%29导出.Designer.cs">
+      <DependentUpon>品号信息%28税务%29导出.cs</DependentUpon>
+    </Compile>
     <Compile Include="财务\成本异常报表导出.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,7 +491,7 @@
     <EmbeddedResource Include="仓储中心\生成领料单.resx">
       <DependentUpon>生成领料单.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Module\FastReport打印预览.resx">
+    <EmbeddedResource Include="BasicForm\FastReport打印预览.resx">
       <DependentUpon>FastReport打印预览.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="品管\成品标签打印.resx">
@@ -485,7 +515,7 @@
     <EmbeddedResource Include="生管排程\生产排程修改.resx">
       <DependentUpon>生产排程修改.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Module\数据导入中.resx">
+    <EmbeddedResource Include="BasicForm\数据导入中.resx">
       <DependentUpon>数据导入中.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="生管排程\生产排程导入.resx">
@@ -536,10 +566,10 @@
     <EmbeddedResource Include="码垛线\纸箱编码添加.resx">
       <DependentUpon>纸箱编码添加.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="登录界面.resx">
+    <EmbeddedResource Include="BasicForm\登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="主界面.resx">
+    <EmbeddedResource Include="BasicForm\主界面.resx">
       <DependentUpon>主界面.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="仓储中心\录入进货单-获取单据信息.resx">
@@ -595,6 +625,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="维护ERP\客户配置维护_勾选项替换.resx">
       <DependentUpon>客户配置维护_勾选项替换.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护ERP\客户配置维护_存在未勾选的配置.resx">
+      <DependentUpon>客户配置维护_存在未勾选的配置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="财务\刷新会计科目%28生产%29.resx">
+      <DependentUpon>刷新会计科目%28生产%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="财务\领退料明细%28生产%29导出.resx">
+      <DependentUpon>领退料明细%28生产%29导出.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="财务\品号信息%28生产%29导出.resx">
+      <DependentUpon>品号信息%28生产%29导出.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="财务\品号信息%28税务%29导出.resx">
+      <DependentUpon>品号信息%28税务%29导出.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="财务\成本异常报表导出.resx">
       <DependentUpon>成本异常报表导出.cs</DependentUpon>

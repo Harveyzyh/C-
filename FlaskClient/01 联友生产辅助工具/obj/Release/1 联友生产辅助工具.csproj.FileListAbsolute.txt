@@ -536,7 +536,6 @@ C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.工单信息�
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.排程物料导出_生产.resources
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.生产排程修改.resources
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.数据导入中.resources
-C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.未排订单查询.resources
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.生产排程导入.resources
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.生产排程部门选择.resources
 C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.生产排程.resources
@@ -635,3 +634,11 @@ C:\C#\01 联友生产辅助工具\obj\Release\1 联友生产辅助工具.csproj.
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.采购.排程物料导出_采购_纸箱.resources
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.排程物料导出_汇总.resources
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.手册下载.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.手册下载.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.采购.排程物料导出_采购_纸箱.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.生管排程.排程物料导出_汇总.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.财务.品号信息生产导出.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.财务.品号信息税务导出.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.财务.领退料明细生产导出.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.维护ERP.客户配置维护_存在未勾选的配置.resources
+C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.财务.刷新会计科目生产.resources

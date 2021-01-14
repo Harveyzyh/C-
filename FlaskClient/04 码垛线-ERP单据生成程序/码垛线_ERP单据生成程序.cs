@@ -31,8 +31,7 @@ namespace 码垛线_ERP单据生成程序
 
         private static string localPath = "";
         private static string iniFilePath = "";
-        private static string iniFileName = "Setting.ini";
-        private static string printFilePath = "";
+        private static string iniFileName = "Configure.ini";
         private static int printReflashTime = 10;
         private static int outXhReflashTime = 5;
         private static int outScrkReflashTime = 5;
@@ -77,7 +76,6 @@ namespace 码垛线_ERP单据生成程序
         public 码垛线_ERP单据生成程序()
         {
             InitializeComponent();
-            GetMutilOpen();
             StopModuleOpen();
             Init();
         }
@@ -204,10 +202,11 @@ namespace 码垛线_ERP单据生成程序
                 File.Create(iniFilePath).Close();
             }
 
-            string printReflashTimeTmp = IniHelper.GetValue("Setting", "PrintReflashTime", "null", iniFilePath);
+            //打印刷新时间
+            string printReflashTimeTmp = IniHelper.GetValue("Configure", "打印刷新时间", "null", iniFilePath);
             if (printReflashTimeTmp == "null")
             {
-                IniHelper.SetValue("Setting", "PrintReflashTime", printReflashTime.ToString(), iniFilePath);
+                IniHelper.SetValue("Configure", "打印刷新时间", printReflashTime.ToString(), iniFilePath);
             }
             else
             {
@@ -217,15 +216,15 @@ namespace 码垛线_ERP单据生成程序
                 }
                 catch
                 {
-                    IniHelper.SetValue("Setting", "PrintReflashTime", printReflashTime.ToString(), iniFilePath);
+                    IniHelper.SetValue("Configure", "PrintReflashTime", printReflashTime.ToString(), iniFilePath);
                 }
             }
 
             //销货单生成刷新时间
-            string outXhReflashTimeTmp = IniHelper.GetValue("Setting", "OutXhReflashTime", "null", iniFilePath);
+            string outXhReflashTimeTmp = IniHelper.GetValue("Configure", "销货单生成刷新时间", "null", iniFilePath);
             if (outXhReflashTimeTmp == "null")
             {
-                IniHelper.SetValue("Setting", "OutXhReflashTime", outXhReflashTime.ToString(), iniFilePath);
+                IniHelper.SetValue("Configure", "销货单生成刷新时间", outXhReflashTime.ToString(), iniFilePath);
             }
             else
             {
@@ -235,15 +234,15 @@ namespace 码垛线_ERP单据生成程序
                 }
                 catch
                 {
-                    IniHelper.SetValue("Setting", "OutXhReflashTime", outXhReflashTime.ToString(), iniFilePath);
+                    IniHelper.SetValue("Configure", "OutXhReflashTime", outXhReflashTime.ToString(), iniFilePath);
                 }
             }
 
             //生产入库单生成刷新时间
-            string outScrkReflashTimeTmp = IniHelper.GetValue("Setting", "OutScrkReflashTime", "null", iniFilePath);
+            string outScrkReflashTimeTmp = IniHelper.GetValue("Configure", "生产入库单生成刷新时间", "null", iniFilePath);
             if (outScrkReflashTimeTmp == "null")
             {
-                IniHelper.SetValue("Setting", "OutScrkReflashTime", outScrkReflashTime.ToString(), iniFilePath);
+                IniHelper.SetValue("Configure", "生产入库单生成刷新时间", outScrkReflashTime.ToString(), iniFilePath);
             }
             else
             {
@@ -253,15 +252,15 @@ namespace 码垛线_ERP单据生成程序
                 }
                 catch
                 {
-                    IniHelper.SetValue("Setting", "OutScrkReflashTime", outScrkReflashTime.ToString(), iniFilePath);
+                    IniHelper.SetValue("Configure", "OutScrkReflashTime", outScrkReflashTime.ToString(), iniFilePath);
                 }
             }
 
             //是否重载纸张
-            string printerReloadPaperFlagTmp = IniHelper.GetValue("Setting", "PrinterReloadPaperFlag", "null", iniFilePath);
+            string printerReloadPaperFlagTmp = IniHelper.GetValue("Configure", "是否重载纸张", "null", iniFilePath);
             if (printerReloadPaperFlagTmp == "null")
             {
-                IniHelper.SetValue("Setting", "PrinterReloadPaperFlag", printerReloadPaperFlag, iniFilePath);
+                IniHelper.SetValue("Configure", "是否重载纸张", printerReloadPaperFlag, iniFilePath);
             }
             else
             {
@@ -269,10 +268,10 @@ namespace 码垛线_ERP单据生成程序
             }
 
             //打印机名
-            string printerNameTmp = IniHelper.GetValue("Setting", "PrinterName", "null", iniFilePath);
+            string printerNameTmp = IniHelper.GetValue("Configure", "打印机名", "null", iniFilePath);
             if (printerNameTmp == "null")
             {
-                IniHelper.SetValue("Setting", "PrinterName", printerName, iniFilePath);
+                IniHelper.SetValue("Configure", "打印机名", printerName, iniFilePath);
             }
             else
             {
@@ -280,10 +279,10 @@ namespace 码垛线_ERP单据生成程序
             }
 
             //自动打印
-            string autoPrintFlagTmp = IniHelper.GetValue("Setting", "AutoPrintFlag", "null", iniFilePath);
+            string autoPrintFlagTmp = IniHelper.GetValue("Configure", "自动打印", "null", iniFilePath);
             if (autoPrintFlagTmp == "null")
             {
-                IniHelper.SetValue("Setting", "AutoPrintFlag", autoPrintFlag, iniFilePath);
+                IniHelper.SetValue("Configure", "自动打印", autoPrintFlag, iniFilePath);
             }
             else
             {
@@ -291,10 +290,10 @@ namespace 码垛线_ERP单据生成程序
             }
 
             //自动生成生产入库单
-            string autoOutScrkFlagTmp = IniHelper.GetValue("Setting", "AutoOutScrkFlag", "null", iniFilePath);
+            string autoOutScrkFlagTmp = IniHelper.GetValue("Configure", "自动生成生产入库单", "null", iniFilePath);
             if (autoOutScrkFlagTmp == "null")
             {
-                IniHelper.SetValue("Setting", "AutoOutScrkFlag", autoOutScrkFlag, iniFilePath);
+                IniHelper.SetValue("Configure", "自动生成生产入库单", autoOutScrkFlag, iniFilePath);
             }
             else
             {
@@ -302,10 +301,10 @@ namespace 码垛线_ERP单据生成程序
             }
 
             //自动生成销货单
-            string autoOutXhFlagTmp = IniHelper.GetValue("Setting", "AutoOutXhFlag", "null", iniFilePath);
+            string autoOutXhFlagTmp = IniHelper.GetValue("Configure", "自动生成销货单", "null", iniFilePath);
             if (autoOutXhFlagTmp == "null")
             {
-                IniHelper.SetValue("Setting", "AutoOutXhFlag", autoOutXhFlag, iniFilePath);
+                IniHelper.SetValue("Configure", "自动生成销货单", autoOutXhFlag, iniFilePath);
             }
             else
             {
@@ -314,10 +313,10 @@ namespace 码垛线_ERP单据生成程序
             
 
             //自动更新
-            string autoUpdateFlagTmp = IniHelper.GetValue("Setting", "AutoUpdateFlag", "null", iniFilePath);
+            string autoUpdateFlagTmp = IniHelper.GetValue("Configure", "自动更新", "null", iniFilePath);
             if (autoUpdateFlagTmp == "null")
             {
-                IniHelper.SetValue("Setting", "AutoUpdateFlag", autoUpdateFlag, iniFilePath);
+                IniHelper.SetValue("Configure", "自动更新", autoUpdateFlag, iniFilePath);
             }
             else
             {
@@ -325,34 +324,8 @@ namespace 码垛线_ERP单据生成程序
             }
         }
 
-        private void CheckReportPath()
-        {
-            var pat = Path.GetDirectoryName(printFilePath);
-            if (Directory.Exists(pat) == false)
-            {
-                Directory.CreateDirectory(pat);
-            }
-        }
-
         #endregion
 
-        #region 程序不能多开设定
-        private void GetMutilOpen()
-        {
-            bool Exist;//定义一个bool变量，用来表示是否已经运行
-                       //创建Mutex互斥对象
-            System.Threading.Mutex newMutex = new System.Threading.Mutex(true, "仅一次", out Exist);
-            if (Exist)//如果没有运行
-            {
-                newMutex.ReleaseMutex();//运行新窗体
-            }
-            else
-            {
-                MessageBox.Show("本程序已正在运行！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);//弹出提示信息
-                Environment.Exit(0);
-            }
-        }
-        #endregion
         #endregion
 
         #region 窗体UI-打印列表

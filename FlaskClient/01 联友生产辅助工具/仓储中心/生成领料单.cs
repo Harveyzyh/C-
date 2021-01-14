@@ -147,13 +147,20 @@ namespace HarveyZ.仓储中心
                 btnSave.Enabled = false;
                 if (infObj.wlRowCount > 0)
                 {
-                    if (infObj.wlRowCount < 9850)
+                    if (!infObj.CreateSingleLL)
                     {
-                        btnSave.Enabled = true;
+                        if (infObj.wlRowCount < 9850)
+                        {
+                            btnSave.Enabled = true;
+                        }
+                        else
+                        {
+                            labelRowCount.ForeColor = Color.Red;
+                        }
                     }
                     else
                     {
-                        labelRowCount.ForeColor = Color.Red;
+                        btnSave.Enabled = true;
                     }
                 }
             }
@@ -234,7 +241,7 @@ namespace HarveyZ.仓储中心
                 }
             }
 
-            if (infObj.wlRowCount > 9900)
+            if (infObj.wlRowCount > 9900 && !infObj.CreateSingleLL)
             {
                 MessageBox.Show("物料行数过多，请删减一部分工单", "错误");
             }

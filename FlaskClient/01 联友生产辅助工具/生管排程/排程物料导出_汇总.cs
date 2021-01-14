@@ -94,6 +94,17 @@ namespace HarveyZ.生管排程
 
             DtOpt.DtDateFormat(dtShow, "日期");
             DgvOpt.SetShow(DgvMain, dtShow);
+            DgvOpt.SetColHeadMiddleCenter(DgvMain);
+            DgvOpt.SetColMiddleCenter(DgvMain, "量");
+            DgvOpt.SetColMiddleCenter(DgvMain, "库存");
+            DgvOpt.SetColWidth(DgvMain, "量", 60);
+            DgvOpt.SetColWidth(DgvMain, "库存", 60);
+            DgvOpt.SetColWidth(DgvMain, "单位", 40);
+            DgvOpt.SetColWidth(DgvMain, "品名", 200);
+            DgvOpt.SetColWidth(DgvMain, "规格", 350);
+            DgvOpt.SetColWidth(DgvMain, "供应商编号", 50);
+            DgvOpt.SetColWidth(DgvMain, "供应商简称", 150);
+            DgvOpt.SetColReadonly(DgvMain);
             UI();
         }
 
@@ -110,7 +121,6 @@ namespace HarveyZ.生管排程
             {
                 if (excelObj.status)
                 {
-                    UpdOutputFlag();
                     Msg.Show("Excel导出成功！");
                 }
                 else
@@ -119,108 +129,63 @@ namespace HarveyZ.生管排程
                 }
             }
         }
-
-        private void CheckBoxJh_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckBoxJh.Checked == true)
-            {
-                CheckBoxJhDl.Checked = false;
-            }
-        }
-
-        private void CheckBoxJhDl_CheckedChanged(object sender, EventArgs e)
-        {
-            if(CheckBoxJhDl.Checked == true)
-            {
-                CheckBoxJh.Checked = false;
-            }
-        }
         #endregion
 
         #region 逻辑
-
-        private string GetTime()
-        {
-            string slqStr = @"SELECT LEFT(dbo.f_getTime(1), 14) ";
-            return mssql.SQLselect(connYF, slqStr).Rows[0][0].ToString();
-        }
-
-        private void UpdOutputFlag()
-        {
-            string time = GetTime();
-            string slqStr = @"UPDATE SC_PLAN SET SC030 = '{1}' WHERE K_ID = '{0}' ";
-            string kidTmp = "";
-            if (kidList.Count > 0)
-            {
-                foreach(string kid in kidList)
-                {
-                    if (kid != kidTmp)
-                    {
-                        kidTmp = kid;
-                        mssql.SQLexcute(connWG, string.Format(slqStr, kid, time));
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-        }
-
         private DataTable GetShowDt()
         {
             string sqlStr = @"SELECT 
-                                SC003 上线日期, RTRIM(INVMB2.MB001) 材料品号, RTRIM(INVMB2.MB002) 材料品名, RTRIM(INVMB2.MB003) 材料规格, 
-                                CAST(SUM(TB004) AS FLOAT) 需领数量, CAST(SUM(TB005) AS FLOAT) 已领数量, CAST(SUM(TB004-TB005) AS FLOAT) 未领数量, 
-                                ISNULL(CAST(SUM(PURTG.TH015) AS FLOAT), 0) 进货数量, 
-                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 批号, 
-                                (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明
-                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
-                                INNER JOIN dbo.MOCTA(NOLOCK) ON MOCTA.UDF02 = SCPLAN.K_ID 
-                                INNER JOIN dbo.MOCTB(NOLOCK) ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
-                                INNER JOIN dbo.COPTD(NOLOCK) ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
-                                INNER JOIN dbo.INVMB(NOLOCK) ON INVMB.MB001 = COPTD.TD004 
-                                INNER JOIN dbo.INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003
-                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA1 ON PURMA1.MA001 = INVMB2.MB032 
-                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06
-                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA3 ON PURMA3.MA001 = COPTD.UDF09 
-                                LEFT JOIN (
-	                                SELECT PURTG.UDF02 AS UDF02, PURTG.TG005, PURTH.TH004, PURTH.TH015 
-	                                FROM PURTG INNER JOIN dbo.PURTH ON PURTG.TG001 = PURTH.TH001 AND PURTG.TG002 = PURTH.TH002 AND PURTG.TG013 = 'Y' AND PURTH.TH030 = 'Y'
-                                ) AS PURTG ON PURTG.UDF02 = SCPLAN.SC003 AND PURTG.TH004 = MOCTB.TB003
-	                                AND PURTG.TG005 = (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 
-                                WHERE 1=1
-                                AND INVMB2.MB025 IN ('P')
-                                AND INVMB2.MB034 IN ('L')";
+                                材料品号, 材料品名, 材料规格, 
+                                需领数量, 已领数量, 未领数量, 
+                                主供应商批号库存, 次供应商批号库存, 
+                                欠量,
+                                ISNULL(主供应商待检量, 0) 主供应商待检量, ISNULL(次供应商待检量, 0) 次供应商待检量, 单位, 
+                                主供应商编号, 主供应商简称, 次供应商编号, 次供应商简称 
+                                FROM (
+	                                SELECT RTRIM(INVMB2.MB001) 材料品号, RTRIM(INVMB2.MB002) 材料品名, RTRIM(INVMB2.MB003) 材料规格, RTRIM(INVMB2.MB004) 单位,
+	                                CAST(SUM(TB004) AS FLOAT) 需领数量, CAST(SUM(TB005) AS FLOAT) 已领数量, CAST(SUM(TB004-TB005) AS FLOAT) 未领数量, 
+	                                ISNULL(CAST(INVML.ML005 AS FLOAT), 0) 主供应商批号库存, ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) 次供应商批号库存, 
+	                                (CASE WHEN CAST(SUM(TB004-TB005) AS FLOAT) > (ISNULL(CAST(INVML.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML2.ML005 AS FLOAT), 0)) THEN CAST(SUM(TB004-TB005) AS FLOAT) - ISNULL(CAST(INVML.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) ELSE 0 END) 欠量,
+	                                RTRIM(PURMA1.MA001) 主供应商编号, RTRIM(PURMA1.MA002) 主供应商简称, RTRIM(PURMA2.MA001) 次供应商编号, RTRIM(PURMA2.MA002) 次供应商简称 
+	                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
+	                                INNER JOIN dbo.MOCTA(NOLOCK) ON MOCTA.UDF02 = SCPLAN.K_ID 
+	                                INNER JOIN dbo.MOCTB(NOLOCK) ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
+	                                INNER JOIN dbo.COPTD(NOLOCK) ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
+	                                INNER JOIN dbo.INVMB(NOLOCK) ON INVMB.MB001 = COPTD.TD004 
+	                                INNER JOIN dbo.INVMB(NOLOCK) AS INVMB2 ON INVMB2.MB001 = MOCTB.TB003
+	                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA1 ON PURMA1.MA001 = INVMB2.MB032 
+	                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06
+	                                LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA3 ON PURMA3.MA001 = COPTD.UDF09 
+	                                LEFT JOIN (
+		                                SELECT ML001, ML004, SUM(ML005) AS ML005 FROM INVML WHERE ML002 NOT IN ('P06', 'P05', 'P09', 'P10', 'P11', 'P15', 'P20', 'P21') GROUP BY ML001, ML004
+	                                ) AS INVML ON INVML.ML001 = INVMB2.MB001 AND INVML.ML004 = PURMA1.MA001
+	                                LEFT JOIN (
+		                                SELECT ML001, ML004, SUM(ML005) AS ML005 FROM INVML WHERE ML002 NOT IN ('P06', 'P05', 'P09', 'P10', 'P11', 'P15', 'P20', 'P21') GROUP BY ML001, ML004
+	                                ) AS INVML2 ON INVML2.ML001 = INVMB2.MB001 AND INVML2.ML004 = PURMA2.MA001 AND PURMA1.MA001 != PURMA2.MA001
+
+	                                WHERE 1=1
+	                                AND INVMB2.MB025 IN ('P')
+	                                AND INVMB2.MB034 IN ('L')";
             sqlStr += string.Format(@" AND SCPLAN.SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
             sqlStr += string.Format(@" AND SCPLAN.SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
 
             sqlStr += string.Format(@" AND (INVMB2.MB001 LIKE '%{0}%' OR INVMB2.MB002 LIKE '%{0}%' OR INVMB2.MB003 LIKE '%{0}%') ", TxbWl.Text);
-            sqlStr += string.Format(@" AND ((CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) LIKE '%{0}%'
-                                        	OR (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) LIKE '%{0}%')", TxbPh.Text);
+            sqlStr += string.Format(@" AND (PURMA1.MA001 LIKE '%{0}%' OR PURMA1.MA002 LIKE '%{0}%' OR PURMA2.MA001 LIKE '%{0}%' OR PURMA2.MA002 LIKE '%{0}%')", TxbPh.Text);
 
-            sqlStr += @"GROUP BY SC003, RTRIM(INVMB2.MB001), RTRIM(INVMB2.MB002), RTRIM(INVMB2.MB003), 
-                            (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END), 
-                            (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) ";
-            if (CheckBoxJh.Checked) sqlStr += @"HAVING ISNULL(CAST(SUM(PURTG.TH015) AS FLOAT), 0) = 0 ";
-            if (CheckBoxJhDl.Checked) sqlStr += @"HAVING ISNULL(CAST(SUM(PURTG.TH015) AS FLOAT), 0) < SUM(TB004-TB005) ";
+            sqlStr += @"GROUP BY RTRIM(INVMB2.MB001), RTRIM(INVMB2.MB002), RTRIM(INVMB2.MB003), RTRIM(INVMB2.MB004), INVML.ML005, INVML2.ML005, RTRIM(PURMA1.MA001), RTRIM(PURMA1.MA002), RTRIM(PURMA2.MA001), RTRIM(PURMA2.MA002) ";
+            if (CheckBoxQl.Checked) sqlStr += @"HAVING (CASE WHEN CAST(SUM(TB004-TB005) AS FLOAT) > (ISNULL(CAST(INVML.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML2.ML005 AS FLOAT), 0)) THEN CAST(SUM(TB004-TB005) AS FLOAT) - ISNULL(CAST(INVML.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) ELSE 0 END) >0 ";
 
-            sqlStr += @"ORDER BY SC003, 
-                            (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END),
-                            RTRIM(INVMB2.MB001), RTRIM(INVMB2.MB002), RTRIM(INVMB2.MB003)";
+            sqlStr += @") AS A
+                        LEFT JOIN (
+	                        SELECT TG005, TH004, CAST(SUM(TH007) AS FLOAT) 主供应商待检量
+	                        FROM PURTG INNER JOIN PURTH ON TG001 = TH001 AND TG002 = TH002 WHERE TG013 = 'N' AND TH030 = 'N' GROUP BY TG005, TH004
+                        ) AS PURTG1 ON PURTG1.TH004 = 材料品号 AND PURTG1.TG005 = 主供应商编号
+                        LEFT JOIN (
+	                        SELECT TG005, TH004, CAST(SUM(TH007) AS FLOAT) 次供应商待检量
+	                        FROM PURTG INNER JOIN PURTH ON TG001 = TH001 AND TG002 = TH002 WHERE TG013 = 'N' AND TH030 = 'N' GROUP BY TG005, TH004
+                        ) AS PURTG2 ON PURTG2.TH004 = 材料品号 AND PURTG2.TG005 = 次供应商编号 AND 次供应商编号 != 主供应商编号
+                        ORDER BY 主供应商编号, 次供应商编号, 材料品号";
             return mssql.SQLselect(connYF, sqlStr); ;
-        }
-
-        private void SetPlanKid(DataTable dt)
-        {
-            kidList.Clear();
-            if(dt != null)
-            {
-                for(int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
-                {
-                    kidList.Add(dt.Rows[rowIndex]["K_ID"].ToString());
-                }
-            }
         }
 
         #endregion

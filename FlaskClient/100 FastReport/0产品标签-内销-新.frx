@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/12/2020 11:22:35" ReportInfo.Modified="12/15/2020 10:33:03" ReportInfo.CreatorVersion="2019.3.5.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/12/2020 11:22:35" ReportInfo.Modified="01/07/2021 11:28:38" ReportInfo.CreatorVersion="2019.3.5.0">
   <Dictionary>
     <TableDataSource Name="Dict" ReferenceName="Data.Dict" DataType="System.Int32" Enabled="true">
       <Column Name="序号" DataType="System.String" PropName="Column"/>
@@ -24,17 +24,17 @@
       <TextObject Name="Text5" Left="9.45" Top="103.95" Width="66.15" Height="56.7" Border.Lines="All" Text="单号" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
       <TextObject Name="Text6" Left="75.6" Top="103.95" Width="255.15" Height="56.7" Border.Lines="All" Text="【[Dict.单号]】" HorzAlign="Center" VertAlign="Center" Font="宋体, 16pt, style=Bold"/>
       <TextObject Name="Text7" Left="9.45" Top="217.35" Width="66.15" Height="56.7" Border.Lines="All" Text="产品名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text8" Left="75.6" Top="217.35" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.产品名称]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="75.6" Top="217.35" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.产品名称]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
       <TextObject Name="Text9" Left="9.45" Top="274.05" Width="66.15" Height="56.7" Border.Lines="All" Text="颜色" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text10" Left="75.6" Top="274.05" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.颜色]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text17" Left="9.45" Top="330.75" Width="66.15" Height="56.7" Border.Lines="All" Text="检验员/日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 7pt, style=Bold"/>
-      <TextObject Name="Text18" Left="75.6" Top="330.75" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.检验日期]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="75.6" Top="274.05" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.颜色]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text17" Left="9.45" Top="330.75" Width="66.15" Height="56.7" Border.Lines="All" Text="检验员/日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text18" Left="75.6" Top="330.75" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.检验日期]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
       <BarcodeObject Name="Barcode1" Left="217.35" Width="116" Height="105.65" AutoSize="false" Expression="[Dict.单号]+'/'+[Dict.品号]" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
-      <TextObject Name="Text23" Left="75.6" Width="141.75" Height="103.95" Border.Lines="All" Text="[Dict.品号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text23" Left="75.6" Width="141.75" Height="103.95" Border.Lines="All" Text="[Dict.品号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
       <TextObject Name="Text24" Left="9.45" Top="160.65" Width="66.15" Height="56.7" Border.Lines="All" Text="客户编码" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
       <TextObject Name="Text25" Left="75.6" Top="160.65" Width="255.15" Height="56.7" Border.Lines="All" Text="[Dict.客户编号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 16pt, style=Bold"/>
-      <TextObject Name="Text26" Left="9.45" Top="387.45" Width="66.15" Height="85.05" Border.Lines="All" Text="备注" HorzAlign="Center" VertAlign="Center" Font="宋体, 7pt, style=Bold"/>
-      <TextObject Name="Text27" Left="75.6" Top="387.45" Width="255.15" Height="85.05" Border.Lines="All" Text="[Dict.备注]" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text26" Left="9.45" Top="387.45" Width="66.15" Height="85.05" Border.Lines="All" Text="备注&#13;&#10;[TotalPages#]-       " HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt, style=Bold"/>
+      <TextObject Name="Text27" Left="75.6" Top="387.45" Width="255.15" Height="85.05" Border.Lines="All" Text="[Dict.备注]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
     </DataBand>
   </ReportPage>
 </Report>

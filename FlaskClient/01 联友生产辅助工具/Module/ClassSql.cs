@@ -51,7 +51,7 @@ namespace HarveyZ
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(slqStr, conn);
-                    cmd.CommandTimeout = 600;
+                    cmd.CommandTimeout = 1800;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     conn.Dispose();
@@ -93,7 +93,7 @@ namespace HarveyZ
                 {
                     DataTable dttmp = new DataTable();
                     SqlCommand cmd = new SqlCommand(slqStr, conn);
-                    cmd.CommandTimeout = 600;
+                    cmd.CommandTimeout = 6000;
 
                     //SqlDataAdapter sdatmp = new SqlDataAdapter(slqStr, conn);
                     SqlDataAdapter sdatmp = new SqlDataAdapter();

@@ -24,7 +24,7 @@ namespace ERP定时任务
         private VersionManeger versionManager = new VersionManeger(connWG);
         private Logger logger = new Logger();
 
-        private static int globalStopDate = 20220301;
+        private static int globalStopDate = 20250000;
         private static bool globalStopFlag = false;
         private static System.Timers.Timer mainTimer = null;
         private static System.Timers.Timer updateTimer = null;
@@ -196,6 +196,12 @@ namespace ERP定时任务
                 logAppendText("AutoLrpPlan: Work Start!");
                 thread.Start();
             }
+            //if (!boxSize.workFlag)
+            //{
+            //    Thread thread = new Thread(new ThreadStart(boxSize.MainWork));
+            //    logAppendText("GetBoxSize: Work Start!");
+            //    thread.Start();
+            //}
         }
         #endregion
 

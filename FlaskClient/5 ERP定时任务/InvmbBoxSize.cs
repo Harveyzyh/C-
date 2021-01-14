@@ -85,7 +85,7 @@ namespace ERP定时任务
                             {
                                 if (L != 0 && H != 0 && W != 0)
                                 {
-                                    BoxSizeUpdate(wlno, L.ToString() + "*" + H.ToString() + "*" + W.ToString(), L * H * W);
+                                    BoxSizeUpdate(wlno, L.ToString() + "*" + W.ToString() + "*" + H.ToString(), L * H * W);
                                 }
                             }
                         }

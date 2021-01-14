@@ -44,8 +44,11 @@ namespace HarveyZ
 
             labelVersion.Text = "Ver: " + infObj.progVer;
 
-            SqlTestDelegate sqlTestDelegate = new SqlTestDelegate(SqlTest);
-            sqlTestDelegate.BeginInvoke(infObj.connWG, null, null);
+            SqlTestDelegate sqlTestDelegateWG = new SqlTestDelegate(SqlTestWG);
+            sqlTestDelegateWG.BeginInvoke(infObj.connWG, null, null);
+
+            SqlTestDelegate sqlTestDelegateSW = new SqlTestDelegate(SqlTestSW);
+            sqlTestDelegateSW.BeginInvoke(infObj.connSW, null, null);
 
             textBoxUid.Text = infObj.userId;
             textBoxUid.SelectAll();
@@ -204,9 +207,14 @@ namespace HarveyZ
         #endregion
 
         #region 逻辑设计
-        private void SqlTest(string connStr)
+        private void SqlTestWG(string connStr)
         {
-            infObj.connFlag = infObj.sql.SQLlinkTest(connStr);
+            infObj.connWgFlag = infObj.sql.SQLlinkTest(connStr);
+        }
+
+        private void SqlTestSW(string connStr)
+        {
+            infObj.connSwFlag = infObj.sql.SQLlinkTest(connStr);
         }
 
         private void FormLogin_Init() //软件配置信息获取
@@ -279,12 +287,14 @@ namespace HarveyZ
                 infObj.connWG = Global_Const.strConnection_WG_R;
                 infObj.connYF = Global_Const.strConnection_YF_R;
                 infObj.connMD = Global_Const.strConnection_MD_R;
+                infObj.connSW = Global_Const.strConnection_SW_R;
             }
             else
             {
                 infObj.connWG = Global_Const.strConnection_WG;
                 infObj.connYF = Global_Const.strConnection_YF;
                 infObj.connMD = Global_Const.strConnection_MD;
+                infObj.connSW = Global_Const.strConnection_SW;
             }
         }
 
@@ -394,7 +404,8 @@ namespace HarveyZ
         private string _localPath = null;
         private string _userPwd = null;
         private bool _testFlag = false;
-        private bool _connFlag = false;
+        private bool _connWgFlag = false;
+        private bool _connSwFlag = false;
 
         private string _systemType = null;
 
@@ -430,7 +441,9 @@ namespace HarveyZ
 
         public bool testFlag { get { return _testFlag; } set { _testFlag = value; } }
 
-        public bool connFlag { get { return _connFlag; } set { _connFlag = value; } }
+        public bool connWgFlag { get { return _connWgFlag; } set { _connWgFlag = value; } }
+
+        public bool connSwFlag { get { return _connSwFlag; } set { _connSwFlag = value; } }
 
         /// <summary>
         /// 软件所处于的模式，区分ERP和Client
