@@ -262,8 +262,8 @@ namespace HarveyZ.采购
                                 LEFT JOIN PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06 
                                 LEFT JOIN COPTD(NOLOCK) AS COPTD ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
                                 WHERE 1=1 ";
-            sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
-            sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
+            sqlStr += string.Format(@" AND SCPLAN.SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
+            sqlStr += string.Format(@" AND SCPLAN.SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
 
             if (CheckBoxFinished.Checked)
             {

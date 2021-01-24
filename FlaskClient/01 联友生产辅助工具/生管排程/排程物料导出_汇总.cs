@@ -164,6 +164,9 @@ namespace HarveyZ.生管排程
 	                                ) AS INVML2 ON INVML2.ML001 = INVMB2.MB001 AND INVML2.ML004 = PURMA2.MA001 AND PURMA1.MA001 != PURMA2.MA001
 
 	                                WHERE 1=1
+                                    AND MOCTA.TA011 IN ('1', '2', '3')
+                                    AND MOCTA.TA013 NOT IN ('U', 'V')
+                                    AND MOCTB.TB011 NOT IN ('4')
 	                                AND INVMB2.MB025 IN ('P')
 	                                AND INVMB2.MB034 IN ('L')";
             sqlStr += string.Format(@" AND SCPLAN.SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));

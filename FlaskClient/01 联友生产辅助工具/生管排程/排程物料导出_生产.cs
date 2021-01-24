@@ -257,13 +257,16 @@ namespace HarveyZ.生管排程
 
         private DataTable GetShowDt()
         {
-            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, SCPLAN.SC023 生产车间, SCPLAN.SC001 生产单号, RTRIM(INVMB.MB001) 成品品号, RTRIM(INVMB.MB002) 成品品名, RTRIM(INVMB.MB003) 成品规格, INVMB.UDF12 产品系列, 
+            string sqlStr = @"SELECT SCPLAN.SC003 排程日期, SCPLAN.SC023 生产车间, SCPLAN.SC001 生产单号, 
+                                (CASE WHEN SC0.SC003 IS NULL THEN '新增' WHEN SC0.SC003>SCPLAN.SC003 THEN '提前，原排程日期'+SC0.SC003 WHEN SC0.SC003<SCPLAN.SC003 THEN '延后，原排程日期'+SC0.SC003 ELSE '' END) 状态, 
+                                RTRIM(INVMB.MB001) 成品品号, RTRIM(INVMB.MB002) 成品品名, RTRIM(INVMB.MB003) 成品规格, INVMB.UDF12 产品系列, 
                                 RTRIM(MOCTB.TB003) 物料品号, RTRIM(MOCTB.TB012) 材料品名, RTRIM(MOCTB.TB013) 材料规格, MOCTB.TB006 工艺, CAST(SUM(MOCTB.TB004) AS FLOAT) 需领料量, 
                                 RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, 
                                 (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 批号, 
                                 (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明, 
                                 RTRIM(INVMB2.UDF02) 货位号
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
+                                LEFT JOIN WG_DB.dbo.SC_PLAN_Snapshot AS SC0 ON SC0.K_ID = SCPLAN.K_ID AND SC0.SC001 = SCPLAN.SC001 AND SC0.SC000 = CONVERT(VARCHAR(8), DATEADD(DAY, -2, GETDATE()), 112)
                                 INNER JOIN dbo.MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
                                 INNER JOIN dbo.MOCTB(NOLOCK) AS MOCTB ON MOCTA.TA001 = MOCTB.TB001 AND MOCTA.TA002 = MOCTB.TB002 
                                 INNER JOIN dbo.COPTD(NOLOCK) ON RTRIM(COPTD.TD001)+'-'+RTRIM(COPTD.TD002)+'-'+RTRIM(COPTD.TD003) = SCPLAN.SC001 
@@ -274,9 +277,9 @@ namespace HarveyZ.生管排程
                                 LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA2 ON PURMA2.MA001 = INVMB2.UDF06
                                 LEFT JOIN dbo.PURMA(NOLOCK) AS PURMA3 ON PURMA3.MA001 = COPTD.UDF09 
                                 WHERE 1=1 ";
-            sqlStr += string.Format(@" AND SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
-            sqlStr += string.Format(@" AND SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
-            if (CmBoxDptType.Text != "全部") sqlStr += string.Format(@" AND SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
+            sqlStr += string.Format(@" AND SCPLAN.SC003 >= '{0}' ", DtpStartDate.Value.ToString("yyyyMMdd"));
+            sqlStr += string.Format(@" AND SCPLAN.SC003 <= '{0}' ", DtpEndDate.Value.ToString("yyyyMMdd"));
+            if (CmBoxDptType.Text != "全部") sqlStr += string.Format(@" AND SCPLAN.SC023 LIKE '%{0}%' ", CmBoxDptType.Text);
 
             if (CheckBoxFinished.Checked)
             {
@@ -289,7 +292,9 @@ namespace HarveyZ.生管排程
 
             sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
                         AND MOCTA.TA011 != 'y' 
-                        GROUP BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(INVMB.MB001), RTRIM(INVMB.MB002), RTRIM(INVMB.MB003), INVMB.UDF12, 
+                        GROUP BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, 
+                            (CASE WHEN SC0.SC003 IS NULL THEN '新增' WHEN SC0.SC003>SCPLAN.SC003 THEN '提前，原排程日期'+SC0.SC003 WHEN SC0.SC003<SCPLAN.SC003 THEN '延后，原排程日期'+SC0.SC003 ELSE '' END), 
+                            RTRIM(INVMB.MB001), RTRIM(INVMB.MB002), RTRIM(INVMB.MB003), INVMB.UDF12, 
                             RTRIM(MOCTB.TB003), RTRIM(MOCTB.TB012), RTRIM(MOCTB.TB013), MOCTB.TB006, RTRIM(CMSMW.MW002), 
                             CONVERT(VARCHAR(100), CMSMW.MW003), 
                             (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END), 

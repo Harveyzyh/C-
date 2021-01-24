@@ -7,7 +7,7 @@ namespace HarveyZ.财务
 {
     public partial class 品号信息税务导出 : Form
     {
-        private string conn = FormLogin.infObj.connSW;
+        private string connSW = FormLogin.infObj.connSW;
         private Mssql mssql = new Mssql();
 
         private bool newFlag = false;
@@ -95,7 +95,7 @@ namespace HarveyZ.财务
                                 LEFT JOIN PURMA ON MA001 = MB032
                                 ORDER BY MB109 DESC , MB025, MB001
                                 ";
-            DataTable dt = mssql.SQLselect(conn, sqlStr);
+            DataTable dt = mssql.SQLselect(connSW, sqlStr);
             dt.TableName = "品号信息";
             return dt;
         }

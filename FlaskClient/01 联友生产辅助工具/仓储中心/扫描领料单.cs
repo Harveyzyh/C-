@@ -32,6 +32,7 @@ namespace HarveyZ.仓储中心
             FormLogin.infObj.userPermission.GetPermUserDetail(FormLogin.infObj.userId, this.Text, out newFlag, out editFlag, out delFlag, out outFlag, out lockFlag, out printFlag);
             Button_Upload.Enabled = false;
             checkedListBoxGroup.Enabled = false;
+            checkBox2.Enabled = false;
             DgvOpt.SetRowBackColor(DataGridView_List);
             dateTimePicker1.Value = DateTime.Now.AddDays(2);
 
@@ -126,12 +127,14 @@ namespace HarveyZ.仓储中心
                 TextBox_Danhao.Enabled = false;
                 dateTimePicker1.Enabled = true;
                 checkedListBoxGroup.Enabled = true;
+                checkBox2.Enabled = true;
             }
             else
             {
                 TextBox_Danhao.Enabled = true;
                 dateTimePicker1.Enabled = false;
                 checkedListBoxGroup.Enabled = false;
+                checkBox2.Enabled = false;
             }
         }
 
@@ -294,9 +297,12 @@ namespace HarveyZ.仓储中心
                                 AND LEFT(TC001, 2) = '54'
                                 AND TA013 = 'Y'
                                 AND TC009 = 'N'
-                                AND TE019 = 'N' 
-                                AND (RTRIM(TC019) = '' OR TC019 IS NULL)
-                                ORDER BY TE001, TE002, TE003";
+                                AND TE019 = 'N' ";
+                    if (checkBox2.Checked)
+                    {
+                        sqlStr += @" AND (RTRIM(TC019) = '' OR TC019 IS NULL) ";
+                    }
+                    sqlStr +=" ORDER BY TE001, TE002, TE003";
                 }
                 dttmp = mssql.SQLselect(connYF, sqlStr);
                 if (dttmp != null)

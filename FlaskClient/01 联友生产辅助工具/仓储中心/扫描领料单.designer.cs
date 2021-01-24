@@ -42,6 +42,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_List)).BeginInit();
             this.panel_Title.SuspendLayout();
             this.SuspendLayout();
@@ -123,6 +124,7 @@
             // panel_Title
             // 
             this.panel_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Title.Controls.Add(this.checkBox2);
             this.panel_Title.Controls.Add(this.checkedListBoxGroup);
             this.panel_Title.Controls.Add(this.label8);
             this.panel_Title.Controls.Add(this.dateTimePicker1);
@@ -136,14 +138,14 @@
             this.panel_Title.Controls.Add(this.Button_Upload);
             this.panel_Title.Location = new System.Drawing.Point(1, 1);
             this.panel_Title.Name = "panel_Title";
-            this.panel_Title.Size = new System.Drawing.Size(862, 104);
+            this.panel_Title.Size = new System.Drawing.Size(1150, 104);
             this.panel_Title.TabIndex = 7;
             // 
             // checkedListBoxGroup
             // 
             this.checkedListBoxGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.checkedListBoxGroup.FormattingEnabled = true;
-            this.checkedListBoxGroup.Location = new System.Drawing.Point(425, 2);
+            this.checkedListBoxGroup.Location = new System.Drawing.Point(535, 2);
             this.checkedListBoxGroup.MultiColumn = true;
             this.checkedListBoxGroup.Name = "checkedListBoxGroup";
             this.checkedListBoxGroup.Size = new System.Drawing.Size(400, 98);
@@ -155,7 +157,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(371, 17);
+            this.label8.Location = new System.Drawing.Point(481, 17);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 48);
             this.label8.TabIndex = 30;
@@ -193,11 +195,21 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(381, 7);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(108, 16);
+            this.checkBox2.TabIndex = 32;
+            this.checkBox2.Text = "包含二次领料单";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // 扫描领料单
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 405);
+            this.ClientSize = new System.Drawing.Size(1212, 405);
             this.Controls.Add(this.panel_Title);
             this.Controls.Add(this.DataGridView_List);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -227,6 +239,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox checkedListBoxGroup;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

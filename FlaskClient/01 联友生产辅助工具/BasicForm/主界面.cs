@@ -639,6 +639,26 @@ namespace HarveyZ
                 frm.Show();
             }
         }
+
+        private void 财务部_工单明细表生产导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                工单明细生产导出 frm = new 工单明细生产导出("财务部_工单明细表生产导出");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
+
+        private void 财务部_收集工单工时税务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FormLogin.StopModuleOpen())
+            {
+                收集工单工时税务 frm = new 收集工单工时税务("财务部_收集工单工时税务");
+                FormOpenInit(frm);
+                frm.Show();
+            }
+        }
         #endregion
 
         #region 报表

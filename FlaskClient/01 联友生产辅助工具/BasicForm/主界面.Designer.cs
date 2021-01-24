@@ -99,6 +99,8 @@
             this.statusLabelWGConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.财务部_收集工单工时税务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.财务部_工单明细表生产导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -440,7 +442,9 @@
             this.财务部_刷新会计科目生产ToolStripMenuItem,
             this.财务部_品号信息生产导出ToolStripMenuItem,
             this.财务部_品号信息税务导出ToolStripMenuItem,
-            this.财务部_领退料明细生产导出ToolStripMenuItem});
+            this.财务部_领退料明细生产导出ToolStripMenuItem,
+            this.财务部_工单明细表生产导出ToolStripMenuItem,
+            this.财务部_收集工单工时税务ToolStripMenuItem});
             this.财务部ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.财务部ToolStripMenuItem.Name = "财务部ToolStripMenuItem";
             this.财务部ToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
@@ -449,35 +453,35 @@
             // 财务部_成本异常报表导出ToolStripMenuItem
             // 
             this.财务部_成本异常报表导出ToolStripMenuItem.Name = "财务部_成本异常报表导出ToolStripMenuItem";
-            this.财务部_成本异常报表导出ToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
-            this.财务部_成本异常报表导出ToolStripMenuItem.Text = "成本异常报表导出";
+            this.财务部_成本异常报表导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
+            this.财务部_成本异常报表导出ToolStripMenuItem.Text = "成本异常报表(生产)导出";
             this.财务部_成本异常报表导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_成本异常报表导出ToolStripMenuItem_Click);
             // 
             // 财务部_刷新会计科目生产ToolStripMenuItem
             // 
             this.财务部_刷新会计科目生产ToolStripMenuItem.Name = "财务部_刷新会计科目生产ToolStripMenuItem";
-            this.财务部_刷新会计科目生产ToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.财务部_刷新会计科目生产ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
             this.财务部_刷新会计科目生产ToolStripMenuItem.Text = "刷新会计科目(生产)";
             this.财务部_刷新会计科目生产ToolStripMenuItem.Click += new System.EventHandler(this.财务部_刷新会计科目生产ToolStripMenuItem_Click);
             // 
             // 财务部_品号信息生产导出ToolStripMenuItem
             // 
             this.财务部_品号信息生产导出ToolStripMenuItem.Name = "财务部_品号信息生产导出ToolStripMenuItem";
-            this.财务部_品号信息生产导出ToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.财务部_品号信息生产导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
             this.财务部_品号信息生产导出ToolStripMenuItem.Text = "品号信息(生产)导出";
             this.财务部_品号信息生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_品号信息生产导出ToolStripMenuItem_Click);
             // 
             // 财务部_品号信息税务导出ToolStripMenuItem
             // 
             this.财务部_品号信息税务导出ToolStripMenuItem.Name = "财务部_品号信息税务导出ToolStripMenuItem";
-            this.财务部_品号信息税务导出ToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.财务部_品号信息税务导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
             this.财务部_品号信息税务导出ToolStripMenuItem.Text = "品号信息(税务)导出";
             this.财务部_品号信息税务导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_品号信息税务导出ToolStripMenuItem_Click);
             // 
             // 财务部_领退料明细生产导出ToolStripMenuItem
             // 
             this.财务部_领退料明细生产导出ToolStripMenuItem.Name = "财务部_领退料明细生产导出ToolStripMenuItem";
-            this.财务部_领退料明细生产导出ToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.财务部_领退料明细生产导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
             this.财务部_领退料明细生产导出ToolStripMenuItem.Text = "领退料明细(生产)导出";
             this.财务部_领退料明细生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_领退料明细生产导出ToolStripMenuItem_Click);
             // 
@@ -687,6 +691,20 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
+            // 财务部_收集工单工时税务ToolStripMenuItem
+            // 
+            this.财务部_收集工单工时税务ToolStripMenuItem.Name = "财务部_收集工单工时税务ToolStripMenuItem";
+            this.财务部_收集工单工时税务ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
+            this.财务部_收集工单工时税务ToolStripMenuItem.Text = "收集工单工时(税务)";
+            this.财务部_收集工单工时税务ToolStripMenuItem.Click += new System.EventHandler(this.财务部_收集工单工时税务ToolStripMenuItem_Click);
+            // 
+            // 财务部_工单明细表生产导出ToolStripMenuItem
+            // 
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Name = "财务部_工单明细表生产导出ToolStripMenuItem";
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Text = "工单明细表(生产)导出";
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_工单明细表生产导出ToolStripMenuItem_Click);
+            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -790,5 +808,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabelLinkMode;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelSWConn;
         private System.Windows.Forms.ToolStripMenuItem 财务部_刷新会计科目生产ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 财务部_收集工单工时税务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 财务部_工单明细表生产导出ToolStripMenuItem;
     }
 }

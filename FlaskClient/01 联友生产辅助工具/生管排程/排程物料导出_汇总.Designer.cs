@@ -175,6 +175,7 @@
             this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMain.Location = new System.Drawing.Point(12, 228);
             this.DgvMain.Name = "DgvMain";
+            this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(240, 150);

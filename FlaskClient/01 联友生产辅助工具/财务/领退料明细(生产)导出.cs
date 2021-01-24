@@ -47,6 +47,16 @@ namespace HarveyZ.财务
         }
         #endregion
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePickerOpt.DateTimeValueChange_Start(dateTimePicker1, dateTimePicker2);
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePickerOpt.DateTimeValueChange_End(dateTimePicker1, dateTimePicker2);
+        }
+
         private void btnOutput_Click(object sender, EventArgs e)
         {
             Excel excel = new Excel();

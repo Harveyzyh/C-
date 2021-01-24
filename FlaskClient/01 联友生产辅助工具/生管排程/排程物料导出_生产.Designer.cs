@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.CmBoxDptType = new System.Windows.Forms.ComboBox();
             this.CheckBoxAll = new System.Windows.Forms.CheckBox();
             this.CheckBoxNew = new System.Windows.Forms.CheckBox();
             this.CheckBoxFinished = new System.Windows.Forms.CheckBox();
@@ -38,9 +39,8 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.DgvMain = new System.Windows.Forms.DataGridView();
-            this.CmBoxDptType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.DgvMain = new System.Windows.Forms.DataGridView();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,15 @@
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(809, 85);
             this.PanelTitle.TabIndex = 0;
+            // 
+            // CmBoxDptType
+            // 
+            this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmBoxDptType.FormattingEnabled = true;
+            this.CmBoxDptType.Location = new System.Drawing.Point(461, 46);
+            this.CmBoxDptType.Name = "CmBoxDptType";
+            this.CmBoxDptType.Size = new System.Drawing.Size(141, 20);
+            this.CmBoxDptType.TabIndex = 9;
             // 
             // CheckBoxAll
             // 
@@ -160,28 +169,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "排程起始：";
             // 
-            // DgvMain
-            // 
-            this.DgvMain.AllowUserToAddRows = false;
-            this.DgvMain.AllowUserToDeleteRows = false;
-            this.DgvMain.BackgroundColor = System.Drawing.Color.White;
-            this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvMain.Location = new System.Drawing.Point(2, 93);
-            this.DgvMain.Name = "DgvMain";
-            this.DgvMain.RowHeadersVisible = false;
-            this.DgvMain.RowTemplate.Height = 23;
-            this.DgvMain.Size = new System.Drawing.Size(240, 150);
-            this.DgvMain.TabIndex = 1;
-            // 
-            // CmBoxDptType
-            // 
-            this.CmBoxDptType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmBoxDptType.FormattingEnabled = true;
-            this.CmBoxDptType.Location = new System.Drawing.Point(461, 46);
-            this.CmBoxDptType.Name = "CmBoxDptType";
-            this.CmBoxDptType.Size = new System.Drawing.Size(141, 20);
-            this.CmBoxDptType.TabIndex = 9;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -190,6 +177,20 @@
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 10;
             this.label3.Text = "生产部门：";
+            // 
+            // DgvMain
+            // 
+            this.DgvMain.AllowUserToAddRows = false;
+            this.DgvMain.AllowUserToDeleteRows = false;
+            this.DgvMain.BackgroundColor = System.Drawing.Color.White;
+            this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMain.Location = new System.Drawing.Point(2, 93);
+            this.DgvMain.Name = "DgvMain";
+            this.DgvMain.ReadOnly = true;
+            this.DgvMain.RowHeadersVisible = false;
+            this.DgvMain.RowTemplate.Height = 23;
+            this.DgvMain.Size = new System.Drawing.Size(240, 150);
+            this.DgvMain.TabIndex = 1;
             // 
             // 排程物料导出_生产
             // 

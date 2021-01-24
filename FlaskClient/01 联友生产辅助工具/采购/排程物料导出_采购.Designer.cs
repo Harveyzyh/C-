@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.PanelTitle = new System.Windows.Forms.Panel();
+            this.CheckBoxAll = new System.Windows.Forms.CheckBox();
+            this.CheckBoxNew = new System.Windows.Forms.CheckBox();
             this.CheckBoxFinished = new System.Windows.Forms.CheckBox();
             this.DtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,8 +39,6 @@
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
-            this.CheckBoxNew = new System.Windows.Forms.CheckBox();
-            this.CheckBoxAll = new System.Windows.Forms.CheckBox();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,30 @@
             this.PanelTitle.Name = "PanelTitle";
             this.PanelTitle.Size = new System.Drawing.Size(809, 85);
             this.PanelTitle.TabIndex = 0;
+            // 
+            // CheckBoxAll
+            // 
+            this.CheckBoxAll.AutoSize = true;
+            this.CheckBoxAll.Location = new System.Drawing.Point(305, 50);
+            this.CheckBoxAll.Name = "CheckBoxAll";
+            this.CheckBoxAll.Size = new System.Drawing.Size(72, 16);
+            this.CheckBoxAll.TabIndex = 8;
+            this.CheckBoxAll.Text = "显示全部";
+            this.CheckBoxAll.UseVisualStyleBackColor = true;
+            this.CheckBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
+            // 
+            // CheckBoxNew
+            // 
+            this.CheckBoxNew.AutoSize = true;
+            this.CheckBoxNew.Checked = true;
+            this.CheckBoxNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxNew.Location = new System.Drawing.Point(162, 50);
+            this.CheckBoxNew.Name = "CheckBoxNew";
+            this.CheckBoxNew.Size = new System.Drawing.Size(120, 16);
+            this.CheckBoxNew.TabIndex = 7;
+            this.CheckBoxNew.Text = "只显示未导出物料";
+            this.CheckBoxNew.UseVisualStyleBackColor = true;
+            this.CheckBoxNew.CheckedChanged += new System.EventHandler(this.CheckBoxNew_CheckedChanged);
             // 
             // CheckBoxFinished
             // 
@@ -140,34 +164,11 @@
             this.DgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMain.Location = new System.Drawing.Point(2, 93);
             this.DgvMain.Name = "DgvMain";
+            this.DgvMain.ReadOnly = true;
             this.DgvMain.RowHeadersVisible = false;
             this.DgvMain.RowTemplate.Height = 23;
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
-            // 
-            // CheckBoxNew
-            // 
-            this.CheckBoxNew.AutoSize = true;
-            this.CheckBoxNew.Checked = true;
-            this.CheckBoxNew.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxNew.Location = new System.Drawing.Point(162, 50);
-            this.CheckBoxNew.Name = "CheckBoxNew";
-            this.CheckBoxNew.Size = new System.Drawing.Size(120, 16);
-            this.CheckBoxNew.TabIndex = 7;
-            this.CheckBoxNew.Text = "只显示未导出物料";
-            this.CheckBoxNew.UseVisualStyleBackColor = true;
-            this.CheckBoxNew.CheckedChanged += new System.EventHandler(this.CheckBoxNew_CheckedChanged);
-            // 
-            // CheckBoxAll
-            // 
-            this.CheckBoxAll.AutoSize = true;
-            this.CheckBoxAll.Location = new System.Drawing.Point(305, 50);
-            this.CheckBoxAll.Name = "CheckBoxAll";
-            this.CheckBoxAll.Size = new System.Drawing.Size(72, 16);
-            this.CheckBoxAll.TabIndex = 8;
-            this.CheckBoxAll.Text = "显示全部";
-            this.CheckBoxAll.UseVisualStyleBackColor = true;
-            this.CheckBoxAll.CheckedChanged += new System.EventHandler(this.CheckBoxAll_CheckedChanged);
             // 
             // 排程物料导出_采购
             // 
