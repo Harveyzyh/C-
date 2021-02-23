@@ -16,9 +16,9 @@
 
 
 
-    public const string strConnection_SW = "Server=192.168.0.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
+    public const string strConnection_SW = "Server=172.16.210.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
 
-    public const string strConnection_SW_R = "Server=192.168.0.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
+    public const string strConnection_SW_R = "Server=172.16.210.239;initial catalog=Comfortseating;user id=sa;password=comfortsjl2013{;Connect Timeout=5";
 
     #endregion
 

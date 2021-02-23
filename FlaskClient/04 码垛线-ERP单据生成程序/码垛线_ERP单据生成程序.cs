@@ -26,7 +26,7 @@ namespace 码垛线_ERP单据生成程序
         private Mssql mssql = new Mssql();
         private VersionManeger verManager = new VersionManeger(connWG);
 
-        private static int globalStopDate = 20300301;
+        private static int globalStopDate = 20250301;
         private static bool globalStopFlag = false;
 
         private static string localPath = "";

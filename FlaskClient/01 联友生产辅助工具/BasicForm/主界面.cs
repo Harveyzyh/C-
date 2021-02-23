@@ -286,12 +286,6 @@ namespace HarveyZ
         {
             FormCloseWork();
         }
-
-        private void 帮助_使用手册ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            手册下载 frm = new 手册下载("帮助_使用手册", "联友生产辅助工具-使用手册.pdf");
-            frm.ShowDialog();
-        }
         #endregion
 
         #region 管理
@@ -317,12 +311,6 @@ namespace HarveyZ
                 FormOpenInit(frm);
                 frm.Show();
             }
-        }
-
-        private void 管理_逻辑手册ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            手册下载 frm = new 手册下载("管理_逻辑手册", "联友生产辅助工具-逻辑手册.pdf");
-            frm.ShowDialog();
         }
         #endregion
 

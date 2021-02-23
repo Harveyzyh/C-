@@ -471,3 +471,12 @@ C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.品号信息生产导
 C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.品号信息税务导出.resources
 C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.维护ERP.客户配置维护_存在未勾选的配置.resources
 C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.刷新会计科目生产.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.收集工单工时税务.resources
+C:\C#\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.工单明细生产导出.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.维护ERP.客户配置维护_存在未勾选的配置.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.收集工单工时税务.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.刷新会计科目生产.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.工单明细生产导出.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.领退料明细生产导出.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.品号信息生产导出.resources
+\\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Debug\HarveyZ.财务.品号信息税务导出.resources

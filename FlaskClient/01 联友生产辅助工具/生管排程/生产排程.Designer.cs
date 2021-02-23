@@ -76,6 +76,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTipBtnSetIndex = new System.Windows.Forms.ToolTip(this.components);
+            this.CheckBoxStatusTypePlanOverTime = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.panelStatusType.SuspendLayout();
@@ -145,6 +146,7 @@
             // 
             // panelStatusType
             // 
+            this.panelStatusType.Controls.Add(this.CheckBoxStatusTypePlanOverTime);
             this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeNew);
             this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeSlChange);
             this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDptChange);
@@ -154,7 +156,7 @@
             this.panelStatusType.Controls.Add(this.CheckBoxStatusTypeDateEarly);
             this.panelStatusType.Location = new System.Drawing.Point(83, 66);
             this.panelStatusType.Name = "panelStatusType";
-            this.panelStatusType.Size = new System.Drawing.Size(596, 37);
+            this.panelStatusType.Size = new System.Drawing.Size(714, 37);
             this.panelStatusType.TabIndex = 52;
             // 
             // CheckBoxStatusTypeNew
@@ -162,7 +164,7 @@
             this.CheckBoxStatusTypeNew.AutoSize = true;
             this.CheckBoxStatusTypeNew.Checked = true;
             this.CheckBoxStatusTypeNew.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeNew.Location = new System.Drawing.Point(143, 9);
+            this.CheckBoxStatusTypeNew.Location = new System.Drawing.Point(138, 9);
             this.CheckBoxStatusTypeNew.Name = "CheckBoxStatusTypeNew";
             this.CheckBoxStatusTypeNew.Size = new System.Drawing.Size(54, 18);
             this.CheckBoxStatusTypeNew.TabIndex = 52;
@@ -175,7 +177,7 @@
             this.CheckBoxStatusTypeSlChange.AutoSize = true;
             this.CheckBoxStatusTypeSlChange.Checked = true;
             this.CheckBoxStatusTypeSlChange.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeSlChange.Location = new System.Drawing.Point(406, 9);
+            this.CheckBoxStatusTypeSlChange.Location = new System.Drawing.Point(395, 9);
             this.CheckBoxStatusTypeSlChange.Name = "CheckBoxStatusTypeSlChange";
             this.CheckBoxStatusTypeSlChange.Size = new System.Drawing.Size(82, 18);
             this.CheckBoxStatusTypeSlChange.TabIndex = 50;
@@ -188,7 +190,7 @@
             this.CheckBoxStatusTypeDptChange.AutoSize = true;
             this.CheckBoxStatusTypeDptChange.Checked = true;
             this.CheckBoxStatusTypeDptChange.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDptChange.Location = new System.Drawing.Point(506, 9);
+            this.CheckBoxStatusTypeDptChange.Location = new System.Drawing.Point(490, 9);
             this.CheckBoxStatusTypeDptChange.Name = "CheckBoxStatusTypeDptChange";
             this.CheckBoxStatusTypeDptChange.Size = new System.Drawing.Size(82, 18);
             this.CheckBoxStatusTypeDptChange.TabIndex = 51;
@@ -224,7 +226,7 @@
             this.CheckBoxStatusTypeDateDelay.AutoSize = true;
             this.CheckBoxStatusTypeDateDelay.Checked = true;
             this.CheckBoxStatusTypeDateDelay.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDateDelay.Location = new System.Drawing.Point(309, 9);
+            this.CheckBoxStatusTypeDateDelay.Location = new System.Drawing.Point(297, 9);
             this.CheckBoxStatusTypeDateDelay.Name = "CheckBoxStatusTypeDateDelay";
             this.CheckBoxStatusTypeDateDelay.Size = new System.Drawing.Size(82, 18);
             this.CheckBoxStatusTypeDateDelay.TabIndex = 49;
@@ -237,7 +239,7 @@
             this.CheckBoxStatusTypeDateEarly.AutoSize = true;
             this.CheckBoxStatusTypeDateEarly.Checked = true;
             this.CheckBoxStatusTypeDateEarly.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypeDateEarly.Location = new System.Drawing.Point(211, 9);
+            this.CheckBoxStatusTypeDateEarly.Location = new System.Drawing.Point(203, 9);
             this.CheckBoxStatusTypeDateEarly.Name = "CheckBoxStatusTypeDateEarly";
             this.CheckBoxStatusTypeDateEarly.Size = new System.Drawing.Size(82, 18);
             this.CheckBoxStatusTypeDateEarly.TabIndex = 48;
@@ -620,6 +622,18 @@
             this.toolTipBtnSetIndex.InitialDelay = 500;
             this.toolTipBtnSetIndex.ReshowDelay = 100;
             // 
+            // CheckBoxStatusTypePlanOverTime
+            // 
+            this.CheckBoxStatusTypePlanOverTime.AutoSize = true;
+            this.CheckBoxStatusTypePlanOverTime.Checked = true;
+            this.CheckBoxStatusTypePlanOverTime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypePlanOverTime.Location = new System.Drawing.Point(580, 10);
+            this.CheckBoxStatusTypePlanOverTime.Name = "CheckBoxStatusTypePlanOverTime";
+            this.CheckBoxStatusTypePlanOverTime.Size = new System.Drawing.Size(138, 18);
+            this.CheckBoxStatusTypePlanOverTime.TabIndex = 53;
+            this.CheckBoxStatusTypePlanOverTime.Text = "上线日期跨度过大";
+            this.CheckBoxStatusTypePlanOverTime.UseVisualStyleBackColor = true;
+            // 
             // 生产排程
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -691,6 +705,7 @@
         private System.Windows.Forms.CheckBox CheckBoxStatusTypeDateDelay;
         private System.Windows.Forms.CheckBox CheckBoxStatusTypeDateEarly;
         private System.Windows.Forms.CheckBox CheckBoxStatusTypeNew;
+        private System.Windows.Forms.CheckBox CheckBoxStatusTypePlanOverTime;
     }
 }
 

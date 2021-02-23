@@ -74,19 +74,18 @@
             this.财务部_品号信息生产导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.财务部_品号信息税务导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.财务部_领退料明细生产导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.财务部_工单明细表生产导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.财务部_收集工单工时税务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.报表_销货信息带入库部门ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_版本发布ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.管理_FastReport模板发布ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.管理_逻辑手册ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ERP不开放ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ERP_客户配置维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ERP_客户配置维护_勾选项替换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.帮助_使用手册ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭当前界面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.此用户没有任何权限ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelParent = new System.Windows.Forms.Panel();
@@ -99,8 +98,6 @@
             this.statusLabelWGConn = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.生成领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.财务部_收集工单工时税务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.财务部_工单明细表生产导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -121,7 +118,6 @@
             this.报表ToolStripMenuItem,
             this.管理ToolStripMenuItem,
             this.ERP不开放ToolStripMenuItem,
-            this.帮助ToolStripMenuItem,
             this.关闭当前界面ToolStripMenuItem,
             this.此用户没有任何权限ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -485,6 +481,20 @@
             this.财务部_领退料明细生产导出ToolStripMenuItem.Text = "领退料明细(生产)导出";
             this.财务部_领退料明细生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_领退料明细生产导出ToolStripMenuItem_Click);
             // 
+            // 财务部_工单明细表生产导出ToolStripMenuItem
+            // 
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Name = "财务部_工单明细表生产导出ToolStripMenuItem";
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Text = "工单明细表(生产)导出";
+            this.财务部_工单明细表生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_工单明细表生产导出ToolStripMenuItem_Click);
+            // 
+            // 财务部_收集工单工时税务ToolStripMenuItem
+            // 
+            this.财务部_收集工单工时税务ToolStripMenuItem.Name = "财务部_收集工单工时税务ToolStripMenuItem";
+            this.财务部_收集工单工时税务ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
+            this.财务部_收集工单工时税务ToolStripMenuItem.Text = "收集工单工时(税务)";
+            this.财务部_收集工单工时税务ToolStripMenuItem.Click += new System.EventHandler(this.财务部_收集工单工时税务ToolStripMenuItem_Click);
+            // 
             // 报表ToolStripMenuItem
             // 
             this.报表ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -506,8 +516,7 @@
             this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.管理_权限管理ToolStripMenuItem,
             this.管理_版本发布ToolStripMenuItem,
-            this.管理_FastReport模板发布ToolStripMenuItem,
-            this.管理_逻辑手册ToolStripMenuItem});
+            this.管理_FastReport模板发布ToolStripMenuItem});
             this.管理ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
             this.管理ToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
@@ -533,13 +542,6 @@
             this.管理_FastReport模板发布ToolStripMenuItem.Size = new System.Drawing.Size(205, 24);
             this.管理_FastReport模板发布ToolStripMenuItem.Text = "FastReport模板发布";
             this.管理_FastReport模板发布ToolStripMenuItem.Click += new System.EventHandler(this.管理_FastReport模板发布ToolStripMenuItem_Click);
-            // 
-            // 管理_逻辑手册ToolStripMenuItem
-            // 
-            this.管理_逻辑手册ToolStripMenuItem.Name = "管理_逻辑手册ToolStripMenuItem";
-            this.管理_逻辑手册ToolStripMenuItem.Size = new System.Drawing.Size(205, 24);
-            this.管理_逻辑手册ToolStripMenuItem.Text = "逻辑手册";
-            this.管理_逻辑手册ToolStripMenuItem.Click += new System.EventHandler(this.管理_逻辑手册ToolStripMenuItem_Click);
             // 
             // ERP不开放ToolStripMenuItem
             // 
@@ -572,22 +574,6 @@
             this.ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
             this.ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem.Text = "存在未勾选的配置";
             this.ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem.Click += new System.EventHandler(this.ERP_客户配置维护_存在未勾选的配置ToolStripMenuItem_Click);
-            // 
-            // 帮助ToolStripMenuItem
-            // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.帮助_使用手册ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 帮助_使用手册ToolStripMenuItem
-            // 
-            this.帮助_使用手册ToolStripMenuItem.Name = "帮助_使用手册ToolStripMenuItem";
-            this.帮助_使用手册ToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
-            this.帮助_使用手册ToolStripMenuItem.Text = "使用手册";
-            this.帮助_使用手册ToolStripMenuItem.Click += new System.EventHandler(this.帮助_使用手册ToolStripMenuItem_Click);
             // 
             // 关闭当前界面ToolStripMenuItem
             // 
@@ -691,20 +677,6 @@
             this.生成领料单ToolStripMenuItem.Name = "生成领料单ToolStripMenuItem";
             this.生成领料单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // 财务部_收集工单工时税务ToolStripMenuItem
-            // 
-            this.财务部_收集工单工时税务ToolStripMenuItem.Name = "财务部_收集工单工时税务ToolStripMenuItem";
-            this.财务部_收集工单工时税务ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
-            this.财务部_收集工单工时税务ToolStripMenuItem.Text = "收集工单工时(税务)";
-            this.财务部_收集工单工时税务ToolStripMenuItem.Click += new System.EventHandler(this.财务部_收集工单工时税务ToolStripMenuItem_Click);
-            // 
-            // 财务部_工单明细表生产导出ToolStripMenuItem
-            // 
-            this.财务部_工单明细表生产导出ToolStripMenuItem.Name = "财务部_工单明细表生产导出ToolStripMenuItem";
-            this.财务部_工单明细表生产导出ToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
-            this.财务部_工单明细表生产导出ToolStripMenuItem.Text = "工单明细表(生产)导出";
-            this.财务部_工单明细表生产导出ToolStripMenuItem.Click += new System.EventHandler(this.财务部_工单明细表生产导出ToolStripMenuItem_Click);
-            // 
             // 主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -796,9 +768,6 @@
         private System.Windows.Forms.ToolStripMenuItem 管理_版本发布ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_自动LRP计划队列ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 采购_排程物料导出_纸箱ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 帮助_使用手册ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 管理_逻辑手册ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生管_排程物料导出_汇总ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 财务部_品号信息生产导出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 财务部_品号信息税务导出ToolStripMenuItem;

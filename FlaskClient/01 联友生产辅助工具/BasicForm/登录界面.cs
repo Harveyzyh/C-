@@ -96,6 +96,7 @@ namespace HarveyZ
             //更新程序
             if (main.GetNewVersion())
             {
+                Thread.Sleep(1000);
                 UpdateMe.ProgUpdate(infObj.progName, infObj.updateHost + @"/download/" + infObj.progName + ".exe");
             }
         }
@@ -305,8 +306,7 @@ namespace HarveyZ
         private void SetModuleOpenFlag()
         {
             string timeYF = infObj.sql.SQLTime(infObj.connYF, 8);
-            string timeMD = infObj.sql.SQLTime(infObj.connMD, 8);
-            if (int.Parse(timeYF) > int.Parse(infObj.globalStopDate) || int.Parse(timeMD) > int.Parse(infObj.globalStopDate))
+            if (int.Parse(timeYF) > int.Parse(infObj.globalStopDate))
             {
                 infObj.globalStopFlag = true;
             }

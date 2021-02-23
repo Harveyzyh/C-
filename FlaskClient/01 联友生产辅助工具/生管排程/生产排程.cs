@@ -102,7 +102,7 @@ namespace HarveyZ.生管排程
                 TxBoxDptWorkTime.Visible = true;
                 labelWorkTime.Visible = true;
                 TxBoxDptWorkTime.Text = GetDptWorkTime();
-                labelWorkTime.Text = "排程总工时：0";
+                //labelWorkTime.Text = "排程总工时：0";
             }
 
             if (CmBoxShowType.Text == "未排订单")
@@ -675,6 +675,24 @@ namespace HarveyZ.生管排程
         #endregion
 
         #region 数据显示
+
+        private bool GetPlanOvertime(string kid)
+        {
+            string sqlStr = @"SELECT 1
+                                FROM WG_DB.dbo.SC_PLAN AS SC1
+                                WHERE 1=1
+                                AND EXISTS(
+	                                SELECT 1 FROM WG_DB.dbo.SC_PLAN AS SC2 
+	                                INNER JOIN COMFORT.dbo.COPTD ON RTRIM(TD001)+'-'+RTRIM(TD002)+'-'+RTRIM(TD003) = SC2.SC001
+	                                WHERE SC2.K_ID != SC1.K_ID 
+                                    AND SC2.SC023 != SC1.SC023
+	                                AND SC2.K_ID = {0} 
+	                                AND SC1.SC001 LIKE (RTRIM(TD001)+'-'+RTRIM(TD002)+'-%')
+	                                AND (DATEADD(DAY, 3, CONVERT(DATE, SC2.SC003, 112)) < CONVERT(DATE, SC1.SC003, 112) OR CONVERT(DATE, SC1.SC003, 112) < DATEADD(DAY, -3, CONVERT(DATE, SC2.SC003, 112)))
+                                )";
+            return mssql.SQLexist(connYF, string.Format(sqlStr, kid));
+        }
+
         /// <summary>
         /// 对datatable作数据整理
         /// </summary>
@@ -686,9 +704,14 @@ namespace HarveyZ.生管排程
             {
                 for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
                 {
+                    if (GetPlanOvertime(dt.Rows[rowIndex]["序号"].ToString()))
+                    {
+                        dt.Rows[rowIndex]["状态"] += "上线日期跨度超过3天，";
+                    }
+
                     if (dt.Rows[rowIndex]["生产车间N"].ToString() == "")
                     {
-                        dt.Rows[rowIndex]["状态"] += "新增";
+                        dt.Rows[rowIndex]["状态"] += "新增，";
                     }
                     else
                     {
@@ -803,6 +826,17 @@ namespace HarveyZ.生管排程
                 else
                 {
                     dv.RowFilter += @" OR 状态 LIKE '%部门变更%' ";
+                }
+            }
+            if (CheckBoxStatusTypePlanOverTime.Checked)
+            {
+                if (dv.RowFilter == "")
+                {
+                    dv.RowFilter += @"状态 LIKE '%上线日期跨度%' ";
+                }
+                else
+                {
+                    dv.RowFilter += @" OR 状态 LIKE '%上线日期跨度%' ";
                 }
             }
 
