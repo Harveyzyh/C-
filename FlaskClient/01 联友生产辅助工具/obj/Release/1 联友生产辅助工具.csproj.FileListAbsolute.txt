@@ -651,3 +651,5 @@ C:\C#\01 联友生产辅助工具\obj\Release\HarveyZ.财务.工单明细生产�
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.财务.领退料明细生产导出.resources
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.财务.品号信息生产导出.resources
 \\Mac\Home\Documents\1 开发\C-\FlaskClient\01 联友生产辅助工具\obj\Release\HarveyZ.财务.品号信息税务导出.resources
+\\Mac\Home\Documents\99 其他\90 云储存文件\以往工作文件\联友\0 ZYH\82 WG程序\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.exe
+\\Mac\Home\Documents\99 其他\90 云储存文件\以往工作文件\联友\0 ZYH\82 WG程序\C-\FlaskClient\01 联友生产辅助工具\obj\Release\联友生产辅助工具.pdb

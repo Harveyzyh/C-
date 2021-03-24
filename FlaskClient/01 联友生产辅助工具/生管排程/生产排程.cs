@@ -704,10 +704,10 @@ namespace HarveyZ.生管排程
             {
                 for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
                 {
-                    if (GetPlanOvertime(dt.Rows[rowIndex]["序号"].ToString()))
-                    {
-                        dt.Rows[rowIndex]["状态"] += "上线日期跨度超过3天，";
-                    }
+                    //if (GetPlanOvertime(dt.Rows[rowIndex]["序号"].ToString()))
+                    //{
+                    //    dt.Rows[rowIndex]["状态"] += "上线日期跨度超过3天，";
+                    //}
 
                     if (dt.Rows[rowIndex]["生产车间N"].ToString() == "")
                     {

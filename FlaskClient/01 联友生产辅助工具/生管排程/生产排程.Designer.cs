@@ -34,6 +34,7 @@
             this.BtnShow = new System.Windows.Forms.Button();
             this.PanelTitle = new System.Windows.Forms.Panel();
             this.panelStatusType = new System.Windows.Forms.Panel();
+            this.CheckBoxStatusTypePlanOverTime = new System.Windows.Forms.CheckBox();
             this.CheckBoxStatusTypeNew = new System.Windows.Forms.CheckBox();
             this.CheckBoxStatusTypeSlChange = new System.Windows.Forms.CheckBox();
             this.CheckBoxStatusTypeDptChange = new System.Windows.Forms.CheckBox();
@@ -76,7 +77,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip_DgvMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTipBtnSetIndex = new System.Windows.Forms.ToolTip(this.components);
-            this.CheckBoxStatusTypePlanOverTime = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.PanelTitle.SuspendLayout();
             this.panelStatusType.SuspendLayout();
@@ -158,6 +158,19 @@
             this.panelStatusType.Name = "panelStatusType";
             this.panelStatusType.Size = new System.Drawing.Size(714, 37);
             this.panelStatusType.TabIndex = 52;
+            // 
+            // CheckBoxStatusTypePlanOverTime
+            // 
+            this.CheckBoxStatusTypePlanOverTime.AutoSize = true;
+            this.CheckBoxStatusTypePlanOverTime.Checked = true;
+            this.CheckBoxStatusTypePlanOverTime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxStatusTypePlanOverTime.Enabled = false;
+            this.CheckBoxStatusTypePlanOverTime.Location = new System.Drawing.Point(580, 10);
+            this.CheckBoxStatusTypePlanOverTime.Name = "CheckBoxStatusTypePlanOverTime";
+            this.CheckBoxStatusTypePlanOverTime.Size = new System.Drawing.Size(138, 18);
+            this.CheckBoxStatusTypePlanOverTime.TabIndex = 53;
+            this.CheckBoxStatusTypePlanOverTime.Text = "上线日期跨度过大";
+            this.CheckBoxStatusTypePlanOverTime.UseVisualStyleBackColor = true;
             // 
             // CheckBoxStatusTypeNew
             // 
@@ -621,18 +634,6 @@
             this.toolTipBtnSetIndex.AutoPopDelay = 10000;
             this.toolTipBtnSetIndex.InitialDelay = 500;
             this.toolTipBtnSetIndex.ReshowDelay = 100;
-            // 
-            // CheckBoxStatusTypePlanOverTime
-            // 
-            this.CheckBoxStatusTypePlanOverTime.AutoSize = true;
-            this.CheckBoxStatusTypePlanOverTime.Checked = true;
-            this.CheckBoxStatusTypePlanOverTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxStatusTypePlanOverTime.Location = new System.Drawing.Point(580, 10);
-            this.CheckBoxStatusTypePlanOverTime.Name = "CheckBoxStatusTypePlanOverTime";
-            this.CheckBoxStatusTypePlanOverTime.Size = new System.Drawing.Size(138, 18);
-            this.CheckBoxStatusTypePlanOverTime.TabIndex = 53;
-            this.CheckBoxStatusTypePlanOverTime.Text = "上线日期跨度过大";
-            this.CheckBoxStatusTypePlanOverTime.UseVisualStyleBackColor = true;
             // 
             // 生产排程
             // 

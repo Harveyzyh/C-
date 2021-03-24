@@ -8,11 +8,11 @@
     public const string strConnection_YF = "Server=192.168.0.99;initial catalog=COMFORT;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
 
 
-    public const string strConnection_MD_R = "Server=183.62.60.226,60044;initial catalog=ROBOT_TEST;user id=sa;password=COMfort123456;Connect Timeout=5";
+    public const string strConnection_MD_R = "Server=comfort-oa.com,60044;initial catalog=ROBOT_TEST;user id=sa;password=COMfort123456;Connect Timeout=5";
 
-    public const string strConnection_YF_R = "Server=183.62.60.226,60043;initial catalog=COMFORT;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
+    public const string strConnection_YF_R = "Server=comfort-oa.com,60043;initial catalog=COMFORT;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
 
-    public const string strConnection_WG_R = "Server=183.62.60.226,60043;initial catalog=WG_DB;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
+    public const string strConnection_WG_R = "Server=comfort-oa.com,60043;initial catalog=WG_DB;user id=sa;password=comfortgroup2016{;Connect Timeout=5";
 
 
 
