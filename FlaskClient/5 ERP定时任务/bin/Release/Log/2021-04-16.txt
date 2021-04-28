@@ -1,0 +1,195 @@
+14:33:24: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+14:33:35: Information: AutoLrpPlan: Work Start!
+14:33:36: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：3
+14:33:36: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:33:36: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:33:38: Information: AutoLrpPlan: Work With PlanDd:2201-017743     0001  - PlanId:A22010177430001  - Wlno: 21040028  - Pz: 佳肯 EHS-HAM背垫 W黑  - LrpCount: 2 
+14:33:38: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017743     0001
+14:33:39: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017743     0001  - PlanId: A22010177430001  - JobId: 20210416000381 
+14:33:55: Information: AutoLrpPlan: Job Done: JobId: 20210416000381'
+14:33:56: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177430001
+14:33:56: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:33:56: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177430001  - JobId: 20210416000382 
+14:34:03: Information: AutoLrpPlan: Job Done: JobId: 20210416000382'
+14:34:04: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010177430001  - JobId: 20210416000383 
+14:34:08: Information: AutoLrpPlan: Job Done: JobId: 20210416000383'
+14:34:08: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017743     0001
+14:34:08: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177430001  - JobId: 20210416000384 
+14:34:14: Information: AutoLrpPlan: Job Done: JobId: 20210416000384'
+14:34:15: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0001  - PlanId:A22010177450001  - Wlno: 21040028  - Pz: 佳肯 EHS-HAM背垫 W黑  - LrpCount: 2 
+14:34:15: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0001
+14:34:15: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0001  - PlanId: A22010177450001  - JobId: 20210416000385 
+14:34:34: Information: AutoLrpPlan: Job Done: JobId: 20210416000385'
+14:34:35: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450001
+14:34:35: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:34:35: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450001  - JobId: 20210416000386 
+14:34:38: Information: AutoLrpPlan: Job Done: JobId: 20210416000386'
+14:34:39: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010177450001  - JobId: 20210416000387 
+14:34:44: Information: AutoLrpPlan: Job Done: JobId: 20210416000387'
+14:34:44: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0001
+14:34:45: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450001  - JobId: 20210416000388 
+14:34:49: Information: AutoLrpPlan: Job Done: JobId: 20210416000388'
+14:34:50: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0003  - PlanId:A22010177450003  - Wlno: 21040029  - Pz: 佳肯 EHS-LAM背垫 W09黑  - LrpCount: 2 
+14:34:50: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0003
+14:34:50: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0003  - PlanId: A22010177450003  - JobId: 20210416000389 
+14:35:05: Information: AutoLrpPlan: Job Done: JobId: 20210416000389'
+14:35:05: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450003
+14:35:05: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:35:05: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450003  - JobId: 20210416000390 
+14:35:09: Information: AutoLrpPlan: Job Done: JobId: 20210416000390'
+14:35:09: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010177450003  - JobId: 20210416000391 
+14:35:17: Information: AutoLrpPlan: Job Done: JobId: 20210416000391'
+14:35:17: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0003
+14:35:17: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450003  - JobId: 20210416000392 
+14:35:25: Information: AutoLrpPlan: Job Done: JobId: 20210416000392'
+14:35:26: Information: AutoLrpPlan: Work With PlanDd:2201-017645     0065  - PlanId:A22010176450065  - Wlno: 10640102  - Pz: W09-01黑色 标配  - LrpCount: 2 
+14:35:26: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017645     0065
+14:35:26: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017645     0065  - PlanId: A22010176450065  - JobId: 20210416000393 
+14:35:43: Information: AutoLrpPlan: Job Done: JobId: 20210416000393'
+14:35:43: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010176450065
+14:35:43: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:35:43: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010176450065  - JobId: 20210416000394 
+14:35:47: Information: AutoLrpPlan: Job Done: JobId: 20210416000394'
+14:35:47: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017645     0065
+14:35:47: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010176450065  - JobId: 20210416000395 
+14:35:50: Information: AutoLrpPlan: Job Done: JobId: 20210416000395'
+14:35:50: Information: AutoLrpPlan: Not Found Order List!
+14:35:50: Information: AutoLrpPlan: Work Finished! 
+
+14:37:29: Information: AutoLrpPlan: Work Start!
+14:37:29: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：3
+14:37:29: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:37:29: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:37:29: Information: AutoLrpPlan: Not Found Order List!
+14:37:29: Information: AutoLrpPlan: Work Finished! 
+
+14:38:41: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+14:38:48: Information: AutoLrpPlan: Work Start!
+14:38:48: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：False
+14:38:48: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:38:49: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:38:49: Information: AutoLrpPlan: Not Found Order List!
+14:38:49: Information: AutoLrpPlan: Work Finished! 
+
+14:39:26: Information: AutoLrpPlan: Work Start!
+14:39:26: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：False
+14:39:26: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:39:26: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:39:26: Information: AutoLrpPlan: Not Found Order List!
+14:39:26: Information: AutoLrpPlan: Work Finished! 
+
+14:40:14: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+14:40:20: Information: AutoLrpPlan: Work Start!
+14:40:20: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：True
+14:40:20: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:40:20: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:40:24: Information: AutoLrpPlan: Not Found Order List!
+14:40:24: Information: AutoLrpPlan: Work Finished! 
+
+14:41:21: Information: AutoLrpPlan: Work Start!
+14:41:21: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：True
+14:41:21: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:41:22: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:41:23: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0003  - PlanId:A22010177450003  - Wlno: 21040029  - Pz: 佳肯 EHS-LAM背垫 W09黑  - LrpCount: 2 
+14:41:23: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0003
+14:41:23: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0003  - PlanId: A22010177450003  - JobId: 20210416000397 
+14:41:38: Information: AutoLrpPlan: Job Done: JobId: 20210416000397'
+14:41:38: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450003
+14:41:38: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:41:38: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450003  - JobId: 20210416000398 
+14:41:43: Information: AutoLrpPlan: Job Done: JobId: 20210416000398'
+14:41:43: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0003
+14:41:43: Information: AutoLrpPlan-SingleUsages: Work Start!
+14:41:43: Information: AutoLrpPlan-SingleUsages: Work With PlanDd:2201-017745     0003  - PlanId:RobotPD
+14:41:44: Information: AutoLrpPlan-SingleUsages: Insert Job Generate Plan: PlanDd: 2299-PD         0001  - PlanId: RobotPD  - JobId: 20210416000399 
+14:42:00: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000399'
+14:42:01: Information: AutoLrpPlan-SingleUsages: Insert Job Layout SC Plan: PlanId: RobotPD  - JobId: 20210416000400 
+14:42:05: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000400'
+14:42:06: Information: AutoLrpPlan-SingleUsages: Work Finished! 
+
+14:42:06: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450003  - JobId: 20210416000401 
+14:42:10: Information: AutoLrpPlan: Job Done: JobId: 20210416000401'
+14:42:10: Information: AutoLrpPlan: Not Found Order List!
+14:42:10: Information: AutoLrpPlan: Work Finished! 
+
+14:48:31: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+14:48:35: Information: AutoLrpPlan: Work Start!
+14:48:35: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：True
+14:48:35: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:48:35: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:48:36: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0003  - PlanId:A22010177450003  - Wlno: 21040029  - Pz: 佳肯 EHS-LAM背垫 W09黑  - LrpCount: 2 
+14:48:36: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0003
+14:48:37: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0003  - PlanId: A22010177450003  - JobId: 20210416000402 
+14:48:55: Information: AutoLrpPlan: Job Done: JobId: 20210416000402'
+14:48:55: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450003
+14:48:55: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:48:55: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450003  - JobId: 20210416000403 
+14:49:00: Information: AutoLrpPlan: Job Done: JobId: 20210416000403'
+14:49:00: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0003
+14:49:00: Information: AutoLrpPlan-SingleUsages: Work Start!
+14:49:00: Information: AutoLrpPlan-SingleUsages: Work With PlanDd:2201-017745     0003  - PlanId:RobotPD
+14:49:01: Information: AutoLrpPlan-SingleUsages: Insert Job Generate Plan: PlanDd: 2299-PD         0001  - PlanId: RobotPD  - JobId: 20210416000404 
+14:49:16: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000404'
+14:49:16: Information: AutoLrpPlan-SingleUsages: Insert Job Layout SC Plan: PlanId: RobotPD  - JobId: 20210416000405 
+14:49:20: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000405'
+14:49:21: Information: AutoLrpPlan-SingleUsages: Work Finished! 
+
+14:49:21: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450003  - JobId: 20210416000406 
+14:49:25: Information: AutoLrpPlan: Job Done: JobId: 20210416000406'
+14:49:25: Information: AutoLrpPlan: Not Found Order List!
+14:49:25: Information: AutoLrpPlan: Work Finished! 
+
+14:56:31: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+14:56:38: Information: AutoLrpPlan: Work Start!
+14:56:38: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：True
+14:56:38: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+14:56:38: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+14:56:40: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0003  - PlanId:A22010177450003  - Wlno: 21040029  - Pz: 佳肯 EHS-LAM背垫 W09黑  - LrpCount: 2 
+14:56:40: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0003
+14:56:40: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0003  - PlanId: A22010177450003  - JobId: 20210416000408 
+14:56:56: Information: AutoLrpPlan: Job Done: JobId: 20210416000408'
+14:56:56: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450003
+14:56:56: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+14:56:56: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450003  - JobId: 20210416000409 
+14:57:00: Information: AutoLrpPlan: Job Done: JobId: 20210416000409'
+14:57:01: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0003
+14:57:01: Information: AutoLrpPlan-SingleUsages: Work Start!
+14:57:01: Information: AutoLrpPlan-SingleUsages: Work With PlanDd:2201-017745     0003  - PlanId:RobotPD
+14:57:01: Information: AutoLrpPlan-SingleUsages: Insert Job Generate Plan: PlanDd: 2299-PD         0001  - PlanId: RobotPD  - JobId: 20210416000410 
+14:57:16: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000410'
+14:57:17: Information: AutoLrpPlan-SingleUsages: Insert Job Layout SC Plan: PlanId: RobotPD  - JobId: 20210416000411 
+14:57:21: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000411'
+14:57:23: Information: AutoLrpPlan-SingleUsages: Work Finished! 
+
+14:57:23: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450003  - JobId: 20210416000412 
+14:57:26: Information: AutoLrpPlan: Job Done: JobId: 20210416000412'
+14:57:26: Information: AutoLrpPlan: Not Found Order List!
+14:57:26: Information: AutoLrpPlan: Work Finished! 
+
+15:04:12: Information: 定时任务初始化已完成!   -Ver 1.0.3.2
+15:04:19: Information: AutoLrpPlan: Work Start!
+15:04:19: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：True
+15:04:19: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+15:04:19: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+15:04:20: Information: AutoLrpPlan: Work With PlanDd:2201-017745     0003  - PlanId:A22010177450003  - Wlno: 21040029  - Pz: 佳肯 EHS-LAM背垫 W09黑  - LrpCount: 2 
+15:04:20: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017745     0003
+15:04:21: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017745     0003  - PlanId: A22010177450003  - JobId: 20210416000413 
+15:04:35: Information: AutoLrpPlan: Job Done: JobId: 20210416000413'
+15:04:35: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010177450003
+15:04:35: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+15:04:35: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010177450003  - JobId: 20210416000414 
+15:04:41: Information: AutoLrpPlan: Job Done: JobId: 20210416000414'
+15:04:41: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017745     0003
+15:04:41: Information: AutoLrpPlan-SingleUsages: Work Start!
+15:04:41: Information: AutoLrpPlan-SingleUsages: Work With PlanDd:2201-017745     0003  - PlanId:RobotPD
+15:04:42: Information: AutoLrpPlan-SingleUsages: Insert Job Generate Plan: PlanDd: 2299-PD         0001  - PlanId: RobotPD  - JobId: 20210416000415 
+15:04:56: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000415'
+15:04:56: Information: AutoLrpPlan-SingleUsages: Insert Job Layout SC Plan: PlanId: RobotPD  - JobId: 20210416000416 
+15:05:02: Information: AutoLrpPlan-SingleUsages: Job Done: JobId: 20210416000416'
+15:05:03: Information: AutoLrpPlan-SingleUsages: Work Finished! 
+
+15:05:03: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010177450003  - JobId: 20210416000417 
+15:05:05: Information: AutoLrpPlan: Job Done: JobId: 20210416000417'
+15:05:05: Information: AutoLrpPlan: Not Found Order List!
+15:05:05: Information: AutoLrpPlan: Work Finished! 
+

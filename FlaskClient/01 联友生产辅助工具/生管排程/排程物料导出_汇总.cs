@@ -137,15 +137,15 @@ namespace HarveyZ.生管排程
             string sqlStr = @"SELECT 
                                 材料品号, 材料品名, 材料规格, 
                                 需领数量, 已领数量, 未领数量, 
-                                主供应商批号库存, 次供应商批号库存, 
+                                主供应商批号库存, 次供应商批号库存, 非主次供应商批号库存, 
                                 欠量,
-                                ISNULL(主供应商待检量, 0) 主供应商待检量, ISNULL(次供应商待检量, 0) 次供应商待检量, 单位, 
+                                ISNULL(主供应商待检量, 0) 主供应商待检量, ISNULL(次供应商待检量, 0) 次供应商待检量, ISNULL(非主次供应商待检量, 0) 非主次供应商待检量, 单位, 
                                 主供应商编号, 主供应商简称, 次供应商编号, 次供应商简称 
                                 FROM (
 	                                SELECT RTRIM(INVMB2.MB001) 材料品号, RTRIM(INVMB2.MB002) 材料品名, RTRIM(INVMB2.MB003) 材料规格, RTRIM(INVMB2.MB004) 单位,
 	                                CAST(SUM(TB004) AS FLOAT) 需领数量, CAST(SUM(TB005) AS FLOAT) 已领数量, CAST(SUM(TB004-TB005) AS FLOAT) 未领数量, 
-	                                ISNULL(CAST(INVML.ML005 AS FLOAT), 0) 主供应商批号库存, ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) 次供应商批号库存, 
-	                                (CASE WHEN CAST(SUM(TB004-TB005) AS FLOAT) > (ISNULL(CAST(INVML.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML2.ML005 AS FLOAT), 0)) THEN CAST(SUM(TB004-TB005) AS FLOAT) - ISNULL(CAST(INVML.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) ELSE 0 END) 欠量,
+	                                ISNULL(CAST(INVML.ML005 AS FLOAT), 0) 主供应商批号库存, ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) 次供应商批号库存, ISNULL(CAST(INVML3.ML005 AS FLOAT), 0) 非主次供应商批号库存, 
+	                                (CASE WHEN CAST(SUM(TB004-TB005) AS FLOAT) > (ISNULL(CAST(INVML.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML3.ML005 AS FLOAT), 0)) THEN CAST(SUM(TB004-TB005) AS FLOAT) - ISNULL(CAST(INVML.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML3.ML005 AS FLOAT), 0) ELSE 0 END) 欠量,
 	                                RTRIM(PURMA1.MA001) 主供应商编号, RTRIM(PURMA1.MA002) 主供应商简称, RTRIM(PURMA2.MA001) 次供应商编号, RTRIM(PURMA2.MA002) 次供应商简称 
 	                                FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
 	                                INNER JOIN dbo.MOCTA(NOLOCK) ON MOCTA.UDF02 = SCPLAN.K_ID 
@@ -162,10 +162,16 @@ namespace HarveyZ.生管排程
 	                                LEFT JOIN (
 		                                SELECT ML001, ML004, SUM(ML005) AS ML005 FROM INVML WHERE ML002 NOT IN ('P06', 'P05', 'P09', 'P10', 'P11', 'P15', 'P20', 'P21') GROUP BY ML001, ML004
 	                                ) AS INVML2 ON INVML2.ML001 = INVMB2.MB001 AND INVML2.ML004 = PURMA2.MA001 AND PURMA1.MA001 != PURMA2.MA001
+									LEFT JOIN (
+										SELECT ML001, SUM(ML005) AS ML005 FROM INVML INNER JOIN INVMB ON MB001 = ML001
+										WHERE ML002 NOT IN ('P06', 'P05', 'P09', 'P10', 'P11', 'P15', 'P20', 'P21') AND ML004 NOT IN (MB032, INVMB.UDF06) GROUP BY ML001
+									) AS INVML3 ON INVML3.ML001 = INVMB2.MB001
 
-	                                WHERE 1=1
-                                    AND MOCTA.TA011 IN ('1', '2', '3')
-                                    AND MOCTA.TA013 NOT IN ('U', 'V')
+	                                WHERE 1=1";
+
+            if(!checkBoxFinished.Checked) sqlStr += @"AND MOCTA.TA011 IN ('1', '2', '3')";
+
+            sqlStr += @"            AND MOCTA.TA013 NOT IN ('U', 'V')
                                     AND MOCTB.TB011 NOT IN ('4')
 	                                AND INVMB2.MB025 IN ('P')
 	                                AND INVMB2.MB034 IN ('L')";
@@ -175,7 +181,7 @@ namespace HarveyZ.生管排程
             sqlStr += string.Format(@" AND (INVMB2.MB001 LIKE '%{0}%' OR INVMB2.MB002 LIKE '%{0}%' OR INVMB2.MB003 LIKE '%{0}%') ", TxbWl.Text);
             sqlStr += string.Format(@" AND (PURMA1.MA001 LIKE '%{0}%' OR PURMA1.MA002 LIKE '%{0}%' OR PURMA2.MA001 LIKE '%{0}%' OR PURMA2.MA002 LIKE '%{0}%')", TxbPh.Text);
 
-            sqlStr += @"GROUP BY RTRIM(INVMB2.MB001), RTRIM(INVMB2.MB002), RTRIM(INVMB2.MB003), RTRIM(INVMB2.MB004), INVML.ML005, INVML2.ML005, RTRIM(PURMA1.MA001), RTRIM(PURMA1.MA002), RTRIM(PURMA2.MA001), RTRIM(PURMA2.MA002) ";
+            sqlStr += @"GROUP BY RTRIM(INVMB2.MB001), RTRIM(INVMB2.MB002), RTRIM(INVMB2.MB003), RTRIM(INVMB2.MB004), INVML.ML005, INVML2.ML005, INVML3.ML005, RTRIM(PURMA1.MA001), RTRIM(PURMA1.MA002), RTRIM(PURMA2.MA001), RTRIM(PURMA2.MA002) ";
             if (CheckBoxQl.Checked) sqlStr += @"HAVING (CASE WHEN CAST(SUM(TB004-TB005) AS FLOAT) > (ISNULL(CAST(INVML.ML005 AS FLOAT), 0) + ISNULL(CAST(INVML2.ML005 AS FLOAT), 0)) THEN CAST(SUM(TB004-TB005) AS FLOAT) - ISNULL(CAST(INVML.ML005 AS FLOAT), 0) - ISNULL(CAST(INVML2.ML005 AS FLOAT), 0) ELSE 0 END) >0 ";
 
             sqlStr += @") AS A
@@ -187,6 +193,10 @@ namespace HarveyZ.生管排程
 	                        SELECT TG005, TH004, CAST(SUM(TH007) AS FLOAT) 次供应商待检量
 	                        FROM PURTG INNER JOIN PURTH ON TG001 = TH001 AND TG002 = TH002 WHERE TG013 = 'N' AND TH030 = 'N' GROUP BY TG005, TH004
                         ) AS PURTG2 ON PURTG2.TH004 = 材料品号 AND PURTG2.TG005 = 次供应商编号 AND 次供应商编号 != 主供应商编号
+                        LEFT JOIN (
+	                        SELECT TH004, CAST(SUM(TH007) AS FLOAT) 非主次供应商待检量
+	                        FROM PURTG INNER JOIN PURTH ON TG001 = TH001 AND TG002 = TH002 INNER JOIN INVMB ON MB001 = TH004 AND TG005 NOT IN (MB032, INVMB.UDF06) WHERE TG013 = 'N' AND TH030 = 'N' GROUP BY TH004
+                        ) AS PURTG3 ON PURTG3.TH004 = 材料品号
                         ORDER BY 主供应商编号, 次供应商编号, 材料品号";
             return mssql.SQLselect(connYF, sqlStr); ;
         }

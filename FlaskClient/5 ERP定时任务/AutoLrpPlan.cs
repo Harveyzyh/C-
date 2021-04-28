@@ -11,6 +11,7 @@ namespace ERP定时任务
         private string connYF = null;
         private string connWG = null;
         private Logger logger = null;
+        private AutoLrpPlan2 lrp2 = null;
 
         public bool workFlag = false;
         private bool workingFlag = false;
@@ -24,6 +25,8 @@ namespace ERP定时任务
         private bool layoutCgPlanEnableFlag = false;
         private bool layoutScPlanEnableFlag = false;
         private int lrpCount = 3;
+        
+        private bool layoutScSingleEnableFlag = false;
 
         private bool layoutCgPlanEnableTmpFlag = false;
         private bool hasKhpzFlag = false;
@@ -35,6 +38,7 @@ namespace ERP定时任务
             this.connYF = connYF;
             this.connWG = connWG;
             this.logger = logger;
+            lrp2 = new AutoLrpPlan2(mssql, connYF, logger);
         }
 
         public void MainWork()
@@ -117,6 +121,10 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+                                    if (layoutScSingleEnableFlag)
+                                    {
+                                        lrp2.MainWork(planDd);
+                                    }
                                 }
                             }
                             else if (planNoneError)
@@ -128,6 +136,10 @@ namespace ERP定时任务
                                 LockPlan(planId);
                                 LayoutPlan(planId);
                                 SetWorkDoneFlag(planDd);
+                                if (layoutScSingleEnableFlag)
+                                {
+                                    lrp2.MainWork(planDd);
+                                }
                             }
                         }
                         //已跑3次
@@ -141,6 +153,10 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+                                    if (layoutScSingleEnableFlag)
+                                    {
+                                        lrp2.MainWork(planDd);
+                                    }
                                 }
                                 else
                                 {
@@ -148,6 +164,10 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+                                    if (layoutScSingleEnableFlag)
+                                    {
+                                        lrp2.MainWork(planDd);
+                                    }
                                 }
                             }
                             else if (planNoneError)
@@ -159,6 +179,10 @@ namespace ERP定时任务
                                 LockPlan(planId);
                                 LayoutPlan(planId);
                                 SetWorkDoneFlag(planDd);
+                                if (layoutScSingleEnableFlag)
+                                {
+                                    lrp2.MainWork(planDd);
+                                }
                             }
                         }
                         CleanPlan(planId);
@@ -187,6 +211,8 @@ namespace ERP定时任务
             layoutScPlanEnableFlag = false;
             lrpCount = 3;
 
+            layoutScSingleEnableFlag = false;
+
             layoutCgPlanEnableTmpFlag = false;
             hasKhpzFlag = false;
         }
@@ -205,6 +231,9 @@ namespace ERP定时任务
             string sqlStr7 = "SELECT Valid FROM WG_DB.dbo.WG_CONFIG WHERE ConfigName = 'AutoErpPlan' AND Type = 'LockCgPlan' AND Valid = 'Y'";
             string sqlStr8 = "SELECT Version FROM WG_DB.dbo.WG_CONFIG WHERE ConfigName = 'AutoErpPlan' AND Type = 'LrpCount' AND Valid = 'Y'";
 
+
+            string sqlStr9 = "SELECT Valid FROM WG_DB.dbo.WG_CONFIG WHERE ConfigName = 'AutoErpPlan' AND Type = 'LayoutScSingle' AND Valid = 'Y'";
+
             workEnableFlag = mssql.SQLexist(connWG, sqlStr1);
             bomCalculateEnableFlag = mssql.SQLexist(connWG, sqlStr2);
             pzCalculateEnableFlag = mssql.SQLexist(connWG, sqlStr3);
@@ -214,11 +243,14 @@ namespace ERP定时任务
             lockCgPlanEnableFlag = mssql.SQLexist(connWG, sqlStr7);
 
             DataTable lrpCountDt = mssql.SQLselect(connWG, sqlStr8);
+
+            layoutScSingleEnableFlag = mssql.SQLexist(connWG, sqlStr9);
+
             if (lrpCountDt != null) lrpCount = int.Parse(lrpCountDt.Rows[0][0].ToString());
 
 
-            log(string.Format("Configuration：Global Enable：{0}, BomCalculation Enable：{1}, PzCalculation Enable：{2}, Layout Sc Plan Enable：{3}, Layout Cg Plan Enable：{4}, Max Lrp Count：{5}",
-                   workEnableFlag, bomCalculateEnableFlag, pzCalculateEnableFlag, layoutScPlanEnableFlag, layoutCgPlanEnableFlag, lrpCount.ToString()));
+            log(string.Format("Configuration：Global Enable：{0}, BomCalculation Enable：{1}, PzCalculation Enable：{2}, Layout Sc Plan Enable：{3}, Layout Cg Plan Enable：{4}, Max Lrp Count：{5}, Layout Sc Single Usages：{6}",
+                   workEnableFlag, bomCalculateEnableFlag, pzCalculateEnableFlag, layoutScPlanEnableFlag, layoutCgPlanEnableFlag, lrpCount.ToString(), layoutScSingleEnableFlag));
         }
 
         /// <summary>

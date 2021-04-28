@@ -47,6 +47,7 @@ namespace ERP定时任务
         private ERP_COPAB02 copab02 = null;
         private FixMocta fixMocta = null;
         private FixPurta fixPurta = null;
+        private FixPurtc fixPurtc = null;
         private CreateScPlanSnapShot scplanSnapshot = null;
         private DeleteCoptrError deleteCoptr = null;
         #endregion
@@ -256,6 +257,7 @@ namespace ERP定时任务
             scplanSnapshot = new CreateScPlanSnapShot(mssql, connWG, logger);
             fixMocta = new FixMocta(mssql, connYF, logger);
             fixPurta = new FixPurta(mssql, connYF, logger);
+            fixPurtc = new FixPurtc(mssql, connYF, logger);
             bomb05 = new ERP_BOMB05(mssql, connYF, logger);
             copab02 = new ERP_COPAB02(mssql, connYF, logger);
             deleteCoptr = new DeleteCoptrError(mssql, connYF, logger);
@@ -308,7 +310,7 @@ namespace ERP定时任务
             }
 
             //请购单-异常修复
-            if (minute % 20 == 0 && hour >= 8 && hour <= 20) 
+            if (minute % 20 == 0 && hour >= 8 && hour <= 20)
             {
                 if (!fixPurta.workFlag)
                 {
@@ -321,6 +323,22 @@ namespace ERP定时任务
                     logAppendText("Fix Purta Info: Working!");
                 }
             }
+
+            //采购单-异常修复
+            if (minute % 20 == 0 && hour >= 8 && hour <= 20)
+            {
+                if (!fixPurtc.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(fixPurtc.MainWork));
+                    logAppendText("Fix Purtc Info: Work Start!");
+                    thread.Start();
+                }
+                else
+                {
+                    logAppendText("Fix Purtc Info: Working!");
+                }
+            }
+
             //删除层级码带X
             if (hour == 0 && minute == 30)
             {

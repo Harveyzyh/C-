@@ -41,6 +41,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TBoxOrderList = new System.Windows.Forms.TextBox();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +51,8 @@
             // 
             this.PanelTitle.BackColor = System.Drawing.SystemColors.Control;
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.TBoxOrderList);
+            this.PanelTitle.Controls.Add(this.label4);
             this.PanelTitle.Controls.Add(this.CmBoxDptType);
             this.PanelTitle.Controls.Add(this.CheckBoxAll);
             this.PanelTitle.Controls.Add(this.CheckBoxNew);
@@ -113,7 +117,7 @@
             // 
             this.DtpEndDate.CustomFormat = "yyyy-MM-dd";
             this.DtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpEndDate.Location = new System.Drawing.Point(297, 11);
+            this.DtpEndDate.Location = new System.Drawing.Point(277, 11);
             this.DtpEndDate.Name = "DtpEndDate";
             this.DtpEndDate.Size = new System.Drawing.Size(115, 21);
             this.DtpEndDate.TabIndex = 5;
@@ -122,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(237, 15);
+            this.label2.Location = new System.Drawing.Point(217, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 4;
@@ -130,7 +134,7 @@
             // 
             // btnOutput
             // 
-            this.btnOutput.Location = new System.Drawing.Point(527, 7);
+            this.btnOutput.Location = new System.Drawing.Point(713, 43);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(75, 23);
             this.btnOutput.TabIndex = 3;
@@ -140,7 +144,7 @@
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(446, 7);
+            this.btnSelect.Location = new System.Drawing.Point(632, 43);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 2;
@@ -192,11 +196,27 @@
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(424, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "订单号：";
+            // 
+            // TBoxOrderList
+            // 
+            this.TBoxOrderList.Location = new System.Drawing.Point(474, 10);
+            this.TBoxOrderList.Name = "TBoxOrderList";
+            this.TBoxOrderList.Size = new System.Drawing.Size(304, 21);
+            this.TBoxOrderList.TabIndex = 12;
+            // 
             // 排程物料导出_生产
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 605);
+            this.ClientSize = new System.Drawing.Size(1250, 605);
             this.Controls.Add(this.DgvMain);
             this.Controls.Add(this.PanelTitle);
             this.Name = "排程物料导出_生产";
@@ -224,5 +244,7 @@
         private System.Windows.Forms.CheckBox CheckBoxNew;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox CmBoxDptType;
+        private System.Windows.Forms.TextBox TBoxOrderList;
+        private System.Windows.Forms.Label label4;
     }
 }

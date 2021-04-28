@@ -631,8 +631,7 @@ namespace HarveyZ.生管排程
                                 FROM WG_DB.dbo.SC_PLAN
                                 INNER JOIN (
 	                                SELECT 
-	                                RTRIM(COPTD.TD001) + '-' + RTRIM(COPTD.TD002) + '-' + RTRIM(COPTD.TD003) AS DD,
-	                                (CASE WHEN TC004='0118' THEN '内销' ELSE '外销' END) AS X00,
+	                                RTRIM(COPTD.TD001) + '-' + RTRIM(COPTD.TD002) + '-' + RTRIM(COPTD.TD003) AS DD, COPTC.UDF12 AS X00,
 	                                RTRIM(COPMA.MA002) AS X01,
 	                                RTRIM(COPTC.TC015) AS X02,
 	                                RTRIM((CASE WHEN COPTF.TF003 IS NULL THEN '' WHEN COPTF.TF003 IS NOT NULL AND COPTF.TF017 = 'Y' 
@@ -668,7 +667,7 @@ namespace HarveyZ.生管排程
 			                                WHERE COPTD.TD001=COPTF.TF001 and COPTD.TD002=COPTF.TF002 and COPTD.TD003=COPTF.TF104) 
 	                                LEFT JOIN COMFORT.dbo.CMSME AS CMSME ON CMSME.ME001 = INVMB.MB445 
                                 ) AS A ON SC001 = DD
-                                WHERE (SC028 IS NULL OR SC028 ='') ";
+                                WHERE (SC028 IS NULL OR SC028 ='')";
             mssql.SQLexcute(connWG, slqStr);
         }
 

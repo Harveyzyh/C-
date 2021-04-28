@@ -264,7 +264,10 @@ namespace HarveyZ.生管排程
                                 RTRIM(CMSMW.MW002) 工艺名称, CONVERT(VARCHAR(100), CMSMW.MW003) 组别, 
                                 (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END) 批号, 
                                 (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END) 批号说明, 
-                                RTRIM(INVMB2.UDF02) 货位号
+                                RTRIM(INVMB2.UDF02) 货位号, '' AS 备料员, SCPLAN.SC002 订单类别, 
+								(CASE WHEN MOCTA.TAU01=INVMB2.MB001 AND SUBSTRING(MOCTA.TAU02, 1, CHARINDEX('*', MOCTA.TAU02)-1)>500 THEN SCPLAN.SC002 
+								WHEN SCPLAN.SC023 LIKE '%LPO%' AND MOCTA.TAU01=INVMB2.MB001 THEN SCPLAN.SC002 ELSE '' END) 纸箱类型, 
+								(CASE WHEN MOCTA.TAU01 = INVMB2.MB001 THEN MOCTA.TAU02 ELSE '' END) 外包装尺寸 
                                 FROM WG_DB.dbo.SC_PLAN(NOLOCK) AS SCPLAN 
                                 LEFT JOIN WG_DB.dbo.SC_PLAN_Snapshot AS SC0 ON SC0.K_ID = SCPLAN.K_ID AND SC0.SC001 = SCPLAN.SC001 AND SC0.SC000 = CONVERT(VARCHAR(8), DATEADD(DAY, -2, GETDATE()), 112)
                                 INNER JOIN dbo.MOCTA(NOLOCK) AS MOCTA ON MOCTA.UDF02 = SCPLAN.K_ID AND SCPLAN.SC028 = MOCTA.TA006 
@@ -290,6 +293,22 @@ namespace HarveyZ.生管排程
                 sqlStr += @"AND SCPLAN.SC030 IS NULL ";
             }
 
+            if (TBoxOrderList.Text != "")
+            {
+                TBoxOrderList.Text = TBoxOrderList.Text.Replace("\n", "");
+                string tmp0 = "";
+                var textTmp = TBoxOrderList.Text.Split(',');
+                foreach(string tmp2 in textTmp)
+                {
+                    tmp0 += "SCPLAN.SC001 LIKE '%" + tmp2 + "%' OR ";
+                }
+                tmp0 = tmp0.TrimEnd(' ');
+                tmp0 = tmp0.TrimEnd('R');
+                tmp0 = tmp0.TrimEnd('O');
+
+                sqlStr += string.Format(@"AND ({0})", tmp0);
+            }
+
             sqlStr += @"AND MOCTB.TB011 IN ('1', '2', '3', '5') 
                         AND MOCTA.TA011 != 'y' 
                         GROUP BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, 
@@ -299,8 +318,11 @@ namespace HarveyZ.生管排程
                             CONVERT(VARCHAR(100), CMSMW.MW003), 
                             (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA001 ELSE PURMA1.MA001 END), 
                             (CASE WHEN INVMB2.MB002 IN('气压棒', '中管气压棒') AND COPTD.UDF09 IS NOT NULL AND COPTD.UDF09 != '' THEN PURMA3.MA002 ELSE PURMA1.MA002 END), 
-                            RTRIM(INVMB2.UDF02)   
+                            RTRIM(INVMB2.UDF02), SCPLAN.SC002, (CASE WHEN MOCTA.TAU01=INVMB2.MB001 AND SUBSTRING(MOCTA.TAU02, 1, CHARINDEX('*', MOCTA.TAU02)-1)>500 THEN SCPLAN.SC002 
+								WHEN SCPLAN.SC023 LIKE '%LPO%' AND MOCTA.TAU01=INVMB2.MB001 THEN SCPLAN.SC002 ELSE '' END), 
+                            (CASE WHEN MOCTA.TAU01 = INVMB2.MB001 THEN MOCTA.TAU02 ELSE '' END)     
                         ORDER BY SCPLAN.SC003, SCPLAN.SC023, SCPLAN.SC001, RTRIM(MOCTB.TB003), MOCTB.TB006 ";
+            string a = sqlStr;
             return mssql.SQLselect(connYF, sqlStr); ;
         }
 

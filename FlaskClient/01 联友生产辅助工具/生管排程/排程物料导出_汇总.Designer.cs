@@ -41,6 +41,7 @@
             this.DtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvMain = new System.Windows.Forms.DataGridView();
+            this.checkBoxFinished = new System.Windows.Forms.CheckBox();
             this.PanelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             this.PanelTitle.BackColor = System.Drawing.SystemColors.Control;
             this.PanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelTitle.Controls.Add(this.checkBoxFinished);
             this.PanelTitle.Controls.Add(this.CheckBoxQl);
             this.PanelTitle.Controls.Add(this.TxbPh);
             this.PanelTitle.Controls.Add(this.label4);
@@ -181,6 +183,16 @@
             this.DgvMain.Size = new System.Drawing.Size(240, 150);
             this.DgvMain.TabIndex = 1;
             // 
+            // checkBoxFinished
+            // 
+            this.checkBoxFinished.AutoSize = true;
+            this.checkBoxFinished.Location = new System.Drawing.Point(146, 83);
+            this.checkBoxFinished.Name = "checkBoxFinished";
+            this.checkBoxFinished.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxFinished.TabIndex = 14;
+            this.checkBoxFinished.Text = "包含已结束工单";
+            this.checkBoxFinished.UseVisualStyleBackColor = true;
+            // 
             // 排程物料导出_汇总
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.TextBox TxbWl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox CheckBoxQl;
+        private System.Windows.Forms.CheckBox checkBoxFinished;
     }
 }
