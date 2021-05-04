@@ -385,21 +385,33 @@ namespace ERP定时任务
         }
 
         /// <summary>
-        /// 请购单中单头单身审核码不对应的
+        /// 维护采购单单头产品系列
         /// </summary>
         private void Fix1()
         {
-            string sqlStr1 = @"SELECT TC001, TC002 FROM PURTC WHERE PURTC.UDF07 IS NULL AND PURTC.TC003 >= '20210101' AND PURTC.TC001 IN ('3301', '3308') ORDER BY TC004, TC001, TC002";
-            string sqlStr2 = @"UPDATE PURTC SET PURTC.UDF07 = 
+            string sqlStr1 = @"SELECT TC001, TC002 FROM PURTC WHERE (ISNULL(PURTC.UDF08, '') != '' OR ISNULL(PURTC.UDF07, '') != '') AND PURTC.TC003 >= '20210429' AND PURTC.TC001 IN ('3301', '3308') ORDER BY TC003, TC001, TC002 ";
+
+            string sqlStr2 = @"UPDATE PURTC SET 
+                               PURTC.UDF07 = 
 		                        ISNULL(STUFF((SELECT DISTINCT ',' +  INVMB.UDF12 FROM PURTD(NOLOCK)
 		                        INNER JOIN PURTR(NOLOCK) ON PURTD.TD001+'-'+PURTD.TD002+'-'+PURTD.TD003 = PURTR.TR019 
 		                        INNER JOIN PURTB(NOLOCK) ON PURTB.TB001 = PURTR.TR001 AND PURTB.TB002 = PURTR.TR002 AND PURTB.TB003 = PURTR.TR003 
 		                        INNER JOIN COPTD(NOLOCK) ON COPTD.TD001 = PURTB.TB029 AND COPTD.TD002 = PURTB.TB030 AND COPTD.TD003 = PURTB.TB031
 		                        INNER JOIN INVMB(NOLOCK) ON INVMB.MB001 = COPTD.TD004 
 		                        WHERE PURTC.TC001 = PURTD.TD001 AND PURTC.TC002 = PURTD.TD002
+	                            AND ISNULL(INVMB.UDF12, '') != '' 
+		                        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), ''), 
+                               PURTC.UDF08 = 
+                                ISNULL(STUFF((SELECT DISTINCT ',' + INVMB.UDF11 FROM PURTD(NOLOCK)
+		                        INNER JOIN PURTR(NOLOCK) ON PURTD.TD001+'-'+PURTD.TD002+'-'+PURTD.TD003 = PURTR.TR019 
+		                        INNER JOIN PURTB(NOLOCK) ON PURTB.TB001 = PURTR.TR001 AND PURTB.TB002 = PURTR.TR002 AND PURTB.TB003 = PURTR.TR003 
+		                        INNER JOIN COPTD(NOLOCK) ON COPTD.TD001 = PURTB.TB029 AND COPTD.TD002 = PURTB.TB030 AND COPTD.TD003 = PURTB.TB031
+		                        INNER JOIN INVMB(NOLOCK) ON INVMB.MB001 = COPTD.TD004 
+		                        WHERE PURTC.TC001 = PURTD.TD001 AND PURTC.TC002 = PURTD.TD002
+		                        AND ISNULL(INVMB.UDF11, '') != '' 
 		                        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), '')
-		                        FROM PURTC(NOLOCK) 
-		                        WHERE PURTC.TC001 = '{0}' AND PURTC.TC002 = '{1}' ";
+		                       FROM PURTC(NOLOCK) 
+		                       WHERE PURTC.TC001 = '{0}' AND PURTC.TC002 = '{1}' ";
             DataTable dt = mssql.SQLselect(connYF, sqlStr1);
 
             if(dt != null)
@@ -408,7 +420,7 @@ namespace ERP定时任务
                 {
                     string tc001 = dt.Rows[i]["TC001"].ToString();
                     string tc002 = dt.Rows[i]["TC002"].ToString();
-                    log(string.Format("TC001: {0}, TC002: {1}!", tc001, tc002));
+                    log(string.Format("Fix UDF07, UDF08: TC001: {0}, TC002: {1}!", tc001, tc002));
                     mssql.SQLexcute(connYF, string.Format(sqlStr2, tc001, tc002));
                 }
                 

@@ -32,7 +32,6 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtnAutoLrpRun = new System.Windows.Forms.Button();
-            this.BtnSingleUsages = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +49,6 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.BtnSingleUsages);
             this.panel1.Controls.Add(this.BtnAutoLrpRun);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 477);
@@ -67,15 +65,6 @@
             this.BtnAutoLrpRun.Text = "立即执行LRP计划作业";
             this.BtnAutoLrpRun.UseVisualStyleBackColor = true;
             this.BtnAutoLrpRun.Click += new System.EventHandler(this.BtnAutoLrpRun_Click);
-            // 
-            // BtnSingleUsages
-            // 
-            this.BtnSingleUsages.Location = new System.Drawing.Point(184, 4);
-            this.BtnSingleUsages.Name = "BtnSingleUsages";
-            this.BtnSingleUsages.Size = new System.Drawing.Size(75, 23);
-            this.BtnSingleUsages.TabIndex = 1;
-            this.BtnSingleUsages.Text = "计算单用量";
-            this.BtnSingleUsages.UseVisualStyleBackColor = true;
             // 
             // ERP定时任务
             // 
@@ -101,7 +90,6 @@
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnAutoLrpRun;
-        private System.Windows.Forms.Button BtnSingleUsages;
     }
 }
 

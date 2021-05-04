@@ -123,7 +123,7 @@ namespace ERP定时任务
                                     SetWorkDoneFlag(planDd);
                                     if (layoutScSingleEnableFlag)
                                     {
-                                        lrp2.MainWork(planDd);
+                                        //lrp2.MainWork(planDd);
                                     }
                                 }
                             }
@@ -138,7 +138,7 @@ namespace ERP定时任务
                                 SetWorkDoneFlag(planDd);
                                 if (layoutScSingleEnableFlag)
                                 {
-                                    lrp2.MainWork(planDd);
+                                    //lrp2.MainWork(planDd);
                                 }
                             }
                         }
@@ -155,7 +155,7 @@ namespace ERP定时任务
                                     SetWorkDoneFlag(planDd);
                                     if (layoutScSingleEnableFlag)
                                     {
-                                        lrp2.MainWork(planDd);
+                                        //lrp2.MainWork(planDd);
                                     }
                                 }
                                 else
@@ -166,7 +166,7 @@ namespace ERP定时任务
                                     SetWorkDoneFlag(planDd);
                                     if (layoutScSingleEnableFlag)
                                     {
-                                        lrp2.MainWork(planDd);
+                                        //lrp2.MainWork(planDd);
                                     }
                                 }
                             }
@@ -181,7 +181,7 @@ namespace ERP定时任务
                                 SetWorkDoneFlag(planDd);
                                 if (layoutScSingleEnableFlag)
                                 {
-                                    lrp2.MainWork(planDd);
+                                    //lrp2.MainWork(planDd);
                                 }
                             }
                         }

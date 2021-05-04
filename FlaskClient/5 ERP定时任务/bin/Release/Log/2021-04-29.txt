@@ -1,0 +1,5 @@
+08:04:11: Information: 定时任务初始化已完成!   -Ver 1.0.3.6
+08:41:29: Information: Inittialization Succeed!   -Ver 1.0.3.6
+08:47:46: Information: Inittialization Succeed!   -Ver 1.0.3.6
+08:47:52: Information: Inittialization Succeed!   -Ver 1.0.3.6
+08:49:47: Information: Inittialization Succeed!   -Ver 1.0.3.7

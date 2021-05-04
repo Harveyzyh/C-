@@ -104,8 +104,8 @@ namespace ERP定时任务
 
             //开始工作
             WorkStart();
-            logAppendText("定时任务初始化已完成!" + "   -Ver " +  ProgVersion);
-            logger.Instance.WriteLog("定时任务初始化已完成!" + "   -Ver " + ProgVersion);
+            logAppendText("Inittialization Succeed!" + "   -Ver " +  ProgVersion);
+            logger.Instance.WriteLog("Inittialization Succeed!" + "   -Ver " + ProgVersion);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace ERP定时任务
         #region 自动更新程序定时
         private void SetUpdateTimer()
         {
-            updateTimer = new System.Timers.Timer(10 * 60 * 1000);//实例化Timer类，设置间隔时间为1000毫秒；
+            updateTimer = new System.Timers.Timer(60 * 60 * 1000);//实例化Timer类，设置间隔时间为1000毫秒；
             updateTimer.Elapsed += new System.Timers.ElapsedEventHandler(SoftwareUpdateTimerWork);//到达时间的时候执行事件；
             updateTimer.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             updateTimer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
@@ -325,7 +325,7 @@ namespace ERP定时任务
             }
 
             //采购单-异常修复
-            if (minute % 20 == 0 && hour >= 8 && hour <= 20)
+            if (minute % 15 == 0 && hour >= 8 && hour <= 20)
             {
                 if (!fixPurtc.workFlag)
                 {
