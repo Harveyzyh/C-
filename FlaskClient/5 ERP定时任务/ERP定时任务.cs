@@ -46,6 +46,7 @@ namespace ERP定时任务
         private ERP_BOMB05 bomb05 = null;
         private ERP_COPAB02 copab02 = null;
         private FixMocta fixMocta = null;
+        private SetMoctaGroup setMoctaGroup = null;
         private FixPurta fixPurta = null;
         private FixPurtc fixPurtc = null;
         private CreateScPlanSnapShot scplanSnapshot = null;
@@ -256,6 +257,7 @@ namespace ERP定时任务
 
             scplanSnapshot = new CreateScPlanSnapShot(mssql, connWG, logger);
             fixMocta = new FixMocta(mssql, connYF, logger);
+            setMoctaGroup = new SetMoctaGroup(mssql, connYF, logger);
             fixPurta = new FixPurta(mssql, connYF, logger);
             fixPurtc = new FixPurtc(mssql, connYF, logger);
             bomb05 = new ERP_BOMB05(mssql, connYF, logger);
@@ -295,7 +297,7 @@ namespace ERP定时任务
             }
 
             //更新工单单头的部门信息为审核者信息
-            if (minute % 10 == 0 && hour >= 8 && hour <= 20) 
+            if (minute % 10 == 0 && hour >= 8 && hour <= 20)
             {
                 if (!fixMocta.workFlag)
                 {
@@ -306,6 +308,21 @@ namespace ERP定时任务
                 else
                 {
                     logAppendText("Fix Mocta Department Info: Working!");
+                }
+            }
+
+            //写入订单工序信息
+            if (minute % 15 == 0 && hour >= 8 && hour <= 20)
+            {
+                if (!setMoctaGroup.workFlag)
+                {
+                    Thread thread = new Thread(new ThreadStart(setMoctaGroup.MainWork));
+                    logAppendText("Set Mocta Group Info: Work Start!");
+                    thread.Start();
+                }
+                else
+                {
+                    logAppendText("Set Mocta Group Info: Working!");
                 }
             }
 

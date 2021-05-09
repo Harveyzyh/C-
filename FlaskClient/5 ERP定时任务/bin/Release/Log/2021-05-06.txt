@@ -1,0 +1,84 @@
+11:15:51: Information: Inittialization Succeed!   -Ver 1.0.3.12
+11:59:16: Information: Inittialization Succeed!   -Ver 1.0.3.13
+12:02:13: Information: AutoLrpPlan: Work Start!
+12:02:13: Information: AutoLrpPlan: Configuration：Global Enable：True, BomCalculation Enable：False, PzCalculation Enable：False, Layout Sc Plan Enable：True, Layout Cg Plan Enable：True, Max Lrp Count：3, Layout Sc Single Usages：False
+12:02:13: Information: AutoLrpPlan: 还原LRPFLAG为n,y的状态
+12:02:13: Information: AutoLrpPlan: 重置已变更但工单未审的订单，不存在工单但状态为Y的订单
+12:02:16: Information: AutoLrpPlan: Work With PlanDd:2201-017847     0010  - PlanId:A22010178470010  - Wlno: 10840343  - Pz: LE黑 标配  - LrpCount: 2 
+12:02:16: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017847     0010
+12:02:16: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017847     0010  - PlanId: A22010178470010  - JobId: 20210506000485 
+12:03:11: Information: AutoLrpPlan: Job Done: JobId: 20210506000485'
+12:03:11: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178470010
+12:03:11: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+12:03:12: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010178470010  - JobId: 20210506000486 
+12:03:18: Information: AutoLrpPlan: Job Done: JobId: 20210506000486'
+12:03:18: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010178470010  - JobId: 20210506000487 
+12:03:27: Information: AutoLrpPlan: Job Done: JobId: 20210506000487'
+12:03:27: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017847     0010
+12:03:28: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178470010  - JobId: 20210506000488 
+12:03:32: Information: AutoLrpPlan: Job Done: JobId: 20210506000488'
+12:03:33: Information: AutoLrpPlan: Work With PlanDd:2201-017827     0101  - PlanId:A22010178270101  - Wlno: 22000354  - Pz: W黑 标配  - LrpCount: 2 
+12:03:33: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017827     0101
+12:03:33: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017827     0101  - PlanId: A22010178270101  - JobId: 20210506000489 
+12:03:42: Information: AutoLrpPlan: Job Done: JobId: 20210506000489'
+12:03:43: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178270101
+12:03:43: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+12:03:43: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010178270101  - JobId: 20210506000490 
+12:03:47: Information: AutoLrpPlan: Job Done: JobId: 20210506000490'
+12:03:47: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010178270101  - JobId: 20210506000491 
+12:03:54: Information: AutoLrpPlan: Job Done: JobId: 20210506000491'
+12:03:54: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017827     0101
+12:03:54: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178270101  - JobId: 20210506000492 
+12:03:57: Information: AutoLrpPlan: Job Done: JobId: 20210506000492'
+12:03:58: Information: AutoLrpPlan: Work With PlanDd:2201-017853     0003  - PlanId:A22010178530003  - Wlno: 10640102  - Pz: W09-01黑色 标配  - LrpCount: 2 
+12:03:58: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017853     0003
+12:03:59: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017853     0003  - PlanId: A22010178530003  - JobId: 20210506000493 
+12:04:13: Information: AutoLrpPlan: Job Done: JobId: 20210506000493'
+12:04:13: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178530003
+12:04:13: Information: AutoLrpPlan: 当前订单执行LRP次数将达到配置上限3次，视为订单使用标准BOM配置
+12:04:13: Information: AutoLrpPlan: Insert Job Layout SC Plan: PlanId: A22010178530003  - JobId: 20210506000494 
+12:04:17: Information: AutoLrpPlan: Job Done: JobId: 20210506000494'
+12:04:18: Information: AutoLrpPlan: Insert Job Layout CG Plan: PlanId: A22010178530003  - JobId: 20210506000495 
+12:04:25: Information: AutoLrpPlan: Job Done: JobId: 20210506000495'
+12:04:25: Information: AutoLrpPlan: Set Work Done Flag Plan: PlanDd: 2201-017853     0003
+12:04:25: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178530003  - JobId: 20210506000496 
+12:04:28: Information: AutoLrpPlan: Job Done: JobId: 20210506000496'
+12:04:29: Information: AutoLrpPlan: Work With PlanDd:2201-017851     0001  - PlanId:A22010178510001  - Wlno: 10610101  - Pz: W黑 全黑扳手  - LrpCount: 1 
+12:04:29: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017851     0001
+12:04:30: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017851     0001  - PlanId: A22010178510001  - JobId: 20210506000497 
+12:05:15: Information: AutoLrpPlan: Job Done: JobId: 20210506000497'
+12:05:16: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178510001
+12:05:16: Information: AutoLrpPlan: Set Work False Flag Plan: PlanDd: 2201-017851     0001
+12:05:16: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178510001  - JobId: 20210506000498 
+12:05:19: Information: AutoLrpPlan: Job Done: JobId: 20210506000498'
+12:05:20: Information: AutoLrpPlan: Work With PlanDd:2201-017851     0002  - PlanId:A22010178510002  - Wlno: 10610503  - Pz: Bafco W黑 座不披覆 全黑扳手  - LrpCount: 1 
+12:05:20: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017851     0002
+12:05:20: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017851     0002  - PlanId: A22010178510002  - JobId: 20210506000499 
+12:06:00: Information: AutoLrpPlan: Job Done: JobId: 20210506000499'
+12:06:01: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178510002
+12:06:01: Information: AutoLrpPlan: Set Work False Flag Plan: PlanDd: 2201-017851     0002
+12:06:01: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178510002  - JobId: 20210506000500 
+12:06:06: Information: AutoLrpPlan: Job Done: JobId: 20210506000500'
+12:06:07: Information: AutoLrpPlan: Work With PlanDd:2201-017851     0003  - PlanId:A22010178510003  - Wlno: 10620101  - Pz: W黑 全黑扳手 其余标配  - LrpCount: 1 
+12:06:07: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017851     0003
+12:06:07: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017851     0003  - PlanId: A22010178510003  - JobId: 20210506000501 
+12:06:55: Information: AutoLrpPlan: Job Done: JobId: 20210506000501'
+12:06:55: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178510003
+12:06:55: Information: AutoLrpPlan: Set Work False Flag Plan: PlanDd: 2201-017851     0003
+12:06:55: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178510003  - JobId: 20210506000502 
+12:06:57: Information: AutoLrpPlan: Job Done: JobId: 20210506000502'
+12:06:58: Information: AutoLrpPlan: Work With PlanDd:2201-017851     0004  - PlanId:A22010178510004  - Wlno: 10620503  - Pz: Bafco W黑 座不披覆 全黑扳手  - LrpCount: 1 
+12:06:58: Information: AutoLrpPlan: Set Working Flag Plan: PlanDd: 2201-017851     0004
+12:06:59: Information: AutoLrpPlan: Insert Job Generate Plan: PlanDd: 2201-017851     0004  - PlanId: A22010178510004  - JobId: 20210506000503 
+12:07:42: Information: AutoLrpPlan: Job Done: JobId: 20210506000503'
+12:07:42: Information: AutoLrpPlan: Checked Bom Error: PlanId: A22010178510004
+12:07:42: Information: AutoLrpPlan: Set Work False Flag Plan: PlanDd: 2201-017851     0004
+12:07:42: Information: AutoLrpPlan: Insert Job Clean Plan: PlanId: A22010178510004  - JobId: 20210506000504 
+12:07:45: Information: AutoLrpPlan: Job Done: JobId: 20210506000504'
+12:07:46: Information: AutoLrpPlan: Not Found Order List!
+12:07:46: Information: AutoLrpPlan: Work Finished! 
+
+13:10:33: Information: Inittialization Succeed!   -Ver 1.0.3.13
+13:11:26: Information: Inittialization Succeed!   -Ver 1.0.3.13
+13:23:11: Information: Inittialization Succeed!   -Ver 1.0.3.13
+13:23:37: Information: Inittialization Succeed!   -Ver 1.0.3.15

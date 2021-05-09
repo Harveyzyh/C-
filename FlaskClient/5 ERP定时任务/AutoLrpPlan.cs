@@ -121,6 +121,7 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+
                                     if (layoutScSingleEnableFlag)
                                     {
                                         //lrp2.MainWork(planDd);
@@ -136,6 +137,7 @@ namespace ERP定时任务
                                 LockPlan(planId);
                                 LayoutPlan(planId);
                                 SetWorkDoneFlag(planDd);
+
                                 if (layoutScSingleEnableFlag)
                                 {
                                     //lrp2.MainWork(planDd);
@@ -153,6 +155,7 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+
                                     if (layoutScSingleEnableFlag)
                                     {
                                         //lrp2.MainWork(planDd);
@@ -164,6 +167,7 @@ namespace ERP定时任务
                                     LockPlan(planId);
                                     LayoutPlan(planId);
                                     SetWorkDoneFlag(planDd);
+
                                     if (layoutScSingleEnableFlag)
                                     {
                                         //lrp2.MainWork(planDd);
@@ -179,6 +183,7 @@ namespace ERP定时任务
                                 LockPlan(planId);
                                 LayoutPlan(planId);
                                 SetWorkDoneFlag(planDd);
+
                                 if (layoutScSingleEnableFlag)
                                 {
                                     //lrp2.MainWork(planDd);

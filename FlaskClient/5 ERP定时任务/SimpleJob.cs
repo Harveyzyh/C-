@@ -225,6 +225,71 @@ namespace ERP定时任务
         }
     }
 
+    public class SetMoctaGroup
+    {
+        private Mssql mssql = null;
+        private string connYF = null;
+        private Logger logger = null;
+
+        public bool workFlag = false;
+
+        public SetMoctaGroup(Mssql mssql, string connYF, Logger logger)
+        {
+            this.mssql = mssql;
+            this.connYF = connYF;
+            this.logger = logger;
+        }
+
+        private void log(string text)
+        {
+            logger.Instance.WriteLog("Set Mocta Group Info: " + text);
+        }
+
+        public void MainWork()
+        {
+            if (ERP定时任务.GetConfig("Set_Mocta_Group", "Work"))
+            {
+                workFlag = true;
+                log("Work Start!");
+                try
+                {
+                    Work();
+                }
+                catch (Exception e)
+                {
+                    log("Work Error./n" + e.ToString());
+                }
+                finally
+                {
+
+                    log("Work Finished!");
+                    workFlag = false;
+                }
+            }
+        }
+
+        private void Work()
+        {
+            string sqlStr1 = @"SELECT TD001+'-'+TD002+TD003 FROM COPTD 
+                                INNER JOIN INVMB ON MB001=TD004 AND MB025='M'
+                                WHERE NOT EXISTS (SELECT 1 FROM MOCTB_Group WHERE TA026=RTRIM(TD001) AND TA027=RTRIM(TD002) AND TA028=RTRIM(TD003) )
+                                AND EXISTS (SELECT 1 FROM MOCTA AS A WHERE A.TA026=TD001 AND A.TA027=TD002 AND A.TA028=TD003)
+                                AND LEFT(COPTD.CREATE_DATE, 6) >= '202104'
+                                ";
+            string sqlStr2 = @"EXEC P_SetMOCTBGroup '{0}' ";
+
+            DataTable dt = mssql.SQLselect(connYF, sqlStr1);
+            if(dt != null)
+            {
+                for(int row = 0; row < dt.Rows.Count; row++)
+                {
+                    mssql.SQLexcute(connYF, string.Format(sqlStr2, dt.Rows[row][0].ToString()));
+                    log(string.Format("Dd: {0}", dt.Rows[row][0].ToString()));
+                }
+            }
+        }
+    }
+
     public class FixPurta
     {
         private Mssql mssql = null;
@@ -321,8 +386,7 @@ namespace ERP定时任务
 				                INNER JOIN dbo.PURTA(NOLOCK) ON TA001 = TB001 AND TA002 = TB002 
 				                LEFT JOIN dbo.PURMA(NOLOCK) ON MA001 = TB010
 				                LEFT JOIN (SELECT TOP 1 COMPANY, CREATOR, CREATE_DATE, FLAG FROM dbo.PURTR(NOLOCK) WHERE RTRIM(TR001)+'-'+RTRIM(TR002) = '{0}') AS K ON 1=1
-				                WHERE 1=1
-				                AND RTRIM(TB001)+'-'+RTRIM(TB002) = '{0}' 
+				                WHERE RTRIM(TB001)+'-'+RTRIM(TB002) = '{0}' 
 				                AND NOT EXISTS(SELECT 1 FROM dbo.PURTR(NOLOCK) WHERE TB001 = TR001 AND TB002 = TR002 AND TB003 = TR003)";
 
             DataTable dt =  mssql.SQLselect(connYF, sqlStr1);
@@ -389,7 +453,7 @@ namespace ERP定时任务
         /// </summary>
         private void Fix1()
         {
-            string sqlStr1 = @"SELECT TC001, TC002 FROM PURTC WHERE (ISNULL(PURTC.UDF08, '') != '' OR ISNULL(PURTC.UDF07, '') != '') AND PURTC.TC003 >= '20210429' AND PURTC.TC001 IN ('3301', '3308') ORDER BY TC003, TC001, TC002 ";
+            string sqlStr1 = @"SELECT TC001, TC002 FROM PURTC WHERE (PURTC.UDF08 IS NULL OR PURTC.UDF07 IS NULL) AND PURTC.TC003 >= '20210429' AND PURTC.TC001 IN ('3301', '3308') ORDER BY TC003, TC001, TC002 ";
 
             string sqlStr2 = @"UPDATE PURTC SET 
                                PURTC.UDF07 = 
